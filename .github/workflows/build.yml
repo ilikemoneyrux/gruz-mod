@@ -32,7 +32,6 @@ jobs:
       - uses: actions/checkout@v4
       - uses: actions/setup-java@v4
         with: { distribution: temurin, java-version: '25' }
-      - uses: gradle/actions/setup-gradle@v4
       - name: Build ${{ matrix.mc }}
         env:
           GRUZ_MC: ${{ matrix.mc }}
@@ -48,7 +47,19 @@ jobs:
       - name: Inspect classes (ci/inspect.txt)
         if: hashFiles('ci/inspect.txt') != ''
         run: python3 ci/inspect.py ${{ matrix.mc }} out/${{ matrix.mc }} || true
+      - name: Publish this job's log (branch ci-log-${{ matrix.mc }})
+        if: always()
+        run: |
+          mkdir -p "$GITHUB_WORKSPACE/out/${{ matrix.mc }}"
+          echo "${{ github.sha }} run ${{ github.run_number }} job=${{ job.status }}" > "$GITHUB_WORKSPACE/out/${{ matrix.mc }}/STATUS"
+          cd /tmp && rm -rf jl && mkdir jl && cd jl && git init -q && git checkout -q -b ci-log-${{ matrix.mc }}
+          git config user.name gruz-ci; git config user.email ci@gruz.invalid
+          cp -r "$GITHUB_WORKSPACE/out/${{ matrix.mc }}/." . ; rm -f *.jar
+          [ -f full.log ] && tail -c 300000 full.log > tail.log && rm full.log
+          git add -A && git commit -qm "log ${{ matrix.mc }} run ${{ github.run_number }}"
+          git push -qf "https://x-access-token:${{ secrets.GITHUB_TOKEN }}@github.com/${{ github.repository }}" ci-log-${{ matrix.mc }}
       - uses: actions/upload-artifact@v4
+        if: always()
         with:
           name: out-${{ matrix.mc }}
           path: out/${{ matrix.mc }}
@@ -60,6 +71,7 @@ jobs:
     steps:
       - uses: actions/checkout@v4
       - uses: actions/download-artifact@v4
+        continue-on-error: true
         with: { path: art }
       - name: Summary + publish to ci-results
         run: |
