@@ -1,0 +1,5 @@
+{
+  "providers": [
+    { "type": "bitmap", "file": "gruzclient:font/gruz_icon.png", "ascent": 8, "height": 9, "chars": [""] }
+  ]
+}

@@ -1,0 +1,20 @@
+{
+  "schemaVersion": 1,
+  "id": "gruzclient",
+  "version": "${version}",
+  "name": "Gruz Client",
+  "description": "Gruz Client – ekran ładowania, menu główne i moduły PvP.",
+  "authors": ["Gruz Client"],
+  "license": "All-Rights-Reserved",
+  "icon": "assets/gruzclient/icon.png",
+  "environment": "client",
+  "entrypoints": {
+    "client": ["pl.gruzclient.GruzClient"]
+  },
+  "mixins": ["gruzclient.mixins.json"],
+  "depends": {
+    "fabricloader": ">=0.16.0",
+    "minecraft": "~${minecraft_version}",
+    "java": ">=21"
+  }
+}

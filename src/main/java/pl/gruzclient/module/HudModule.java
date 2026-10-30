@@ -1,0 +1,72 @@
+package pl.gruzclient.module;
+
+import com.google.gson.JsonObject;
+import net.minecraft.client.gui.DrawContext;
+import net.minecraft.client.util.math.MatrixStack;
+
+import static pl.gruzclient.render.GruzDraw.*;
+
+/**
+ * Moduł rysowany na ekranie gry. Pozycja jest zapisana jako ułamek szerokości/wysokości ekranu,
+ * więc układ zostaje taki sam przy każdej rozdzielczości.
+ */
+public abstract class HudModule extends Module {
+    public float x, y;          // 0..1 – lewy górny róg elementu
+    public float scale = 1f;
+    private final float defX, defY;
+    public int lastW = 40, lastH = 12; // rozmiar z ostatniego rysowania (dla edytora)
+
+    protected final Setting.Bool background;
+    protected final Setting.Color color;
+
+    protected HudModule(String id, boolean enabledByDefault, float defX, float defY) {
+        super(id, Category.HUD, enabledByDefault);
+        this.x = this.defX = defX;
+        this.y = this.defY = defY;
+        background = add(new Setting.Bool("background", "setting.background", true));
+        color = add(new Setting.Color("color", "setting.color", 0));
+    }
+
+    /** Rysuje element w punkcie (0,0) i zwraca jego rozmiar: {szerokość, wysokość} */
+    protected abstract int[] draw(DrawContext c, boolean editing);
+
+    public void render(DrawContext c, int screenW, int screenH, boolean editing) {
+        MatrixStack m = c.getMatrices();
+        m.push();
+        int px = Math.round(x * screenW), py = Math.round(y * screenH);
+        m.translate(px, py, 0);
+        m.scale(scale, scale, 1f);
+        int[] size = draw(c, editing);
+        lastW = size[0];
+        lastH = size[1];
+        m.pop();
+    }
+
+    /** Wspólne tło "pastylki" HUD */
+    protected void panel(DrawContext c, int w, int h) {
+        if (!background.value) return;
+        c.fill(0, 0, w, h, argb(0.55f, SLAB));
+        c.fill(0, 0, 1, h, argb(0.9f, NEON));
+    }
+
+    public int textColor() { return 0xFF000000 | color.rgb(); }
+
+    public void resetPosition() { x = defX; y = defY; scale = 1f; }
+
+    @Override
+    public void load(JsonObject o) {
+        super.load(o);
+        if (o.has("x")) x = o.get("x").getAsFloat();
+        if (o.has("y")) y = o.get("y").getAsFloat();
+        if (o.has("scale")) scale = o.get("scale").getAsFloat();
+    }
+
+    @Override
+    public JsonObject save() {
+        JsonObject o = super.save();
+        o.addProperty("x", x);
+        o.addProperty("y", y);
+        o.addProperty("scale", scale);
+        return o;
+    }
+}

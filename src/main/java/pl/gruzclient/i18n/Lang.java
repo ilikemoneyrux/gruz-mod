@@ -1,0 +1,490 @@
+package pl.gruzclient.i18n;
+
+import net.minecraft.client.MinecraftClient;
+import pl.gruzclient.config.GruzConfig;
+
+import java.util.HashMap;
+import java.util.Map;
+
+/**
+ * Tłumaczenia Gruz Client (PL / EN).
+ * Ustawienie "auto" bierze język z launchera (-Dgruz.lang), a gdy go brak – z języka Minecrafta.
+ */
+public final class Lang {
+    private Lang() {}
+
+    public static final String[] CHOICES = {"auto", "pl", "en"};
+    private static final Map<String, String> PL = new HashMap<>();
+    private static final Map<String, String> EN = new HashMap<>();
+
+    private static void put(String key, String pl, String en) { PL.put(key, pl); EN.put(key, en); }
+
+    static {
+        // menu główne
+        put("menu.singleplayer", "Jeden gracz", "Singleplayer");
+        put("menu.multiplayer", "Wielu graczy", "Multiplayer");
+        put("menu.options", "Ustawienia", "Options");
+        put("menu.mods", "Gruz Mods", "Gruz Mods");
+        put("menu.quit", "Wyjdź", "Quit");
+        put("menu.premium", "Konto premium", "Premium account");
+        put("menu.language", "Język", "Language");
+        // ekran modów
+        put("mods.title", "Gruz Client Mods", "Gruz Client Mods");
+        put("mods.subtitle", "Przełącznik włącza moduł, kliknięcie karty pokazuje jego ustawienia.",
+                "The switch toggles a module, clicking the card shows its settings.");
+        put("mods.editHud", "Edytuj HUD", "Edit HUD");
+        put("mods.back", "Wróć", "Back");
+        put("mods.save", "Zapisz", "Save");
+        put("mods.on", "WŁ.", "ON");
+        put("mods.off", "WYŁ.", "OFF");
+        put("mods.settings", "Ustawienia", "Settings");
+        put("mods.noSettings", "Ten moduł nie ma dodatkowych ustawień.", "This module has no extra settings.");
+        put("mods.pressKey", "Naciśnij klawisz…", "Press a key…");
+        put("mods.cat.hud", "HUD", "HUD");
+        put("mods.cat.visual", "Wygląd", "Visual");
+        put("mods.cat.utility", "Przydatne", "Utility");
+        put("hud.editor.hint", "Przeciągaj elementy myszką. Kółko myszy zmienia rozmiar. ESC zapisuje.",
+                "Drag elements with the mouse. Scroll to resize. ESC saves.");
+        put("hud.editor.reset", "Przywróć układ", "Reset layout");
+        // moduły
+        put("module.zoom", "Zoom", "Zoom");
+        put("module.zoom.desc", "Przybliżenie pod klawiszem, kółko myszy zmienia siłę", "Hold to zoom, scroll to adjust");
+        put("module.fps", "FPS", "FPS");
+        put("module.fps.desc", "Licznik klatek na sekundę", "Frames per second counter");
+        put("module.cps", "CPS", "CPS");
+        put("module.cps.desc", "Kliknięcia na sekundę", "Clicks per second");
+        put("module.keystrokes", "Keystrokes", "Keystrokes");
+        put("module.keystrokes.desc", "Podgląd WASD, myszy i spacji", "Shows WASD, mouse and space");
+        put("module.freelook", "Perspective", "Perspective");
+        put("module.freelook.desc", "Obracaj kamerę wokół postaci bez ruszania nią", "Orbit the camera without turning");
+        put("module.armor", "Armor HUD", "Armor HUD");
+        put("module.armor.desc", "Zbroja i jej wytrzymałość", "Armor and durability");
+        put("module.potions", "Potion HUD", "Potion HUD");
+        put("module.potions.desc", "Aktywne efekty i czas", "Active effects and time");
+        put("module.crosshair", "Celownik", "Crosshair");
+        put("module.crosshair.desc", "Własny kształt, rozmiar i kolor", "Custom shape, size and color");
+        put("module.fullbright", "Fullbright", "Fullbright");
+        put("module.fullbright.desc", "Pełna jasność wszędzie", "Full brightness everywhere");
+        put("module.coords", "Koordynaty", "Coordinates");
+        put("module.coords.desc", "Pozycja i kierunek", "Position and facing");
+        put("module.ping", "Ping", "Ping");
+        put("module.ping.desc", "Opóźnienie do serwera", "Latency to the server");
+        put("module.togglesprint", "Toggle Sprint", "Toggle Sprint");
+        put("module.togglesprint.desc", "Bieg włączany jednym kliknięciem", "Sprint toggled with one press");
+        // ustawienia
+        put("setting.key", "Klawisz", "Key");
+        put("setting.mode", "Tryb", "Mode");
+        put("setting.mode.hold", "Przytrzymaj", "Hold");
+        put("setting.mode.toggle", "Przełącz", "Toggle");
+        put("setting.level", "Siła przybliżenia", "Zoom level");
+        put("setting.smooth", "Płynne przejście", "Smooth transition");
+        put("setting.background", "Tło", "Background");
+        put("setting.color", "Kolor", "Color");
+        put("setting.showRight", "Pokaż prawy przycisk", "Show right button");
+        put("setting.showSpace", "Pokaż spację", "Show space bar");
+        put("setting.showCps", "CPS na przyciskach myszy", "CPS on mouse buttons");
+        put("setting.showMouse", "Pokaż przyciski myszy", "Show mouse buttons");
+        put("setting.style", "Kształt", "Style");
+        put("setting.style.cross", "Krzyżyk", "Cross");
+        put("setting.style.dot", "Kropka", "Dot");
+        put("setting.style.crossdot", "Krzyżyk z kropką", "Cross with dot");
+        put("setting.size", "Rozmiar", "Size");
+        put("setting.gap", "Przerwa", "Gap");
+        put("setting.thickness", "Grubość", "Thickness");
+        put("setting.showDirection", "Pokaż kierunek", "Show facing");
+        put("setting.durability", "Pokaż wytrzymałość", "Show durability");
+        put("color.white", "Biały", "White");
+        put("color.neon", "Neonowy fiolet", "Neon purple");
+        put("color.lilac", "Liliowy", "Lilac");
+        put("color.cyan", "Cyjan", "Cyan");
+        put("color.green", "Zielony", "Green");
+        put("color.red", "Czerwony", "Red");
+        put("color.yellow", "Żółty", "Yellow");
+        put("lang.auto", "Automatyczny", "Automatic");
+        put("lang.pl", "Polski", "Polski");
+        put("lang.en", "English", "English");
+        put("hud.fps", "FPS", "FPS");
+        put("hud.cps", "CPS", "CPS");
+        put("hud.ping", "ms", "ms");
+        put("dir.north", "Północ", "North");
+        put("dir.south", "Południe", "South");
+        put("dir.east", "Wschód", "East");
+        put("dir.west", "Zachód", "West");
+        put("net.offline", "Brak połączenia z serwerem Gruz.", "Not connected to the Gruz server.");
+        put("net.notFriend", "{name} nie jest Twoim znajomym w Gruz.", "{name} isn't your Gruz friend.");
+        put("net.noReply", "Nikt jeszcze do Ciebie nie napisał.", "Nobody has messaged you yet.");
+        put("net.friendOnline", "{name} jest teraz online.", "{name} is now online.");
+        put("net.you", "Ty", "you");
+        put("net.friendRequest", "{name} chce dodać Cię do znajomych (zaakceptuj w launcherze).", "{name} sent you a friend request (accept it in the launcher).");
+        put("net.friendAccepted", "{name} przyjął Twoje zaproszenie.", "{name} accepted your friend request.");
+        put("net.partyInvite", "{name} zaprasza Cię do party (dołącz w launcherze).", "{name} invited you to a party (join in the launcher).");
+        put("net.warping", "{name} zabiera party na {server}…", "{name} is taking the party to {server}…");
+        put("net.err.USER_NOT_FOUND", "Nie ma gracza {name} w Gruz Client.", "No Gruz Client player called {name}.");
+        put("net.err.NOT_FRIENDS", "Możesz pisać tylko do znajomych.", "You can only message friends.");
+        put("net.err.NOT_LEADER", "Tylko lider party może to zrobić.", "Only the party leader can do that.");
+        put("net.err.NO_SERVER", "Najpierw wejdź na serwer.", "Join a server first.");
+        put("net.err.PARTY_FULL", "Party jest pełne (8 osób).", "The party is full (8 players).");
+        put("net.err.INVITE_EXPIRED", "Zaproszenie wygasło.", "The invite expired.");
+        put("net.err.SELF", "Nie możesz dodać samego siebie.", "You can't add yourself.");
+        put("net.err.ALREADY_FRIENDS", "Już jesteście znajomymi.", "You're already friends.");
+        put("net.help", "Komendy Gruz:|.msg Nick tekst – wiadomość do znajomego|.r tekst – odpowiedź|.warp – party na Twój serwer", "Gruz commands:|.msg Name text – message a friend|.r text – reply|.warp – bring your party to your server");
+        put("mods.cat.cosmetics", "Kosmetyki", "Cosmetics");
+        put("module.cosmetics", "Kosmetyki", "Cosmetics");
+        put("module.cosmetics.desc", "Peleryna, aureola, ślad, pet i emotki", "Cape, halo, trail, pet and emotes");
+        put("setting.cape", "Peleryna", "Cape");
+        put("setting.headwear", "Nad głową", "Above head");
+        put("setting.trail", "Ślad", "Trail");
+        put("setting.pet", "Pet", "Pet");
+        put("setting.showOthers", "Pokaż kosmetyki innych", "Show others' cosmetics");
+        put("setting.emoteKey", "Klawisz emotek", "Emote key");
+        put("setting.emoteCamera", "Kamera z przodu przy emotce", "Front camera during emote");
+        put("setting.gruzIcon", "Ikona Gruz przy nicku", "Gruz icon next to names");
+        put("cos.none", "Brak", "None");
+        put("cape.flow", "Fioletowy płomień", "Violet flame");
+        put("cape.crystals", "Kryształy", "Crystals");
+        put("cape.galaxy", "Galaktyka", "Galaxy");
+        put("cape.aurora", "Zorza (kod)", "Aurora (code)");
+        put("cape.ember", "Żar (kod)", "Ember (code)");
+        put("net.voice", "🎤 wiadomość głosowa (odsłuchaj w launcherze)", "🎤 voice message (play it in the launcher)");
+        put("net.badge", "Nowa odznaka: {name}", "New badge: {name}");
+        put("cape.gruz", "Gruz", "Gruz");
+        put("head.halo", "Aureola", "Halo");
+        put("head.crown", "Kryształowa korona", "Crystal crown");
+        put("trail.shards", "Odłamki", "Shards");
+        put("trail.sparks", "Iskry", "Sparks");
+        put("trail.stars", "Gwiazdki", "Stars");
+        put("trail.witch", "Magia", "Magic");
+        put("pet.crystal", "Kryształ", "Crystal");
+        put("emote.wave", "Machanie", "Wave");
+        put("emote.cheer", "Hura!", "Cheer");
+        put("emote.clap", "Brawa", "Clap");
+        put("emote.dance", "Taniec", "Dance");
+        put("emote.salute", "Salut", "Salute");
+        put("emote.facepalm", "Facepalm", "Facepalm");
+        put("emote.bow", "Ukłon", "Bow");
+        put("emote.point", "Wskaż", "Point");
+        put("emote.hint", "Najedź i puść klawisz · cyfry 1–8", "Hover and release · keys 1–8");
+        put("mods.cat.pvp", "PvP", "PvP");
+        put("mods.open", "Otwórz", "Open");
+        put("common.cancel", "Anuluj", "Cancel");
+        put("hud.blocks", "bloków", "blocks");
+        put("hud.combo", "Combo", "Combo");
+        put("hud.kills", "Kille", "Kills");
+        put("hud.armor", "zbroi", "armor");
+        put("hud.enemy", "Przeciwnik", "Opponent");
+        put("module.targethud", "Target HUD", "Target HUD");
+        put("module.targethud.desc", "Życie, zbroja i nick przeciwnika", "Opponent health, armor and name");
+        put("module.reach", "Reach", "Reach");
+        put("module.reach.desc", "Odległość ostatniego ciosu", "Distance of your last hit");
+        put("module.combo", "Combo i kille", "Combo & kills");
+        put("module.combo.desc", "Trafienia z rzędu i kille w sesji", "Hits in a row and session kills");
+        put("module.items", "Licznik przedmiotów", "Item counter");
+        put("module.items.desc", "Bloki, perły, strzały, złote jabłka", "Blocks, pearls, arrows, golden apples");
+        put("module.hitcolor", "Hit Color", "Hit Color");
+        put("module.hitcolor.desc", "Kolor błysku przy trafieniu", "Colour of the hurt flash");
+        put("module.hitsound", "Dźwięk trafienia", "Hit sound");
+        put("module.hitsound.desc", "Własny dźwięk przy każdym ciosie", "Custom sound on every hit");
+        put("module.lowhp", "Ostrzeżenie o HP", "Low HP warning");
+        put("module.lowhp.desc", "Czerwona winieta przy małym życiu", "Red vignette when health is low");
+        put("module.recording", "Tryb nagrywania", "Recording mode");
+        put("module.recording.desc", "Klawisz chowa HUD i celownik (ręka zostaje)", "A key hides HUD and crosshair (hand stays)");
+        put("module.blockoverlay", "Block Overlay", "Block Overlay");
+        put("module.blockoverlay.desc", "Kolorowy obrys i wypełnienie bloku", "Coloured block outline and fill");
+        put("module.lowfire", "Ogień i tarcza", "Fire & shield");
+        put("module.lowfire.desc", "Mniejszy ogień, niższa tarcza", "Lower fire, lower shield");
+        put("module.nametags", "Nicki i drużyna", "Nametags & team");
+        put("module.nametags.desc", "Kolor nicków, podświetlenie drużyny", "Name colour, team highlight");
+        put("module.world", "Świat i niebo", "World & sky");
+        put("module.world.desc", "Pora dnia, pogoda, kosmiczne niebo", "Time, weather, cosmic sky");
+        put("module.motionblur", "Motion blur", "Motion blur");
+        put("module.motionblur.desc", "Rozmycie ruchu przy obrocie kamery", "Blur when turning the camera");
+        put("module.oldanim", "Animacje 1.7", "1.7 animations");
+        put("module.oldanim.desc", "Ręka nie opada po ciosie, szybkość machania", "No cooldown dip, swing speed");
+        put("module.itemphysics", "Item physics", "Item physics");
+        put("module.itemphysics.desc", "Przedmioty leżą płasko na ziemi", "Dropped items lie flat");
+        put("module.menu", "Menu główne", "Main menu");
+        put("module.menu.desc", "Tło: kryształy albo panorama z Twojego świata", "Background: crystals or your world panorama");
+        put("module.autogg", "Auto GG", "Auto GG");
+        put("module.autogg.desc", "Pisze gg po końcu gry", "Says gg when a game ends");
+        put("module.betterchat", "Lepszy czat", "Better chat");
+        put("module.betterchat.desc", "Zwijanie powtórzeń, wyszukiwanie, kopiowanie", "Stacking, search, copy");
+        put("setting.sound", "Dźwięk", "Sound");
+        put("sound.crystal", "Kryształ", "Crystal");
+        put("sound.ding", "Ding", "Ding");
+        put("sound.pling", "Pling", "Pling");
+        put("sound.bell", "Dzwonek", "Bell");
+        put("sound.arrow", "Strzała", "Arrow");
+        put("setting.volume", "Głośność", "Volume");
+        put("setting.pitch", "Wysokość", "Pitch");
+        put("setting.opacity", "Krycie", "Opacity");
+        put("setting.showCombo", "Pokaż combo", "Show combo");
+        put("setting.showKills", "Pokaż kille", "Show kills");
+        put("setting.countBlocks", "Bloki", "Blocks");
+        put("setting.countPearls", "Perły", "Pearls");
+        put("setting.countArrows", "Strzały", "Arrows");
+        put("setting.countGapples", "Złote jabłka", "Golden apples");
+        put("setting.hideEmpty", "Ukryj, gdy 0", "Hide when 0");
+        put("setting.hpThreshold", "Próg życia", "Health threshold");
+        put("setting.strength", "Siła", "Strength");
+        put("setting.outlineOpacity", "Krycie obrysu", "Outline opacity");
+        put("setting.fill", "Wypełnienie", "Fill");
+        put("setting.fillOpacity", "Krycie wypełnienia", "Fill opacity");
+        put("setting.pulse", "Pulsowanie", "Pulse");
+        put("setting.fireHeight", "Obniż ogień", "Lower fire");
+        put("setting.shieldHeight", "Obniż tarczę", "Lower shield");
+        put("setting.recolorNames", "Własny kolor nicków", "Custom name colour");
+        put("setting.teamGlow", "Podświetl drużynę", "Highlight team");
+        put("setting.showOwnName", "Własny nick w F5", "Own name in F5");
+        put("setting.time", "Pora dnia", "Time of day");
+        put("time.server", "Jak na serwerze", "Server time");
+        put("time.morning", "Rano", "Morning");
+        put("time.noon", "Południe", "Noon");
+        put("time.sunset", "Zachód", "Sunset");
+        put("time.night", "Noc", "Night");
+        put("time.midnight", "Północ", "Midnight");
+        put("setting.clearWeather", "Bez deszczu", "No rain");
+        put("setting.cosmicSky", "Kosmiczne niebo", "Cosmic sky");
+        put("setting.noCooldownDip", "Ręka nie opada po ciosie", "No cooldown dip");
+        put("setting.swingSpeed", "Czas machania", "Swing duration");
+        put("setting.ggMessage", "Wiadomość", "Message");
+        put("gg.gg", "gg", "gg");
+        put("gg.GG", "GG", "GG");
+        put("gg.ggwp", "gg wp", "gg wp");
+        put("gg.pl", "Dobra gra!", "Dobra gra!");
+        put("gg.en", "Good game!", "Good game!");
+        put("setting.delay", "Opóźnienie", "Delay");
+        put("setting.ggOnKill", "Też po zabójstwie", "Also after a kill");
+        put("setting.stackMessages", "Zwijaj powtórzenia", "Stack repeats");
+        put("setting.timestamps", "Godziny wiadomości", "Timestamps");
+        put("setting.longHistory", "Długa historia (1000)", "Long history (1000)");
+        put("setting.rightClickCopy", "Kopiuj prawym przyciskiem", "Right-click to copy");
+        put("setting.menuBackground", "Tło menu", "Menu background");
+        put("menu.crystals", "Kryształy", "Crystals");
+        put("menu.panorama", "Panorama", "Panorama");
+        put("setting.panoramaKey", "Klawisz panoramy", "Panorama key");
+        put("menu.panoramaSaved", "Panorama zapisana! Zobaczysz ją w menu głównym.", "Panorama saved! You'll see it in the main menu.");
+        put("menu.panoramaFailed", "Nie udało się zrobić panoramy.", "Couldn't take the panorama.");
+        put("setting.style.pixel", "Piksele", "Pixels");
+        put("setting.crosshairOutline", "Obwódka", "Outline");
+        put("setting.pixelCode", "Kod celownika", "Crosshair code");
+        put("setting.editPixels", "Edytuj piksele", "Edit pixels");
+        put("cross.title", "Edytor celownika", "Crosshair editor");
+        put("cross.hint", "Lewy przycisk rysuje, prawy ściera. Możesz przeciągać.", "Left click draws, right click erases. Drag to paint.");
+        put("cross.mirror", "Lustro", "Mirror");
+        put("cross.clear", "Wyczyść", "Clear");
+        put("cross.copy", "Kopiuj kod", "Copy code");
+        put("cross.copied", "Kod skopiowany – wyślij go znajomym.", "Code copied – send it to friends.");
+        put("cross.paste", "Wklej kod", "Paste code");
+        put("cross.badCode", "W schowku nie ma kodu celownika Gruz.", "No Gruz crosshair code in clipboard.");
+        put("cross.pasted", "Wklejono celownik.", "Crosshair pasted.");
+        put("cross.save", "Zapisz", "Save");
+        put("cross.preview", "Podgląd", "Preview");
+        put("chat.search", "Szukaj w czacie…", "Search chat…");
+        put("chat.searchHint", "Ctrl+F zamyka", "Ctrl+F closes");
+        put("chat.copied", "Skopiowano wiadomość", "Message copied");
+
+        // ---- mapa, HUD, nowe moduły ----
+        put("hud.preset.pvp", "Układ PvP", "PvP layout");
+        put("hud.preset.survival", "Survival", "Survival");
+        put("hud.preset.minimal", "Minimalny", "Minimal");
+        put("module.minimap", "Minimapa", "Minimap");
+        put("module.minimap.desc", "Mapa, waypointy, kompas (M = cała mapa)", "Map, waypoints, compass (M = world map)");
+        put("module.speed", "Prędkość", "Speed");
+        put("module.speed.desc", "Bloki na sekundę", "Blocks per second");
+        put("module.clock", "Zegar", "Clock");
+        put("module.clock.desc", "Godzina, czas w grze albo czas sesji", "Real time, game time or session time");
+        put("module.fight", "Statystyki walki", "Fight stats");
+        put("module.fight.desc", "Czas walki, ciosy, combo i podsumowanie", "Fight time, hits, combo and summary");
+        put("module.clip", "Klipy (OBS)", "Clips (OBS)");
+        put("module.clip.desc", "Klawisz zapisuje ostatnie sekundy gry przez OBS", "A key saves the last seconds of gameplay via OBS");
+        put("module.hitboxes", "Hitboxy", "Hitboxes");
+        put("module.hitboxes.desc", "Obrysy encji, zapamiętane między sesjami", "Entity outlines, remembered between sessions");
+        put("module.scoreboard", "Tablica wyników", "Scoreboard");
+        put("module.scoreboard.desc", "Rozmiar, pozycja, tło, bez czerwonych liczb", "Size, position, background, no red numbers");
+        put("module.hudTweaks", "Boss i napisy", "Bossbar & titles");
+        put("module.hudTweaks.desc", "Rozmiar i pozycja paska bossa oraz dużych napisów", "Size and position of the bossbar and titles");
+        put("module.tab", "Lista graczy", "Tab list");
+        put("module.tab.desc", "Ping w ms, logo Gruz, statystyki Hypixela", "Ping in ms, Gruz logo, Hypixel stats");
+        put("module.freecam", "Freecam", "Freecam");
+        put("module.freecam.desc", "Wolna kamera (tylko w świecie jednoosobowym)", "Free camera (singleplayer only)");
+        put("setting.mapSize", "Rozmiar mapy", "Map size");
+        put("setting.mapZoom", "Przybliżenie", "Zoom");
+        put("setting.mapRotate", "Obracaj z graczem", "Rotate with player");
+        put("setting.compass", "Kompas u góry", "Compass bar");
+        put("setting.deathPoint", "Punkt śmierci", "Death point");
+        put("setting.mapKey", "Klawisz mapy", "Map key");
+        put("setting.waypointKey", "Nowy waypoint", "New waypoint");
+        put("setting.speedVertical", "Licz ruch w pionie", "Include vertical");
+        put("setting.clockMode", "Tryb", "Mode");
+        put("setting.clock12", "Format 12 h", "12-hour format");
+        put("clock.real", "Godzina", "Real time");
+        put("clock.game", "Czas w grze", "Game time");
+        put("clock.session", "Czas sesji", "Session time");
+        put("clock.sessionShort", "sesja", "session");
+        put("clock.day", "dzień", "day");
+        put("setting.fightSummary", "Podsumowanie w czacie", "Summary in chat");
+        put("fight.title", "Walka", "Fight");
+        put("fight.dealt", "Zadane", "Dealt");
+        put("fight.taken", "Otrzymane", "Taken");
+        put("fight.combo", "Combo", "Combo");
+        put("fight.end", "Walka z {opp}: {time} s · zadane {dealt} · otrzymane {taken} · combo {combo} · straciłeś {dmg}❤",
+                "Fight vs {opp}: {time}s · dealt {dealt} · taken {taken} · combo {combo} · lost {dmg}❤");
+        put("fight.lost", "Przegrana z {opp}: {time} s · zadane {dealt} · otrzymane {taken} · combo {combo}",
+                "Lost to {opp}: {time}s · dealt {dealt} · taken {taken} · combo {combo}");
+        put("setting.clipOnKill", "Klip po każdym killu", "Clip after every kill");
+        put("setting.obsPort", "Port OBS WebSocket", "OBS WebSocket port");
+        put("setting.obsPassword", "Hasło OBS WebSocket", "OBS WebSocket password");
+        put("setting.obsTest", "Sprawdź połączenie", "Test connection");
+        put("clip.saved", "Klip zapisany w folderze nagrań OBS", "Clip saved to your OBS recordings folder");
+        put("clip.started", "Włączono Bufor powtórek w OBS. Następny klip już się zapisze", "Replay Buffer started in OBS. The next clip will save");
+        put("clip.ok", "OBS połączony, bufor powtórek działa", "OBS connected, replay buffer running");
+        put("clip.noObs", "Brak połączenia z OBS. Włącz Narzędzia → Ustawienia WebSocket", "Can't reach OBS. Enable Tools → WebSocket Server Settings");
+        put("clip.auth", "Złe hasło OBS WebSocket (ustaw je w module Klipy)", "Wrong OBS WebSocket password (set it in the Clips module)");
+        put("clip.error", "OBS odrzucił zapis. Ustaw Bufor powtórek w Ustawienia → Wyjście", "OBS refused. Set up the Replay Buffer in Settings → Output");
+        put("setting.hideScoreboard", "Ukryj tablicę", "Hide scoreboard");
+        put("setting.size", "Rozmiar", "Size");
+        put("setting.offsetY", "Przesunięcie w pionie", "Vertical offset");
+        put("setting.bgOpacity", "Krycie tła", "Background opacity");
+        put("setting.scoreNumbers", "Czerwone liczby", "Red numbers");
+        put("setting.hideBossbar", "Ukryj pasek bossa", "Hide bossbar");
+        put("setting.bossSize", "Rozmiar paska bossa", "Bossbar size");
+        put("setting.bossY", "Pasek bossa niżej o", "Move bossbar down");
+        put("setting.hideTitle", "Ukryj duże napisy", "Hide titles");
+        put("setting.titleSize", "Rozmiar napisów", "Title size");
+        put("setting.titleY", "Przesunięcie napisów", "Title offset");
+        put("setting.pingMs", "Ping w ms", "Ping in ms");
+        put("setting.hypixelStats", "Statystyki Hypixela (BedWars)", "Hypixel stats (BedWars)");
+        put("setting.flySpeed", "Prędkość lotu", "Fly speed");
+        put("freecam.onlySp", "Freecam działa tylko w świecie jednoosobowym", "Freecam works in singleplayer only");
+        put("map.title", "Mapa świata", "World map");
+        put("map.waypoints", "Waypointy", "Waypoints");
+        put("map.empty", "Brak. PPM na mapie albo N w grze", "None. Right-click the map or press N in game");
+        put("map.help", "Przeciągnij: przesuń · Kółko: przybliż · PPM: waypoint · Lista: LPM usuń, PPM pokaż",
+                "Drag: pan · Wheel: zoom · Right-click: waypoint · List: left-click delete, right-click show");
+        put("map.center", "Do mnie", "Center on me");
+        put("map.point", "Punkt", "Point");
+        put("map.death", "Miejsce śmierci", "Death point");
+        put("map.added", "Dodano waypoint {name}", "Added waypoint {name}");
+        put("setting.lineWidth", "Grubość linii", "Line width");
+        put("setting.swordBlock", "Blok mieczem (1.8)", "Sword block (1.8)");
+        put("bench.warmup", "Test wydajności: rozgrzewka… nie ruszaj myszką", "Benchmark: warming up… don't touch the mouse");
+        put("bench.running", "Test wydajności: jeszcze {s} s", "Benchmark: {s}s left");
+        put("bench.done", "Wynik: średnio {avg} FPS, 1% low {low} FPS. Możesz zamknąć grę", "Result: {avg} FPS average, {low} FPS 1% low. You can close the game");
+        put("dir.n.short", "Pn", "N");
+        put("dir.s.short", "Pd", "S");
+        put("dir.e.short", "Wsch", "E");
+        put("dir.w.short", "Zach", "W");
+
+        // ---- nowy wygląd (menu, centrum modów, lista modów) ----
+        put("menu.cosmetics", "Kosmetyki", "Cosmetics");
+        put("menu.rejoin", "Wróć na {name}", "Rejoin {name}");
+        put("menu.quitGame", "Wyjdź z gry", "Quit game");
+        put("menu.vanilla", "Rozmyta panorama", "Blurred panorama");
+        put("menu.tipTag", "Wskazówka", "Tip");
+        put("menu.tip0.title", "Przesuń wszystko", "Move anything");
+        put("menu.tip0", "Prawy Shift w grze otwiera centrum modów: przeciągnij HUD, tablicę wyników i pasek bossa.", "Right Shift in game opens the mod hub: drag the HUD, scoreboard and boss bar.");
+        put("menu.tip1.title", "Klipy z OBS", "Clips via OBS");
+        put("menu.tip1", "Włącz moduł Klipy i naciśnij F8, żeby zapisać ostatnie sekundy gry.", "Enable the Clips module and press F8 to save the last seconds of gameplay.");
+        put("menu.tip2.title", "Mapa świata", "World map");
+        put("menu.tip2", "M otwiera pełną mapę, N dodaje waypoint w miejscu, w którym stoisz.", "M opens the full map, N adds a waypoint where you stand.");
+        put("menu.tip3.title", "Emotki", "Emotes");
+        put("menu.tip3", "Przytrzymaj B, żeby wybrać emotkę. Inni gracze Gruz ją zobaczą.", "Hold B to pick an emote. Other Gruz players will see it.");
+        put("menu.shortcuts", "Skróty", "Shortcuts");
+        put("menu.key.mods", "Centrum modów", "Mod hub");
+        put("menu.key.emotes", "Emotki", "Emotes");
+        put("menu.key.map", "Mapa", "Map");
+        put("menu.key.zoom", "Zoom", "Zoom");
+        put("hud.el.scoreboard", "Tablica wyników", "Scoreboard");
+        put("hud.el.bossbar", "Pasek bossa", "Boss bar");
+        put("hud.el.bossSample", "Boss", "Boss");
+        put("hud.editMods", "Edytuj mody Gruz", "Edit Gruz mods");
+        put("hud.act.cosmetics", "Kosmetyki", "Cosmetics");
+        put("hud.act.emotes", "Emotki", "Emotes");
+        put("hud.act.preset", "Następny gotowy układ HUD", "Next HUD preset");
+        put("hud.act.snap", "Przyciąganie do krawędzi", "Snap to edges");
+        put("hud.act.reset", "Przywróć domyślne pozycje", "Reset positions");
+        put("hud.presetApplied", "Układ: {name}", "Layout: {name}");
+        put("hud.snapOn", "Przyciąganie włączone", "Snapping on");
+        put("hud.snapOff", "Przyciąganie wyłączone (albo trzymaj Alt)", "Snapping off (or hold Alt)");
+        put("hud.resetDone", "Przywrócono domyślne pozycje", "Positions reset");
+        put("hud.hidden", "Ukryto: {name}", "Hidden: {name}");
+        put("hud.hint", "Przeciągaj elementy · kółko: rozmiar · PPM: ustawienia · strzałki: o 1 px · R-Shift / ESC: zamknij",
+                "Drag elements · wheel: size · right-click: settings · arrows: 1 px · R-Shift / ESC: close");
+        put("mods.search", "Szukaj modów…", "Search mods…");
+        put("mods.cat.all", "Wszystkie", "All");
+        put("mods.enabledCount", "Włączone: {n}/{all}", "Enabled: {n}/{all}");
+        put("mods.nothing", "Nic nie znaleziono.", "Nothing found.");
+        put("mods.enabled", "WŁĄCZONY", "ENABLED");
+        put("mods.disabled", "WYŁĄCZONY", "DISABLED");
+
+        // ---- kosmetyki: nowe ----
+        put("cape.gruz", "Gruz Client (za darmo)", "Gruz Client (free)");
+        put("cape.nebula", "Mgławica", "Nebula");
+        put("cape.sakura", "Sakura", "Sakura");
+        put("cape.inferno", "Inferno", "Inferno");
+        put("cape.ocean", "Ocean", "Ocean");
+        put("cape.pumpkin", "Dynia (Halloween)", "Pumpkin (Halloween)");
+        put("cape.winter", "Zima (Święta)", "Winter (Christmas)");
+        put("cape.aurora", "Zorza", "Aurora");
+        put("cape.ember", "Żar", "Ember");
+        put("head.tophat", "Cylinder", "Top hat");
+        put("head.witch", "Kapelusz czarownicy", "Witch hat");
+        put("head.santa", "Czapka Mikołaja", "Santa hat");
+        put("wings.angel", "Skrzydła anioła", "Angel wings");
+        put("wings.demon", "Skrzydła demona", "Demon wings");
+        put("wings.crystal", "Kryształowe skrzydła", "Crystal wings");
+        put("wings.bat", "Skrzydła nietoperza", "Bat wings");
+        put("back.backpack", "Plecak", "Backpack");
+        put("back.jetpack", "Jetpack", "Jetpack");
+        put("trail.souls", "Dusze", "Souls");
+        put("trail.snow", "Śnieg", "Snow");
+        put("pet.pumpkin", "Dyniek", "Pumpkin buddy");
+        put("name.rainbow", "Tęcza", "Rainbow");
+        put("name.neon", "Neon", "Neon");
+        put("name.gold", "Złoto", "Gold");
+        put("name.fire", "Ogień", "Fire");
+        put("name.frost", "Lód", "Frost");
+        put("setting.wings", "Skrzydła", "Wings");
+        put("setting.back", "Plecy", "Back");
+        put("setting.nameEffect", "Efekt nicku", "Name effect");
+        put("setting.seasonal", "Motyw sezonowy w menu", "Seasonal menu theme");
+        put("season.halloween", "Halloween", "Halloween");
+        put("season.christmas", "Święta", "Christmas");
+        put("season.cardTitle.halloween", "Halloween w Gruz", "Halloween in Gruz");
+        put("season.cardTitle.christmas", "Święta w Gruz", "Christmas in Gruz");
+        put("season.cardBody", "Darmowe kosmetyki z wydarzenia odbierzesz w Szafie w launcherze. Zostało dni: {d}.",
+                "Claim free event cosmetics in the launcher Wardrobe. Days left: {d}.");
+    }
+
+    /** Aktualny język: "pl" albo "en" */
+    public static String current() {
+        String set = GruzConfig.get().language;
+        if ("pl".equals(set) || "en".equals(set)) return set;
+        String fromLauncher = System.getProperty("gruz.lang");
+        if ("pl".equals(fromLauncher) || "en".equals(fromLauncher)) return fromLauncher;
+        MinecraftClient mc = MinecraftClient.getInstance();
+        String mcLang = mc != null && mc.options != null ? mc.options.language : "en_us";
+        return mcLang != null && mcLang.startsWith("pl") ? "pl" : "en";
+    }
+
+    public static String t(String key) {
+        Map<String, String> map = "pl".equals(current()) ? PL : EN;
+        String v = map.get(key);
+        return v != null ? v : EN.getOrDefault(key, key);
+    }
+
+    /** Następny język w kolejności auto -> pl -> en */
+    public static void cycle() {
+        GruzConfig cfg = GruzConfig.get();
+        int i = 0;
+        for (int k = 0; k < CHOICES.length; k++) if (CHOICES[k].equals(cfg.language)) i = k;
+        cfg.language = CHOICES[(i + 1) % CHOICES.length];
+        GruzConfig.save();
+    }
+
+    /** Krótka etykieta do przycisku języka */
+    public static String badge() {
+        String set = GruzConfig.get().language;
+        return "auto".equals(set) ? current().toUpperCase() + "*" : set.toUpperCase();
+    }
+}

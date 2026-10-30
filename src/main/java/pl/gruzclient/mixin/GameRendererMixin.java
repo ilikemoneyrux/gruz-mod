@@ -1,0 +1,41 @@
+package pl.gruzclient.mixin;
+
+import net.minecraft.client.render.Camera;
+import net.minecraft.client.render.GameRenderer;
+import net.minecraft.client.render.RenderTickCounter;
+import net.minecraft.entity.LivingEntity;
+import org.spongepowered.asm.mixin.Mixin;
+import org.spongepowered.asm.mixin.injection.At;
+import org.spongepowered.asm.mixin.injection.Inject;
+import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
+import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
+import pl.gruzclient.module.Modules;
+
+@Mixin(GameRenderer.class)
+public abstract class GameRendererMixin {
+    /** Zoom: dzielimy pole widzenia przez aktualny mnożnik */
+    @Inject(method = "getFov", at = @At("RETURN"), cancellable = true)
+    private void gruz$zoom(Camera camera, float tickDelta, boolean changingFov, CallbackInfoReturnable<Double> cir) {
+        float f = Modules.ZOOM.factor();
+        if (f > 1.001f) cir.setReturnValue(cir.getReturnValue() / f);
+    }
+
+    /** Fullbright: pełna siła "widzenia w ciemności" */
+    @Inject(method = "getNightVisionStrength", at = @At("HEAD"), cancellable = true)
+    private static void gruz$fullbright(LivingEntity entity, float tickDelta, CallbackInfoReturnable<Float> cir) {
+        if (Modules.FULLBRIGHT.isEnabled()) cir.setReturnValue(1f);
+    }
+
+    /** Motion blur: po narysowaniu świata, przed GUI */
+    @Inject(method = "render", require = 0, at = @At(value = "INVOKE",
+            target = "Lnet/minecraft/client/render/WorldRenderer;drawEntityOutlinesFramebuffer()V", shift = At.Shift.AFTER))
+    private void gruz$motionBlur(RenderTickCounter tickCounter, boolean tick, CallbackInfo ci) {
+        Modules.MOTION_BLUR.render(tickCounter.getTickDelta(true));
+    }
+
+    /** Freecam: bez ręki przed kamerą */
+    @Inject(method = "renderHand", at = @At("HEAD"), cancellable = true, require = 0)
+    private void gruz$freecamHand(CallbackInfo ci) {
+        if (Modules.FREECAM.isActive()) ci.cancel();
+    }
+}
