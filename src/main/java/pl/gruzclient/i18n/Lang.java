@@ -1,10 +1,10 @@
 package pl.gruzclient.i18n;
 
-import net.minecraft.client.MinecraftClient;
 import pl.gruzclient.config.GruzConfig;
 
 import java.util.HashMap;
 import java.util.Map;
+import net.minecraft.client.Minecraft;
 
 /**
  * Tłumaczenia Gruz Client (PL / EN).
@@ -462,8 +462,8 @@ public final class Lang {
         if ("pl".equals(set) || "en".equals(set)) return set;
         String fromLauncher = System.getProperty("gruz.lang");
         if ("pl".equals(fromLauncher) || "en".equals(fromLauncher)) return fromLauncher;
-        MinecraftClient mc = MinecraftClient.getInstance();
-        String mcLang = mc != null && mc.options != null ? mc.options.language : "en_us";
+        Minecraft mc = Minecraft.getInstance();
+        String mcLang = mc != null && mc.options != null ? mc.options.languageCode : "en_us";
         return mcLang != null && mcLang.startsWith("pl") ? "pl" : "en";
     }
 

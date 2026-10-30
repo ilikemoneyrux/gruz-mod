@@ -1,11 +1,5 @@
 package pl.gruzclient.module.impl;
 
-import net.minecraft.client.option.Perspective;
-import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.particle.DustParticleEffect;
-import net.minecraft.particle.ParticleEffect;
-import net.minecraft.particle.ParticleTypes;
-import net.minecraft.util.math.Vec3d;
 import org.joml.Vector3f;
 import org.lwjgl.glfw.GLFW;
 import pl.gruzclient.GruzClient;
@@ -21,6 +15,12 @@ import pl.gruzclient.render.GruzDraw;
 import pl.gruzclient.screen.EmoteWheelScreen;
 
 import java.util.Random;
+import net.minecraft.client.CameraType;
+import net.minecraft.core.particles.DustParticleOptions;
+import net.minecraft.core.particles.ParticleOptions;
+import net.minecraft.core.particles.ParticleTypes;
+import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.phys.Vec3;
 
 /**
  * Kosmetyki Gruz Client: peleryna (HD albo animowana), nakrycie głowy, skrzydła, plecak, ślad cząsteczek,
@@ -48,7 +48,7 @@ public class CosmeticsModule extends Module {
 
     private final Random random = new Random();
     private boolean wasDown;
-    private Perspective beforeEmote;
+    private CameraType beforeEmote;
     private CosmeticSet cached;
     private String cachedKey = "";
 
@@ -91,18 +91,18 @@ public class CosmeticsModule extends Module {
 
     public void playEmote(Emote e) {
         if (mc.player == null) return;
-        Cosmetics.EMOTES.put(mc.player.getUuid(), new Emote.Playing(e, System.currentTimeMillis()));
+        Cosmetics.EMOTES.put(mc.player.getUUID(), new Emote.Playing(e, System.currentTimeMillis()));
         if (emoteCamera.value && beforeEmote == null) {
-            beforeEmote = mc.options.getPerspective();
-            mc.options.setPerspective(Perspective.THIRD_PERSON_FRONT);
+            beforeEmote = mc.options.getCameraType();
+            mc.options.setCameraType(CameraType.THIRD_PERSON_FRONT);
         }
         GruzNetwork.publishEmote(e);
     }
 
     private void endEmote() {
-        if (mc.player != null) Cosmetics.EMOTES.remove(mc.player.getUuid());
+        if (mc.player != null) Cosmetics.EMOTES.remove(mc.player.getUUID());
         if (beforeEmote != null) {
-            mc.options.setPerspective(beforeEmote);
+            mc.options.setCameraType(beforeEmote);
             beforeEmote = null;
         }
     }
@@ -118,33 +118,33 @@ public class CosmeticsModule extends Module {
         wasDown = down;
 
         // emotka kończy się po czasie albo gdy zaczniesz iść
-        Emote.Playing mine = Cosmetics.EMOTES.get(mc.player.getUuid());
+        Emote.Playing mine = Cosmetics.EMOTES.get(mc.player.getUUID());
         if (mine != null) {
-            boolean moving = mc.player.input != null && (mc.player.input.movementForward != 0 || mc.player.input.movementSideways != 0 || mc.player.input.jumping);
+            boolean moving = mc.player.input != null && (mc.player.input.forwardImpulse != 0 || mc.player.input.leftImpulse != 0 || mc.player.input.jumping);
             if (mine.finished() || (moving && mine.progress() > 0.1f)) endEmote();
         }
-        Cosmetics.EMOTES.entrySet().removeIf(en -> en.getValue().finished() && !en.getKey().equals(mc.player.getUuid()));
+        Cosmetics.EMOTES.entrySet().removeIf(en -> en.getValue().finished() && !en.getKey().equals(mc.player.getUUID()));
 
         // ślady cząsteczek: Twoje i innych graczy Gruz w pobliżu
-        if (mc.world != null) {
-            for (PlayerEntity p : mc.world.getPlayers()) {
+        if (mc.level != null) {
+            for (Player p : mc.level.players()) {
                 CosmeticSet set = Cosmetics.of(p);
                 if (set.hasTrail()) spawnTrail(p, set);
             }
         }
     }
 
-    private void spawnTrail(PlayerEntity p, CosmeticSet set) {
-        Vec3d vel = p.getVelocity();
-        double speed = vel.horizontalLength();
+    private void spawnTrail(Player p, CosmeticSet set) {
+        Vec3 vel = p.getDeltaMovement();
+        double speed = vel.horizontalDistance();
         if (speed < 0.03 && random.nextFloat() > 0.15f) return; // stojąc: tylko czasem
-        if (p == mc.player && mc.options.getPerspective().isFirstPerson() && random.nextFloat() > 0.5f) return;
+        if (p == mc.player && mc.options.getCameraType().isFirstPerson() && random.nextFloat() > 0.5f) return;
         int n = speed > 0.15 ? 2 : 1;
         for (int i = 0; i < n; i++) {
             double x = p.getX() - vel.x * 2 + (random.nextDouble() - 0.5) * 0.4;
             double y = p.getY() + 0.1 + random.nextDouble() * 0.3;
             double z = p.getZ() - vel.z * 2 + (random.nextDouble() - 0.5) * 0.4;
-            ParticleEffect effect = switch (set.trail()) {
+            ParticleOptions effect = switch (set.trail()) {
                 case "sparks" -> ParticleTypes.ELECTRIC_SPARK;
                 case "stars" -> ParticleTypes.END_ROD;
                 case "witch" -> ParticleTypes.WITCH;
@@ -152,11 +152,11 @@ public class CosmeticsModule extends Module {
                 case "snow" -> ParticleTypes.SNOWFLAKE;
                 default -> {
                     int c = random.nextFloat() < 0.3f ? GruzDraw.NEON_HOT : set.color();
-                    yield new DustParticleEffect(new Vector3f(((c >> 16) & 255) / 255f, ((c >> 8) & 255) / 255f, (c & 255) / 255f), 0.9f);
+                    yield new DustParticleOptions(new Vector3f(((c >> 16) & 255) / 255f, ((c >> 8) & 255) / 255f, (c & 255) / 255f), 0.9f);
                 }
             };
             double vy = "stars".equals(set.trail()) ? 0.02 : 0.0;
-            mc.world.addParticle(effect, x, y, z, 0, vy, 0);
+            mc.level.addParticle(effect, x, y, z, 0, vy, 0);
         }
     }
 

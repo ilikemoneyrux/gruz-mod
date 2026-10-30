@@ -1,10 +1,10 @@
 package pl.gruzclient.mixin;
 
-import net.minecraft.client.render.VertexConsumerProvider;
-import net.minecraft.client.render.entity.ItemEntityRenderer;
-import net.minecraft.client.render.item.ItemRenderer;
-import net.minecraft.client.util.math.MatrixStack;
-import net.minecraft.entity.ItemEntity;
+import com.mojang.blaze3d.vertex.PoseStack;
+import net.minecraft.client.renderer.MultiBufferSource;
+import net.minecraft.client.renderer.entity.ItemEntityRenderer;
+import net.minecraft.client.renderer.entity.ItemRenderer;
+import net.minecraft.world.entity.item.ItemEntity;
 import org.spongepowered.asm.mixin.Final;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
@@ -20,7 +20,7 @@ public abstract class ItemEntityRendererMixin {
 
     @Inject(method = "render(Lnet/minecraft/entity/ItemEntity;FFLnet/minecraft/client/util/math/MatrixStack;Lnet/minecraft/client/render/VertexConsumerProvider;I)V",
             at = @At("HEAD"), cancellable = true, require = 0)
-    private void gruz$physics(ItemEntity entity, float yaw, float tickDelta, MatrixStack matrices, VertexConsumerProvider buffers, int light, CallbackInfo ci) {
+    private void gruz$physics(ItemEntity entity, float yaw, float tickDelta, PoseStack matrices, MultiBufferSource buffers, int light, CallbackInfo ci) {
         if (Modules.ITEM_PHYSICS.render(entity, tickDelta, matrices, buffers, light, this.itemRenderer)) ci.cancel();
     }
 }

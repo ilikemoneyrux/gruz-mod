@@ -1,14 +1,14 @@
 package pl.gruzclient.module.impl;
 
-import net.minecraft.text.MutableText;
-import net.minecraft.text.Text;
-import net.minecraft.util.Formatting;
 import pl.gruzclient.module.Module;
 import pl.gruzclient.module.Setting;
 
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
 import java.util.Locale;
+import net.minecraft.ChatFormatting;
+import net.minecraft.network.chat.Component;
+import net.minecraft.network.chat.MutableComponent;
 
 /**
  * Lepszy czat: zwijanie powtórzeń "(x3)", godziny wiadomości, dłuższa historia,
@@ -30,21 +30,21 @@ public class BetterChatModule extends Module {
     public int historyLimit() { return isEnabled() && longHistory.value ? 1000 : 100; }
 
     /** Dokleja godzinę na początku wiadomości */
-    public Text decorate(Text message) {
+    public Component decorate(Component message) {
         if (!isEnabled() || !timestamps.value) return message;
-        MutableText t = Text.literal("[" + LocalTime.now().format(TIME) + "] ").formatted(Formatting.DARK_GRAY);
+        MutableComponent t = Component.literal("[" + LocalTime.now().format(TIME) + "] ").withStyle(ChatFormatting.DARK_GRAY);
         return t.append(message);
     }
 
     /** Licznik powtórzeń doklejany na końcu */
-    public static Text withCount(Text message, int count) {
-        return message.copy().append(Text.literal(" (x" + count + ")").formatted(Formatting.GRAY));
+    public static Component withCount(Component message, int count) {
+        return message.copy().append(Component.literal(" (x" + count + ")").withStyle(ChatFormatting.GRAY));
     }
 
     public boolean stacking() { return isEnabled() && stack.value; }
     public boolean copying() { return isEnabled() && copy.value; }
 
-    public static boolean matches(Text message) {
+    public static boolean matches(Component message) {
         return filter.isEmpty() || message.getString().toLowerCase(Locale.ROOT).contains(filter.toLowerCase(Locale.ROOT));
     }
 }

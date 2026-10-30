@@ -1,11 +1,11 @@
 package pl.gruzclient.module.impl;
 
-import net.minecraft.client.gui.DrawContext;
 import pl.gruzclient.module.Module;
 import pl.gruzclient.module.Setting;
 import pl.gruzclient.screen.CrosshairEditorScreen;
 
 import java.util.Base64;
+import net.minecraft.client.gui.GuiGraphics;
 
 /** Własny celownik: gotowe kształty albo rysunek piksel po pikselu (z kodem do udostępniania). */
 public class CrosshairModule extends Module {
@@ -20,7 +20,7 @@ public class CrosshairModule extends Module {
     public final Setting.Bool outline = add(new Setting.Bool("outline", "setting.crosshairOutline", true));
     public final Setting.Text pixels = add(new Setting.Text("pixels", "setting.pixelCode", defaultCode()));
     public final Setting.Action edit = add(new Setting.Action("edit", "setting.editPixels",
-            () -> mc.setScreen(new CrosshairEditorScreen(mc.currentScreen, this))));
+            () -> mc.setScreen(new CrosshairEditorScreen(mc.screen, this))));
 
     private String decodedFrom = null;
     private boolean[] grid = new boolean[GRID * GRID];
@@ -69,8 +69,8 @@ public class CrosshairModule extends Module {
 
     // ---------------- rysowanie ----------------
 
-    public void draw(DrawContext c) {
-        int cx = c.getScaledWindowWidth() / 2, cy = c.getScaledWindowHeight() / 2;
+    public void draw(GuiGraphics c) {
+        int cx = c.guiWidth() / 2, cy = c.guiHeight() / 2;
         int col = 0xFF000000 | color.rgb();
         int shadow = 0x90000000;
         if (style.index == 3) {

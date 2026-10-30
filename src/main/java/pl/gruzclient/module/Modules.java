@@ -1,14 +1,14 @@
 package pl.gruzclient.module;
 
 import com.google.gson.JsonObject;
-import net.minecraft.client.MinecraftClient;
-import net.minecraft.client.gui.DrawContext;
-import net.minecraft.client.util.InputUtil;
+import com.mojang.blaze3d.platform.InputConstants;
 import pl.gruzclient.config.GruzConfig;
 import pl.gruzclient.module.impl.*;
 
 import java.util.ArrayList;
 import java.util.List;
+import net.minecraft.client.Minecraft;
+import net.minecraft.client.gui.GuiGraphics;
 
 /** Rejestr wszystkich modułów + zapis/odczyt + rysowanie HUD. */
 public final class Modules {
@@ -104,28 +104,28 @@ public final class Modules {
 
     public static void tick() {
         for (Module m : ALL) if (m.isEnabled()) m.tick();
-        MinecraftClient mc = MinecraftClient.getInstance();
+        Minecraft mc = Minecraft.getInstance();
         boolean down = keyDown(HUB_KEY);
-        if (down && !hubWasDown && mc.world != null) mc.setScreen(new pl.gruzclient.screen.HudEditorScreen(null));
+        if (down && !hubWasDown && mc.level != null) mc.setScreen(new pl.gruzclient.screen.HudEditorScreen(null));
         hubWasDown = down;
     }
 
     /** Rysowanie elementów HUD w trakcie gry */
-    public static void renderHud(DrawContext c) {
-        MinecraftClient mc = MinecraftClient.getInstance();
+    public static void renderHud(GuiGraphics c) {
+        Minecraft mc = Minecraft.getInstance();
         pl.gruzclient.status.Benchmark.frame(c);
-        if (mc.options.hudHidden || mc.player == null) return;
-        if (mc.getDebugHud().shouldShowDebugHud()) return;
-        if (mc.currentScreen instanceof pl.gruzclient.screen.HudEditorScreen) return; // edytor rysuje HUD sam, ponad rozmyciem
-        int w = c.getScaledWindowWidth(), h = c.getScaledWindowHeight();
+        if (mc.options.hideGui || mc.player == null) return;
+        if (mc.getDebugOverlay().showDebugScreen()) return;
+        if (mc.screen instanceof pl.gruzclient.screen.HudEditorScreen) return; // edytor rysuje HUD sam, ponad rozmyciem
+        int w = c.guiWidth(), h = c.guiHeight();
         for (HudModule m : hud()) if (m.isEnabled()) m.render(c, w, h, false);
         MINIMAP.renderCompass(c);
     }
 
     /** Czy klawisz jest wciśnięty (tylko gdy nie ma otwartego ekranu) */
     public static boolean keyDown(int code) {
-        MinecraftClient mc = MinecraftClient.getInstance();
-        if (mc.currentScreen != null || code <= 0) return false;
-        return InputUtil.isKeyPressed(mc.getWindow().getHandle(), code);
+        Minecraft mc = Minecraft.getInstance();
+        if (mc.screen != null || code <= 0) return false;
+        return InputConstants.isKeyDown(mc.getWindow().getWindow(), code);
     }
 }

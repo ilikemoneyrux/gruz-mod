@@ -11,11 +11,11 @@ public class HitboxesModule extends Module {
     @Override
     public void tick() {
         // ustawiamy raz po wejściu do świata; F3+B dalej działa normalnie
-        if (!applied && mc.world != null) {
-            mc.getEntityRenderDispatcher().setRenderHitboxes(true);
+        if (!applied && mc.level != null) {
+            mc.getEntityRenderDispatcher().setRenderHitBoxes(true);
             applied = true;
         }
-        if (mc.world == null) applied = false;
+        if (mc.level == null) applied = false;
     }
 
     @Override
@@ -24,6 +24,6 @@ public class HitboxesModule extends Module {
     @Override
     protected void onDisable() {
         applied = false;
-        if (mc.world != null) mc.getEntityRenderDispatcher().setRenderHitboxes(false);
+        if (mc.level != null) mc.getEntityRenderDispatcher().setRenderHitBoxes(false);
     }
 }

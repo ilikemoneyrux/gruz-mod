@@ -26,7 +26,7 @@ public class AutoGGModule extends Module {
 
     /** Każda wiadomość na czacie (z mixina ChatHud) */
     public void onChat(String text) {
-        if (!isEnabled() || mc.player == null || mc.isInSingleplayer()) return;
+        if (!isEnabled() || mc.player == null || mc.isLocalServer()) return;
         // ignorujemy wiadomości graczy ("<Nick> ..." albo "Nick: ...") – szukamy komunikatów serwera
         if (text.startsWith("<") || text.matches("^\\[?[\\w\\s\\]]{0,24}[\\w]{3,16}: .*")) return;
         if (END.matcher(text).find()) schedule();
@@ -46,8 +46,8 @@ public class AutoGGModule extends Module {
     public void tick() {
         if (sendAt == 0 || System.currentTimeMillis() < sendAt) return;
         sendAt = 0;
-        if (mc.player == null || mc.getNetworkHandler() == null) return;
-        mc.getNetworkHandler().sendChatMessage(MESSAGES[message.index]);
+        if (mc.player == null || mc.getConnection() == null) return;
+        mc.getConnection().sendChat(MESSAGES[message.index]);
         lastSent = System.currentTimeMillis();
     }
 }

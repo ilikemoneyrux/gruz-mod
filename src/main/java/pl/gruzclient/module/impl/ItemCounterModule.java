@@ -1,15 +1,15 @@
 package pl.gruzclient.module.impl;
 
-import net.minecraft.client.gui.DrawContext;
-import net.minecraft.item.BlockItem;
-import net.minecraft.item.Item;
-import net.minecraft.item.ItemStack;
-import net.minecraft.item.Items;
 import pl.gruzclient.module.HudModule;
 import pl.gruzclient.module.Setting;
 
 import java.util.ArrayList;
 import java.util.List;
+import net.minecraft.client.gui.GuiGraphics;
+import net.minecraft.world.item.BlockItem;
+import net.minecraft.world.item.Item;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.Items;
 
 import static pl.gruzclient.render.GruzDraw.*;
 
@@ -26,13 +26,13 @@ public class ItemCounterModule extends HudModule {
     private record Row(ItemStack icon, int count) {}
 
     @Override
-    protected int[] draw(DrawContext c, boolean editing) {
+    protected int[] draw(GuiGraphics c, boolean editing) {
         int nBlocks = 0, nPearls = 0, nArrows = 0, nGapples = 0;
         ItemStack blockIcon = new ItemStack(Items.WHITE_WOOL);
         if (mc.player != null) {
             var inv = mc.player.getInventory();
-            List<ItemStack> all = new ArrayList<>(inv.main);
-            all.addAll(inv.offHand);
+            List<ItemStack> all = new ArrayList<>(inv.items);
+            all.addAll(inv.offhand);
             int bestBlocks = 0;
             for (ItemStack s : all) {
                 if (s.isEmpty()) continue;
@@ -55,17 +55,17 @@ public class ItemCounterModule extends HudModule {
         if (gapples.value && !(hide && nGapples == 0)) rows.add(new Row(new ItemStack(Items.GOLDEN_APPLE), nGapples));
         if (rows.isEmpty()) return new int[]{0, 0};
 
-        var tr = mc.textRenderer;
+        var tr = mc.font;
         int w = 26;
-        for (Row r : rows) w = Math.max(w, 26 + tr.getWidth(String.valueOf(r.count())) + 6);
+        for (Row r : rows) w = Math.max(w, 26 + tr.width(String.valueOf(r.count())) + 6);
         int h = rows.size() * 18 + 4;
         panel(c, w, h);
         for (int i = 0; i < rows.size(); i++) {
             Row r = rows.get(i);
             int y = 3 + i * 18;
-            c.drawItem(r.icon(), 5, y);
+            c.renderItem(r.icon(), 5, y);
             int col = r.count() == 0 ? 0xFFFF5C8A : textColor();
-            c.drawText(tr, String.valueOf(r.count()), 25, y + 5, col, !background.value);
+            c.drawString(tr, String.valueOf(r.count()), 25, y + 5, col, !background.value);
         }
         return new int[]{w, h};
     }

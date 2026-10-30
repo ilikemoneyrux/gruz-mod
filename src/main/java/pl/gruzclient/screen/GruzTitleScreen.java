@@ -1,20 +1,20 @@
 package pl.gruzclient.screen;
 
 import net.minecraft.SharedConstants;
-import net.minecraft.client.gui.CubeMapRenderer;
-import net.minecraft.client.gui.DrawContext;
-import net.minecraft.client.gui.PlayerSkinDrawer;
-import net.minecraft.client.gui.RotatingCubeMapRenderer;
-import net.minecraft.client.gui.screen.Screen;
-import net.minecraft.client.gui.screen.multiplayer.ConnectScreen;
-import net.minecraft.client.gui.screen.multiplayer.MultiplayerScreen;
-import net.minecraft.client.gui.screen.option.OptionsScreen;
-import net.minecraft.client.gui.screen.world.SelectWorldScreen;
-import net.minecraft.client.network.ServerAddress;
-import net.minecraft.client.network.ServerInfo;
-import net.minecraft.client.util.SkinTextures;
-import net.minecraft.text.Text;
-import net.minecraft.util.Util;
+import net.minecraft.Util;
+import net.minecraft.client.gui.GuiGraphics;
+import net.minecraft.client.gui.components.PlayerFaceRenderer;
+import net.minecraft.client.gui.screens.ConnectScreen;
+import net.minecraft.client.gui.screens.Screen;
+import net.minecraft.client.gui.screens.multiplayer.JoinMultiplayerScreen;
+import net.minecraft.client.gui.screens.options.OptionsScreen;
+import net.minecraft.client.gui.screens.worldselection.SelectWorldScreen;
+import net.minecraft.client.multiplayer.ServerData;
+import net.minecraft.client.multiplayer.resolver.ServerAddress;
+import net.minecraft.client.renderer.CubeMap;
+import net.minecraft.client.renderer.PanoramaRenderer;
+import net.minecraft.client.resources.PlayerSkin;
+import net.minecraft.network.chat.Component;
 import pl.gruzclient.GruzClient;
 import pl.gruzclient.config.GruzConfig;
 import pl.gruzclient.i18n.Lang;
@@ -37,7 +37,7 @@ import static pl.gruzclient.render.GruzDraw.*;
 public class GruzTitleScreen extends Screen {
     private static boolean firstOpen = true;
     private static final CrystalField CRYSTALS = new CrystalField(26);
-    private static RotatingCubeMapRenderer ownPanorama;
+    private static PanoramaRenderer ownPanorama;
 
     private final List<UiButton> buttons = new ArrayList<>();
     private final long openedAt = System.currentTimeMillis();
@@ -46,7 +46,7 @@ public class GruzTitleScreen extends Screen {
     private int tipIndex = (int) (System.currentTimeMillis() / 1000 % 4);
 
     public GruzTitleScreen() {
-        super(Text.literal("Gruz Client"));
+        super(Component.literal("Gruz Client"));
         this.slowIntro = firstOpen;
         firstOpen = false;
     }
@@ -66,16 +66,16 @@ public class GruzTitleScreen extends Screen {
         int y = top;
 
         add(new UiButton(cx - bw / 2, y, bw, bh, Ui.Icon.USER, Lang.t("menu.singleplayer"),
-                b -> this.client.setScreen(new SelectWorldScreen(this))).big());
+                b -> this.minecraft.setScreen(new SelectWorldScreen(this))).big());
         y += bh + gap;
         add(new UiButton(cx - bw / 2, y, bw, bh, Ui.Icon.USERS, Lang.t("menu.multiplayer"),
-                b -> this.client.setScreen(new MultiplayerScreen(this))).big());
+                b -> this.minecraft.setScreen(new JoinMultiplayerScreen(this))).big());
         y += bh + gap;
         add(new UiButton(cx - bw / 2, y, bw, bh, Ui.Icon.GRID, Lang.t("menu.mods"),
-                b -> this.client.setScreen(new GruzModsScreen(this))).big());
+                b -> this.minecraft.setScreen(new GruzModsScreen(this))).big());
         y += bh + gap;
         add(new UiButton(cx - bw / 2, y, bw, bh, Ui.Icon.SHIRT, Lang.t("menu.cosmetics"),
-                b -> this.client.setScreen(new GruzModsScreen(this, Module.Category.COSMETICS))).big());
+                b -> this.minecraft.setScreen(new GruzModsScreen(this, Module.Category.COSMETICS))).big());
         y += bh + gap;
 
         // akcent: szybki powrót na ostatni serwer
@@ -91,19 +91,19 @@ public class GruzTitleScreen extends Screen {
         int qw = Math.min(130, bw - 40);
         int qy = Math.min(this.height - 54, y + 16);
         add(new UiButton(cx - qw / 2, qy, qw, 22, Ui.Icon.POWER, Lang.t("menu.quitGame"),
-                b -> this.client.scheduleStop()).kind(UiButton.Kind.DANGER).big());
+                b -> this.minecraft.stop()).kind(UiButton.Kind.DANGER).big());
 
         // pasek ikon (prawy górny róg)
         int s = 22, ix = this.width - 10 - s;
-        add(new UiButton(ix, 10, s, s, Ui.Icon.GLOBE, null, b -> { Lang.cycle(); this.clearAndInit(); })
+        add(new UiButton(ix, 10, s, s, Ui.Icon.GLOBE, null, b -> { Lang.cycle(); this.rebuildWidgets(); })
                 .kind(UiButton.Kind.ICON).badge(Lang.badge().replace("*", "")));
         ix -= s + 5;
-        add(new UiButton(ix, 10, s, s, Ui.Icon.GEAR, null, b -> this.client.setScreen(new OptionsScreen(this, this.client.options))).kind(UiButton.Kind.ICON));
+        add(new UiButton(ix, 10, s, s, Ui.Icon.GEAR, null, b -> this.minecraft.setScreen(new OptionsScreen(this, this.minecraft.options))).kind(UiButton.Kind.ICON));
         ix -= s + 5;
         add(new UiButton(ix, 10, s, s, Ui.Icon.CAMERA, null,
-                b -> Util.getOperatingSystem().open(this.client.runDirectory.toPath().resolve("screenshots").toFile())).kind(UiButton.Kind.ICON));
+                b -> Util.getPlatform().openFile(this.minecraft.gameDirectory.toPath().resolve("screenshots").toFile())).kind(UiButton.Kind.ICON));
         ix -= s + 5;
-        add(new UiButton(ix, 10, s, s, Ui.Icon.GRID, null, b -> this.client.setScreen(new GruzModsScreen(this))).kind(UiButton.Kind.ICON));
+        add(new UiButton(ix, 10, s, s, Ui.Icon.GRID, null, b -> this.minecraft.setScreen(new GruzModsScreen(this))).kind(UiButton.Kind.ICON));
         chipRight = ix - 6;
     }
 
@@ -111,14 +111,14 @@ public class GruzTitleScreen extends Screen {
 
     private void rejoin(String address, String name) {
         // typ "zwykły serwer" (ostatni w enumie: LAN, REALM, OTHER)
-        ServerInfo.ServerType[] types = ServerInfo.ServerType.values();
-        ServerInfo info = new ServerInfo(name, address, types[types.length - 1]);
-        ConnectScreen.connect(this, this.client, ServerAddress.parse(address), info, false, null);
+        ServerData.Type[] types = ServerData.Type.values();
+        ServerData info = new ServerData(name, address, types[types.length - 1]);
+        ConnectScreen.startConnecting(this, this.minecraft, ServerAddress.parseString(address), info, false, null);
     }
 
     private UiButton add(UiButton b) {
         buttons.add(b);
-        return this.addDrawableChild(b);
+        return this.addRenderableWidget(b);
     }
 
     private float reveal(long delayMs, long durMs) {
@@ -129,7 +129,7 @@ public class GruzTitleScreen extends Screen {
     }
 
     @Override
-    public void renderBackground(DrawContext c, int mouseX, int mouseY, float delta) {
+    public void renderBackground(GuiGraphics c, int mouseX, int mouseY, float delta) {
         long now = System.currentTimeMillis();
         float dt = last == 0 ? 0.016f : Math.min(0.05f, (now - last) / 1000f);
         last = now;
@@ -137,15 +137,15 @@ public class GruzTitleScreen extends Screen {
         float bg = reveal(0, 1400);
 
         if (Modules.MENU.usePanorama()) {
-            if (ownPanorama == null) ownPanorama = new RotatingCubeMapRenderer(new CubeMapRenderer(MenuModule.PANORAMA));
+            if (ownPanorama == null) ownPanorama = new PanoramaRenderer(new CubeMap(MenuModule.PANORAMA));
             ownPanorama.render(c, w, h, 1f, delta);
         } else if (Modules.MENU.crystals()) {
             c.fill(0, 0, w, h, 0xFF000000);
         } else {
-            this.renderPanoramaBackground(c, delta);
+            this.renderPanorama(c, delta);
         }
         if (!Modules.MENU.crystals()) {
-            this.applyBlur(delta);
+            this.renderBlurredBackground(delta);
         }
         // przyciemnienie + delikatny kolor motywu od dołu
         c.fill(0, 0, w, h, argb(0.45f, 0x000000));
@@ -163,7 +163,7 @@ public class GruzTitleScreen extends Screen {
     }
 
     @Override
-    public void render(DrawContext c, int mouseX, int mouseY, float delta) {
+    public void render(GuiGraphics c, int mouseX, int mouseY, float delta) {
         for (int i = 0; i < buttons.size(); i++) buttons.get(i).setReveal(reveal(400 + i * 60L, 800));
         this.renderBackground(c, mouseX, mouseY, delta);
         int w = this.width, h = this.height;
@@ -186,29 +186,29 @@ public class GruzTitleScreen extends Screen {
 
         float rv = reveal(900, 900);
         if (textVisible(rv)) {
-            Text v = Ui.text("Gruz Client " + GruzClient.version() + "  ·  Minecraft " + SharedConstants.getGameVersion().getName() + "  ·  Fabric");
+            Component v = Ui.text("Gruz Client " + GruzClient.version() + "  ·  Minecraft " + SharedConstants.getCurrentVersion().getName() + "  ·  Fabric");
             Ui.drawCentered(c, v, w / 2, h - 14, argb(rv * 0.7f, MUTE));
-            Text cr = Ui.text("Copyright Mojang AB. Do not distribute!");
+            Component cr = Ui.text("Copyright Mojang AB. Do not distribute!");
             Ui.draw(c, cr, w - Ui.width(cr) - 8, h - 14, argb(rv * 0.45f, MUTE));
         }
     }
 
     /** Karta gracza obok ikon (głowa + nick) */
-    private void drawPlayerChip(DrawContext c, float a) {
-        if (!textVisible(a) || this.client.getGameProfile() == null) return;
-        Text name = Ui.bold(this.client.getSession().getUsername());
+    private void drawPlayerChip(GuiGraphics c, float a) {
+        if (!textVisible(a) || this.minecraft.getGameProfile() == null) return;
+        Component name = Ui.bold(this.minecraft.getUser().getName());
         int cw = Ui.width(name) + 34, x = chipRight - cw, y = 10;
         Ui.round(c, x, y, cw, 22, 4, argb(a * 0.8f, 0x0A0810));
         Ui.roundBorder(c, x, y, cw, 22, 4, argb(a * 0.1f, 0xFFFFFF));
-        SkinTextures skin = this.client.getSkinProvider().getSkinTextures(this.client.getGameProfile());
-        c.setShaderColor(1f, 1f, 1f, a);
-        PlayerSkinDrawer.draw(c, skin, x + 5, y + 4, 14);
-        c.setShaderColor(1f, 1f, 1f, 1f);
-        c.drawText(Ui.tr(), name, x + 25, y + 7, argb(a, 0xFFFFFF), false);
+        PlayerSkin skin = this.minecraft.getSkinManager().getInsecureSkin(this.minecraft.getGameProfile());
+        c.setColor(1f, 1f, 1f, a);
+        PlayerFaceRenderer.draw(c, skin, x + 5, y + 4, 14);
+        c.setColor(1f, 1f, 1f, 1f);
+        c.drawString(Ui.tr(), name, x + 25, y + 7, argb(a, 0xFFFFFF), false);
     }
 
     /** Karty po lewej: news z serwera Gruz (albo wskazówka) i skróty klawiszowe */
-    private void drawCards(DrawContext c, float a) {
+    private void drawCards(GuiGraphics c, float a) {
         if (!textVisible(a) || this.width < 420) return;
         int x = 10 - Math.round((1f - a) * 12), y = 10, cw = Math.min(150, this.width / 4);
 
@@ -221,14 +221,14 @@ public class GruzTitleScreen extends Screen {
         String tag = n != null ? n.tag() : Lang.t("menu.tipTag");
         String title = n != null ? n.title() : Lang.t("menu.tip" + tipIndex + ".title");
         String body = n != null ? n.body() : Lang.t("menu.tip" + tipIndex);
-        var lines = Ui.tr().wrapLines(Ui.text(body), cw - 16);
+        var lines = Ui.tr().split(Ui.text(body), cw - 16);
         int lines2 = Math.min(3, lines.size());
         int ch = 34 + lines2 * 10;
         Ui.panel(c, x, y, cw, ch, a);
         c.fill(x + 8, y + 8, x + 10, y + 16, argb(a, NEON));
         Ui.draw(c, Ui.bold(tag.toUpperCase()), x + 14, y + 8, argb(a, NEON_HOT));
         Ui.draw(c, Ui.fit(title, cw - 16, true), x + 8, y + 20, argb(a, 0xFFFFFF));
-        for (int i = 0; i < lines2; i++) c.drawText(Ui.tr(), lines.get(i), x + 8, y + 32 + i * 10, argb(a * 0.85f, MUTE), false);
+        for (int i = 0; i < lines2; i++) c.drawString(Ui.tr(), lines.get(i), x + 8, y + 32 + i * 10, argb(a * 0.85f, MUTE), false);
         y += ch + 6;
 
         String[][] keys = {
@@ -241,10 +241,10 @@ public class GruzTitleScreen extends Screen {
         for (int i = 0; i < keys.length; i++) {
             int ky = y + 22 + i * 12;
             Ui.draw(c, Ui.text(keys[i][0]), x + 8, ky, argb(a * 0.9f, 0xD6CCE6));
-            Text k = Ui.bold(keys[i][1]);
+            Component k = Ui.bold(keys[i][1]);
             int kw = Ui.width(k) + 8;
             Ui.round(c, x + cw - 8 - kw, ky - 2, kw, 11, 2, argb(a * 0.9f, 0x1E1630));
-            c.drawText(Ui.tr(), k, x + cw - 4 - kw, ky, argb(a, NEON_HOT), false);
+            c.drawString(Ui.tr(), k, x + cw - 4 - kw, ky, argb(a, NEON_HOT), false);
         }
     }
 

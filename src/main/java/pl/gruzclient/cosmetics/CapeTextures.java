@@ -1,14 +1,13 @@
 package pl.gruzclient.cosmetics;
 
-import net.minecraft.client.MinecraftClient;
-import net.minecraft.client.texture.NativeImage;
-import net.minecraft.client.texture.NativeImageBackedTexture;
-import net.minecraft.util.Identifier;
 import pl.gruzclient.GruzClient;
 import pl.gruzclient.render.GruzDraw;
-
+import com.mojang.blaze3d.platform.NativeImage;
 import java.util.HashMap;
 import java.util.Map;
+import net.minecraft.client.Minecraft;
+import net.minecraft.client.renderer.texture.DynamicTexture;
+import net.minecraft.resources.ResourceLocation;
 
 /**
  * Animowane peleryny generowane na żywo (64x32, układ jak zwykła peleryna Minecrafta).
@@ -17,22 +16,22 @@ import java.util.Map;
 public final class CapeTextures {
     private CapeTextures() {}
 
-    private static final Map<String, NativeImageBackedTexture> TEXTURES = new HashMap<>();
-    private static final Map<String, Identifier> IDS = new HashMap<>();
+    private static final Map<String, DynamicTexture> TEXTURES = new HashMap<>();
+    private static final Map<String, ResourceLocation> IDS = new HashMap<>();
     private static int frame = 0;
 
     /** Rozdzielczość animowanych peleryn: 64x32 razy SCALE */
     private static final int SCALE = 4;
 
-    public static Identifier id(String style, int color) {
+    public static ResourceLocation id(String style, int color) {
         // peleryny HD to gotowe obrazki 1024x512 z zasobów moda
-        if (CosmeticSet.HD_CAPES.contains(style)) return Identifier.of(GruzClient.MOD_ID, "textures/cape/" + style + ".png");
+        if (CosmeticSet.HD_CAPES.contains(style)) return ResourceLocation.fromNamespaceAndPath(GruzClient.MOD_ID, "textures/cape/" + style + ".png");
         String key = style + "_" + Integer.toHexString(color & 0xFFFFFF);
-        Identifier id = IDS.get(key);
+        ResourceLocation id = IDS.get(key);
         if (id != null) return id;
-        NativeImageBackedTexture tex = new NativeImageBackedTexture(64 * SCALE, 32 * SCALE, true);
-        id = Identifier.of(GruzClient.MOD_ID, "cape/" + key);
-        MinecraftClient.getInstance().getTextureManager().registerTexture(id, tex);
+        DynamicTexture tex = new DynamicTexture(64 * SCALE, 32 * SCALE, true);
+        id = ResourceLocation.fromNamespaceAndPath(GruzClient.MOD_ID, "cape/" + key);
+        Minecraft.getInstance().getTextureManager().register(id, tex);
         TEXTURES.put(key, tex);
         IDS.put(key, id);
         paint(style, color, tex, 0f);
@@ -43,7 +42,7 @@ public final class CapeTextures {
     public static void tick() {
         if (++frame % 2 != 0 || TEXTURES.isEmpty()) return;
         float t = frame / 20f;
-        for (Map.Entry<String, NativeImageBackedTexture> e : TEXTURES.entrySet()) {
+        for (Map.Entry<String, DynamicTexture> e : TEXTURES.entrySet()) {
             String[] parts = e.getKey().split("_");
             int color;
             try { color = Integer.parseInt(parts[1], 16); } catch (Exception ex) { color = GruzDraw.NEON; }
@@ -62,8 +61,8 @@ public final class CapeTextures {
         return ((h ^ (h >>> 16)) & 0xFFFF) / 65535f;
     }
 
-    private static void paint(String style, int color, NativeImageBackedTexture tex, float t) {
-        NativeImage img = tex.getImage();
+    private static void paint(String style, int color, DynamicTexture tex, float t) {
+        NativeImage img = tex.getPixels();
         if (img == null) return;
         int deep = GruzDraw.mix(color, 0x000000, 0.72f);
         int dark = GruzDraw.mix(color, 0x000000, 0.45f);
@@ -134,7 +133,7 @@ public final class CapeTextures {
                         }
                     }
                 }
-                img.setColor(px, py, abgr(rgb, 255));
+                img.setPixelRGBA(px, py, abgr(rgb, 255));
             }
         }
         tex.upload();

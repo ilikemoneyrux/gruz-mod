@@ -1,15 +1,16 @@
 package pl.gruzclient.module.impl;
 
-import net.minecraft.client.gui.DrawContext;
-import net.minecraft.client.gui.PlayerSkinDrawer;
-import net.minecraft.client.network.PlayerListEntry;
-import net.minecraft.entity.LivingEntity;
-import net.minecraft.entity.player.PlayerEntity;
 import pl.gruzclient.combat.Combat;
 import pl.gruzclient.i18n.Lang;
 import pl.gruzclient.module.HudModule;
 
 import static pl.gruzclient.render.GruzDraw.*;
+
+import net.minecraft.client.gui.GuiGraphics;
+import net.minecraft.client.gui.components.PlayerFaceRenderer;
+import net.minecraft.client.multiplayer.PlayerInfo;
+import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.world.entity.player.Player;
 
 /** Karta przeciwnika: głowa, nick, życie (płynny pasek), zbroja i odległość. */
 public class TargetHudModule extends HudModule {
@@ -22,7 +23,7 @@ public class TargetHudModule extends HudModule {
     public TargetHudModule() { super("targethud", true, 0.42f, 0.62f); }
 
     @Override
-    protected int[] draw(DrawContext c, boolean editing) {
+    protected int[] draw(GuiGraphics c, boolean editing) {
         long now = System.currentTimeMillis();
         float dt = last == 0 ? 0.016f : Math.min(0.05f, (now - last) / 1000f);
         last = now;
@@ -33,32 +34,32 @@ public class TargetHudModule extends HudModule {
         LivingEntity e = t != null ? t : lastTarget;
         if (fade < 0.02f || (e == null && !editing)) return new int[]{w, h};
 
-        var tr = mc.textRenderer;
+        var tr = mc.font;
         String name = e != null ? e.getDisplayName().getString() : Lang.t("hud.enemy");
         float hp = e != null ? e.getHealth() + e.getAbsorptionAmount() : 14f;
         float max = e != null ? Math.max(1f, e.getMaxHealth()) : 20f;
-        int armor = e != null ? e.getArmor() : 12;
+        int armor = e != null ? e.getArmorValue() : 12;
         if (shownHealth < 0 || e != shownFor) { shownHealth = hp; shownFor = e; }
         shownHealth = damp(shownHealth, hp, 9f, dt);
 
         c.fill(0, 0, w, h, argb(0.7f * fade, SLAB));
         c.fill(0, 0, 2, h, argb(fade, NEON));
         // głowa gracza (dla mobów – kwadrat w kolorze motywu)
-        if (e instanceof PlayerEntity p && mc.getNetworkHandler() != null) {
-            PlayerListEntry entry = mc.getNetworkHandler().getPlayerListEntry(p.getUuid());
+        if (e instanceof Player p && mc.getConnection() != null) {
+            PlayerInfo entry = mc.getConnection().getPlayerInfo(p.getUUID());
             if (entry != null) {
-                c.setShaderColor(1f, 1f, 1f, fade);
-                PlayerSkinDrawer.draw(c, entry.getSkinTextures(), 6, 6, 28);
-                c.setShaderColor(1f, 1f, 1f, 1f);
+                c.setColor(1f, 1f, 1f, fade);
+                PlayerFaceRenderer.draw(c, entry.getSkin(), 6, 6, 28);
+                c.setColor(1f, 1f, 1f, 1f);
             } else c.fill(6, 6, 34, 34, argb(fade, SEAM));
         } else c.fill(6, 6, 34, 34, argb(fade * 0.8f, NEON_DEEP));
 
         if (textVisible(fade)) {
-            c.drawText(tr, tr.trimToWidth(name, w - 46), 40, 6, argb(fade, TEXT), false);
+            c.drawString(tr, tr.plainSubstrByWidth(name, w - 46), 40, 6, argb(fade, TEXT), false);
             String hpText = String.format("%.1f", hp / 2f) + " ❤";
-            c.drawText(tr, hpText, 40, 17, argb(fade, hp / max < 0.3f ? 0xFF5C8A : MUTE), false);
+            c.drawString(tr, hpText, 40, 17, argb(fade, hp / max < 0.3f ? 0xFF5C8A : MUTE), false);
             String ar = armor + " " + Lang.t("hud.armor");
-            c.drawText(tr, ar, w - 6 - tr.getWidth(ar), 17, argb(fade, MUTE), false);
+            c.drawString(tr, ar, w - 6 - tr.width(ar), 17, argb(fade, MUTE), false);
         }
         // pasek życia: tło, "opóźniony" biały ślad, wypełnienie w kolorze motywu
         int bx = 40, by = 30, bw = w - 46;

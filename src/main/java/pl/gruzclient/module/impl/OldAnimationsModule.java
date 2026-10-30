@@ -17,12 +17,12 @@ public class OldAnimationsModule extends Module {
 
     public boolean noCooldown() { return isEnabled() && noCooldown.value; }
     /** Blokowanie mieczem jak w 1.8: miecz w ręce + tarcza w drugiej, tarcza w użyciu */
-    public boolean swordBlocking(net.minecraft.entity.player.PlayerEntity p) {
+    public boolean swordBlocking(net.minecraft.world.entity.player.Player p) {
         if (!isEnabled() || !swordBlock.value || p == null || !p.isUsingItem()) return false;
-        var hand = p.getActiveHand();
-        var other = hand == net.minecraft.util.Hand.MAIN_HAND ? net.minecraft.util.Hand.OFF_HAND : net.minecraft.util.Hand.MAIN_HAND;
-        return p.getStackInHand(hand).isOf(net.minecraft.item.Items.SHIELD)
-                && p.getStackInHand(other).getItem() instanceof net.minecraft.item.SwordItem;
+        var hand = p.getUsedItemHand();
+        var other = hand == net.minecraft.world.InteractionHand.MAIN_HAND ? net.minecraft.world.InteractionHand.OFF_HAND : net.minecraft.world.InteractionHand.MAIN_HAND;
+        return p.getItemInHand(hand).is(net.minecraft.world.item.Items.SHIELD)
+                && p.getItemInHand(other).getItem() instanceof net.minecraft.world.item.SwordItem;
     }
 
     public int swingDuration(int vanilla) { return isEnabled() ? Math.round(swing.value) + (vanilla - 6) : vanilla; }

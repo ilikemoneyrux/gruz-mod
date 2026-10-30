@@ -1,8 +1,5 @@
 package pl.gruzclient.screen;
 
-import net.minecraft.client.gui.DrawContext;
-import net.minecraft.client.gui.screen.Screen;
-import net.minecraft.text.Text;
 import org.lwjgl.glfw.GLFW;
 import pl.gruzclient.i18n.Lang;
 import pl.gruzclient.module.HudModule;
@@ -13,6 +10,9 @@ import pl.gruzclient.render.Ui;
 
 import java.util.ArrayList;
 import java.util.List;
+import net.minecraft.client.gui.GuiGraphics;
+import net.minecraft.client.gui.screens.Screen;
+import net.minecraft.network.chat.Component;
 
 import static pl.gruzclient.render.GruzDraw.*;
 
@@ -39,7 +39,7 @@ public class HudEditorScreen extends Screen {
     private long toastAt = 0;
 
     public HudEditorScreen(Screen parent) {
-        super(Text.literal("Gruz Mods"));
+        super(Component.literal("Gruz Mods"));
         this.parent = parent;
     }
 
@@ -52,7 +52,7 @@ public class HudEditorScreen extends Screen {
         void scaleBy(float d);
         Module settings();
         void hide();
-        void render(DrawContext c, int w, int h);
+        void render(GuiGraphics c, int w, int h);
     }
 
     private static final class HudEl implements Element {
@@ -66,7 +66,7 @@ public class HudEditorScreen extends Screen {
         public void scaleBy(float d) { m.scale = Math.max(0.5f, Math.min(2.5f, Math.round((m.scale + d) * 10f) / 10f)); }
         public Module settings() { return m; }
         public void hide() { m.setEnabled(false); }
-        public void render(DrawContext c, int w, int h) { m.render(c, w, h, true); }
+        public void render(GuiGraphics c, int w, int h) { m.render(c, w, h, true); }
     }
 
     private static final class ScoreboardEl implements Element {
@@ -80,7 +80,7 @@ public class HudEditorScreen extends Screen {
         public void scaleBy(float d) { var s = Modules.SCOREBOARD.size; s.set(s.value + d); }
         public Module settings() { return Modules.SCOREBOARD; }
         public void hide() { Modules.SCOREBOARD.hide.value = true; }
-        public void render(DrawContext c, int w, int h) {
+        public void render(GuiGraphics c, int w, int h) {
             if (Modules.SCOREBOARD.live()) return; // prawdziwą tablicę gra rysuje sama
             int[] r = rect(w, h);
             c.fill(r[0], r[1], r[0] + r[2], r[1] + r[3], argb(0.3f, 0x000000));
@@ -88,7 +88,7 @@ public class HudEditorScreen extends Screen {
             for (int i = 0; i < sample.length; i++) {
                 int ty = r[1] + 3 + Math.round(i * 9 * Modules.SCOREBOARD.size.value);
                 if (ty + 8 > r[1] + r[3]) break;
-                c.drawText(Ui.tr(), sample[i], r[0] + 4, ty, i == 0 ? 0xFFFFD35C : 0xFFFFFFFF, false);
+                c.drawString(Ui.tr(), sample[i], r[0] + 4, ty, i == 0 ? 0xFFFFD35C : 0xFFFFFFFF, false);
             }
         }
     }
@@ -104,11 +104,11 @@ public class HudEditorScreen extends Screen {
         public void scaleBy(float d) { var s = Modules.HUD_TWEAKS.bossSize; s.set(s.value + d); }
         public Module settings() { return Modules.HUD_TWEAKS; }
         public void hide() { Modules.HUD_TWEAKS.hideBoss.value = true; }
-        public void render(DrawContext c, int w, int h) {
+        public void render(GuiGraphics c, int w, int h) {
             if (Modules.HUD_TWEAKS.bossCount > 0) return;
             int[] r = rect(w, h);
-            Text t = Ui.bold(Lang.t("hud.el.bossSample"));
-            c.drawText(Ui.tr(), t, r[0] + (r[2] - Ui.width(t)) / 2, r[1], 0xFFFFFFFF, true);
+            Component t = Ui.bold(Lang.t("hud.el.bossSample"));
+            c.drawString(Ui.tr(), t, r[0] + (r[2] - Ui.width(t)) / 2, r[1], 0xFFFFFFFF, true);
             c.fill(r[0], r[1] + r[3] - 5, r[0] + r[2], r[1] + r[3], argb(0.6f, 0x2A0F33));
             c.fill(r[0], r[1] + r[3] - 5, r[0] + Math.round(r[2] * 0.7f), r[1] + r[3], argb(1f, 0xE040C8));
         }
@@ -128,8 +128,8 @@ public class HudEditorScreen extends Screen {
         int cx = this.width / 2;
         hubY = this.height / 2 - 30;
         int bw = 150;
-        this.addDrawableChild(new UiButton(cx - bw / 2, hubY + 24, bw, 22, Ui.Icon.GRID, Lang.t("hud.editMods"),
-                b -> this.client.setScreen(new GruzModsScreen(this))).kind(UiButton.Kind.ACCENT).big());
+        this.addRenderableWidget(new UiButton(cx - bw / 2, hubY + 24, bw, 22, Ui.Icon.GRID, Lang.t("hud.editMods"),
+                b -> this.minecraft.setScreen(new GruzModsScreen(this))).kind(UiButton.Kind.ACCENT).big());
         Object[][] row = {
                 {Ui.Icon.SHIRT, "hud.act.cosmetics"}, {Ui.Icon.SMILE, "hud.act.emotes"}, {Ui.Icon.LAYOUT, "hud.act.preset"},
                 {Ui.Icon.MAGNET, "hud.act.snap"}, {Ui.Icon.MOVE, "hud.act.reset"},
@@ -138,16 +138,16 @@ public class HudEditorScreen extends Screen {
         for (int i = 0; i < row.length; i++) {
             final String key = (String) row[i][1];
             UiButton b = new UiButton(cx - total / 2 + i * (s + gap), hubY + 52, s, s, (Ui.Icon) row[i][0], null, x -> action(key)).kind(UiButton.Kind.ICON);
-            b.setTooltip(net.minecraft.client.gui.tooltip.Tooltip.of(Text.literal(Lang.t(key))));
-            this.addDrawableChild(b);
+            b.setTooltip(net.minecraft.client.gui.components.Tooltip.create(Component.literal(Lang.t(key))));
+            this.addRenderableWidget(b);
         }
-        this.addDrawableChild(new UiButton(this.width - 10 - 22, 10, 22, 22, Ui.Icon.CLOSE, null, b -> close()).kind(UiButton.Kind.ICON));
+        this.addRenderableWidget(new UiButton(this.width - 10 - 22, 10, 22, 22, Ui.Icon.CLOSE, null, b -> onClose()).kind(UiButton.Kind.ICON));
     }
 
     private void action(String key) {
         switch (key) {
-            case "hud.act.cosmetics" -> this.client.setScreen(new GruzModsScreen(this, Module.Category.COSMETICS));
-            case "hud.act.emotes" -> { if (this.client.player != null) this.client.setScreen(new EmoteWheelScreen(Modules.COSMETICS)); }
+            case "hud.act.cosmetics" -> this.minecraft.setScreen(new GruzModsScreen(this, Module.Category.COSMETICS));
+            case "hud.act.emotes" -> { if (this.minecraft.player != null) this.minecraft.setScreen(new EmoteWheelScreen(Modules.COSMETICS)); }
             case "hud.act.preset" -> {
                 String name = HudPresets.NAMES[presetIndex++ % HudPresets.NAMES.length];
                 HudPresets.apply(name);
@@ -168,18 +168,18 @@ public class HudEditorScreen extends Screen {
     private void say(String s) { toast = s; toastAt = System.currentTimeMillis(); }
 
     @Override
-    public void close() {
+    public void onClose() {
         Modules.save();
-        this.client.setScreen(parent);
+        this.minecraft.setScreen(parent);
     }
 
     @Override
-    public boolean shouldPause() { return false; }
+    public boolean isPauseScreen() { return false; }
 
     @Override
-    public void renderBackground(DrawContext c, int mouseX, int mouseY, float delta) {
-        if (this.client.world != null) {
-            this.applyBlur(delta);
+    public void renderBackground(GuiGraphics c, int mouseX, int mouseY, float delta) {
+        if (this.minecraft.level != null) {
+            this.renderBlurredBackground(delta);
             c.fill(0, 0, this.width, this.height, 0x40000000);
         } else {
             c.fill(0, 0, this.width, this.height, 0xFF07050C);
@@ -187,7 +187,7 @@ public class HudEditorScreen extends Screen {
     }
 
     @Override
-    public void render(DrawContext c, int mouseX, int mouseY, float delta) {
+    public void render(GuiGraphics c, int mouseX, int mouseY, float delta) {
         this.renderBackground(c, mouseX, mouseY, delta);
         int w = this.width, h = this.height;
         float r0 = outExpo(clamp01((System.currentTimeMillis() - openedAt) / 500f));
@@ -202,11 +202,11 @@ public class HudEditorScreen extends Screen {
         }
 
         // tablica wyników i pasek bossa rysujemy jeszcze raz, ostro, ponad rozmyciem
-        if (this.client.world != null && this.client.player != null) {
+        if (this.minecraft.level != null && this.minecraft.player != null) {
             drawingVanilla = true;
             try {
-                ((pl.gruzclient.mixin.InGameHudInvoker) this.client.inGameHud).gruz$renderScoreboard(c, this.client.getRenderTickCounter());
-                this.client.inGameHud.getBossBarHud().render(c);
+                ((pl.gruzclient.mixin.InGameHudInvoker) this.minecraft.gui).gruz$renderScoreboard(c, this.minecraft.getTimer());
+                this.minecraft.gui.getBossOverlay().render(c);
             } catch (Exception ignored) {
                 // brak tablicy itp.
             } finally {
@@ -224,7 +224,7 @@ public class HudEditorScreen extends Screen {
             Ui.roundBorder(c, r[0] - 2, r[1] - 2, r[2] + 4, r[3] + 4, 2, argb(r0 * (hot ? 0.95f : 0.28f), hot ? NEON : 0xFFFFFF));
             if (hot) c.fill(r[0] - 1, r[1] - 1, r[0] + r[2] + 1, r[1] + r[3] + 1, argb(0.12f, NEON));
             // podpis pod elementem
-            Text label = Ui.text(e.name());
+            Component label = Ui.text(e.name());
             int ly = r[1] + r[3] + 4 > h - 12 ? r[1] - 13 : r[1] + r[3] + 4;
             int lx = Math.max(2, Math.min(w - Ui.width(label) - 2, r[0] + (r[2] - Ui.width(label)) / 2));
             // podpis, który wchodziłby na inny element, pokazujemy tylko po najechaniu
@@ -234,7 +234,7 @@ public class HudEditorScreen extends Screen {
                 int[] q = o.rect(w, h);
                 if (lx < q[0] + q[2] && lx + Ui.width(label) > q[0] && ly < q[1] + q[3] && ly + 9 > q[1]) { clash = true; break; }
             }
-            if (!clash || hot) c.drawText(Ui.tr(), label, lx, ly, argb(r0 * (hot ? 1f : 0.8f), hot ? NEON_HOT : 0xFFFFFF), true);
+            if (!clash || hot) c.drawString(Ui.tr(), label, lx, ly, argb(r0 * (hot ? 1f : 0.8f), hot ? NEON_HOT : 0xFFFFFF), true);
             // ⚙ i ⊖ w prawym górnym rogu (przy najechaniu)
             if (hot && dragging == null) {
                 int bx = r[0] + r[2] - 4, by = r[1] - 6;
@@ -250,7 +250,7 @@ public class HudEditorScreen extends Screen {
         for (var child : this.children()) if (child instanceof UiButton b) b.render(c, mouseX, mouseY, delta);
 
         // podpowiedź na dole
-        Text hint = Ui.text(Lang.t("hud.hint"));
+        Component hint = Ui.text(Lang.t("hud.hint"));
         int hw = Ui.width(hint) + 16;
         Ui.round(c, (w - hw) / 2, h - 24, hw, 16, 4, argb(r0 * 0.7f, 0x0A0810));
         Ui.drawCentered(c, hint, w / 2, h - 20, argb(r0, 0xD6CCE6));
@@ -259,7 +259,7 @@ public class HudEditorScreen extends Screen {
         long since = System.currentTimeMillis() - toastAt;
         if (since < 2200 && !toast.isEmpty()) {
             float ta = clamp01(Math.min(since / 150f, (2200 - since) / 300f));
-            Text tt = Ui.bold(toast);
+            Component tt = Ui.bold(toast);
             int tw = Ui.width(tt) + 20;
             Ui.round(c, (w - tw) / 2, hubY + 82, tw, 18, 4, argb(ta * 0.9f, 0x1A0F2A));
             Ui.roundBorder(c, (w - tw) / 2, hubY + 82, tw, 18, 4, argb(ta, NEON));
@@ -267,7 +267,7 @@ public class HudEditorScreen extends Screen {
         }
     }
 
-    private void smallButton(DrawContext c, int x, int y, Ui.Icon icon, int color, boolean hot) {
+    private void smallButton(GuiGraphics c, int x, int y, Ui.Icon icon, int color, boolean hot) {
         Ui.round(c, x, y, 10, 10, 5, argb(1f, hot ? GruzDraw2.lighten(color) : color));
         Ui.icon(c, icon, x + 2, y + 2, 6, 0xFFFFFFFF);
     }
@@ -287,13 +287,13 @@ public class HudEditorScreen extends Screen {
         if (hovered != null && dragging == null) {
             int[] r = hovered.rect(this.width, this.height);
             int bx = r[0] + r[2] - 4, by = r[1] - 6;
-            if (Ui.inside(mx, my, bx - 12, by, 10, 10)) { this.client.setScreen(new GruzModsScreen(this, hovered.settings())); return true; }
+            if (Ui.inside(mx, my, bx - 12, by, 10, 10)) { this.minecraft.setScreen(new GruzModsScreen(this, hovered.settings())); return true; }
             if (Ui.inside(mx, my, bx, by, 10, 10)) { hovered.hide(); say(Lang.t("hud.hidden").replace("{name}", hovered.name())); Modules.save(); return true; }
         }
         if (super.mouseClicked(mx, my, button)) return true;
         Element e = at(elements(), mx, my);
         if (e == null) return false;
-        if (button == 1) { this.client.setScreen(new GruzModsScreen(this, e.settings())); return true; }
+        if (button == 1) { this.minecraft.setScreen(new GruzModsScreen(this, e.settings())); return true; }
         if (button == 0) {
             int[] r = e.rect(this.width, this.height);
             dragging = e;
@@ -351,7 +351,7 @@ public class HudEditorScreen extends Screen {
 
     @Override
     public boolean keyPressed(int keyCode, int scanCode, int modifiers) {
-        if (keyCode == Modules.HUB_KEY && this.client.world != null) { close(); return true; }
+        if (keyCode == Modules.HUB_KEY && this.minecraft.level != null) { onClose(); return true; }
         // strzałki przesuwają element pod kursorem o 1 px
         if (hovered != null && keyCode >= GLFW.GLFW_KEY_RIGHT && keyCode <= GLFW.GLFW_KEY_UP) {
             int[] r = hovered.rect(this.width, this.height);

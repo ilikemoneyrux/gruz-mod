@@ -1,13 +1,14 @@
 package pl.gruzclient.screen;
 
-import net.minecraft.client.gui.DrawContext;
-import net.minecraft.client.gui.screen.Screen;
-import net.minecraft.text.Text;
 import pl.gruzclient.i18n.Lang;
 import pl.gruzclient.module.Modules;
 import pl.gruzclient.module.impl.CrosshairModule;
 
 import static pl.gruzclient.render.GruzDraw.*;
+
+import net.minecraft.client.gui.GuiGraphics;
+import net.minecraft.client.gui.screens.Screen;
+import net.minecraft.network.chat.Component;
 
 /**
  * Edytor celownika piksel po pikselu. Lewy przycisk rysuje, prawy ściera (można przeciągać).
@@ -25,7 +26,7 @@ public class CrosshairEditorScreen extends Screen {
     private long statusAt = 0;
 
     public CrosshairEditorScreen(Screen parent, CrosshairModule module) {
-        super(Text.literal("Crosshair"));
+        super(Component.literal("Crosshair"));
         this.parent = parent;
         this.module = module;
         this.grid = module.grid().clone();
@@ -39,26 +40,26 @@ public class CrosshairEditorScreen extends Screen {
         gy = 40;
         int bx = gx + size + 20, bw = 120, bh = 20;
         int y = gy;
-        addDrawableChild(new GruzButton(bx, y, bw, bh, Text.literal(Lang.t("cross.mirror") + ": " + Lang.t(mirror ? "mods.on" : "mods.off")), b -> {
+        addRenderableWidget(new GruzButton(bx, y, bw, bh, Component.literal(Lang.t("cross.mirror") + ": " + Lang.t(mirror ? "mods.on" : "mods.off")), b -> {
             mirror = !mirror;
-            b.setMessage(Text.literal(Lang.t("cross.mirror") + ": " + Lang.t(mirror ? "mods.on" : "mods.off")));
+            b.setMessage(Component.literal(Lang.t("cross.mirror") + ": " + Lang.t(mirror ? "mods.on" : "mods.off")));
         }));
         y += bh + 6;
-        addDrawableChild(new GruzButton(bx, y, bw, bh, Text.literal(Lang.t("cross.clear")), b -> grid = new boolean[N * N]));
+        addRenderableWidget(new GruzButton(bx, y, bw, bh, Component.literal(Lang.t("cross.clear")), b -> grid = new boolean[N * N]));
         y += bh + 6;
-        addDrawableChild(new GruzButton(bx, y, bw, bh, Text.literal(Lang.t("cross.copy")), b -> {
-            this.client.keyboard.setClipboard(CrosshairModule.encode(grid));
+        addRenderableWidget(new GruzButton(bx, y, bw, bh, Component.literal(Lang.t("cross.copy")), b -> {
+            this.minecraft.keyboardHandler.setClipboard(CrosshairModule.encode(grid));
             flash(Lang.t("cross.copied"));
         }));
         y += bh + 6;
-        addDrawableChild(new GruzButton(bx, y, bw, bh, Text.literal(Lang.t("cross.paste")), b -> {
-            boolean[] g = CrosshairModule.decode(this.client.keyboard.getClipboard().trim());
+        addRenderableWidget(new GruzButton(bx, y, bw, bh, Component.literal(Lang.t("cross.paste")), b -> {
+            boolean[] g = CrosshairModule.decode(this.minecraft.keyboardHandler.getClipboard().trim());
             if (g == null) flash(Lang.t("cross.badCode"));
             else { grid = g; flash(Lang.t("cross.pasted")); }
         }));
         int by = this.height - 30;
-        addDrawableChild(new GruzButton(this.width / 2 - 126, by, 120, 20, Text.literal(Lang.t("common.cancel")), b -> this.client.setScreen(parent)));
-        addDrawableChild(new GruzButton(this.width / 2 + 6, by, 120, 20, Text.literal(Lang.t("cross.save")), b -> save()).primary());
+        addRenderableWidget(new GruzButton(this.width / 2 - 126, by, 120, 20, Component.literal(Lang.t("common.cancel")), b -> this.minecraft.setScreen(parent)));
+        addRenderableWidget(new GruzButton(this.width / 2 + 6, by, 120, 20, Component.literal(Lang.t("cross.save")), b -> save()).primary());
     }
 
     private void flash(String s) { status = s; statusAt = System.currentTimeMillis(); }
@@ -68,23 +69,23 @@ public class CrosshairEditorScreen extends Screen {
         module.style.index = 3; // przełącz na styl "piksele"
         if (!module.isEnabled()) module.setEnabled(true);
         Modules.save();
-        this.client.setScreen(parent);
+        this.minecraft.setScreen(parent);
     }
 
     @Override
-    public void close() { this.client.setScreen(parent); }
+    public void onClose() { this.minecraft.setScreen(parent); }
 
     @Override
-    public void renderBackground(DrawContext c, int mouseX, int mouseY, float delta) {
-        c.fill(0, 0, this.width, this.height, this.client.world != null ? 0xD0000000 : 0xFF07050C);
+    public void renderBackground(GuiGraphics c, int mouseX, int mouseY, float delta) {
+        c.fill(0, 0, this.width, this.height, this.minecraft.level != null ? 0xD0000000 : 0xFF07050C);
     }
 
     @Override
-    public void render(DrawContext c, int mouseX, int mouseY, float delta) {
+    public void render(GuiGraphics c, int mouseX, int mouseY, float delta) {
         this.renderBackground(c, mouseX, mouseY, delta);
-        var tr = this.textRenderer;
-        c.drawText(tr, Lang.t("cross.title"), gx, 14, argb(1f, TEXT), false);
-        c.drawText(tr, Lang.t("cross.hint"), gx, 25, argb(1f, MUTE), false);
+        var tr = this.font;
+        c.drawString(tr, Lang.t("cross.title"), gx, 14, argb(1f, TEXT), false);
+        c.drawString(tr, Lang.t("cross.hint"), gx, 25, argb(1f, MUTE), false);
         int size = cell * N;
         c.fill(gx - 1, gy - 1, gx + size + 1, gy + size + 1, argb(1f, SEAM));
         int col = 0xFF000000 | module.color.rgb();
@@ -96,18 +97,18 @@ public class CrosshairEditorScreen extends Screen {
             int bg = center ? 0xFF1E1530 : ((x + y) % 2 == 0 ? 0xFF0C0912 : 0xFF110C19);
             c.fill(px, py, px + cell, py + cell, bg);
             if (grid[y * N + x]) c.fill(px + 1, py + 1, px + cell - 1, py + cell - 1, col);
-            if (hovering && x == hx && y == hy) c.drawBorder(px, py, cell, cell, argb(1f, NEON_HOT));
+            if (hovering && x == hx && y == hy) c.renderOutline(px, py, cell, cell, argb(1f, NEON_HOT));
         }
         // podgląd w prawdziwej skali na tle "nieba"
         int pvx = gx + size + 20, pvy = gy + 4 * 26 + 12, pv = 64;
         c.fillGradient(pvx, pvy, pvx + 120, pvy + pv, 0xFF6FA8DC, 0xFF3D6B4A);
-        c.drawText(tr, Lang.t("cross.preview"), pvx, pvy + pv + 4, argb(1f, MUTE), false);
+        c.drawString(tr, Lang.t("cross.preview"), pvx, pvy + pv + 4, argb(1f, MUTE), false);
         int cx = pvx + 60, cy = pvy + pv / 2, half = N / 2;
         for (int y = 0; y < N; y++) for (int x = 0; x < N; x++) {
             if (grid[y * N + x]) c.fill(cx + x - half, cy + y - half, cx + x - half + 1, cy + y - half + 1, col);
         }
         if (!status.isEmpty() && System.currentTimeMillis() - statusAt < 2500) {
-            c.drawText(tr, status, pvx, pvy + pv + 18, argb(1f, NEON_HOT), false);
+            c.drawString(tr, status, pvx, pvy + pv + 18, argb(1f, NEON_HOT), false);
         }
         for (var child : this.children()) if (child instanceof GruzButton b) b.render(c, mouseX, mouseY, delta);
     }

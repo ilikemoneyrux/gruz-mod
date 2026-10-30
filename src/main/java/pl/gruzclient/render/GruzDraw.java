@@ -1,20 +1,20 @@
 package pl.gruzclient.render;
 
 import com.mojang.blaze3d.platform.GlStateManager;
+import com.mojang.blaze3d.platform.NativeImage;
 import com.mojang.blaze3d.systems.RenderSystem;
-import net.minecraft.client.MinecraftClient;
-import net.minecraft.client.gui.DrawContext;
-import net.minecraft.client.texture.NativeImage;
-import net.minecraft.client.texture.NativeImageBackedTexture;
-import net.minecraft.client.util.math.MatrixStack;
-import net.minecraft.util.Identifier;
-import net.minecraft.util.Util;
-import net.minecraft.util.math.RotationAxis;
+import com.mojang.blaze3d.vertex.PoseStack;
+import com.mojang.math.Axis;
 import pl.gruzclient.GruzClient;
 
 import java.io.InputStream;
 import java.util.HashSet;
 import java.util.Set;
+import net.minecraft.Util;
+import net.minecraft.client.Minecraft;
+import net.minecraft.client.gui.GuiGraphics;
+import net.minecraft.client.renderer.texture.DynamicTexture;
+import net.minecraft.resources.ResourceLocation;
 
 /** Wspólne narzędzia rysowania: kolory, easing i tekstury z poświatą. */
 public final class GruzDraw {
@@ -31,24 +31,24 @@ public final class GruzDraw {
     public static final int TEXT = 0xF1ECF8;
     public static final int MUTE = 0x9488A8;
 
-    public static final Identifier LOGO = Identifier.of(GruzClient.MOD_ID, "textures/gui/logo.png");
-    public static final Identifier GLOW = Identifier.of(GruzClient.MOD_ID, "textures/gui/glow.png");
-    public static final Identifier CRYSTAL = Identifier.of(GruzClient.MOD_ID, "textures/gui/crystal.png");
+    public static final ResourceLocation LOGO = ResourceLocation.fromNamespaceAndPath(GruzClient.MOD_ID, "textures/gui/logo.png");
+    public static final ResourceLocation GLOW = ResourceLocation.fromNamespaceAndPath(GruzClient.MOD_ID, "textures/gui/glow.png");
+    public static final ResourceLocation CRYSTAL = ResourceLocation.fromNamespaceAndPath(GruzClient.MOD_ID, "textures/gui/crystal.png");
 
-    private static final Set<Identifier> LOADED = new HashSet<>();
+    private static final Set<ResourceLocation> LOADED = new HashSet<>();
 
     /**
      * Tekstury ładujemy sami prosto z pliku moda – dzięki temu działają już na ekranie
      * ładowania, zanim Minecraft wczyta paczki zasobów.
      */
-    public static Identifier tex(Identifier id) {
+    public static ResourceLocation tex(ResourceLocation id) {
         if (LOADED.contains(id)) return id;
         String path = "/assets/" + id.getNamespace() + "/" + id.getPath();
         try (InputStream in = GruzDraw.class.getResourceAsStream(path)) {
             if (in == null) throw new IllegalStateException("Brak pliku " + path);
-            NativeImageBackedTexture t = new NativeImageBackedTexture(NativeImage.read(in));
+            DynamicTexture t = new DynamicTexture(NativeImage.read(in));
             t.setFilter(true, false); // gładkie skalowanie
-            MinecraftClient.getInstance().getTextureManager().registerTexture(id, t);
+            Minecraft.getInstance().getTextureManager().register(id, t);
         } catch (Exception e) {
             GruzClient.LOG.error("Nie udało się wczytać tekstury {}", id, e);
         }
@@ -57,23 +57,23 @@ public final class GruzDraw {
     }
 
     /** Rysuje kwadratową teksturę w pozycji float z przezroczystością; additive = świecenie */
-    public static void sprite(DrawContext c, Identifier id, int texSize, float x, float y, float w, float h,
+    public static void sprite(GuiGraphics c, ResourceLocation id, int texSize, float x, float y, float w, float h,
                               float alpha, boolean additive, float rotation) {
         if (alpha <= 0.003f) return;
         tex(id);
         RenderSystem.enableBlend();
-        if (additive) RenderSystem.blendFunc(GlStateManager.SrcFactor.SRC_ALPHA, GlStateManager.DstFactor.ONE);
+        if (additive) RenderSystem.blendFunc(GlStateManager.SourceFactor.SRC_ALPHA, GlStateManager.DestFactor.ONE);
         else RenderSystem.defaultBlendFunc();
-        c.setShaderColor(1f, 1f, 1f, Math.min(1f, alpha));
-        MatrixStack m = c.getMatrices();
-        m.push();
+        c.setColor(1f, 1f, 1f, Math.min(1f, alpha));
+        PoseStack m = c.pose();
+        m.pushPose();
         m.translate(x + w / 2f, y + h / 2f, 0);
-        if (rotation != 0) m.multiply(RotationAxis.POSITIVE_Z.rotation(rotation));
+        if (rotation != 0) m.mulPose(Axis.ZP.rotation(rotation));
         m.scale(w / texSize, h / texSize, 1f);
         m.translate(-texSize / 2f, -texSize / 2f, 0);
-        c.drawTexture(id, 0, 0, 0f, 0f, texSize, texSize, texSize, texSize);
-        m.pop();
-        c.setShaderColor(1f, 1f, 1f, 1f);
+        c.blit(id, 0, 0, 0f, 0f, texSize, texSize, texSize, texSize);
+        m.popPose();
+        c.setColor(1f, 1f, 1f, 1f);
         RenderSystem.defaultBlendFunc();
     }
 
@@ -108,7 +108,7 @@ public final class GruzDraw {
     public static float clamp01(float v) { return Math.max(0f, Math.min(1f, v)); }
     public static float outExpo(float x) { return x >= 1f ? 1f : 1f - (float) Math.pow(2, -10 * x); }
     public static float outCubic(float x) { float i = 1f - clamp01(x); return 1f - i * i * i; }
-    public static float seconds() { return Util.getMeasuringTimeMs() / 1000f; }
+    public static float seconds() { return Util.getMillis() / 1000f; }
 
     /** Wygładzanie niezależne od FPS */
     public static float damp(float current, float target, float lambda, float dt) {

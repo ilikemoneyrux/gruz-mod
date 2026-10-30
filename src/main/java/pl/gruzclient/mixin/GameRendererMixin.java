@@ -1,9 +1,9 @@
 package pl.gruzclient.mixin;
 
-import net.minecraft.client.render.Camera;
-import net.minecraft.client.render.GameRenderer;
-import net.minecraft.client.render.RenderTickCounter;
-import net.minecraft.entity.LivingEntity;
+import net.minecraft.client.Camera;
+import net.minecraft.client.DeltaTracker;
+import net.minecraft.client.renderer.GameRenderer;
+import net.minecraft.world.entity.LivingEntity;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
@@ -29,8 +29,8 @@ public abstract class GameRendererMixin {
     /** Motion blur: po narysowaniu świata, przed GUI */
     @Inject(method = "render", require = 0, at = @At(value = "INVOKE",
             target = "Lnet/minecraft/client/render/WorldRenderer;drawEntityOutlinesFramebuffer()V", shift = At.Shift.AFTER))
-    private void gruz$motionBlur(RenderTickCounter tickCounter, boolean tick, CallbackInfo ci) {
-        Modules.MOTION_BLUR.render(tickCounter.getTickDelta(true));
+    private void gruz$motionBlur(DeltaTracker tickCounter, boolean tick, CallbackInfo ci) {
+        Modules.MOTION_BLUR.render(tickCounter.getGameTimeDeltaPartialTick(true));
     }
 
     /** Freecam: bez ręki przed kamerą */

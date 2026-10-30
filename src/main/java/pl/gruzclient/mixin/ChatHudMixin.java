@@ -1,10 +1,5 @@
 package pl.gruzclient.mixin;
 
-import net.minecraft.client.gui.hud.ChatHud;
-import net.minecraft.client.gui.hud.ChatHudLine;
-import net.minecraft.client.gui.hud.MessageIndicator;
-import net.minecraft.network.message.MessageSignatureData;
-import net.minecraft.text.Text;
 import org.spongepowered.asm.mixin.Final;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
@@ -20,18 +15,23 @@ import pl.gruzclient.module.Modules;
 import pl.gruzclient.module.impl.BetterChatModule;
 
 import java.util.List;
+import net.minecraft.client.GuiMessage;
+import net.minecraft.client.GuiMessageTag;
+import net.minecraft.client.gui.components.ChatComponent;
+import net.minecraft.network.chat.Component;
+import net.minecraft.network.chat.MessageSignature;
 
 /**
  * Lepszy czat: zwijanie powtórzeń, godziny, dłuższa historia, filtr wyszukiwania i kopiowanie.
  * Przy okazji przekazuje wiadomości do Auto GG.
  */
-@Mixin(ChatHud.class)
+@Mixin(ChatComponent.class)
 public abstract class ChatHudMixin implements GruzChat {
-    @Shadow @Final private List<ChatHudLine> messages;
-    @Shadow @Final private List<ChatHudLine.Visible> visibleMessages;
+    @Shadow @Final private List<GuiMessage> messages;
+    @Shadow @Final private List<GuiMessage.Line> visibleMessages;
     @Shadow private int scrolledLines;
 
-    @Shadow private void addVisibleMessage(ChatHudLine message) { throw new AssertionError(); }
+    @Shadow private void addVisibleMessage(GuiMessage message) { throw new AssertionError(); }
     @Shadow private double toChatLineX(double x) { throw new AssertionError(); }
     @Shadow private double toChatLineY(double y) { throw new AssertionError(); }
     @Shadow private int getMessageLineIndex(double chatLineX, double chatLineY) { throw new AssertionError(); }
@@ -41,7 +41,7 @@ public abstract class ChatHudMixin implements GruzChat {
 
     @ModifyVariable(method = "addMessage(Lnet/minecraft/text/Text;Lnet/minecraft/network/message/MessageSignatureData;Lnet/minecraft/client/gui/hud/MessageIndicator;)V",
             at = @At("HEAD"), argsOnly = true, require = 0)
-    private Text gruz$onMessage(Text message, Text original, MessageSignatureData signature, MessageIndicator indicator) {
+    private Component gruz$onMessage(Component message, Component original, MessageSignature signature, GuiMessageTag indicator) {
         String plain = message.getString();
         Modules.AUTO_GG.onChat(plain);
         BetterChatModule chat = Modules.BETTER_CHAT;
@@ -73,7 +73,7 @@ public abstract class ChatHudMixin implements GruzChat {
 
     /** Filtr wyszukiwania: pomijamy linie niepasujące do frazy */
     @Inject(method = "addVisibleMessage", at = @At("HEAD"), cancellable = true, require = 0)
-    private void gruz$filter(ChatHudLine message, CallbackInfo ci) {
+    private void gruz$filter(GuiMessage message, CallbackInfo ci) {
         if (!BetterChatModule.matches(message.content())) ci.cancel();
     }
 

@@ -1,17 +1,17 @@
 package pl.gruzclient.cosmetics;
 
-import net.minecraft.client.network.AbstractClientPlayerEntity;
-import net.minecraft.client.render.LightmapTextureManager;
-import net.minecraft.client.render.OverlayTexture;
-import net.minecraft.client.render.RenderLayer;
-import net.minecraft.client.render.VertexConsumer;
-import net.minecraft.client.render.VertexConsumerProvider;
-import net.minecraft.client.render.entity.feature.FeatureRenderer;
-import net.minecraft.client.render.entity.feature.FeatureRendererContext;
-import net.minecraft.client.render.entity.model.PlayerEntityModel;
-import net.minecraft.client.util.math.MatrixStack;
-import net.minecraft.util.Identifier;
-import net.minecraft.util.math.RotationAxis;
+import com.mojang.blaze3d.vertex.PoseStack;
+import com.mojang.blaze3d.vertex.VertexConsumer;
+import com.mojang.math.Axis;
+import net.minecraft.client.model.PlayerModel;
+import net.minecraft.client.player.AbstractClientPlayer;
+import net.minecraft.client.renderer.LightTexture;
+import net.minecraft.client.renderer.MultiBufferSource;
+import net.minecraft.client.renderer.RenderType;
+import net.minecraft.client.renderer.entity.RenderLayerParent;
+import net.minecraft.client.renderer.entity.layers.RenderLayer;
+import net.minecraft.client.renderer.texture.OverlayTexture;
+import net.minecraft.resources.ResourceLocation;
 import pl.gruzclient.GruzClient;
 import pl.gruzclient.render.GruzDraw;
 
@@ -23,15 +23,15 @@ import pl.gruzclient.render.GruzDraw;
  * Ważne: bufor warstwy bierzemy tuż przed rysowaniem i nie przeplatamy dwóch warstw –
  * w ekwipunku pobranie drugiej warstwy zamyka pierwszą ("Not building!").
  */
-public class CosmeticsFeature extends FeatureRenderer<AbstractClientPlayerEntity, PlayerEntityModel<AbstractClientPlayerEntity>> {
-    private static final Identifier WHITE = Identifier.of(GruzClient.MOD_ID, "textures/gui/white.png");
-    private static final int FULL = LightmapTextureManager.MAX_LIGHT_COORDINATE;
+public class CosmeticsFeature extends RenderLayer<AbstractClientPlayer, PlayerModel<AbstractClientPlayer>> {
+    private static final ResourceLocation WHITE = ResourceLocation.fromNamespaceAndPath(GruzClient.MOD_ID, "textures/gui/white.png");
+    private static final int FULL = LightTexture.FULL_BRIGHT;
     private static final float PX = 1f / 16f;
 
-    private VertexConsumerProvider buffers;
-    private RenderLayer solidLayer, glowLayer, litLayer;
+    private MultiBufferSource buffers;
+    private RenderType solidLayer, glowLayer, litLayer;
 
-    public CosmeticsFeature(FeatureRendererContext<AbstractClientPlayerEntity, PlayerEntityModel<AbstractClientPlayerEntity>> context) {
+    public CosmeticsFeature(RenderLayerParent<AbstractClientPlayer, PlayerModel<AbstractClientPlayer>> context) {
         super(context);
     }
 
@@ -41,23 +41,23 @@ public class CosmeticsFeature extends FeatureRenderer<AbstractClientPlayerEntity
     private VertexConsumer lit() { return buffers.getBuffer(litLayer); }
 
     @Override
-    public void render(MatrixStack m, VertexConsumerProvider buffers, int light, AbstractClientPlayerEntity player,
+    public void render(PoseStack m, MultiBufferSource buffers, int light, AbstractClientPlayer player,
                        float limbAngle, float limbDistance, float tickDelta, float animationProgress, float headYaw, float headPitch) {
         if (player.isInvisible()) return;
         CosmeticSet set = Cosmetics.of(player);
         if (!set.has3d()) return;
         GruzDraw.tex(WHITE);
         this.buffers = buffers;
-        this.solidLayer = RenderLayer.getEntityTranslucentEmissive(WHITE);
-        this.glowLayer = RenderLayer.getEyes(WHITE);
-        this.litLayer = RenderLayer.getEntityTranslucent(WHITE);
-        float t = (player.age + tickDelta) / 20f;
+        this.solidLayer = RenderType.entityTranslucentEmissive(WHITE);
+        this.glowLayer = RenderType.eyes(WHITE);
+        this.litLayer = RenderType.entityTranslucent(WHITE);
+        float t = (player.tickCount + tickDelta) / 20f;
         int color = set.color();
         int hot = GruzDraw.mix(color, 0xFFFFFF, 0.5f);
 
         if (set.hasHead()) {
-            m.push();
-            this.getContextModel().head.rotate(m);
+            m.pushPose();
+            this.getParentModel().head.translateAndRotate(m);
             switch (set.head()) {
                 case "halo" -> halo(m, t, color, hot);
                 case "crown" -> crown(m, t, color, hot);
@@ -66,40 +66,40 @@ public class CosmeticsFeature extends FeatureRenderer<AbstractClientPlayerEntity
                 case "santa" -> santaHat(m, light);
                 default -> { }
             }
-            m.pop();
+            m.popPose();
         }
         if (set.hasWings()) {
-            m.push();
-            this.getContextModel().body.rotate(m);
-            boolean fast = !player.isOnGround() || player.isSprinting() || player.isFallFlying();
+            m.pushPose();
+            this.getParentModel().body.translateAndRotate(m);
+            boolean fast = !player.onGround() || player.isSprinting() || player.isFallFlying();
             wings(m, light, set.wings(), t, fast, color);
-            m.pop();
+            m.popPose();
         }
         if (set.hasBack()) {
-            m.push();
-            this.getContextModel().body.rotate(m);
-            if ("jetpack".equals(set.back())) jetpack(m, light, t, color, !player.isOnGround() || player.isSprinting());
+            m.pushPose();
+            this.getParentModel().body.translateAndRotate(m);
+            if ("jetpack".equals(set.back())) jetpack(m, light, t, color, !player.onGround() || player.isSprinting());
             else backpack(m, light, color);
-            m.pop();
+            m.popPose();
         }
         if (set.hasPet()) {
-            m.push();
+            m.pushPose();
             float a = t * 0.9f;
             m.translate(Math.cos(a) * 0.75, -0.55 + Math.sin(t * 2.1f) * 0.08, Math.sin(a) * 0.75);
-            m.multiply(RotationAxis.POSITIVE_Y.rotation(t * 2f));
+            m.mulPose(Axis.YP.rotation(t * 2f));
             if ("pumpkin".equals(set.pet())) pumpkinPet(m, t);
             else {
                 crystal(m, solid(), 0.09f, 0.2f, color, hot, 230, FULL);
                 crystal(m, glow(), 0.13f, 0.27f, color, color, 70, FULL);
             }
-            m.pop();
+            m.popPose();
         }
     }
 
     // ---------------- nakrycia głowy ----------------
-    private void halo(MatrixStack m, float t, int color, int hot) {
+    private void halo(PoseStack m, float t, int color, int hot) {
         m.translate(0, -0.72 + Math.sin(t * 1.6f) * 0.025, 0);
-        m.multiply(RotationAxis.POSITIVE_Y.rotation(t * 0.6f));
+        m.mulPose(Axis.YP.rotation(t * 0.6f));
         int seg = 24;
         float r0 = 0.2f, r1 = 0.27f;
         VertexConsumer core = solid();
@@ -118,20 +118,20 @@ public class CosmeticsFeature extends FeatureRenderer<AbstractClientPlayerEntity
         }
     }
 
-    private void crown(MatrixStack m, float t, int color, int hot) {
+    private void crown(PoseStack m, float t, int color, int hot) {
         m.translate(0, -0.55, 0);
         VertexConsumer vc = solid();
         for (int i = 0; i < 5; i++) {
             double a = i * Math.PI * 2 / 5 + t * 0.3;
-            m.push();
+            m.pushPose();
             m.translate(Math.cos(a) * 0.22, 0, Math.sin(a) * 0.22);
-            m.multiply(RotationAxis.POSITIVE_Y.rotation((float) -a));
+            m.mulPose(Axis.YP.rotation((float) -a));
             crystal(m, vc, 0.05f, 0.16f + (float) Math.sin(t * 2f + i) * 0.015f, color, hot, 235, FULL);
-            m.pop();
+            m.popPose();
         }
     }
 
-    private void topHat(MatrixStack m, int light, int color) {
+    private void topHat(PoseStack m, int light, int color) {
         VertexConsumer vc = lit();
         int black = 0x1A1A20;
         box(m, vc, -5.2f, -8.6f, -5.2f, 5.2f, -8f, 5.2f, black, light);           // rondo
@@ -139,7 +139,7 @@ public class CosmeticsFeature extends FeatureRenderer<AbstractClientPlayerEntity
         box(m, vc, -3.75f, -10.4f, -3.75f, 3.75f, -9.2f, 3.75f, color, light);   // wstążka w kolorze motywu
     }
 
-    private void witchHat(MatrixStack m, int light) {
+    private void witchHat(PoseStack m, int light) {
         VertexConsumer vc = lit();
         int hat = 0x2A1440, band = 0xFF7A1A;
         box(m, vc, -6.5f, -8.7f, -6.5f, 6.5f, -8f, 6.5f, hat, light);
@@ -153,7 +153,7 @@ public class CosmeticsFeature extends FeatureRenderer<AbstractClientPlayerEntity
         }
     }
 
-    private void santaHat(MatrixStack m, int light) {
+    private void santaHat(PoseStack m, int light) {
         VertexConsumer vc = lit();
         int red = 0xC8202A, white = 0xF4F4F8;
         box(m, vc, -4.6f, -9.4f, -4.6f, 4.6f, -7.6f, 4.6f, white, light);
@@ -168,7 +168,7 @@ public class CosmeticsFeature extends FeatureRenderer<AbstractClientPlayerEntity
     }
 
     // ---------------- skrzydła ----------------
-    private void wings(MatrixStack m, int light, String style, float t, boolean fast, int color) {
+    private void wings(PoseStack m, int light, String style, float t, boolean fast, int color) {
         float speed = fast ? 9f : 2.2f;
         float flap = (float) Math.sin(t * speed) * (fast ? 24f : 9f);
         int base, tip;
@@ -182,10 +182,10 @@ public class CosmeticsFeature extends FeatureRenderer<AbstractClientPlayerEntity
         int lt = emissive ? FULL : light;
         boolean membrane = "demon".equals(style) || "bat".equals(style);
         for (int side = -1; side <= 1; side += 2) {
-            m.push();
+            m.pushPose();
             m.translate(side * 1.5f * PX, 2.5f * PX, 2.6f * PX);
-            m.multiply(RotationAxis.POSITIVE_Y.rotationDegrees(side * (-(28f + flap))));
-            m.multiply(RotationAxis.POSITIVE_Z.rotationDegrees(side * -12f));
+            m.mulPose(Axis.YP.rotationDegrees(side * (-(28f + flap))));
+            m.mulPose(Axis.ZP.rotationDegrees(side * -12f));
             VertexConsumer vc = emissive ? solid() : lit();
             if (membrane) {
                 // kości + błona
@@ -213,24 +213,24 @@ public class CosmeticsFeature extends FeatureRenderer<AbstractClientPlayerEntity
                             emissive ? GruzDraw.mix(tip, 0xFFFFFF, 0.3f) : tip, lt);
                 }
             }
-            m.pop();
+            m.popPose();
         }
         if (emissive) {
             // poświata kryształowych skrzydeł
             VertexConsumer g = glow();
             for (int side = -1; side <= 1; side += 2) {
-                m.push();
+                m.pushPose();
                 m.translate(side * 1.5f * PX, 2.5f * PX, 2.6f * PX);
-                m.multiply(RotationAxis.POSITIVE_Y.rotationDegrees(side * (-(28f + flap))));
-                m.multiply(RotationAxis.POSITIVE_Z.rotationDegrees(side * -12f));
+                m.mulPose(Axis.YP.rotationDegrees(side * (-(28f + flap))));
+                m.mulPose(Axis.ZP.rotationDegrees(side * -12f));
                 box(m, g, side > 0 ? 0 : -15f, -2.5f, -0.6f, side > 0 ? 15f : 0, 9f, 0.6f, color, FULL, 50);
-                m.pop();
+                m.popPose();
             }
         }
     }
 
     // ---------------- plecy ----------------
-    private void backpack(MatrixStack m, int light, int color) {
+    private void backpack(PoseStack m, int light, int color) {
         VertexConsumer vc = lit();
         int leather = 0x6B4A2B, dark = 0x4A311B;
         box(m, vc, -3.6f, 1f, 2.1f, 3.6f, 9.5f, 5.4f, leather, light);
@@ -243,7 +243,7 @@ public class CosmeticsFeature extends FeatureRenderer<AbstractClientPlayerEntity
         }
     }
 
-    private void jetpack(MatrixStack m, int light, float t, int color, boolean active) {
+    private void jetpack(PoseStack m, int light, float t, int color, boolean active) {
         VertexConsumer vc = lit();
         int metal = 0x8C8F99, dark = 0x4A4D57;
         for (int s = -1; s <= 1; s += 2) {
@@ -265,7 +265,7 @@ public class CosmeticsFeature extends FeatureRenderer<AbstractClientPlayerEntity
     }
 
     // ---------------- pety ----------------
-    private void pumpkinPet(MatrixStack m, float t) {
+    private void pumpkinPet(PoseStack m, float t) {
         VertexConsumer vc = solid();
         float s = 2.8f;
         box(m, vc, -s, -s, -s, s, s, s, 0xE8701A, FULL);
@@ -277,7 +277,7 @@ public class CosmeticsFeature extends FeatureRenderer<AbstractClientPlayerEntity
     }
 
     /** Kryształ (ośmiościan wydłużony w pionie) */
-    private void crystal(MatrixStack m, VertexConsumer vc, float w, float h, int color, int tip, int alpha, int light) {
+    private void crystal(PoseStack m, VertexConsumer vc, float w, float h, int color, int tip, int alpha, int light) {
         float[][] ring = {{w, 0, 0}, {0, 0, w}, {-w, 0, 0}, {0, 0, -w}};
         float[] top = {0, -h, 0}, bottom = {0, h * 0.6f, 0};
         for (int i = 0; i < 4; i++) {
@@ -289,11 +289,11 @@ public class CosmeticsFeature extends FeatureRenderer<AbstractClientPlayerEntity
 
     // ---------------- geometria ----------------
     /** Prostopadłościan w pikselach modelu (1/16 bloku), ściany lekko cieniowane */
-    private void box(MatrixStack m, VertexConsumer vc, float x1, float y1, float z1, float x2, float y2, float z2, int color, int light) {
+    private void box(PoseStack m, VertexConsumer vc, float x1, float y1, float z1, float x2, float y2, float z2, int color, int light) {
         box(m, vc, x1, y1, z1, x2, y2, z2, color, light, 255);
     }
 
-    private void box(MatrixStack m, VertexConsumer vc, float x1, float y1, float z1, float x2, float y2, float z2, int color, int light, int alpha) {
+    private void box(PoseStack m, VertexConsumer vc, float x1, float y1, float z1, float x2, float y2, float z2, int color, int light, int alpha) {
         x1 *= PX; y1 *= PX; z1 *= PX; x2 *= PX; y2 *= PX; z2 *= PX;
         int top = GruzDraw.mix(color, 0xFFFFFF, 0.12f), side = color, side2 = GruzDraw.mix(color, 0x000000, 0.12f), bottom = GruzDraw.mix(color, 0x000000, 0.3f);
         quad(m, vc, x1, y1, z1, x2, y1, z1, x2, y1, z2, x1, y1, z2, top, alpha, light);      // góra (y w dół)
@@ -304,8 +304,8 @@ public class CosmeticsFeature extends FeatureRenderer<AbstractClientPlayerEntity
         quad(m, vc, x2, y1, z1, x2, y2, z1, x2, y2, z2, x2, y1, z2, side2, alpha, light);    // prawo
     }
 
-    private void tri(MatrixStack m, VertexConsumer vc, float[] a, float[] b, float[] c, int ca, int cb, int alpha, int light) {
-        MatrixStack.Entry e = m.peek();
+    private void tri(PoseStack m, VertexConsumer vc, float[] a, float[] b, float[] c, int ca, int cb, int alpha, int light) {
+        PoseStack.Pose e = m.last();
         vertex(vc, e, a[0], a[1], a[2], ca, alpha, light);
         vertex(vc, e, b[0], b[1], b[2], cb, alpha, light);
         vertex(vc, e, c[0], c[1], c[2], cb, alpha, light);
@@ -317,9 +317,9 @@ public class CosmeticsFeature extends FeatureRenderer<AbstractClientPlayerEntity
     }
 
     /** Czworokąt widoczny z obu stron */
-    private void quad(MatrixStack m, VertexConsumer vc, float x1, float y1, float z1, float x2, float y2, float z2,
+    private void quad(PoseStack m, VertexConsumer vc, float x1, float y1, float z1, float x2, float y2, float z2,
                       float x3, float y3, float z3, float x4, float y4, float z4, int color, int alpha, int light) {
-        MatrixStack.Entry e = m.peek();
+        PoseStack.Pose e = m.last();
         vertex(vc, e, x1, y1, z1, color, alpha, light);
         vertex(vc, e, x2, y2, z2, color, alpha, light);
         vertex(vc, e, x3, y3, z3, color, alpha, light);
@@ -330,12 +330,12 @@ public class CosmeticsFeature extends FeatureRenderer<AbstractClientPlayerEntity
         vertex(vc, e, x1, y1, z1, color, alpha, light);
     }
 
-    private void vertex(VertexConsumer vc, MatrixStack.Entry e, float x, float y, float z, int rgb, int alpha, int light) {
-        vc.vertex(e, x, y, z)
-                .color((rgb >> 16) & 255, (rgb >> 8) & 255, rgb & 255, alpha)
-                .texture(0.5f, 0.5f)
-                .overlay(OverlayTexture.DEFAULT_UV)
-                .light(light)
-                .normal(e, 0f, -1f, 0f);
+    private void vertex(VertexConsumer vc, PoseStack.Pose e, float x, float y, float z, int rgb, int alpha, int light) {
+        vc.addVertex(e, x, y, z)
+                .setColor((rgb >> 16) & 255, (rgb >> 8) & 255, rgb & 255, alpha)
+                .setUv(0.5f, 0.5f)
+                .setOverlay(OverlayTexture.NO_OVERLAY)
+                .setLight(light)
+                .setNormal(e, 0f, -1f, 0f);
     }
 }

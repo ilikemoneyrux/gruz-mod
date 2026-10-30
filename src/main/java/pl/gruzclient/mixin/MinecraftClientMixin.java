@@ -1,9 +1,9 @@
 package pl.gruzclient.mixin;
 
-import net.minecraft.client.MinecraftClient;
-import net.minecraft.client.gui.screen.Screen;
-import net.minecraft.client.gui.screen.TitleScreen;
-import net.minecraft.entity.Entity;
+import net.minecraft.client.Minecraft;
+import net.minecraft.client.gui.screens.Screen;
+import net.minecraft.client.gui.screens.TitleScreen;
+import net.minecraft.world.entity.Entity;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
@@ -16,7 +16,7 @@ import pl.gruzclient.network.GruzNetwork;
 import pl.gruzclient.screen.GruzTitleScreen;
 import pl.gruzclient.status.GameStatus;
 
-@Mixin(MinecraftClient.class)
+@Mixin(Minecraft.class)
 public abstract class MinecraftClientMixin {
     /** Za każdym razem, gdy gra chce pokazać menu główne, pokazujemy menu Gruz. */
     @ModifyVariable(method = "setScreen", at = @At("HEAD"), argsOnly = true)

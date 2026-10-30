@@ -1,8 +1,8 @@
 package pl.gruzclient.module;
 
-import net.minecraft.client.gui.DrawContext;
-
 import static pl.gruzclient.render.GruzDraw.*;
+
+import net.minecraft.client.gui.GuiGraphics;
 
 /** Prosty element HUD: wartość + mała etykieta, np. "144 FPS". */
 public abstract class TextHudModule extends HudModule {
@@ -14,17 +14,17 @@ public abstract class TextHudModule extends HudModule {
     protected String label() { return ""; }
 
     @Override
-    protected int[] draw(DrawContext c, boolean editing) {
+    protected int[] draw(GuiGraphics c, boolean editing) {
         String v = value(editing);
         String l = label();
-        var tr = mc.textRenderer;
+        var tr = mc.font;
         int pad = 5;
-        int vw = tr.getWidth(v);
-        int lw = l.isEmpty() ? 0 : tr.getWidth(l) + 4;
+        int vw = tr.width(v);
+        int lw = l.isEmpty() ? 0 : tr.width(l) + 4;
         int w = vw + lw + pad * 2, h = 16;
         panel(c, w, h);
-        c.drawText(tr, v, pad, 4, textColor(), !background.value);
-        if (!l.isEmpty()) c.drawText(tr, l, pad + vw + 4, 4, argb(1f, MUTE), !background.value);
+        c.drawString(tr, v, pad, 4, textColor(), !background.value);
+        if (!l.isEmpty()) c.drawString(tr, l, pad + vw + 4, 4, argb(1f, MUTE), !background.value);
         return new int[]{w, h};
     }
 }

@@ -7,8 +7,8 @@ public class ToggleSprintModule extends Module {
     public ToggleSprintModule() { super("togglesprint", Category.UTILITY, false); }
 
     @Override
-    protected void onEnable() { mc.options.getSprintToggled().setValue(true); mc.options.write(); }
+    protected void onEnable() { mc.options.toggleSprint().set(true); mc.options.save(); }
 
     @Override
-    protected void onDisable() { mc.options.getSprintToggled().setValue(false); mc.options.write(); }
+    protected void onDisable() { mc.options.toggleSprint().set(false); mc.options.save(); }
 }

@@ -3,8 +3,6 @@ package pl.gruzclient.hypixel;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
-import net.minecraft.client.MinecraftClient;
-import net.minecraft.client.network.ServerInfo;
 import pl.gruzclient.GruzClient;
 
 import java.net.URI;
@@ -16,6 +14,8 @@ import java.util.ArrayDeque;
 import java.util.Map;
 import java.util.UUID;
 import java.util.concurrent.ConcurrentHashMap;
+import net.minecraft.client.Minecraft;
+import net.minecraft.client.multiplayer.ServerData;
 
 /**
  * Statystyki BedWars z oficjalnego API Hypixela (gwiazdki i FKDR) pokazywane w tabie.
@@ -37,8 +37,8 @@ public final class HypixelStats {
     public static String key() { return System.getProperty("gruz.hypixel", "").trim(); }
 
     public static boolean onHypixel() {
-        ServerInfo s = MinecraftClient.getInstance().getCurrentServerEntry();
-        return s != null && s.address != null && s.address.toLowerCase().contains("hypixel.net");
+        ServerData s = Minecraft.getInstance().getCurrentServer();
+        return s != null && s.ip != null && s.ip.toLowerCase().contains("hypixel.net");
     }
 
     public static boolean available() { return !key().isEmpty() && !badKey && onHypixel(); }

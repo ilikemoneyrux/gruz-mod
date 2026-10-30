@@ -1,13 +1,13 @@
 package pl.gruzclient.render;
 
 import com.mojang.blaze3d.systems.RenderSystem;
-import net.minecraft.client.MinecraftClient;
-import net.minecraft.client.font.TextRenderer;
-import net.minecraft.client.gui.DrawContext;
-import net.minecraft.text.MutableText;
-import net.minecraft.text.Style;
-import net.minecraft.text.Text;
-import net.minecraft.util.Identifier;
+import net.minecraft.client.Minecraft;
+import net.minecraft.client.gui.Font;
+import net.minecraft.client.gui.GuiGraphics;
+import net.minecraft.network.chat.Component;
+import net.minecraft.network.chat.MutableComponent;
+import net.minecraft.network.chat.Style;
+import net.minecraft.resources.ResourceLocation;
 import pl.gruzclient.GruzClient;
 
 import static pl.gruzclient.render.GruzDraw.*;
@@ -19,9 +19,9 @@ import static pl.gruzclient.render.GruzDraw.*;
 public final class Ui {
     private Ui() {}
 
-    public static final Identifier FONT = Identifier.of(GruzClient.MOD_ID, "ui");
-    public static final Identifier FONT_BOLD = Identifier.of(GruzClient.MOD_ID, "ui_bold");
-    public static final Identifier ICONS = Identifier.of(GruzClient.MOD_ID, "textures/gui/icons.png");
+    public static final ResourceLocation FONT = ResourceLocation.fromNamespaceAndPath(GruzClient.MOD_ID, "ui");
+    public static final ResourceLocation FONT_BOLD = ResourceLocation.fromNamespaceAndPath(GruzClient.MOD_ID, "ui_bold");
+    public static final ResourceLocation ICONS = ResourceLocation.fromNamespaceAndPath(GruzClient.MOD_ID, "textures/gui/icons.png");
 
     /** Ikony w atlasie icons.png (8 x 4, po 32 px) */
     public enum Icon {
@@ -31,28 +31,28 @@ public final class Ui {
     }
 
     // ---------------- tekst ----------------
-    public static MutableText text(String s) { return Text.literal(s).setStyle(Style.EMPTY.withFont(FONT)); }
-    public static MutableText bold(String s) { return Text.literal(s).setStyle(Style.EMPTY.withFont(FONT_BOLD)); }
+    public static MutableComponent text(String s) { return Component.literal(s).setStyle(Style.EMPTY.withFont(FONT)); }
+    public static MutableComponent bold(String s) { return Component.literal(s).setStyle(Style.EMPTY.withFont(FONT_BOLD)); }
 
-    public static TextRenderer tr() { return MinecraftClient.getInstance().textRenderer; }
-    public static int width(Text t) { return tr().getWidth(t); }
+    public static Font tr() { return Minecraft.getInstance().font; }
+    public static int width(Component t) { return tr().width(t); }
 
-    public static void draw(DrawContext c, Text t, int x, int y, int argb) { c.drawText(tr(), t, x, y, argb, false); }
-    public static void drawCentered(DrawContext c, Text t, int cx, int y, int argb) { c.drawText(tr(), t, cx - width(t) / 2, y, argb, false); }
+    public static void draw(GuiGraphics c, Component t, int x, int y, int argb) { c.drawString(tr(), t, x, y, argb, false); }
+    public static void drawCentered(GuiGraphics c, Component t, int cx, int y, int argb) { c.drawString(tr(), t, cx - width(t) / 2, y, argb, false); }
 
     /** Tekst w skali (np. duże tytuły) */
-    public static void drawScaled(DrawContext c, Text t, float x, float y, float scale, int argb, boolean centered) {
-        var m = c.getMatrices();
-        m.push();
+    public static void drawScaled(GuiGraphics c, Component t, float x, float y, float scale, int argb, boolean centered) {
+        var m = c.pose();
+        m.pushPose();
         m.translate(x, y, 0);
         m.scale(scale, scale, 1f);
-        c.drawText(tr(), t, centered ? -width(t) / 2 : 0, 0, argb, false);
-        m.pop();
+        c.drawString(tr(), t, centered ? -width(t) / 2 : 0, 0, argb, false);
+        m.popPose();
     }
 
     /** Ucina tekst do szerokości z "…" */
-    public static MutableText fit(String s, int maxW, boolean b) {
-        MutableText t = b ? bold(s) : text(s);
+    public static MutableComponent fit(String s, int maxW, boolean b) {
+        MutableComponent t = b ? bold(s) : text(s);
         if (width(t) <= maxW) return t;
         String cut = s;
         while (cut.length() > 1 && width(b ? bold(cut + "…") : text(cut + "…")) > maxW) cut = cut.substring(0, cut.length() - 1);
@@ -60,19 +60,19 @@ public final class Ui {
     }
 
     // ---------------- ikony ----------------
-    public static void icon(DrawContext c, Icon icon, int x, int y, int size, int argb) {
+    public static void icon(GuiGraphics c, Icon icon, int x, int y, int size, int argb) {
         GruzDraw.tex(ICONS);
         int i = icon.ordinal();
         RenderSystem.enableBlend();
         RenderSystem.defaultBlendFunc();
-        c.setShaderColor(((argb >> 16) & 255) / 255f, ((argb >> 8) & 255) / 255f, (argb & 255) / 255f, ((argb >>> 24) & 255) / 255f);
-        c.drawTexture(ICONS, x, y, size, size, (i % 8) * 32f, (i / 8) * 32f, 32, 32, 256, 128);
-        c.setShaderColor(1f, 1f, 1f, 1f);
+        c.setColor(((argb >> 16) & 255) / 255f, ((argb >> 8) & 255) / 255f, (argb & 255) / 255f, ((argb >>> 24) & 255) / 255f);
+        c.blit(ICONS, x, y, size, size, (i % 8) * 32f, (i / 8) * 32f, 32, 32, 256, 128);
+        c.setColor(1f, 1f, 1f, 1f);
     }
 
     // ---------------- kształty ----------------
     /** Prostokąt z zaokrąglonymi rogami (promień w pikselach GUI) */
-    public static void round(DrawContext c, int x, int y, int w, int h, int r, int argb) {
+    public static void round(GuiGraphics c, int x, int y, int w, int h, int r, int argb) {
         if (w <= 0 || h <= 0) return;
         r = Math.max(0, Math.min(r, Math.min(w, h) / 2));
         if (r == 0) { c.fill(x, y, x + w, y + h, argb); return; }
@@ -86,7 +86,7 @@ public final class Ui {
     }
 
     /** Obrys zaokrąglonego prostokąta (1 px) */
-    public static void roundBorder(DrawContext c, int x, int y, int w, int h, int r, int argb) {
+    public static void roundBorder(GuiGraphics c, int x, int y, int w, int h, int r, int argb) {
         r = Math.max(0, Math.min(r, Math.min(w, h) / 2));
         int[] ins = new int[Math.max(1, r)];
         for (int i = 0; i < r; i++) {
@@ -108,13 +108,13 @@ public final class Ui {
     }
 
     /** Ciemny półprzezroczysty panel jak w nowoczesnych klientach */
-    public static void panel(DrawContext c, int x, int y, int w, int h, float alpha) {
+    public static void panel(GuiGraphics c, int x, int y, int w, int h, float alpha) {
         round(c, x, y, w, h, 4, argb(0.78f * alpha, 0x0A0810));
         roundBorder(c, x, y, w, h, 4, argb(0.08f * alpha, 0xFFFFFF));
     }
 
     /** Poziomy gradient (rysowany kolumnami) – akcentowe przyciski */
-    public static void hGradient(DrawContext c, int x, int y, int w, int h, int left, int right, float alpha, int r) {
+    public static void hGradient(GuiGraphics c, int x, int y, int w, int h, int left, int right, float alpha, int r) {
         for (int i = 0; i < w; i++) {
             int col = argb(alpha, GruzDraw.lerpColor(left, right, i / (float) Math.max(1, w - 1)));
             int inset = 0;
