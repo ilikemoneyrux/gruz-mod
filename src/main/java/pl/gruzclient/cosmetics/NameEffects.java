@@ -1,9 +1,9 @@
 package pl.gruzclient.cosmetics;
 
-import net.minecraft.text.MutableText;
-import net.minecraft.text.Style;
-import net.minecraft.text.Text;
-import net.minecraft.text.TextColor;
+import net.minecraft.network.chat.Component;
+import net.minecraft.network.chat.MutableComponent;
+import net.minecraft.network.chat.Style;
+import net.minecraft.network.chat.TextColor;
 import pl.gruzclient.render.GruzDraw;
 
 /** Animowane nicki (kosmetyka "name"): tęcza, neon, złoto, ogień, lód. Widzą je inni gracze Gruz. */
@@ -14,14 +14,14 @@ public final class NameEffects {
      * Koloruje tylko sam nick (np. w "[VIP] Gracz" ranga zostaje w kolorach serwera).
      * @param nick nazwa konta; gdy nie ma jej w tekście, kolorujemy cały tekst
      */
-    public static Text apply(Text original, CosmeticSet set, String nick) {
+    public static Component apply(Component original, CosmeticSet set, String nick) {
         if (set == null || !set.hasName()) return original;
         String full = original.getString();
         if (full.isEmpty()) return original;
         int start = nick == null ? -1 : full.indexOf(nick);
         int from = start >= 0 ? start : 0, to = start >= 0 ? start + nick.length() : full.length();
         float t = (System.currentTimeMillis() % 100_000L) / 1000f;
-        MutableText out = Text.empty();
+        MutableComponent out = Component.empty();
         int[] pos = {0};
         original.visit((style, segment) -> {
             for (int i = 0; i < segment.length(); ) {
@@ -29,9 +29,9 @@ public final class NameEffects {
                 int g = pos[0];
                 String ch = new String(Character.toChars(cp));
                 if (g >= from && g < to) {
-                    out.append(Text.literal(ch).setStyle(style.withColor(TextColor.fromRgb(color(set.name(), set.color(), g - from, to - from, t)))));
+                    out.append(Component.literal(ch).setStyle(style.withColor(TextColor.fromRgb(color(set.name(), set.color(), g - from, to - from, t)))));
                 } else {
-                    out.append(Text.literal(ch).setStyle(style));
+                    out.append(Component.literal(ch).setStyle(style));
                 }
                 int n = Character.charCount(cp);
                 i += n;

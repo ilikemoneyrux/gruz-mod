@@ -1,8 +1,8 @@
 package pl.gruzclient.render;
 
-import net.minecraft.client.gui.DrawContext;
-
 import static pl.gruzclient.render.GruzDraw.*;
+
+import net.minecraft.client.gui.GuiGraphics;
 
 /** Ekran ładowania Gruz: czerń, logo z pulsującą poświatą, neonowy pasek postępu. */
 public final class GruzSplash {
@@ -16,9 +16,9 @@ public final class GruzSplash {
      * @param barAlpha widoczność paska (gaśnie wcześniej niż logo)
      * @param progress postęp wczytywania 0..1
      */
-    public static void render(DrawContext c, float alpha, float barAlpha, float progress) {
+    public static void render(GuiGraphics c, float alpha, float barAlpha, float progress) {
         if (alpha <= 0.002f) return;
-        int w = c.getScaledWindowWidth(), h = c.getScaledWindowHeight();
+        int w = c.guiWidth(), h = c.guiHeight();
         long nowMs = System.currentTimeMillis();
         float dt = last == 0 ? 0.016f : Math.min(0.05f, (nowMs - last) / 1000f);
         last = nowMs;

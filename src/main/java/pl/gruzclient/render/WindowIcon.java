@@ -1,17 +1,16 @@
 package pl.gruzclient.render;
 
-import net.minecraft.client.MinecraftClient;
-import net.minecraft.client.texture.NativeImage;
-import net.minecraft.util.Util;
 import org.lwjgl.glfw.GLFW;
 import org.lwjgl.glfw.GLFWImage;
 import org.lwjgl.system.MemoryUtil;
 import pl.gruzclient.GruzClient;
-
+import com.mojang.blaze3d.platform.NativeImage;
 import java.io.InputStream;
 import java.nio.ByteBuffer;
 import java.util.ArrayList;
 import java.util.List;
+import net.minecraft.Util;
+import net.minecraft.client.Minecraft;
 
 /** Logo Gruz jako ikona okna gry (pasek zadań i Alt+Tab) zamiast ikony Minecrafta. */
 public final class WindowIcon {
@@ -22,8 +21,8 @@ public final class WindowIcon {
     public static void apply() {
         if (done) return;
         done = true;
-        if (Util.getOperatingSystem() == Util.OperatingSystem.OSX) return; // macOS bierze ikonę z aplikacji
-        long handle = MinecraftClient.getInstance().getWindow().getHandle();
+        if (Util.getPlatform() == Util.OS.OSX) return; // macOS bierze ikonę z aplikacji
+        long handle = Minecraft.getInstance().getWindow().getWindow();
         List<ByteBuffer> buffers = new ArrayList<>();
         try (InputStream in = WindowIcon.class.getResourceAsStream("/assets/gruzclient/textures/gui/logo.png")) {
             if (in == null) return;
@@ -38,7 +37,7 @@ public final class WindowIcon {
                 buffers.add(buf);
                 for (int y = 0; y < s; y++) {
                     for (int x = 0; x < s; x++) {
-                        int abgr = scaled.getColor(x, y);
+                        int abgr = scaled.getPixelRGBA(x, y);
                         buf.put((byte) (abgr & 255)).put((byte) ((abgr >> 8) & 255)).put((byte) ((abgr >> 16) & 255)).put((byte) ((abgr >>> 24) & 255));
                     }
                 }

@@ -4,17 +4,6 @@ import com.google.gson.Gson;
 import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
-import net.minecraft.client.MinecraftClient;
-import net.minecraft.client.gui.screen.TitleScreen;
-import net.minecraft.client.gui.screen.multiplayer.ConnectScreen;
-import net.minecraft.client.network.ServerAddress;
-import net.minecraft.client.network.ServerInfo;
-import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.text.MutableText;
-import net.minecraft.text.Style;
-import net.minecraft.text.Text;
-import net.minecraft.text.TextColor;
-import net.minecraft.util.Formatting;
 import pl.gruzclient.GruzClient;
 import pl.gruzclient.cosmetics.CosmeticSet;
 import pl.gruzclient.cosmetics.Cosmetics;
@@ -32,6 +21,17 @@ import java.util.Map;
 import java.util.Set;
 import java.util.UUID;
 import java.util.concurrent.CompletionStage;
+import net.minecraft.ChatFormatting;
+import net.minecraft.client.Minecraft;
+import net.minecraft.client.gui.screens.ConnectScreen;
+import net.minecraft.client.gui.screens.TitleScreen;
+import net.minecraft.client.multiplayer.ServerData;
+import net.minecraft.client.multiplayer.resolver.ServerAddress;
+import net.minecraft.network.chat.Component;
+import net.minecraft.network.chat.MutableComponent;
+import net.minecraft.network.chat.Style;
+import net.minecraft.network.chat.TextColor;
+import net.minecraft.world.entity.player.Player;
 import java.util.concurrent.CompletableFuture;
 
 /**
@@ -107,9 +107,9 @@ public final class GruzNetwork {
     // ---------------- wysyłanie ----------------
 
     public static void sendPresence(boolean force) {
-        MinecraftClient mc = MinecraftClient.getInstance();
-        String state = mc.world == null ? "menu" : mc.isInSingleplayer() ? "singleplayer" : "multiplayer";
-        String server = "multiplayer".equals(state) && mc.getCurrentServerEntry() != null ? mc.getCurrentServerEntry().address : null;
+        Minecraft mc = Minecraft.getInstance();
+        String state = mc.level == null ? "menu" : mc.isLocalServer() ? "singleplayer" : "multiplayer";
+        String server = "multiplayer".equals(state) && mc.getCurrentServer() != null ? mc.getCurrentServer().ip : null;
         String key = state + "|" + server;
         if (!force && key.equals(lastPresence)) return;
         lastPresence = key;
@@ -136,10 +136,10 @@ public final class GruzNetwork {
     }
 
     public static void sendDm(String nameOrUuid, String text) {
-        if (!connected()) { chat(Text.literal(Lang.t("net.offline")).formatted(Formatting.RED)); return; }
+        if (!connected()) { chat(Component.literal(Lang.t("net.offline")).withStyle(ChatFormatting.RED)); return; }
         UUID target = null;
         for (Map.Entry<UUID, String> f : friendNames.entrySet()) if (f.getValue().equalsIgnoreCase(nameOrUuid)) target = f.getKey();
-        if (target == null) { chat(Text.literal(Lang.t("net.notFriend").replace("{name}", nameOrUuid)).formatted(Formatting.RED)); return; }
+        if (target == null) { chat(Component.literal(Lang.t("net.notFriend").replace("{name}", nameOrUuid)).withStyle(ChatFormatting.RED)); return; }
         JsonObject o = msg("dm");
         o.addProperty("to", target.toString());
         o.addProperty("text", text);
@@ -147,24 +147,24 @@ public final class GruzNetwork {
     }
 
     public static void reply(String text) {
-        if (lastDmFrom == null) { chat(Text.literal(Lang.t("net.noReply")).formatted(Formatting.GRAY)); return; }
+        if (lastDmFrom == null) { chat(Component.literal(Lang.t("net.noReply")).withStyle(ChatFormatting.GRAY)); return; }
         sendDm(friendNames.getOrDefault(lastDmFrom, lastDmFrom.toString()), text);
     }
 
     public static void partyWarp() {
-        if (!connected()) { chat(Text.literal(Lang.t("net.offline")).formatted(Formatting.RED)); return; }
+        if (!connected()) { chat(Component.literal(Lang.t("net.offline")).withStyle(ChatFormatting.RED)); return; }
         send(msg("party.warp"));
     }
 
     /** Pyta serwer o kosmetyki graczy w zasięgu, których jeszcze nie znamy */
     private static void lookupVisiblePlayers() {
-        MinecraftClient mc = MinecraftClient.getInstance();
-        if (mc.world == null) return;
+        Minecraft mc = Minecraft.getInstance();
+        if (mc.level == null) return;
         JsonArray ids = new JsonArray();
-        for (PlayerEntity p : mc.world.getPlayers()) {
-            if (p == mc.player || looked.contains(p.getUuid())) continue;
-            looked.add(p.getUuid());
-            ids.add(p.getUuid().toString());
+        for (Player p : mc.level.players()) {
+            if (p == mc.player || looked.contains(p.getUUID())) continue;
+            looked.add(p.getUUID());
+            ids.add(p.getUUID().toString());
         }
         if (ids.isEmpty()) return;
         JsonObject o = msg("lookup");
@@ -174,17 +174,17 @@ public final class GruzNetwork {
 
     // ---------------- odbieranie ----------------
 
-    private static void chat(Text t) {
-        MinecraftClient mc = MinecraftClient.getInstance();
-        if (mc.player != null) mc.player.sendMessage(prefix().append(t), false);
+    private static void chat(Component t) {
+        Minecraft mc = Minecraft.getInstance();
+        if (mc.player != null) mc.player.displayClientMessage(prefix().append(t), false);
     }
 
-    private static MutableText prefix() {
-        return Text.literal("◆ Gruz ").setStyle(Style.EMPTY.withColor(TextColor.fromRgb(GruzDraw.NEON)));
+    private static MutableComponent prefix() {
+        return Component.literal("◆ Gruz ").setStyle(Style.EMPTY.withColor(TextColor.fromRgb(GruzDraw.NEON)));
     }
 
     private static void handle(JsonObject m) {
-        MinecraftClient mc = MinecraftClient.getInstance();
+        Minecraft mc = Minecraft.getInstance();
         String t = m.get("t").getAsString();
         switch (t) {
             case "challenge" -> {
@@ -192,10 +192,10 @@ public final class GruzNetwork {
                 // potwierdzenie konta przez Mojang (jak przy wejściu na serwer) – w tle, żeby nie zacinać gry
                 CompletableFuture.runAsync(() -> {
                     try {
-                        var session = mc.getSession();
-                        mc.getSessionService().joinServer(session.getUuidOrNull(), session.getAccessToken(), serverId);
+                        var session = mc.getUser();
+                        mc.getMinecraftSessionService().joinServer(session.getProfileId(), session.getAccessToken(), serverId);
                         JsonObject o = msg("auth");
-                        o.addProperty("name", session.getUsername());
+                        o.addProperty("name", session.getName());
                         send(o);
                     } catch (Exception e) {
                         GruzClient.LOG.warn("Gruz: nie udało się potwierdzić konta: {}", e.toString());
@@ -239,34 +239,34 @@ public final class GruzNetwork {
                 boolean wasKnown = friendNames.containsValue(name);
                 friendNames.put(UUID.fromString(f.get("uuid").getAsString()), name);
                 if (wasKnown && f.has("online") && f.get("online").getAsBoolean() && "launcher".equals(str(f, "state"))) {
-                    chat(Text.literal(Lang.t("net.friendOnline").replace("{name}", name)).formatted(Formatting.GRAY));
+                    chat(Component.literal(Lang.t("net.friendOnline").replace("{name}", name)).withStyle(ChatFormatting.GRAY));
                 }
             }
             case "dm" -> {
                 String from = m.get("from").getAsString();
-                boolean mine = mc.getSession().getUuidOrNull() != null && from.equals(mc.getSession().getUuidOrNull().toString());
+                boolean mine = mc.getUser().getProfileId() != null && from.equals(mc.getUser().getProfileId().toString());
                 String other = mine ? str(m, "toName") : str(m, "fromName");
                 if (!mine) lastDmFrom = UUID.fromString(from);
-                MutableText line = Text.literal(mine ? "→ " + other + ": " : other + " → " + Lang.t("net.you") + ": ").formatted(Formatting.LIGHT_PURPLE)
-                        .append(Text.literal(m.has("text") ? m.get("text").getAsString()
-                                : m.has("voice") ? Lang.t("net.voice") : "[" + str(m, "sticker").toUpperCase() + "]").formatted(Formatting.WHITE));
+                MutableComponent line = Component.literal(mine ? "→ " + other + ": " : other + " → " + Lang.t("net.you") + ": ").withStyle(ChatFormatting.LIGHT_PURPLE)
+                        .append(Component.literal(m.has("text") ? m.get("text").getAsString()
+                                : m.has("voice") ? Lang.t("net.voice") : "[" + str(m, "sticker").toUpperCase() + "]").withStyle(ChatFormatting.WHITE));
                 chat(line);
             }
             case "notify" -> {
                 String kind = str(m, "kind"), name = str(m, "name");
                 if ("badge".equals(kind) && m.has("names")) name = m.getAsJsonObject("names").get(Lang.current()).getAsString();
-                chat(Text.literal(Lang.t("net." + kind).replace("{name}", name)).formatted(Formatting.GRAY));
+                chat(Component.literal(Lang.t("net." + kind).replace("{name}", name)).withStyle(ChatFormatting.GRAY));
             }
-            case "party.invite" -> chat(Text.literal(Lang.t("net.partyInvite").replace("{name}", str(m, "from"))).formatted(Formatting.GRAY));
+            case "party.invite" -> chat(Component.literal(Lang.t("net.partyInvite").replace("{name}", str(m, "from"))).withStyle(ChatFormatting.GRAY));
             case "party.warp" -> {
                 String address = str(m, "address");
-                chat(Text.literal(Lang.t("net.warping").replace("{name}", str(m, "from")).replace("{server}", address)).formatted(Formatting.GRAY));
+                chat(Component.literal(Lang.t("net.warping").replace("{name}", str(m, "from")).replace("{server}", address)).withStyle(ChatFormatting.GRAY));
                 warpTo(address);
             }
             case "error" -> {
                 String code = str(m, "code");
                 if ("AUTH_FAILED".equals(code)) { GruzClient.LOG.warn("Gruz: serwer odrzucił logowanie"); scheduleRetry(); }
-                else chat(Text.literal(Lang.t("net.err." + code).replace("{name}", str(m, "name"))).formatted(Formatting.RED));
+                else chat(Component.literal(Lang.t("net.err." + code).replace("{name}", str(m, "name"))).withStyle(ChatFormatting.RED));
             }
             default -> { }
         }
@@ -278,16 +278,16 @@ public final class GruzNetwork {
 
     /** Party: przejście na serwer lidera */
     private static void warpTo(String address) {
-        MinecraftClient mc = MinecraftClient.getInstance();
-        ServerInfo current = mc.getCurrentServerEntry();
-        if (current != null && current.address.equalsIgnoreCase(address)) return;
-        if (!ServerAddress.isValid(address)) return;
-        if (mc.world != null) {
-            mc.world.disconnect();
+        Minecraft mc = Minecraft.getInstance();
+        ServerData current = mc.getCurrentServer();
+        if (current != null && current.ip.equalsIgnoreCase(address)) return;
+        if (!ServerAddress.isValidAddress(address)) return;
+        if (mc.level != null) {
+            mc.level.disconnect();
             mc.disconnect();
         }
-        ServerInfo info = new ServerInfo(address, address, ServerInfo.ServerType.OTHER);
-        ConnectScreen.connect(new TitleScreen(), mc, ServerAddress.parse(address), info, false, null);
+        ServerData info = new ServerData(address, address, ServerData.Type.OTHER);
+        ConnectScreen.startConnecting(new TitleScreen(), mc, ServerAddress.parseString(address), info, false, null);
     }
 
     // ---------------- WebSocket ----------------
@@ -303,7 +303,7 @@ public final class GruzNetwork {
                 buffer.setLength(0);
                 try {
                     JsonObject m = JsonParser.parseString(text).getAsJsonObject();
-                    MinecraftClient.getInstance().execute(() -> {
+                    Minecraft.getInstance().execute(() -> {
                         try { handle(m); } catch (Exception e) { GruzClient.LOG.debug("Gruz: błąd wiadomości", e); }
                     });
                 } catch (Exception ignored) { }
@@ -314,13 +314,13 @@ public final class GruzNetwork {
 
         @Override
         public CompletionStage<?> onClose(WebSocket ws, int statusCode, String reason) {
-            MinecraftClient.getInstance().execute(GruzNetwork::scheduleRetry);
+            Minecraft.getInstance().execute(GruzNetwork::scheduleRetry);
             return null;
         }
 
         @Override
         public void onError(WebSocket ws, Throwable error) {
-            MinecraftClient.getInstance().execute(GruzNetwork::scheduleRetry);
+            Minecraft.getInstance().execute(GruzNetwork::scheduleRetry);
         }
     }
 }

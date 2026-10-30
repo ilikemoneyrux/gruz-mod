@@ -1,11 +1,11 @@
 package pl.gruzclient.mixin;
 
-import net.minecraft.client.MinecraftClient;
-import net.minecraft.client.gui.DrawContext;
-import net.minecraft.client.gui.screen.SplashOverlay;
-import net.minecraft.client.option.SimpleOption;
-import net.minecraft.util.Util;
-import net.minecraft.util.math.MathHelper;
+import net.minecraft.Util;
+import net.minecraft.client.Minecraft;
+import net.minecraft.client.OptionInstance;
+import net.minecraft.client.gui.GuiGraphics;
+import net.minecraft.client.gui.screens.LoadingOverlay;
+import net.minecraft.util.Mth;
 import org.spongepowered.asm.mixin.Final;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
@@ -18,9 +18,9 @@ import pl.gruzclient.render.GruzSplash;
  * Podmienia wygląd ekranu ładowania Mojang. Logika wczytywania zostaje oryginalna
  * – rysujemy tylko własną warstwę na wierzchu z tą samą przezroczystością.
  */
-@Mixin(SplashOverlay.class)
+@Mixin(LoadingOverlay.class)
 public abstract class SplashOverlayMixin {
-    @Shadow @Final private MinecraftClient client;
+    @Shadow @Final private Minecraft client;
     @Shadow @Final private boolean reloading;
     @Shadow private float progress;
     @Shadow private long reloadCompleteTime;
@@ -28,21 +28,21 @@ public abstract class SplashOverlayMixin {
 
     /** Czarne tło zamiast czerwonego (opcja "logo monochromatyczne"), żeby wygaszanie było czyste */
     @Inject(method = "render", at = @At("HEAD"))
-    private void gruz$blackBackground(DrawContext context, int mouseX, int mouseY, float delta, CallbackInfo ci) {
-        SimpleOption<Boolean> mono = this.client.options.getMonochromeLogo();
-        if (!mono.getValue()) mono.setValue(true);
+    private void gruz$blackBackground(GuiGraphics context, int mouseX, int mouseY, float delta, CallbackInfo ci) {
+        OptionInstance<Boolean> mono = this.client.options.darkMojangStudiosBackground();
+        if (!mono.get()) mono.set(true);
     }
 
     @Inject(method = "render", at = @At("TAIL"))
-    private void gruz$render(DrawContext context, int mouseX, int mouseY, float delta, CallbackInfo ci) {
-        long now = Util.getMeasuringTimeMs();
+    private void gruz$render(GuiGraphics context, int mouseX, int mouseY, float delta, CallbackInfo ci) {
+        long now = Util.getMillis();
         float fade = this.reloadCompleteTime > -1L ? (now - this.reloadCompleteTime) / 1000f : -1f;
         float start = this.reloadStartTime > -1L ? (now - this.reloadStartTime) / 500f : -1f;
         float alpha;
-        if (fade >= 1f) alpha = 1f - MathHelper.clamp(fade - 1f, 0f, 1f);
-        else if (this.reloading) alpha = MathHelper.clamp(start, 0f, 1f);
+        if (fade >= 1f) alpha = 1f - Mth.clamp(fade - 1f, 0f, 1f);
+        else if (this.reloading) alpha = Mth.clamp(start, 0f, 1f);
         else alpha = 1f;
-        float barAlpha = 1f - MathHelper.clamp(fade, 0f, 1f);
+        float barAlpha = 1f - Mth.clamp(fade, 0f, 1f);
         GruzSplash.render(context, alpha, barAlpha, this.progress);
     }
 }

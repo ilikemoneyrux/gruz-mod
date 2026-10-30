@@ -1,9 +1,9 @@
 package pl.gruzclient.module.impl;
 
-import net.minecraft.client.sound.PositionedSoundInstance;
-import net.minecraft.registry.entry.RegistryEntry;
-import net.minecraft.sound.SoundEvent;
-import net.minecraft.sound.SoundEvents;
+import net.minecraft.client.resources.sounds.SimpleSoundInstance;
+import net.minecraft.core.Holder;
+import net.minecraft.sounds.SoundEvent;
+import net.minecraft.sounds.SoundEvents;
 import pl.gruzclient.module.Module;
 import pl.gruzclient.module.Setting;
 
@@ -18,22 +18,22 @@ public class HitSoundModule extends Module {
 
     /** SoundEvents mają w 1.21 dwa typy (SoundEvent i RegistryEntry) – obsługujemy oba */
     private static SoundEvent of(Object o) {
-        if (o instanceof RegistryEntry<?> r) return (SoundEvent) r.value();
+        if (o instanceof Holder<?> r) return (SoundEvent) r.value();
         return (SoundEvent) o;
     }
 
     private SoundEvent event() {
         return switch (sound.index) {
-            case 1 -> of(SoundEvents.ENTITY_EXPERIENCE_ORB_PICKUP);
-            case 2 -> of(SoundEvents.BLOCK_NOTE_BLOCK_PLING);
-            case 3 -> of(SoundEvents.BLOCK_NOTE_BLOCK_BELL);
-            case 4 -> of(SoundEvents.ENTITY_ARROW_HIT_PLAYER);
-            default -> of(SoundEvents.BLOCK_AMETHYST_BLOCK_HIT);
+            case 1 -> of(SoundEvents.EXPERIENCE_ORB_PICKUP);
+            case 2 -> of(SoundEvents.NOTE_BLOCK_PLING);
+            case 3 -> of(SoundEvents.NOTE_BLOCK_BELL);
+            case 4 -> of(SoundEvents.ARROW_HIT_PLAYER);
+            default -> of(SoundEvents.AMETHYST_BLOCK_HIT);
         };
     }
 
     public void play() {
         if (!isEnabled()) return;
-        mc.getSoundManager().play(PositionedSoundInstance.master(event(), pitch.value, volume.value / 100f));
+        mc.getSoundManager().play(SimpleSoundInstance.forUI(event(), pitch.value, volume.value / 100f));
     }
 }

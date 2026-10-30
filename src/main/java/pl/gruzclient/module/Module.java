@@ -1,11 +1,11 @@
 package pl.gruzclient.module;
 
 import com.google.gson.JsonObject;
-import net.minecraft.client.MinecraftClient;
 import pl.gruzclient.i18n.Lang;
 
 import java.util.ArrayList;
 import java.util.List;
+import net.minecraft.client.Minecraft;
 
 /** Bazowy moduł Gruz Client. */
 public abstract class Module {
@@ -15,7 +15,7 @@ public abstract class Module {
     public final Category category;
     private boolean enabled;
     protected final List<Setting> settings = new ArrayList<>();
-    protected final MinecraftClient mc = MinecraftClient.getInstance();
+    protected final Minecraft mc = Minecraft.getInstance();
 
     protected Module(String id, Category category, boolean enabledByDefault) {
         this.id = id;

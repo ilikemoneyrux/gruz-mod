@@ -1,8 +1,8 @@
 package pl.gruzclient.module;
 
 import com.google.gson.JsonObject;
-import net.minecraft.client.gui.DrawContext;
-import net.minecraft.client.util.math.MatrixStack;
+import com.mojang.blaze3d.vertex.PoseStack;
+import net.minecraft.client.gui.GuiGraphics;
 
 import static pl.gruzclient.render.GruzDraw.*;
 
@@ -28,22 +28,22 @@ public abstract class HudModule extends Module {
     }
 
     /** Rysuje element w punkcie (0,0) i zwraca jego rozmiar: {szerokość, wysokość} */
-    protected abstract int[] draw(DrawContext c, boolean editing);
+    protected abstract int[] draw(GuiGraphics c, boolean editing);
 
-    public void render(DrawContext c, int screenW, int screenH, boolean editing) {
-        MatrixStack m = c.getMatrices();
-        m.push();
+    public void render(GuiGraphics c, int screenW, int screenH, boolean editing) {
+        PoseStack m = c.pose();
+        m.pushPose();
         int px = Math.round(x * screenW), py = Math.round(y * screenH);
         m.translate(px, py, 0);
         m.scale(scale, scale, 1f);
         int[] size = draw(c, editing);
         lastW = size[0];
         lastH = size[1];
-        m.pop();
+        m.popPose();
     }
 
     /** Wspólne tło "pastylki" HUD */
-    protected void panel(DrawContext c, int w, int h) {
+    protected void panel(GuiGraphics c, int w, int h) {
         if (!background.value) return;
         c.fill(0, 0, w, h, argb(0.55f, SLAB));
         c.fill(0, 0, 1, h, argb(0.9f, NEON));

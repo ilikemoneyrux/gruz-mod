@@ -1,8 +1,8 @@
 package pl.gruzclient.mixin;
 
-import net.minecraft.client.network.AbstractClientPlayerEntity;
-import net.minecraft.client.util.SkinTextures;
-import net.minecraft.util.Identifier;
+import net.minecraft.client.player.AbstractClientPlayer;
+import net.minecraft.client.resources.PlayerSkin;
+import net.minecraft.resources.ResourceLocation;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
@@ -12,14 +12,14 @@ import pl.gruzclient.cosmetics.CosmeticSet;
 import pl.gruzclient.cosmetics.Cosmetics;
 
 /** Peleryny Gruz: podmieniamy teksturę peleryny (i elytry) gracza na animowaną. */
-@Mixin(AbstractClientPlayerEntity.class)
+@Mixin(AbstractClientPlayer.class)
 public abstract class AbstractClientPlayerEntityMixin {
     @Inject(method = "getSkinTextures", at = @At("RETURN"), cancellable = true, require = 0)
-    private void gruz$cape(CallbackInfoReturnable<SkinTextures> cir) {
-        CosmeticSet set = Cosmetics.of((AbstractClientPlayerEntity) (Object) this);
+    private void gruz$cape(CallbackInfoReturnable<PlayerSkin> cir) {
+        CosmeticSet set = Cosmetics.of((AbstractClientPlayer) (Object) this);
         if (!set.hasCape()) return;
-        SkinTextures t = cir.getReturnValue();
-        Identifier cape = CapeTextures.id(set.cape(), set.color());
-        cir.setReturnValue(new SkinTextures(t.texture(), t.textureUrl(), cape, cape, t.model(), t.secure()));
+        PlayerSkin t = cir.getReturnValue();
+        ResourceLocation cape = CapeTextures.id(set.cape(), set.color());
+        cir.setReturnValue(new PlayerSkin(t.texture(), t.textureUrl(), cape, cape, t.model(), t.secure()));
     }
 }

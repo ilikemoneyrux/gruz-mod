@@ -1,17 +1,18 @@
 package pl.gruzclient.screen;
 
-import net.minecraft.client.gui.DrawContext;
-import net.minecraft.client.gui.widget.ButtonWidget;
-import net.minecraft.text.Text;
 import pl.gruzclient.render.Ui;
 
 import static pl.gruzclient.render.GruzDraw.*;
+
+import net.minecraft.client.gui.GuiGraphics;
+import net.minecraft.client.gui.components.Button;
+import net.minecraft.network.chat.Component;
 
 /**
  * Przycisk w nowym stylu Gruz: zaokrąglony ciemny panel z ikoną i tekstem.
  * Warianty: zwykły, akcentowy (gradient w kolorze motywu), "niebezpieczny" (wyjście) i sama ikona.
  */
-public class UiButton extends ButtonWidget {
+public class UiButton extends Button {
     public enum Kind { NORMAL, ACCENT, DANGER, ICON }
 
     private final Ui.Icon icon;
@@ -22,8 +23,8 @@ public class UiButton extends ButtonWidget {
     private long last = 0;
     private boolean bigText = false;
 
-    public UiButton(int x, int y, int w, int h, Ui.Icon icon, String label, PressAction onPress) {
-        super(x, y, w, h, Text.literal(label == null ? "" : label), onPress, DEFAULT_NARRATION_SUPPLIER);
+    public UiButton(int x, int y, int w, int h, Ui.Icon icon, String label, OnPress onPress) {
+        super(x, y, w, h, Component.literal(label == null ? "" : label), onPress, DEFAULT_NARRATION);
         this.icon = icon;
         this.label = label;
     }
@@ -32,14 +33,14 @@ public class UiButton extends ButtonWidget {
     public UiButton big() { this.bigText = true; return this; }
     public UiButton badge(String b) { this.badge = b; return this; }
     public void setReveal(float r) { this.reveal = r; }
-    public void setLabel(String l) { this.label = l; setMessage(Text.literal(l)); }
+    public void setLabel(String l) { this.label = l; setMessage(Component.literal(l)); }
 
     @Override
-    protected void renderWidget(DrawContext c, int mouseX, int mouseY, float delta) {
+    protected void renderWidget(GuiGraphics c, int mouseX, int mouseY, float delta) {
         long now = System.currentTimeMillis();
         float dt = last == 0 ? 0.016f : Math.min(0.05f, (now - last) / 1000f);
         last = now;
-        hover = damp(hover, active && isSelected() ? 1f : 0f, 16f, dt);
+        hover = damp(hover, active && isHoveredOrFocused() ? 1f : 0f, 16f, dt);
         float a = alpha * reveal;
         if (a < 0.01f) return;
         int x = getX(), y = getY() - Math.round(hover), w = getWidth(), h = getHeight();
@@ -67,19 +68,19 @@ public class UiButton extends ButtonWidget {
             int s = Math.min(w, h) - 10;
             if (icon != null) Ui.icon(c, icon, x + (w - s) / 2, y + (h - s) / 2, s, argb(a, iconCol));
         } else {
-            Text t = bigText ? Ui.bold(label) : Ui.text(label);
+            Component t = bigText ? Ui.bold(label) : Ui.text(label);
             int tw = Ui.width(t);
             int is = icon != null ? Math.min(12, h - 10) : 0, gap = icon != null ? 6 : 0;
             int total = tw + is + gap;
             int sx = x + (w - total) / 2;
             if (icon != null) Ui.icon(c, icon, sx, y + (h - is) / 2, is, argb(a, iconCol));
-            c.drawText(Ui.tr(), t, sx + is + gap, y + (h - 8) / 2, argb(a, textCol), false);
+            c.drawString(Ui.tr(), t, sx + is + gap, y + (h - 8) / 2, argb(a, textCol), false);
         }
         if (badge != null && !badge.isEmpty()) {
-            Text b = Ui.bold(badge);
+            Component b = Ui.bold(badge);
             int bw = Ui.width(b) + 6;
             Ui.round(c, x + w - bw + 3, y - 4, bw, 10, 3, argb(a, NEON));
-            c.drawText(Ui.tr(), b, x + w - bw + 6, y - 3, argb(a, 0xFFFFFF), false);
+            c.drawString(Ui.tr(), b, x + w - bw + 6, y - 3, argb(a, 0xFFFFFF), false);
         }
     }
 }

@@ -1,10 +1,9 @@
 package pl.gruzclient.screen;
 
-import net.minecraft.client.gui.DrawContext;
-
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
+import net.minecraft.client.gui.GuiGraphics;
 
 import static pl.gruzclient.render.GruzDraw.*;
 
@@ -33,7 +32,7 @@ public class CrystalField {
         }
     }
 
-    public void render(DrawContext c, int w, int h, float dt, float alpha) {
+    public void render(GuiGraphics c, int w, int h, float dt, float alpha) {
         for (Mote m : motes) {
             m.y -= m.vy * dt * (0.4f + m.depth);
             m.x += m.vx * dt;

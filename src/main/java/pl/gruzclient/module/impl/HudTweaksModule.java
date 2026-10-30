@@ -1,6 +1,6 @@
 package pl.gruzclient.module.impl;
 
-import net.minecraft.client.gui.DrawContext;
+import net.minecraft.client.gui.GuiGraphics;
 import pl.gruzclient.module.Module;
 import pl.gruzclient.module.Setting;
 
@@ -22,12 +22,12 @@ public class HudTweaksModule extends Module {
     public boolean hideBossbar() { return isEnabled() && hideBoss.value; }
     public boolean hideTitles() { return isEnabled() && hideTitle.value; }
 
-    public void bossBegin(DrawContext c) {
+    public void bossBegin(GuiGraphics c) {
         bossPushed = isEnabled() || pl.gruzclient.module.Modules.MINIMAP.compassShown();
         if (!bossPushed) return;
-        var m = c.getMatrices();
-        m.push();
-        float cx = c.getScaledWindowWidth() / 2f;
+        var m = c.pose();
+        m.pushPose();
+        float cx = c.guiWidth() / 2f;
         float top = bossY + (pl.gruzclient.module.Modules.MINIMAP.compassShown() ? 16 : 0);
         m.translate(cx + bossX, top, 0);
         float k = isEnabled() ? bossSize.value : 1f;
@@ -59,24 +59,24 @@ public class HudTweaksModule extends Module {
         return o;
     }
 
-    public void bossEnd(DrawContext c) {
-        if (bossPushed) c.getMatrices().pop();
+    public void bossEnd(GuiGraphics c) {
+        if (bossPushed) c.pose().popPose();
         bossPushed = false;
     }
 
-    public void titleBegin(DrawContext c) {
+    public void titleBegin(GuiGraphics c) {
         titlePushed = isEnabled();
         if (!titlePushed) return;
-        var m = c.getMatrices();
-        m.push();
-        float cx = c.getScaledWindowWidth() / 2f, cy = c.getScaledWindowHeight() / 2f;
+        var m = c.pose();
+        m.pushPose();
+        float cx = c.guiWidth() / 2f, cy = c.guiHeight() / 2f;
         m.translate(cx, cy + titleY.value, 0);
         m.scale(titleSize.value, titleSize.value, 1f);
         m.translate(-cx, -cy, 0);
     }
 
-    public void titleEnd(DrawContext c) {
-        if (titlePushed) c.getMatrices().pop();
+    public void titleEnd(GuiGraphics c) {
+        if (titlePushed) c.pose().popPose();
         titlePushed = false;
     }
 }

@@ -1,6 +1,6 @@
 package pl.gruzclient.module.impl;
 
-import net.minecraft.client.gui.DrawContext;
+import net.minecraft.client.gui.GuiGraphics;
 import pl.gruzclient.module.Module;
 import pl.gruzclient.module.Setting;
 
@@ -24,12 +24,12 @@ public class ScoreboardModule extends Module {
 
     public boolean hidden() { return isEnabled() && hide.value; }
 
-    public void begin(DrawContext c) {
+    public void begin(GuiGraphics c) {
         drawing = isEnabled();
         if (!drawing) return;
-        var m = c.getMatrices();
-        m.push();
-        float w = c.getScaledWindowWidth(), h = c.getScaledWindowHeight();
+        var m = c.pose();
+        m.pushPose();
+        float w = c.guiWidth(), h = c.guiHeight();
         m.translate(w + offX, h / 2f + offY, 0);
         m.scale(size.value, size.value, 1f);
         m.translate(-w, -h / 2f, 0);
@@ -55,11 +55,11 @@ public class ScoreboardModule extends Module {
 
     public boolean live() { return lastRect != null && System.currentTimeMillis() - lastSeen < 3000; }
 
-    public void end(DrawContext c) {
+    public void end(GuiGraphics c) {
         if (!drawing) return;
         drawing = false;
         if (rx2 > rx1) { lastRect = new int[]{rx1, ry1, rx2, ry2}; lastSeen = System.currentTimeMillis(); }
-        c.getMatrices().pop();
+        c.pose().popPose();
     }
 
     /** Kolor tła wierszy; tytuł dostaje trochę mocniejsze tło jak w grze */

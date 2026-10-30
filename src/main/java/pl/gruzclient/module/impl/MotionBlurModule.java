@@ -1,7 +1,7 @@
 package pl.gruzclient.module.impl;
 
-import net.minecraft.client.gl.PostEffectProcessor;
-import net.minecraft.util.Identifier;
+import net.minecraft.client.renderer.PostChain;
+import net.minecraft.resources.ResourceLocation;
 import pl.gruzclient.GruzClient;
 import pl.gruzclient.module.Module;
 import pl.gruzclient.module.Setting;
@@ -13,8 +13,8 @@ import pl.gruzclient.module.Setting;
 public class MotionBlurModule extends Module {
     public final Setting.Number strength = add(new Setting.Number("strength", "setting.strength", 50f, 10f, 90f, 5f, "%"));
 
-    private static final Identifier SHADER = Identifier.of(GruzClient.MOD_ID, "shaders/post/motion_blur.json");
-    private PostEffectProcessor processor;
+    private static final ResourceLocation SHADER = ResourceLocation.fromNamespaceAndPath(GruzClient.MOD_ID, "shaders/post/motion_blur.json");
+    private PostChain processor;
     private int width = -1, height = -1;
     private boolean failed = false;
 
@@ -22,20 +22,20 @@ public class MotionBlurModule extends Module {
 
     /** Wywoływane w GameRenderer po narysowaniu świata */
     public void render(float tickDelta) {
-        if (!isEnabled() || failed || mc.world == null) return;
+        if (!isEnabled() || failed || mc.level == null) return;
         try {
             if (processor == null) {
-                processor = new PostEffectProcessor(mc.getTextureManager(), mc.getResourceManager(), mc.getFramebuffer(), SHADER);
+                processor = new PostChain(mc.getTextureManager(), mc.getResourceManager(), mc.getMainRenderTarget(), SHADER);
                 width = -1;
             }
-            int w = mc.getWindow().getFramebufferWidth(), h = mc.getWindow().getFramebufferHeight();
+            int w = mc.getWindow().getWidth(), h = mc.getWindow().getHeight();
             if (w != width || h != height) {
-                processor.setupDimensions(w, h);
+                processor.resize(w, h);
                 width = w;
                 height = h;
             }
-            processor.setUniforms("BlendFactor", strength.value / 100f);
-            processor.render(tickDelta);
+            processor.setUniform("BlendFactor", strength.value / 100f);
+            processor.process(tickDelta);
         } catch (Exception e) {
             failed = true; // shader nie działa na tym sprzęcie / wersji – wyłączamy bez crasha
             GruzClient.LOG.warn("Motion blur wyłączony: {}", e.toString());

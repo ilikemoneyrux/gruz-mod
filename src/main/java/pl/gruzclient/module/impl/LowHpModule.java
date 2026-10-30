@@ -1,10 +1,11 @@
 package pl.gruzclient.module.impl;
 
-import net.minecraft.client.gui.DrawContext;
 import pl.gruzclient.module.Module;
 import pl.gruzclient.module.Setting;
 
 import static pl.gruzclient.render.GruzDraw.*;
+
+import net.minecraft.client.gui.GuiGraphics;
 
 /** Delikatna czerwona winieta na krawędziach ekranu, gdy masz mało życia. Pulsuje coraz szybciej. */
 public class LowHpModule extends Module {
@@ -16,7 +17,7 @@ public class LowHpModule extends Module {
 
     public LowHpModule() { super("lowhp", Category.PVP, true); }
 
-    public void render(DrawContext c) {
+    public void render(GuiGraphics c) {
         if (!isEnabled() || mc.player == null || mc.player.isCreative() || mc.player.isSpectator()) return;
         long now = System.currentTimeMillis();
         float dt = last == 0 ? 0.016f : Math.min(0.05f, (now - last) / 1000f);
@@ -28,7 +29,7 @@ public class LowHpModule extends Module {
         float speed = 2f + 4f * shown;
         float pulse = 0.75f + 0.25f * (float) Math.sin(seconds() * speed);
         float a = shown * pulse * strength.value / 100f;
-        int w = c.getScaledWindowWidth(), h = c.getScaledWindowHeight();
+        int w = c.guiWidth(), h = c.guiHeight();
         int edge = Math.max(24, Math.round(Math.min(w, h) * 0.16f));
         int red = 0xC4224F;
         int on = argb(a * 0.85f, red), off = argb(0f, red);

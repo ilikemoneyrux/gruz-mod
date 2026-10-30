@@ -1,9 +1,9 @@
 package pl.gruzclient.mixin;
 
-import net.minecraft.client.MinecraftClient;
-import net.minecraft.client.network.ClientPlayNetworkHandler;
-import net.minecraft.text.Text;
-import net.minecraft.util.Formatting;
+import net.minecraft.ChatFormatting;
+import net.minecraft.client.Minecraft;
+import net.minecraft.client.multiplayer.ClientPacketListener;
+import net.minecraft.network.chat.Component;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
@@ -17,7 +17,7 @@ import pl.gruzclient.network.GruzNetwork;
  *  .r tekst          – odpowiedź na ostatnią wiadomość
  *  .warp             – lider party ściąga wszystkich na swój serwer
  */
-@Mixin(ClientPlayNetworkHandler.class)
+@Mixin(ClientPacketListener.class)
 public abstract class ClientPlayNetworkHandlerMixin {
     @Inject(method = "sendChatMessage", at = @At("HEAD"), cancellable = true, require = 0)
     private void gruz$commands(String content, CallbackInfo ci) {
@@ -38,13 +38,13 @@ public abstract class ClientPlayNetworkHandlerMixin {
             case "gruz", "help" -> help();
             default -> { return; } // inne kropki (np. ".") idą normalnie na serwer
         }
-        MinecraftClient.getInstance().inGameHud.getChatHud().addToMessageHistory(content);
+        Minecraft.getInstance().gui.getChat().addRecentChat(content);
         ci.cancel();
     }
 
     private static void help() {
-        var mc = MinecraftClient.getInstance();
+        var mc = Minecraft.getInstance();
         if (mc.player == null) return;
-        for (String line : Lang.t("net.help").split("\\|")) mc.player.sendMessage(Text.literal(line).formatted(Formatting.GRAY), false);
+        for (String line : Lang.t("net.help").split("\\|")) mc.player.displayClientMessage(Component.literal(line).withStyle(ChatFormatting.GRAY), false);
     }
 }

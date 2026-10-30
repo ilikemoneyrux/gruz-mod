@@ -1,10 +1,10 @@
 package pl.gruzclient.combat;
 
-import net.minecraft.client.MinecraftClient;
-import net.minecraft.entity.Entity;
-import net.minecraft.entity.LivingEntity;
-import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.util.math.Vec3d;
+import net.minecraft.client.Minecraft;
+import net.minecraft.world.entity.Entity;
+import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.phys.Vec3;
 import pl.gruzclient.module.Modules;
 
 /**
@@ -34,10 +34,10 @@ public final class Combat {
     private static long pendingKillAt = 0;
 
     /** Gracz uderza encję (wywoływane przed wysłaniem pakietu ataku) */
-    public static void onAttack(PlayerEntity player, Entity entity) {
+    public static void onAttack(Player player, Entity entity) {
         long now = System.currentTimeMillis();
-        Vec3d eye = player.getEyePos();
-        lastReach = Math.sqrt(entity.getBoundingBox().squaredMagnitude(eye));
+        Vec3 eye = player.getEyePosition();
+        lastReach = Math.sqrt(entity.getBoundingBox().distanceToSqr(eye));
         lastReachAt = now;
 
         if (entity instanceof LivingEntity living && living.isAlive()) {
@@ -57,7 +57,7 @@ public final class Combat {
 
     /** Co tick klienta: reset combo po otrzymaniu obrażeń, wykrywanie killi */
     public static void tick() {
-        MinecraftClient mc = MinecraftClient.getInstance();
+        Minecraft mc = Minecraft.getInstance();
         if (mc.player == null) { target = null; return; }
         long now = System.currentTimeMillis();
 
@@ -69,7 +69,7 @@ public final class Combat {
         float hp = mc.player.getHealth();
         if (lastHealth >= 0 && hp < lastHealth && fightStart > 0) fightDamageTaken += lastHealth - hp;
         lastHealth = hp;
-        boolean dead = mc.player.isDead();
+        boolean dead = mc.player.isDeadOrDying();
         if (dead && !wasDead) { deaths++; endFight(true); }
         wasDead = dead;
         if (fightStart > 0 && now - fightLast > 5000) endFight(false);
@@ -77,7 +77,7 @@ public final class Combat {
         if (now - lastHitAt > 3000) combo = 0;
 
         if (pendingKill != null) {
-            if (pendingKill.isDead() || (pendingKill.isRemoved() && pendingKill.getHealth() <= 0)) {
+            if (pendingKill.isDeadOrDying() || (pendingKill.isRemoved() && pendingKill.getHealth() <= 0)) {
                 kills++;
                 pendingKill = null;
                 Modules.CLIP.onKill();

@@ -1,11 +1,11 @@
 package pl.gruzclient.render;
 
-import net.minecraft.client.gui.DrawContext;
 import pl.gruzclient.cosmetics.CosmeticSet;
 
 import java.time.LocalDate;
 import java.time.temporal.ChronoUnit;
 import java.util.Random;
+import net.minecraft.client.gui.GuiGraphics;
 
 import static pl.gruzclient.render.GruzDraw.*;
 
@@ -35,7 +35,7 @@ public final class SeasonFx {
         return Math.max(0, ChronoUnit.DAYS.between(now, end) + 1);
     }
 
-    public static void render(DrawContext c, int w, int h, float dt, float alpha) {
+    public static void render(GuiGraphics c, int w, int h, float dt, float alpha) {
         String s = CosmeticSet.season();
         if (s == null || alpha <= 0.02f) return;
         setup();
@@ -60,7 +60,7 @@ public final class SeasonFx {
     }
 
     /** Pikselowy nietoperz (ciało + machające skrzydła) */
-    private static void bat(DrawContext c, float cx, float cy, float s, float flap, float alpha) {
+    private static void bat(GuiGraphics c, float cx, float cy, float s, float flap, float alpha) {
         int col = argb(0.85f * alpha, 0x0A0610);
         int x = Math.round(cx), y = Math.round(cy);
         int k = Math.max(1, Math.round(s));

@@ -1,0 +1,158 @@
+// Wspólny build dla jednej wersji Minecrafta (folder versions/<mc>).
+// Kod jest jeden (src/main), a różnice między wersjami opisują komentarze:
+//
+//   //#if MC >= 1.21.2
+//   ...kod dla 1.21.2+
+//   //#elif MC >= 1.20.5
+//   ...
+//   //#else
+//   ...
+//   //#endif
+//
+//   //#only MC >= 1.21.2      (na początku pliku: cały plik tylko dla tych wersji)
+//
+// Nieaktywne linie zamieniamy na puste, więc numery linii w błędach się zgadzają.
+import groovy.json.JsonOutput
+import groovy.json.JsonSlurper
+
+def mc = project.property('minecraft_version') as String
+def obf = (project.property('obf') as String).toBoolean()
+def javaVer = (project.property('java_version') as String) as int
+def mcDep = project.property('mc_dep') as String
+
+apply plugin: obf ? 'net.fabricmc.fabric-loom-remap' : 'net.fabricmc.fabric-loom'
+
+version = "${rootProject.property('mod_version')}+${mc}"
+group = 'pl.gruzclient'
+base { archivesName = 'gruzclient' }
+
+dependencies {
+    minecraft "com.mojang:minecraft:${mc}"
+    if (obf) {
+        mappings loom.officialMojangMappings()
+        modImplementation "net.fabricmc:fabric-loader:${rootProject.property('loader_version')}"
+    } else {
+        implementation "net.fabricmc:fabric-loader:${rootProject.property('loader_version')}"
+    }
+}
+
+// ---------------- preprocesor ----------------
+def verKey = { String v ->
+    def p = v.tokenize('.').collect { it.replaceAll(/[^0-9].*$/, '') as int }
+    while (p.size() < 3) p << 0
+    return p[0] * 1_000_000L + p[1] * 1_000L + p[2]
+}
+def cur = verKey(mc)
+def evalCond = { String cond, String where ->
+    def expr = cond.replaceAll(/MC\s*(>=|<=|==|!=|>|<)\s*([0-9][0-9.]*)/) { all, op, v ->
+        def k = verKey(v)
+        switch (op) {
+            case '>=': return (cur >= k).toString()
+            case '<=': return (cur <= k).toString()
+            case '>': return (cur > k).toString()
+            case '<': return (cur < k).toString()
+            case '==': return (cur == k).toString()
+            default: return (cur != k).toString()
+        }
+    }.replaceAll(/\bOBF\b/, obf.toString())
+    if (!(expr ==~ /[\s()truefals&|!]+/)) throw new GradleException("Zły warunek '${cond}' w ${where}")
+    return Eval.me(expr) as boolean
+}
+
+def ppJava = layout.buildDirectory.dir('pp/java')
+def ppRes = layout.buildDirectory.dir('pp/resources')
+def srcJava = rootProject.file('src/main/java')
+def srcRes = rootProject.file('src/main/resources')
+
+def preprocess = tasks.register('preprocess') {
+    inputs.dir(srcJava)
+    inputs.dir(srcRes)
+    inputs.property('mc', mc)
+    outputs.dir(ppJava)
+    outputs.dir(ppRes)
+    doLast {
+        def outJ = ppJava.get().asFile
+        def outR = ppRes.get().asFile
+        project.delete(outJ, outR)
+        def skipped = [] as Set
+        srcJava.eachFileRecurse(groovy.io.FileType.FILES) { f ->
+            def rel = srcJava.toPath().relativize(f.toPath()).toString().replace('\\', '/')
+            def lines = f.getText('UTF-8').split('\n', -1) as List
+            def only = lines.find { it.trim().startsWith('//#only ') }
+            if (only && !evalCond(only.trim().substring(8), rel)) { skipped << rel; return }
+            def out = []
+            def stack = [] // [parentActive, taken, active]
+            def active = { stack.isEmpty() || stack.last()[2] }
+            lines.eachWithIndex { line, n ->
+                def t = line.trim()
+                def where = "${rel}:${n + 1}"
+                if (t.startsWith('//#if ')) {
+                    def pa = active()
+                    def c = pa && evalCond(t.substring(6), where)
+                    stack << [pa, c, c]; out << ''
+                } else if (t.startsWith('//#elif ')) {
+                    if (!stack) throw new GradleException("//#elif bez //#if w ${where}")
+                    def fr = stack.last()
+                    def c = fr[0] && !fr[1] && evalCond(t.substring(8), where)
+                    fr[2] = c; if (c) fr[1] = true; out << ''
+                } else if (t == '//#else') {
+                    if (!stack) throw new GradleException("//#else bez //#if w ${where}")
+                    def fr = stack.last()
+                    fr[2] = fr[0] && !fr[1]; fr[1] = true; out << ''
+                } else if (t == '//#endif') {
+                    if (!stack) throw new GradleException("//#endif bez //#if w ${where}")
+                    stack.removeLast(); out << ''
+                } else if (t.startsWith('//#only ')) {
+                    out << ''
+                } else {
+                    out << (active() ? line : '')
+                }
+            }
+            if (stack) throw new GradleException("Brak //#endif w ${rel}")
+            def dst = new File(outJ, rel)
+            dst.parentFile.mkdirs()
+            dst.setText(out.join('\n'), 'UTF-8')
+        }
+        // zasoby; z listy mixinów usuwamy klasy pominięte w tej wersji
+        project.copy { from srcRes; into outR; exclude 'gruzclient.mixins.json' }
+        def mj = new JsonSlurper().parse(new File(srcRes, 'gruzclient.mixins.json'), 'UTF-8')
+        def pkg = (mj.package as String).replace('.', '/')
+        ['mixins', 'client'].each { k ->
+            if (mj[k]) mj[k] = mj[k].findAll { !skipped.contains("${pkg}/${it.replace('.', '/')}.java".toString()) }
+        }
+        mj.compatibilityLevel = "JAVA_${javaVer}".toString()
+        new File(outR, 'gruzclient.mixins.json').setText(JsonOutput.prettyPrint(JsonOutput.toJson(mj)), 'UTF-8')
+        if (skipped) logger.lifecycle("[gruz ${mc}] pominięte pliki: ${skipped.sort().join(', ')}")
+    }
+}
+
+sourceSets.main.java.srcDirs = [ppJava]
+sourceSets.main.resources.srcDirs = [ppRes]
+tasks.named('compileJava') { dependsOn preprocess }
+tasks.named('processResources') {
+    dependsOn preprocess
+    inputs.property('version', project.version)
+    inputs.property('mc_dep', mcDep)
+    filesMatching('fabric.mod.json') {
+        expand 'version': project.version, 'mc_dep': mcDep, 'java_version': javaVer
+    }
+}
+tasks.matching { it.name == 'sourcesJar' }.configureEach { dependsOn preprocess }
+
+tasks.withType(JavaCompile).configureEach {
+    it.options.release = javaVer
+    it.options.encoding = 'UTF-8'
+}
+java {
+    sourceCompatibility = JavaVersion.toVersion(javaVer)
+    targetCompatibility = JavaVersion.toVersion(javaVer)
+}
+
+// gotowy jar: build/out/gruzclient-<mc>.jar w głównym folderze
+def finalJar = obf ? tasks.named('remapJar') : tasks.named('jar')
+tasks.register('collect', Copy) {
+    dependsOn finalJar
+    from finalJar.flatMap { it.archiveFile }
+    into rootProject.layout.buildDirectory.dir('out')
+    rename { "gruzclient-${mc}.jar" }
+}

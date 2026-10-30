@@ -1,11 +1,6 @@
 package pl.gruzclient.module.impl;
 
 import com.mojang.authlib.GameProfile;
-import net.minecraft.client.input.Input;
-import net.minecraft.client.network.OtherClientPlayerEntity;
-import net.minecraft.text.Text;
-import net.minecraft.util.math.MathHelper;
-import net.minecraft.util.math.Vec3d;
 import org.lwjgl.glfw.GLFW;
 import pl.gruzclient.i18n.Lang;
 import pl.gruzclient.module.Module;
@@ -13,6 +8,11 @@ import pl.gruzclient.module.Modules;
 import pl.gruzclient.module.Setting;
 
 import java.util.UUID;
+import net.minecraft.client.player.Input;
+import net.minecraft.client.player.RemotePlayer;
+import net.minecraft.network.chat.Component;
+import net.minecraft.util.Mth;
+import net.minecraft.world.phys.Vec3;
 
 /**
  * Freecam: kamera lata swobodnie, postać stoi w miejscu. Tylko w świecie jednoosobowym
@@ -22,7 +22,7 @@ public class FreecamModule extends Module {
     public final Setting.Key key = add(new Setting.Key("key", "setting.key", GLFW.GLFW_KEY_F4));
     public final Setting.Number speed = add(new Setting.Number("speed", "setting.flySpeed", 1f, 0.2f, 5f, 0.1f, "x"));
 
-    private OtherClientPlayerEntity camera;
+    private RemotePlayer camera;
     private Input savedInput;
     private boolean wasDown;
 
@@ -38,7 +38,7 @@ public class FreecamModule extends Module {
         }
         wasDown = down;
         if (!isActive()) return;
-        if (mc.player == null || mc.world == null || camera.getWorld() != mc.world || !mc.isInSingleplayer()) { stop(); return; }
+        if (mc.player == null || mc.level == null || camera.level() != mc.level || !mc.isLocalServer()) { stop(); return; }
         move();
     }
 
@@ -46,15 +46,15 @@ public class FreecamModule extends Module {
     protected void onDisable() { stop(); }
 
     private void start() {
-        if (mc.player == null || mc.world == null) return;
-        if (!mc.isInSingleplayer()) {
-            mc.player.sendMessage(Text.literal("§d[Gruz] §f" + Lang.t("freecam.onlySp")), true);
+        if (mc.player == null || mc.level == null) return;
+        if (!mc.isLocalServer()) {
+            mc.player.displayClientMessage(Component.literal("§d[Gruz] §f" + Lang.t("freecam.onlySp")), true);
             return;
         }
-        camera = new OtherClientPlayerEntity(mc.world, new GameProfile(UUID.randomUUID(), "GruzCam"));
-        camera.copyPositionAndRotation(mc.player);
-        camera.setHeadYaw(mc.player.getHeadYaw());
-        camera.noClip = true;
+        camera = new RemotePlayer(mc.level, new GameProfile(UUID.randomUUID(), "GruzCam"));
+        camera.copyPosition(mc.player);
+        camera.setYHeadRot(mc.player.getYHeadRot());
+        camera.noPhysics = true;
         savedInput = mc.player.input;
         mc.player.input = new Input(); // postać przestaje reagować na klawisze
         mc.setCameraEntity(camera);
@@ -72,35 +72,35 @@ public class FreecamModule extends Module {
 
     /** Obrót myszą trafia do kamery zamiast do postaci (EntityMixin) */
     public void look(double dx, double dy) {
-        if (camera != null) camera.changeLookDirection(dx, dy);
+        if (camera != null) camera.turn(dx, dy);
     }
 
     private void move() {
         var o = mc.options;
-        boolean screen = mc.currentScreen != null;
+        boolean screen = mc.screen != null;
         double fwd = 0, side = 0, up = 0;
         if (!screen) {
-            if (o.forwardKey.isPressed()) fwd++;
-            if (o.backKey.isPressed()) fwd--;
-            if (o.leftKey.isPressed()) side++;
-            if (o.rightKey.isPressed()) side--;
-            if (o.jumpKey.isPressed()) up++;
-            if (o.sneakKey.isPressed()) up--;
+            if (o.keyUp.isDown()) fwd++;
+            if (o.keyDown.isDown()) fwd--;
+            if (o.keyLeft.isDown()) side++;
+            if (o.keyRight.isDown()) side--;
+            if (o.keyJump.isDown()) up++;
+            if (o.keyShift.isDown()) up--;
         }
-        double sp = 0.6 * speed.value * (o.sprintKey.isPressed() ? 2.5 : 1);
-        float yaw = camera.getYaw() * MathHelper.RADIANS_PER_DEGREE;
-        double sin = MathHelper.sin(yaw), cos = MathHelper.cos(yaw);
-        Vec3d v = new Vec3d(side * cos - fwd * sin, up, fwd * cos + side * sin);
-        if (v.lengthSquared() > 1) v = v.normalize();
-        v = v.multiply(sp);
-        camera.prevX = camera.getX();
-        camera.prevY = camera.getY();
-        camera.prevZ = camera.getZ();
-        camera.lastRenderX = camera.getX();
-        camera.lastRenderY = camera.getY();
-        camera.lastRenderZ = camera.getZ();
-        camera.prevYaw = camera.getYaw();
-        camera.prevPitch = camera.getPitch();
-        camera.setPos(camera.getX() + v.x, camera.getY() + v.y, camera.getZ() + v.z);
+        double sp = 0.6 * speed.value * (o.keySprint.isDown() ? 2.5 : 1);
+        float yaw = camera.getYRot() * Mth.DEG_TO_RAD;
+        double sin = Mth.sin(yaw), cos = Mth.cos(yaw);
+        Vec3 v = new Vec3(side * cos - fwd * sin, up, fwd * cos + side * sin);
+        if (v.lengthSqr() > 1) v = v.normalize();
+        v = v.scale(sp);
+        camera.xo = camera.getX();
+        camera.yo = camera.getY();
+        camera.zo = camera.getZ();
+        camera.xOld = camera.getX();
+        camera.yOld = camera.getY();
+        camera.zOld = camera.getZ();
+        camera.yRotO = camera.getYRot();
+        camera.xRotO = camera.getXRot();
+        camera.setPosRaw(camera.getX() + v.x, camera.getY() + v.y, camera.getZ() + v.z);
     }
 }

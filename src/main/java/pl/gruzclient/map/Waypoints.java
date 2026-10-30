@@ -3,7 +3,6 @@ package pl.gruzclient.map;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.google.gson.reflect.TypeToken;
-import net.minecraft.client.MinecraftClient;
 import pl.gruzclient.GruzClient;
 
 import java.nio.charset.StandardCharsets;
@@ -13,6 +12,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import net.minecraft.client.Minecraft;
 
 /** Punkty na mapie (waypointy), osobno dla każdego świata/serwera i wymiaru. */
 public final class Waypoints {
@@ -35,7 +35,7 @@ public final class Waypoints {
     private static Map<String, List<Point>> all;
 
     private static Path file() {
-        return MinecraftClient.getInstance().runDirectory.toPath().resolve("config/gruzclient/waypoints.json");
+        return Minecraft.getInstance().gameDirectory.toPath().resolve("config/gruzclient/waypoints.json");
     }
 
     private static Map<String, List<Point>> data() {

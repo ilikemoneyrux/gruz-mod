@@ -1,0 +1,21 @@
+name: maptable
+on:
+  push:
+    branches: [main]
+    paths: ['ci/maptable.py', '.github/workflows/maptable.yml']
+permissions:
+  contents: write
+jobs:
+  table:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - run: python3 ci/maptable.py 1.21.1 1.21.1+build.3 | gzip -9 > /tmp/yarn2moj-1.21.1.txt.gz
+      - name: Publish
+        run: |
+          cd /tmp && rm -rf res && mkdir res && cd res && git init -q && git checkout -q -b ci-results
+          git config user.name gruz-ci; git config user.email ci@gruz.invalid
+          git remote add origin "https://x-access-token:${{ secrets.GITHUB_TOKEN }}@github.com/${{ github.repository }}"
+          (git fetch -q origin ci-results && git reset -q --hard origin/ci-results) || true
+          mkdir -p maps && cp /tmp/yarn2moj-1.21.1.txt.gz maps/
+          git add -A && git commit -qm "maptable" && git push -q origin ci-results

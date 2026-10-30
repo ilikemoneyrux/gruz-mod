@@ -1,6 +1,6 @@
 package pl.gruzclient.module.impl;
 
-import net.minecraft.client.network.PlayerListEntry;
+import net.minecraft.client.multiplayer.PlayerInfo;
 import pl.gruzclient.i18n.Lang;
 import pl.gruzclient.module.TextHudModule;
 
@@ -9,9 +9,9 @@ public class PingModule extends TextHudModule {
 
     @Override
     protected String value(boolean editing) {
-        if (mc.player == null || mc.getNetworkHandler() == null) return editing ? "42" : "0";
-        if (mc.isInSingleplayer()) return "0";
-        PlayerListEntry e = mc.getNetworkHandler().getPlayerListEntry(mc.player.getUuid());
+        if (mc.player == null || mc.getConnection() == null) return editing ? "42" : "0";
+        if (mc.isLocalServer()) return "0";
+        PlayerInfo e = mc.getConnection().getPlayerInfo(mc.player.getUUID());
         return e == null ? "?" : String.valueOf(e.getLatency());
     }
 

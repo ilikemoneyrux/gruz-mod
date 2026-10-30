@@ -1,8 +1,8 @@
 package pl.gruzclient.mixin;
 
-import net.minecraft.client.MinecraftClient;
-import net.minecraft.client.render.entity.LivingEntityRenderer;
-import net.minecraft.entity.LivingEntity;
+import net.minecraft.client.Minecraft;
+import net.minecraft.client.renderer.entity.LivingEntityRenderer;
+import net.minecraft.world.entity.LivingEntity;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
@@ -14,9 +14,9 @@ import pl.gruzclient.module.Modules;
 public abstract class LivingEntityRendererMixin<T extends LivingEntity> {
     @Inject(method = "hasLabel(Lnet/minecraft/entity/LivingEntity;)Z", at = @At("HEAD"), cancellable = true, require = 0)
     private void gruz$ownLabel(T entity, CallbackInfoReturnable<Boolean> cir) {
-        MinecraftClient mc = MinecraftClient.getInstance();
+        Minecraft mc = Minecraft.getInstance();
         if (Modules.NAMETAGS.isEnabled() && Modules.NAMETAGS.showOwn.value && entity == mc.player
-                && !mc.options.getPerspective().isFirstPerson() && !mc.options.hudHidden) {
+                && !mc.options.getCameraType().isFirstPerson() && !mc.options.hideGui) {
             cir.setReturnValue(true);
         }
     }

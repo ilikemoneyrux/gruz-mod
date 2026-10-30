@@ -1,10 +1,5 @@
 package pl.gruzclient.screen;
 
-import net.minecraft.client.gui.DrawContext;
-import net.minecraft.client.gui.screen.Screen;
-import net.minecraft.client.gui.widget.TextFieldWidget;
-import net.minecraft.text.OrderedText;
-import net.minecraft.text.Text;
 import org.lwjgl.glfw.GLFW;
 import pl.gruzclient.i18n.Lang;
 import pl.gruzclient.module.Module;
@@ -16,6 +11,11 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
 import java.util.Map;
+import net.minecraft.client.gui.GuiGraphics;
+import net.minecraft.client.gui.components.EditBox;
+import net.minecraft.client.gui.screens.Screen;
+import net.minecraft.network.chat.Component;
+import net.minecraft.util.FormattedCharSequence;
 
 import static pl.gruzclient.render.GruzDraw.*;
 
@@ -34,7 +34,7 @@ public class GruzModsScreen extends Screen {
     private int dragX, dragW;
     private float scroll = 0, scrollTarget = 0;
     private long last = 0;
-    private TextFieldWidget search;
+    private EditBox search;
 
     // układ
     private int px, py, pw, ph, sideW = 96, contentX, contentY, contentW, contentH;
@@ -44,7 +44,7 @@ public class GruzModsScreen extends Screen {
     public GruzModsScreen(Screen parent) { this(parent, (Module.Category) null); }
 
     public GruzModsScreen(Screen parent, Module.Category cat) {
-        super(Text.literal("Gruz Mods"));
+        super(Component.literal("Gruz Mods"));
         this.parent = parent;
         if (cat != null) category = cat;
     }
@@ -101,31 +101,31 @@ public class GruzModsScreen extends Screen {
         cols = Math.max(1, Math.min(4, (contentW + GAP) / (128 + GAP)));
         cardW = (contentW - (cols - 1) * GAP) / cols;
 
-        String prev = search != null ? search.getText() : "";
-        search = new TextFieldWidget(this.textRenderer, contentX + 22, py + 16, Math.min(200, contentW - 140), 12, Text.literal(""));
-        search.setDrawsBackground(false);
+        String prev = search != null ? search.getValue() : "";
+        search = new EditBox(this.font, contentX + 22, py + 16, Math.min(200, contentW - 140), 12, Component.literal(""));
+        search.setBordered(false);
         search.setMaxLength(40);
-        search.setText(prev);
-        search.setPlaceholder(Ui.text(Lang.t("mods.search")).withColor(MUTE));
-        search.setChangedListener(s -> { scroll = scrollTarget = 0; settingsOf = null; });
-        this.addDrawableChild(search);
+        search.setValue(prev);
+        search.setHint(Ui.text(Lang.t("mods.search")).withColor(MUTE));
+        search.setResponder(s -> { scroll = scrollTarget = 0; settingsOf = null; });
+        this.addRenderableWidget(search);
 
-        this.addDrawableChild(new UiButton(px + pw - 10 - 20, py + 10, 20, 20, Ui.Icon.CLOSE, null, b -> close()).kind(UiButton.Kind.ICON));
-        this.addDrawableChild(new UiButton(px + pw - 36 - 92, py + 10, 92, 20, Ui.Icon.MOVE, Lang.t("mods.editHud"),
-                b -> this.client.setScreen(new HudEditorScreen(this))));
+        this.addRenderableWidget(new UiButton(px + pw - 10 - 20, py + 10, 20, 20, Ui.Icon.CLOSE, null, b -> onClose()).kind(UiButton.Kind.ICON));
+        this.addRenderableWidget(new UiButton(px + pw - 36 - 92, py + 10, 92, 20, Ui.Icon.MOVE, Lang.t("mods.editHud"),
+                b -> this.minecraft.setScreen(new HudEditorScreen(this))));
     }
 
     @Override
-    public void close() {
+    public void onClose() {
         Modules.save();
-        this.client.setScreen(parent);
+        this.minecraft.setScreen(parent);
     }
 
     @Override
-    public boolean shouldPause() { return this.client.world == null || this.client.isInSingleplayer(); }
+    public boolean isPauseScreen() { return this.minecraft.level == null || this.minecraft.isLocalServer(); }
 
     private List<Module> mods() {
-        String q = search == null ? "" : search.getText().trim().toLowerCase(Locale.ROOT);
+        String q = search == null ? "" : search.getValue().trim().toLowerCase(Locale.ROOT);
         List<Module> out = new ArrayList<>();
         for (Module m : Modules.ALL) {
             if (!q.isEmpty()) {
@@ -139,19 +139,19 @@ public class GruzModsScreen extends Screen {
 
     // ---------------- rysowanie ----------------
     @Override
-    public void renderBackground(DrawContext c, int mouseX, int mouseY, float delta) {
-        if (this.client.world != null) {
-            this.applyBlur(delta);
+    public void renderBackground(GuiGraphics c, int mouseX, int mouseY, float delta) {
+        if (this.minecraft.level != null) {
+            this.renderBlurredBackground(delta);
             c.fill(0, 0, this.width, this.height, 0x66000000);
         } else {
-            this.renderPanoramaBackground(c, delta);
-            this.applyBlur(delta);
+            this.renderPanorama(c, delta);
+            this.renderBlurredBackground(delta);
             c.fill(0, 0, this.width, this.height, 0x99000000);
         }
     }
 
     @Override
-    public void render(DrawContext c, int mouseX, int mouseY, float delta) {
+    public void render(GuiGraphics c, int mouseX, int mouseY, float delta) {
         long now = System.currentTimeMillis();
         float dt = last == 0 ? 0.016f : Math.min(0.05f, (now - last) / 1000f);
         last = now;
@@ -172,7 +172,7 @@ public class GruzModsScreen extends Screen {
         Module.Category[] cats = {null, Module.Category.HUD, Module.Category.PVP, Module.Category.VISUAL, Module.Category.UTILITY, Module.Category.COSMETICS};
         for (int i = 0; i < cats.length; i++) {
             int cy = py + 44 + i * 24 + lift;
-            boolean on = settingsOf == null && search.getText().isBlank() && cats[i] == category;
+            boolean on = settingsOf == null && search.getValue().isBlank() && cats[i] == category;
             boolean hot = Ui.inside(mouseX, mouseY, px + 8, cy, sideW - 8, 20);
             if (on || hot) Ui.round(c, px + 8, cy, sideW - 8, 20, 4, argb(r * (on ? 0.95f : 0.5f), on ? 0x24163A : 0x1A1326));
             if (on) c.fill(px + 8, cy + 5, px + 10, cy + 15, argb(r, NEON));
@@ -200,7 +200,7 @@ public class GruzModsScreen extends Screen {
         search.render(c, mouseX, mouseY, delta);
     }
 
-    private void drawCards(DrawContext c, int mouseX, int mouseY, float r) {
+    private void drawCards(GuiGraphics c, int mouseX, int mouseY, float r) {
         List<Module> list = mods();
         if (list.isEmpty()) {
             Ui.drawCentered(c, Ui.text(Lang.t("mods.nothing")), contentX + contentW / 2, contentY + 40, argb(r, MUTE));
@@ -226,14 +226,14 @@ public class GruzModsScreen extends Screen {
             }
             Ui.draw(c, Ui.fit(m.name(), cardW - 44, true), x + 34, y + 9, argb(a, 0xFFFFFF));
             Ui.draw(c, Ui.fit(Lang.t("mods.cat." + m.category.name().toLowerCase(Locale.ROOT)), cardW - 44, false), x + 34, y + 19, argb(a * 0.8f, MUTE));
-            List<OrderedText> desc = Ui.tr().wrapLines(Ui.text(m.description()), cardW - 16);
-            for (int k = 0; k < Math.min(2, desc.size()); k++) c.drawText(Ui.tr(), desc.get(k), x + 8, y + 33 + k * 9, argb(a * 0.85f, 0xB8AECB), false);
+            List<FormattedCharSequence> desc = Ui.tr().split(Ui.text(m.description()), cardW - 16);
+            for (int k = 0; k < Math.min(2, desc.size()); k++) c.drawString(Ui.tr(), desc.get(k), x + 8, y + 33 + k * 9, argb(a * 0.85f, 0xB8AECB), false);
             // przycisk WŁ./WYŁ.
             int by = y + cardH - 18;
             boolean bh = Ui.inside(mouseX, mouseY, x + 6, by, cardW - 12, 13);
             if (en) Ui.hGradient(c, x + 6, by, cardW - 12, 13, bh ? NEON_HOT : NEON, NEON_DEEP, a, 3);
             else Ui.round(c, x + 6, by, cardW - 12, 13, 3, argb(a, bh ? 0x2C2238 : 0x211A2B));
-            Text st = Ui.bold(Lang.t(en ? "mods.enabled" : "mods.disabled"));
+            Component st = Ui.bold(Lang.t(en ? "mods.enabled" : "mods.disabled"));
             Ui.drawCentered(c, st, x + cardW / 2, by + 3, argb(a, en ? 0xFFFFFF : 0x9488A8));
         }
     }
@@ -241,7 +241,7 @@ public class GruzModsScreen extends Screen {
     // ---------------- ustawienia modułu ----------------
     private int rowsTop() { return contentY + 42; }
 
-    private void drawSettings(DrawContext c, int mouseX, int mouseY, float r) {
+    private void drawSettings(GuiGraphics c, int mouseX, int mouseY, float r) {
         Module m = settingsOf;
         int x = contentX, y = contentY - Math.round(scroll);
         boolean backHot = Ui.inside(mouseX, mouseY, x, y, 16, 16);
@@ -251,8 +251,8 @@ public class GruzModsScreen extends Screen {
         Ui.draw(c, Ui.bold(m.name()), x + 38, y + 4, argb(r, 0xFFFFFF));
         // przełącznik modułu obok tytułu
         drawSwitch(c, x + contentW - 26, y + 3, m.isEnabled(), r, Ui.inside(mouseX, mouseY, x + contentW - 26, y + 3, 22, 11));
-        List<OrderedText> desc = Ui.tr().wrapLines(Ui.text(m.description()), contentW - 10);
-        if (!desc.isEmpty()) c.drawText(Ui.tr(), desc.get(0), x, y + 22, argb(r * 0.85f, MUTE), false);
+        List<FormattedCharSequence> desc = Ui.tr().split(Ui.text(m.description()), contentW - 10);
+        if (!desc.isEmpty()) c.drawString(Ui.tr(), desc.get(0), x, y + 22, argb(r * 0.85f, MUTE), false);
 
         List<Setting> list = m.settings();
         int rowY = rowsTop() - Math.round(scroll);
@@ -269,7 +269,7 @@ public class GruzModsScreen extends Screen {
             if (s instanceof Setting.Bool b) {
                 drawSwitch(c, ctrlX + ctrlW - 22, cy + 1, b.value, r, hot);
             } else if (s instanceof Setting.Number n) {
-                Text v = Ui.bold(n.display());
+                Component v = Ui.bold(n.display());
                 int vw = Ui.width(v), bw = ctrlW - vw - 10;
                 c.fill(ctrlX, cy + 5, ctrlX + bw, cy + 7, argb(r, 0x2B2139));
                 int fx = ctrlX + Math.round(bw * n.fraction());
@@ -291,12 +291,12 @@ public class GruzModsScreen extends Screen {
             } else if (s instanceof Setting.Choice ch) {
                 Ui.round(c, ctrlX, cy - 1, ctrlW, 14, 3, argb(r, 0x1C1626));
                 Ui.icon(c, Ui.Icon.BACK, ctrlX + 4, cy + 2, 7, argb(r, NEON_HOT));
-                c.getMatrices().push();
-                c.getMatrices().translate(ctrlX + ctrlW - 4, cy + 9, 0);
-                c.getMatrices().multiply(net.minecraft.util.math.RotationAxis.POSITIVE_Z.rotationDegrees(180));
+                c.pose().pushPose();
+                c.pose().translate(ctrlX + ctrlW - 4, cy + 9, 0);
+                c.pose().mulPose(com.mojang.math.Axis.ZP.rotationDegrees(180));
                 Ui.icon(c, Ui.Icon.BACK, 0, 0, 7, argb(r, NEON_HOT));
-                c.getMatrices().pop();
-                Text v = Ui.fit(ch.display(), ctrlW - 34, true);
+                c.pose().popPose();
+                Component v = Ui.fit(ch.display(), ctrlW - 34, true);
                 int sx = ctrlX + (ctrlW - Ui.width(v)) / 2;
                 if (s instanceof Setting.Color col) {
                     Ui.round(c, sx - 10, cy + 2, 7, 7, 2, 0xFF000000 | col.rgb());
@@ -308,7 +308,7 @@ public class GruzModsScreen extends Screen {
         }
     }
 
-    private void drawSwitch(DrawContext c, int x, int y, boolean on, float a, boolean hot) {
+    private void drawSwitch(GuiGraphics c, int x, int y, boolean on, float a, boolean hot) {
         Ui.round(c, x, y, 22, 11, 5, argb(a, on ? (hot ? NEON_HOT : NEON) : (hot ? 0x3A3048 : 0x2B2139)));
         int kx = on ? x + 12 : x + 1;
         Ui.round(c, kx, y + 1, 9, 9, 4, argb(a, 0xFFFFFF));
@@ -325,7 +325,7 @@ public class GruzModsScreen extends Screen {
             if (Ui.inside(mx, my, px + 8, py + 44 + i * 24, sideW - 8, 20)) {
                 category = cats[i];
                 settingsOf = null;
-                search.setText("");
+                search.setValue("");
                 scroll = scrollTarget = 0;
                 return true;
             }
@@ -363,7 +363,7 @@ public class GruzModsScreen extends Screen {
         for (Setting s : m.settings()) {
             if (Ui.inside(mx, my, x, rowY, contentW, 22)) {
                 if (s instanceof Setting.Action a) { Modules.save(); a.action.run(); return true; }
-                if (s instanceof Setting.Text tx) { this.client.setScreen(new TextInputScreen(this, tx)); return true; }
+                if (s instanceof Setting.Text tx) { this.minecraft.setScreen(new TextInputScreen(this, tx)); return true; }
                 if (s instanceof Setting.Bool b) b.toggle();
                 else if (s instanceof Setting.Key k) capturing = k;
                 else if (s instanceof Setting.Number n) {

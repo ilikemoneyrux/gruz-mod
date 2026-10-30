@@ -7,3 +7,12 @@ pluginManagement {
 }
 
 rootProject.name = 'gruzclient'
+
+// Każdy folder w versions/ to jedna wersja Minecrafta (osobny jar).
+// GRUZ_MC=1.21.1,1.20.1 buduje tylko wybrane wersje (CI buduje każdą osobno).
+def only = System.getenv('GRUZ_MC')?.split(',')?.collect { it.trim() }?.findAll { it }
+file('versions').eachDir { d ->
+    if (only && !only.contains(d.name)) return
+    include ":${d.name}"
+    project(":${d.name}").projectDir = d
+}

@@ -1,6 +1,6 @@
 package pl.gruzclient.module.impl;
 
-import net.minecraft.client.option.Perspective;
+import net.minecraft.client.CameraType;
 import org.lwjgl.glfw.GLFW;
 import pl.gruzclient.module.Module;
 import pl.gruzclient.module.Modules;
@@ -15,7 +15,7 @@ public class FreelookModule extends Module {
     public final Setting.Choice mode = add(new Setting.Choice("mode", "setting.mode", 0, "setting.mode.hold", "setting.mode.toggle"));
 
     private boolean active, wasDown;
-    private Perspective previous;
+    private CameraType previous;
     public float yaw, pitch;
 
     public FreelookModule() { super("freelook", Category.UTILITY, true); }
@@ -32,16 +32,16 @@ public class FreelookModule extends Module {
 
     private void start() {
         active = true;
-        yaw = mc.player.getYaw();
-        pitch = mc.player.getPitch();
-        previous = mc.options.getPerspective();
-        mc.options.setPerspective(Perspective.THIRD_PERSON_BACK);
+        yaw = mc.player.getYRot();
+        pitch = mc.player.getXRot();
+        previous = mc.options.getCameraType();
+        mc.options.setCameraType(CameraType.THIRD_PERSON_BACK);
     }
 
     private void stop() {
         if (!active) return;
         active = false;
-        if (previous != null) mc.options.setPerspective(previous);
+        if (previous != null) mc.options.setCameraType(previous);
     }
 
     public boolean isActive() { return isEnabled() && active; }

@@ -1,7 +1,7 @@
 package pl.gruzclient.mixin;
 
-import net.minecraft.client.MinecraftClient;
-import net.minecraft.entity.LivingEntity;
+import net.minecraft.client.Minecraft;
+import net.minecraft.world.entity.LivingEntity;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
@@ -13,7 +13,7 @@ import pl.gruzclient.module.Modules;
 public abstract class LivingEntityMixin {
     @Inject(method = "getHandSwingDuration", at = @At("RETURN"), cancellable = true, require = 0)
     private void gruz$swing(CallbackInfoReturnable<Integer> cir) {
-        if ((Object) this == MinecraftClient.getInstance().player) {
+        if ((Object) this == Minecraft.getInstance().player) {
             cir.setReturnValue(Modules.OLD_ANIM.swingDuration(cir.getReturnValue()));
         }
     }

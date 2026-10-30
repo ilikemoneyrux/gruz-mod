@@ -1,0 +1,72 @@
+name: build
+on:
+  push:
+    branches: [main]
+    paths-ignore: ['README.md']
+  workflow_dispatch:
+permissions:
+  contents: write
+concurrency:
+  group: build
+  cancel-in-progress: true
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        mc: ['1.20.1', '1.20.4', '1.21.1', '1.21.4', '1.21.11', '26.1', '26.2', '26.3']
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-java@v4
+        with: { distribution: temurin, java-version: '25' }
+      - uses: gradle/actions/setup-gradle@v4
+      - name: Build ${{ matrix.mc }}
+        env:
+          GRUZ_MC: ${{ matrix.mc }}
+        run: |
+          mkdir -p out/${{ matrix.mc }}
+          chmod +x gradlew
+          set +e
+          ./gradlew --no-daemon --stacktrace :${{ matrix.mc }}:collect > out/${{ matrix.mc }}/full.log 2>&1
+          echo $? > out/${{ matrix.mc }}/exit
+          python3 ci/errors.py out/${{ matrix.mc }}/full.log > out/${{ matrix.mc }}/errors.txt
+          cp build/out/*.jar out/${{ matrix.mc }}/ 2>/dev/null
+          exit 0
+      - name: Inspect classes (ci/inspect.txt)
+        if: hashFiles('ci/inspect.txt') != ''
+        run: python3 ci/inspect.py ${{ matrix.mc }} out/${{ matrix.mc }} || true
+      - uses: actions/upload-artifact@v4
+        with:
+          name: out-${{ matrix.mc }}
+          path: out/${{ matrix.mc }}
+  report:
+    needs: build
+    if: always()
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/download-artifact@v4
+        with: { path: art }
+      - name: Summary + publish to ci-results
+        run: |
+          python3 ci/summary.py art "${{ github.sha }}" "${{ github.run_number }}" > /tmp/STATUS.md
+          cat /tmp/STATUS.md
+          cd /tmp && rm -rf res && mkdir res && cd res && git init -q && git checkout -q -b ci-results
+          git config user.name gruz-ci; git config user.email ci@gruz.invalid
+          git remote add origin "https://x-access-token:${{ secrets.GITHUB_TOKEN }}@github.com/${{ github.repository }}"
+          (git fetch -q origin ci-results && git reset -q --hard origin/ci-results) || true
+          rm -rf build && mkdir -p build
+          cp /tmp/STATUS.md build/STATUS.md
+          for d in "$GITHUB_WORKSPACE"/art/out-*; do v=${d##*/out-}; mkdir -p build/$v; cp "$d"/errors.txt "$d"/exit build/$v/ 2>/dev/null; tail -c 200000 "$d"/full.log > build/$v/tail.log 2>/dev/null; cp -r "$d"/inspect build/$v/ 2>/dev/null; done
+          git add -A && git commit -qm "build run ${{ github.run_number }} (${{ github.sha }})" && git push -q origin ci-results
+      - name: Publish jars (release "nightly")
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          mkdir -p rel
+          cp art/out-*/gruzclient-*.jar rel/ 2>/dev/null || true
+          ls rel/*.jar >/dev/null 2>&1 || { echo "no jars"; exit 0; }
+          python3 ci/manifest.py rel > rel/versions.json
+          gh release delete nightly -y --cleanup-tag 2>/dev/null || true
+          gh release create nightly rel/* --title "Gruz Client mod – nightly" --notes "Automatyczny build z ${{ github.sha }}" --prerelease

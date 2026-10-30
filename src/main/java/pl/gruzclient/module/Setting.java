@@ -1,7 +1,7 @@
 package pl.gruzclient.module;
 
 import com.google.gson.JsonObject;
-import net.minecraft.client.util.InputUtil;
+import com.mojang.blaze3d.platform.InputConstants;
 import pl.gruzclient.i18n.Lang;
 
 /** Ustawienie modułu. Typy: przełącznik, wybór z listy, liczba, klawisz. */
@@ -60,7 +60,7 @@ public abstract class Setting {
         public int code;
         public Key(String id, String labelKey, int def) { super(id, labelKey); code = def; }
         @Override public String display() {
-            return InputUtil.Type.KEYSYM.createFromCode(code).getLocalizedText().getString();
+            return InputConstants.Type.KEYSYM.getOrCreate(code).getDisplayName().getString();
         }
         @Override public void load(JsonObject o) { if (o.has(id)) code = o.get(id).getAsInt(); }
         @Override public void save(JsonObject o) { o.addProperty(id, code); }

@@ -13,8 +13,8 @@
   },
   "mixins": ["gruzclient.mixins.json"],
   "depends": {
-    "fabricloader": ">=0.16.0",
-    "minecraft": "~${minecraft_version}",
-    "java": ">=21"
+    "fabricloader": ">=0.15.0",
+    "minecraft": "${mc_dep}",
+    "java": ">=${java_version}"
   }
 }

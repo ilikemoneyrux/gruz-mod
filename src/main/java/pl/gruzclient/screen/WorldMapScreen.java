@@ -1,31 +1,32 @@
 package pl.gruzclient.screen;
 
-import net.minecraft.client.gui.DrawContext;
-import net.minecraft.client.gui.screen.Screen;
-import net.minecraft.client.texture.NativeImage;
-import net.minecraft.client.texture.NativeImageBackedTexture;
-import net.minecraft.client.util.math.MatrixStack;
-import net.minecraft.text.Text;
-import net.minecraft.util.Identifier;
-import net.minecraft.util.math.RotationAxis;
 import pl.gruzclient.GruzClient;
 import pl.gruzclient.i18n.Lang;
 import pl.gruzclient.map.MapCache;
 import pl.gruzclient.map.Waypoints;
 
 import java.util.List;
+import net.minecraft.client.gui.GuiGraphics;
+import net.minecraft.client.gui.screens.Screen;
+import net.minecraft.client.renderer.texture.DynamicTexture;
+import net.minecraft.network.chat.Component;
+import net.minecraft.resources.ResourceLocation;
 
 import static pl.gruzclient.render.GruzDraw.*;
+
+import com.mojang.blaze3d.platform.NativeImage;
+import com.mojang.blaze3d.vertex.PoseStack;
+import com.mojang.math.Axis;
 
 /**
  * Pełna mapa odkrytego świata (klawisz M).
  * Przeciąganie = przesuwanie, kółko = przybliżenie, PPM = nowy waypoint, klik w punkt na liście = usuń.
  */
 public class WorldMapScreen extends Screen {
-    private static final Identifier ID = Identifier.of(GruzClient.MOD_ID, "worldmap");
+    private static final ResourceLocation ID = ResourceLocation.fromNamespaceAndPath(GruzClient.MOD_ID, "worldmap");
     private static final int SIDE = 130;
     private final Screen parent;
-    private NativeImageBackedTexture texture;
+    private DynamicTexture texture;
     private int texW, texH;
     private double cx, cz;          // środek widoku (bloki)
     private float zoom = 1f;        // pikseli GUI na blok
@@ -33,46 +34,46 @@ public class WorldMapScreen extends Screen {
     private double lastMx, lastMy;
 
     public WorldMapScreen(Screen parent) {
-        super(Text.literal("Map"));
+        super(Component.literal("Map"));
         this.parent = parent;
     }
 
     @Override
     protected void init() {
-        if (client.player != null && !dragging && texture == null) {
-            cx = client.player.getX();
-            cz = client.player.getZ();
+        if (minecraft.player != null && !dragging && texture == null) {
+            cx = minecraft.player.getX();
+            cz = minecraft.player.getZ();
         }
         int mapW = Math.max(16, width - SIDE), mapH = height;
         if (texture == null || texW != mapW || texH != mapH) {
             if (texture != null) texture.close();
             texW = mapW; texH = mapH;
-            texture = new NativeImageBackedTexture(texW, texH, true);
-            client.getTextureManager().registerTexture(ID, texture);
+            texture = new DynamicTexture(texW, texH, true);
+            minecraft.getTextureManager().register(ID, texture);
         }
         dirty = true;
-        addDrawableChild(new GruzButton(width - SIDE + 8, height - 28, SIDE - 16, 20, Text.literal(Lang.t("map.center")), b -> {
-            if (client.player != null) { cx = client.player.getX(); cz = client.player.getZ(); dirty = true; }
+        addRenderableWidget(new GruzButton(width - SIDE + 8, height - 28, SIDE - 16, 20, Component.literal(Lang.t("map.center")), b -> {
+            if (minecraft.player != null) { cx = minecraft.player.getX(); cz = minecraft.player.getZ(); dirty = true; }
         }));
     }
 
     @Override
     public void removed() {
         if (texture != null) {
-            client.getTextureManager().destroyTexture(ID);
+            minecraft.getTextureManager().release(ID);
             texture = null;
         }
     }
 
     @Override
-    public void close() { client.setScreen(parent); }
+    public void onClose() { minecraft.setScreen(parent); }
 
     @Override
-    public boolean shouldPause() { return false; }
+    public boolean isPauseScreen() { return false; }
 
     @Override
     public boolean keyPressed(int keyCode, int scanCode, int modifiers) {
-        if (keyCode == pl.gruzclient.module.Modules.MINIMAP.mapKey.code) { close(); return true; }
+        if (keyCode == pl.gruzclient.module.Modules.MINIMAP.mapKey.code) { onClose(); return true; }
         return super.keyPressed(keyCode, scanCode, modifiers);
     }
 
@@ -80,7 +81,7 @@ public class WorldMapScreen extends Screen {
     private double blockZ(double my) { return cz + (my - texH / 2.0) / zoom; }
 
     private void rebuild() {
-        NativeImage img = texture.getImage();
+        NativeImage img = texture.getPixels();
         if (img == null) return;
         for (int y = 0; y < texH; y++) {
             int bz = (int) Math.floor(blockZ(y + 0.5));
@@ -93,7 +94,7 @@ public class WorldMapScreen extends Screen {
                     col = grid ? 0xFF0B0911 : 0xFF0E0B16;
                 }
                 int r = (col >> 16) & 255, g = (col >> 8) & 255, b = col & 255;
-                img.setColor(x, y, 0xFF000000 | (b << 16) | (g << 8) | r);
+                img.setPixelRGBA(x, y, 0xFF000000 | (b << 16) | (g << 8) | r);
             }
         }
         texture.upload();
@@ -101,49 +102,49 @@ public class WorldMapScreen extends Screen {
     }
 
     @Override
-    public void renderBackground(DrawContext c, int mouseX, int mouseY, float delta) {
+    public void renderBackground(GuiGraphics c, int mouseX, int mouseY, float delta) {
         c.fill(0, 0, width, height, 0xFF07050C);
     }
 
     private long lastAuto = 0;
 
     @Override
-    public void render(DrawContext c, int mouseX, int mouseY, float delta) {
+    public void render(GuiGraphics c, int mouseX, int mouseY, float delta) {
         renderBackground(c, mouseX, mouseY, delta);
         long now = System.currentTimeMillis();
         if (now - lastAuto > 1000) { dirty = true; lastAuto = now; } // dociągaj świeżo odkryte chunki
         if (dirty && texture != null) rebuild();
-        c.drawTexture(ID, 0, 0, 0f, 0f, texW, texH, texW, texH);
+        c.blit(ID, 0, 0, 0f, 0f, texW, texH, texW, texH);
 
         // waypointy
-        var tr = textRenderer;
+        var tr = font;
         for (Waypoints.Point p : Waypoints.current()) {
             int sx = (int) Math.round((p.x + 0.5 - cx) * zoom + texW / 2.0), sy = (int) Math.round((p.z + 0.5 - cz) * zoom + texH / 2.0);
             if (sx < -20 || sy < -20 || sx > texW + 20 || sy > texH + 20) continue;
             c.fill(sx - 3, sy - 3, sx + 3, sy + 3, 0xFF000000);
             c.fill(sx - 2, sy - 2, sx + 2, sy + 2, 0xFF000000 | p.color);
-            c.drawText(tr, p.name, sx - tr.getWidth(p.name) / 2, sy - 13, 0xFF000000 | p.color, true);
+            c.drawString(tr, p.name, sx - tr.width(p.name) / 2, sy - 13, 0xFF000000 | p.color, true);
         }
         // gracz
-        if (client.player != null) {
-            float px = (float) ((client.player.getX() - cx) * zoom + texW / 2.0), pz = (float) ((client.player.getZ() - cz) * zoom + texH / 2.0);
-            MatrixStack m = c.getMatrices();
-            m.push();
+        if (minecraft.player != null) {
+            float px = (float) ((minecraft.player.getX() - cx) * zoom + texW / 2.0), pz = (float) ((minecraft.player.getZ() - cz) * zoom + texH / 2.0);
+            PoseStack m = c.pose();
+            m.pushPose();
             m.translate(px, pz, 0);
-            m.multiply(RotationAxis.POSITIVE_Z.rotationDegrees(client.player.getYaw() + 180f));
+            m.mulPose(Axis.ZP.rotationDegrees(minecraft.player.getYRot() + 180f));
             c.fill(-1, -5, 1, 4, 0xFFFFFFFF);
             c.fill(-3, -1, 3, 1, argb(1f, NEON_HOT));
-            m.pop();
+            m.popPose();
         }
 
         // pasek boczny
         int sx = width - SIDE;
         c.fill(sx, 0, width, height, argb(0.92f, SLAB));
         c.fill(sx, 0, sx + 1, height, argb(0.9f, NEON));
-        c.drawText(tr, Lang.t("map.title"), sx + 8, 8, argb(1f, NEON_HOT), false);
+        c.drawString(tr, Lang.t("map.title"), sx + 8, 8, argb(1f, NEON_HOT), false);
         int bx = (int) Math.floor(blockX(mouseX)), bz = (int) Math.floor(blockZ(mouseY));
-        if (mouseX < texW) c.drawText(tr, "X " + bx + "  Z " + bz, sx + 8, 22, argb(1f, MUTE), false);
-        c.drawText(tr, Lang.t("map.waypoints"), sx + 8, 40, argb(1f, TEXT), false);
+        if (mouseX < texW) c.drawString(tr, "X " + bx + "  Z " + bz, sx + 8, 22, argb(1f, MUTE), false);
+        c.drawString(tr, Lang.t("map.waypoints"), sx + 8, 40, argb(1f, TEXT), false);
         List<Waypoints.Point> pts = Waypoints.current();
         int y = 54;
         for (Waypoints.Point p : pts) {
@@ -151,16 +152,16 @@ public class WorldMapScreen extends Screen {
             boolean hover = mouseX >= sx + 4 && mouseX < width - 4 && mouseY >= y - 2 && mouseY < y + 20;
             if (hover) c.fill(sx + 4, y - 2, width - 4, y + 20, argb(0.25f, NEON));
             c.fill(sx + 8, y + 2, sx + 13, y + 7, 0xFF000000 | p.color);
-            c.drawText(tr, tr.trimToWidth(p.name, SIDE - 40), sx + 18, y, argb(1f, TEXT), false);
+            c.drawString(tr, tr.plainSubstrByWidth(p.name, SIDE - 40), sx + 18, y, argb(1f, TEXT), false);
             String sub = p.x + ", " + p.y + ", " + p.z;
-            if (client.player != null) sub += "  ·  " + Math.round(Math.sqrt(client.player.squaredDistanceTo(p.x, p.y, p.z))) + " m";
-            c.drawText(tr, tr.trimToWidth(sub, SIDE - 26), sx + 18, y + 10, argb(1f, MUTE), false);
-            if (hover) c.drawText(tr, "✕", width - 14, y + 4, 0xFFFF5C8A, false);
+            if (minecraft.player != null) sub += "  ·  " + Math.round(Math.sqrt(minecraft.player.distanceToSqr(p.x, p.y, p.z))) + " m";
+            c.drawString(tr, tr.plainSubstrByWidth(sub, SIDE - 26), sx + 18, y + 10, argb(1f, MUTE), false);
+            if (hover) c.drawString(tr, "✕", width - 14, y + 4, 0xFFFF5C8A, false);
             y += 24;
         }
-        if (pts.isEmpty()) c.drawText(tr, Lang.t("map.empty"), sx + 8, 56, argb(1f, MUTE), false);
-        c.drawText(tr, Lang.t("map.help"), 6, height - 12, argb(0.8f, MUTE), true);
-        for (var child : this.children()) if (child instanceof net.minecraft.client.gui.Drawable d) d.render(c, mouseX, mouseY, delta);
+        if (pts.isEmpty()) c.drawString(tr, Lang.t("map.empty"), sx + 8, 56, argb(1f, MUTE), false);
+        c.drawString(tr, Lang.t("map.help"), 6, height - 12, argb(0.8f, MUTE), true);
+        for (var child : this.children()) if (child instanceof net.minecraft.client.gui.components.Renderable d) d.render(c, mouseX, mouseY, delta);
     }
 
     @Override
@@ -184,7 +185,7 @@ public class WorldMapScreen extends Screen {
         }
         if (button == 1) {
             int bx = (int) Math.floor(blockX(mx)), bz = (int) Math.floor(blockZ(my));
-            int by = client.world != null ? client.world.getTopY(net.minecraft.world.Heightmap.Type.WORLD_SURFACE, bx, bz) : 64;
+            int by = minecraft.level != null ? minecraft.level.getHeight(net.minecraft.world.level.levelgen.Heightmap.Types.WORLD_SURFACE, bx, bz) : 64;
             Waypoints.add(Lang.t("map.point") + " " + (Waypoints.current().size() + 1), bx, by, bz, false);
             return true;
         }
