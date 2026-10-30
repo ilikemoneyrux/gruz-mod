@@ -20,7 +20,8 @@ jobs:
           ./gradlew --no-daemon build -x copyToLauncher > logs/build-yarn.log 2>&1 || (tail -200 logs/build-yarn.log; exit 1)
       - name: Migrate to Mojang mappings
         run: |
-          ./gradlew --no-daemon migrateMappings --mappings "net.minecraft:mappings:1.21.1" --input src/main/java --output src/main/java --overrideInputsIHaveABackup > logs/migrate.log 2>&1 || (tail -200 logs/migrate.log; exit 1)
+          ./gradlew --no-daemon migrateMappings --mappings "net.minecraft:mappings:1.21.1" --input src/main/java --output remappedSrc > logs/migrate.log 2>&1 || (tail -200 logs/migrate.log; exit 1)
+          rm -rf src/main/java && cp -r remappedSrc src/main/java && rm -rf remappedSrc
           git diff --stat > logs/migrate-diff-stat.txt
       - name: Push migrated sources to branch mojmap
         run: |
