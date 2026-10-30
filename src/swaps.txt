@@ -1,0 +1,2 @@
+# Podmiany nazw w kodzie dla wybranych wersji (całe słowa).
+# warunek | stara => nowa

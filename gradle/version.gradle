@@ -67,6 +67,7 @@ def srcRes = rootProject.file('src/main/resources')
 def preprocess = tasks.register('preprocess') {
     inputs.dir(srcJava)
     inputs.dir(srcRes)
+    inputs.file(rootProject.file('src/swaps.txt'))
     inputs.property('mc', mc)
     outputs.dir(ppJava)
     outputs.dir(ppRes)
@@ -75,6 +76,17 @@ def preprocess = tasks.register('preprocess') {
         def outR = ppRes.get().asFile
         project.delete(outJ, outR)
         def skipped = [] as Set
+        // podmiany nazw (Mojang zmienia nazwy klas między wersjami): src/swaps.txt
+        //   MC >= 1.21.11 | ResourceLocation => Identifier
+        def swaps = []
+        def swapFile = rootProject.file('src/swaps.txt')
+        if (swapFile.exists()) swapFile.eachLine('UTF-8') { l ->
+            l = l.trim()
+            if (!l || l.startsWith('#')) return
+            def (cond, rule) = l.split(/\s*\|\s*/, 2) as List
+            def (from, to) = rule.split(/\s*=>\s*/, 2) as List
+            if (evalCond(cond, 'swaps.txt')) swaps << [java.util.regex.Pattern.compile('(?<![\\w$])' + java.util.regex.Pattern.quote(from) + '(?![\\w$])'), to]
+        }
         srcJava.eachFileRecurse(groovy.io.FileType.FILES) { f ->
             def rel = srcJava.toPath().relativize(f.toPath()).toString().replace('\\', '/')
             def lines = f.getText('UTF-8').split('\n', -1) as List
@@ -109,9 +121,11 @@ def preprocess = tasks.register('preprocess') {
                 }
             }
             if (stack) throw new GradleException("Brak //#endif w ${rel}")
+            def text = out.join('\n')
+            swaps.each { p, to -> text = p.matcher(text).replaceAll(java.util.regex.Matcher.quoteReplacement(to)) }
             def dst = new File(outJ, rel)
             dst.parentFile.mkdirs()
-            dst.setText(out.join('\n'), 'UTF-8')
+            dst.setText(text, 'UTF-8')
         }
         // zasoby; z listy mixinów usuwamy klasy pominięte w tej wersji
         project.copy { from srcRes; into outR; exclude 'gruzclient.mixins.json' }
