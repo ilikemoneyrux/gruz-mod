@@ -10,6 +10,17 @@ concurrency:
   group: build
   cancel-in-progress: true
 jobs:
+  start:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Mark start
+        run: |
+          cd /tmp && rm -rf res && mkdir res && cd res && git init -q && git checkout -q -b ci-results
+          git config user.name gruz-ci; git config user.email ci@gruz.invalid
+          git remote add origin "https://x-access-token:${{ secrets.GITHUB_TOKEN }}@github.com/${{ github.repository }}"
+          (git fetch -q origin ci-results && git reset -q --hard origin/ci-results) || true
+          mkdir -p build && echo "started ${{ github.sha }} run ${{ github.run_number }} $(date -u)" > build/STARTED
+          git add -A && git commit -qm "start ${{ github.run_number }}" && git push -q origin ci-results || true
   build:
     runs-on: ubuntu-latest
     strategy:
@@ -50,7 +61,7 @@ jobs:
         with: { path: art }
       - name: Summary + publish to ci-results
         run: |
-          python3 ci/summary.py art "${{ github.sha }}" "${{ github.run_number }}" > /tmp/STATUS.md
+          python3 ci/summary.py art "${{ github.sha }}" "${{ github.run_number }}" > /tmp/STATUS.md || echo "summary failed $(ls art)" > /tmp/STATUS.md
           cat /tmp/STATUS.md
           cd /tmp && rm -rf res && mkdir res && cd res && git init -q && git checkout -q -b ci-results
           git config user.name gruz-ci; git config user.email ci@gruz.invalid
@@ -59,7 +70,7 @@ jobs:
           rm -rf build && mkdir -p build
           cp /tmp/STATUS.md build/STATUS.md
           for d in "$GITHUB_WORKSPACE"/art/out-*; do v=${d##*/out-}; mkdir -p build/$v; cp "$d"/errors.txt "$d"/exit build/$v/ 2>/dev/null; tail -c 200000 "$d"/full.log > build/$v/tail.log 2>/dev/null; cp -r "$d"/inspect build/$v/ 2>/dev/null; done
-          git add -A && git commit -qm "build run ${{ github.run_number }} (${{ github.sha }})" && git push -q origin ci-results
+          (git add -A && git commit -qm "build run ${{ github.run_number }} (${{ github.sha }})" && git push -q origin ci-results) || (sleep 5; git pull -q --rebase origin ci-results && git push -q origin ci-results)
       - name: Publish jars (release "nightly")
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
