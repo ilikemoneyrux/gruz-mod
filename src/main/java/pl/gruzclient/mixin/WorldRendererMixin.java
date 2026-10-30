@@ -22,8 +22,8 @@ import pl.gruzclient.module.impl.BlockOverlayModule;
 /** Block Overlay: kolor obrysu i półprzezroczyste wypełnienie bloku, na który patrzysz. */
 @Mixin(LevelRenderer.class)
 public abstract class WorldRendererMixin {
-    @ModifyArgs(method = "drawBlockOutline", require = 0, at = @At(value = "INVOKE",
-            target = "Lnet/minecraft/client/render/WorldRenderer;drawCuboidShapeOutline(Lnet/minecraft/client/util/math/MatrixStack;Lnet/minecraft/client/render/VertexConsumer;Lnet/minecraft/util/shape/VoxelShape;DDDFFFF)V"))
+    @ModifyArgs(method = "renderHitOutline", require = 0, at = @At(value = "INVOKE",
+            target = "Lnet/minecraft/client/renderer/LevelRenderer;renderShape(Lcom/mojang/blaze3d/vertex/PoseStack;Lcom/mojang/blaze3d/vertex/VertexConsumer;Lnet/minecraft/world/phys/shapes/VoxelShape;DDDFFFF)V"))
     private void gruz$outlineColor(Args args) {
         BlockOverlayModule m = Modules.BLOCK_OVERLAY;
         if (!m.isEnabled()) return;
@@ -34,7 +34,7 @@ public abstract class WorldRendererMixin {
         args.set(9, c[3]);
     }
 
-    @Inject(method = "drawBlockOutline", at = @At("TAIL"), require = 0)
+    @Inject(method = "renderHitOutline", at = @At("TAIL"), require = 0)
     private void gruz$fill(PoseStack matrices, VertexConsumer vertexConsumer, Entity entity, double cameraX, double cameraY, double cameraZ,
                            BlockPos pos, BlockState state, CallbackInfo ci) {
         BlockOverlayModule m = Modules.BLOCK_OVERLAY;

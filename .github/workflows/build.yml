@@ -68,5 +68,5 @@ jobs:
           cp art/out-*/gruzclient-*.jar rel/ 2>/dev/null || true
           ls rel/*.jar >/dev/null 2>&1 || { echo "no jars"; exit 0; }
           python3 ci/manifest.py rel > rel/versions.json
-          gh release delete nightly -y --cleanup-tag 2>/dev/null || true
-          gh release create nightly rel/* --title "Gruz Client mod – nightly" --notes "Automatyczny build z ${{ github.sha }}" --prerelease
+          gh release delete mod -y --cleanup-tag 2>/dev/null || true
+          gh release create mod rel/* --title "Gruz Client mod" --notes "Automatyczny build z ${{ github.sha }}" --latest

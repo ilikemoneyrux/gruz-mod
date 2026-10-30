@@ -10,7 +10,7 @@ import pl.gruzclient.module.Modules;
 /** Przezroczystość tła tablicy wyników (tylko w trakcie jej rysowania) */
 @Mixin(Options.class)
 public abstract class GameOptionsMixin {
-    @Inject(method = "getTextBackgroundColor(F)I", at = @At("HEAD"), cancellable = true, require = 0)
+    @Inject(method = "getBackgroundColor(F)I", at = @At("HEAD"), cancellable = true, require = 0)
     private void gruz$scoreboardBg(float fallbackOpacity, CallbackInfoReturnable<Integer> cir) {
         if (Modules.SCOREBOARD.drawing) cir.setReturnValue(Modules.SCOREBOARD.background(fallbackOpacity));
     }

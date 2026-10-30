@@ -10,7 +10,7 @@ import pl.gruzclient.module.Modules;
 /** Stała pora dnia widziana tylko przez Ciebie. */
 @Mixin(ClientLevel.ClientLevelData.class)
 public abstract class ClientWorldPropertiesMixin {
-    @Inject(method = "getTimeOfDay", at = @At("HEAD"), cancellable = true, require = 0)
+    @Inject(method = "getDayTime", at = @At("HEAD"), cancellable = true, require = 0)
     private void gruz$time(CallbackInfoReturnable<Long> cir) {
         long t = Modules.WORLD.fixedTime();
         if (t >= 0) cir.setReturnValue(t);

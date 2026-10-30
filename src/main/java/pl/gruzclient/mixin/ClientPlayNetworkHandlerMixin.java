@@ -19,7 +19,7 @@ import pl.gruzclient.network.GruzNetwork;
  */
 @Mixin(ClientPacketListener.class)
 public abstract class ClientPlayNetworkHandlerMixin {
-    @Inject(method = "sendChatMessage", at = @At("HEAD"), cancellable = true, require = 0)
+    @Inject(method = "sendChat", at = @At("HEAD"), cancellable = true, require = 0)
     private void gruz$commands(String content, CallbackInfo ci) {
         if (!content.startsWith(".")) return;
         String[] parts = content.substring(1).split(" ", 3);

@@ -12,7 +12,7 @@ import pl.gruzclient.module.Modules;
 /** Ukrywanie czerwonych liczb po prawej stronie tablicy wyników */
 @Mixin(Objective.class)
 public abstract class ScoreboardObjectiveMixin {
-    @Inject(method = "getNumberFormatOr", at = @At("HEAD"), cancellable = true, require = 0)
+    @Inject(method = "numberFormatOrDefault", at = @At("HEAD"), cancellable = true, require = 0)
     private void gruz$hideNumbers(NumberFormat format, CallbackInfoReturnable<NumberFormat> cir) {
         if (Modules.SCOREBOARD.hideNumbers()) cir.setReturnValue(BlankFormat.INSTANCE);
     }

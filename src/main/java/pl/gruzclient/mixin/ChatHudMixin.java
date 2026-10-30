@@ -27,25 +27,25 @@ import net.minecraft.network.chat.MessageSignature;
  */
 @Mixin(ChatComponent.class)
 public abstract class ChatHudMixin implements GruzChat {
-    @Shadow @Final private List<GuiMessage> messages;
-    @Shadow @Final private List<GuiMessage.Line> visibleMessages;
-    @Shadow private int scrolledLines;
+    @Shadow @Final private List<GuiMessage> allMessages;
+    @Shadow @Final private List<GuiMessage.Line> trimmedMessages;
+    @Shadow private int chatScrollbarPos;
 
-    @Shadow private void addVisibleMessage(GuiMessage message) { throw new AssertionError(); }
-    @Shadow private double toChatLineX(double x) { throw new AssertionError(); }
-    @Shadow private double toChatLineY(double y) { throw new AssertionError(); }
-    @Shadow private int getMessageLineIndex(double chatLineX, double chatLineY) { throw new AssertionError(); }
+    @Shadow private void addMessageToDisplayQueue(GuiMessage message) { throw new AssertionError(); }
+    @Shadow private double screenToChatX(double x) { throw new AssertionError(); }
+    @Shadow private double screenToChatY(double y) { throw new AssertionError(); }
+    @Shadow private int getMessageLineIndexAt(double chatLineX, double chatLineY) { throw new AssertionError(); }
 
     @Unique private String gruz$lastPlain = null;
     @Unique private int gruz$count = 1;
 
-    @ModifyVariable(method = "addMessage(Lnet/minecraft/text/Text;Lnet/minecraft/network/message/MessageSignatureData;Lnet/minecraft/client/gui/hud/MessageIndicator;)V",
+    @ModifyVariable(method = "addMessage(Lnet/minecraft/network/chat/Component;Lnet/minecraft/network/chat/MessageSignature;Lnet/minecraft/client/GuiMessageTag;)V",
             at = @At("HEAD"), argsOnly = true, require = 0)
     private Component gruz$onMessage(Component message, Component original, MessageSignature signature, GuiMessageTag indicator) {
         String plain = message.getString();
         Modules.AUTO_GG.onChat(plain);
         BetterChatModule chat = Modules.BETTER_CHAT;
-        if (chat.stacking() && plain.equals(gruz$lastPlain) && !this.messages.isEmpty()) {
+        if (chat.stacking() && plain.equals(gruz$lastPlain) && !this.allMessages.isEmpty()) {
             gruz$count++;
             gruz$removeNewest();
             return chat.decorate(BetterChatModule.withCount(message, gruz$count));
@@ -58,43 +58,43 @@ public abstract class ChatHudMixin implements GruzChat {
     /** Usuwa najnowszą wiadomość (jej linie są na początku listy widocznych) */
     @Unique
     private void gruz$removeNewest() {
-        this.messages.remove(0);
-        if (this.visibleMessages.isEmpty()) return;
-        this.visibleMessages.remove(0); // dolna linia wiadomości (endOfEntry)
-        while (!this.visibleMessages.isEmpty() && !this.visibleMessages.get(0).endOfEntry()) this.visibleMessages.remove(0);
+        this.allMessages.remove(0);
+        if (this.trimmedMessages.isEmpty()) return;
+        this.trimmedMessages.remove(0); // dolna linia wiadomości (endOfEntry)
+        while (!this.trimmedMessages.isEmpty() && !this.trimmedMessages.get(0).endOfEntry()) this.trimmedMessages.remove(0);
     }
 
     /** Dłuższa historia czatu (1000 zamiast 100 wiadomości) */
-    @ModifyConstant(method = {"addVisibleMessage", "addMessage(Lnet/minecraft/client/gui/hud/ChatHudLine;)V"},
+    @ModifyConstant(method = {"addMessageToDisplayQueue", "addMessageToQueue(Lnet/minecraft/client/GuiMessage;)V"},
             constant = @Constant(intValue = 100), require = 0)
     private int gruz$history(int original) {
         return Modules.BETTER_CHAT.historyLimit();
     }
 
     /** Filtr wyszukiwania: pomijamy linie niepasujące do frazy */
-    @Inject(method = "addVisibleMessage", at = @At("HEAD"), cancellable = true, require = 0)
+    @Inject(method = "addMessageToDisplayQueue", at = @At("HEAD"), cancellable = true, require = 0)
     private void gruz$filter(GuiMessage message, CallbackInfo ci) {
         if (!BetterChatModule.matches(message.content())) ci.cancel();
     }
 
     @Override
     public void gruz$rebuild() {
-        this.visibleMessages.clear();
-        this.scrolledLines = 0;
-        for (int i = this.messages.size() - 1; i >= 0; i--) this.addVisibleMessage(this.messages.get(i));
+        this.trimmedMessages.clear();
+        this.chatScrollbarPos = 0;
+        for (int i = this.allMessages.size() - 1; i >= 0; i--) this.addMessageToDisplayQueue(this.allMessages.get(i));
     }
 
     @Override
     public String gruz$messageAt(double mouseX, double mouseY) {
-        int idx = this.getMessageLineIndex(this.toChatLineX(mouseX), this.toChatLineY(mouseY));
-        if (idx < 0 || idx >= this.visibleMessages.size()) return null;
+        int idx = this.getMessageLineIndexAt(this.screenToChatX(mouseX), this.screenToChatY(mouseY));
+        if (idx < 0 || idx >= this.trimmedMessages.size()) return null;
         // linie jednej wiadomości: od dolnej (endOfEntry) w górę do następnej endOfEntry
         int bottom = idx;
-        while (bottom > 0 && !this.visibleMessages.get(bottom).endOfEntry()) bottom--;
+        while (bottom > 0 && !this.trimmedMessages.get(bottom).endOfEntry()) bottom--;
         int top = idx;
-        while (top + 1 < this.visibleMessages.size() && !this.visibleMessages.get(top + 1).endOfEntry()) top++;
+        while (top + 1 < this.trimmedMessages.size() && !this.trimmedMessages.get(top + 1).endOfEntry()) top++;
         StringBuilder sb = new StringBuilder();
-        for (int i = top; i >= bottom; i--) sb.append(GruzChat.plain(this.visibleMessages.get(i).content()));
+        for (int i = top; i >= bottom; i--) sb.append(GruzChat.plain(this.trimmedMessages.get(i).content()));
         return sb.toString();
     }
 }

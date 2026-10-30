@@ -12,7 +12,7 @@ import pl.gruzclient.combat.Combat;
 /** Każdy cios gracza: zasięg, combo, cel, dźwięk trafienia. */
 @Mixin(MultiPlayerGameMode.class)
 public abstract class ClientPlayerInteractionManagerMixin {
-    @Inject(method = "attackEntity", at = @At("HEAD"), require = 0)
+    @Inject(method = "attack", at = @At("HEAD"), require = 0)
     private void gruz$onAttack(Player player, Entity target, CallbackInfo ci) {
         Combat.onAttack(player, target);
     }

@@ -12,13 +12,13 @@ import pl.gruzclient.module.Modules;
 /** Mniejszy ogień: przesuwamy nakładkę ognia w dół ekranu. */
 @Mixin(ScreenEffectRenderer.class)
 public abstract class InGameOverlayRendererMixin {
-    @Inject(method = "renderFireOverlay", at = @At("HEAD"), require = 0)
+    @Inject(method = "renderFire", at = @At("HEAD"), require = 0)
     private static void gruz$fireDown(Minecraft client, PoseStack matrices, CallbackInfo ci) {
         matrices.pushPose();
         matrices.translate(0f, -Modules.LOW_FIRE.fireOffset(), 0f);
     }
 
-    @Inject(method = "renderFireOverlay", at = @At("RETURN"), require = 0)
+    @Inject(method = "renderFire", at = @At("RETURN"), require = 0)
     private static void gruz$fireRestore(Minecraft client, PoseStack matrices, CallbackInfo ci) {
         matrices.popPose();
     }

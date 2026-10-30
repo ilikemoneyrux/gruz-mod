@@ -13,7 +13,7 @@ import pl.gruzclient.module.Modules;
 /** Własny kolor nicków nad głowami graczy. */
 @Mixin(EntityRenderer.class)
 public abstract class EntityRendererMixin<T extends Entity> {
-    @ModifyVariable(method = "renderLabelIfPresent", at = @At("HEAD"), argsOnly = true, require = 0)
+    @ModifyVariable(method = "renderNameTag", at = @At("HEAD"), argsOnly = true, require = 0)
     private Component gruz$recolor(Component text, T entity, Component original, PoseStack matrices, MultiBufferSource vertexConsumers,
                               int light, float tickDelta) {
         return Modules.NAMETAGS.label(entity, text);

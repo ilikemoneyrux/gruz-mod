@@ -21,20 +21,20 @@ public abstract class GameRendererMixin {
     }
 
     /** Fullbright: pełna siła "widzenia w ciemności" */
-    @Inject(method = "getNightVisionStrength", at = @At("HEAD"), cancellable = true)
+    @Inject(method = "getNightVisionScale", at = @At("HEAD"), cancellable = true)
     private static void gruz$fullbright(LivingEntity entity, float tickDelta, CallbackInfoReturnable<Float> cir) {
         if (Modules.FULLBRIGHT.isEnabled()) cir.setReturnValue(1f);
     }
 
     /** Motion blur: po narysowaniu świata, przed GUI */
     @Inject(method = "render", require = 0, at = @At(value = "INVOKE",
-            target = "Lnet/minecraft/client/render/WorldRenderer;drawEntityOutlinesFramebuffer()V", shift = At.Shift.AFTER))
+            target = "Lnet/minecraft/client/renderer/LevelRenderer;doEntityOutline()V", shift = At.Shift.AFTER))
     private void gruz$motionBlur(DeltaTracker tickCounter, boolean tick, CallbackInfo ci) {
         Modules.MOTION_BLUR.render(tickCounter.getGameTimeDeltaPartialTick(true));
     }
 
     /** Freecam: bez ręki przed kamerą */
-    @Inject(method = "renderHand", at = @At("HEAD"), cancellable = true, require = 0)
+    @Inject(method = "renderItemInHand", at = @At("HEAD"), cancellable = true, require = 0)
     private void gruz$freecamHand(CallbackInfo ci) {
         if (Modules.FREECAM.isActive()) ci.cancel();
     }

@@ -13,7 +13,7 @@ import pl.gruzclient.cosmetics.Emote;
 /** Emotki: po vanillowej animacji nakładamy pozę emotki (rękawy i czapka idą za nią). */
 @Mixin(HumanoidModel.class)
 public abstract class BipedEntityModelMixin<T extends LivingEntity> {
-    @Inject(method = "setAngles(Lnet/minecraft/entity/LivingEntity;FFFFF)V", at = @At("TAIL"), require = 0)
+    @Inject(method = "setupAnim(Lnet/minecraft/world/entity/LivingEntity;FFFFF)V", at = @At("TAIL"), require = 0)
     private void gruz$emote(T entity, float limbAngle, float limbDistance, float animationProgress, float headYaw, float headPitch, CallbackInfo ci) {
         if (!(entity instanceof Player)) return;
         Emote.Playing play = Cosmetics.EMOTES.get(entity.getUUID());

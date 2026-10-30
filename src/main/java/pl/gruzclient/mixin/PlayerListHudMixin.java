@@ -14,12 +14,12 @@ import pl.gruzclient.module.Modules;
 /** Tab: logo Gruz, statystyki Hypixela i ping w ms */
 @Mixin(PlayerTabOverlay.class)
 public abstract class PlayerListHudMixin {
-    @Inject(method = "getPlayerName", at = @At("RETURN"), cancellable = true, require = 0)
+    @Inject(method = "getNameForDisplay", at = @At("RETURN"), cancellable = true, require = 0)
     private void gruz$name(PlayerInfo entry, CallbackInfoReturnable<Component> cir) {
         cir.setReturnValue(Modules.TAB.name(entry, cir.getReturnValue()));
     }
 
-    @Inject(method = "renderLatencyIcon", at = @At("HEAD"), cancellable = true, require = 0)
+    @Inject(method = "renderPingIcon", at = @At("HEAD"), cancellable = true, require = 0)
     private void gruz$ping(GuiGraphics context, int width, int x, int y, PlayerInfo entry, CallbackInfo ci) {
         if (Modules.TAB.drawPing(context, width, x, y, entry)) ci.cancel();
     }

@@ -11,7 +11,7 @@ import pl.gruzclient.module.Modules;
 /** Freelook: w trakcie trybu ruch myszy obraca kamerę, a nie gracza. */
 @Mixin(Entity.class)
 public abstract class EntityMixin {
-    @Inject(method = "changeLookDirection", at = @At("HEAD"), cancellable = true)
+    @Inject(method = "turn", at = @At("HEAD"), cancellable = true)
     private void gruz$freelook(double cursorDeltaX, double cursorDeltaY, CallbackInfo ci) {
         if (Modules.FREECAM.isActive() && (Object) this == Minecraft.getInstance().player) {
             Modules.FREECAM.look(cursorDeltaX, cursorDeltaY);

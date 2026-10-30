@@ -18,7 +18,7 @@ import pl.gruzclient.module.Modules;
 public abstract class ItemEntityRendererMixin {
     @Shadow @Final private ItemRenderer itemRenderer;
 
-    @Inject(method = "render(Lnet/minecraft/entity/ItemEntity;FFLnet/minecraft/client/util/math/MatrixStack;Lnet/minecraft/client/render/VertexConsumerProvider;I)V",
+    @Inject(method = "render(Lnet/minecraft/world/entity/item/ItemEntity;FFLcom/mojang/blaze3d/vertex/PoseStack;Lnet/minecraft/client/renderer/MultiBufferSource;I)V",
             at = @At("HEAD"), cancellable = true, require = 0)
     private void gruz$physics(ItemEntity entity, float yaw, float tickDelta, PoseStack matrices, MultiBufferSource buffers, int light, CallbackInfo ci) {
         if (Modules.ITEM_PHYSICS.render(entity, tickDelta, matrices, buffers, light, this.itemRenderer)) ci.cancel();

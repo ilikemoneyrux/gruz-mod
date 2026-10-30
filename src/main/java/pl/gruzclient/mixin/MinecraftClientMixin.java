@@ -36,30 +36,30 @@ public abstract class MinecraftClientMixin {
     }
 
     /** Nowy świat / serwer – czyścimy cel i combo */
-    @Inject(method = "joinWorld", at = @At("HEAD"), require = 0)
+    @Inject(method = "setLevel", at = @At("HEAD"), require = 0)
     private void gruz$joinWorld(CallbackInfo ci) {
         Combat.reset();
         Modules.FREECAM.stop();
     }
 
     /** Podświetlenie członków drużyny (obrys widoczny przez ściany) */
-    @Inject(method = "hasOutline", at = @At("HEAD"), cancellable = true, require = 0)
+    @Inject(method = "shouldEntityAppearGlowing", at = @At("HEAD"), cancellable = true, require = 0)
     private void gruz$teamGlow(Entity entity, CallbackInfoReturnable<Boolean> cir) {
         if (Modules.NAMETAGS.glow(entity)) cir.setReturnValue(true);
     }
 
     /** Freecam: w trakcie nie można bić, kopać ani używać przedmiotów */
-    @Inject(method = "doAttack", at = @At("HEAD"), cancellable = true, require = 0)
+    @Inject(method = "startAttack", at = @At("HEAD"), cancellable = true, require = 0)
     private void gruz$freecamAttack(CallbackInfoReturnable<Boolean> cir) {
         if (Modules.FREECAM.isActive()) cir.setReturnValue(false);
     }
 
-    @Inject(method = "doItemUse", at = @At("HEAD"), cancellable = true, require = 0)
+    @Inject(method = "startUseItem", at = @At("HEAD"), cancellable = true, require = 0)
     private void gruz$freecamUse(CallbackInfo ci) {
         if (Modules.FREECAM.isActive()) ci.cancel();
     }
 
-    @Inject(method = "handleBlockBreaking", at = @At("HEAD"), cancellable = true, require = 0)
+    @Inject(method = "continueAttack", at = @At("HEAD"), cancellable = true, require = 0)
     private void gruz$freecamBreak(boolean breaking, CallbackInfo ci) {
         if (Modules.FREECAM.isActive()) ci.cancel();
     }

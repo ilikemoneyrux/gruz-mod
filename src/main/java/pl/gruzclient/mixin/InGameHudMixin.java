@@ -27,27 +27,27 @@ public abstract class InGameHudMixin {
     }
 
     /** Tablica wyników: rozmiar / pozycja / ukrycie */
-    @Inject(method = "renderScoreboardSidebar(Lnet/minecraft/client/gui/DrawContext;Lnet/minecraft/scoreboard/ScoreboardObjective;)V",
+    @Inject(method = "displayScoreboardSidebar(Lnet/minecraft/client/gui/GuiGraphics;Lnet/minecraft/world/scores/Objective;)V",
             at = @At("HEAD"), cancellable = true, require = 0)
     private void gruz$scoreboardHead(GuiGraphics context, Objective objective, CallbackInfo ci) {
         if (Modules.SCOREBOARD.hidden() || editorHidesVanilla()) { ci.cancel(); return; }
         Modules.SCOREBOARD.begin(context);
     }
 
-    @Inject(method = "renderScoreboardSidebar(Lnet/minecraft/client/gui/DrawContext;Lnet/minecraft/scoreboard/ScoreboardObjective;)V",
+    @Inject(method = "displayScoreboardSidebar(Lnet/minecraft/client/gui/GuiGraphics;Lnet/minecraft/world/scores/Objective;)V",
             at = @At("RETURN"), require = 0)
     private void gruz$scoreboardTail(GuiGraphics context, Objective objective, CallbackInfo ci) {
         Modules.SCOREBOARD.end(context);
     }
 
     /** Duże napisy na środku ekranu (title / subtitle) */
-    @Inject(method = "renderTitleAndSubtitle", at = @At("HEAD"), cancellable = true, require = 0)
+    @Inject(method = "renderTitle", at = @At("HEAD"), cancellable = true, require = 0)
     private void gruz$titleHead(GuiGraphics context, DeltaTracker tickCounter, CallbackInfo ci) {
         if (Modules.HUD_TWEAKS.hideTitles()) { ci.cancel(); return; }
         Modules.HUD_TWEAKS.titleBegin(context);
     }
 
-    @Inject(method = "renderTitleAndSubtitle", at = @At("RETURN"), require = 0)
+    @Inject(method = "renderTitle", at = @At("RETURN"), require = 0)
     private void gruz$titleTail(GuiGraphics context, DeltaTracker tickCounter, CallbackInfo ci) {
         Modules.HUD_TWEAKS.titleEnd(context);
     }

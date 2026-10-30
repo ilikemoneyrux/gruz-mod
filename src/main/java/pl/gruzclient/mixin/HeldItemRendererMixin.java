@@ -18,7 +18,7 @@ import pl.gruzclient.module.Modules;
 @Mixin(ItemInHandRenderer.class)
 public abstract class HeldItemRendererMixin {
     /** Niżej trzymana tarcza (gdy jej nie używasz) */
-    @Inject(method = "renderFirstPersonItem", at = @At("HEAD"), cancellable = true, require = 0)
+    @Inject(method = "renderArmWithItem", at = @At("HEAD"), cancellable = true, require = 0)
     private void gruz$shieldDown(AbstractClientPlayer player, float tickDelta, float pitch, InteractionHand hand, float swingProgress,
                                  ItemStack item, float equipProgress, PoseStack matrices, MultiBufferSource vertexConsumers,
                                  int light, CallbackInfo ci) {
@@ -30,7 +30,7 @@ public abstract class HeldItemRendererMixin {
         }
     }
 
-    @Inject(method = "renderFirstPersonItem", at = @At("RETURN"), require = 0)
+    @Inject(method = "renderArmWithItem", at = @At("RETURN"), require = 0)
     private void gruz$shieldRestore(AbstractClientPlayer player, float tickDelta, float pitch, InteractionHand hand, float swingProgress,
                                     ItemStack item, float equipProgress, PoseStack matrices, MultiBufferSource vertexConsumers,
                                     int light, CallbackInfo ci) {
@@ -38,8 +38,8 @@ public abstract class HeldItemRendererMixin {
     }
 
     /** Poza bloku mieczem z 1.8 (doBlockTransformations), tuż przed narysowaniem miecza */
-    @Inject(method = "renderFirstPersonItem", require = 0, at = @At(value = "INVOKE",
-            target = "Lnet/minecraft/client/render/item/HeldItemRenderer;renderItem(Lnet/minecraft/entity/LivingEntity;Lnet/minecraft/item/ItemStack;Lnet/minecraft/client/render/model/json/ModelTransformationMode;ZLnet/minecraft/client/util/math/MatrixStack;Lnet/minecraft/client/render/VertexConsumerProvider;I)V"))
+    @Inject(method = "renderArmWithItem", require = 0, at = @At(value = "INVOKE",
+            target = "Lnet/minecraft/client/renderer/ItemInHandRenderer;renderItem(Lnet/minecraft/world/entity/LivingEntity;Lnet/minecraft/world/item/ItemStack;Lnet/minecraft/world/item/ItemDisplayContext;ZLcom/mojang/blaze3d/vertex/PoseStack;Lnet/minecraft/client/renderer/MultiBufferSource;I)V"))
     private void gruz$swordBlock(AbstractClientPlayer player, float tickDelta, float pitch, InteractionHand hand, float swingProgress,
                                  ItemStack item, float equipProgress, PoseStack matrices, MultiBufferSource vertexConsumers,
                                  int light, CallbackInfo ci) {
@@ -53,8 +53,8 @@ public abstract class HeldItemRendererMixin {
     }
 
     /** Animacje 1.7: ręka nie opada po ciosie (ignorujemy cooldown ataku) */
-    @Redirect(method = "updateHeldItems", require = 0, at = @At(value = "INVOKE",
-            target = "Lnet/minecraft/client/network/ClientPlayerEntity;getAttackCooldownProgress(F)F"))
+    @Redirect(method = "tick", require = 0, at = @At(value = "INVOKE",
+            target = "Lnet/minecraft/client/player/LocalPlayer;getAttackStrengthScale(F)F"))
     private float gruz$noCooldownDip(LocalPlayer player, float baseTime) {
         return Modules.OLD_ANIM.noCooldown() ? 1.0f : player.getAttackStrengthScale(baseTime);
     }

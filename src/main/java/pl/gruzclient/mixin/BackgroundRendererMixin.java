@@ -16,18 +16,18 @@ import pl.gruzclient.render.GruzDraw;
 /** Kosmiczne niebo: mgła na horyzoncie w kolorze nieba, żeby świat płynnie w nie przechodził. */
 @Mixin(FogRenderer.class)
 public abstract class BackgroundRendererMixin {
-    @Shadow private static float red;
-    @Shadow private static float green;
-    @Shadow private static float blue;
+    @Shadow private static float fogRed;
+    @Shadow private static float fogGreen;
+    @Shadow private static float fogBlue;
 
-    @Inject(method = "render", at = @At("TAIL"), require = 0)
+    @Inject(method = "setupColor", at = @At("TAIL"), require = 0)
     private static void gruz$fog(Camera camera, float tickDelta, ClientLevel world, int viewDistance, float skyDarkness, CallbackInfo ci) {
         if (!Modules.WORLD.cosmic() || camera.getFluidInCamera() != FogType.NONE) return;
         if (!world.dimensionType().hasSkyLight()) return;
         int c = GruzDraw.mix(GruzDraw.NEON, 0x000000, 0.8f);
-        red = ((c >> 16) & 255) / 255f;
-        green = ((c >> 8) & 255) / 255f;
-        blue = (c & 255) / 255f;
-        RenderSystem.clearColor(red, green, blue, 0f);
+        fogRed = ((c >> 16) & 255) / 255f;
+        fogGreen = ((c >> 8) & 255) / 255f;
+        fogBlue = (c & 255) / 255f;
+        RenderSystem.clearColor(fogRed, fogGreen, fogBlue, 0f);
     }
 }

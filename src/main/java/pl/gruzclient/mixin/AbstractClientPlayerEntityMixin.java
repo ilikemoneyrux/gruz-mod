@@ -14,7 +14,7 @@ import pl.gruzclient.cosmetics.Cosmetics;
 /** Peleryny Gruz: podmieniamy teksturę peleryny (i elytry) gracza na animowaną. */
 @Mixin(AbstractClientPlayer.class)
 public abstract class AbstractClientPlayerEntityMixin {
-    @Inject(method = "getSkinTextures", at = @At("RETURN"), cancellable = true, require = 0)
+    @Inject(method = "getSkin", at = @At("RETURN"), cancellable = true, require = 0)
     private void gruz$cape(CallbackInfoReturnable<PlayerSkin> cir) {
         CosmeticSet set = Cosmetics.of((AbstractClientPlayer) (Object) this);
         if (!set.hasCape()) return;

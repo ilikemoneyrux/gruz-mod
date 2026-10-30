@@ -9,6 +9,6 @@ import net.minecraft.client.gui.components.BossHealthOverlay;
 
 @Mixin(BossHealthOverlay.class)
 public interface BossBarHudAccessor {
-    @Accessor("bossBars")
+    @Accessor("events")
     Map<UUID, ?> gruz$getBossBars();
 }

@@ -11,12 +11,12 @@ import pl.gruzclient.module.Modules;
 /** Bez deszczu i burzy (tylko po stronie klienta – serwer nic nie wie). */
 @Mixin(Level.class)
 public abstract class WorldMixin {
-    @Inject(method = "getRainGradient", at = @At("HEAD"), cancellable = true, require = 0)
+    @Inject(method = "getRainLevel", at = @At("HEAD"), cancellable = true, require = 0)
     private void gruz$rain(float delta, CallbackInfoReturnable<Float> cir) {
         if ((Object) this instanceof ClientLevel && Modules.WORLD.noRain()) cir.setReturnValue(0f);
     }
 
-    @Inject(method = "getThunderGradient", at = @At("HEAD"), cancellable = true, require = 0)
+    @Inject(method = "getThunderLevel", at = @At("HEAD"), cancellable = true, require = 0)
     private void gruz$thunder(float delta, CallbackInfoReturnable<Float> cir) {
         if ((Object) this instanceof ClientLevel && Modules.WORLD.noRain()) cir.setReturnValue(0f);
     }
