@@ -23,6 +23,7 @@ jobs:
           git add -A && git commit -qm "start ${{ github.run_number }}" && git push -q origin ci-results || true
   build:
     runs-on: ubuntu-latest
+    timeout-minutes: 40
     strategy:
       fail-fast: false
       matrix:
@@ -39,7 +40,7 @@ jobs:
           mkdir -p out/${{ matrix.mc }}
           chmod +x gradlew
           set +e
-          ./gradlew --no-daemon --stacktrace :${{ matrix.mc }}:collect > out/${{ matrix.mc }}/full.log 2>&1
+          timeout 25m ./gradlew --no-daemon --stacktrace --console=plain :${{ matrix.mc }}:collect > out/${{ matrix.mc }}/full.log 2>&1
           echo $? > out/${{ matrix.mc }}/exit
           python3 ci/errors.py out/${{ matrix.mc }}/full.log > out/${{ matrix.mc }}/errors.txt
           cp build/out/*.jar out/${{ matrix.mc }}/ 2>/dev/null
@@ -55,6 +56,7 @@ jobs:
     needs: build
     if: always()
     runs-on: ubuntu-latest
+    timeout-minutes: 10
     steps:
       - uses: actions/checkout@v4
       - uses: actions/download-artifact@v4
