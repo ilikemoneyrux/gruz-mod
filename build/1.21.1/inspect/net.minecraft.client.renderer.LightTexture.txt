@@ -1,0 +1,27 @@
+Compiled from "LightTexture.java"
+public class net.minecraft.client.renderer.LightTexture implements java.lang.AutoCloseable {
+  public static final int FULL_BRIGHT;
+  public static final int FULL_SKY;
+  public static final int FULL_BLOCK;
+  private final net.minecraft.client.renderer.texture.DynamicTexture lightTexture;
+  private final com.mojang.blaze3d.platform.NativeImage lightPixels;
+  private final net.minecraft.resources.ResourceLocation lightTextureLocation;
+  private boolean updateLightTexture;
+  private float blockLightRedFlicker;
+  private final net.minecraft.client.renderer.GameRenderer renderer;
+  private final net.minecraft.client.Minecraft minecraft;
+  public net.minecraft.client.renderer.LightTexture(net.minecraft.client.renderer.GameRenderer, net.minecraft.client.Minecraft);
+  public void close();
+  public void tick();
+  public void turnOffLightLayer();
+  public void turnOnLightLayer();
+  private float getDarknessGamma(float);
+  private float calculateDarknessScale(net.minecraft.world.entity.LivingEntity, float, float);
+  public void updateLightTexture(float);
+  private static void clampColor(org.joml.Vector3f);
+  private float notGamma(float);
+  public static float getBrightness(net.minecraft.world.level.dimension.DimensionType, int);
+  public static int pack(int, int);
+  public static int block(int);
+  public static int sky(int);
+}

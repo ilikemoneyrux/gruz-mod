@@ -1,0 +1,10 @@
+Compiled from "PanoramaRenderer.java"
+public class net.minecraft.client.renderer.PanoramaRenderer {
+  private final net.minecraft.client.Minecraft minecraft;
+  private final net.minecraft.client.renderer.CubeMap cubeMap;
+  private float spin;
+  private float bob;
+  public net.minecraft.client.renderer.PanoramaRenderer(net.minecraft.client.renderer.CubeMap);
+  public void render(float, float);
+  private static float wrap(float, float);
+}

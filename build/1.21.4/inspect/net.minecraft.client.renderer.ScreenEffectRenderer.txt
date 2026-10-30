@@ -1,0 +1,11 @@
+Compiled from "ScreenEffectRenderer.java"
+public class net.minecraft.client.renderer.ScreenEffectRenderer {
+  private static final net.minecraft.resources.ResourceLocation UNDERWATER_LOCATION;
+  public net.minecraft.client.renderer.ScreenEffectRenderer();
+  public static void renderScreenEffect(net.minecraft.client.Minecraft, com.mojang.blaze3d.vertex.PoseStack, net.minecraft.client.renderer.MultiBufferSource);
+  private static net.minecraft.world.level.block.state.BlockState getViewBlockingState(net.minecraft.world.entity.player.Player);
+  private static void renderTex(net.minecraft.client.renderer.texture.TextureAtlasSprite, com.mojang.blaze3d.vertex.PoseStack, net.minecraft.client.renderer.MultiBufferSource);
+  private static void renderWater(net.minecraft.client.Minecraft, com.mojang.blaze3d.vertex.PoseStack, net.minecraft.client.renderer.MultiBufferSource);
+  private static void renderFire(com.mojang.blaze3d.vertex.PoseStack, net.minecraft.client.renderer.MultiBufferSource);
+  static {};
+}

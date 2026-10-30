@@ -1,0 +1,10 @@
+# Build 7 (877c0f54)
+
+- 1.20.1: FAIL (exit 1, errors: 69)
+- 1.20.4: FAIL (exit 1, errors: 40)
+- 1.21.1: OK (exit 0, errors: 0)
+- 1.21.11: FAIL (exit 1, errors: 223)
+- 1.21.4: FAIL (exit 1, errors: 48)
+- 26.1: FAIL (exit 1, errors: 350)
+- 26.2: FAIL (exit 1, errors: 402)
+- 26.3: FAIL (exit 1, errors: 461)

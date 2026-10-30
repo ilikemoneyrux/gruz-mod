@@ -1,0 +1,25 @@
+Compiled from "ConnectScreen.java"
+public class net.minecraft.client.gui.screens.ConnectScreen extends net.minecraft.client.gui.screens.Screen {
+  private static final java.util.concurrent.atomic.AtomicInteger UNIQUE_THREAD_ID;
+  static final org.slf4j.Logger LOGGER;
+  private static final long NARRATION_DELAY_MS;
+  static final net.minecraft.network.chat.Component ABORT_CONNECTION;
+  public static final net.minecraft.network.chat.Component UNKNOWN_HOST_MESSAGE;
+  volatile net.minecraft.network.Connection connection;
+  io.netty.channel.ChannelFuture channelFuture;
+  volatile boolean aborted;
+  final net.minecraft.client.gui.screens.Screen parent;
+  private net.minecraft.network.chat.Component status;
+  private long lastNarration;
+  final net.minecraft.network.chat.Component connectFailedTitle;
+  private net.minecraft.client.gui.screens.ConnectScreen(net.minecraft.client.gui.screens.Screen, net.minecraft.network.chat.Component);
+  public static void startConnecting(net.minecraft.client.gui.screens.Screen, net.minecraft.client.Minecraft, net.minecraft.client.multiplayer.resolver.ServerAddress, net.minecraft.client.multiplayer.ServerData, boolean);
+  private void connect(net.minecraft.client.Minecraft, net.minecraft.client.multiplayer.resolver.ServerAddress, net.minecraft.client.multiplayer.ServerData);
+  private void updateStatus(net.minecraft.network.chat.Component);
+  public void tick();
+  public boolean shouldCloseOnEsc();
+  protected void init();
+  public void render(net.minecraft.client.gui.GuiGraphics, int, int, float);
+  private void method_19800(net.minecraft.client.gui.components.Button);
+  static {};
+}

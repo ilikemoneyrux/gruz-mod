@@ -1,0 +1,22 @@
+Compiled from "PlayerRenderer.java"
+public class net.minecraft.client.renderer.entity.player.PlayerRenderer extends net.minecraft.client.renderer.entity.LivingEntityRenderer<net.minecraft.client.player.AbstractClientPlayer, net.minecraft.client.model.PlayerModel<net.minecraft.client.player.AbstractClientPlayer>> {
+  public net.minecraft.client.renderer.entity.player.PlayerRenderer(net.minecraft.client.renderer.entity.EntityRendererProvider$Context, boolean);
+  public void render(net.minecraft.client.player.AbstractClientPlayer, float, float, com.mojang.blaze3d.vertex.PoseStack, net.minecraft.client.renderer.MultiBufferSource, int);
+  public net.minecraft.world.phys.Vec3 getRenderOffset(net.minecraft.client.player.AbstractClientPlayer, float);
+  private void setModelProperties(net.minecraft.client.player.AbstractClientPlayer);
+  private static net.minecraft.client.model.HumanoidModel$ArmPose getArmPose(net.minecraft.client.player.AbstractClientPlayer, net.minecraft.world.InteractionHand);
+  public net.minecraft.resources.ResourceLocation getTextureLocation(net.minecraft.client.player.AbstractClientPlayer);
+  protected void scale(net.minecraft.client.player.AbstractClientPlayer, com.mojang.blaze3d.vertex.PoseStack, float);
+  protected void renderNameTag(net.minecraft.client.player.AbstractClientPlayer, net.minecraft.network.chat.Component, com.mojang.blaze3d.vertex.PoseStack, net.minecraft.client.renderer.MultiBufferSource, int, float);
+  public void renderRightHand(com.mojang.blaze3d.vertex.PoseStack, net.minecraft.client.renderer.MultiBufferSource, int, net.minecraft.client.player.AbstractClientPlayer);
+  public void renderLeftHand(com.mojang.blaze3d.vertex.PoseStack, net.minecraft.client.renderer.MultiBufferSource, int, net.minecraft.client.player.AbstractClientPlayer);
+  private void renderHand(com.mojang.blaze3d.vertex.PoseStack, net.minecraft.client.renderer.MultiBufferSource, int, net.minecraft.client.player.AbstractClientPlayer, net.minecraft.client.model.geom.ModelPart, net.minecraft.client.model.geom.ModelPart);
+  protected void setupRotations(net.minecraft.client.player.AbstractClientPlayer, com.mojang.blaze3d.vertex.PoseStack, float, float, float, float);
+  protected void scale(net.minecraft.world.entity.LivingEntity, com.mojang.blaze3d.vertex.PoseStack, float);
+  protected void setupRotations(net.minecraft.world.entity.LivingEntity, com.mojang.blaze3d.vertex.PoseStack, float, float, float, float);
+  public void render(net.minecraft.world.entity.LivingEntity, float, float, com.mojang.blaze3d.vertex.PoseStack, net.minecraft.client.renderer.MultiBufferSource, int);
+  public net.minecraft.resources.ResourceLocation getTextureLocation(net.minecraft.world.entity.Entity);
+  protected void renderNameTag(net.minecraft.world.entity.Entity, net.minecraft.network.chat.Component, com.mojang.blaze3d.vertex.PoseStack, net.minecraft.client.renderer.MultiBufferSource, int, float);
+  public void render(net.minecraft.world.entity.Entity, float, float, com.mojang.blaze3d.vertex.PoseStack, net.minecraft.client.renderer.MultiBufferSource, int);
+  public net.minecraft.world.phys.Vec3 getRenderOffset(net.minecraft.world.entity.Entity, float);
+}

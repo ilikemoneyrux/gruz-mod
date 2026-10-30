@@ -1,0 +1,30 @@
+Compiled from "EntityRenderer.java"
+public abstract class net.minecraft.client.renderer.entity.EntityRenderer<T extends net.minecraft.world.entity.Entity, S extends net.minecraft.client.renderer.entity.state.EntityRenderState> {
+  protected static final float NAMETAG_SCALE;
+  public static final int LEASH_RENDER_STEPS;
+  protected final net.minecraft.client.renderer.entity.EntityRenderDispatcher entityRenderDispatcher;
+  private final net.minecraft.client.gui.Font font;
+  protected float shadowRadius;
+  protected float shadowStrength;
+  private final S reusedState;
+  protected net.minecraft.client.renderer.entity.EntityRenderer(net.minecraft.client.renderer.entity.EntityRendererProvider$Context);
+  public final int getPackedLightCoords(T, float);
+  protected int getSkyLightLevel(T, net.minecraft.core.BlockPos);
+  protected int getBlockLightLevel(T, net.minecraft.core.BlockPos);
+  public boolean shouldRender(T, net.minecraft.client.renderer.culling.Frustum, double, double, double);
+  protected net.minecraft.world.phys.AABB getBoundingBoxForCulling(T);
+  protected boolean affectedByCulling(T);
+  public net.minecraft.world.phys.Vec3 getRenderOffset(S);
+  public void render(S, com.mojang.blaze3d.vertex.PoseStack, net.minecraft.client.renderer.MultiBufferSource, int);
+  private static void renderLeash(com.mojang.blaze3d.vertex.PoseStack, net.minecraft.client.renderer.MultiBufferSource, net.minecraft.client.renderer.entity.state.EntityRenderState$LeashState);
+  private static void addVertexPair(com.mojang.blaze3d.vertex.VertexConsumer, org.joml.Matrix4f, float, float, float, int, int, int, int, float, float, float, float, int, boolean);
+  protected boolean shouldShowName(T, double);
+  public net.minecraft.client.gui.Font getFont();
+  protected void renderNameTag(S, net.minecraft.network.chat.Component, com.mojang.blaze3d.vertex.PoseStack, net.minecraft.client.renderer.MultiBufferSource, int);
+  protected net.minecraft.network.chat.Component getNameTag(T);
+  protected float getShadowRadius(S);
+  protected float getShadowStrength(S);
+  public abstract S createRenderState();
+  public final S createRenderState(T, float);
+  public void extractRenderState(T, S, float);
+}

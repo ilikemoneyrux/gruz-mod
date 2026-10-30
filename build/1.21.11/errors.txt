@@ -1,0 +1,864 @@
+errors: 223
+pl/gruzclient/status/Benchmark.java:9: cannot find symbol
+    import net.minecraft.Util;
+                        ^
+      symbol:   class Util
+pl/gruzclient/render/GruzDraw.java:3: cannot find symbol
+    import com.mojang.blaze3d.platform.GlStateManager;
+                                      ^
+      symbol:   class GlStateManager
+pl/gruzclient/render/GruzDraw.java:13: cannot find symbol
+    import net.minecraft.Util;
+                        ^
+      symbol:   class Util
+pl/gruzclient/render/GruzDraw.java:17: cannot find symbol
+    import net.minecraft.resources.ResourceLocation;
+                                  ^
+      symbol:   class ResourceLocation
+pl/gruzclient/render/GruzDraw.java:34: cannot find symbol
+        public static final ResourceLocation LOGO = ResourceLocation.fromNamespaceAndPath(GruzClient.MOD_ID, "textures/gui/logo.png");
+                            ^
+      symbol:   class ResourceLocation
+pl/gruzclient/render/GruzDraw.java:35: cannot find symbol
+        public static final ResourceLocation GLOW = ResourceLocation.fromNamespaceAndPath(GruzClient.MOD_ID, "textures/gui/glow.png");
+                            ^
+      symbol:   class ResourceLocation
+pl/gruzclient/render/GruzDraw.java:36: cannot find symbol
+        public static final ResourceLocation CRYSTAL = ResourceLocation.fromNamespaceAndPath(GruzClient.MOD_ID, "textures/gui/crystal.png");
+                            ^
+      symbol:   class ResourceLocation
+pl/gruzclient/render/GruzDraw.java:38: cannot find symbol
+        private static final Set<ResourceLocation> LOADED = new HashSet<>();
+                                 ^
+      symbol:   class ResourceLocation
+pl/gruzclient/render/GruzDraw.java:44: cannot find symbol
+        public static ResourceLocation tex(ResourceLocation id) {
+                                           ^
+      symbol:   class ResourceLocation
+pl/gruzclient/render/GruzDraw.java:60: cannot find symbol
+        public static void sprite(GuiGraphics c, ResourceLocation id, int texSize, float x, float y, float w, float h,
+                                                 ^
+      symbol:   class ResourceLocation
+pl/gruzclient/render/Ui.java:10: cannot find symbol
+    import net.minecraft.resources.ResourceLocation;
+                                  ^
+      symbol:   class ResourceLocation
+pl/gruzclient/render/Ui.java:22: cannot find symbol
+        public static final ResourceLocation FONT = ResourceLocation.fromNamespaceAndPath(GruzClient.MOD_ID, "ui");
+                            ^
+      symbol:   class ResourceLocation
+pl/gruzclient/render/Ui.java:23: cannot find symbol
+        public static final ResourceLocation FONT_BOLD = ResourceLocation.fromNamespaceAndPath(GruzClient.MOD_ID, "ui_bold");
+                            ^
+      symbol:   class ResourceLocation
+pl/gruzclient/render/Ui.java:24: cannot find symbol
+        public static final ResourceLocation ICONS = ResourceLocation.fromNamespaceAndPath(GruzClient.MOD_ID, "textures/gui/icons.png");
+                            ^
+      symbol:   class ResourceLocation
+pl/gruzclient/render/WindowIcon.java:12: cannot find symbol
+    import net.minecraft.Util;
+                        ^
+      symbol:   class Util
+pl/gruzclient/mixin/SplashOverlayMixin.java:3: cannot find symbol
+    import net.minecraft.Util;
+                        ^
+      symbol:   class Util
+pl/gruzclient/mixin/WorldRendererMixin.java:7: cannot find symbol
+    import net.minecraft.client.renderer.RenderType;
+                                        ^
+      symbol:   class RenderType
+pl/gruzclient/mixin/BackgroundRendererMixin.java:6: cannot find symbol
+    import net.minecraft.client.renderer.FogRenderer;
+                                        ^
+      symbol:   class FogRenderer
+pl/gruzclient/mixin/PlayerEntityRendererMixin.java:3: cannot find symbol
+    import net.minecraft.client.model.PlayerModel;
+                                     ^
+      symbol:   class PlayerModel
+pl/gruzclient/mixin/PlayerEntityRendererMixin.java:7: cannot find symbol
+    import net.minecraft.client.renderer.entity.player.PlayerRenderer;
+                                                      ^
+      symbol:   class PlayerRenderer
+pl/gruzclient/mixin/PlayerEntityRendererMixin.java:16: cannot find symbol
+    public abstract class PlayerEntityRendererMixin extends LivingEntityRenderer<AbstractClientPlayer, PlayerModel<AbstractClientPlayer>> {
+                                                                                                       ^
+      symbol: class PlayerModel
+pl/gruzclient/mixin/PlayerEntityRendererMixin.java:16: wrong number of type arguments; required 3
+    public abstract class PlayerEntityRendererMixin extends LivingEntityRenderer<AbstractClientPlayer, PlayerModel<AbstractClientPlayer>> {
+                                                                                ^
+pl/gruzclient/mixin/PlayerEntityRendererMixin.java:17: cannot find symbol
+        protected PlayerEntityRendererMixin(EntityRendererProvider.Context ctx, PlayerModel<AbstractClientPlayer> model, float shadowRadius) {
+                                                                                ^
+      symbol:   class PlayerModel
+pl/gruzclient/mixin/AbstractClientPlayerEntityMixin.java:4: cannot find symbol
+    import net.minecraft.client.resources.PlayerSkin;
+                                         ^
+      symbol:   class PlayerSkin
+pl/gruzclient/mixin/AbstractClientPlayerEntityMixin.java:5: cannot find symbol
+    import net.minecraft.resources.ResourceLocation;
+                                  ^
+      symbol:   class ResourceLocation
+pl/gruzclient/mixin/AbstractClientPlayerEntityMixin.java:18: cannot find symbol
+        private void gruz$cape(CallbackInfoReturnable<PlayerSkin> cir) {
+                                                      ^
+      symbol:   class PlayerSkin
+pl/gruzclient/module/impl/NametagModule.java:6: cannot find symbol
+    import net.minecraft.resources.ResourceLocation;
+                                  ^
+      symbol:   class ResourceLocation
+pl/gruzclient/module/impl/MotionBlurModule.java:4: cannot find symbol
+    import net.minecraft.resources.ResourceLocation;
+                                  ^
+      symbol:   class ResourceLocation
+pl/gruzclient/module/impl/ItemPhysicsModule.java:8: cannot find symbol
+    import net.minecraft.client.resources.model.BakedModel;
+                                               ^
+      symbol:   class BakedModel
+pl/gruzclient/module/impl/MenuModule.java:19: cannot find symbol
+    import net.minecraft.resources.ResourceLocation;
+                                  ^
+      symbol:   class ResourceLocation
+pl/gruzclient/module/impl/FreecamModule.java:11: cannot find symbol
+    import net.minecraft.client.player.Input;
+                                      ^
+      symbol:   class Input
+pl/gruzclient/module/impl/MinimapModule.java:20: cannot find symbol
+    import net.minecraft.resources.ResourceLocation;
+                                  ^
+      symbol:   class ResourceLocation
+pl/gruzclient/module/impl/MinimapModule.java:36: cannot find symbol
+        private static final ResourceLocation ID = ResourceLocation.fromNamespaceAndPath(GruzClient.MOD_ID, "minimap");
+                             ^
+      symbol:   class ResourceLocation
+pl/gruzclient/module/impl/FreecamModule.java:26: cannot find symbol
+        private Input savedInput;
+                ^
+      symbol:   class Input
+pl/gruzclient/module/impl/MenuModule.java:30: cannot find symbol
+        public static final ResourceLocation PANORAMA = ResourceLocation.fromNamespaceAndPath(GruzClient.MOD_ID, "panorama/menu");
+                            ^
+      symbol:   class ResourceLocation
+pl/gruzclient/module/impl/MotionBlurModule.java:16: cannot find symbol
+        private static final ResourceLocation SHADER = ResourceLocation.fromNamespaceAndPath(GruzClient.MOD_ID, "shaders/post/motion_blur.json");
+                             ^
+      symbol:   class ResourceLocation
+pl/gruzclient/module/impl/NametagModule.java:32: cannot find symbol
+        private static final ResourceLocation ICON_FONT = ResourceLocation.fromNamespaceAndPath("gruzclient", "icons");
+                             ^
+      symbol:   class ResourceLocation
+pl/gruzclient/cosmetics/CosmeticsFeature.java:6: cannot find symbol
+    import net.minecraft.client.model.PlayerModel;
+                                     ^
+      symbol:   class PlayerModel
+pl/gruzclient/cosmetics/CosmeticsFeature.java:10: cannot find symbol
+    import net.minecraft.client.renderer.RenderType;
+                                        ^
+      symbol:   class RenderType
+pl/gruzclient/cosmetics/CosmeticsFeature.java:14: cannot find symbol
+    import net.minecraft.resources.ResourceLocation;
+                                  ^
+      symbol:   class ResourceLocation
+pl/gruzclient/cosmetics/CosmeticsFeature.java:26: cannot find symbol
+    public class CosmeticsFeature extends RenderLayer<AbstractClientPlayer, PlayerModel<AbstractClientPlayer>> {
+                                                                            ^
+      symbol: class PlayerModel
+pl/gruzclient/cosmetics/CosmeticsFeature.java:27: cannot find symbol
+        private static final ResourceLocation WHITE = ResourceLocation.fromNamespaceAndPath(GruzClient.MOD_ID, "textures/gui/white.png");
+                             ^
+      symbol:   class ResourceLocation
+pl/gruzclient/cosmetics/CosmeticsFeature.java:32: cannot find symbol
+        private RenderType solidLayer, glowLayer, litLayer;
+                ^
+      symbol:   class RenderType
+pl/gruzclient/cosmetics/CosmeticsFeature.java:34: cannot find symbol
+        public CosmeticsFeature(RenderLayerParent<AbstractClientPlayer, PlayerModel<AbstractClientPlayer>> context) {
+                                                                        ^
+      symbol:   class PlayerModel
+pl/gruzclient/cosmetics/CapeTextures.java:10: cannot find symbol
+    import net.minecraft.resources.ResourceLocation;
+                                  ^
+      symbol:   class ResourceLocation
+pl/gruzclient/cosmetics/CapeTextures.java:20: cannot find symbol
+        private static final Map<String, ResourceLocation> IDS = new HashMap<>();
+                                         ^
+      symbol:   class ResourceLocation
+pl/gruzclient/cosmetics/CapeTextures.java:26: cannot find symbol
+        public static ResourceLocation id(String style, int color) {
+                      ^
+      symbol:   class ResourceLocation
+pl/gruzclient/screen/GruzTitleScreen.java:4: cannot find symbol
+    import net.minecraft.Util;
+                        ^
+      symbol:   class Util
+pl/gruzclient/screen/GruzTitleScreen.java:16: cannot find symbol
+    import net.minecraft.client.resources.PlayerSkin;
+                                         ^
+      symbol:   class PlayerSkin
+pl/gruzclient/screen/WorldMapScreen.java:13: cannot find symbol
+    import net.minecraft.resources.ResourceLocation;
+                                  ^
+      symbol:   class ResourceLocation
+pl/gruzclient/screen/WorldMapScreen.java:26: cannot find symbol
+        private static final ResourceLocation ID = ResourceLocation.fromNamespaceAndPath(GruzClient.MOD_ID, "worldmap");
+                             ^
+      symbol:   class ResourceLocation
+pl/gruzclient/mixin/BackgroundRendererMixin.java:17: cannot find symbol
+    @Mixin(FogRenderer.class)
+           ^
+      symbol: class FogRenderer
+pl/gruzclient/mixin/PlayerEntityRendererMixin.java:15: cannot find symbol
+    @Mixin(PlayerRenderer.class)
+           ^
+      symbol: class PlayerRenderer
+pl/gruzclient/render/GruzDraw.java:49: no suitable constructor found for DynamicTexture(NativeImage)
+                DynamicTexture t = new DynamicTexture(NativeImage.read(in));
+                                   ^
+        constructor DynamicTexture.DynamicTexture(Supplier<String>,NativeImage) is not applicable
+pl/gruzclient/render/GruzDraw.java:50: cannot find symbol
+                t.setFilter(true, false); // gładkie skalowanie
+                 ^
+      symbol:   method setFilter(boolean,boolean)
+pl/gruzclient/render/GruzDraw.java:64: cannot find symbol
+            RenderSystem.enableBlend();
+                        ^
+      symbol:   method enableBlend()
+pl/gruzclient/render/GruzDraw.java:65: package GlStateManager does not exist
+            if (additive) RenderSystem.blendFunc(GlStateManager.SourceFactor.SRC_ALPHA, GlStateManager.DestFactor.ONE);
+                                                               ^
+pl/gruzclient/render/GruzDraw.java:66: cannot find symbol
+            else RenderSystem.defaultBlendFunc();
+                             ^
+      symbol:   method defaultBlendFunc()
+pl/gruzclient/render/GruzDraw.java:67: cannot find symbol
+            c.setColor(1f, 1f, 1f, Math.min(1f, alpha));
+             ^
+      symbol:   method setColor(float,float,float,float)
+pl/gruzclient/render/GruzDraw.java:68: incompatible types: Matrix3x2fStack cannot be converted to PoseStack
+            PoseStack m = c.pose();
+                                ^
+pl/gruzclient/render/GruzDraw.java:76: cannot find symbol
+            c.setColor(1f, 1f, 1f, 1f);
+             ^
+      symbol:   method setColor(float,float,float,float)
+pl/gruzclient/render/GruzDraw.java:77: cannot find symbol
+            RenderSystem.defaultBlendFunc();
+                        ^
+      symbol:   method defaultBlendFunc()
+pl/gruzclient/render/GruzDraw.java:111: cannot find symbol
+        public static float seconds() { return Util.getMillis() / 1000f; }
+                                               ^
+      symbol:   variable Util
+pl/gruzclient/status/Benchmark.java:38: cannot find symbol
+            long now = Util.getNanos() / 1_000_000L;
+                       ^
+      symbol:   variable Util
+pl/gruzclient/status/Benchmark.java:43: cannot find symbol
+                long nano = Util.getNanos();
+                            ^
+      symbol:   variable Util
+pl/gruzclient/render/Ui.java:46: cannot find symbol
+            m.pushPose();
+             ^
+      symbol:   method pushPose()
+pl/gruzclient/render/Ui.java:47: incompatible types: int cannot be converted to Matrix3x2f
+            m.translate(x, y, 0);
+                              ^
+pl/gruzclient/render/Ui.java:48: incompatible types: float cannot be converted to Matrix3x2f
+            m.scale(scale, scale, 1f);
+                                  ^
+pl/gruzclient/render/Ui.java:50: cannot find symbol
+            m.popPose();
+             ^
+      symbol:   method popPose()
+pl/gruzclient/render/Ui.java:66: cannot find symbol
+            RenderSystem.enableBlend();
+                        ^
+      symbol:   method enableBlend()
+pl/gruzclient/render/Ui.java:67: cannot find symbol
+            RenderSystem.defaultBlendFunc();
+                        ^
+      symbol:   method defaultBlendFunc()
+pl/gruzclient/render/Ui.java:68: cannot find symbol
+            c.setColor(((argb >> 16) & 255) / 255f, ((argb >> 8) & 255) / 255f, (argb & 255) / 255f, ((argb >>> 24) & 255) / 255f);
+             ^
+      symbol:   method setColor(float,float,float,float)
+pl/gruzclient/render/Ui.java:70: cannot find symbol
+            c.setColor(1f, 1f, 1f, 1f);
+             ^
+      symbol:   method setColor(float,float,float,float)
+pl/gruzclient/render/WindowIcon.java:24: cannot find symbol
+            if (Util.getPlatform() == Util.OS.OSX) return; // macOS bierze ikonę z aplikacji
+                ^
+      symbol:   variable Util
+pl/gruzclient/render/WindowIcon.java:24: package Util does not exist
+            if (Util.getPlatform() == Util.OS.OSX) return; // macOS bierze ikonę z aplikacji
+                                          ^
+pl/gruzclient/render/WindowIcon.java:25: cannot find symbol
+            long handle = Minecraft.getInstance().getWindow().getWindow();
+                                                             ^
+      symbol:   method getWindow()
+pl/gruzclient/render/WindowIcon.java:40: cannot find symbol
+                            int abgr = scaled.getPixelRGBA(x, y);
+                                             ^
+      symbol:   method getPixelRGBA(int,int)
+pl/gruzclient/mixin/SplashOverlayMixin.java:38: cannot find symbol
+            long now = Util.getMillis();
+                       ^
+      symbol:   variable Util
+pl/gruzclient/mixin/HeldItemRendererMixin.java:46: cannot find symbol
+            if (!(item.getItem() instanceof net.minecraft.world.item.SwordItem) || !Modules.OLD_ANIM.swordBlocking(player)) return;
+                                                                    ^
+      symbol:   class SwordItem
+pl/gruzclient/mixin/WorldRendererMixin.java:45: cannot find symbol
+            VertexConsumer fill = mc.renderBuffers().bufferSource().getBuffer(RenderType.debugFilledBox());
+                                                                              ^
+      symbol:   variable RenderType
+pl/gruzclient/mixin/WorldRendererMixin.java:53: cannot find symbol
+                shape.forAllEdges((x1, y1, z1, x2, y2, z2) -> LevelRenderer.addChainedFilledBoxVertices(matrices, fill,
+                                                                           ^
+      symbol:   method addChainedFilledBoxVertices(PoseStack,VertexConsumer,double,double,double,double,double,double,float,float,float,float)
+pl/gruzclient/mixin/WorldRendererMixin.java:61: cannot find symbol
+                LevelRenderer.addChainedFilledBoxVertices(matrices, fill,
+                             ^
+      symbol:   method addChainedFilledBoxVertices(PoseStack,VertexConsumer,double,double,double,double,double,double,float,float,float,float)
+pl/gruzclient/mixin/ChatScreenMixin.java:51: cannot find symbol
+            if (keyCode == GLFW.GLFW_KEY_F && Screen.hasControlDown()) {
+                                                    ^
+      symbol:   method hasControlDown()
+pl/gruzclient/mixin/ChatScreenMixin.java:66: method keyPressed in class EditBox cannot be applied to given types;
+                cir.setReturnValue(gruz$search.keyPressed(keyCode, scanCode, modifiers));
+                                              ^
+      required: KeyEvent
+pl/gruzclient/mixin/BackgroundRendererMixin.java:31: cannot find symbol
+            RenderSystem.clearColor(fogRed, fogGreen, fogBlue, 0f);
+                        ^
+      symbol:   method clearColor(float,float,float,float)
+pl/gruzclient/mixin/PlayerEntityRendererMixin.java:23: incompatible types: PlayerEntityRendererMixin cannot be converted to RenderLayerParent<AbstractClientPlayer,PlayerModel>
+            this.addLayer(new CosmeticsFeature(this));
+                                               ^
+pl/gruzclient/mixin/AbstractClientPlayerEntityMixin.java:21: cannot find symbol
+            PlayerSkin t = cir.getReturnValue();
+            ^
+      symbol:   class PlayerSkin
+pl/gruzclient/mixin/AbstractClientPlayerEntityMixin.java:22: cannot find symbol
+            ResourceLocation cape = CapeTextures.id(set.cape(), set.color());
+            ^
+      symbol:   class ResourceLocation
+pl/gruzclient/mixin/AbstractClientPlayerEntityMixin.java:23: cannot find symbol
+            cir.setReturnValue(new PlayerSkin(t.texture(), t.textureUrl(), cape, cape, t.model(), t.secure()));
+                                   ^
+      symbol:   class PlayerSkin
+pl/gruzclient/network/GruzNetwork.java:196: cannot find symbol
+                            mc.getMinecraftSessionService().joinServer(session.getProfileId(), session.getAccessToken(), serverId);
+                              ^
+      symbol:   method getMinecraftSessionService()
+pl/gruzclient/network/GruzNetwork.java:286: method disconnect in class ClientLevel cannot be applied to given types;
+                mc.level.disconnect();
+                        ^
+      required: Component
+pl/gruzclient/network/GruzNetwork.java:287: no suitable method found for disconnect(no arguments)
+                mc.disconnect();
+                  ^
+        method Minecraft.disconnect(Screen,boolean) is not applicable
+pl/gruzclient/cosmetics/Emote.java:84: cannot find symbol
+            m.hat.copyFrom(m.head);
+                 ^
+      symbol:   method copyFrom(ModelPart)
+pl/gruzclient/module/Modules.java:129: cannot find symbol
+            return InputConstants.isKeyDown(mc.getWindow().getWindow(), code);
+                                                          ^
+      symbol:   method getWindow()
+pl/gruzclient/module/HudModule.java:34: incompatible types: Matrix3x2fStack cannot be converted to PoseStack
+            PoseStack m = c.pose();
+                                ^
+pl/gruzclient/module/impl/KeystrokesModule.java:77: cannot find symbol
+            c.pose().pushPose();
+                    ^
+      symbol:   method pushPose()
+pl/gruzclient/module/impl/KeystrokesModule.java:78: incompatible types: int cannot be converted to Matrix3x2f
+            c.pose().translate(x + w / 2f, y + 13, 0);
+                                                   ^
+pl/gruzclient/module/impl/KeystrokesModule.java:79: incompatible types: float cannot be converted to Matrix3x2f
+            c.pose().scale(0.75f, 0.75f, 1f);
+                                         ^
+pl/gruzclient/module/impl/KeystrokesModule.java:81: cannot find symbol
+            c.pose().popPose();
+                    ^
+      symbol:   method popPose()
+pl/gruzclient/module/impl/ArmorHudModule.java:24: cannot find symbol
+                var armor = mc.player.getInventory().armor;
+                                                    ^
+      symbol:   variable armor
+pl/gruzclient/module/impl/PotionHudModule.java:37: cannot find symbol
+                TextureAtlasSprite sprite = mc.getMobEffectTextures().get(e.getEffect());
+                                              ^
+      symbol:   method getMobEffectTextures()
+pl/gruzclient/module/impl/PotionHudModule.java:38: no suitable method found for blit(int,int,int,int,int,TextureAtlasSprite)
+                c.blit(5, y + 3, 0, 18, 18, sprite);
+                 ^
+        method GuiGraphics.blit(RenderPipeline,Identifier,int,int,float,float,int,int,int,int,int) is not applicable
+pl/gruzclient/module/impl/TargetHudModule.java:51: cannot find symbol
+                    c.setColor(1f, 1f, 1f, fade);
+                     ^
+      symbol:   method setColor(float,float,float,float)
+pl/gruzclient/module/impl/TargetHudModule.java:53: cannot find symbol
+                    c.setColor(1f, 1f, 1f, 1f);
+                     ^
+      symbol:   method setColor(float,float,float,float)
+pl/gruzclient/module/impl/ItemCounterModule.java:34: items has private access in Inventory
+                List<ItemStack> all = new ArrayList<>(inv.items);
+                                                         ^
+pl/gruzclient/module/impl/ItemCounterModule.java:35: cannot find symbol
+                all.addAll(inv.offhand);
+                              ^
+      symbol:   variable offhand
+pl/gruzclient/module/impl/HitColorModule.java:44: cannot find symbol
+            for (int y = 0; y < 8; y++) for (int x = 0; x < 16; x++) img.setPixelRGBA(x, y, abgr);
+                                                                        ^
+      symbol:   method setPixelRGBA(int,int,int)
+pl/gruzclient/module/impl/NametagModule.java:27: cannot find symbol
+            out = pl.gruzclient.cosmetics.NameEffects.apply(out, Cosmetics.of((Player) entity), ((Player) entity).getGameProfile().getName());
+                                                                                                                                  ^
+      symbol:   method getName()
+pl/gruzclient/module/impl/MotionBlurModule.java:33: cannot find symbol
+                    processor.resize(w, h);
+                             ^
+      symbol:   method resize(int,int)
+pl/gruzclient/module/impl/MotionBlurModule.java:37: cannot find symbol
+                processor.setUniform("BlendFactor", strength.value / 100f);
+                         ^
+      symbol:   method setUniform(String,float)
+pl/gruzclient/module/impl/MotionBlurModule.java:38: method process in class PostChain cannot be applied to given types;
+                processor.process(tickDelta);
+                         ^
+      required: RenderTarget,GraphicsResourceAllocator
+pl/gruzclient/module/impl/OldAnimationsModule.java:25: cannot find symbol
+                    && p.getItemInHand(other).getItem() instanceof net.minecraft.world.item.SwordItem;
+                                                                                           ^
+      symbol:   class SwordItem
+pl/gruzclient/module/impl/ItemPhysicsModule.java:24: cannot find symbol
+            BakedModel model = itemRenderer.getModel(stack, entity.level(), null, entity.getId());
+            ^
+      symbol:   class BakedModel
+pl/gruzclient/module/impl/MenuModule.java:55: no suitable constructor found for DynamicTexture(NativeImage)
+                        DynamicTexture t = new DynamicTexture(NativeImage.read(in));
+                                           ^
+        constructor DynamicTexture.DynamicTexture(Supplier<String>,NativeImage) is not applicable
+pl/gruzclient/module/impl/MenuModule.java:56: cannot find symbol
+                        t.setFilter(true, false);
+                         ^
+      symbol:   method setFilter(boolean,boolean)
+pl/gruzclient/module/impl/MenuModule.java:81: method grabPanoramixScreenshot in class Minecraft cannot be applied to given types;
+                mc.grabPanoramixScreenshot(work, 1024, 1024);
+                  ^
+      required: File
+pl/gruzclient/module/impl/HitboxesModule.java:15: cannot find symbol
+                mc.getEntityRenderDispatcher().setRenderHitBoxes(true);
+                                              ^
+      symbol:   method setRenderHitBoxes(boolean)
+pl/gruzclient/module/impl/HitboxesModule.java:27: cannot find symbol
+            if (mc.level != null) mc.getEntityRenderDispatcher().setRenderHitBoxes(false);
+                                                                ^
+      symbol:   method setRenderHitBoxes(boolean)
+pl/gruzclient/module/impl/ScoreboardModule.java:31: cannot find symbol
+            m.pushPose();
+             ^
+      symbol:   method pushPose()
+pl/gruzclient/module/impl/ScoreboardModule.java:33: incompatible types: int cannot be converted to Matrix3x2f
+            m.translate(w + offX, h / 2f + offY, 0);
+                                                 ^
+pl/gruzclient/module/impl/ScoreboardModule.java:34: incompatible types: float cannot be converted to Matrix3x2f
+            m.scale(size.value, size.value, 1f);
+                                            ^
+pl/gruzclient/module/impl/ScoreboardModule.java:35: incompatible types: int cannot be converted to Matrix3x2f
+            m.translate(-w, -h / 2f, 0);
+                                     ^
+pl/gruzclient/module/impl/ScoreboardModule.java:62: cannot find symbol
+            c.pose().popPose();
+                    ^
+      symbol:   method popPose()
+pl/gruzclient/module/impl/HudTweaksModule.java:29: cannot find symbol
+            m.pushPose();
+             ^
+      symbol:   method pushPose()
+pl/gruzclient/module/impl/HudTweaksModule.java:32: incompatible types: int cannot be converted to Matrix3x2f
+            m.translate(cx + bossX, top, 0);
+                                         ^
+pl/gruzclient/module/impl/HudTweaksModule.java:34: incompatible types: float cannot be converted to Matrix3x2f
+            m.scale(k, k, 1f);
+                          ^
+pl/gruzclient/module/impl/HudTweaksModule.java:35: incompatible types: int cannot be converted to Matrix3x2f
+            m.translate(-cx, 0, 0);
+                                ^
+pl/gruzclient/module/impl/HudTweaksModule.java:63: cannot find symbol
+            if (bossPushed) c.pose().popPose();
+                                    ^
+      symbol:   method popPose()
+pl/gruzclient/module/impl/HudTweaksModule.java:71: cannot find symbol
+            m.pushPose();
+             ^
+      symbol:   method pushPose()
+pl/gruzclient/module/impl/HudTweaksModule.java:73: incompatible types: int cannot be converted to Matrix3x2f
+            m.translate(cx, cy + titleY.value, 0);
+                                               ^
+pl/gruzclient/module/impl/HudTweaksModule.java:74: incompatible types: float cannot be converted to Matrix3x2f
+            m.scale(titleSize.value, titleSize.value, 1f);
+                                                      ^
+pl/gruzclient/module/impl/HudTweaksModule.java:75: incompatible types: int cannot be converted to Matrix3x2f
+            m.translate(-cx, -cy, 0);
+                                  ^
+pl/gruzclient/module/impl/HudTweaksModule.java:79: cannot find symbol
+            if (titlePushed) c.pose().popPose();
+                                     ^
+      symbol:   method popPose()
+pl/gruzclient/module/impl/TabModule.java:28: cannot find symbol
+            var id = entry.getProfile().getId();
+                                       ^
+      symbol:   method getId()
+pl/gruzclient/module/impl/TabModule.java:29: cannot find symbol
+            Component out = pl.gruzclient.cosmetics.NameEffects.apply(name, Cosmetics.ofUuid(id), entry.getProfile().getName());
+                                                                                                                    ^
+      symbol:   method getName()
+pl/gruzclient/module/impl/TabModule.java:52: cannot find symbol
+            m.pushPose();
+             ^
+      symbol:   method pushPose()
+pl/gruzclient/module/impl/TabModule.java:55: incompatible types: int cannot be converted to Matrix3x2f
+            m.translate(tx, y + 1.5f, 0);
+                                      ^
+pl/gruzclient/module/impl/TabModule.java:56: incompatible types: float cannot be converted to Matrix3x2f
+            m.scale(k, k, 1f);
+                          ^
+pl/gruzclient/module/impl/TabModule.java:58: cannot find symbol
+            m.popPose();
+             ^
+      symbol:   method popPose()
+pl/gruzclient/module/impl/FreecamModule.java:59: cannot find symbol
+            mc.player.input = new Input(); // postać przestaje reagować na klawisze
+                                  ^
+      symbol:   class Input
+pl/gruzclient/module/impl/MinimapModule.java:68: no suitable constructor found for DynamicTexture(int,int,boolean)
+            texture = new DynamicTexture(TEX, TEX, true);
+                      ^
+        constructor DynamicTexture.DynamicTexture(Supplier<String>,NativeImage) is not applicable
+pl/gruzclient/module/impl/MinimapModule.java:93: incompatible types: Matrix3x2fStack cannot be converted to PoseStack
+            PoseStack m = c.pose();
+                                ^
+pl/gruzclient/module/impl/MinimapModule.java:143: cannot find symbol
+                    img.setPixelRGBA(tx, ty, 0xFF000000 | (b << 16) | (g << 8) | r); // NativeImage = ABGR
+                       ^
+      symbol:   method setPixelRGBA(int,int,int)
+pl/gruzclient/module/impl/CosmeticsModule.java:123: cannot find symbol
+                boolean moving = mc.player.input != null && (mc.player.input.forwardImpulse != 0 || mc.player.input.leftImpulse != 0 || mc.player.input.jumping);
+                                                                            ^
+      symbol:   variable forwardImpulse
+pl/gruzclient/module/impl/CosmeticsModule.java:155: incompatible types: Vector3f cannot be converted to int
+                        yield new DustParticleOptions(new Vector3f(((c >> 16) & 255) / 255f, ((c >> 8) & 255) / 255f, (c & 255) / 255f), 0.9f);
+                                                      ^
+pl/gruzclient/cosmetics/CosmeticsFeature.java:26: type argument AbstractClientPlayer is not within bounds of type-variable S
+    public class CosmeticsFeature extends RenderLayer<AbstractClientPlayer, PlayerModel<AbstractClientPlayer>> {
+                                                      ^
+      where S is a type-variable:
+pl/gruzclient/cosmetics/CosmeticsFeature.java:26: CosmeticsFeature is not abstract and does not override abstract method submit(PoseStack,SubmitNodeCollector,int,AbstractClientPlayer,float,float) in RenderLayer
+    public class CosmeticsFeature extends RenderLayer<AbstractClientPlayer, PlayerModel<AbstractClientPlayer>> {
+           ^
+pl/gruzclient/cosmetics/CosmeticsFeature.java:34: type argument AbstractClientPlayer is not within bounds of type-variable S
+        public CosmeticsFeature(RenderLayerParent<AbstractClientPlayer, PlayerModel<AbstractClientPlayer>> context) {
+                                                  ^
+      where S is a type-variable:
+pl/gruzclient/cosmetics/CosmeticsFeature.java:43: method does not override or implement a method from a supertype
+        @Override
+        ^
+pl/gruzclient/cosmetics/CosmeticsFeature.java:51: cannot find symbol
+            this.solidLayer = RenderType.entityTranslucentEmissive(WHITE);
+                              ^
+      symbol:   variable RenderType
+pl/gruzclient/cosmetics/CosmeticsFeature.java:52: cannot find symbol
+            this.glowLayer = RenderType.eyes(WHITE);
+                             ^
+      symbol:   variable RenderType
+pl/gruzclient/cosmetics/CosmeticsFeature.java:53: cannot find symbol
+            this.litLayer = RenderType.entityTranslucent(WHITE);
+                            ^
+      symbol:   variable RenderType
+pl/gruzclient/cosmetics/CapeTextures.java:28: cannot find symbol
+            if (CosmeticSet.HD_CAPES.contains(style)) return ResourceLocation.fromNamespaceAndPath(GruzClient.MOD_ID, "textures/cape/" + style + ".png");
+                                                             ^
+      symbol:   variable ResourceLocation
+pl/gruzclient/cosmetics/CapeTextures.java:30: cannot find symbol
+            ResourceLocation id = IDS.get(key);
+            ^
+      symbol:   class ResourceLocation
+pl/gruzclient/cosmetics/CapeTextures.java:32: no suitable constructor found for DynamicTexture(int,int,boolean)
+            DynamicTexture tex = new DynamicTexture(64 * SCALE, 32 * SCALE, true);
+                                 ^
+        constructor DynamicTexture.DynamicTexture(Supplier<String>,NativeImage) is not applicable
+pl/gruzclient/cosmetics/CapeTextures.java:33: cannot find symbol
+            id = ResourceLocation.fromNamespaceAndPath(GruzClient.MOD_ID, "cape/" + key);
+                 ^
+      symbol:   variable ResourceLocation
+pl/gruzclient/cosmetics/CapeTextures.java:136: cannot find symbol
+                    img.setPixelRGBA(px, py, abgr(rgb, 255));
+                       ^
+      symbol:   method setPixelRGBA(int,int,int)
+pl/gruzclient/map/MapCache.java:40: cannot find symbol
+            String dim = mc.level.dimension().location().toString();
+                                             ^
+      symbol:   method location()
+pl/gruzclient/map/MapCache.java:119: cannot find symbol
+                    while (st.getMapColor(w, pos) == MapColor.NONE && pos.getY() > w.getMinBuildHeight() && guard++ < 64) {
+                                                                                    ^
+      symbol:   method getMinBuildHeight()
+pl/gruzclient/map/MapCache.java:129: cannot find symbol
+                    int abgr = mc.calculateRGBColor(b);
+                                 ^
+      symbol:   method calculateRGBColor(Brightness)
+pl/gruzclient/screen/GruzTitleScreen.java:104: cannot find symbol
+                    b -> Util.getPlatform().openFile(this.minecraft.gameDirectory.toPath().resolve("screenshots").toFile())).kind(UiButton.Kind.ICON));
+                         ^
+      symbol:   variable Util
+pl/gruzclient/screen/GruzTitleScreen.java:141: method render in class PanoramaRenderer cannot be applied to given types;
+                ownPanorama.render(c, w, h, 1f, delta);
+                           ^
+      required: GuiGraphics,int,int,boolean
+pl/gruzclient/screen/GruzTitleScreen.java:148: incompatible types: float cannot be converted to GuiGraphics
+                this.renderBlurredBackground(delta);
+                                             ^
+pl/gruzclient/screen/GruzTitleScreen.java:189: cannot find symbol
+                Component v = Ui.text("Gruz Client " + GruzClient.version() + "  ·  Minecraft " + SharedConstants.getCurrentVersion().getName() + "  ·  Fabric");
+                                                                                                                                     ^
+      symbol:   method getName()
+pl/gruzclient/screen/GruzTitleScreen.java:203: cannot find symbol
+            PlayerSkin skin = this.minecraft.getSkinManager().getInsecureSkin(this.minecraft.getGameProfile());
+            ^
+      symbol:   class PlayerSkin
+pl/gruzclient/screen/GruzTitleScreen.java:204: cannot find symbol
+            c.setColor(1f, 1f, 1f, a);
+             ^
+      symbol:   method setColor(float,float,float,float)
+pl/gruzclient/screen/GruzTitleScreen.java:206: cannot find symbol
+            c.setColor(1f, 1f, 1f, 1f);
+             ^
+      symbol:   method setColor(float,float,float,float)
+pl/gruzclient/screen/GruzTitleScreen.java:251: method does not override or implement a method from a supertype
+        @Override
+        ^
+pl/gruzclient/screen/GruzTitleScreen.java:258: method mouseClicked in interface ContainerEventHandler cannot be applied to given types;
+            return super.mouseClicked(mx, my, button);
+                        ^
+      required: MouseButtonEvent,boolean
+pl/gruzclient/screen/UiButton.java:15: UiButton is not abstract and does not override abstract method renderContents(GuiGraphics,int,int,float) in AbstractButton
+    public class UiButton extends Button {
+           ^
+pl/gruzclient/screen/UiButton.java:39: renderWidget(GuiGraphics,int,int,float) in UiButton cannot override renderWidget(GuiGraphics,int,int,float) in AbstractButton
+        protected void renderWidget(GuiGraphics c, int mouseX, int mouseY, float delta) {
+                       ^
+      overridden method is final
+pl/gruzclient/screen/WorldMapScreen.java:51: no suitable constructor found for DynamicTexture(int,int,boolean)
+                texture = new DynamicTexture(texW, texH, true);
+                          ^
+        constructor DynamicTexture.DynamicTexture(Supplier<String>,NativeImage) is not applicable
+pl/gruzclient/screen/WorldMapScreen.java:74: method does not override or implement a method from a supertype
+        @Override
+        ^
+pl/gruzclient/screen/WorldMapScreen.java:77: method keyPressed in class Screen cannot be applied to given types;
+            return super.keyPressed(keyCode, scanCode, modifiers);
+                        ^
+      required: KeyEvent
+pl/gruzclient/screen/WorldMapScreen.java:97: cannot find symbol
+                    img.setPixelRGBA(x, y, 0xFF000000 | (b << 16) | (g << 8) | r);
+                       ^
+      symbol:   method setPixelRGBA(int,int,int)
+pl/gruzclient/screen/WorldMapScreen.java:131: incompatible types: Matrix3x2fStack cannot be converted to PoseStack
+                PoseStack m = c.pose();
+                                    ^
+pl/gruzclient/screen/WorldMapScreen.java:167: method does not override or implement a method from a supertype
+        @Override
+        ^
+pl/gruzclient/screen/WorldMapScreen.java:169: method mouseClicked in interface ContainerEventHandler cannot be applied to given types;
+            if (super.mouseClicked(mx, my, button)) return true;
+                     ^
+      required: MouseButtonEvent,boolean
+pl/gruzclient/screen/WorldMapScreen.java:196: method does not override or implement a method from a supertype
+        @Override
+        ^
+pl/gruzclient/screen/WorldMapScreen.java:205: method mouseDragged in interface ContainerEventHandler cannot be applied to given types;
+            return super.mouseDragged(mx, my, button, dx, dy);
+                        ^
+      required: MouseButtonEvent,double,double
+pl/gruzclient/screen/WorldMapScreen.java:208: method does not override or implement a method from a supertype
+        @Override
+        ^
+pl/gruzclient/screen/WorldMapScreen.java:211: method mouseReleased in interface ContainerEventHandler cannot be applied to given types;
+            return super.mouseReleased(mx, my, button);
+                        ^
+      required: MouseButtonEvent
+pl/gruzclient/screen/HudEditorScreen.java:182: incompatible types: float cannot be converted to GuiGraphics
+                this.renderBlurredBackground(delta);
+                                             ^
+pl/gruzclient/screen/HudEditorScreen.java:208: cannot find symbol
+                    ((pl.gruzclient.mixin.InGameHudInvoker) this.minecraft.gui).gruz$renderScoreboard(c, this.minecraft.getTimer());
+                                                                                                                       ^
+      symbol:   method getTimer()
+pl/gruzclient/screen/HudEditorScreen.java:284: method does not override or implement a method from a supertype
+        @Override
+        ^
+pl/gruzclient/screen/HudEditorScreen.java:293: method mouseClicked in interface ContainerEventHandler cannot be applied to given types;
+            if (super.mouseClicked(mx, my, button)) return true;
+                     ^
+      required: MouseButtonEvent,boolean
+pl/gruzclient/screen/HudEditorScreen.java:307: method does not override or implement a method from a supertype
+        @Override
+        ^
+pl/gruzclient/screen/HudEditorScreen.java:309: method mouseDragged in interface ContainerEventHandler cannot be applied to given types;
+            if (dragging == null) return super.mouseDragged(mx, my, button, dx, dy);
+                                              ^
+      required: MouseButtonEvent,double,double
+pl/gruzclient/screen/HudEditorScreen.java:314: cannot find symbol
+            if (snapOn && !hasAltDown()) {
+                           ^
+      symbol:   method hasAltDown()
+pl/gruzclient/screen/HudEditorScreen.java:338: method does not override or implement a method from a supertype
+        @Override
+        ^
+pl/gruzclient/screen/HudEditorScreen.java:341: method mouseReleased in interface ContainerEventHandler cannot be applied to given types;
+            return super.mouseReleased(mx, my, button);
+                        ^
+      required: MouseButtonEvent
+pl/gruzclient/screen/HudEditorScreen.java:352: method does not override or implement a method from a supertype
+        @Override
+        ^
+pl/gruzclient/screen/HudEditorScreen.java:363: method keyPressed in class Screen cannot be applied to given types;
+            return super.keyPressed(keyCode, scanCode, modifiers);
+                        ^
+      required: KeyEvent
+pl/gruzclient/screen/CrosshairEditorScreen.java:126: method does not override or implement a method from a supertype
+        @Override
+        ^
+pl/gruzclient/screen/CrosshairEditorScreen.java:128: method mouseClicked in interface ContainerEventHandler cannot be applied to given types;
+            if (super.mouseClicked(mx, my, button)) return true;
+                     ^
+      required: MouseButtonEvent,boolean
+pl/gruzclient/screen/CrosshairEditorScreen.java:138: method does not override or implement a method from a supertype
+        @Override
+        ^
+pl/gruzclient/screen/CrosshairEditorScreen.java:141: method mouseDragged in interface ContainerEventHandler cannot be applied to given types;
+            return super.mouseDragged(mx, my, button, dx, dy);
+                        ^
+      required: MouseButtonEvent,double,double
+pl/gruzclient/screen/CrosshairEditorScreen.java:144: method does not override or implement a method from a supertype
+        @Override
+        ^
+pl/gruzclient/screen/CrosshairEditorScreen.java:147: method mouseReleased in interface ContainerEventHandler cannot be applied to given types;
+            return super.mouseReleased(mx, my, button);
+                        ^
+      required: MouseButtonEvent
+pl/gruzclient/screen/GruzModsScreen.java:144: incompatible types: float cannot be converted to GuiGraphics
+                this.renderBlurredBackground(delta);
+                                             ^
+pl/gruzclient/screen/GruzModsScreen.java:148: incompatible types: float cannot be converted to GuiGraphics
+                this.renderBlurredBackground(delta);
+                                             ^
+pl/gruzclient/screen/GruzModsScreen.java:294: cannot find symbol
+                    c.pose().pushPose();
+                            ^
+      symbol:   method pushPose()
+pl/gruzclient/screen/GruzModsScreen.java:295: incompatible types: int cannot be converted to Matrix3x2f
+                    c.pose().translate(ctrlX + ctrlW - 4, cy + 9, 0);
+                                                                  ^
+pl/gruzclient/screen/GruzModsScreen.java:296: cannot find symbol
+                    c.pose().mulPose(com.mojang.math.Axis.ZP.rotationDegrees(180));
+                            ^
+      symbol:   method mulPose(Quaternionf)
+pl/gruzclient/screen/GruzModsScreen.java:298: cannot find symbol
+                    c.pose().popPose();
+                            ^
+      symbol:   method popPose()
+pl/gruzclient/screen/GruzModsScreen.java:318: method does not override or implement a method from a supertype
+        @Override
+        ^
+pl/gruzclient/screen/GruzModsScreen.java:320: method mouseClicked in interface ContainerEventHandler cannot be applied to given types;
+            if (super.mouseClicked(mx, my, button)) return true;
+                     ^
+      required: MouseButtonEvent,boolean
+pl/gruzclient/screen/GruzModsScreen.java:382: method does not override or implement a method from a supertype
+        @Override
+        ^
+pl/gruzclient/screen/GruzModsScreen.java:388: method mouseDragged in interface ContainerEventHandler cannot be applied to given types;
+            return super.mouseDragged(mx, my, button, dx, dy);
+                        ^
+      required: MouseButtonEvent,double,double
+pl/gruzclient/screen/GruzModsScreen.java:391: method does not override or implement a method from a supertype
+        @Override
+        ^
+pl/gruzclient/screen/GruzModsScreen.java:394: method mouseReleased in interface ContainerEventHandler cannot be applied to given types;
+            return super.mouseReleased(mx, my, button);
+                        ^
+      required: MouseButtonEvent
+pl/gruzclient/screen/GruzModsScreen.java:407: method does not override or implement a method from a supertype
+        @Override
+        ^
+pl/gruzclient/screen/GruzModsScreen.java:421: method keyPressed in class Screen cannot be applied to given types;
+            return super.keyPressed(keyCode, scanCode, modifiers);
+                        ^
+      required: KeyEvent
+pl/gruzclient/screen/EmoteWheelScreen.java:75: method does not override or implement a method from a supertype
+        @Override
+        ^
+pl/gruzclient/screen/EmoteWheelScreen.java:81: method does not override or implement a method from a supertype
+        @Override
+        ^
+pl/gruzclient/screen/EmoteWheelScreen.java:84: method keyReleased in interface ContainerEventHandler cannot be applied to given types;
+            return super.keyReleased(keyCode, scanCode, modifiers);
+                        ^
+      required: KeyEvent
+pl/gruzclient/screen/EmoteWheelScreen.java:87: method does not override or implement a method from a supertype
+        @Override
+        ^
+pl/gruzclient/screen/EmoteWheelScreen.java:95: method keyPressed in class Screen cannot be applied to given types;
+            return super.keyPressed(keyCode, scanCode, modifiers);
+                        ^
+      required: KeyEvent
+pl/gruzclient/screen/TextInputScreen.java:33: cannot find symbol
+            if (setting.secret) field.setFormatter((s, i) -> net.minecraft.util.FormattedCharSequence.forward("•".repeat(s.length()), net.minecraft.network.chat.Style.EMPTY));
+                                     ^
+      symbol:   method setFormatter((s,i)->net[...]MPTY))
+pl/gruzclient/screen/TextInputScreen.java:46: method does not override or implement a method from a supertype
+        @Override
+        ^
+pl/gruzclient/screen/TextInputScreen.java:49: method keyPressed in class Screen cannot be applied to given types;
+            return super.keyPressed(keyCode, scanCode, modifiers);
+                        ^
+      required: KeyEvent
+pl/gruzclient/screen/GruzButton.java:15: GruzButton is not abstract and does not override abstract method renderContents(GuiGraphics,int,int,float) in AbstractButton
+    public class GruzButton extends Button {
+           ^
+pl/gruzclient/screen/GruzButton.java:29: renderWidget(GuiGraphics,int,int,float) in GruzButton cannot override renderWidget(GuiGraphics,int,int,float) in AbstractButton
+        public void renderWidget(GuiGraphics c, int mouseX, int mouseY, float delta) {
+                    ^
+      overridden method is final
+--- What went wrong ---
+Execution failed for task ':1.21.11:compileJava' (registered by plugin class 'org.gradle.api.plugins.JavaBasePlugin').
+> Compilation failed; see the compiler output below.
+  /home/runner/work/gruz-mod/gruz-mod/versions/1.21.11/build/pp/java/pl/gruzclient/status/Benchmark.java:9: error: cannot find symbol
+  import net.minecraft.Util;
+                      ^
+    symbol:   class Util
+    location: package net.minecraft
+  /home/runner/work/gruz-mod/gruz-mod/versions/1.21.11/build/pp/java/pl/gruzclient/render/GruzDraw.java:3: error: cannot find symbol
+  import com.mojang.blaze3d.platform.GlStateManager;
+                                    ^
+    symbol:   class GlStateManager
+    location: package com.mojang.blaze3d.platform
+  /home/runner/work/gruz-mod/gruz-mod/versions/1.21.11/build/pp/java/pl/gruzclient/render/GruzDraw.java:13: error: cannot find symbol
+  import net.minecraft.Util;
+                      ^
+    symbol:   class Util
+    location: package net.minecraft
+  /home/runner/work/gruz-mod/gruz-mod/versions/1.21.11/build/pp/java/pl/gruzclient/render/GruzDraw.java:17: error: cannot find symbol
+  import net.minecraft.resources.ResourceLocation;
+                                ^
+    symbol:   class ResourceLocation
+    location: package net.minecraft.resources
+  /home/runner/work/gruz-mod/gruz-mod/versions/1.21.11/build/pp/java/pl/gruzclient/render/GruzDraw.java:34: error: cannot find symbol
+      public static final ResourceLocation LOGO = ResourceLocation.fromNamespaceAndPath(GruzClient.MOD_ID, "textures/gui/logo.png");

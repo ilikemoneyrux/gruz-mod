@@ -1,0 +1,21 @@
+Compiled from "FogRenderer.java"
+public class net.minecraft.client.renderer.FogRenderer {
+  private static final int WATER_FOG_DISTANCE;
+  private static final java.util.List<net.minecraft.client.renderer.FogRenderer$MobEffectFogFunction> MOB_EFFECT_FOG;
+  public static final float BIOME_FOG_TRANSITION_TIME;
+  private static float fogRed;
+  private static float fogGreen;
+  private static float fogBlue;
+  private static int targetBiomeFog;
+  private static int previousBiomeFog;
+  private static long biomeChangedTime;
+  public net.minecraft.client.renderer.FogRenderer();
+  public static void setupColor(net.minecraft.client.Camera, float, net.minecraft.client.multiplayer.ClientLevel, int, float);
+  public static void setupNoFog();
+  private static net.minecraft.client.renderer.FogRenderer$MobEffectFogFunction getPriorityFogFunction(net.minecraft.world.entity.Entity, float);
+  public static void setupFog(net.minecraft.client.Camera, net.minecraft.client.renderer.FogRenderer$FogMode, float, boolean, float);
+  public static void levelFogColor();
+  private static boolean method_42589(net.minecraft.world.entity.LivingEntity, float, net.minecraft.client.renderer.FogRenderer$MobEffectFogFunction);
+  private static net.minecraft.world.phys.Vec3 method_24873(net.minecraft.client.multiplayer.ClientLevel, net.minecraft.world.level.biome.BiomeManager, float, int, int, int);
+  static {};
+}

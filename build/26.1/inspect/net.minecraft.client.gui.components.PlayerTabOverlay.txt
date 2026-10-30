@@ -1,0 +1,45 @@
+Compiled from "PlayerTabOverlay.java"
+public class net.minecraft.client.gui.components.PlayerTabOverlay {
+  private static final net.minecraft.resources.Identifier PING_UNKNOWN_SPRITE;
+  private static final net.minecraft.resources.Identifier PING_1_SPRITE;
+  private static final net.minecraft.resources.Identifier PING_2_SPRITE;
+  private static final net.minecraft.resources.Identifier PING_3_SPRITE;
+  private static final net.minecraft.resources.Identifier PING_4_SPRITE;
+  private static final net.minecraft.resources.Identifier PING_5_SPRITE;
+  private static final net.minecraft.resources.Identifier HEART_CONTAINER_BLINKING_SPRITE;
+  private static final net.minecraft.resources.Identifier HEART_CONTAINER_SPRITE;
+  private static final net.minecraft.resources.Identifier HEART_FULL_BLINKING_SPRITE;
+  private static final net.minecraft.resources.Identifier HEART_HALF_BLINKING_SPRITE;
+  private static final net.minecraft.resources.Identifier HEART_ABSORBING_FULL_BLINKING_SPRITE;
+  private static final net.minecraft.resources.Identifier HEART_FULL_SPRITE;
+  private static final net.minecraft.resources.Identifier HEART_ABSORBING_HALF_BLINKING_SPRITE;
+  private static final net.minecraft.resources.Identifier HEART_HALF_SPRITE;
+  private static final java.util.Comparator<net.minecraft.client.multiplayer.PlayerInfo> PLAYER_COMPARATOR;
+  public static final int MAX_ROWS_PER_COL;
+  private final net.minecraft.client.Minecraft minecraft;
+  private final net.minecraft.client.gui.Gui gui;
+  private net.minecraft.network.chat.Component footer;
+  private net.minecraft.network.chat.Component header;
+  private boolean visible;
+  private final java.util.Map<java.util.UUID, net.minecraft.client.gui.components.PlayerTabOverlay$HealthState> healthStates;
+  public net.minecraft.client.gui.components.PlayerTabOverlay(net.minecraft.client.Minecraft, net.minecraft.client.gui.Gui);
+  public net.minecraft.network.chat.Component getNameForDisplay(net.minecraft.client.multiplayer.PlayerInfo);
+  private net.minecraft.network.chat.Component decorateName(net.minecraft.client.multiplayer.PlayerInfo, net.minecraft.network.chat.MutableComponent);
+  public void setVisible(boolean);
+  private java.util.List<net.minecraft.client.multiplayer.PlayerInfo> getPlayerInfos();
+  public void extractRenderState(net.minecraft.client.gui.GuiGraphicsExtractor, int, net.minecraft.world.scores.Scoreboard, net.minecraft.world.scores.Objective);
+  protected void extractPingIcon(net.minecraft.client.gui.GuiGraphicsExtractor, int, int, int, net.minecraft.client.multiplayer.PlayerInfo);
+  private void extractTablistScore(net.minecraft.world.scores.Objective, int, net.minecraft.client.gui.components.PlayerTabOverlay$ScoreDisplayEntry, int, int, java.util.UUID, net.minecraft.client.gui.GuiGraphicsExtractor);
+  private void extractTablistHearts(int, int, int, java.util.UUID, net.minecraft.client.gui.GuiGraphicsExtractor, int);
+  public void setFooter(net.minecraft.network.chat.Component);
+  public void setHeader(net.minecraft.network.chat.Component);
+  public void reset();
+  private static net.minecraft.client.gui.components.PlayerTabOverlay$HealthState lambda$extractTablistHearts$0(int, java.util.UUID);
+  private static boolean lambda$extractRenderState$1(java.util.Set, java.util.UUID);
+  private static java.util.UUID lambda$extractRenderState$0(net.minecraft.client.multiplayer.PlayerInfo);
+  private static java.lang.String lambda$static$3(net.minecraft.client.multiplayer.PlayerInfo);
+  private static java.lang.String lambda$static$2(net.minecraft.client.multiplayer.PlayerInfo);
+  private static int lambda$static$1(net.minecraft.client.multiplayer.PlayerInfo);
+  private static int lambda$static$0(net.minecraft.client.multiplayer.PlayerInfo);
+  static {};
+}

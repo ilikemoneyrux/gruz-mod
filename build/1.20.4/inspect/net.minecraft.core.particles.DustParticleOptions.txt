@@ -1,0 +1,13 @@
+Compiled from "DustParticleOptions.java"
+public class net.minecraft.core.particles.DustParticleOptions extends net.minecraft.core.particles.DustParticleOptionsBase {
+  public static final org.joml.Vector3f REDSTONE_PARTICLE_COLOR;
+  public static final net.minecraft.core.particles.DustParticleOptions REDSTONE;
+  public static final com.mojang.serialization.Codec<net.minecraft.core.particles.DustParticleOptions> CODEC;
+  public static final net.minecraft.core.particles.ParticleOptions$Deserializer<net.minecraft.core.particles.DustParticleOptions> DESERIALIZER;
+  public net.minecraft.core.particles.DustParticleOptions(org.joml.Vector3f, float);
+  public net.minecraft.core.particles.ParticleType<net.minecraft.core.particles.DustParticleOptions> getType();
+  private static com.mojang.datafixers.kinds.App method_33115(com.mojang.serialization.codecs.RecordCodecBuilder$Instance);
+  private static java.lang.Float method_33116(net.minecraft.core.particles.DustParticleOptions);
+  private static org.joml.Vector3f method_33117(net.minecraft.core.particles.DustParticleOptions);
+  static {};
+}

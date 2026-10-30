@@ -1,0 +1,18 @@
+Compiled from "ItemEntityRenderer.java"
+public class net.minecraft.client.renderer.entity.ItemEntityRenderer extends net.minecraft.client.renderer.entity.EntityRenderer<net.minecraft.world.entity.item.ItemEntity> {
+  private static final float ITEM_BUNDLE_OFFSET_SCALE;
+  private static final float FLAT_ITEM_BUNDLE_OFFSET_X;
+  private static final float FLAT_ITEM_BUNDLE_OFFSET_Y;
+  private static final float FLAT_ITEM_BUNDLE_OFFSET_Z;
+  private final net.minecraft.client.renderer.entity.ItemRenderer itemRenderer;
+  private final net.minecraft.util.RandomSource random;
+  public net.minecraft.client.renderer.entity.ItemEntityRenderer(net.minecraft.client.renderer.entity.EntityRendererProvider$Context);
+  public net.minecraft.resources.ResourceLocation getTextureLocation(net.minecraft.world.entity.item.ItemEntity);
+  public void render(net.minecraft.world.entity.item.ItemEntity, float, float, com.mojang.blaze3d.vertex.PoseStack, net.minecraft.client.renderer.MultiBufferSource, int);
+  public static int getSeedForItemStack(net.minecraft.world.item.ItemStack);
+  static int getRenderedAmount(int);
+  public static void renderMultipleFromCount(net.minecraft.client.renderer.entity.ItemRenderer, com.mojang.blaze3d.vertex.PoseStack, net.minecraft.client.renderer.MultiBufferSource, int, net.minecraft.world.item.ItemStack, net.minecraft.util.RandomSource, net.minecraft.world.level.Level);
+  public static void renderMultipleFromCount(net.minecraft.client.renderer.entity.ItemRenderer, com.mojang.blaze3d.vertex.PoseStack, net.minecraft.client.renderer.MultiBufferSource, int, net.minecraft.world.item.ItemStack, net.minecraft.client.resources.model.BakedModel, boolean, net.minecraft.util.RandomSource);
+  public net.minecraft.resources.ResourceLocation getTextureLocation(net.minecraft.world.entity.Entity);
+  public void render(net.minecraft.world.entity.Entity, float, float, com.mojang.blaze3d.vertex.PoseStack, net.minecraft.client.renderer.MultiBufferSource, int);
+}

@@ -1,0 +1,42 @@
+Compiled from "Camera.java"
+public class net.minecraft.client.Camera {
+  private boolean initialized;
+  private net.minecraft.world.level.BlockGetter level;
+  private net.minecraft.world.entity.Entity entity;
+  private net.minecraft.world.phys.Vec3 position;
+  private final net.minecraft.core.BlockPos$MutableBlockPos blockPosition;
+  private final org.joml.Vector3f forwards;
+  private final org.joml.Vector3f up;
+  private final org.joml.Vector3f left;
+  private float xRot;
+  private float yRot;
+  private final org.joml.Quaternionf rotation;
+  private boolean detached;
+  private float eyeHeight;
+  private float eyeHeightOld;
+  private float partialTickTime;
+  public static final float FOG_DISTANCE_SCALE;
+  public net.minecraft.client.Camera();
+  public void setup(net.minecraft.world.level.BlockGetter, net.minecraft.world.entity.Entity, boolean, boolean, float);
+  public void tick();
+  private double getMaxZoom(double);
+  protected void move(double, double, double);
+  protected void setRotation(float, float);
+  protected void setPosition(double, double, double);
+  protected void setPosition(net.minecraft.world.phys.Vec3);
+  public net.minecraft.world.phys.Vec3 getPosition();
+  public net.minecraft.core.BlockPos getBlockPosition();
+  public float getXRot();
+  public float getYRot();
+  public org.joml.Quaternionf rotation();
+  public net.minecraft.world.entity.Entity getEntity();
+  public boolean isInitialized();
+  public boolean isDetached();
+  public net.minecraft.client.Camera$NearPlane getNearPlane();
+  public net.minecraft.world.level.material.FogType getFluidInCamera();
+  public final org.joml.Vector3f getLookVector();
+  public final org.joml.Vector3f getUpVector();
+  public final org.joml.Vector3f getLeftVector();
+  public void reset();
+  public float getPartialTickTime();
+}

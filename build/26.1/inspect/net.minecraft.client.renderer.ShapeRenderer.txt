@@ -1,0 +1,6 @@
+Compiled from "ShapeRenderer.java"
+public class net.minecraft.client.renderer.ShapeRenderer {
+  public net.minecraft.client.renderer.ShapeRenderer();
+  public static void renderShape(com.mojang.blaze3d.vertex.PoseStack, com.mojang.blaze3d.vertex.VertexConsumer, net.minecraft.world.phys.shapes.VoxelShape, double, double, double, int, float);
+  private static void lambda$renderShape$0(com.mojang.blaze3d.vertex.VertexConsumer, com.mojang.blaze3d.vertex.PoseStack$Pose, double, double, double, int, float, double, double, double, double, double, double);
+}

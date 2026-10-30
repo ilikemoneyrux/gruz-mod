@@ -1,0 +1,30 @@
+Compiled from "PostChain.java"
+public class net.minecraft.client.renderer.PostChain implements java.lang.AutoCloseable {
+  private static final java.lang.String MAIN_RENDER_TARGET;
+  private final com.mojang.blaze3d.pipeline.RenderTarget screenTarget;
+  private final net.minecraft.server.packs.resources.ResourceManager resourceManager;
+  private final java.lang.String name;
+  private final java.util.List<net.minecraft.client.renderer.PostPass> passes;
+  private final java.util.Map<java.lang.String, com.mojang.blaze3d.pipeline.RenderTarget> customRenderTargets;
+  private final java.util.List<com.mojang.blaze3d.pipeline.RenderTarget> fullSizedTargets;
+  private org.joml.Matrix4f shaderOrthoMatrix;
+  private int screenWidth;
+  private int screenHeight;
+  private float time;
+  private float lastStamp;
+  public net.minecraft.client.renderer.PostChain(net.minecraft.client.renderer.texture.TextureManager, net.minecraft.server.packs.resources.ResourceManager, com.mojang.blaze3d.pipeline.RenderTarget, net.minecraft.resources.ResourceLocation) throws java.io.IOException, com.google.gson.JsonSyntaxException;
+  private void load(net.minecraft.client.renderer.texture.TextureManager, net.minecraft.resources.ResourceLocation) throws java.io.IOException, com.google.gson.JsonSyntaxException;
+  private void parseTargetNode(com.google.gson.JsonElement) throws net.minecraft.server.ChainedJsonException;
+  private void parsePassNode(net.minecraft.client.renderer.texture.TextureManager, com.google.gson.JsonElement) throws java.io.IOException;
+  private void parseUniformNode(com.google.gson.JsonElement) throws net.minecraft.server.ChainedJsonException;
+  public com.mojang.blaze3d.pipeline.RenderTarget getTempTarget(java.lang.String);
+  public void addTempTarget(java.lang.String, int, int);
+  public void close();
+  public net.minecraft.client.renderer.PostPass addPass(java.lang.String, com.mojang.blaze3d.pipeline.RenderTarget, com.mojang.blaze3d.pipeline.RenderTarget) throws java.io.IOException;
+  private void updateOrthoMatrix();
+  public void resize(int, int);
+  public void process(float);
+  public final java.lang.String getName();
+  private com.mojang.blaze3d.pipeline.RenderTarget getRenderTarget(java.lang.String);
+  private static net.minecraft.server.ChainedJsonException method_43210(java.lang.String);
+}

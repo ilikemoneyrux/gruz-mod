@@ -1,0 +1,10 @@
+Compiled from "RenderLayer.java"
+public abstract class net.minecraft.client.renderer.entity.layers.RenderLayer<T extends net.minecraft.world.entity.Entity, M extends net.minecraft.client.model.EntityModel<T>> {
+  private final net.minecraft.client.renderer.entity.RenderLayerParent<T, M> renderer;
+  public net.minecraft.client.renderer.entity.layers.RenderLayer(net.minecraft.client.renderer.entity.RenderLayerParent<T, M>);
+  protected static <T extends net.minecraft.world.entity.LivingEntity> void coloredCutoutModelCopyLayerRender(net.minecraft.client.model.EntityModel<T>, net.minecraft.client.model.EntityModel<T>, net.minecraft.resources.ResourceLocation, com.mojang.blaze3d.vertex.PoseStack, net.minecraft.client.renderer.MultiBufferSource, int, T, float, float, float, float, float, float, float, float, float);
+  protected static <T extends net.minecraft.world.entity.LivingEntity> void renderColoredCutoutModel(net.minecraft.client.model.EntityModel<T>, net.minecraft.resources.ResourceLocation, com.mojang.blaze3d.vertex.PoseStack, net.minecraft.client.renderer.MultiBufferSource, int, T, float, float, float);
+  public M getParentModel();
+  protected net.minecraft.resources.ResourceLocation getTextureLocation(T);
+  public abstract void render(com.mojang.blaze3d.vertex.PoseStack, net.minecraft.client.renderer.MultiBufferSource, int, T, float, float, float, float, float, float);
+}

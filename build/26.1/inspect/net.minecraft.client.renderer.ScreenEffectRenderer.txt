@@ -1,0 +1,23 @@
+Compiled from "ScreenEffectRenderer.java"
+public class net.minecraft.client.renderer.ScreenEffectRenderer {
+  private static final net.minecraft.resources.Identifier UNDERWATER_LOCATION;
+  private final net.minecraft.client.Minecraft minecraft;
+  private final net.minecraft.client.resources.model.sprite.SpriteGetter sprites;
+  private final net.minecraft.client.renderer.MultiBufferSource bufferSource;
+  public static final int ITEM_ACTIVATION_ANIMATION_LENGTH;
+  private net.minecraft.world.item.ItemStack itemActivationItem;
+  private int itemActivationTicks;
+  private float itemActivationOffX;
+  private float itemActivationOffY;
+  public net.minecraft.client.renderer.ScreenEffectRenderer(net.minecraft.client.Minecraft, net.minecraft.client.resources.model.sprite.SpriteGetter, net.minecraft.client.renderer.MultiBufferSource);
+  public void tick();
+  public void renderScreenEffect(boolean, boolean, float, net.minecraft.client.renderer.SubmitNodeCollector, boolean);
+  private void renderItemActivationAnimation(com.mojang.blaze3d.vertex.PoseStack, float, net.minecraft.client.renderer.SubmitNodeCollector);
+  public void resetItemActivation();
+  public void displayItemActivation(net.minecraft.world.item.ItemStack, net.minecraft.util.RandomSource);
+  private static net.minecraft.world.level.block.state.BlockState getViewBlockingState(net.minecraft.world.entity.player.Player);
+  private static void renderTex(net.minecraft.client.renderer.texture.TextureAtlasSprite, com.mojang.blaze3d.vertex.PoseStack, net.minecraft.client.renderer.MultiBufferSource);
+  private static void renderWater(net.minecraft.client.Minecraft, com.mojang.blaze3d.vertex.PoseStack, net.minecraft.client.renderer.MultiBufferSource);
+  private static void renderFire(com.mojang.blaze3d.vertex.PoseStack, net.minecraft.client.renderer.MultiBufferSource, net.minecraft.client.renderer.texture.TextureAtlasSprite);
+  static {};
+}

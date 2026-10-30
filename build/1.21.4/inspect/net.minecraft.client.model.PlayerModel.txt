@@ -1,0 +1,22 @@
+Compiled from "PlayerModel.java"
+public class net.minecraft.client.model.PlayerModel extends net.minecraft.client.model.HumanoidModel<net.minecraft.client.renderer.entity.state.PlayerRenderState> {
+  private static final java.lang.String LEFT_SLEEVE;
+  private static final java.lang.String RIGHT_SLEEVE;
+  private static final java.lang.String LEFT_PANTS;
+  private static final java.lang.String RIGHT_PANTS;
+  private final java.util.List<net.minecraft.client.model.geom.ModelPart> bodyParts;
+  public final net.minecraft.client.model.geom.ModelPart leftSleeve;
+  public final net.minecraft.client.model.geom.ModelPart rightSleeve;
+  public final net.minecraft.client.model.geom.ModelPart leftPants;
+  public final net.minecraft.client.model.geom.ModelPart rightPants;
+  public final net.minecraft.client.model.geom.ModelPart jacket;
+  private final boolean slim;
+  public net.minecraft.client.model.PlayerModel(net.minecraft.client.model.geom.ModelPart, boolean);
+  public static net.minecraft.client.model.geom.builders.MeshDefinition createMesh(net.minecraft.client.model.geom.builders.CubeDeformation, boolean);
+  public void setupAnim(net.minecraft.client.renderer.entity.state.PlayerRenderState);
+  public void setAllVisible(boolean);
+  public void translateToHand(net.minecraft.world.entity.HumanoidArm, com.mojang.blaze3d.vertex.PoseStack);
+  public net.minecraft.client.model.geom.ModelPart getRandomBodyPart(net.minecraft.util.RandomSource);
+  public void setupAnim(net.minecraft.client.renderer.entity.state.HumanoidRenderState);
+  public void setupAnim(net.minecraft.client.renderer.entity.state.EntityRenderState);
+}

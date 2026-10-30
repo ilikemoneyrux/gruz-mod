@@ -1,0 +1,29 @@
+Compiled from "PlayerModel.java"
+public class net.minecraft.client.model.PlayerModel<T extends net.minecraft.world.entity.LivingEntity> extends net.minecraft.client.model.HumanoidModel<T> {
+  private static final java.lang.String EAR;
+  private static final java.lang.String CLOAK;
+  private static final java.lang.String LEFT_SLEEVE;
+  private static final java.lang.String RIGHT_SLEEVE;
+  private static final java.lang.String LEFT_PANTS;
+  private static final java.lang.String RIGHT_PANTS;
+  private final java.util.List<net.minecraft.client.model.geom.ModelPart> parts;
+  public final net.minecraft.client.model.geom.ModelPart leftSleeve;
+  public final net.minecraft.client.model.geom.ModelPart rightSleeve;
+  public final net.minecraft.client.model.geom.ModelPart leftPants;
+  public final net.minecraft.client.model.geom.ModelPart rightPants;
+  public final net.minecraft.client.model.geom.ModelPart jacket;
+  private final net.minecraft.client.model.geom.ModelPart cloak;
+  private final net.minecraft.client.model.geom.ModelPart ear;
+  private final boolean slim;
+  public net.minecraft.client.model.PlayerModel(net.minecraft.client.model.geom.ModelPart, boolean);
+  public static net.minecraft.client.model.geom.builders.MeshDefinition createMesh(net.minecraft.client.model.geom.builders.CubeDeformation, boolean);
+  protected java.lang.Iterable<net.minecraft.client.model.geom.ModelPart> bodyParts();
+  public void renderEars(com.mojang.blaze3d.vertex.PoseStack, com.mojang.blaze3d.vertex.VertexConsumer, int, int);
+  public void renderCloak(com.mojang.blaze3d.vertex.PoseStack, com.mojang.blaze3d.vertex.VertexConsumer, int, int);
+  public void setupAnim(T, float, float, float, float, float);
+  public void setAllVisible(boolean);
+  public void translateToHand(net.minecraft.world.entity.HumanoidArm, com.mojang.blaze3d.vertex.PoseStack);
+  public net.minecraft.client.model.geom.ModelPart getRandomModelPart(net.minecraft.util.RandomSource);
+  public void setupAnim(net.minecraft.world.entity.Entity, float, float, float, float, float);
+  private static boolean method_32027(net.minecraft.client.model.geom.ModelPart);
+}

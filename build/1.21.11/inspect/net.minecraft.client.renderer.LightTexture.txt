@@ -1,0 +1,31 @@
+Compiled from "LightTexture.java"
+public class net.minecraft.client.renderer.LightTexture implements java.lang.AutoCloseable {
+  public static final int FULL_BRIGHT;
+  public static final int FULL_SKY;
+  public static final int FULL_BLOCK;
+  private static final int TEXTURE_SIZE;
+  private static final int LIGHTMAP_UBO_SIZE;
+  private final com.mojang.blaze3d.textures.GpuTexture texture;
+  private final com.mojang.blaze3d.textures.GpuTextureView textureView;
+  private boolean updateLightTexture;
+  private float blockLightRedFlicker;
+  private final net.minecraft.client.renderer.GameRenderer renderer;
+  private final net.minecraft.client.Minecraft minecraft;
+  private final net.minecraft.client.renderer.MappableRingBuffer ubo;
+  private final net.minecraft.util.RandomSource randomSource;
+  public net.minecraft.client.renderer.LightTexture(net.minecraft.client.renderer.GameRenderer, net.minecraft.client.Minecraft);
+  public com.mojang.blaze3d.textures.GpuTextureView getTextureView();
+  public void close();
+  public void tick();
+  private float calculateDarknessScale(net.minecraft.world.entity.LivingEntity, float, float);
+  public void updateLightTexture(float);
+  public static float getBrightness(net.minecraft.world.level.dimension.DimensionType, int);
+  public static float getBrightness(float, int);
+  public static int pack(int, int);
+  public static int block(int);
+  public static int sky(int);
+  public static int lightCoordsWithEmission(int, int);
+  private static java.lang.String method_71310();
+  private static java.lang.String method_71311();
+  static {};
+}

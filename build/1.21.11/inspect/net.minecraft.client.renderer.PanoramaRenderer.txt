@@ -1,0 +1,12 @@
+Compiled from "PanoramaRenderer.java"
+public class net.minecraft.client.renderer.PanoramaRenderer {
+  public static final net.minecraft.resources.Identifier PANORAMA_OVERLAY;
+  private final net.minecraft.client.Minecraft minecraft;
+  private final net.minecraft.client.renderer.CubeMap cubeMap;
+  private float spin;
+  public net.minecraft.client.renderer.PanoramaRenderer(net.minecraft.client.renderer.CubeMap);
+  public void render(net.minecraft.client.gui.GuiGraphics, int, int, boolean);
+  private static float wrap(float, float);
+  public void registerTextures(net.minecraft.client.renderer.texture.TextureManager);
+  static {};
+}

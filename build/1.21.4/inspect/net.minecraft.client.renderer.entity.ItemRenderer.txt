@@ -1,0 +1,25 @@
+Compiled from "ItemRenderer.java"
+public class net.minecraft.client.renderer.entity.ItemRenderer {
+  public static final net.minecraft.resources.ResourceLocation ENCHANTED_GLINT_ENTITY;
+  public static final net.minecraft.resources.ResourceLocation ENCHANTED_GLINT_ITEM;
+  public static final int GUI_SLOT_CENTER_X;
+  public static final int GUI_SLOT_CENTER_Y;
+  public static final int ITEM_DECORATION_BLIT_OFFSET;
+  public static final float COMPASS_FOIL_UI_SCALE;
+  public static final float COMPASS_FOIL_FIRST_PERSON_SCALE;
+  public static final float COMPASS_FOIL_TEXTURE_SCALE;
+  public static final int NO_TINT;
+  private final net.minecraft.client.renderer.item.ItemModelResolver resolver;
+  private final net.minecraft.client.renderer.item.ItemStackRenderState scratchItemStackRenderState;
+  public net.minecraft.client.renderer.entity.ItemRenderer(net.minecraft.client.renderer.item.ItemModelResolver);
+  private static void renderModelLists(net.minecraft.client.resources.model.BakedModel, int[], int, int, com.mojang.blaze3d.vertex.PoseStack, com.mojang.blaze3d.vertex.VertexConsumer);
+  public static void renderItem(net.minecraft.world.item.ItemDisplayContext, com.mojang.blaze3d.vertex.PoseStack, net.minecraft.client.renderer.MultiBufferSource, int, int, int[], net.minecraft.client.resources.model.BakedModel, net.minecraft.client.renderer.RenderType, net.minecraft.client.renderer.item.ItemStackRenderState$FoilType);
+  public static com.mojang.blaze3d.vertex.VertexConsumer getArmorFoilBuffer(net.minecraft.client.renderer.MultiBufferSource, net.minecraft.client.renderer.RenderType, boolean);
+  private static com.mojang.blaze3d.vertex.VertexConsumer getCompassFoilBuffer(net.minecraft.client.renderer.MultiBufferSource, net.minecraft.client.renderer.RenderType, com.mojang.blaze3d.vertex.PoseStack$Pose);
+  public static com.mojang.blaze3d.vertex.VertexConsumer getFoilBuffer(net.minecraft.client.renderer.MultiBufferSource, net.minecraft.client.renderer.RenderType, boolean, boolean);
+  private static int getLayerColorSafe(int[], int);
+  private static void renderQuadList(com.mojang.blaze3d.vertex.PoseStack, com.mojang.blaze3d.vertex.VertexConsumer, java.util.List<net.minecraft.client.renderer.block.model.BakedQuad>, int[], int, int);
+  public void renderStatic(net.minecraft.world.item.ItemStack, net.minecraft.world.item.ItemDisplayContext, int, int, com.mojang.blaze3d.vertex.PoseStack, net.minecraft.client.renderer.MultiBufferSource, net.minecraft.world.level.Level, int);
+  public void renderStatic(net.minecraft.world.entity.LivingEntity, net.minecraft.world.item.ItemStack, net.minecraft.world.item.ItemDisplayContext, boolean, com.mojang.blaze3d.vertex.PoseStack, net.minecraft.client.renderer.MultiBufferSource, net.minecraft.world.level.Level, int, int, int);
+  static {};
+}

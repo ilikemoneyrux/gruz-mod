@@ -1,0 +1,807 @@
+Downloading https://services.gradle.org/distributions/gradle-9.8.0-bin.zip
+..............10%..............20%...............30%..............40%...............50%..............60%...............70%..............80%...............90%..............100%
+
+Welcome to Gradle 9.8.0!
+
+Here are the highlights of this release:
+ - Java 27 support
+ - Maven mirror settings reuse
+ - Linked problem locations in build output
+
+For more details see https://docs.gradle.org/9.8.0/release-notes.html
+
+To honour the JVM settings for this build a single-use Daemon process will be forked. For more on this, please refer to https://docs.gradle.org/9.8.0/userguide/gradle_daemon.html#sec:disabling_the_daemon in the Gradle documentation.
+Daemon will be stopped at the end of the build 
+
+> Configure project :
+Fabric Loom: 1.19.3
+
+> Configure project :1.20.4
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+Using of the official minecraft mappings is at your own risk!
+Please make sure to read and understand the following license:
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+# (c) 2020 Microsoft Corporation. These mappings are provided "as-is" and you bear the risk of using them. You may copy and use the mappings for development purposes, but you may not redistribute the mappings complete and unmodified. Microsoft makes no warranties, express or implied, with respect to the mappings provided here.  Use and modification of this document or the source code (in any form) of Minecraft: Java Edition is governed by the Minecraft End User License Agreement available at https://account.mojang.com/documents/minecraft_eula.
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+> Task :1.20.4:preprocess
+
+> Task :1.20.4:compileJava
+/home/runner/work/gruz-mod/gruz-mod/versions/1.20.4/build/pp/java/pl/gruzclient/mixin/InGameHudInvoker.java:3: error: cannot find symbol
+import net.minecraft.client.DeltaTracker;
+                           ^
+  symbol:   class DeltaTracker
+  location: package net.minecraft.client
+/home/runner/work/gruz-mod/gruz-mod/versions/1.20.4/build/pp/java/pl/gruzclient/mixin/InGameHudInvoker.java:12: error: cannot find symbol
+    void gruz$renderScoreboard(GuiGraphics context, DeltaTracker tickCounter);
+                                                    ^
+  symbol:   class DeltaTracker
+  location: interface InGameHudInvoker
+/home/runner/work/gruz-mod/gruz-mod/versions/1.20.4/build/pp/java/pl/gruzclient/mixin/GameRendererMixin.java:4: error: cannot find symbol
+import net.minecraft.client.DeltaTracker;
+                           ^
+  symbol:   class DeltaTracker
+  location: package net.minecraft.client
+/home/runner/work/gruz-mod/gruz-mod/versions/1.20.4/build/pp/java/pl/gruzclient/mixin/GameRendererMixin.java:32: error: cannot find symbol
+    private void gruz$motionBlur(DeltaTracker tickCounter, boolean tick, CallbackInfo ci) {
+                                 ^
+  symbol:   class DeltaTracker
+  location: class GameRendererMixin
+/home/runner/work/gruz-mod/gruz-mod/versions/1.20.4/build/pp/java/pl/gruzclient/mixin/InGameHudMixin.java:3: error: cannot find symbol
+import net.minecraft.client.DeltaTracker;
+                           ^
+  symbol:   class DeltaTracker
+  location: package net.minecraft.client
+/home/runner/work/gruz-mod/gruz-mod/versions/1.20.4/build/pp/java/pl/gruzclient/mixin/InGameHudMixin.java:18: error: cannot find symbol
+    private void gruz$recording(GuiGraphics context, DeltaTracker tickCounter, CallbackInfo ci) {
+                                                     ^
+  symbol:   class DeltaTracker
+  location: class InGameHudMixin
+/home/runner/work/gruz-mod/gruz-mod/versions/1.20.4/build/pp/java/pl/gruzclient/mixin/InGameHudMixin.java:24: error: cannot find symbol
+    private void gruz$renderHud(GuiGraphics context, DeltaTracker tickCounter, CallbackInfo ci) {
+                                                     ^
+  symbol:   class DeltaTracker
+  location: class InGameHudMixin
+/home/runner/work/gruz-mod/gruz-mod/versions/1.20.4/build/pp/java/pl/gruzclient/mixin/InGameHudMixin.java:45: error: cannot find symbol
+    private void gruz$titleHead(GuiGraphics context, DeltaTracker tickCounter, CallbackInfo ci) {
+                                                     ^
+  symbol:   class DeltaTracker
+  location: class InGameHudMixin
+/home/runner/work/gruz-mod/gruz-mod/versions/1.20.4/build/pp/java/pl/gruzclient/mixin/InGameHudMixin.java:51: error: cannot find symbol
+    private void gruz$titleTail(GuiGraphics context, DeltaTracker tickCounter, CallbackInfo ci) {
+                                                     ^
+  symbol:   class DeltaTracker
+  location: class InGameHudMixin
+/home/runner/work/gruz-mod/gruz-mod/versions/1.20.4/build/pp/java/pl/gruzclient/mixin/InGameHudMixin.java:63: error: cannot find symbol
+    private void gruz$crosshair(GuiGraphics context, DeltaTracker tickCounter, CallbackInfo ci) {
+                                                     ^
+  symbol:   class DeltaTracker
+  location: class InGameHudMixin
+/home/runner/work/gruz-mod/gruz-mod/versions/1.20.4/build/pp/java/pl/gruzclient/screen/GruzTitleScreen.java:10: error: package net.minecraft.client.gui.screens.options does not exist
+import net.minecraft.client.gui.screens.options.OptionsScreen;
+                                               ^
+/home/runner/work/gruz-mod/gruz-mod/versions/1.20.4/build/pp/java/pl/gruzclient/render/GruzDraw.java:34: error: cannot find symbol
+    public static final ResourceLocation LOGO = ResourceLocation.fromNamespaceAndPath(GruzClient.MOD_ID, "textures/gui/logo.png");
+                                                                ^
+  symbol:   method fromNamespaceAndPath(String,String)
+  location: class ResourceLocation
+/home/runner/work/gruz-mod/gruz-mod/versions/1.20.4/build/pp/java/pl/gruzclient/render/GruzDraw.java:35: error: cannot find symbol
+    public static final ResourceLocation GLOW = ResourceLocation.fromNamespaceAndPath(GruzClient.MOD_ID, "textures/gui/glow.png");
+                                                                ^
+  symbol:   method fromNamespaceAndPath(String,String)
+  location: class ResourceLocation
+/home/runner/work/gruz-mod/gruz-mod/versions/1.20.4/build/pp/java/pl/gruzclient/render/GruzDraw.java:36: error: cannot find symbol
+    public static final ResourceLocation CRYSTAL = ResourceLocation.fromNamespaceAndPath(GruzClient.MOD_ID, "textures/gui/crystal.png");
+                                                                   ^
+  symbol:   method fromNamespaceAndPath(String,String)
+  location: class ResourceLocation
+/home/runner/work/gruz-mod/gruz-mod/versions/1.20.4/build/pp/java/pl/gruzclient/render/Ui.java:22: error: cannot find symbol
+    public static final ResourceLocation FONT = ResourceLocation.fromNamespaceAndPath(GruzClient.MOD_ID, "ui");
+                                                                ^
+  symbol:   method fromNamespaceAndPath(String,String)
+  location: class ResourceLocation
+/home/runner/work/gruz-mod/gruz-mod/versions/1.20.4/build/pp/java/pl/gruzclient/render/Ui.java:23: error: cannot find symbol
+    public static final ResourceLocation FONT_BOLD = ResourceLocation.fromNamespaceAndPath(GruzClient.MOD_ID, "ui_bold");
+                                                                     ^
+  symbol:   method fromNamespaceAndPath(String,String)
+  location: class ResourceLocation
+/home/runner/work/gruz-mod/gruz-mod/versions/1.20.4/build/pp/java/pl/gruzclient/render/Ui.java:24: error: cannot find symbol
+    public static final ResourceLocation ICONS = ResourceLocation.fromNamespaceAndPath(GruzClient.MOD_ID, "textures/gui/icons.png");
+                                                                 ^
+  symbol:   method fromNamespaceAndPath(String,String)
+  location: class ResourceLocation
+/home/runner/work/gruz-mod/gruz-mod/versions/1.20.4/build/pp/java/pl/gruzclient/mixin/LightmapTextureManagerMixin.java:20: error: incompatible types: Holder<MobEffect> cannot be converted to MobEffect
+        return player.hasEffect(effect);
+                                ^
+/home/runner/work/gruz-mod/gruz-mod/versions/1.20.4/build/pp/java/pl/gruzclient/network/GruzNetwork.java:290: error: method startConnecting in class ConnectScreen cannot be applied to given types;
+        ConnectScreen.startConnecting(new TitleScreen(), mc, ServerAddress.parseString(address), info, false, null);
+                     ^
+  required: Screen,Minecraft,ServerAddress,ServerData,boolean
+  found:    TitleScreen,Minecraft,ServerAddress,ServerData,boolean,<null>
+  reason: actual and formal argument lists differ in length
+/home/runner/work/gruz-mod/gruz-mod/versions/1.20.4/build/pp/java/pl/gruzclient/module/impl/PotionHudModule.java:47: error: cannot find symbol
+        String n = e.getEffect().value().getDisplayName().getString();
+                                ^
+  symbol:   method value()
+  location: class MobEffect
+/home/runner/work/gruz-mod/gruz-mod/versions/1.20.4/build/pp/java/pl/gruzclient/module/impl/NametagModule.java:32: error: cannot find symbol
+    private static final ResourceLocation ICON_FONT = ResourceLocation.fromNamespaceAndPath("gruzclient", "icons");
+                                                                      ^
+  symbol:   method fromNamespaceAndPath(String,String)
+  location: class ResourceLocation
+/home/runner/work/gruz-mod/gruz-mod/versions/1.20.4/build/pp/java/pl/gruzclient/module/impl/MotionBlurModule.java:16: error: cannot find symbol
+    private static final ResourceLocation SHADER = ResourceLocation.fromNamespaceAndPath(GruzClient.MOD_ID, "shaders/post/motion_blur.json");
+                                                                   ^
+  symbol:   method fromNamespaceAndPath(String,String)
+  location: class ResourceLocation
+/home/runner/work/gruz-mod/gruz-mod/versions/1.20.4/build/pp/java/pl/gruzclient/module/impl/MotionBlurModule.java:37: error: cannot find symbol
+            processor.setUniform("BlendFactor", strength.value / 100f);
+                     ^
+  symbol:   method setUniform(String,float)
+  location: variable processor of type PostChain
+/home/runner/work/gruz-mod/gruz-mod/versions/1.20.4/build/pp/java/pl/gruzclient/module/impl/MenuModule.java:30: error: cannot find symbol
+    public static final ResourceLocation PANORAMA = ResourceLocation.fromNamespaceAndPath(GruzClient.MOD_ID, "panorama/menu");
+                                                                    ^
+  symbol:   method fromNamespaceAndPath(String,String)
+  location: class ResourceLocation
+/home/runner/work/gruz-mod/gruz-mod/versions/1.20.4/build/pp/java/pl/gruzclient/module/impl/MinimapModule.java:36: error: cannot find symbol
+    private static final ResourceLocation ID = ResourceLocation.fromNamespaceAndPath(GruzClient.MOD_ID, "minimap");
+                                                               ^
+  symbol:   method fromNamespaceAndPath(String,String)
+  location: class ResourceLocation
+/home/runner/work/gruz-mod/gruz-mod/versions/1.20.4/build/pp/java/pl/gruzclient/cosmetics/CosmeticsFeature.java:27: error: cannot find symbol
+    private static final ResourceLocation WHITE = ResourceLocation.fromNamespaceAndPath(GruzClient.MOD_ID, "textures/gui/white.png");
+                                                                  ^
+  symbol:   method fromNamespaceAndPath(String,String)
+  location: class ResourceLocation
+/home/runner/work/gruz-mod/gruz-mod/versions/1.20.4/build/pp/java/pl/gruzclient/cosmetics/CosmeticsFeature.java:334: error: cannot find symbol
+        vc.addVertex(e, x, y, z)
+          ^
+  symbol:   method addVertex(Pose,float,float,float)
+  location: variable vc of type VertexConsumer
+/home/runner/work/gruz-mod/gruz-mod/versions/1.20.4/build/pp/java/pl/gruzclient/cosmetics/CapeTextures.java:28: error: cannot find symbol
+        if (CosmeticSet.HD_CAPES.contains(style)) return ResourceLocation.fromNamespaceAndPath(GruzClient.MOD_ID, "textures/cape/" + style + ".png");
+                                                                         ^
+  symbol:   method fromNamespaceAndPath(String,String)
+  location: class ResourceLocation
+/home/runner/work/gruz-mod/gruz-mod/versions/1.20.4/build/pp/java/pl/gruzclient/cosmetics/CapeTextures.java:33: error: cannot find symbol
+        id = ResourceLocation.fromNamespaceAndPath(GruzClient.MOD_ID, "cape/" + key);
+                             ^
+  symbol:   method fromNamespaceAndPath(String,String)
+  location: class ResourceLocation
+/home/runner/work/gruz-mod/gruz-mod/versions/1.20.4/build/pp/java/pl/gruzclient/screen/GruzTitleScreen.java:101: error: cannot find symbol
+        add(new UiButton(ix, 10, s, s, Ui.Icon.GEAR, null, b -> this.minecraft.setScreen(new OptionsScreen(this, this.minecraft.options))).kind(UiButton.Kind.ICON));
+                                                                                             ^
+  symbol:   class OptionsScreen
+  location: class GruzTitleScreen
+/home/runner/work/gruz-mod/gruz-mod/versions/1.20.4/build/pp/java/pl/gruzclient/screen/GruzTitleScreen.java:116: error: method startConnecting in class ConnectScreen cannot be applied to given types;
+        ConnectScreen.startConnecting(this, this.minecraft, ServerAddress.parseString(address), info, false, null);
+                     ^
+  required: Screen,Minecraft,ServerAddress,ServerData,boolean
+  found:    GruzTitleScreen,Minecraft,ServerAddress,ServerData,boolean,<null>
+  reason: actual and formal argument lists differ in length
+/home/runner/work/gruz-mod/gruz-mod/versions/1.20.4/build/pp/java/pl/gruzclient/screen/GruzTitleScreen.java:141: error: method render in class PanoramaRenderer cannot be applied to given types;
+            ownPanorama.render(c, w, h, 1f, delta);
+                       ^
+  required: float,float
+  found:    GuiGraphics,int,int,float,float
+  reason: actual and formal argument lists differ in length
+/home/runner/work/gruz-mod/gruz-mod/versions/1.20.4/build/pp/java/pl/gruzclient/screen/GruzTitleScreen.java:145: error: cannot find symbol
+            this.renderPanorama(c, delta);
+                ^
+  symbol: method renderPanorama(GuiGraphics,float)
+/home/runner/work/gruz-mod/gruz-mod/versions/1.20.4/build/pp/java/pl/gruzclient/screen/GruzTitleScreen.java:148: error: cannot find symbol
+            this.renderBlurredBackground(delta);
+                ^
+  symbol: method renderBlurredBackground(float)
+/home/runner/work/gruz-mod/gruz-mod/versions/1.20.4/build/pp/java/pl/gruzclient/screen/WorldMapScreen.java:26: error: cannot find symbol
+    private static final ResourceLocation ID = ResourceLocation.fromNamespaceAndPath(GruzClient.MOD_ID, "worldmap");
+                                                               ^
+  symbol:   method fromNamespaceAndPath(String,String)
+  location: class ResourceLocation
+/home/runner/work/gruz-mod/gruz-mod/versions/1.20.4/build/pp/java/pl/gruzclient/screen/HudEditorScreen.java:182: error: cannot find symbol
+            this.renderBlurredBackground(delta);
+                ^
+  symbol: method renderBlurredBackground(float)
+/home/runner/work/gruz-mod/gruz-mod/versions/1.20.4/build/pp/java/pl/gruzclient/screen/HudEditorScreen.java:208: error: cannot find symbol
+                ((pl.gruzclient.mixin.InGameHudInvoker) this.minecraft.gui).gruz$renderScoreboard(c, this.minecraft.getTimer());
+                                                                                                                   ^
+  symbol:   method getTimer()
+  location: variable minecraft of type Minecraft
+/home/runner/work/gruz-mod/gruz-mod/versions/1.20.4/build/pp/java/pl/gruzclient/screen/GruzModsScreen.java:144: error: cannot find symbol
+            this.renderBlurredBackground(delta);
+                ^
+  symbol: method renderBlurredBackground(float)
+/home/runner/work/gruz-mod/gruz-mod/versions/1.20.4/build/pp/java/pl/gruzclient/screen/GruzModsScreen.java:147: error: cannot find symbol
+            this.renderPanorama(c, delta);
+                ^
+  symbol: method renderPanorama(GuiGraphics,float)
+/home/runner/work/gruz-mod/gruz-mod/versions/1.20.4/build/pp/java/pl/gruzclient/screen/GruzModsScreen.java:148: error: cannot find symbol
+            this.renderBlurredBackground(delta);
+                ^
+  symbol: method renderBlurredBackground(float)
+Note: Some messages have been simplified; recompile with -Xdiags:verbose to get full output
+40 errors
+
+> Task :1.20.4:compileJava FAILED
+
+[Incubating] Problems report is available at: file:///home/runner/work/gruz-mod/gruz-mod/build/reports/problems/problems-report.html
+
+FAILURE: Build failed with an exception.
+
+* What went wrong:
+Execution failed for task ':1.20.4:compileJava' (registered by plugin class 'org.gradle.api.plugins.JavaBasePlugin').
+> Compilation failed; see the compiler output below.
+  /home/runner/work/gruz-mod/gruz-mod/versions/1.20.4/build/pp/java/pl/gruzclient/mixin/InGameHudInvoker.java:3: error: cannot find symbol
+  import net.minecraft.client.DeltaTracker;
+                             ^
+    symbol:   class DeltaTracker
+    location: package net.minecraft.client
+  /home/runner/work/gruz-mod/gruz-mod/versions/1.20.4/build/pp/java/pl/gruzclient/mixin/InGameHudInvoker.java:12: error: cannot find symbol
+      void gruz$renderScoreboard(GuiGraphics context, DeltaTracker tickCounter);
+                                                      ^
+    symbol:   class DeltaTracker
+    location: interface InGameHudInvoker
+  /home/runner/work/gruz-mod/gruz-mod/versions/1.20.4/build/pp/java/pl/gruzclient/mixin/GameRendererMixin.java:4: error: cannot find symbol
+  import net.minecraft.client.DeltaTracker;
+                             ^
+    symbol:   class DeltaTracker
+    location: package net.minecraft.client
+  /home/runner/work/gruz-mod/gruz-mod/versions/1.20.4/build/pp/java/pl/gruzclient/mixin/GameRendererMixin.java:32: error: cannot find symbol
+      private void gruz$motionBlur(DeltaTracker tickCounter, boolean tick, CallbackInfo ci) {
+                                   ^
+    symbol:   class DeltaTracker
+    location: class GameRendererMixin
+  /home/runner/work/gruz-mod/gruz-mod/versions/1.20.4/build/pp/java/pl/gruzclient/mixin/InGameHudMixin.java:3: error: cannot find symbol
+  import net.minecraft.client.DeltaTracker;
+                             ^
+    symbol:   class DeltaTracker
+    location: package net.minecraft.client
+  /home/runner/work/gruz-mod/gruz-mod/versions/1.20.4/build/pp/java/pl/gruzclient/mixin/InGameHudMixin.java:18: error: cannot find symbol
+      private void gruz$recording(GuiGraphics context, DeltaTracker tickCounter, CallbackInfo ci) {
+                                                       ^
+    symbol:   class DeltaTracker
+    location: class InGameHudMixin
+  /home/runner/work/gruz-mod/gruz-mod/versions/1.20.4/build/pp/java/pl/gruzclient/mixin/InGameHudMixin.java:24: error: cannot find symbol
+      private void gruz$renderHud(GuiGraphics context, DeltaTracker tickCounter, CallbackInfo ci) {
+                                                       ^
+    symbol:   class DeltaTracker
+    location: class InGameHudMixin
+  /home/runner/work/gruz-mod/gruz-mod/versions/1.20.4/build/pp/java/pl/gruzclient/mixin/InGameHudMixin.java:45: error: cannot find symbol
+      private void gruz$titleHead(GuiGraphics context, DeltaTracker tickCounter, CallbackInfo ci) {
+                                                       ^
+    symbol:   class DeltaTracker
+    location: class InGameHudMixin
+  /home/runner/work/gruz-mod/gruz-mod/versions/1.20.4/build/pp/java/pl/gruzclient/mixin/InGameHudMixin.java:51: error: cannot find symbol
+      private void gruz$titleTail(GuiGraphics context, DeltaTracker tickCounter, CallbackInfo ci) {
+                                                       ^
+    symbol:   class DeltaTracker
+    location: class InGameHudMixin
+  /home/runner/work/gruz-mod/gruz-mod/versions/1.20.4/build/pp/java/pl/gruzclient/mixin/InGameHudMixin.java:63: error: cannot find symbol
+      private void gruz$crosshair(GuiGraphics context, DeltaTracker tickCounter, CallbackInfo ci) {
+                                                       ^
+    symbol:   class DeltaTracker
+    location: class InGameHudMixin
+  /home/runner/work/gruz-mod/gruz-mod/versions/1.20.4/build/pp/java/pl/gruzclient/screen/GruzTitleScreen.java:101: error: cannot find symbol
+          add(new UiButton(ix, 10, s, s, Ui.Icon.GEAR, null, b -> this.minecraft.setScreen(new OptionsScreen(this, this.minecraft.options))).kind(UiButton.Kind.ICON));
+                                                                                               ^
+    symbol:   class OptionsScreen
+    location: class GruzTitleScreen
+  /home/runner/work/gruz-mod/gruz-mod/versions/1.20.4/build/pp/java/pl/gruzclient/screen/GruzTitleScreen.java:10: error: package net.minecraft.client.gui.screens.options does not exist
+  import net.minecraft.client.gui.screens.options.OptionsScreen;
+                                                 ^
+  /home/runner/work/gruz-mod/gruz-mod/versions/1.20.4/build/pp/java/pl/gruzclient/render/GruzDraw.java:34: error: cannot find symbol
+      public static final ResourceLocation LOGO = ResourceLocation.fromNamespaceAndPath(GruzClient.MOD_ID, "textures/gui/logo.png");
+                                                                  ^
+    symbol:   method fromNamespaceAndPath(String,String)
+    location: class ResourceLocation
+  /home/runner/work/gruz-mod/gruz-mod/versions/1.20.4/build/pp/java/pl/gruzclient/render/GruzDraw.java:35: error: cannot find symbol
+      public static final ResourceLocation GLOW = ResourceLocation.fromNamespaceAndPath(GruzClient.MOD_ID, "textures/gui/glow.png");
+                                                                  ^
+    symbol:   method fromNamespaceAndPath(String,String)
+    location: class ResourceLocation
+  /home/runner/work/gruz-mod/gruz-mod/versions/1.20.4/build/pp/java/pl/gruzclient/render/GruzDraw.java:36: error: cannot find symbol
+      public static final ResourceLocation CRYSTAL = ResourceLocation.fromNamespaceAndPath(GruzClient.MOD_ID, "textures/gui/crystal.png");
+                                                                     ^
+    symbol:   method fromNamespaceAndPath(String,String)
+    location: class ResourceLocation
+  /home/runner/work/gruz-mod/gruz-mod/versions/1.20.4/build/pp/java/pl/gruzclient/render/Ui.java:22: error: cannot find symbol
+      public static final ResourceLocation FONT = ResourceLocation.fromNamespaceAndPath(GruzClient.MOD_ID, "ui");
+                                                                  ^
+    symbol:   method fromNamespaceAndPath(String,String)
+    location: class ResourceLocation
+  /home/runner/work/gruz-mod/gruz-mod/versions/1.20.4/build/pp/java/pl/gruzclient/render/Ui.java:23: error: cannot find symbol
+      public static final ResourceLocation FONT_BOLD = ResourceLocation.fromNamespaceAndPath(GruzClient.MOD_ID, "ui_bold");
+                                                                       ^
+    symbol:   method fromNamespaceAndPath(String,String)
+    location: class ResourceLocation
+  /home/runner/work/gruz-mod/gruz-mod/versions/1.20.4/build/pp/java/pl/gruzclient/render/Ui.java:24: error: cannot find symbol
+      public static final ResourceLocation ICONS = ResourceLocation.fromNamespaceAndPath(GruzClient.MOD_ID, "textures/gui/icons.png");
+                                                                   ^
+    symbol:   method fromNamespaceAndPath(String,String)
+    location: class ResourceLocation
+  /home/runner/work/gruz-mod/gruz-mod/versions/1.20.4/build/pp/java/pl/gruzclient/module/impl/PotionHudModule.java:47: error: cannot find symbol
+          String n = e.getEffect().value().getDisplayName().getString();
+                                  ^
+    symbol:   method value()
+    location: class MobEffect
+  /home/runner/work/gruz-mod/gruz-mod/versions/1.20.4/build/pp/java/pl/gruzclient/module/impl/NametagModule.java:32: error: cannot find symbol
+      private static final ResourceLocation ICON_FONT = ResourceLocation.fromNamespaceAndPath("gruzclient", "icons");
+                                                                        ^
+    symbol:   method fromNamespaceAndPath(String,String)
+    location: class ResourceLocation
+  /home/runner/work/gruz-mod/gruz-mod/versions/1.20.4/build/pp/java/pl/gruzclient/module/impl/MotionBlurModule.java:16: error: cannot find symbol
+      private static final ResourceLocation SHADER = ResourceLocation.fromNamespaceAndPath(GruzClient.MOD_ID, "shaders/post/motion_blur.json");
+                                                                     ^
+    symbol:   method fromNamespaceAndPath(String,String)
+    location: class ResourceLocation
+  /home/runner/work/gruz-mod/gruz-mod/versions/1.20.4/build/pp/java/pl/gruzclient/module/impl/MotionBlurModule.java:37: error: cannot find symbol
+              processor.setUniform("BlendFactor", strength.value / 100f);
+                       ^
+    symbol:   method setUniform(String,float)
+    location: variable processor of type PostChain
+  /home/runner/work/gruz-mod/gruz-mod/versions/1.20.4/build/pp/java/pl/gruzclient/module/impl/MenuModule.java:30: error: cannot find symbol
+      public static final ResourceLocation PANORAMA = ResourceLocation.fromNamespaceAndPath(GruzClient.MOD_ID, "panorama/menu");
+                                                                      ^
+    symbol:   method fromNamespaceAndPath(String,String)
+    location: class ResourceLocation
+  /home/runner/work/gruz-mod/gruz-mod/versions/1.20.4/build/pp/java/pl/gruzclient/module/impl/MinimapModule.java:36: error: cannot find symbol
+      private static final ResourceLocation ID = ResourceLocation.fromNamespaceAndPath(GruzClient.MOD_ID, "minimap");
+                                                                 ^
+    symbol:   method fromNamespaceAndPath(String,String)
+    location: class ResourceLocation
+  /home/runner/work/gruz-mod/gruz-mod/versions/1.20.4/build/pp/java/pl/gruzclient/cosmetics/CosmeticsFeature.java:27: error: cannot find symbol
+      private static final ResourceLocation WHITE = ResourceLocation.fromNamespaceAndPath(GruzClient.MOD_ID, "textures/gui/white.png");
+                                                                    ^
+    symbol:   method fromNamespaceAndPath(String,String)
+    location: class ResourceLocation
+  /home/runner/work/gruz-mod/gruz-mod/versions/1.20.4/build/pp/java/pl/gruzclient/cosmetics/CosmeticsFeature.java:334: error: cannot find symbol
+          vc.addVertex(e, x, y, z)
+            ^
+    symbol:   method addVertex(Pose,float,float,float)
+    location: variable vc of type VertexConsumer
+  /home/runner/work/gruz-mod/gruz-mod/versions/1.20.4/build/pp/java/pl/gruzclient/cosmetics/CapeTextures.java:28: error: cannot find symbol
+          if (CosmeticSet.HD_CAPES.contains(style)) return ResourceLocation.fromNamespaceAndPath(GruzClient.MOD_ID, "textures/cape/" + style + ".png");
+                                                                           ^
+    symbol:   method fromNamespaceAndPath(String,String)
+    location: class ResourceLocation
+  /home/runner/work/gruz-mod/gruz-mod/versions/1.20.4/build/pp/java/pl/gruzclient/cosmetics/CapeTextures.java:33: error: cannot find symbol
+          id = ResourceLocation.fromNamespaceAndPath(GruzClient.MOD_ID, "cape/" + key);
+                               ^
+    symbol:   method fromNamespaceAndPath(String,String)
+    location: class ResourceLocation
+  /home/runner/work/gruz-mod/gruz-mod/versions/1.20.4/build/pp/java/pl/gruzclient/screen/WorldMapScreen.java:26: error: cannot find symbol
+      private static final ResourceLocation ID = ResourceLocation.fromNamespaceAndPath(GruzClient.MOD_ID, "worldmap");
+                                                                 ^
+    symbol:   method fromNamespaceAndPath(String,String)
+    location: class ResourceLocation
+  /home/runner/work/gruz-mod/gruz-mod/versions/1.20.4/build/pp/java/pl/gruzclient/screen/HudEditorScreen.java:208: error: cannot find symbol
+                  ((pl.gruzclient.mixin.InGameHudInvoker) this.minecraft.gui).gruz$renderScoreboard(c, this.minecraft.getTimer());
+                                                                                                                     ^
+    symbol:   method getTimer()
+    location: variable minecraft of type Minecraft
+  /home/runner/work/gruz-mod/gruz-mod/versions/1.20.4/build/pp/java/pl/gruzclient/mixin/LightmapTextureManagerMixin.java:20: error: incompatible types: Holder<MobEffect> cannot be converted to MobEffect
+          return player.hasEffect(effect);
+                                  ^
+  /home/runner/work/gruz-mod/gruz-mod/versions/1.20.4/build/pp/java/pl/gruzclient/network/GruzNetwork.java:290: error: method startConnecting in class ConnectScreen cannot be applied to given types;
+          ConnectScreen.startConnecting(new TitleScreen(), mc, ServerAddress.parseString(address), info, false, null);
+                       ^
+    required: Screen,Minecraft,ServerAddress,ServerData,boolean
+    found:    TitleScreen,Minecraft,ServerAddress,ServerData,boolean,<null>
+    reason: actual and formal argument lists differ in length
+  /home/runner/work/gruz-mod/gruz-mod/versions/1.20.4/build/pp/java/pl/gruzclient/screen/GruzTitleScreen.java:116: error: method startConnecting in class ConnectScreen cannot be applied to given types;
+          ConnectScreen.startConnecting(this, this.minecraft, ServerAddress.parseString(address), info, false, null);
+                       ^
+    required: Screen,Minecraft,ServerAddress,ServerData,boolean
+    found:    GruzTitleScreen,Minecraft,ServerAddress,ServerData,boolean,<null>
+    reason: actual and formal argument lists differ in length
+  /home/runner/work/gruz-mod/gruz-mod/versions/1.20.4/build/pp/java/pl/gruzclient/screen/GruzTitleScreen.java:141: error: method render in class PanoramaRenderer cannot be applied to given types;
+              ownPanorama.render(c, w, h, 1f, delta);
+                         ^
+    required: float,float
+    found:    GuiGraphics,int,int,float,float
+    reason: actual and formal argument lists differ in length
+  /home/runner/work/gruz-mod/gruz-mod/versions/1.20.4/build/pp/java/pl/gruzclient/screen/GruzTitleScreen.java:145: error: cannot find symbol
+              this.renderPanorama(c, delta);
+                  ^
+    symbol: method renderPanorama(GuiGraphics,float)
+  /home/runner/work/gruz-mod/gruz-mod/versions/1.20.4/build/pp/java/pl/gruzclient/screen/GruzTitleScreen.java:148: error: cannot find symbol
+              this.renderBlurredBackground(delta);
+                  ^
+    symbol: method renderBlurredBackground(float)
+  /home/runner/work/gruz-mod/gruz-mod/versions/1.20.4/build/pp/java/pl/gruzclient/screen/HudEditorScreen.java:182: error: cannot find symbol
+              this.renderBlurredBackground(delta);
+                  ^
+    symbol: method renderBlurredBackground(float)
+  /home/runner/work/gruz-mod/gruz-mod/versions/1.20.4/build/pp/java/pl/gruzclient/screen/GruzModsScreen.java:144: error: cannot find symbol
+              this.renderBlurredBackground(delta);
+                  ^
+    symbol: method renderBlurredBackground(float)
+  /home/runner/work/gruz-mod/gruz-mod/versions/1.20.4/build/pp/java/pl/gruzclient/screen/GruzModsScreen.java:147: error: cannot find symbol
+              this.renderPanorama(c, delta);
+                  ^
+    symbol: method renderPanorama(GuiGraphics,float)
+  /home/runner/work/gruz-mod/gruz-mod/versions/1.20.4/build/pp/java/pl/gruzclient/screen/GruzModsScreen.java:148: error: cannot find symbol
+              this.renderBlurredBackground(delta);
+                  ^
+    symbol: method renderBlurredBackground(float)
+  Note: Some messages have been simplified; recompile with -Xdiags:verbose to get full output
+  40 errors
+
+* Try:
+> Check your code and dependencies to fix the compilation error(s)
+> Run with --scan to get full insights from a Build Scan (powered by Develocity).
+
+* Exception is:
+org.gradle.api.tasks.TaskExecutionException: Execution failed for task ':1.20.4:compileJava' (registered by plugin class 'org.gradle.api.plugins.JavaBasePlugin').
+	at org.gradle.api.internal.tasks.execution.DefaultTaskNodeExecutor.lambda$doExecute$1(DefaultTaskNodeExecutor.java:367)
+	at org.gradle.internal.Try$Failure.ifSuccessfulOrElse(Try.java:288)
+	at org.gradle.api.internal.tasks.execution.DefaultTaskNodeExecutor.doExecute(DefaultTaskNodeExecutor.java:365)
+	at org.gradle.api.internal.tasks.execution.DefaultTaskNodeExecutor.executeTrackingTaskIdentity(DefaultTaskNodeExecutor.java:332)
+	at org.gradle.api.internal.tasks.execution.DefaultTaskNodeExecutor.executeFinalizingProperties(DefaultTaskNodeExecutor.java:318)
+	at org.gradle.api.internal.tasks.execution.DefaultTaskNodeExecutor.executeSkippingWithNoActions(DefaultTaskNodeExecutor.java:289)
+	at org.gradle.api.internal.tasks.execution.DefaultTaskNodeExecutor.executeSkippingOnlyIf(DefaultTaskNodeExecutor.java:272)
+	at org.gradle.api.internal.tasks.execution.DefaultTaskNodeExecutor.executeCatchingFailures(DefaultTaskNodeExecutor.java:228)
+	at org.gradle.api.internal.tasks.execution.DefaultTaskNodeExecutor.executeWithFallbackOperationId(DefaultTaskNodeExecutor.java:197)
+	at org.gradle.api.internal.tasks.execution.DefaultTaskNodeExecutor.executeWithLifecycle(DefaultTaskNodeExecutor.java:171)
+	at org.gradle.api.internal.tasks.execution.DefaultTaskNodeExecutor.access$000(DefaultTaskNodeExecutor.java:67)
+	at org.gradle.api.internal.tasks.execution.DefaultTaskNodeExecutor$1.run(DefaultTaskNodeExecutor.java:136)
+	at org.gradle.internal.operations.DefaultBuildOperationRunner$1.execute(DefaultBuildOperationRunner.java:30)
+	at org.gradle.internal.operations.DefaultBuildOperationRunner$1.execute(DefaultBuildOperationRunner.java:27)
+	at org.gradle.internal.operations.DefaultBuildOperationRunner$2.execute(DefaultBuildOperationRunner.java:67)
+	at org.gradle.internal.operations.DefaultBuildOperationRunner$2.execute(DefaultBuildOperationRunner.java:60)
+	at org.gradle.internal.operations.DefaultBuildOperationRunner.execute(DefaultBuildOperationRunner.java:167)
+	at org.gradle.internal.operations.DefaultBuildOperationRunner.execute(DefaultBuildOperationRunner.java:60)
+	at org.gradle.internal.operations.DefaultBuildOperationRunner.run(DefaultBuildOperationRunner.java:48)
+	at org.gradle.api.internal.tasks.execution.DefaultTaskNodeExecutor.execute(DefaultTaskNodeExecutor.java:133)
+	at org.gradle.execution.plan.LocalTaskNode.execute(LocalTaskNode.java:229)
+	at org.gradle.execution.DefaultBuildWorkExecutor.lambda$executePlan$0(DefaultBuildWorkExecutor.java:153)
+	at org.gradle.execution.plan.DefaultPlanExecutor$ExecutorWorker.lambda$execute$0(DefaultPlanExecutor.java:476)
+	at org.gradle.internal.operations.CurrentBuildOperationRef.with(CurrentBuildOperationRef.java:85)
+	at org.gradle.execution.plan.DefaultPlanExecutor$ExecutorWorker.execute(DefaultPlanExecutor.java:475)
+	at org.gradle.execution.plan.DefaultPlanExecutor$ExecutorWorker.run(DefaultPlanExecutor.java:392)
+	at org.gradle.internal.concurrent.ExecutorPolicy$CatchAndRecordFailures.onExecute(ExecutorPolicy.java:65)
+	at org.gradle.internal.concurrent.AbstractManagedExecutor$1.run(AbstractManagedExecutor.java:47)
+Caused by: org.gradle.api.internal.tasks.compile.CompilationFailedException: Compilation failed; see the compiler output below.
+/home/runner/work/gruz-mod/gruz-mod/versions/1.20.4/build/pp/java/pl/gruzclient/mixin/InGameHudInvoker.java:3: error: cannot find symbol
+import net.minecraft.client.DeltaTracker;
+                           ^
+  symbol:   class DeltaTracker
+  location: package net.minecraft.client
+/home/runner/work/gruz-mod/gruz-mod/versions/1.20.4/build/pp/java/pl/gruzclient/mixin/InGameHudInvoker.java:12: error: cannot find symbol
+    void gruz$renderScoreboard(GuiGraphics context, DeltaTracker tickCounter);
+                                                    ^
+  symbol:   class DeltaTracker
+  location: interface InGameHudInvoker
+/home/runner/work/gruz-mod/gruz-mod/versions/1.20.4/build/pp/java/pl/gruzclient/mixin/GameRendererMixin.java:4: error: cannot find symbol
+import net.minecraft.client.DeltaTracker;
+                           ^
+  symbol:   class DeltaTracker
+  location: package net.minecraft.client
+/home/runner/work/gruz-mod/gruz-mod/versions/1.20.4/build/pp/java/pl/gruzclient/mixin/GameRendererMixin.java:32: error: cannot find symbol
+    private void gruz$motionBlur(DeltaTracker tickCounter, boolean tick, CallbackInfo ci) {
+                                 ^
+  symbol:   class DeltaTracker
+  location: class GameRendererMixin
+/home/runner/work/gruz-mod/gruz-mod/versions/1.20.4/build/pp/java/pl/gruzclient/mixin/InGameHudMixin.java:3: error: cannot find symbol
+import net.minecraft.client.DeltaTracker;
+                           ^
+  symbol:   class DeltaTracker
+  location: package net.minecraft.client
+/home/runner/work/gruz-mod/gruz-mod/versions/1.20.4/build/pp/java/pl/gruzclient/mixin/InGameHudMixin.java:18: error: cannot find symbol
+    private void gruz$recording(GuiGraphics context, DeltaTracker tickCounter, CallbackInfo ci) {
+                                                     ^
+  symbol:   class DeltaTracker
+  location: class InGameHudMixin
+/home/runner/work/gruz-mod/gruz-mod/versions/1.20.4/build/pp/java/pl/gruzclient/mixin/InGameHudMixin.java:24: error: cannot find symbol
+    private void gruz$renderHud(GuiGraphics context, DeltaTracker tickCounter, CallbackInfo ci) {
+                                                     ^
+  symbol:   class DeltaTracker
+  location: class InGameHudMixin
+/home/runner/work/gruz-mod/gruz-mod/versions/1.20.4/build/pp/java/pl/gruzclient/mixin/InGameHudMixin.java:45: error: cannot find symbol
+    private void gruz$titleHead(GuiGraphics context, DeltaTracker tickCounter, CallbackInfo ci) {
+                                                     ^
+  symbol:   class DeltaTracker
+  location: class InGameHudMixin
+/home/runner/work/gruz-mod/gruz-mod/versions/1.20.4/build/pp/java/pl/gruzclient/mixin/InGameHudMixin.java:51: error: cannot find symbol
+    private void gruz$titleTail(GuiGraphics context, DeltaTracker tickCounter, CallbackInfo ci) {
+                                                     ^
+  symbol:   class DeltaTracker
+  location: class InGameHudMixin
+/home/runner/work/gruz-mod/gruz-mod/versions/1.20.4/build/pp/java/pl/gruzclient/mixin/InGameHudMixin.java:63: error: cannot find symbol
+    private void gruz$crosshair(GuiGraphics context, DeltaTracker tickCounter, CallbackInfo ci) {
+                                                     ^
+  symbol:   class DeltaTracker
+  location: class InGameHudMixin
+/home/runner/work/gruz-mod/gruz-mod/versions/1.20.4/build/pp/java/pl/gruzclient/screen/GruzTitleScreen.java:10: error: package net.minecraft.client.gui.screens.options does not exist
+import net.minecraft.client.gui.screens.options.OptionsScreen;
+                                               ^
+/home/runner/work/gruz-mod/gruz-mod/versions/1.20.4/build/pp/java/pl/gruzclient/render/GruzDraw.java:34: error: cannot find symbol
+    public static final ResourceLocation LOGO = ResourceLocation.fromNamespaceAndPath(GruzClient.MOD_ID, "textures/gui/logo.png");
+                                                                ^
+  symbol:   method fromNamespaceAndPath(String,String)
+  location: class ResourceLocation
+/home/runner/work/gruz-mod/gruz-mod/versions/1.20.4/build/pp/java/pl/gruzclient/render/GruzDraw.java:35: error: cannot find symbol
+    public static final ResourceLocation GLOW = ResourceLocation.fromNamespaceAndPath(GruzClient.MOD_ID, "textures/gui/glow.png");
+                                                                ^
+  symbol:   method fromNamespaceAndPath(String,String)
+  location: class ResourceLocation
+/home/runner/work/gruz-mod/gruz-mod/versions/1.20.4/build/pp/java/pl/gruzclient/render/GruzDraw.java:36: error: cannot find symbol
+    public static final ResourceLocation CRYSTAL = ResourceLocation.fromNamespaceAndPath(GruzClient.MOD_ID, "textures/gui/crystal.png");
+                                                                   ^
+  symbol:   method fromNamespaceAndPath(String,String)
+  location: class ResourceLocation
+/home/runner/work/gruz-mod/gruz-mod/versions/1.20.4/build/pp/java/pl/gruzclient/render/Ui.java:22: error: cannot find symbol
+    public static final ResourceLocation FONT = ResourceLocation.fromNamespaceAndPath(GruzClient.MOD_ID, "ui");
+                                                                ^
+  symbol:   method fromNamespaceAndPath(String,String)
+  location: class ResourceLocation
+/home/runner/work/gruz-mod/gruz-mod/versions/1.20.4/build/pp/java/pl/gruzclient/render/Ui.java:23: error: cannot find symbol
+    public static final ResourceLocation FONT_BOLD = ResourceLocation.fromNamespaceAndPath(GruzClient.MOD_ID, "ui_bold");
+                                                                     ^
+  symbol:   method fromNamespaceAndPath(String,String)
+  location: class ResourceLocation
+/home/runner/work/gruz-mod/gruz-mod/versions/1.20.4/build/pp/java/pl/gruzclient/render/Ui.java:24: error: cannot find symbol
+    public static final ResourceLocation ICONS = ResourceLocation.fromNamespaceAndPath(GruzClient.MOD_ID, "textures/gui/icons.png");
+                                                                 ^
+  symbol:   method fromNamespaceAndPath(String,String)
+  location: class ResourceLocation
+/home/runner/work/gruz-mod/gruz-mod/versions/1.20.4/build/pp/java/pl/gruzclient/mixin/LightmapTextureManagerMixin.java:20: error: incompatible types: Holder<MobEffect> cannot be converted to MobEffect
+        return player.hasEffect(effect);
+                                ^
+/home/runner/work/gruz-mod/gruz-mod/versions/1.20.4/build/pp/java/pl/gruzclient/network/GruzNetwork.java:290: error: method startConnecting in class ConnectScreen cannot be applied to given types;
+        ConnectScreen.startConnecting(new TitleScreen(), mc, ServerAddress.parseString(address), info, false, null);
+                     ^
+  required: Screen,Minecraft,ServerAddress,ServerData,boolean
+  found:    TitleScreen,Minecraft,ServerAddress,ServerData,boolean,<null>
+  reason: actual and formal argument lists differ in length
+/home/runner/work/gruz-mod/gruz-mod/versions/1.20.4/build/pp/java/pl/gruzclient/module/impl/PotionHudModule.java:47: error: cannot find symbol
+        String n = e.getEffect().value().getDisplayName().getString();
+                                ^
+  symbol:   method value()
+  location: class MobEffect
+/home/runner/work/gruz-mod/gruz-mod/versions/1.20.4/build/pp/java/pl/gruzclient/module/impl/NametagModule.java:32: error: cannot find symbol
+    private static final ResourceLocation ICON_FONT = ResourceLocation.fromNamespaceAndPath("gruzclient", "icons");
+                                                                      ^
+  symbol:   method fromNamespaceAndPath(String,String)
+  location: class ResourceLocation
+/home/runner/work/gruz-mod/gruz-mod/versions/1.20.4/build/pp/java/pl/gruzclient/module/impl/MotionBlurModule.java:16: error: cannot find symbol
+    private static final ResourceLocation SHADER = ResourceLocation.fromNamespaceAndPath(GruzClient.MOD_ID, "shaders/post/motion_blur.json");
+                                                                   ^
+  symbol:   method fromNamespaceAndPath(String,String)
+  location: class ResourceLocation
+/home/runner/work/gruz-mod/gruz-mod/versions/1.20.4/build/pp/java/pl/gruzclient/module/impl/MotionBlurModule.java:37: error: cannot find symbol
+            processor.setUniform("BlendFactor", strength.value / 100f);
+                     ^
+  symbol:   method setUniform(String,float)
+  location: variable processor of type PostChain
+/home/runner/work/gruz-mod/gruz-mod/versions/1.20.4/build/pp/java/pl/gruzclient/module/impl/MenuModule.java:30: error: cannot find symbol
+    public static final ResourceLocation PANORAMA = ResourceLocation.fromNamespaceAndPath(GruzClient.MOD_ID, "panorama/menu");
+                                                                    ^
+  symbol:   method fromNamespaceAndPath(String,String)
+  location: class ResourceLocation
+/home/runner/work/gruz-mod/gruz-mod/versions/1.20.4/build/pp/java/pl/gruzclient/module/impl/MinimapModule.java:36: error: cannot find symbol
+    private static final ResourceLocation ID = ResourceLocation.fromNamespaceAndPath(GruzClient.MOD_ID, "minimap");
+                                                               ^
+  symbol:   method fromNamespaceAndPath(String,String)
+  location: class ResourceLocation
+/home/runner/work/gruz-mod/gruz-mod/versions/1.20.4/build/pp/java/pl/gruzclient/cosmetics/CosmeticsFeature.java:27: error: cannot find symbol
+    private static final ResourceLocation WHITE = ResourceLocation.fromNamespaceAndPath(GruzClient.MOD_ID, "textures/gui/white.png");
+                                                                  ^
+  symbol:   method fromNamespaceAndPath(String,String)
+  location: class ResourceLocation
+/home/runner/work/gruz-mod/gruz-mod/versions/1.20.4/build/pp/java/pl/gruzclient/cosmetics/CosmeticsFeature.java:334: error: cannot find symbol
+        vc.addVertex(e, x, y, z)
+          ^
+  symbol:   method addVertex(Pose,float,float,float)
+  location: variable vc of type VertexConsumer
+/home/runner/work/gruz-mod/gruz-mod/versions/1.20.4/build/pp/java/pl/gruzclient/cosmetics/CapeTextures.java:28: error: cannot find symbol
+        if (CosmeticSet.HD_CAPES.contains(style)) return ResourceLocation.fromNamespaceAndPath(GruzClient.MOD_ID, "textures/cape/" + style + ".png");
+                                                                         ^
+  symbol:   method fromNamespaceAndPath(String,String)
+  location: class ResourceLocation
+/home/runner/work/gruz-mod/gruz-mod/versions/1.20.4/build/pp/java/pl/gruzclient/cosmetics/CapeTextures.java:33: error: cannot find symbol
+        id = ResourceLocation.fromNamespaceAndPath(GruzClient.MOD_ID, "cape/" + key);
+                             ^
+  symbol:   method fromNamespaceAndPath(String,String)
+  location: class ResourceLocation
+/home/runner/work/gruz-mod/gruz-mod/versions/1.20.4/build/pp/java/pl/gruzclient/screen/GruzTitleScreen.java:101: error: cannot find symbol
+        add(new UiButton(ix, 10, s, s, Ui.Icon.GEAR, null, b -> this.minecraft.setScreen(new OptionsScreen(this, this.minecraft.options))).kind(UiButton.Kind.ICON));
+                                                                                             ^
+  symbol:   class OptionsScreen
+  location: class GruzTitleScreen
+/home/runner/work/gruz-mod/gruz-mod/versions/1.20.4/build/pp/java/pl/gruzclient/screen/GruzTitleScreen.java:116: error: method startConnecting in class ConnectScreen cannot be applied to given types;
+        ConnectScreen.startConnecting(this, this.minecraft, ServerAddress.parseString(address), info, false, null);
+                     ^
+  required: Screen,Minecraft,ServerAddress,ServerData,boolean
+  found:    GruzTitleScreen,Minecraft,ServerAddress,ServerData,boolean,<null>
+  reason: actual and formal argument lists differ in length
+/home/runner/work/gruz-mod/gruz-mod/versions/1.20.4/build/pp/java/pl/gruzclient/screen/GruzTitleScreen.java:141: error: method render in class PanoramaRenderer cannot be applied to given types;
+            ownPanorama.render(c, w, h, 1f, delta);
+                       ^
+  required: float,float
+  found:    GuiGraphics,int,int,float,float
+  reason: actual and formal argument lists differ in length
+/home/runner/work/gruz-mod/gruz-mod/versions/1.20.4/build/pp/java/pl/gruzclient/screen/GruzTitleScreen.java:145: error: cannot find symbol
+            this.renderPanorama(c, delta);
+                ^
+  symbol: method renderPanorama(GuiGraphics,float)
+/home/runner/work/gruz-mod/gruz-mod/versions/1.20.4/build/pp/java/pl/gruzclient/screen/GruzTitleScreen.java:148: error: cannot find symbol
+            this.renderBlurredBackground(delta);
+                ^
+  symbol: method renderBlurredBackground(float)
+/home/runner/work/gruz-mod/gruz-mod/versions/1.20.4/build/pp/java/pl/gruzclient/screen/WorldMapScreen.java:26: error: cannot find symbol
+    private static final ResourceLocation ID = ResourceLocation.fromNamespaceAndPath(GruzClient.MOD_ID, "worldmap");
+                                                               ^
+  symbol:   method fromNamespaceAndPath(String,String)
+  location: class ResourceLocation
+/home/runner/work/gruz-mod/gruz-mod/versions/1.20.4/build/pp/java/pl/gruzclient/screen/HudEditorScreen.java:182: error: cannot find symbol
+            this.renderBlurredBackground(delta);
+                ^
+  symbol: method renderBlurredBackground(float)
+/home/runner/work/gruz-mod/gruz-mod/versions/1.20.4/build/pp/java/pl/gruzclient/screen/HudEditorScreen.java:208: error: cannot find symbol
+                ((pl.gruzclient.mixin.InGameHudInvoker) this.minecraft.gui).gruz$renderScoreboard(c, this.minecraft.getTimer());
+                                                                                                                   ^
+  symbol:   method getTimer()
+  location: variable minecraft of type Minecraft
+/home/runner/work/gruz-mod/gruz-mod/versions/1.20.4/build/pp/java/pl/gruzclient/screen/GruzModsScreen.java:144: error: cannot find symbol
+            this.renderBlurredBackground(delta);
+                ^
+  symbol: method renderBlurredBackground(float)
+/home/runner/work/gruz-mod/gruz-mod/versions/1.20.4/build/pp/java/pl/gruzclient/screen/GruzModsScreen.java:147: error: cannot find symbol
+            this.renderPanorama(c, delta);
+                ^
+  symbol: method renderPanorama(GuiGraphics,float)
+/home/runner/work/gruz-mod/gruz-mod/versions/1.20.4/build/pp/java/pl/gruzclient/screen/GruzModsScreen.java:148: error: cannot find symbol
+            this.renderBlurredBackground(delta);
+                ^
+  symbol: method renderBlurredBackground(float)
+Note: Some messages have been simplified; recompile with -Xdiags:verbose to get full output
+40 errors
+	at org.gradle.api.internal.tasks.compile.JdkJavaCompiler.execute(JdkJavaCompiler.java:88)
+	at org.gradle.api.internal.tasks.compile.JdkJavaCompiler.execute(JdkJavaCompiler.java:49)
+	at org.gradle.api.internal.tasks.compile.NormalizingJavaCompiler.delegateAndHandleErrors(NormalizingJavaCompiler.java:98)
+	at org.gradle.api.internal.tasks.compile.NormalizingJavaCompiler.execute(NormalizingJavaCompiler.java:52)
+	at org.gradle.api.internal.tasks.compile.NormalizingJavaCompiler.execute(NormalizingJavaCompiler.java:38)
+	at org.gradle.api.internal.tasks.compile.AnnotationProcessorDiscoveringCompiler.execute(AnnotationProcessorDiscoveringCompiler.java:52)
+	at org.gradle.api.internal.tasks.compile.AnnotationProcessorDiscoveringCompiler.execute(AnnotationProcessorDiscoveringCompiler.java:38)
+	at org.gradle.api.internal.tasks.compile.ModuleApplicationNameWritingCompiler.execute(ModuleApplicationNameWritingCompiler.java:46)
+	at org.gradle.api.internal.tasks.compile.ModuleApplicationNameWritingCompiler.execute(ModuleApplicationNameWritingCompiler.java:36)
+	at org.gradle.jvm.toolchain.internal.DefaultToolchainJavaCompiler.execute(DefaultToolchainJavaCompiler.java:57)
+	at org.gradle.api.tasks.compile.JavaCompile.lambda$createToolchainCompiler$0(JavaCompile.java:213)
+	at org.gradle.api.internal.tasks.compile.CleaningJavaCompiler.execute(CleaningJavaCompiler.java:53)
+	at org.gradle.api.internal.tasks.compile.incremental.IncrementalCompilerFactory.lambda$createRebuildAllCompiler$0(IncrementalCompilerFactory.java:55)
+	at org.gradle.api.internal.tasks.compile.incremental.SelectiveCompiler.execute(SelectiveCompiler.java:70)
+	at org.gradle.api.internal.tasks.compile.incremental.SelectiveCompiler.execute(SelectiveCompiler.java:44)
+	at org.gradle.api.internal.tasks.compile.incremental.IncrementalResultStoringCompiler.execute(IncrementalResultStoringCompiler.java:66)
+	at org.gradle.api.internal.tasks.compile.incremental.IncrementalResultStoringCompiler.execute(IncrementalResultStoringCompiler.java:52)
+	at org.gradle.api.internal.tasks.compile.CompileJavaBuildOperationReportingCompiler$CompileOperation.call(CompileJavaBuildOperationReportingCompiler.java:78)
+	at org.gradle.api.internal.tasks.compile.CompileJavaBuildOperationReportingCompiler$CompileOperation.call(CompileJavaBuildOperationReportingCompiler.java:52)
+	at org.gradle.internal.operations.DefaultBuildOperationRunner$CallableBuildOperationWorker.execute(DefaultBuildOperationRunner.java:210)
+	at org.gradle.internal.operations.DefaultBuildOperationRunner$CallableBuildOperationWorker.execute(DefaultBuildOperationRunner.java:205)
+	at org.gradle.internal.operations.DefaultBuildOperationRunner$2.execute(DefaultBuildOperationRunner.java:67)
+	at org.gradle.internal.operations.DefaultBuildOperationRunner$2.execute(DefaultBuildOperationRunner.java:60)
+	at org.gradle.internal.operations.DefaultBuildOperationRunner.execute(DefaultBuildOperationRunner.java:167)
+	at org.gradle.internal.operations.DefaultBuildOperationRunner.execute(DefaultBuildOperationRunner.java:60)
+	at org.gradle.internal.operations.DefaultBuildOperationRunner.call(DefaultBuildOperationRunner.java:54)
+	at org.gradle.api.internal.tasks.compile.CompileJavaBuildOperationReportingCompiler.execute(CompileJavaBuildOperationReportingCompiler.java:49)
+	at org.gradle.api.tasks.compile.JavaCompile.performCompilation(JavaCompile.java:231)
+	at org.gradle.api.tasks.compile.JavaCompile.performIncrementalCompilation(JavaCompile.java:172)
+	at org.gradle.api.tasks.compile.JavaCompile.compile(JavaCompile.java:157)
+	at org.gradle.internal.reflect.JavaMethod.invoke(JavaMethod.java:125)
+	at org.gradle.api.internal.project.taskfactory.IncrementalTaskAction.doExecute(IncrementalTaskAction.java:45)
+	at org.gradle.api.internal.project.taskfactory.StandardTaskAction.execute(StandardTaskAction.java:51)
+	at org.gradle.api.internal.project.taskfactory.IncrementalTaskAction.execute(IncrementalTaskAction.java:26)
+	at org.gradle.api.internal.project.taskfactory.StandardTaskAction.execute(StandardTaskAction.java:29)
+	at org.gradle.api.internal.tasks.execution.TaskExecution$3.run(TaskExecution.java:268)
+	at org.gradle.internal.operations.DefaultBuildOperationRunner$1.execute(DefaultBuildOperationRunner.java:30)
+	at org.gradle.internal.operations.DefaultBuildOperationRunner$1.execute(DefaultBuildOperationRunner.java:27)
+	at org.gradle.internal.operations.DefaultBuildOperationRunner$2.execute(DefaultBuildOperationRunner.java:67)
+	at org.gradle.internal.operations.DefaultBuildOperationRunner$2.execute(DefaultBuildOperationRunner.java:60)
+	at org.gradle.internal.operations.DefaultBuildOperationRunner.execute(DefaultBuildOperationRunner.java:167)
+	at org.gradle.internal.operations.DefaultBuildOperationRunner.execute(DefaultBuildOperationRunner.java:60)
+	at org.gradle.internal.operations.DefaultBuildOperationRunner.run(DefaultBuildOperationRunner.java:48)
+	at org.gradle.api.internal.tasks.execution.TaskExecution.executeAction(TaskExecution.java:253)
+	at org.gradle.api.internal.tasks.execution.TaskExecution.executeActions(TaskExecution.java:236)
+	at org.gradle.api.internal.tasks.execution.TaskExecution.executeWithPreviousOutputFiles(TaskExecution.java:219)
+	at org.gradle.api.internal.tasks.execution.TaskExecution.execute(TaskExecution.java:185)
+	at org.gradle.internal.execution.steps.ExecuteStep.executeInternal(ExecuteStep.java:167)
+	at org.gradle.internal.execution.steps.ExecuteStep.access$000(ExecuteStep.java:47)
+	at org.gradle.internal.execution.steps.ExecuteStep$1.call(ExecuteStep.java:137)
+	at org.gradle.internal.execution.steps.ExecuteStep$1.call(ExecuteStep.java:134)
+	at org.gradle.internal.operations.DefaultBuildOperationRunner$CallableBuildOperationWorker.execute(DefaultBuildOperationRunner.java:210)
+	at org.gradle.internal.operations.DefaultBuildOperationRunner$CallableBuildOperationWorker.execute(DefaultBuildOperationRunner.java:205)
+	at org.gradle.internal.operations.DefaultBuildOperationRunner$2.execute(DefaultBuildOperationRunner.java:67)
+	at org.gradle.internal.operations.DefaultBuildOperationRunner$2.execute(DefaultBuildOperationRunner.java:60)
+	at org.gradle.internal.operations.DefaultBuildOperationRunner.execute(DefaultBuildOperationRunner.java:167)
+	at org.gradle.internal.operations.DefaultBuildOperationRunner.execute(DefaultBuildOperationRunner.java:60)
+	at org.gradle.internal.operations.DefaultBuildOperationRunner.call(DefaultBuildOperationRunner.java:54)
+	at org.gradle.internal.execution.steps.ExecuteStep.execute(ExecuteStep.java:134)
+	at org.gradle.internal.execution.steps.ExecuteStep$Mutable.execute(ExecuteStep.java:80)
+	at org.gradle.internal.execution.steps.CancelExecutionStep.execute(CancelExecutionStep.java:42)
+	at org.gradle.internal.execution.steps.TimeoutStep.executeWithoutTimeout(TimeoutStep.java:75)
+	at org.gradle.internal.execution.steps.TimeoutStep.execute(TimeoutStep.java:55)
+	at org.gradle.internal.execution.steps.PreCreateOutputParentsStep.execute(PreCreateOutputParentsStep.java:51)
+	at org.gradle.internal.execution.steps.PreCreateOutputParentsStep.execute(PreCreateOutputParentsStep.java:29)
+	at org.gradle.internal.execution.steps.RemovePreviousOutputsStep.executeMutable(RemovePreviousOutputsStep.java:67)
+	at org.gradle.internal.execution.steps.RemovePreviousOutputsStep.executeMutable(RemovePreviousOutputsStep.java:39)
+	at org.gradle.internal.execution.steps.MutableStep.execute(MutableStep.java:26)
+	at org.gradle.internal.execution.steps.BroadcastChangingOutputsStep.execute(BroadcastChangingOutputsStep.java:42)
+	at org.gradle.internal.execution.steps.BroadcastChangingOutputsStep.execute(BroadcastChangingOutputsStep.java:24)
+	at org.gradle.internal.execution.steps.CaptureOutputsAfterExecutionStep.execute(CaptureOutputsAfterExecutionStep.java:69)
+	at org.gradle.internal.execution.steps.CaptureOutputsAfterExecutionStep.execute(CaptureOutputsAfterExecutionStep.java:46)
+	at org.gradle.internal.execution.steps.ResolveInputChangesStep.executeMutable(ResolveInputChangesStep.java:39)
+	at org.gradle.internal.execution.steps.ResolveInputChangesStep.executeMutable(ResolveInputChangesStep.java:28)
+	at org.gradle.internal.execution.steps.MutableStep.execute(MutableStep.java:26)
+	at org.gradle.internal.execution.steps.BuildCacheStep.executeWithoutCache(BuildCacheStep.java:189)
+	at org.gradle.internal.execution.steps.BuildCacheStep.executeAndStoreInCache(BuildCacheStep.java:145)
+	at org.gradle.internal.execution.steps.BuildCacheStep.lambda$executeWithCache$3(BuildCacheStep.java:104)
+	at org.gradle.internal.execution.steps.BuildCacheStep.lambda$executeWithCache$1(BuildCacheStep.java:104)
+	at org.gradle.internal.Try$Success.map(Try.java:170)
+	at org.gradle.internal.execution.steps.BuildCacheStep.executeWithCache(BuildCacheStep.java:88)
+	at org.gradle.internal.execution.steps.BuildCacheStep.lambda$execute$0(BuildCacheStep.java:75)
+	at org.gradle.internal.Either$Left.fold(Either.java:116)
+	at org.gradle.internal.execution.caching.CachingState.fold(CachingState.java:62)
+	at org.gradle.internal.execution.steps.BuildCacheStep.execute(BuildCacheStep.java:74)
+	at org.gradle.internal.execution.steps.BuildCacheStep.execute(BuildCacheStep.java:49)
+	at org.gradle.internal.execution.steps.StoreExecutionStateStep.executeMutable(StoreExecutionStateStep.java:46)
+	at org.gradle.internal.execution.steps.StoreExecutionStateStep.executeMutable(StoreExecutionStateStep.java:35)
+	at org.gradle.internal.execution.steps.MutableStep.execute(MutableStep.java:26)
+	at org.gradle.internal.execution.steps.SkipUpToDateStep.executeBecause(SkipUpToDateStep.java:75)
+	at org.gradle.internal.execution.steps.SkipUpToDateStep.lambda$execute$2(SkipUpToDateStep.java:53)
+	at org.gradle.internal.execution.steps.SkipUpToDateStep.execute(SkipUpToDateStep.java:53)
+	at org.gradle.internal.execution.steps.SkipUpToDateStep.execute(SkipUpToDateStep.java:35)
+	at org.gradle.internal.execution.steps.legacy.MarkSnapshottingInputsFinishedStep.execute(MarkSnapshottingInputsFinishedStep.java:37)
+	at org.gradle.internal.execution.steps.legacy.MarkSnapshottingInputsFinishedStep.execute(MarkSnapshottingInputsFinishedStep.java:27)
+	at org.gradle.internal.execution.steps.ResolveMutableCachingStateStep.executeDelegate(ResolveMutableCachingStateStep.java:70)
+	at org.gradle.internal.execution.steps.ResolveMutableCachingStateStep.executeDelegate(ResolveMutableCachingStateStep.java:32)
+	at org.gradle.internal.execution.steps.AbstractResolveCachingStateStep.execute(AbstractResolveCachingStateStep.java:69)
+	at org.gradle.internal.execution.steps.AbstractResolveCachingStateStep.execute(AbstractResolveCachingStateStep.java:37)
+	at org.gradle.internal.execution.steps.ResolveChangesStep.executeMutable(ResolveChangesStep.java:63)
+	at org.gradle.internal.execution.steps.ResolveChangesStep.executeMutable(ResolveChangesStep.java:34)
+	at org.gradle.internal.execution.steps.MutableStep.execute(MutableStep.java:26)
+	at org.gradle.internal.execution.steps.ValidateStep$Mutable.executeDelegate(ValidateStep.java:79)
+	at org.gradle.internal.execution.steps.ValidateStep$Mutable.executeDelegate(ValidateStep.java:65)
+	at org.gradle.internal.execution.steps.ValidateStep.execute(ValidateStep.java:105)
+	at org.gradle.internal.execution.steps.ValidateStep$Mutable.execute(ValidateStep.java:65)
+	at org.gradle.internal.execution.steps.CaptureMutableStateBeforeExecutionStep.executeMutable(CaptureMutableStateBeforeExecutionStep.java:86)
+	at org.gradle.internal.execution.steps.CaptureMutableStateBeforeExecutionStep.execute(CaptureMutableStateBeforeExecutionStep.java:65)
+	at org.gradle.internal.execution.steps.CaptureMutableStateBeforeExecutionStep.execute(CaptureMutableStateBeforeExecutionStep.java:45)
+	at org.gradle.internal.execution.steps.SkipEmptyMutableWorkStep.executeWithNonEmptySources(SkipEmptyMutableWorkStep.java:210)
+	at org.gradle.internal.execution.steps.SkipEmptyMutableWorkStep.executeMutable(SkipEmptyMutableWorkStep.java:90)
+	at org.gradle.internal.execution.steps.SkipEmptyMutableWorkStep.executeMutable(SkipEmptyMutableWorkStep.java:53)
+	at org.gradle.internal.execution.steps.MutableStep.execute(MutableStep.java:26)
+	at org.gradle.internal.execution.steps.legacy.MarkSnapshottingInputsStartedStep.execute(MarkSnapshottingInputsStartedStep.java:38)
+	at org.gradle.internal.execution.steps.LoadPreviousExecutionStateStep.executeMutable(LoadPreviousExecutionStateStep.java:36)
+	at org.gradle.internal.execution.steps.LoadPreviousExecutionStateStep.executeMutable(LoadPreviousExecutionStateStep.java:23)
+	at org.gradle.internal.execution.steps.MutableStep.execute(MutableStep.java:26)
+	at org.gradle.internal.execution.steps.HandleStaleOutputsStep.executeMutable(HandleStaleOutputsStep.java:77)
+	at org.gradle.internal.execution.steps.HandleStaleOutputsStep.executeMutable(HandleStaleOutputsStep.java:43)
+	at org.gradle.internal.execution.steps.MutableStep.execute(MutableStep.java:26)
+	at org.gradle.internal.execution.steps.AssignMutableWorkspaceStep.lambda$executeMutable$0(AssignMutableWorkspaceStep.java:34)
+	at org.gradle.api.internal.tasks.execution.TaskExecution$4.withWorkspace(TaskExecution.java:314)
+	at org.gradle.internal.execution.steps.AssignMutableWorkspaceStep.executeMutable(AssignMutableWorkspaceStep.java:30)
+	at org.gradle.internal.execution.steps.AssignMutableWorkspaceStep.executeMutable(AssignMutableWorkspaceStep.java:21)
+	at org.gradle.internal.execution.steps.MutableStep.execute(MutableStep.java:26)
+	at org.gradle.internal.execution.steps.ChoosePipelineStep.execute(ChoosePipelineStep.java:40)
+	at org.gradle.internal.execution.steps.ChoosePipelineStep.execute(ChoosePipelineStep.java:23)
+	at org.gradle.internal.execution.steps.ExecuteWorkBuildOperationFiringStep.lambda$execute$2(ExecuteWorkBuildOperationFiringStep.java:67)
+	at org.gradle.internal.execution.steps.ExecuteWorkBuildOperationFiringStep.execute(ExecuteWorkBuildOperationFiringStep.java:67)
+	at org.gradle.internal.execution.steps.ExecuteWorkBuildOperationFiringStep.execute(ExecuteWorkBuildOperationFiringStep.java:39)
+	at org.gradle.internal.execution.steps.IdentityCacheStep.execute(IdentityCacheStep.java:46)
+	at org.gradle.internal.execution.steps.IdentityCacheStep.execute(IdentityCacheStep.java:34)
+	at org.gradle.internal.execution.steps.IdentifyStep.execute(IdentifyStep.java:56)
+	at org.gradle.internal.execution.steps.IdentifyStep.execute(IdentifyStep.java:38)
+	at org.gradle.internal.execution.impl.DefaultExecutionEngine$1.execute(DefaultExecutionEngine.java:68)
+	at org.gradle.api.internal.tasks.execution.DefaultTaskNodeExecutor.doExecute(DefaultTaskNodeExecutor.java:364)
+	... 25 more
+
+
+Deprecated Gradle features were used in this build, making it incompatible with Gradle 10.
+
+You can use '--warning-mode all' to show the individual deprecation warnings and determine if they come from your own scripts or plugins.
+
+For more on this, please refer to https://docs.gradle.org/9.8.0/userguide/command_line_interface.html#sec:command_line_warnings in the Gradle documentation.
+
+BUILD FAILED in 30s
+2 actionable tasks: 2 executed

@@ -1,0 +1,37 @@
+Compiled from "ItemRenderer.java"
+public class net.minecraft.client.renderer.entity.ItemRenderer implements net.minecraft.server.packs.resources.ResourceManagerReloadListener {
+  public static final net.minecraft.resources.ResourceLocation ENCHANTED_GLINT_ENTITY;
+  public static final net.minecraft.resources.ResourceLocation ENCHANTED_GLINT_ITEM;
+  private static final java.util.Set<net.minecraft.world.item.Item> IGNORED;
+  public static final int GUI_SLOT_CENTER_X;
+  public static final int GUI_SLOT_CENTER_Y;
+  public static final int ITEM_COUNT_BLIT_OFFSET;
+  public static final float COMPASS_FOIL_UI_SCALE;
+  public static final float COMPASS_FOIL_FIRST_PERSON_SCALE;
+  public static final float COMPASS_FOIL_TEXTURE_SCALE;
+  private static final net.minecraft.client.resources.model.ModelResourceLocation TRIDENT_MODEL;
+  public static final net.minecraft.client.resources.model.ModelResourceLocation TRIDENT_IN_HAND_MODEL;
+  private static final net.minecraft.client.resources.model.ModelResourceLocation SPYGLASS_MODEL;
+  public static final net.minecraft.client.resources.model.ModelResourceLocation SPYGLASS_IN_HAND_MODEL;
+  private final net.minecraft.client.Minecraft minecraft;
+  private final net.minecraft.client.renderer.ItemModelShaper itemModelShaper;
+  private final net.minecraft.client.renderer.texture.TextureManager textureManager;
+  private final net.minecraft.client.color.item.ItemColors itemColors;
+  private final net.minecraft.client.renderer.BlockEntityWithoutLevelRenderer blockEntityRenderer;
+  public net.minecraft.client.renderer.entity.ItemRenderer(net.minecraft.client.Minecraft, net.minecraft.client.renderer.texture.TextureManager, net.minecraft.client.resources.model.ModelManager, net.minecraft.client.color.item.ItemColors, net.minecraft.client.renderer.BlockEntityWithoutLevelRenderer);
+  public net.minecraft.client.renderer.ItemModelShaper getItemModelShaper();
+  private void renderModelLists(net.minecraft.client.resources.model.BakedModel, net.minecraft.world.item.ItemStack, int, int, com.mojang.blaze3d.vertex.PoseStack, com.mojang.blaze3d.vertex.VertexConsumer);
+  public void render(net.minecraft.world.item.ItemStack, net.minecraft.world.item.ItemDisplayContext, boolean, com.mojang.blaze3d.vertex.PoseStack, net.minecraft.client.renderer.MultiBufferSource, int, int, net.minecraft.client.resources.model.BakedModel);
+  private static boolean hasAnimatedTexture(net.minecraft.world.item.ItemStack);
+  public static com.mojang.blaze3d.vertex.VertexConsumer getArmorFoilBuffer(net.minecraft.client.renderer.MultiBufferSource, net.minecraft.client.renderer.RenderType, boolean, boolean);
+  public static com.mojang.blaze3d.vertex.VertexConsumer getCompassFoilBuffer(net.minecraft.client.renderer.MultiBufferSource, net.minecraft.client.renderer.RenderType, com.mojang.blaze3d.vertex.PoseStack$Pose);
+  public static com.mojang.blaze3d.vertex.VertexConsumer getCompassFoilBufferDirect(net.minecraft.client.renderer.MultiBufferSource, net.minecraft.client.renderer.RenderType, com.mojang.blaze3d.vertex.PoseStack$Pose);
+  public static com.mojang.blaze3d.vertex.VertexConsumer getFoilBuffer(net.minecraft.client.renderer.MultiBufferSource, net.minecraft.client.renderer.RenderType, boolean, boolean);
+  public static com.mojang.blaze3d.vertex.VertexConsumer getFoilBufferDirect(net.minecraft.client.renderer.MultiBufferSource, net.minecraft.client.renderer.RenderType, boolean, boolean);
+  private void renderQuadList(com.mojang.blaze3d.vertex.PoseStack, com.mojang.blaze3d.vertex.VertexConsumer, java.util.List<net.minecraft.client.renderer.block.model.BakedQuad>, net.minecraft.world.item.ItemStack, int, int);
+  public net.minecraft.client.resources.model.BakedModel getModel(net.minecraft.world.item.ItemStack, net.minecraft.world.level.Level, net.minecraft.world.entity.LivingEntity, int);
+  public void renderStatic(net.minecraft.world.item.ItemStack, net.minecraft.world.item.ItemDisplayContext, int, int, com.mojang.blaze3d.vertex.PoseStack, net.minecraft.client.renderer.MultiBufferSource, net.minecraft.world.level.Level, int);
+  public void renderStatic(net.minecraft.world.entity.LivingEntity, net.minecraft.world.item.ItemStack, net.minecraft.world.item.ItemDisplayContext, boolean, com.mojang.blaze3d.vertex.PoseStack, net.minecraft.client.renderer.MultiBufferSource, net.minecraft.world.level.Level, int, int, int);
+  public void onResourceManagerReload(net.minecraft.server.packs.resources.ResourceManager);
+  static {};
+}

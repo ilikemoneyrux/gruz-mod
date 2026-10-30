@@ -1,0 +1,28 @@
+Compiled from "ScreenEffectRenderer.java"
+public class net.minecraft.client.renderer.ScreenEffectRenderer {
+  private static final net.minecraft.resources.Identifier UNDERWATER_LOCATION;
+  private final net.minecraft.client.Minecraft minecraft;
+  private final net.minecraft.client.resources.model.sprite.SpriteGetter sprites;
+  public static final int ITEM_ACTIVATION_ANIMATION_LENGTH;
+  private net.minecraft.world.item.ItemStack itemActivationItem;
+  private int itemActivationTicks;
+  private float itemActivationOffX;
+  private float itemActivationOffY;
+  public net.minecraft.client.renderer.ScreenEffectRenderer(net.minecraft.client.Minecraft, net.minecraft.client.resources.model.sprite.SpriteGetter);
+  public void tick();
+  public void submit(boolean, boolean, float, net.minecraft.client.renderer.SubmitNodeCollector, boolean);
+  private void renderItemActivationAnimation(com.mojang.blaze3d.vertex.PoseStack, float, net.minecraft.client.renderer.SubmitNodeCollector);
+  public void resetItemActivation();
+  public void displayItemActivation(net.minecraft.world.item.ItemStack, net.minecraft.util.RandomSource);
+  private static net.minecraft.world.level.block.state.BlockState getViewBlockingState(net.minecraft.world.entity.player.Player);
+  private static void submitBlockSprite(net.minecraft.client.renderer.texture.TextureAtlasSprite, com.mojang.blaze3d.vertex.PoseStack, net.minecraft.client.renderer.SubmitNodeCollector, int);
+  private static void submitWater(net.minecraft.client.Minecraft, com.mojang.blaze3d.vertex.PoseStack, net.minecraft.client.renderer.SubmitNodeCollector);
+  private static void submitFire(com.mojang.blaze3d.vertex.PoseStack, net.minecraft.client.renderer.SubmitNodeCollector, net.minecraft.client.renderer.texture.TextureAtlasSprite);
+  private static void buildFireQuad(net.minecraft.client.renderer.texture.TextureAtlasSprite, com.mojang.blaze3d.vertex.VertexConsumer, org.joml.Matrix4f);
+  private static void buildSpriteQuad(com.mojang.blaze3d.vertex.VertexConsumer, org.joml.Matrix4f, net.minecraft.client.renderer.texture.TextureAtlasSprite, float, float, float, float, float, int);
+  private static void buildQuad(com.mojang.blaze3d.vertex.VertexConsumer, org.joml.Matrix4f, float, float, float, float, float, float, float, float, float, int);
+  private static void lambda$submitFire$0(net.minecraft.client.renderer.texture.TextureAtlasSprite, com.mojang.blaze3d.vertex.PoseStack$Pose, com.mojang.blaze3d.vertex.VertexConsumer);
+  private static void lambda$submitWater$0(float, float, int, com.mojang.blaze3d.vertex.PoseStack$Pose, com.mojang.blaze3d.vertex.VertexConsumer);
+  private static void lambda$submitBlockSprite$0(net.minecraft.client.renderer.texture.TextureAtlasSprite, int, com.mojang.blaze3d.vertex.PoseStack$Pose, com.mojang.blaze3d.vertex.VertexConsumer);
+  static {};
+}

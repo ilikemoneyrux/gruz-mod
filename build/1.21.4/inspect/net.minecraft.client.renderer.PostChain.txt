@@ -1,0 +1,18 @@
+Compiled from "PostChain.java"
+public class net.minecraft.client.renderer.PostChain {
+  public static final net.minecraft.resources.ResourceLocation MAIN_TARGET_ID;
+  private final java.util.List<net.minecraft.client.renderer.PostPass> passes;
+  private final java.util.Map<net.minecraft.resources.ResourceLocation, net.minecraft.client.renderer.PostChainConfig$InternalTarget> internalTargets;
+  private final java.util.Set<net.minecraft.resources.ResourceLocation> externalTargets;
+  private net.minecraft.client.renderer.PostChain(java.util.List<net.minecraft.client.renderer.PostPass>, java.util.Map<net.minecraft.resources.ResourceLocation, net.minecraft.client.renderer.PostChainConfig$InternalTarget>, java.util.Set<net.minecraft.resources.ResourceLocation>);
+  public static net.minecraft.client.renderer.PostChain load(net.minecraft.client.renderer.PostChainConfig, net.minecraft.client.renderer.texture.TextureManager, net.minecraft.client.renderer.ShaderManager, java.util.Set<net.minecraft.resources.ResourceLocation>) throws net.minecraft.client.renderer.ShaderManager$CompilationException;
+  private static net.minecraft.client.renderer.PostPass createPass(net.minecraft.client.renderer.texture.TextureManager, net.minecraft.client.renderer.ShaderManager, net.minecraft.client.renderer.PostChainConfig$Pass) throws net.minecraft.client.renderer.ShaderManager$CompilationException;
+  public void addToFrame(com.mojang.blaze3d.framegraph.FrameGraphBuilder, int, int, net.minecraft.client.renderer.PostChain$TargetBundle);
+  public void process(com.mojang.blaze3d.pipeline.RenderTarget, com.mojang.blaze3d.resource.GraphicsResourceAllocator);
+  public void setUniform(java.lang.String, float);
+  private static java.lang.String method_62239(java.lang.String);
+  private static boolean method_62238(net.minecraft.client.renderer.PostChainConfig, net.minecraft.resources.ResourceLocation);
+  private static java.util.stream.Stream method_62236(net.minecraft.client.renderer.PostChainConfig$Input);
+  private static java.util.stream.Stream method_62237(net.minecraft.client.renderer.PostChainConfig$Pass);
+  static {};
+}

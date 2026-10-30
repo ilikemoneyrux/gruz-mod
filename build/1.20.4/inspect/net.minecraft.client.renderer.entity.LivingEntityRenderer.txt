@@ -1,0 +1,27 @@
+Compiled from "LivingEntityRenderer.java"
+public abstract class net.minecraft.client.renderer.entity.LivingEntityRenderer<T extends net.minecraft.world.entity.LivingEntity, M extends net.minecraft.client.model.EntityModel<T>> extends net.minecraft.client.renderer.entity.EntityRenderer<T> implements net.minecraft.client.renderer.entity.RenderLayerParent<T, M> {
+  private static final org.slf4j.Logger LOGGER;
+  private static final float EYE_BED_OFFSET;
+  protected M model;
+  protected final java.util.List<net.minecraft.client.renderer.entity.layers.RenderLayer<T, M>> layers;
+  public net.minecraft.client.renderer.entity.LivingEntityRenderer(net.minecraft.client.renderer.entity.EntityRendererProvider$Context, M, float);
+  protected final boolean addLayer(net.minecraft.client.renderer.entity.layers.RenderLayer<T, M>);
+  public M getModel();
+  public void render(T, float, float, com.mojang.blaze3d.vertex.PoseStack, net.minecraft.client.renderer.MultiBufferSource, int);
+  protected net.minecraft.client.renderer.RenderType getRenderType(T, boolean, boolean, boolean);
+  public static int getOverlayCoords(net.minecraft.world.entity.LivingEntity, float);
+  protected boolean isBodyVisible(T);
+  private static float sleepDirectionToRotation(net.minecraft.core.Direction);
+  protected boolean isShaking(T);
+  protected void setupRotations(T, com.mojang.blaze3d.vertex.PoseStack, float, float, float);
+  protected float getAttackAnim(T, float);
+  protected float getBob(T, float);
+  protected float getFlipDegrees(T);
+  protected float getWhiteOverlayProgress(T, float);
+  protected void scale(T, com.mojang.blaze3d.vertex.PoseStack, float);
+  protected boolean shouldShowName(T);
+  public static boolean isEntityUpsideDown(net.minecraft.world.entity.LivingEntity);
+  protected boolean shouldShowName(net.minecraft.world.entity.Entity);
+  public void render(net.minecraft.world.entity.Entity, float, float, com.mojang.blaze3d.vertex.PoseStack, net.minecraft.client.renderer.MultiBufferSource, int);
+  static {};
+}

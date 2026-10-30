@@ -1,0 +1,17 @@
+Compiled from "PlayerFaceRenderer.java"
+public class net.minecraft.client.gui.components.PlayerFaceRenderer {
+  public static final int SKIN_HEAD_U;
+  public static final int SKIN_HEAD_V;
+  public static final int SKIN_HEAD_WIDTH;
+  public static final int SKIN_HEAD_HEIGHT;
+  public static final int SKIN_HAT_U;
+  public static final int SKIN_HAT_V;
+  public static final int SKIN_HAT_WIDTH;
+  public static final int SKIN_HAT_HEIGHT;
+  public static final int SKIN_TEX_WIDTH;
+  public static final int SKIN_TEX_HEIGHT;
+  public net.minecraft.client.gui.components.PlayerFaceRenderer();
+  public static void draw(net.minecraft.client.gui.GuiGraphics, net.minecraft.resources.ResourceLocation, int, int, int);
+  public static void draw(net.minecraft.client.gui.GuiGraphics, net.minecraft.resources.ResourceLocation, int, int, int, boolean, boolean);
+  private static void drawHat(net.minecraft.client.gui.GuiGraphics, net.minecraft.resources.ResourceLocation, int, int, int, boolean);
+}

@@ -1,0 +1,18 @@
+Compiled from "ItemEntityRenderer.java"
+public class net.minecraft.client.renderer.entity.ItemEntityRenderer extends net.minecraft.client.renderer.entity.EntityRenderer<net.minecraft.world.entity.item.ItemEntity, net.minecraft.client.renderer.entity.state.ItemEntityRenderState> {
+  private static final float ITEM_MIN_HOVER_HEIGHT;
+  private static final float ITEM_BUNDLE_OFFSET_SCALE;
+  private static final float FLAT_ITEM_DEPTH_THRESHOLD;
+  private final net.minecraft.client.renderer.item.ItemModelResolver itemModelResolver;
+  private final net.minecraft.util.RandomSource random;
+  public net.minecraft.client.renderer.entity.ItemEntityRenderer(net.minecraft.client.renderer.entity.EntityRendererProvider$Context);
+  public net.minecraft.client.renderer.entity.state.ItemEntityRenderState createRenderState();
+  public void extractRenderState(net.minecraft.world.entity.item.ItemEntity, net.minecraft.client.renderer.entity.state.ItemEntityRenderState, float);
+  public void submit(net.minecraft.client.renderer.entity.state.ItemEntityRenderState, com.mojang.blaze3d.vertex.PoseStack, net.minecraft.client.renderer.SubmitNodeCollector, net.minecraft.client.renderer.state.CameraRenderState);
+  public static void submitMultipleFromCount(com.mojang.blaze3d.vertex.PoseStack, net.minecraft.client.renderer.SubmitNodeCollector, int, net.minecraft.client.renderer.entity.state.ItemClusterRenderState, net.minecraft.util.RandomSource);
+  public static void submitMultipleFromCount(com.mojang.blaze3d.vertex.PoseStack, net.minecraft.client.renderer.SubmitNodeCollector, int, net.minecraft.client.renderer.entity.state.ItemClusterRenderState, net.minecraft.util.RandomSource, net.minecraft.world.phys.AABB);
+  public static void renderMultipleFromCount(com.mojang.blaze3d.vertex.PoseStack, net.minecraft.client.renderer.SubmitNodeCollector, int, net.minecraft.client.renderer.entity.state.ItemClusterRenderState, net.minecraft.util.RandomSource);
+  public void extractRenderState(net.minecraft.world.entity.Entity, net.minecraft.client.renderer.entity.state.EntityRenderState, float);
+  public net.minecraft.client.renderer.entity.state.EntityRenderState createRenderState();
+  public void submit(net.minecraft.client.renderer.entity.state.EntityRenderState, com.mojang.blaze3d.vertex.PoseStack, net.minecraft.client.renderer.SubmitNodeCollector, net.minecraft.client.renderer.state.CameraRenderState);
+}

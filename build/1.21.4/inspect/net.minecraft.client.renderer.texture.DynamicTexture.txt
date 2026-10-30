@@ -1,0 +1,14 @@
+Compiled from "DynamicTexture.java"
+public class net.minecraft.client.renderer.texture.DynamicTexture extends net.minecraft.client.renderer.texture.AbstractTexture implements net.minecraft.client.renderer.texture.Dumpable {
+  private static final org.slf4j.Logger LOGGER;
+  private com.mojang.blaze3d.platform.NativeImage pixels;
+  public net.minecraft.client.renderer.texture.DynamicTexture(com.mojang.blaze3d.platform.NativeImage);
+  public net.minecraft.client.renderer.texture.DynamicTexture(int, int, boolean);
+  public void upload();
+  public com.mojang.blaze3d.platform.NativeImage getPixels();
+  public void setPixels(com.mojang.blaze3d.platform.NativeImage);
+  public void close();
+  public void dumpContents(net.minecraft.resources.ResourceLocation, java.nio.file.Path) throws java.io.IOException;
+  private void method_22793();
+  static {};
+}

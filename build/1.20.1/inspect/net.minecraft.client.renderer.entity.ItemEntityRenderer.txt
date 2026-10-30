@@ -1,0 +1,19 @@
+Compiled from "ItemEntityRenderer.java"
+public class net.minecraft.client.renderer.entity.ItemEntityRenderer extends net.minecraft.client.renderer.entity.EntityRenderer<net.minecraft.world.entity.item.ItemEntity> {
+  private static final float ITEM_BUNDLE_OFFSET_SCALE;
+  private static final int ITEM_COUNT_FOR_5_BUNDLE;
+  private static final int ITEM_COUNT_FOR_4_BUNDLE;
+  private static final int ITEM_COUNT_FOR_3_BUNDLE;
+  private static final int ITEM_COUNT_FOR_2_BUNDLE;
+  private static final float FLAT_ITEM_BUNDLE_OFFSET_X;
+  private static final float FLAT_ITEM_BUNDLE_OFFSET_Y;
+  private static final float FLAT_ITEM_BUNDLE_OFFSET_Z;
+  private final net.minecraft.client.renderer.entity.ItemRenderer itemRenderer;
+  private final net.minecraft.util.RandomSource random;
+  public net.minecraft.client.renderer.entity.ItemEntityRenderer(net.minecraft.client.renderer.entity.EntityRendererProvider$Context);
+  private int getRenderAmount(net.minecraft.world.item.ItemStack);
+  public void render(net.minecraft.world.entity.item.ItemEntity, float, float, com.mojang.blaze3d.vertex.PoseStack, net.minecraft.client.renderer.MultiBufferSource, int);
+  public net.minecraft.resources.ResourceLocation getTextureLocation(net.minecraft.world.entity.item.ItemEntity);
+  public net.minecraft.resources.ResourceLocation getTextureLocation(net.minecraft.world.entity.Entity);
+  public void render(net.minecraft.world.entity.Entity, float, float, com.mojang.blaze3d.vertex.PoseStack, net.minecraft.client.renderer.MultiBufferSource, int);
+}

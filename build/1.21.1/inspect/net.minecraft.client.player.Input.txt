@@ -1,0 +1,15 @@
+Compiled from "Input.java"
+public class net.minecraft.client.player.Input {
+  public float leftImpulse;
+  public float forwardImpulse;
+  public boolean up;
+  public boolean down;
+  public boolean left;
+  public boolean right;
+  public boolean jumping;
+  public boolean shiftKeyDown;
+  public net.minecraft.client.player.Input();
+  public void tick(boolean, float);
+  public net.minecraft.world.phys.Vec2 getMoveVector();
+  public boolean hasForwardImpulse();
+}

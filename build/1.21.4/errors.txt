@@ -1,0 +1,208 @@
+errors: 48
+pl/gruzclient/mixin/PlayerEntityRendererMixin.java:16: type PlayerModel does not take parameters
+    public abstract class PlayerEntityRendererMixin extends LivingEntityRenderer<AbstractClientPlayer, PlayerModel<AbstractClientPlayer>> {
+                                                                                                                  ^
+pl/gruzclient/mixin/PlayerEntityRendererMixin.java:16: wrong number of type arguments; required 3
+    public abstract class PlayerEntityRendererMixin extends LivingEntityRenderer<AbstractClientPlayer, PlayerModel<AbstractClientPlayer>> {
+                                                                                ^
+pl/gruzclient/mixin/PlayerEntityRendererMixin.java:17: type PlayerModel does not take parameters
+        protected PlayerEntityRendererMixin(EntityRendererProvider.Context ctx, PlayerModel<AbstractClientPlayer> model, float shadowRadius) {
+                                                                                           ^
+pl/gruzclient/module/impl/FreecamModule.java:11: cannot find symbol
+    import net.minecraft.client.player.Input;
+                                      ^
+      symbol:   class Input
+pl/gruzclient/module/impl/FreecamModule.java:26: cannot find symbol
+        private Input savedInput;
+                ^
+      symbol:   class Input
+pl/gruzclient/cosmetics/CosmeticsFeature.java:26: type PlayerModel does not take parameters
+    public class CosmeticsFeature extends RenderLayer<AbstractClientPlayer, PlayerModel<AbstractClientPlayer>> {
+                                                                                       ^
+pl/gruzclient/cosmetics/CosmeticsFeature.java:34: type PlayerModel does not take parameters
+        public CosmeticsFeature(RenderLayerParent<AbstractClientPlayer, PlayerModel<AbstractClientPlayer>> context) {
+                                                                                   ^
+pl/gruzclient/render/GruzDraw.java:67: cannot find symbol
+            c.setColor(1f, 1f, 1f, Math.min(1f, alpha));
+             ^
+      symbol:   method setColor(float,float,float,float)
+pl/gruzclient/render/GruzDraw.java:74: no suitable method found for blit(ResourceLocation,int,int,float,float,int,int,int,int)
+            c.blit(id, 0, 0, 0f, 0f, texSize, texSize, texSize, texSize);
+             ^
+        method GuiGraphics.blit(Function<ResourceLocation,RenderType>,ResourceLocation,int,int,float,float,int,int,int,int,int) is not applicable
+pl/gruzclient/render/GruzDraw.java:76: cannot find symbol
+            c.setColor(1f, 1f, 1f, 1f);
+             ^
+      symbol:   method setColor(float,float,float,float)
+pl/gruzclient/render/Ui.java:68: cannot find symbol
+            c.setColor(((argb >> 16) & 255) / 255f, ((argb >> 8) & 255) / 255f, (argb & 255) / 255f, ((argb >>> 24) & 255) / 255f);
+             ^
+      symbol:   method setColor(float,float,float,float)
+pl/gruzclient/render/Ui.java:69: incompatible types: ResourceLocation cannot be converted to Function<ResourceLocation,RenderType>
+            c.blit(ICONS, x, y, size, size, (i % 8) * 32f, (i / 8) * 32f, 32, 32, 256, 128);
+                   ^
+pl/gruzclient/render/Ui.java:70: cannot find symbol
+            c.setColor(1f, 1f, 1f, 1f);
+             ^
+      symbol:   method setColor(float,float,float,float)
+pl/gruzclient/render/WindowIcon.java:40: cannot find symbol
+                            int abgr = scaled.getPixelRGBA(x, y);
+                                             ^
+      symbol:   method getPixelRGBA(int,int)
+pl/gruzclient/mixin/WorldRendererMixin.java:53: cannot find symbol
+                shape.forAllEdges((x1, y1, z1, x2, y2, z2) -> LevelRenderer.addChainedFilledBoxVertices(matrices, fill,
+                                                                           ^
+      symbol:   method addChainedFilledBoxVertices(PoseStack,VertexConsumer,double,double,double,double,double,double,float,float,float,float)
+pl/gruzclient/mixin/WorldRendererMixin.java:61: cannot find symbol
+                LevelRenderer.addChainedFilledBoxVertices(matrices, fill,
+                             ^
+      symbol:   method addChainedFilledBoxVertices(PoseStack,VertexConsumer,double,double,double,double,double,double,float,float,float,float)
+pl/gruzclient/mixin/PlayerEntityRendererMixin.java:23: incompatible types: PlayerEntityRendererMixin cannot be converted to RenderLayerParent<AbstractClientPlayer,<any>>
+            this.addLayer(new CosmeticsFeature(this));
+                                               ^
+pl/gruzclient/module/impl/PotionHudModule.java:38: no suitable method found for blit(int,int,int,int,int,TextureAtlasSprite)
+                c.blit(5, y + 3, 0, 18, 18, sprite);
+                 ^
+        method GuiGraphics.blit(Function<ResourceLocation,RenderType>,ResourceLocation,int,int,float,float,int,int,int,int,int) is not applicable
+pl/gruzclient/module/impl/TargetHudModule.java:51: cannot find symbol
+                    c.setColor(1f, 1f, 1f, fade);
+                     ^
+      symbol:   method setColor(float,float,float,float)
+pl/gruzclient/module/impl/TargetHudModule.java:53: cannot find symbol
+                    c.setColor(1f, 1f, 1f, 1f);
+                     ^
+      symbol:   method setColor(float,float,float,float)
+pl/gruzclient/module/impl/HitColorModule.java:44: cannot find symbol
+            for (int y = 0; y < 8; y++) for (int x = 0; x < 16; x++) img.setPixelRGBA(x, y, abgr);
+                                                                        ^
+      symbol:   method setPixelRGBA(int,int,int)
+pl/gruzclient/module/impl/MotionBlurModule.java:28: constructor PostChain in class PostChain cannot be applied to given types;
+                    processor = new PostChain(mc.getTextureManager(), mc.getResourceManager(), mc.getMainRenderTarget(), SHADER);
+                                ^
+      required: List<PostPass>,Map<ResourceLocation,InternalTarget>,Set<ResourceLocation>
+pl/gruzclient/module/impl/MotionBlurModule.java:33: cannot find symbol
+                    processor.resize(w, h);
+                             ^
+      symbol:   method resize(int,int)
+pl/gruzclient/module/impl/MotionBlurModule.java:38: method process in class PostChain cannot be applied to given types;
+                processor.process(tickDelta);
+                         ^
+      required: RenderTarget,GraphicsResourceAllocator
+pl/gruzclient/module/impl/MotionBlurModule.java:47: cannot find symbol
+            if (processor != null) { processor.close(); processor = null; }
+                                              ^
+      symbol:   method close()
+pl/gruzclient/module/impl/ItemPhysicsModule.java:24: cannot find symbol
+            BakedModel model = itemRenderer.getModel(stack, entity.level(), null, entity.getId());
+                                           ^
+      symbol:   method getModel(ItemStack,Level,<null>,int)
+pl/gruzclient/module/impl/ItemPhysicsModule.java:52: cannot find symbol
+                itemRenderer.render(stack, ItemDisplayContext.GROUND, false, m, buffers, light, OverlayTexture.NO_OVERLAY, model);
+                            ^
+      symbol:   method render(ItemStack,ItemDisplayContext,boolean,PoseStack,MultiBufferSource,int,int,BakedModel)
+pl/gruzclient/module/impl/FreecamModule.java:59: cannot find symbol
+            mc.player.input = new Input(); // postać przestaje reagować na klawisze
+                                  ^
+      symbol:   class Input
+pl/gruzclient/module/impl/MinimapModule.java:101: no suitable method found for blit(ResourceLocation,int,int,float,float,int,int,int,int)
+            c.blit(ID, -half, -half, 0f, 0f, TEX, TEX, TEX, TEX);
+             ^
+        method GuiGraphics.blit(Function<ResourceLocation,RenderType>,ResourceLocation,int,int,float,float,int,int,int,int,int) is not applicable
+pl/gruzclient/module/impl/MinimapModule.java:143: cannot find symbol
+                    img.setPixelRGBA(tx, ty, 0xFF000000 | (b << 16) | (g << 8) | r); // NativeImage = ABGR
+                       ^
+      symbol:   method setPixelRGBA(int,int,int)
+pl/gruzclient/module/impl/CosmeticsModule.java:123: cannot find symbol
+                boolean moving = mc.player.input != null && (mc.player.input.forwardImpulse != 0 || mc.player.input.leftImpulse != 0 || mc.player.input.jumping);
+                                                                                                                                                       ^
+      symbol:   variable jumping
+pl/gruzclient/module/impl/CosmeticsModule.java:155: incompatible types: Vector3f cannot be converted to int
+                        yield new DustParticleOptions(new Vector3f(((c >> 16) & 255) / 255f, ((c >> 8) & 255) / 255f, (c & 255) / 255f), 0.9f);
+                                                      ^
+pl/gruzclient/cosmetics/CosmeticsFeature.java:26: type argument AbstractClientPlayer is not within bounds of type-variable S
+    public class CosmeticsFeature extends RenderLayer<AbstractClientPlayer, PlayerModel<AbstractClientPlayer>> {
+                                                      ^
+      where S is a type-variable:
+pl/gruzclient/cosmetics/CosmeticsFeature.java:26: CosmeticsFeature is not abstract and does not override abstract method render(PoseStack,MultiBufferSource,int,AbstractClientPlayer,float,float) in RenderLayer
+    public class CosmeticsFeature extends RenderLayer<AbstractClientPlayer, PlayerModel<AbstractClientPlayer>> {
+           ^
+pl/gruzclient/cosmetics/CosmeticsFeature.java:34: type argument AbstractClientPlayer is not within bounds of type-variable S
+        public CosmeticsFeature(RenderLayerParent<AbstractClientPlayer, PlayerModel<AbstractClientPlayer>> context) {
+                                                  ^
+      where S is a type-variable:
+pl/gruzclient/cosmetics/CosmeticsFeature.java:43: method does not override or implement a method from a supertype
+        @Override
+        ^
+pl/gruzclient/cosmetics/CapeTextures.java:136: cannot find symbol
+                    img.setPixelRGBA(px, py, abgr(rgb, 255));
+                       ^
+      symbol:   method setPixelRGBA(int,int,int)
+pl/gruzclient/map/MapCache.java:119: cannot find symbol
+                    while (st.getMapColor(w, pos) == MapColor.NONE && pos.getY() > w.getMinBuildHeight() && guard++ < 64) {
+                                                                                    ^
+      symbol:   method getMinBuildHeight()
+pl/gruzclient/map/MapCache.java:129: cannot find symbol
+                    int abgr = mc.calculateRGBColor(b);
+                                 ^
+      symbol:   method calculateRGBColor(Brightness)
+pl/gruzclient/screen/GruzTitleScreen.java:148: method renderBlurredBackground in class Screen cannot be applied to given types;
+                this.renderBlurredBackground(delta);
+                    ^
+      required: no arguments
+pl/gruzclient/screen/GruzTitleScreen.java:204: cannot find symbol
+            c.setColor(1f, 1f, 1f, a);
+             ^
+      symbol:   method setColor(float,float,float,float)
+pl/gruzclient/screen/GruzTitleScreen.java:206: cannot find symbol
+            c.setColor(1f, 1f, 1f, 1f);
+             ^
+      symbol:   method setColor(float,float,float,float)
+pl/gruzclient/screen/WorldMapScreen.java:97: cannot find symbol
+                    img.setPixelRGBA(x, y, 0xFF000000 | (b << 16) | (g << 8) | r);
+                       ^
+      symbol:   method setPixelRGBA(int,int,int)
+pl/gruzclient/screen/WorldMapScreen.java:117: no suitable method found for blit(ResourceLocation,int,int,float,float,int,int,int,int)
+            c.blit(ID, 0, 0, 0f, 0f, texW, texH, texW, texH);
+             ^
+        method GuiGraphics.blit(Function<ResourceLocation,RenderType>,ResourceLocation,int,int,float,float,int,int,int,int,int) is not applicable
+pl/gruzclient/screen/HudEditorScreen.java:182: method renderBlurredBackground in class Screen cannot be applied to given types;
+                this.renderBlurredBackground(delta);
+                    ^
+      required: no arguments
+pl/gruzclient/screen/HudEditorScreen.java:208: cannot find symbol
+                    ((pl.gruzclient.mixin.InGameHudInvoker) this.minecraft.gui).gruz$renderScoreboard(c, this.minecraft.getTimer());
+                                                                                                                       ^
+      symbol:   method getTimer()
+pl/gruzclient/screen/GruzModsScreen.java:144: method renderBlurredBackground in class Screen cannot be applied to given types;
+                this.renderBlurredBackground(delta);
+                    ^
+      required: no arguments
+pl/gruzclient/screen/GruzModsScreen.java:148: method renderBlurredBackground in class Screen cannot be applied to given types;
+                this.renderBlurredBackground(delta);
+                    ^
+      required: no arguments
+--- What went wrong ---
+Execution failed for task ':1.21.4:compileJava' (registered by plugin class 'org.gradle.api.plugins.JavaBasePlugin').
+> Compilation failed; see the compiler output below.
+  /home/runner/work/gruz-mod/gruz-mod/versions/1.21.4/build/pp/java/pl/gruzclient/mixin/PlayerEntityRendererMixin.java:16: error: type PlayerModel does not take parameters
+  public abstract class PlayerEntityRendererMixin extends LivingEntityRenderer<AbstractClientPlayer, PlayerModel<AbstractClientPlayer>> {
+                                                                                                                ^
+  /home/runner/work/gruz-mod/gruz-mod/versions/1.21.4/build/pp/java/pl/gruzclient/mixin/PlayerEntityRendererMixin.java:17: error: type PlayerModel does not take parameters
+      protected PlayerEntityRendererMixin(EntityRendererProvider.Context ctx, PlayerModel<AbstractClientPlayer> model, float shadowRadius) {
+                                                                                         ^
+  /home/runner/work/gruz-mod/gruz-mod/versions/1.21.4/build/pp/java/pl/gruzclient/cosmetics/CosmeticsFeature.java:26: error: type PlayerModel does not take parameters
+  public class CosmeticsFeature extends RenderLayer<AbstractClientPlayer, PlayerModel<AbstractClientPlayer>> {
+                                                                                     ^
+  /home/runner/work/gruz-mod/gruz-mod/versions/1.21.4/build/pp/java/pl/gruzclient/cosmetics/CosmeticsFeature.java:34: error: type PlayerModel does not take parameters
+      public CosmeticsFeature(RenderLayerParent<AbstractClientPlayer, PlayerModel<AbstractClientPlayer>> context) {
+                                                                                 ^
+  /home/runner/work/gruz-mod/gruz-mod/versions/1.21.4/build/pp/java/pl/gruzclient/mixin/PlayerEntityRendererMixin.java:16: error: wrong number of type arguments; required 3
+  public abstract class PlayerEntityRendererMixin extends LivingEntityRenderer<AbstractClientPlayer, PlayerModel<AbstractClientPlayer>> {
+                                                                              ^
+  /home/runner/work/gruz-mod/gruz-mod/versions/1.21.4/build/pp/java/pl/gruzclient/module/impl/FreecamModule.java:11: error: cannot find symbol
+  import net.minecraft.client.player.Input;
+                                    ^
+    symbol:   class Input
+    location: package net.minecraft.client.player
+  /home/runner/work/gruz-mod/gruz-mod/versions/1.21.4/build/pp/java/pl/gruzclient/module/impl/FreecamModule.java:26: error: cannot find symbol
+      private Input savedInput;

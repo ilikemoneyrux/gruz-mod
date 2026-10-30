@@ -1,0 +1,30 @@
+Compiled from "PlayerRenderer.java"
+public class net.minecraft.client.renderer.entity.player.PlayerRenderer extends net.minecraft.client.renderer.entity.LivingEntityRenderer<net.minecraft.client.player.AbstractClientPlayer, net.minecraft.client.renderer.entity.state.PlayerRenderState, net.minecraft.client.model.PlayerModel> {
+  public net.minecraft.client.renderer.entity.player.PlayerRenderer(net.minecraft.client.renderer.entity.EntityRendererProvider$Context, boolean);
+  protected boolean shouldRenderLayers(net.minecraft.client.renderer.entity.state.PlayerRenderState);
+  public net.minecraft.world.phys.Vec3 getRenderOffset(net.minecraft.client.renderer.entity.state.PlayerRenderState);
+  private static net.minecraft.client.model.HumanoidModel$ArmPose getArmPose(net.minecraft.client.player.AbstractClientPlayer, net.minecraft.world.entity.HumanoidArm);
+  private static net.minecraft.client.model.HumanoidModel$ArmPose getArmPose(net.minecraft.world.entity.player.Player, net.minecraft.world.item.ItemStack, net.minecraft.world.InteractionHand);
+  public net.minecraft.resources.ResourceLocation getTextureLocation(net.minecraft.client.renderer.entity.state.PlayerRenderState);
+  protected void scale(net.minecraft.client.renderer.entity.state.PlayerRenderState, com.mojang.blaze3d.vertex.PoseStack);
+  protected void renderNameTag(net.minecraft.client.renderer.entity.state.PlayerRenderState, net.minecraft.network.chat.Component, com.mojang.blaze3d.vertex.PoseStack, net.minecraft.client.renderer.MultiBufferSource, int);
+  public net.minecraft.client.renderer.entity.state.PlayerRenderState createRenderState();
+  public void extractRenderState(net.minecraft.client.player.AbstractClientPlayer, net.minecraft.client.renderer.entity.state.PlayerRenderState, float);
+  private static void extractFlightData(net.minecraft.client.player.AbstractClientPlayer, net.minecraft.client.renderer.entity.state.PlayerRenderState, float);
+  private static void extractCapeState(net.minecraft.client.player.AbstractClientPlayer, net.minecraft.client.renderer.entity.state.PlayerRenderState, float);
+  private static net.minecraft.world.entity.animal.Parrot$Variant getParrotOnShoulder(net.minecraft.client.player.AbstractClientPlayer, boolean);
+  public void renderRightHand(com.mojang.blaze3d.vertex.PoseStack, net.minecraft.client.renderer.MultiBufferSource, int, net.minecraft.resources.ResourceLocation, boolean);
+  public void renderLeftHand(com.mojang.blaze3d.vertex.PoseStack, net.minecraft.client.renderer.MultiBufferSource, int, net.minecraft.resources.ResourceLocation, boolean);
+  private void renderHand(com.mojang.blaze3d.vertex.PoseStack, net.minecraft.client.renderer.MultiBufferSource, int, net.minecraft.resources.ResourceLocation, net.minecraft.client.model.geom.ModelPart, boolean);
+  protected void setupRotations(net.minecraft.client.renderer.entity.state.PlayerRenderState, com.mojang.blaze3d.vertex.PoseStack, float, float);
+  public void extractRenderState(net.minecraft.world.entity.LivingEntity, net.minecraft.client.renderer.entity.state.LivingEntityRenderState, float);
+  protected void scale(net.minecraft.client.renderer.entity.state.LivingEntityRenderState, com.mojang.blaze3d.vertex.PoseStack);
+  protected void setupRotations(net.minecraft.client.renderer.entity.state.LivingEntityRenderState, com.mojang.blaze3d.vertex.PoseStack, float, float);
+  public net.minecraft.resources.ResourceLocation getTextureLocation(net.minecraft.client.renderer.entity.state.LivingEntityRenderState);
+  protected boolean shouldRenderLayers(net.minecraft.client.renderer.entity.state.LivingEntityRenderState);
+  public void extractRenderState(net.minecraft.world.entity.Entity, net.minecraft.client.renderer.entity.state.EntityRenderState, float);
+  public net.minecraft.client.renderer.entity.state.EntityRenderState createRenderState();
+  protected void renderNameTag(net.minecraft.client.renderer.entity.state.EntityRenderState, net.minecraft.network.chat.Component, com.mojang.blaze3d.vertex.PoseStack, net.minecraft.client.renderer.MultiBufferSource, int);
+  public net.minecraft.world.phys.Vec3 getRenderOffset(net.minecraft.client.renderer.entity.state.EntityRenderState);
+  private static boolean method_62602(net.minecraft.world.entity.EntityType);
+}

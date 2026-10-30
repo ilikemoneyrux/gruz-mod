@@ -1,0 +1,6 @@
+Compiled from "CapeLayer.java"
+public class net.minecraft.client.renderer.entity.layers.CapeLayer extends net.minecraft.client.renderer.entity.layers.RenderLayer<net.minecraft.client.player.AbstractClientPlayer, net.minecraft.client.model.PlayerModel<net.minecraft.client.player.AbstractClientPlayer>> {
+  public net.minecraft.client.renderer.entity.layers.CapeLayer(net.minecraft.client.renderer.entity.RenderLayerParent<net.minecraft.client.player.AbstractClientPlayer, net.minecraft.client.model.PlayerModel<net.minecraft.client.player.AbstractClientPlayer>>);
+  public void render(com.mojang.blaze3d.vertex.PoseStack, net.minecraft.client.renderer.MultiBufferSource, int, net.minecraft.client.player.AbstractClientPlayer, float, float, float, float, float, float);
+  public void render(com.mojang.blaze3d.vertex.PoseStack, net.minecraft.client.renderer.MultiBufferSource, int, net.minecraft.world.entity.Entity, float, float, float, float, float, float);
+}

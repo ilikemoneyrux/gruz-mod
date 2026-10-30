@@ -1,0 +1,184 @@
+errors: 40
+pl/gruzclient/mixin/InGameHudInvoker.java:3: cannot find symbol
+    import net.minecraft.client.DeltaTracker;
+                               ^
+      symbol:   class DeltaTracker
+pl/gruzclient/mixin/InGameHudInvoker.java:12: cannot find symbol
+        void gruz$renderScoreboard(GuiGraphics context, DeltaTracker tickCounter);
+                                                        ^
+      symbol:   class DeltaTracker
+pl/gruzclient/mixin/GameRendererMixin.java:4: cannot find symbol
+    import net.minecraft.client.DeltaTracker;
+                               ^
+      symbol:   class DeltaTracker
+pl/gruzclient/mixin/GameRendererMixin.java:32: cannot find symbol
+        private void gruz$motionBlur(DeltaTracker tickCounter, boolean tick, CallbackInfo ci) {
+                                     ^
+      symbol:   class DeltaTracker
+pl/gruzclient/mixin/InGameHudMixin.java:3: cannot find symbol
+    import net.minecraft.client.DeltaTracker;
+                               ^
+      symbol:   class DeltaTracker
+pl/gruzclient/mixin/InGameHudMixin.java:18: cannot find symbol
+        private void gruz$recording(GuiGraphics context, DeltaTracker tickCounter, CallbackInfo ci) {
+                                                         ^
+      symbol:   class DeltaTracker
+pl/gruzclient/mixin/InGameHudMixin.java:24: cannot find symbol
+        private void gruz$renderHud(GuiGraphics context, DeltaTracker tickCounter, CallbackInfo ci) {
+                                                         ^
+      symbol:   class DeltaTracker
+pl/gruzclient/mixin/InGameHudMixin.java:45: cannot find symbol
+        private void gruz$titleHead(GuiGraphics context, DeltaTracker tickCounter, CallbackInfo ci) {
+                                                         ^
+      symbol:   class DeltaTracker
+pl/gruzclient/mixin/InGameHudMixin.java:51: cannot find symbol
+        private void gruz$titleTail(GuiGraphics context, DeltaTracker tickCounter, CallbackInfo ci) {
+                                                         ^
+      symbol:   class DeltaTracker
+pl/gruzclient/mixin/InGameHudMixin.java:63: cannot find symbol
+        private void gruz$crosshair(GuiGraphics context, DeltaTracker tickCounter, CallbackInfo ci) {
+                                                         ^
+      symbol:   class DeltaTracker
+pl/gruzclient/screen/GruzTitleScreen.java:10: package net.minecraft.client.gui.screens.options does not exist
+    import net.minecraft.client.gui.screens.options.OptionsScreen;
+                                                   ^
+pl/gruzclient/render/GruzDraw.java:34: cannot find symbol
+        public static final ResourceLocation LOGO = ResourceLocation.fromNamespaceAndPath(GruzClient.MOD_ID, "textures/gui/logo.png");
+                                                                    ^
+      symbol:   method fromNamespaceAndPath(String,String)
+pl/gruzclient/render/GruzDraw.java:35: cannot find symbol
+        public static final ResourceLocation GLOW = ResourceLocation.fromNamespaceAndPath(GruzClient.MOD_ID, "textures/gui/glow.png");
+                                                                    ^
+      symbol:   method fromNamespaceAndPath(String,String)
+pl/gruzclient/render/GruzDraw.java:36: cannot find symbol
+        public static final ResourceLocation CRYSTAL = ResourceLocation.fromNamespaceAndPath(GruzClient.MOD_ID, "textures/gui/crystal.png");
+                                                                       ^
+      symbol:   method fromNamespaceAndPath(String,String)
+pl/gruzclient/render/Ui.java:22: cannot find symbol
+        public static final ResourceLocation FONT = ResourceLocation.fromNamespaceAndPath(GruzClient.MOD_ID, "ui");
+                                                                    ^
+      symbol:   method fromNamespaceAndPath(String,String)
+pl/gruzclient/render/Ui.java:23: cannot find symbol
+        public static final ResourceLocation FONT_BOLD = ResourceLocation.fromNamespaceAndPath(GruzClient.MOD_ID, "ui_bold");
+                                                                         ^
+      symbol:   method fromNamespaceAndPath(String,String)
+pl/gruzclient/render/Ui.java:24: cannot find symbol
+        public static final ResourceLocation ICONS = ResourceLocation.fromNamespaceAndPath(GruzClient.MOD_ID, "textures/gui/icons.png");
+                                                                     ^
+      symbol:   method fromNamespaceAndPath(String,String)
+pl/gruzclient/mixin/LightmapTextureManagerMixin.java:20: incompatible types: Holder<MobEffect> cannot be converted to MobEffect
+            return player.hasEffect(effect);
+                                    ^
+pl/gruzclient/network/GruzNetwork.java:290: method startConnecting in class ConnectScreen cannot be applied to given types;
+            ConnectScreen.startConnecting(new TitleScreen(), mc, ServerAddress.parseString(address), info, false, null);
+                         ^
+      required: Screen,Minecraft,ServerAddress,ServerData,boolean
+pl/gruzclient/module/impl/PotionHudModule.java:47: cannot find symbol
+            String n = e.getEffect().value().getDisplayName().getString();
+                                    ^
+      symbol:   method value()
+pl/gruzclient/module/impl/NametagModule.java:32: cannot find symbol
+        private static final ResourceLocation ICON_FONT = ResourceLocation.fromNamespaceAndPath("gruzclient", "icons");
+                                                                          ^
+      symbol:   method fromNamespaceAndPath(String,String)
+pl/gruzclient/module/impl/MotionBlurModule.java:16: cannot find symbol
+        private static final ResourceLocation SHADER = ResourceLocation.fromNamespaceAndPath(GruzClient.MOD_ID, "shaders/post/motion_blur.json");
+                                                                       ^
+      symbol:   method fromNamespaceAndPath(String,String)
+pl/gruzclient/module/impl/MotionBlurModule.java:37: cannot find symbol
+                processor.setUniform("BlendFactor", strength.value / 100f);
+                         ^
+      symbol:   method setUniform(String,float)
+pl/gruzclient/module/impl/MenuModule.java:30: cannot find symbol
+        public static final ResourceLocation PANORAMA = ResourceLocation.fromNamespaceAndPath(GruzClient.MOD_ID, "panorama/menu");
+                                                                        ^
+      symbol:   method fromNamespaceAndPath(String,String)
+pl/gruzclient/module/impl/MinimapModule.java:36: cannot find symbol
+        private static final ResourceLocation ID = ResourceLocation.fromNamespaceAndPath(GruzClient.MOD_ID, "minimap");
+                                                                   ^
+      symbol:   method fromNamespaceAndPath(String,String)
+pl/gruzclient/cosmetics/CosmeticsFeature.java:27: cannot find symbol
+        private static final ResourceLocation WHITE = ResourceLocation.fromNamespaceAndPath(GruzClient.MOD_ID, "textures/gui/white.png");
+                                                                      ^
+      symbol:   method fromNamespaceAndPath(String,String)
+pl/gruzclient/cosmetics/CosmeticsFeature.java:334: cannot find symbol
+            vc.addVertex(e, x, y, z)
+              ^
+      symbol:   method addVertex(Pose,float,float,float)
+pl/gruzclient/cosmetics/CapeTextures.java:28: cannot find symbol
+            if (CosmeticSet.HD_CAPES.contains(style)) return ResourceLocation.fromNamespaceAndPath(GruzClient.MOD_ID, "textures/cape/" + style + ".png");
+                                                                             ^
+      symbol:   method fromNamespaceAndPath(String,String)
+pl/gruzclient/cosmetics/CapeTextures.java:33: cannot find symbol
+            id = ResourceLocation.fromNamespaceAndPath(GruzClient.MOD_ID, "cape/" + key);
+                                 ^
+      symbol:   method fromNamespaceAndPath(String,String)
+pl/gruzclient/screen/GruzTitleScreen.java:101: cannot find symbol
+            add(new UiButton(ix, 10, s, s, Ui.Icon.GEAR, null, b -> this.minecraft.setScreen(new OptionsScreen(this, this.minecraft.options))).kind(UiButton.Kind.ICON));
+                                                                                                 ^
+      symbol:   class OptionsScreen
+pl/gruzclient/screen/GruzTitleScreen.java:116: method startConnecting in class ConnectScreen cannot be applied to given types;
+            ConnectScreen.startConnecting(this, this.minecraft, ServerAddress.parseString(address), info, false, null);
+                         ^
+      required: Screen,Minecraft,ServerAddress,ServerData,boolean
+pl/gruzclient/screen/GruzTitleScreen.java:141: method render in class PanoramaRenderer cannot be applied to given types;
+                ownPanorama.render(c, w, h, 1f, delta);
+                           ^
+      required: float,float
+pl/gruzclient/screen/GruzTitleScreen.java:145: cannot find symbol
+                this.renderPanorama(c, delta);
+                    ^
+      symbol: method renderPanorama(GuiGraphics,float)
+pl/gruzclient/screen/GruzTitleScreen.java:148: cannot find symbol
+                this.renderBlurredBackground(delta);
+                    ^
+      symbol: method renderBlurredBackground(float)
+pl/gruzclient/screen/WorldMapScreen.java:26: cannot find symbol
+        private static final ResourceLocation ID = ResourceLocation.fromNamespaceAndPath(GruzClient.MOD_ID, "worldmap");
+                                                                   ^
+      symbol:   method fromNamespaceAndPath(String,String)
+pl/gruzclient/screen/HudEditorScreen.java:182: cannot find symbol
+                this.renderBlurredBackground(delta);
+                    ^
+      symbol: method renderBlurredBackground(float)
+pl/gruzclient/screen/HudEditorScreen.java:208: cannot find symbol
+                    ((pl.gruzclient.mixin.InGameHudInvoker) this.minecraft.gui).gruz$renderScoreboard(c, this.minecraft.getTimer());
+                                                                                                                       ^
+      symbol:   method getTimer()
+pl/gruzclient/screen/GruzModsScreen.java:144: cannot find symbol
+                this.renderBlurredBackground(delta);
+                    ^
+      symbol: method renderBlurredBackground(float)
+pl/gruzclient/screen/GruzModsScreen.java:147: cannot find symbol
+                this.renderPanorama(c, delta);
+                    ^
+      symbol: method renderPanorama(GuiGraphics,float)
+pl/gruzclient/screen/GruzModsScreen.java:148: cannot find symbol
+                this.renderBlurredBackground(delta);
+                    ^
+      symbol: method renderBlurredBackground(float)
+--- What went wrong ---
+Execution failed for task ':1.20.4:compileJava' (registered by plugin class 'org.gradle.api.plugins.JavaBasePlugin').
+> Compilation failed; see the compiler output below.
+  /home/runner/work/gruz-mod/gruz-mod/versions/1.20.4/build/pp/java/pl/gruzclient/mixin/InGameHudInvoker.java:3: error: cannot find symbol
+  import net.minecraft.client.DeltaTracker;
+                             ^
+    symbol:   class DeltaTracker
+    location: package net.minecraft.client
+  /home/runner/work/gruz-mod/gruz-mod/versions/1.20.4/build/pp/java/pl/gruzclient/mixin/InGameHudInvoker.java:12: error: cannot find symbol
+      void gruz$renderScoreboard(GuiGraphics context, DeltaTracker tickCounter);
+                                                      ^
+    symbol:   class DeltaTracker
+    location: interface InGameHudInvoker
+  /home/runner/work/gruz-mod/gruz-mod/versions/1.20.4/build/pp/java/pl/gruzclient/mixin/GameRendererMixin.java:4: error: cannot find symbol
+  import net.minecraft.client.DeltaTracker;
+                             ^
+    symbol:   class DeltaTracker
+    location: package net.minecraft.client
+  /home/runner/work/gruz-mod/gruz-mod/versions/1.20.4/build/pp/java/pl/gruzclient/mixin/GameRendererMixin.java:32: error: cannot find symbol
+      private void gruz$motionBlur(DeltaTracker tickCounter, boolean tick, CallbackInfo ci) {
+                                   ^
+    symbol:   class DeltaTracker
+    location: class GameRendererMixin
+  /home/runner/work/gruz-mod/gruz-mod/versions/1.20.4/build/pp/java/pl/gruzclient/mixin/InGameHudMixin.java:3: error: cannot find symbol
+  import net.minecraft.client.DeltaTracker;

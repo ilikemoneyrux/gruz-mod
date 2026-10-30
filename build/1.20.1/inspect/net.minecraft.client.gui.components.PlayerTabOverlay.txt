@@ -1,0 +1,39 @@
+Compiled from "PlayerTabOverlay.java"
+public class net.minecraft.client.gui.components.PlayerTabOverlay {
+  private static final java.util.Comparator<net.minecraft.client.multiplayer.PlayerInfo> PLAYER_COMPARATOR;
+  private static final net.minecraft.resources.ResourceLocation GUI_ICONS_LOCATION;
+  public static final int MAX_ROWS_PER_COL;
+  public static final int HEART_EMPTY_CONTAINER;
+  public static final int HEART_EMPTY_CONTAINER_BLINKING;
+  public static final int HEART_FULL;
+  public static final int HEART_HALF_FULL;
+  public static final int HEART_GOLDEN_FULL;
+  public static final int HEART_GOLDEN_HALF_FULL;
+  public static final int HEART_GHOST_FULL;
+  public static final int HEART_GHOST_HALF_FULL;
+  private final net.minecraft.client.Minecraft minecraft;
+  private final net.minecraft.client.gui.Gui gui;
+  private net.minecraft.network.chat.Component footer;
+  private net.minecraft.network.chat.Component header;
+  private boolean visible;
+  private final java.util.Map<java.util.UUID, net.minecraft.client.gui.components.PlayerTabOverlay$HealthState> healthStates;
+  public net.minecraft.client.gui.components.PlayerTabOverlay(net.minecraft.client.Minecraft, net.minecraft.client.gui.Gui);
+  public net.minecraft.network.chat.Component getNameForDisplay(net.minecraft.client.multiplayer.PlayerInfo);
+  private net.minecraft.network.chat.Component decorateName(net.minecraft.client.multiplayer.PlayerInfo, net.minecraft.network.chat.MutableComponent);
+  public void setVisible(boolean);
+  private java.util.List<net.minecraft.client.multiplayer.PlayerInfo> getPlayerInfos();
+  public void render(net.minecraft.client.gui.GuiGraphics, int, net.minecraft.world.scores.Scoreboard, net.minecraft.world.scores.Objective);
+  protected void renderPingIcon(net.minecraft.client.gui.GuiGraphics, int, int, int, net.minecraft.client.multiplayer.PlayerInfo);
+  private void renderTablistScore(net.minecraft.world.scores.Objective, int, java.lang.String, int, int, java.util.UUID, net.minecraft.client.gui.GuiGraphics);
+  private void renderTablistHearts(int, int, int, java.util.UUID, net.minecraft.client.gui.GuiGraphics, int);
+  public void setFooter(net.minecraft.network.chat.Component);
+  public void setHeader(net.minecraft.network.chat.Component);
+  public void reset();
+  private static net.minecraft.client.gui.components.PlayerTabOverlay$HealthState method_45591(int, java.util.UUID);
+  private static boolean method_45593(java.util.Set, java.util.UUID);
+  private static java.util.UUID method_45594(net.minecraft.client.multiplayer.PlayerInfo);
+  private static java.lang.String method_46511(net.minecraft.client.multiplayer.PlayerInfo);
+  private static java.lang.String method_45595(net.minecraft.client.multiplayer.PlayerInfo);
+  private static int method_45592(net.minecraft.client.multiplayer.PlayerInfo);
+  static {};
+}
