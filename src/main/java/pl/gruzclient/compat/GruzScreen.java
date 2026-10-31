@@ -1,3 +1,4 @@
+//#swap MC >= 26.3 | e.scancode() => e.keycode()
 package pl.gruzclient.compat;
 
 import net.minecraft.client.gui.screens.Screen;
@@ -77,6 +78,23 @@ public abstract class GruzScreen extends Screen {
         return super.charTyped(new CharacterEvent(chr, modifiers));
         //#endif
     }
+    //#endif
+
+    //#if MC < 1.20.2
+    // 1.20.1: Screen.render nie rysuje tła (ekran wołał renderBackground(GuiGraphics) sam), a kółko myszy ma 3 parametry.
+    // Dokładamy metody z 1.20.2+, więc ekrany moda nadpisują renderBackground(c, x, y, delta) i mouseScrolled(x, y, h, v) jak wszędzie.
+    @Override
+    public void render(net.minecraft.client.gui.GuiGraphics c, int mouseX, int mouseY, float delta) {
+        renderBackground(c, mouseX, mouseY, delta);
+        super.render(c, mouseX, mouseY, delta);
+    }
+
+    public void renderBackground(net.minecraft.client.gui.GuiGraphics c, int mouseX, int mouseY, float delta) { super.renderBackground(c); }
+
+    @Override
+    public boolean mouseScrolled(double mx, double my, double v) { return mouseScrolled(mx, my, 0, v); }
+
+    public boolean mouseScrolled(double mx, double my, double h, double v) { return super.mouseScrolled(mx, my, v); }
     //#endif
 
     //#if MC >= 26.1

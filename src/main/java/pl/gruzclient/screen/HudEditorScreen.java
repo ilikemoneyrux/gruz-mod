@@ -1,3 +1,4 @@
+//#swap MC >= 26.2 | (pl.gruzclient.mixin.InGameHudInvoker) this.minecraft.gui) => (pl.gruzclient.mixin.InGameHudInvoker) this.minecraft.gui.hud)
 package pl.gruzclient.screen;
 
 import org.lwjgl.glfw.GLFW;

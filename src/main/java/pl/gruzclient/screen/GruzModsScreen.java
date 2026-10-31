@@ -1,3 +1,4 @@
+//#swap MC < 1.20.3 | Ui.text(Lang.t("mods.search")).withColor(MUTE) => Ui.text(Lang.t("mods.search")).withStyle(st -> st.withColor(MUTE))
 package pl.gruzclient.screen;
 
 import org.lwjgl.glfw.GLFW;

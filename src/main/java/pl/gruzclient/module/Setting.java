@@ -1,3 +1,4 @@
+//#swap MC >= 26.3 | InputConstants.Type.KEYSYM => InputConstants.Type.KEYBOARD
 package pl.gruzclient.module;
 
 import com.google.gson.JsonObject;

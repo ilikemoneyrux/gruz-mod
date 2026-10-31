@@ -34,7 +34,8 @@ public abstract class GameRendererMixin {
         if (Modules.FULLBRIGHT.isEnabled()) cir.setReturnValue(1f);
     }
 
-    /** Motion blur: po narysowaniu świata, przed GUI */
+    //#if MC < 26.3
+    /** Motion blur: po narysowaniu świata, przed GUI (od 26.3 render() nie ma parametrów i nie ma doEntityOutline) */
     @Inject(method = "render", require = 0, at = @At(value = "INVOKE",
             target = "Lnet/minecraft/client/renderer/LevelRenderer;doEntityOutline()V", shift = At.Shift.AFTER))
     //#if MC >= 1.21
@@ -45,6 +46,7 @@ public abstract class GameRendererMixin {
     private void gruz$motionBlur(float tickDelta, long nanos, boolean tick, CallbackInfo ci) {
         Modules.MOTION_BLUR.render(tickDelta);
     }
+    //#endif
     //#endif
 
     /** Freecam: bez ręki przed kamerą */

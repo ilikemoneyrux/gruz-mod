@@ -14,6 +14,8 @@
 * net.minecraft.client.renderer.PanoramaRenderer
 * net.minecraft.client.Minecraft
 * net.minecraft.client.gui.Gui
+* net.minecraft.client.gui.Hud
+* net.minecraft.client.renderer.FirstPersonHandsAndItemsRenderer
 * net.minecraft.client.renderer.LevelRenderer
 * net.minecraft.client.renderer.ShapeRenderer
 * net.minecraft.core.particles.DustParticleOptions

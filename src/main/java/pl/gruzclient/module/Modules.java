@@ -128,7 +128,8 @@ public final class Modules {
         Minecraft mc = Minecraft.getInstance();
         if (mc.screen != null || code <= 0) return false;
         return InputConstants.isKeyDown(
-                //#if MC >= 1.21.9
+                //#if MC >= 26.3
+                //#elif MC >= 1.21.9
                 mc.getWindow(),
                 //#else
                 mc.getWindow().getWindow(),

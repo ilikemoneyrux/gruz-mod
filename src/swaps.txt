@@ -41,3 +41,16 @@ MC >= 26.1 | d.render(c, mouseX, mouseY, delta) => d.extractRenderState(c, mouse
 MC >= 26.1 | search.render(c, mouseX, mouseY, delta) => search.extractRenderState(c, mouseX, mouseY, delta)
 MC >= 26.1 | chunkPosition().x => chunkPosition().x()
 MC >= 26.1 | chunkPosition().z => chunkPosition().z()
+# 26.2: ekrany i nakładki przeniesione z Minecraft do mc.gui, HUD to osobna klasa Hud (mc.gui.hud)
+MC >= 26.2 | minecraft.setScreen( => minecraft.gui.setScreen(
+MC >= 26.2 | mc.setScreen( => mc.gui.setScreen(
+MC >= 26.2 | mc.screen => mc.gui.screen()
+MC >= 26.2 | Minecraft.getInstance().screen => Minecraft.getInstance().gui.screen()
+MC >= 26.2 | mc.getOverlay() => mc.gui.overlay()
+MC >= 26.2 | gui.getChat() => gui.hud.getChat()
+MC >= 26.2 | gui.getBossOverlay() => gui.hud.getBossOverlay()
+MC >= 26.2 | net.minecraft.client.gui.Gui.getMobEffectSprite => net.minecraft.client.gui.Hud.getMobEffectSprite
+MC >= 26.2 | mc.options.hideGui => mc.gui.hud.isHidden()
+MC >= 26.2 | Items.WHITE_WOOL => Items.WOOL.white()
+# 1.20.1: ekran debugowania to jeszcze flaga w opcjach
+MC < 1.20.2 | mc.getDebugOverlay().showDebugScreen() => mc.options.renderDebug

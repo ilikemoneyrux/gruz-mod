@@ -1,0 +1,2 @@
+package com.google.gson;
+public final class JsonArray extends JsonElement implements Iterable<JsonElement> { public void add(JsonElement e) {} public void add(String s) {} public void add(Number n) {} public void add(Boolean b) {} public JsonElement get(int i) { return null; } public int size() { return 0; } public boolean isEmpty() { return true; } public java.util.Iterator<JsonElement> iterator() { return null; } public java.util.List<JsonElement> asList() { return null; } }

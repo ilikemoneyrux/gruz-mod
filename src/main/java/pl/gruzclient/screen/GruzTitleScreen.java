@@ -1,3 +1,4 @@
+//#swap MC < 1.20.2 | this.minecraft.getGameProfile() => this.minecraft.getUser().getGameProfile()
 package pl.gruzclient.screen;
 
 import pl.gruzclient.compat.Compat;
@@ -19,7 +20,9 @@ import net.minecraft.client.multiplayer.resolver.ServerAddress;
 import net.minecraft.client.renderer.CubeMap;
 import net.minecraft.client.renderer.PanoramaRenderer;
 //#endif
+//#if MC >= 1.20.2
 import net.minecraft.client.resources.PlayerSkin;
+//#endif
 import net.minecraft.network.chat.Component;
 import pl.gruzclient.GruzClient;
 import pl.gruzclient.config.GruzConfig;
@@ -107,13 +110,17 @@ public class GruzTitleScreen extends pl.gruzclient.compat.GruzScreen {
                 .kind(UiButton.Kind.ICON).badge(Lang.badge().replace("*", "")));
         ix -= s + 5;
         add(new UiButton(ix, 10, s, s, Ui.Icon.GEAR, null, b -> this.minecraft.setScreen(new OptionsScreen(this, this.minecraft.options
-                //#if MC >= 26.1
+                //#if MC >= 26.1 && MC < 26.3
                 , false
                 //#endif
                 ))).kind(UiButton.Kind.ICON));
         ix -= s + 5;
         add(new UiButton(ix, 10, s, s, Ui.Icon.CAMERA, null,
+                //#if MC >= 26.3
+                b -> com.mojang.blaze3d.Blaze3D.openPath(this.minecraft.gameDirectory.toPath().resolve("screenshots"))).kind(UiButton.Kind.ICON));
+                //#else
                 b -> Util.getPlatform().openFile(this.minecraft.gameDirectory.toPath().resolve("screenshots").toFile())).kind(UiButton.Kind.ICON));
+                //#endif
         ix -= s + 5;
         add(new UiButton(ix, 10, s, s, Ui.Icon.GRID, null, b -> this.minecraft.setScreen(new GruzModsScreen(this))).kind(UiButton.Kind.ICON));
         chipRight = ix - 6;

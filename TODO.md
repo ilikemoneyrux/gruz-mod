@@ -9,23 +9,40 @@
   w wydaniu `mod` z `versions.json`. Launcher pobiera stamtąd jar pasujący do wersji gry.
 - Logi buildów: gałęzie `ci-log-<wersja>` i `ci-results`. Zrzuty klas Minecrafta (javap): `ci/inspect.txt`.
 - `ci/check_mixins.py <zrzuty> <wersje>` – sprawdza miksy offline względem zrzutów klas.
+- `ci/offline/check.sh <wersja>` – sprawdza kompilację offline (bez Gradle i Minecrafta), patrz `ci/offline/README.md`.
 
-## Stan (31.10.2026)
+## Stan (1.11.2026, mod 0.5.0)
 | Wersja | Build | W grze |
 |---|---|---|
+| 1.20.1 | lokalnie 0 błędów, czeka na CI | – |
 | 1.20.4 | OK | OK |
 | 1.21.1 | OK | OK |
 | 1.21.4 | OK | OK |
 | 1.21.11 | OK | OK |
 | 26.1 | OK | OK |
-| 26.2 | 51 błędów | – (Minecraft.setScreen/screen → mc.gui; HUD to klasa `Hud`) |
-| 26.3 | 112 błędów | – (jak 26.2 + więcej) |
-| 1.20.1 | 26 błędów | – (PlayerSkin, renderBackground/mouseScrolled, ServerData) |
-| 1.8.9 | – | osobny projekt (Legacy Fabric) |
+| 26.2 | lokalnie 0 błędów, czeka na CI | – |
+| 26.3 | lokalnie 0 błędów, czeka na CI | – |
+| 1.8.9 | – | osobny projekt (Legacy Fabric) – nie zaczęty |
+
+"Lokalnie" = `ci/offline/check.sh` (kompilacja na stubach z zrzutów javap) + `ci/check_mixins.py` bez błędów.
+Pewność daje dopiero CI (build + test uruchomienia gry).
+
+### Co się zmieniło w 0.5.0
+- 26.2: ekrany i nakładki są w `mc.gui` (`screen()`, `setScreen`, `overlay()`), HUD to `mc.gui.hud` (klasa `Hud`):
+  podmiany w `src/swaps.txt`, miksy HUD (`InGameHudMixin`, `InGameHudInvoker`) celują w `Hud`;
+  `hideGui` → `gui.hud.isHidden()`, `Items.WHITE_WOOL` → `Items.WOOL.white()`, ogień: `submitFire`,
+  ręka: `submitArmWithItem`.
+- 26.3: ręka w 1. osobie to `FirstPersonHandsAndItemsRenderer` (nowy `HandsRendererMixin`), `KeyEvent.keycode()`,
+  `InputConstants.Type.KEYBOARD`, `InputConstants.isKeyDown(kod)`, `OptionsScreen(ekran, opcje)`, `Blaze3D.openPath`.
+- 1.20.1: `GruzScreen` dokłada `renderBackground(c, x, y, delta)` i `mouseScrolled(x, y, h, v)` jak w 1.20.2+,
+  peleryna przez `getCloakTextureLocation`/`getElytraTextureLocation`, `ServerData(nazwa, ip, false)`,
+  skin przez `getSkinLocation`, debug przez `options.renderDebug`.
 
 ## Wyłączone funkcje na części wersji (do przeniesienia)
 - 1.20.4: dodatki czatu (łączenie powtórzeń, kopiowanie, dłuższa historia, wyszukiwarka).
 - ≥ 1.21.2: motion blur (nowy post-processing), item physics (nowe modele przedmiotów), kolor mgły.
 - ≥ 1.21.9: block overlay (obrys/wypełnienie bloku), kopiowanie wiadomości z czatu.
 - 26.1: własna panorama menu (pokazuje zwykłą), fullbright przez lightmapę, kolor nieba.
+- 26.3: poza bloku mieczem z 1.8 i brak opadania ręki po ciosie (nie ma już renderItem/tick w rendererze ręki), motion blur (render() bez parametrów).
+- 1.20.1: ukrywanie czerwonych liczb na tablicy wyników (NumberFormat jest od 1.20.3).
 - Test w CI sprawdza menu i ekrany moda, ale nie wchodzi do świata – rzeczy w grze trzeba sprawdzić ręcznie.

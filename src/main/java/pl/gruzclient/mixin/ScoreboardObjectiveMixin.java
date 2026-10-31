@@ -1,3 +1,4 @@
+//#only MC >= 1.20.3
 package pl.gruzclient.mixin;
 
 import net.minecraft.network.chat.numbers.BlankFormat;

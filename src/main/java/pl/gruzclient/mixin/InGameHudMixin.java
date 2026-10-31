@@ -1,3 +1,4 @@
+//#swap MC >= 26.2 | Gui => Hud
 //#swap MC >= 26.1 | "render" => "extractRenderState"
 //#swap MC >= 26.1 | "renderTitle" => "extractTitle"
 //#swap MC >= 26.1 | "renderCrosshair" => "extractCrosshair"

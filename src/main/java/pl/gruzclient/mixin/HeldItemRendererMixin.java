@@ -1,3 +1,5 @@
+//#only MC < 26.3
+//#swap MC >= 26.2 | "renderArmWithItem" => "submitArmWithItem"
 //#swap MC >= 1.21.9 | MultiBufferSource vertexConsumers => net.minecraft.client.renderer.SubmitNodeCollector vertexConsumers
 //#swap MC >= 1.21.9 | ItemDisplayContext;ZLcom/mojang/blaze3d/vertex/PoseStack;Lnet/minecraft/client/renderer/MultiBufferSource;I)V => ItemDisplayContext;Lcom/mojang/blaze3d/vertex/PoseStack;Lnet/minecraft/client/renderer/SubmitNodeCollector;I)V
 package pl.gruzclient.mixin;
@@ -7,7 +9,9 @@ import com.mojang.blaze3d.vertex.PoseStack;
 import net.minecraft.client.player.AbstractClientPlayer;
 import net.minecraft.client.player.LocalPlayer;
 import net.minecraft.client.renderer.ItemInHandRenderer;
+//#if MC < 26.2
 import net.minecraft.client.renderer.MultiBufferSource;
+//#endif
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;

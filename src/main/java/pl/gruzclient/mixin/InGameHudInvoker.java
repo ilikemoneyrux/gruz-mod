@@ -1,3 +1,4 @@
+//#swap MC >= 26.2 | Gui => Hud
 //#swap MC >= 26.1 | "renderScoreboardSidebar" => "extractScoreboardSidebar"
 //#only MC >= 1.21
 package pl.gruzclient.mixin;

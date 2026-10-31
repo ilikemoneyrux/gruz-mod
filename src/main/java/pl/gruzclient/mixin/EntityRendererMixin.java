@@ -1,7 +1,9 @@
 package pl.gruzclient.mixin;
 
 import com.mojang.blaze3d.vertex.PoseStack;
+//#if MC < 26.2
 import net.minecraft.client.renderer.MultiBufferSource;
+//#endif
 import net.minecraft.client.renderer.entity.EntityRenderer;
 import net.minecraft.network.chat.Component;
 import net.minecraft.world.entity.Entity;

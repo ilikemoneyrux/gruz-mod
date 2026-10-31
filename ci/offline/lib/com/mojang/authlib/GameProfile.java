@@ -1,0 +1,2 @@
+package com.mojang.authlib;
+public class GameProfile { public GameProfile(java.util.UUID id, String name) {} public java.util.UUID getId() { return null; } public String getName() { return null; } public java.util.UUID id() { return null; } public String name() { return null; } public com.mojang.authlib.properties.PropertyMap getProperties() { return null; } public com.mojang.authlib.properties.PropertyMap properties() { return null; } }

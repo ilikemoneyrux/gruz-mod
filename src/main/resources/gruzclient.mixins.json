@@ -18,6 +18,7 @@
     "WorldRendererMixin",
     "InGameOverlayRendererMixin",
     "HeldItemRendererMixin",
+    "HandsRendererMixin",
     "LivingEntityMixin",
     "EntityRendererMixin",
     "LivingEntityRendererMixin",

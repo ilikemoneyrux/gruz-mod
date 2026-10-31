@@ -1,3 +1,5 @@
+//#swap MC < 1.20.2 | info.getSkin() => info.getSkinLocation()
+//#swap MC < 1.20.2 | getInsecureSkin(mc.getGameProfile()) => getInsecureSkinLocation(mc.getUser().getGameProfile())
 package pl.gruzclient.compat;
 
 import com.mojang.blaze3d.platform.NativeImage;
@@ -333,7 +335,11 @@ public final class Compat {
     // ---------------- serwery ----------------
 
     public static ServerData server(String name, String address) {
+        //#if MC >= 1.20.2
         return new ServerData(name, address, ServerData.Type.OTHER);
+        //#else
+        return new ServerData(name, address, false);
+        //#endif
     }
 
     public static void connect(Screen parent, Minecraft mc, String address, ServerData info) {
