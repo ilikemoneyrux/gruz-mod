@@ -26,5 +26,5 @@ for cls in want:
         names = sorted(n[:-6].replace('/', '.') for n in zipfile.ZipFile(jar).namelist() if n.endswith('.class') and '$' not in n)
         open(out + '/inspect/LIST.txt', 'w').write('\n'.join(names))
         continue
-    r = subprocess.run(['javap', '-p', '-cp', cp, cls], capture_output=True, text=True)
+    r = subprocess.run(['javap', '-p', '-s', '-cp', cp, cls], capture_output=True, text=True)
     open(out + '/inspect/' + cls.replace('$', '_') + '.txt', 'w').write(r.stdout + r.stderr)

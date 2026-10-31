@@ -1,3 +1,4 @@
+//#only MC < 1.21.2
 package pl.gruzclient.mixin;
 
 import com.mojang.blaze3d.systems.RenderSystem;

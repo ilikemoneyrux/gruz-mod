@@ -13,13 +13,21 @@ import pl.gruzclient.module.Modules;
 @Mixin(ScreenEffectRenderer.class)
 public abstract class InGameOverlayRendererMixin {
     @Inject(method = "renderFire", at = @At("HEAD"), require = 0)
+    //#if MC >= 1.21.2
+    private static void gruz$fireDown(PoseStack matrices, net.minecraft.client.renderer.MultiBufferSource buffers, CallbackInfo ci) {
+    //#else
     private static void gruz$fireDown(Minecraft client, PoseStack matrices, CallbackInfo ci) {
+    //#endif
         matrices.pushPose();
         matrices.translate(0f, -Modules.LOW_FIRE.fireOffset(), 0f);
     }
 
     @Inject(method = "renderFire", at = @At("RETURN"), require = 0)
+    //#if MC >= 1.21.2
+    private static void gruz$fireRestore(PoseStack matrices, net.minecraft.client.renderer.MultiBufferSource buffers, CallbackInfo ci) {
+    //#else
     private static void gruz$fireRestore(Minecraft client, PoseStack matrices, CallbackInfo ci) {
+    //#endif
         matrices.popPose();
     }
 }
