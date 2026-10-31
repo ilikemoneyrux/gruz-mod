@@ -1,0 +1,844 @@
+<!doctype html>
+<html lang="pl">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Gruz Admin</title>
+<style>
+  :root {
+    --void: #050308; --slab: #0c0912; --rubble: #161020; --seam: #2b2139;
+    --neon: #b45cff; --hot: #dcaaff; --text: #f1ecf8; --mute: #9488a8; --ok: #7dffb2; --bad: #ff5c8a;
+    color-scheme: dark;
+  }
+  * { box-sizing: border-box; }
+  body { margin: 0; background: radial-gradient(1200px 600px at 80% -10%, rgba(180, 92, 255, .14), transparent 60%), var(--void);
+    color: var(--text); font: 14px/1.5 'Segoe UI', system-ui, sans-serif; min-height: 100vh; }
+  button, input, select, textarea { font: inherit; color: inherit; }
+  .wrap { max-width: 1100px; margin: 0 auto; padding: 28px 20px 60px; }
+  header { display: flex; align-items: center; gap: 14px; margin-bottom: 22px; }
+  .logo { font: 800 22px/1 'Segoe UI', sans-serif; letter-spacing: .14em; color: var(--hot); text-shadow: 0 0 18px rgba(180, 92, 255, .6); }
+  .logo small { font-size: 11px; letter-spacing: .3em; color: var(--mute); margin-left: 8px; }
+  header .sp { flex: 1; }
+  nav { display: flex; gap: 4px; flex-wrap: wrap; }
+  nav button { background: transparent; border: 1px solid transparent; padding: 7px 14px; cursor: pointer; color: var(--mute); }
+  nav button.on { color: var(--text); border-color: var(--seam); background: var(--slab); box-shadow: inset 0 -2px 0 var(--neon); }
+  .card { background: var(--slab); border: 1px solid var(--seam); padding: 18px; margin-bottom: 16px; }
+  h2 { margin: 0 0 12px; font-size: 13px; letter-spacing: .12em; text-transform: uppercase; color: var(--mute); font-weight: 600; }
+  .grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(160px, 1fr)); gap: 12px; }
+  .stat { background: var(--rubble); padding: 14px; }
+  .stat b { display: block; font-size: 26px; font-variant-numeric: tabular-nums; color: var(--hot); }
+  .stat span { color: var(--mute); font-size: 12px; }
+  table { width: 100%; border-collapse: collapse; }
+  th { text-align: left; color: var(--mute); font-weight: 500; font-size: 12px; padding: 6px 8px; border-bottom: 1px solid var(--seam); }
+  td { padding: 8px; border-bottom: 1px solid rgba(43, 33, 57, .6); vertical-align: middle; }
+  td img { width: 22px; height: 22px; vertical-align: middle; margin-right: 8px; image-rendering: pixelated; }
+  .row { display: flex; gap: 8px; flex-wrap: wrap; align-items: center; }
+  input, select, textarea { background: var(--rubble); border: 1px solid var(--seam); padding: 8px 10px; min-width: 0; }
+  input:focus, select:focus, textarea:focus { outline: none; border-color: var(--neon); }
+  textarea { width: 100%; min-height: 90px; resize: vertical; }
+  .btn { background: var(--neon); color: #12051f; border: 0; padding: 8px 16px; font-weight: 700; cursor: pointer; }
+  .btn:hover { background: var(--hot); }
+  .ghost { background: transparent; border: 1px solid var(--seam); padding: 6px 12px; cursor: pointer; }
+  .ghost:hover { border-color: var(--neon); }
+  .danger { color: var(--bad); }
+  .pill { display: inline-block; font-size: 11px; padding: 1px 7px; border: 1px solid var(--seam); margin: 1px 2px; color: var(--mute); }
+  .pill.on { color: var(--ok); border-color: rgba(125, 255, 178, .4); }
+  .pill.ban { color: var(--bad); border-color: rgba(255, 92, 138, .4); }
+  .muted { color: var(--mute); }
+  .code { font-family: Consolas, monospace; letter-spacing: .06em; color: var(--hot); }
+  #login { max-width: 360px; margin: 14vh auto 0; }
+  #login .card { padding: 26px; }
+  #login input { width: 100%; margin: 10px 0 14px; }
+  .err { color: var(--bad); min-height: 20px; margin: 0; }
+  .news-item { border-left: 2px solid var(--neon); padding: 6px 12px; margin-bottom: 10px; background: var(--rubble); }
+  .news-item h3 { margin: 0; font-size: 15px; }
+  .ad-prev { display: flex; gap: 12px; align-items: center; background: var(--rubble); padding: 10px; margin-bottom: 8px; border-left: 3px solid var(--neon); }
+  .ad-prev img { width: 120px; height: 60px; object-fit: cover; background: #000; }
+  .ad-prev .grow { flex: 1; min-width: 0; }
+  .ad-prev h3 { margin: 0; font-size: 15px; }
+  .ad-prev p { margin: 2px 0 0; color: var(--mute); font-size: 13px; }
+  .three { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; }
+  .three label { display: block; font-size: 12px; color: var(--mute); } .three input, .three select { width: 100%; }
+  pre.log { max-height: 420px; overflow: auto; background: #000; padding: 12px; font-size: 12px; white-space: pre-wrap; }
+  @media (max-width: 760px) { .three { grid-template-columns: 1fr; } }
+  .bot-head { display: flex; gap: 14px; align-items: center; }
+  .dot { width: 10px; height: 10px; border-radius: 50%; background: var(--bad); display: inline-block; }
+  .dot.on { background: var(--ok); box-shadow: 0 0 10px var(--ok); }
+  .checks { display: flex; flex-wrap: wrap; gap: 6px 14px; margin-top: 4px; }
+  .checks label { display: flex; gap: 6px; align-items: center; font-size: 13px; color: var(--text); }
+  .tier { display: flex; gap: 8px; align-items: center; margin-bottom: 6px; }
+  .tier input { width: 90px; }
+  .ok-msg { color: var(--ok); min-height: 20px; margin: 0; }
+  .grid2 { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; } @media (max-width: 900px) { .grid2 { grid-template-columns: 1fr; } }
+  .grid2 > .card { margin-bottom: 0; }
+  label.blk { display: block; font-size: 12px; color: var(--mute); margin-top: 8px; } label.blk input, label.blk select, label.blk textarea { width: 100%; margin-top: 3px; }
+  .two { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+  .two label, .one label { display: block; font-size: 12px; color: var(--mute); }
+  .two input, .one input { width: 100%; }
+  @media (max-width: 640px) { .two { grid-template-columns: 1fr; } }
+  .chart { width: 100%; height: auto; display: block; }
+  .chart text { fill: var(--mute); font-size: 11px; font-family: 'Segoe UI', system-ui, sans-serif; }
+  .chart .grid line { stroke: var(--seam); stroke-width: 1; }
+  .chart rect:hover, .chart circle:hover { opacity: .75; }
+  .legend { display: flex; gap: 14px; flex-wrap: wrap; font-size: 12px; color: var(--mute); margin: 4px 0 8px; }
+  .legend i { display: inline-block; width: 10px; height: 10px; margin-right: 6px; vertical-align: -1px; }
+  .chart-head { display: flex; align-items: center; gap: 10px; flex-wrap: wrap; }
+  .chart-head h2 { margin: 0; flex: 1; }
+  .srcbar { display: flex; height: 14px; background: var(--rubble); margin: 8px 0 4px; overflow: hidden; }
+  .srcbar span { display: block; height: 100%; }
+  .mini td { padding: 5px 8px; }
+  .lvrow { display: flex; gap: 8px; align-items: center; margin-bottom: 6px; } .lvrow input { width: 80px; } .lvrow select { flex: 1; }
+  [hidden] { display: none !important; }
+</style>
+</head>
+<body>
+<div id="disabled" class="wrap" hidden>
+  <div class="card"><h2>Panel wyłączony</h2><p>Uruchom serwer ze zmienną <span class="code">GRUZ_ADMIN_PASSWORD</span>, np. <span class="code">GRUZ_ADMIN_PASSWORD=tajne npm start</span>.</p></div>
+</div>
+
+<div id="login" hidden>
+  <div class="card">
+    <div class="logo">GRUZ<small>ADMIN</small></div>
+    <form id="login-form">
+      <input type="password" id="pw" placeholder="Hasło admina" autocomplete="current-password" autofocus />
+      <p class="err" id="login-err"></p>
+      <button class="btn" type="submit">Zaloguj</button>
+    </form>
+  </div>
+</div>
+
+<div id="app" class="wrap" hidden>
+  <header>
+    <div class="logo">GRUZ<small>ADMIN</small></div>
+    <div class="sp"></div>
+    <nav id="nav">
+      <button data-tab="overview" class="on">Przegląd</button>
+      <button data-tab="growth">Wykresy</button>
+      <button data-tab="users">Gracze</button>
+      <button data-tab="codes">Kody</button>
+      <button data-tab="news">Newsy</button>
+      <button data-tab="promo">Partnerzy i reklamy</button>
+      <button data-tab="creators">Twórcy</button>
+      <button data-tab="invites">Zaproszenia</button>
+      <button data-tab="quests">Zadania i ranking</button>
+      <button data-tab="bot">Bot Discord</button>
+      <button data-tab="crashes">Crashe</button>
+    </nav>
+    <button class="ghost" id="logout">Wyloguj</button>
+  </header>
+
+  <section data-panel="overview">
+    <div class="card"><h2>Serwer</h2><div class="grid" id="stats"></div></div>
+    <div class="card"><h2>Najwięcej godzin</h2><table><thead><tr><th>Gracz</th><th>Poziom</th><th>Godziny</th></tr></thead><tbody id="top"></tbody></table></div>
+  </section>
+
+  <section data-panel="growth" hidden>
+    <div class="card">
+      <div class="chart-head"><h2>Nowi gracze dziennie</h2>
+        <select id="gr-days"><option value="14">14 dni</option><option value="30" selected>30 dni</option><option value="90">90 dni</option><option value="180">180 dni</option></select></div>
+      <div class="legend" id="gr-legend"></div>
+      <div id="gr-new"></div>
+    </div>
+    <div class="card">
+      <h2>Aktywni gracze i szczyt online</h2>
+      <div class="legend"><span><i style="background:#dcaaff"></i>Aktywni w danym dniu</span><span><i style="background:#7dffb2"></i>Najwięcej online naraz</span></div>
+      <div id="gr-active"></div>
+      <p class="muted" id="gr-tracked"></p>
+    </div>
+    <div class="grid2">
+      <div class="card"><h2>Skąd przyszli (wybrany okres)</h2><div id="gr-sources"></div></div>
+      <div class="card"><h2>Kody twórców</h2><table class="mini"><tbody id="gr-creators"></tbody></table></div>
+    </div>
+    <div class="grid2" style="margin-top:16px">
+      <div class="card"><h2>Najwięcej zaproszonych znajomych</h2><table class="mini"><tbody id="gr-inviters"></tbody></table></div>
+      <div class="card"><h2>Wersje launchera (aktywni gracze)</h2><table class="mini"><tbody id="gr-versions"></tbody></table></div>
+    </div>
+  </section>
+
+  <section data-panel="quests" hidden>
+    <div class="grid2">
+      <div class="card">
+        <h2>Codzienne zadania</h2>
+        <p class="muted" id="q-today"></p>
+        <table class="mini"><thead><tr><th>Zadanie</th><th>Cel</th><th>XP</th><th>Odebrane dziś</th></tr></thead><tbody id="q-list"></tbody></table>
+        <h2 style="margin-top:16px">Nagrody za serię dni (wszystkie 3 zadania)</h2>
+        <div id="q-streak"></div>
+        <div class="row" style="margin-top:6px"><button class="ghost" id="q-streak-add">+ Dodaj próg</button></div>
+        <div class="row" style="margin-top:12px"><button class="btn" id="q-save">Zapisz</button><span class="ok-msg" id="q-ok"></span><span class="err" id="q-err"></span></div>
+      </div>
+      <div class="card">
+        <h2 id="w-title">Ranking tygodnia</h2>
+        <table class="mini"><thead><tr><th>#</th><th>Gracz</th><th>XP w tygodniu</th></tr></thead><tbody id="w-list"></tbody></table>
+        <h2 style="margin-top:16px">Nagroda tygodniowa</h2>
+        <div class="two"><label class="blk">Ile pierwszych miejsc<input id="w-places" type="number" min="0" max="10" /></label><label class="blk">Kosmetyka<select id="w-cos"></select></label></div>
+        <p class="muted">W poniedziałek o północy bot ogłasza wyniki na kanale rankingu (ustaw go w zakładce Bot Discord), a top dostaje kosmetykę od razu na konto.</p>
+        <div class="row"><button class="btn" id="w-save">Zapisz nagrodę</button><button class="ghost" id="w-post">Wyślij obecny ranking na Discorda</button><span class="ok-msg" id="w-ok"></span><span class="err" id="w-err"></span></div>
+        <h2 style="margin-top:16px">Poprzedni tydzień</h2><div id="w-last" class="muted"></div>
+        <h2 style="margin-top:16px">Najdłuższe serie</h2><table class="mini"><tbody id="q-streaks"></tbody></table>
+      </div>
+    </div>
+  </section>
+
+  <section data-panel="users" hidden>
+    <div class="card">
+      <div class="row" style="margin-bottom:12px"><input id="q" placeholder="Szukaj po nicku albo UUID" style="flex:1" /><button class="btn" id="search">Szukaj</button></div>
+      <table><thead><tr><th>Gracz</th><th>Poz.</th><th>Godz.</th><th>Kille</th><th>Odznaki / odblokowane</th><th>Ostatnio</th><th></th></tr></thead><tbody id="users"></tbody></table>
+    </div>
+  </section>
+
+  <section data-panel="codes" hidden>
+    <div class="card">
+      <h2>Nowe kody</h2>
+      <div class="row">
+        <select id="c-cos"></select>
+        <input id="c-count" type="number" min="1" max="100" value="1" style="width:80px" title="Ile kodów" />
+        <input id="c-uses" type="number" min="0" value="1" style="width:90px" title="Użycia na kod (0 = bez limitu)" />
+        <input id="c-code" placeholder="Własny kod (opcjonalnie)" />
+        <input id="c-note" placeholder="Notatka, np. giveaway" />
+        <button class="btn" id="c-make">Utwórz</button>
+      </div>
+      <p class="muted" id="c-made"></p>
+    </div>
+    <div class="card"><h2>Kody</h2><table><thead><tr><th>Kod</th><th>Kosmetyka</th><th>Użycia</th><th>Notatka</th><th></th></tr></thead><tbody id="codes"></tbody></table></div>
+  </section>
+
+  <section data-panel="news" hidden>
+    <div class="card">
+      <h2>Nowy news</h2>
+      <p class="muted">Launchery z wpisanym adresem tego serwera same pokażą newsy z <span class="code">/news.json</span>.</p>
+      <div class="two">
+        <label>Tytuł (PL)<input id="n-tpl" /></label><label>Title (EN)<input id="n-ten" /></label>
+        <label>Etykieta (PL)<input id="n-gpl" placeholder="Aktualizacja" /></label><label>Tag (EN)<input id="n-gen" placeholder="Update" /></label>
+      </div>
+      <div class="two" style="margin-top:10px">
+        <label>Treść (PL)<textarea id="n-bpl"></textarea></label><label>Body (EN)<textarea id="n-ben"></textarea></label>
+      </div>
+      <div class="row" style="margin-top:10px"><button class="btn" id="n-add">Opublikuj</button><span class="err" id="n-err"></span></div>
+    </div>
+    <div class="card"><h2>Opublikowane</h2><div id="news"></div></div>
+  </section>
+  <section data-panel="promo" hidden>
+    <div class="card">
+      <h2>Serwer partnerski</h2>
+      <p class="muted">Pokazuje się na górze listy serwerów w launcherze (z pingiem i przyciskiem Dołącz).</p>
+      <div class="three">
+        <label>Nazwa<input id="pa-name" placeholder="np. GrowMC" /></label>
+        <label>IP<input id="pa-ip" placeholder="play.growmc.pl" /></label>
+        <label>Etykieta<input id="pa-tag" placeholder="Partner / Survival / PvP" /></label>
+      </div>
+      <div class="two" style="margin-top:10px">
+        <label>Opis (krótki)<input id="pa-desc" placeholder="Najlepszy survival w PL" /></label>
+        <label>Strona / Discord (https://…, opcjonalnie)<input id="pa-url" /></label>
+      </div>
+      <div class="row" style="margin-top:10px"><button class="btn" id="pa-add">Dodaj / zapisz</button><span class="err" id="pa-err"></span></div>
+    </div>
+    <div class="card"><h2>Serwery partnerskie</h2><table><thead><tr><th>Nazwa</th><th>IP</th><th>Etykieta</th><th>Opis</th><th></th></tr></thead><tbody id="partners"></tbody></table></div>
+
+    <div class="card">
+      <h2>Nowa reklama</h2>
+      <p class="muted">Baner na stronie Graj w launcherze. Kilka reklam zmienia się co 8 s. Obrazek: link https do PNG/JPG (najlepiej 1200×400).</p>
+      <div class="two">
+        <label>Tytuł<input id="ad-title" placeholder="Nowy sezon na GrowMC!" /></label>
+        <label>Tekst<input id="ad-text" placeholder="Wbijaj od piątku 18:00" /></label>
+        <label>Obrazek (https://…)<input id="ad-image" /></label>
+        <label>Link po kliknięciu (https://…)<input id="ad-url" /></label>
+        <label>Napis na przycisku<input id="ad-cta" placeholder="Sprawdź" /></label>
+        <label>Ile dni ma wisieć (0 = bez końca)<input id="ad-days" type="number" min="0" value="0" /></label>
+      </div>
+      <div class="row" style="margin-top:10px"><button class="btn" id="ad-add">Dodaj reklamę</button><span class="err" id="ad-err"></span></div>
+    </div>
+    <div class="card"><h2>Reklamy</h2><div id="ads"></div></div>
+  </section>
+
+  <section data-panel="creators" hidden>
+    <div class="card">
+      <h2>Nowy kod twórcy</h2>
+      <p class="muted">Gracz wpisuje kod przy pierwszym uruchomieniu launchera (albo w polu „Kod” w Szafie do 14 dni od rejestracji) i dostaje kosmetykę. Partnerzy z Discorda mogą też sami ustawić kod przez <span class="code">/gruzpartner set-nick</span>.</p>
+      <div class="three">
+        <label>Kod<input id="cr-code" placeholder="RAE" /></label>
+        <label>Nazwa twórcy<input id="cr-name" placeholder="Rae" /></label>
+        <label>Nagroda<select id="cr-cos"></select></label>
+      </div>
+      <div class="row" style="margin-top:10px"><button class="btn" id="cr-add">Zapisz kod</button><span class="err" id="cr-err"></span></div>
+    </div>
+    <div class="card">
+      <h2>Domyślna nagroda za kod twórcy</h2>
+      <div class="row"><select id="cr-reward"></select><button class="ghost" id="cr-reward-save">Zapisz</button><span class="muted" id="cr-reward-ok"></span></div>
+    </div>
+    <div class="card"><h2>Twórcy</h2><table><thead><tr><th>Kod</th><th>Twórca</th><th>Nagroda</th><th>Użycia</th><th>Discord</th><th></th></tr></thead><tbody id="creators"></tbody></table></div>
+  </section>
+
+  <section data-panel="invites" hidden>
+    <div class="card">
+      <h2>Nagrody za zaproszenia</h2>
+      <p class="muted">Każdy gracz ma swój kod (domyślnie nick). Kiedy nowy gracz wpisze go przy pierwszym uruchomieniu, zapraszający dostaje +1. Za progi poniżej kosmetyka odblokowuje się sama. To samo ustawisz na Discordzie: <span class="code">/gruzadmin invites set</span>.</p>
+      <div id="tiers"></div>
+      <div class="row" style="margin-top:6px"><button class="ghost" id="tier-add">+ Dodaj próg</button></div>
+      <label class="blk" style="max-width:360px">Prezent dla NOWEGO gracza (za użycie kodu znajomego)<select id="inv-welcome"></select></label>
+      <div class="row" style="margin-top:12px"><button class="btn" id="inv-save">Zapisz</button><span class="ok-msg" id="inv-ok"></span><span class="err" id="inv-err"></span></div>
+    </div>
+    <div class="card"><h2>Najwięcej zaproszeń <span class="muted" id="inv-total"></span></h2><table><thead><tr><th>Gracz</th><th>Kod</th><th>Zaproszonych</th></tr></thead><tbody id="inv-top"></tbody></table></div>
+  </section>
+
+  <section data-panel="bot" hidden>
+    <div class="card bot-head" id="bot-head"></div>
+    <div id="bot-body">
+      <div class="grid2">
+        <div class="card">
+          <h2>Ustawienia</h2>
+          <label class="blk">Język bota<select id="b-lang"><option value="en">English</option><option value="pl">Polski</option></select></label>
+          <label class="blk">Kanał: lista grających na żywo<select id="b-ch-status" class="ch-sel"></select></label>
+          <label class="blk">Kanał: ogłoszenia nowych wersji<select id="b-ch-updates" class="ch-sel"></select></label>
+          <label class="blk">Kanał: logi (tickety, weryfikacja, zaproszenia)<select id="b-ch-logs" class="ch-sel"></select></label>
+          <label class="blk">Kanał: raporty crashy (tylko ekipa!)<select id="b-ch-crashes" class="ch-sel"></select></label>
+          <label class="blk">Kanał: ranking tygodniowy<select id="b-ch-ranking" class="ch-sel"></select></label>
+          <label class="blk">Rola po połączeniu konta (Gruz Member)<select id="b-member" class="role-sel"></select></label>
+          <label class="blk">Rola ekipy (widzi tickety)<select id="b-staff" class="role-sel"></select></label>
+          <label class="blk">Role partnerów / twórców (mogą używać /gruzpartner)</label><div class="checks" id="b-partners"></div>
+          <div class="row" style="margin-top:12px"><button class="btn" id="b-save">Zapisz ustawienia</button><span class="ok-msg" id="b-save-ok"></span><span class="err" id="b-save-err"></span></div>
+          <div class="row" style="margin-top:10px"><button class="ghost" id="b-release">Ogłoś najnowszą wersję teraz</button><span class="ok-msg" id="b-rel-ok"></span><span class="err" id="b-rel-err"></span></div>
+        </div>
+        <div class="card">
+          <h2>Ogłoszenie</h2>
+          <label class="blk">Kanał<select id="a-ch" class="ch-sel"></select></label>
+          <label class="blk">Oznacz<select id="a-ping"><option value="">nikogo</option><option value="everyone">@everyone</option></select></label>
+          <label class="blk">Tytuł<input id="a-title" maxlength="250" /></label>
+          <label class="blk">Treść (można **pogrubiać**, emoji, linki)<textarea id="a-text" maxlength="4000"></textarea></label>
+          <div class="two"><label class="blk">Obrazek (https://…)<input id="a-image" /></label><label class="blk">Kolor<input id="a-color" type="color" value="#b45cff" style="height:38px;padding:2px" /></label></div>
+          <div class="two"><label class="blk">Przycisk – napis<input id="a-blabel" placeholder="Pobierz" /></label><label class="blk">Przycisk – link (https://…)<input id="a-burl" /></label></div>
+          <div class="row" style="margin-top:12px"><button class="btn" id="a-send">Wyślij</button><span class="ok-msg" id="a-ok"></span><span class="err" id="a-err"></span></div>
+        </div>
+      </div>
+      <div class="grid2" style="margin-top:16px">
+        <div class="card">
+          <h2>Nowy event</h2>
+          <label class="blk">Tytuł<input id="e-title" maxlength="80" placeholder="Turniej Bedwars" /></label>
+          <div class="two"><label class="blk">Kiedy (Twój czas)<input id="e-at" type="datetime-local" /></label><label class="blk">Serwer (IP)<input id="e-server" placeholder="mc.hypixel.net" /></label></div>
+          <label class="blk">Nagroda<input id="e-prize" maxlength="100" placeholder="Peleryna Galaxy dla zwycięzcy" /></label>
+          <label class="blk">Opis<textarea id="e-desc" maxlength="1000"></textarea></label>
+          <div class="two"><label class="blk">Kanał<select id="e-ch" class="ch-sel"></select></label><label class="blk">Oznacz rolę<select id="e-ping" class="role-sel"></select></label></div>
+          <div class="row" style="margin-top:12px"><button class="btn" id="e-add">Ogłoś event</button><span class="ok-msg" id="e-ok"></span><span class="err" id="e-err"></span></div>
+          <h2 style="margin-top:18px">Nadchodzące</h2><div id="e-list"></div>
+        </div>
+        <div class="card">
+          <h2>Giveaway</h2>
+          <label class="blk">Nagroda<select id="g-cos"></select></label>
+          <div class="two"><label class="blk">Czas (np. 30m, 24h, 2d)<input id="g-dur" value="24h" /></label><label class="blk">Zwycięzców<input id="g-win" type="number" min="1" max="20" value="1" /></label></div>
+          <label class="blk">Kanał<select id="g-ch" class="ch-sel"></select></label>
+          <div class="row" style="margin-top:12px"><button class="btn" id="g-start">Start</button><span class="ok-msg" id="g-ok"></span><span class="err" id="g-err"></span></div>
+          <h2 style="margin-top:18px">Trwające</h2><div id="g-list"></div>
+        </div>
+      </div>
+      <div class="card" style="margin-top:16px">
+        <h2>Role za poziom Gruz</h2>
+        <p class="muted">Gracz z połączonym kontem (/gruz link) dostaje rolę, gdy wbije poziom. Rola bota musi być wyżej niż te role.</p>
+        <div id="lv-list"></div>
+        <div class="row" style="margin:6px 0 10px"><button class="ghost" id="lv-add">+ Dodaj rolę</button></div>
+        <div class="checks"><label><input type="checkbox" id="lv-stack" />Zostaw niższe role (domyślnie gracz ma tylko rolę za najwyższy poziom)</label></div>
+        <div class="row" style="margin-top:12px"><button class="btn" id="lv-save">Zapisz role</button><button class="ghost" id="lv-sync">Sprawdź wszystkich teraz</button><span class="ok-msg" id="lv-ok"></span><span class="err" id="lv-err"></span></div>
+      </div>
+      <div class="grid2" style="margin-top:16px">
+        <div class="card">
+          <h2>Tickety</h2>
+          <div id="tk-cats"></div>
+          <div class="three" style="margin-top:8px"><label>Nazwa<input id="tk-name" maxlength="40" placeholder="Bug report" /></label><label>Emoji<input id="tk-emoji" placeholder="🐛" /></label><label>Pytanie (≤45)<input id="tk-q" maxlength="45" placeholder="Describe the bug" /></label></div>
+          <label class="blk">Opis w menu (≤90)<input id="tk-desc" maxlength="90" /></label>
+          <div class="row" style="margin-top:8px"><button class="ghost" id="tk-add">+ Dodaj kategorię</button><span class="err" id="tk-err"></span></div>
+          <label class="blk" style="margin-top:14px">Wyślij panel ticketów na kanał<select id="tk-ch" class="ch-sel"></select></label>
+          <div class="row" style="margin-top:8px"><button class="btn" id="tk-post">Wyślij panel</button><span class="ok-msg" id="tk-ok"></span></div>
+        </div>
+        <div class="card">
+          <h2>Weryfikacja (captcha)</h2>
+          <label class="blk">Rola po weryfikacji<select id="v-role" class="role-sel"></select></label>
+          <label class="blk">Blokuj konta Discord młodsze niż (dni)<input id="v-age" type="number" min="0" max="365" value="0" /></label>
+          <label class="blk">Kanał<select id="v-ch" class="ch-sel"></select></label>
+          <div class="row" style="margin-top:12px"><button class="btn" id="v-post">Wyślij panel weryfikacji</button><span class="ok-msg" id="v-ok"></span><span class="err" id="v-err"></span></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section data-panel="crashes" hidden>
+    <div class="card"><h2>Raporty crashy</h2><table><thead><tr><th>Kiedy</th><th>Gracz</th><th>Wersja</th><th>Typ</th><th>Podejrzane mody</th><th>Ticket</th><th></th></tr></thead><tbody id="crashes"></tbody></table></div>
+    <div class="card" id="crash-detail" hidden><h2 id="crash-title"></h2><p class="muted" id="crash-note"></p><pre class="log" id="crash-log"></pre></div>
+  </section>
+</div>
+
+<script>
+(() => {
+  const ENABLED = __ENABLED__;
+  const $ = (s) => document.querySelector(s);
+  const esc = (s) => String(s ?? '').replace(/[&<>"']/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]));
+  const ago = (t) => {
+    const m = Math.round((Date.now() - t) / 60000);
+    if (m < 1) return 'teraz';
+    if (m < 60) return m + ' min temu';
+    const h = Math.round(m / 60);
+    if (h < 48) return h + ' h temu';
+    return Math.round(h / 24) + ' dni temu';
+  };
+  let token = sessionStorage.getItem('gruzAdmin') || '';
+
+  async function api(path, opts = {}) {
+    const res = await fetch('/admin/api/' + path, {
+      method: opts.method || 'GET',
+      headers: { 'content-type': 'application/json', authorization: 'Bearer ' + token },
+      body: opts.body ? JSON.stringify(opts.body) : undefined,
+    });
+    const data = await res.json().catch(() => ({}));
+    if (res.status === 401 && path !== 'login') { logout(); throw new Error(data.error || 'Zaloguj się'); }
+    if (!res.ok) throw new Error(data.error || 'Błąd ' + res.status);
+    return data;
+  }
+
+  function show(id) { ['disabled', 'login', 'app'].forEach((x) => { $('#' + x).hidden = x !== id; }); }
+  function logout() { token = ''; sessionStorage.removeItem('gruzAdmin'); show('login'); }
+
+  $('#login-form').addEventListener('submit', async (e) => {
+    e.preventDefault();
+    $('#login-err').textContent = '';
+    try {
+      const r = await api('login', { method: 'POST', body: { password: $('#pw').value } });
+      token = r.token;
+      sessionStorage.setItem('gruzAdmin', token);
+      start();
+    } catch (err) { $('#login-err').textContent = err.message; }
+  });
+  $('#logout').addEventListener('click', logout);
+
+  $('#nav').addEventListener('click', (e) => {
+    const b = e.target.closest('button');
+    if (!b) return;
+    document.querySelectorAll('#nav button').forEach((x) => x.classList.toggle('on', x === b));
+    document.querySelectorAll('[data-panel]').forEach((p) => { p.hidden = p.dataset.panel !== b.dataset.tab; });
+    ({ overview: loadStats, users: loadUsers, codes: loadCodes, news: loadNews, promo: loadPromo, creators: loadCreators, crashes: loadCrashes, invites: loadInvites, bot: loadBot, growth: loadGrowth, quests: loadQuests })[b.dataset.tab]();
+  });
+
+  async function loadStats() {
+    const s = await api('stats');
+    const items = [['Graczy', s.users], ['Online teraz', s.online], ['Aktywni (24 h)', s.active24h], ['Nowi (24 h)', s.new24h],
+      ['Party', s.parties], ['Rozmów', s.conversations], ['Wiadomości', s.messages], ['Godzin gry', s.hours],
+      ['Zbanowani', s.banned], ['Kody', s.codes], ['Wersja', s.version]];
+    $('#stats').innerHTML = items.map(([k, v]) => `<div class="stat"><b>${esc(v)}</b><span>${esc(k)}</span></div>`).join('');
+    $('#top').innerHTML = s.top.map((u) => `<tr><td><img src="https://mc-heads.net/avatar/${esc(u.uuid)}/22" alt="">${esc(u.name)}</td><td>${u.level}</td><td>${u.hours}</td></tr>`).join('')
+      || '<tr><td colspan="3" class="muted">Jeszcze nikt nie grał.</td></tr>';
+  }
+
+  async function loadUsers() {
+    const list = await api('users?q=' + encodeURIComponent($('#q').value.trim()));
+    $('#users').innerHTML = list.map((u) => `
+      <tr data-uuid="${esc(u.uuid)}">
+        <td><img src="https://mc-heads.net/avatar/${esc(u.uuid)}/22" alt="">${esc(u.name)}
+          ${u.online ? '<span class="pill on">online</span>' : ''}${u.banned ? '<span class="pill ban">ban</span>' : ''}${u.staff ? '<span class="pill">ekipa</span>' : ''}</td>
+        <td>${u.level}</td><td>${u.hours}</td><td>${u.kills}</td>
+        <td>${u.badges.map((b) => `<span class="pill">${esc(b)}</span>`).join('')}${u.unlocked.map((b) => `<span class="pill on">${esc(b)}</span>`).join('')}</td>
+        <td class="muted">${ago(u.lastSeen)}</td>
+        <td class="row">
+          <button class="ghost ${u.banned ? '' : 'danger'}" data-act="ban" data-v="${!u.banned}">${u.banned ? 'Odbanuj' : 'Banuj'}</button>
+          <button class="ghost" data-act="staff" data-v="${!u.staff}">${u.staff ? 'Zabierz ekipę' : 'Ekipa'}</button>
+          <button class="ghost" data-act="${u.unlocked.includes('all') ? 'lockall' : 'unlockall'}">${u.unlocked.includes('all') ? 'Zabierz wszystko' : 'Odblokuj wszystko'}</button>
+        </td>
+      </tr>`).join('') || '<tr><td colspan="7" class="muted">Brak wyników.</td></tr>';
+  }
+  $('#search').addEventListener('click', loadUsers);
+  $('#q').addEventListener('keydown', (e) => { if (e.key === 'Enter') loadUsers(); });
+  $('#users').addEventListener('click', async (e) => {
+    const b = e.target.closest('[data-act]');
+    if (!b) return;
+    const uuid = b.closest('tr').dataset.uuid;
+    if (b.dataset.act === 'ban' && b.dataset.v === 'true' && !confirm('Zbanować tego gracza? Zostanie rozłączony.')) return;
+    if (b.dataset.act === 'unlockall') await api('user', { method: 'POST', body: { uuid, unlock: 'all' } });
+    else if (b.dataset.act === 'lockall') await api('user', { method: 'POST', body: { uuid, lock: 'all' } });
+    else await api('user', { method: 'POST', body: { uuid, [b.dataset.act === 'ban' ? 'banned' : 'staff']: b.dataset.v === 'true' } });
+    loadUsers();
+  });
+
+  async function loadCodes() {
+    const r = await api('codes');
+    $('#c-cos').innerHTML = r.locked.map((c) => `<option value="${esc(c)}">${c === 'all' ? 'all (wszystkie kosmetyki)' : esc(c)}</option>`).join('');
+    $('#codes').innerHTML = r.codes.map((c) => `<tr><td class="code">${esc(c.code)}</td><td>${esc(c.cosmetic)}</td>
+      <td>${c.used} / ${c.maxUses || '∞'}</td><td class="muted">${esc(c.note)}</td>
+      <td><button class="ghost danger" data-del="${esc(c.code)}">Usuń</button></td></tr>`).join('')
+      || '<tr><td colspan="5" class="muted">Brak kodów.</td></tr>';
+  }
+  $('#c-make').addEventListener('click', async () => {
+    const r = await api('codes', { method: 'POST', body: {
+      cosmetic: $('#c-cos').value, count: $('#c-count').value, maxUses: $('#c-uses').value, code: $('#c-code').value, note: $('#c-note').value,
+    } });
+    $('#c-made').innerHTML = 'Utworzono: ' + r.made.map((c) => `<span class="code">${esc(c)}</span>`).join(', ');
+    $('#c-code').value = '';
+    loadCodes();
+  });
+  $('#codes').addEventListener('click', async (e) => {
+    const code = e.target.dataset.del;
+    if (!code || !confirm('Usunąć kod ' + code + '?')) return;
+    await api('codes/' + encodeURIComponent(code), { method: 'DELETE' });
+    loadCodes();
+  });
+
+  async function loadNews() {
+    const list = await api('news');
+    $('#news').innerHTML = list.map((n) => `<div class="news-item"><div class="row"><h3>${esc(n.title.pl)}</h3>
+      <span class="pill">${esc(n.tag.pl)}</span><span class="muted">${esc(n.date)}</span><span style="flex:1"></span>
+      <button class="ghost danger" data-del="${esc(n.id)}">Usuń</button></div><p>${esc(n.body.pl)}</p></div>`).join('')
+      || '<p class="muted">Brak newsów. Launchery pokażą wtedy swoje wbudowane.</p>';
+  }
+  $('#n-add').addEventListener('click', async () => {
+    $('#n-err').textContent = '';
+    try {
+      await api('news', { method: 'POST', body: {
+        titlePl: $('#n-tpl').value, titleEn: $('#n-ten').value, tagPl: $('#n-gpl').value, tagEn: $('#n-gen').value,
+        bodyPl: $('#n-bpl').value, bodyEn: $('#n-ben').value,
+      } });
+      ['#n-tpl', '#n-ten', '#n-gpl', '#n-gen', '#n-bpl', '#n-ben'].forEach((s) => { $(s).value = ''; });
+      loadNews();
+    } catch (err) { $('#n-err').textContent = err.message; }
+  });
+  $('#news').addEventListener('click', async (e) => {
+    const id = e.target.dataset.del;
+    if (!id || !confirm('Usunąć ten news?')) return;
+    await api('news/' + encodeURIComponent(id), { method: 'DELETE' });
+    loadNews();
+  });
+
+  // ---------- partnerzy i reklamy ----------
+  let promo = { partners: [], ads: [], cosmetics: [] };
+  const v = (id) => $(id).value.trim();
+  async function loadPromo() {
+    promo = await api('promo');
+    $('#partners').innerHTML = promo.partners.map((x, i) => `<tr data-id="${esc(x.id)}"><td><b>${esc(x.name)}</b></td><td class="code">${esc(x.ip)}</td>
+      <td>${x.tag ? `<span class="pill">${esc(x.tag)}</span>` : ''}</td><td class="muted">${esc(x.desc)}</td>
+      <td class="row"><button class="ghost" data-move="partner" data-dir="-1" ${i ? '' : 'disabled'}>↑</button><button class="ghost" data-move="partner" data-dir="1">↓</button>
+      <button class="ghost" data-edit="partner">Edytuj</button><button class="ghost" data-hide="partner">${x.hidden ? 'Pokaż' : 'Ukryj'}</button>
+      <button class="ghost danger" data-del="partner">Usuń</button></td></tr>`).join('') || '<tr><td colspan="5" class="muted">Brak partnerów.</td></tr>';
+    $('#ads').innerHTML = promo.ads.map((a) => `<div class="ad-prev" data-id="${esc(a.id)}" style="${a.hidden ? 'opacity:.45' : ''}">
+      ${a.image ? `<img src="${esc(a.image)}" alt="">` : ''}<div class="grow"><h3>${esc(a.title)}</h3><p>${esc(a.text)}</p>
+      <p>${a.url ? esc(a.url) : 'bez linku'} · ${a.until ? (a.until < Date.now() ? 'wygasła' : 'do ' + new Date(a.until).toLocaleDateString('pl-PL')) : 'bez końca'}</p></div>
+      <button class="ghost" data-move="ad" data-dir="-1">↑</button><button class="ghost" data-move="ad" data-dir="1">↓</button>
+      <button class="ghost" data-hide="ad">${a.hidden ? 'Pokaż' : 'Ukryj'}</button><button class="ghost danger" data-del="ad">Usuń</button></div>`).join('')
+      || '<p class="muted">Brak reklam.</p>';
+  }
+  let editPartner = null;
+  $('#pa-add').addEventListener('click', async () => {
+    $('#pa-err').textContent = '';
+    try {
+      await api('promo/partner', { method: 'POST', body: { id: editPartner, name: v('#pa-name'), ip: v('#pa-ip'), tag: v('#pa-tag'), desc: v('#pa-desc'), url: v('#pa-url') } });
+      ['#pa-name', '#pa-ip', '#pa-tag', '#pa-desc', '#pa-url'].forEach((s) => { $(s).value = ''; });
+      editPartner = null; $('#pa-add').textContent = 'Dodaj / zapisz';
+      loadPromo();
+    } catch (err) { $('#pa-err').textContent = err.message; }
+  });
+  $('#ad-add').addEventListener('click', async () => {
+    $('#ad-err').textContent = '';
+    try {
+      await api('promo/ad', { method: 'POST', body: { title: v('#ad-title'), text: v('#ad-text'), image: v('#ad-image'), url: v('#ad-url'), cta: v('#ad-cta'), days: v('#ad-days') } });
+      ['#ad-title', '#ad-text', '#ad-image', '#ad-url', '#ad-cta'].forEach((s) => { $(s).value = ''; });
+      loadPromo();
+    } catch (err) { $('#ad-err').textContent = err.message; }
+  });
+  document.querySelector('[data-panel="promo"]').addEventListener('click', async (e) => {
+    const b = e.target.closest('button');
+    const row = b?.closest('[data-id]');
+    if (!b || !row) return;
+    const id = row.dataset.id;
+    if (b.dataset.move) await api('promo/move', { method: 'POST', body: { kind: b.dataset.move, id, dir: Number(b.dataset.dir) } });
+    else if (b.dataset.del) { if (!confirm('Usunąć?')) return; await api(`promo/${b.dataset.del}/${encodeURIComponent(id)}`, { method: 'DELETE' }); }
+    else if (b.dataset.hide) {
+      const item = (b.dataset.hide === 'ad' ? promo.ads : promo.partners).find((x) => x.id === id);
+      await api('promo/' + b.dataset.hide, { method: 'POST', body: { ...item, hidden: !item.hidden } });
+    } else if (b.dataset.edit) {
+      const x = promo.partners.find((p) => p.id === id);
+      editPartner = id;
+      $('#pa-name').value = x.name; $('#pa-ip').value = x.ip; $('#pa-tag').value = x.tag; $('#pa-desc').value = x.desc; $('#pa-url').value = x.url || '';
+      $('#pa-add').textContent = 'Zapisz zmiany';
+      $('#pa-name').focus();
+      return;
+    }
+    loadPromo();
+  });
+
+  // ---------- twórcy ----------
+  async function loadCreators() {
+    if (!promo.cosmetics.length) promo = await api('promo');
+    const opts = (sel) => promo.cosmetics.map((c) => `<option value="${esc(c)}" ${c === sel ? 'selected' : ''}>${esc(c)}</option>`).join('');
+    $('#cr-cos').innerHTML = '<option value="">domyślna (' + esc(promo.creatorReward) + ')</option>' + opts('');
+    $('#cr-reward').innerHTML = opts(promo.creatorReward);
+    const list = await api('creators');
+    $('#creators').innerHTML = list.map((c) => `<tr><td class="code">${esc(c.code)}</td><td>${esc(c.name)}</td>
+      <td>${esc(c.cosmetic || 'domyślna')}</td><td><b>${c.uses}</b></td><td class="muted">${c.discordId ? 'połączony' : '—'}</td>
+      <td><button class="ghost danger" data-del="${esc(c.code)}">Usuń</button></td></tr>`).join('')
+      || '<tr><td colspan="6" class="muted">Brak kodów twórców.</td></tr>';
+  }
+  $('#cr-add').addEventListener('click', async () => {
+    $('#cr-err').textContent = '';
+    try {
+      await api('creators', { method: 'POST', body: { code: v('#cr-code'), name: v('#cr-name'), cosmetic: $('#cr-cos').value } });
+      $('#cr-code').value = ''; $('#cr-name').value = '';
+      loadCreators();
+    } catch (err) { $('#cr-err').textContent = err.message; }
+  });
+  $('#cr-reward-save').addEventListener('click', async () => {
+    await api('promo/reward', { method: 'POST', body: { cosmetic: $('#cr-reward').value } });
+    promo.creatorReward = $('#cr-reward').value;
+    $('#cr-reward-ok').textContent = 'Zapisano';
+    loadCreators();
+  });
+  $('#creators').addEventListener('click', async (e) => {
+    const code = e.target.dataset.del;
+    if (!code || !confirm('Usunąć kod ' + code + '?')) return;
+    await api('creators/' + encodeURIComponent(code), { method: 'DELETE' });
+    loadCreators();
+  });
+
+  // ---------- crashe ----------
+  async function loadCrashes() {
+    const list = await api('crashes');
+    $('#crashes').innerHTML = list.map((r) => `<tr><td class="muted">${ago(r.at)}</td><td>${esc(r.name)}</td>
+      <td>${esc(r.mc || '?')} · ${esc(r.launcher || '?')}</td><td>${esc(r.kind || '?')}</td><td>${esc((r.mods || []).join(', '))}</td>
+      <td>${r.ticket ? `<a href="${esc(r.ticket)}" target="_blank" rel="noopener" style="color:var(--hot)">Otwórz</a>` : '<span class="muted">—</span>'}</td>
+      <td><button class="ghost" data-open="${esc(r.id)}">Log</button></td></tr>`).join('')
+      || '<tr><td colspan="7" class="muted">Brak raportów.</td></tr>';
+  }
+  $('#crashes').addEventListener('click', async (e) => {
+    const id = e.target.dataset.open;
+    if (!id) return;
+    const r = await api('crashes/' + encodeURIComponent(id));
+    $('#crash-detail').hidden = false;
+    $('#crash-title').textContent = `${r.title || 'Crash'} · ${r.name}`;
+    $('#crash-note').textContent = r.note ? 'Notatka gracza: ' + r.note : (r.text || '');
+    $('#crash-log').textContent = r.log || r.excerpt || '';
+    $('#crash-detail').scrollIntoView({ behavior: 'smooth' });
+  });
+
+  // ---------- zaproszenia ----------
+  let invCos = [];
+  const cosOpts = (sel, list, empty) => (empty ? `<option value="">${esc(empty)}</option>` : '') + list.map((c) => `<option value="${esc(c)}" ${c === sel ? 'selected' : ''}>${esc(c)}</option>`).join('');
+  function tierRow(tr = { count: '', cosmetic: '' }) {
+    return `<div class="tier"><input type="number" min="1" max="1000" value="${esc(tr.count)}" placeholder="ilu" /> <span class="muted">znajomych →</span>
+      <select>${cosOpts(tr.cosmetic, invCos)}</select><button class="ghost danger" data-rm>×</button></div>`;
+  }
+  async function loadInvites() {
+    const r = await api('invites');
+    invCos = r.cosmetics;
+    $('#tiers').innerHTML = r.tiers.map(tierRow).join('') || '<p class="muted">Brak progów – dodaj pierwszy.</p>';
+    $('#inv-welcome').innerHTML = cosOpts(r.welcome, invCos, 'nic');
+    $('#inv-total').textContent = `· ${r.total} graczy przyszło z zaproszenia`;
+    $('#inv-top').innerHTML = r.top.map((u) => `<tr><td><img src="https://mc-heads.net/avatar/${esc(u.uuid)}/22" alt="">${esc(u.name)}</td><td class="code">${esc(u.code)}</td><td><b>${u.count}</b></td></tr>`).join('')
+      || '<tr><td colspan="3" class="muted">Nikt jeszcze nikogo nie zaprosił.</td></tr>';
+  }
+  $('#tier-add').addEventListener('click', () => { if (!$('#tiers .tier')) $('#tiers').innerHTML = ''; $('#tiers').insertAdjacentHTML('beforeend', tierRow()); });
+  $('#tiers').addEventListener('click', (e) => { if (e.target.dataset.rm !== undefined) e.target.closest('.tier').remove(); });
+  $('#inv-save').addEventListener('click', async () => {
+    $('#inv-ok').textContent = ''; $('#inv-err').textContent = '';
+    try {
+      const tiers = [...document.querySelectorAll('#tiers .tier')].map((d) => ({ count: d.querySelector('input').value, cosmetic: d.querySelector('select').value }));
+      await api('invites', { method: 'POST', body: { tiers, welcome: $('#inv-welcome').value } });
+      $('#inv-ok').textContent = 'Zapisano ✓';
+      loadInvites();
+    } catch (err) { $('#inv-err').textContent = err.message; }
+  });
+
+  // ---------- bot ----------
+  let bot = null;
+  const flash = (id, text) => { $(id).textContent = text; setTimeout(() => { $(id).textContent = ''; }, 4000); };
+  async function act(okId, errId, fn) {
+    $(errId).textContent = '';
+    try { const r = await fn(); flash(okId, r?.url ? 'Wysłano ✓' : 'Zapisano ✓'); await loadBot(); } catch (err) { $(errId).textContent = err.message; }
+  }
+  async function loadBot() {
+    bot = await api('bot');
+    if (!bot.online) {
+      $('#bot-head').innerHTML = `<span class="dot"></span><div><b>Bot offline</b><div class="muted">${esc(bot.reason || 'Bot się łączy albo nie ma tokena.')}</div></div>`;
+      $('#bot-body').hidden = true;
+      return;
+    }
+    $('#bot-body').hidden = false;
+    $('#bot-head').innerHTML = `<span class="dot on"></span><div><b>${esc(bot.tag)}</b><div class="muted">${bot.guild ? esc(bot.guild.name) + ' · ' + bot.guild.members + ' osób' : 'nie jest na żadnym serwerze'}</div></div>`;
+    const c = bot.config;
+    const chOpts = (sel) => '<option value="">— brak —</option>' + bot.channels.map((x) => `<option value="${x.id}" ${x.id === sel ? 'selected' : ''}>#${esc(x.name)}${x.parent ? ' · ' + esc(x.parent) : ''}</option>`).join('');
+    const roleOpts = (sel) => '<option value="">— brak —</option>' + bot.roles.map((r) => `<option value="${r.id}" ${r.id === sel ? 'selected' : ''}>@${esc(r.name)}</option>`).join('');
+    $('#b-lang').value = c.lang;
+    for (const k of ['status', 'updates', 'logs', 'crashes', 'ranking']) $('#b-ch-' + k).innerHTML = chOpts(c.channels[k]);
+    lvRoleOpts = roleOpts;
+    $('#lv-list').innerHTML = (c.levelRoles || []).map((x) => lvRow(x)).join('') || '<p class="muted" id="lv-empty">Brak ról za poziom.</p>';
+    $('#lv-stack').checked = !!c.levelStack;
+    for (const id of ['#a-ch', '#e-ch', '#g-ch', '#tk-ch', '#v-ch']) { const keep = $(id).value; $(id).innerHTML = chOpts(keep); }
+    $('#b-member').innerHTML = roleOpts(c.memberRole);
+    $('#b-staff').innerHTML = roleOpts(c.staffRole);
+    $('#e-ping').innerHTML = roleOpts($('#e-ping').value);
+    $('#v-role').innerHTML = roleOpts(c.verifyRole);
+    $('#v-age').value = c.verifyMinAge;
+    $('#a-ping').innerHTML = '<option value="">nikogo</option><option value="everyone">@everyone</option>' + bot.roles.map((r) => `<option value="${r.id}">@${esc(r.name)}</option>`).join('');
+    $('#b-partners').innerHTML = bot.roles.map((r) => `<label><input type="checkbox" value="${r.id}" ${c.partnerRoles.includes(r.id) ? 'checked' : ''} />@${esc(r.name)}</label>`).join('');
+    $('#g-cos').innerHTML = cosOpts($('#g-cos').value, bot.cosmetics);
+    $('#tk-cats').innerHTML = c.ticketCategories.map((x) => `<div class="row" style="margin-bottom:4px"><span>${esc(x.emoji?.name || x.emoji || '')} <b>${esc(x.name)}</b></span><span class="muted" style="flex:1">${esc(x.description)}</span><button class="ghost danger" data-tkrm="${esc(x.id)}">Usuń</button></div>`).join('') || '<p class="muted">Brak kategorii.</p>';
+    const when = (ms) => new Date(ms).toLocaleString('pl-PL', { dateStyle: 'short', timeStyle: 'short' });
+    $('#e-list').innerHTML = bot.events.map((e) => `<div class="row" style="margin-bottom:4px"><b>${esc(e.title)}</b><span class="muted" style="flex:1">${when(e.at)} · ${esc(e.channel || '')} · chętnych: ${e.going}</span><button class="ghost danger" data-evrm="${esc(e.id)}">Odwołaj</button></div>`).join('') || '<p class="muted">Brak eventów.</p>';
+    $('#g-list').innerHTML = bot.giveaways.map((g) => `<div class="row" style="margin-bottom:4px"><b>${esc(g.cosmetic)}</b><span class="muted">do ${when(g.endsAt)} · ${esc(g.channel || '')} · ${g.entrants} osób</span></div>`).join('') || '<p class="muted">Brak.</p>';
+  }
+  $('#b-save').addEventListener('click', () => act('#b-save-ok', '#b-save-err', () => api('bot/config', { method: 'POST', body: {
+    lang: $('#b-lang').value, memberRole: $('#b-member').value, staffRole: $('#b-staff').value,
+    channels: { status: $('#b-ch-status').value, updates: $('#b-ch-updates').value, logs: $('#b-ch-logs').value, crashes: $('#b-ch-crashes').value, ranking: $('#b-ch-ranking').value },
+    partnerRoles: [...document.querySelectorAll('#b-partners input:checked')].map((x) => x.value),
+  } })));
+  $('#b-release').addEventListener('click', () => act('#b-rel-ok', '#b-rel-err', () => api('bot/release', { method: 'POST' })));
+  $('#a-send').addEventListener('click', () => act('#a-ok', '#a-err', async () => {
+    const r = await api('bot/announce', { method: 'POST', body: { channelId: $('#a-ch').value, ping: $('#a-ping').value, title: v('#a-title'), text: $('#a-text').value,
+      image: v('#a-image'), color: $('#a-color').value, buttonLabel: v('#a-blabel'), buttonUrl: v('#a-burl') } });
+    ['#a-title', '#a-text', '#a-image', '#a-blabel', '#a-burl'].forEach((s) => { $(s).value = ''; });
+    return r;
+  }));
+  $('#e-add').addEventListener('click', () => act('#e-ok', '#e-err', async () => {
+    const at = $('#e-at').value ? new Date($('#e-at').value).getTime() : 0;
+    const r = await api('bot/event', { method: 'POST', body: { title: v('#e-title'), at, server: v('#e-server'), prize: v('#e-prize'), desc: $('#e-desc').value, channelId: $('#e-ch').value, pingRoleId: $('#e-ping').value } });
+    ['#e-title', '#e-server', '#e-prize', '#e-desc'].forEach((s) => { $(s).value = ''; });
+    return { url: 1, ...r };
+  }));
+  $('#e-list').addEventListener('click', async (e) => {
+    const id = e.target.dataset.evrm;
+    if (!id || !confirm('Odwołać ten event?')) return;
+    await api('bot/event/' + encodeURIComponent(id), { method: 'DELETE' });
+    loadBot();
+  });
+  $('#g-start').addEventListener('click', () => act('#g-ok', '#g-err', () => api('bot/giveaway', { method: 'POST', body: { cosmetic: $('#g-cos').value, duration: v('#g-dur'), winners: $('#g-win').value, channelId: $('#g-ch').value } })));
+  $('#tk-add').addEventListener('click', () => act('#tk-ok', '#tk-err', async () => {
+    await api('bot/ticket-category', { method: 'POST', body: { name: v('#tk-name'), emoji: v('#tk-emoji'), question: v('#tk-q'), description: v('#tk-desc') } });
+    ['#tk-name', '#tk-emoji', '#tk-q', '#tk-desc'].forEach((s) => { $(s).value = ''; });
+  }));
+  $('#tk-cats').addEventListener('click', async (e) => {
+    const id = e.target.dataset.tkrm;
+    if (!id || !confirm('Usunąć kategorię?')) return;
+    await api('bot/ticket-category', { method: 'POST', body: { remove: id } });
+    loadBot();
+  });
+  $('#tk-post').addEventListener('click', () => act('#tk-ok', '#tk-err', () => api('bot/panel', { method: 'POST', body: { kind: 'tickets', channelId: $('#tk-ch').value } })));
+  $('#v-post').addEventListener('click', () => act('#v-ok', '#v-err', () => api('bot/panel', { method: 'POST', body: { kind: 'verify', channelId: $('#v-ch').value, roleId: $('#v-role').value, minAge: $('#v-age').value } })));
+
+
+  // ---------- role za poziom ----------
+  let lvRoleOpts = () => '';
+  const lvRow = (x = { level: '', roleId: '' }) => `<div class="lvrow"><span class="muted">od poziomu</span><input type="number" min="1" max="200" value="${esc(x.level)}" data-lv />
+    <select data-role>${lvRoleOpts(x.roleId)}</select><button class="ghost danger" data-lvrm>Usuń</button></div>`;
+  $('#lv-add').addEventListener('click', () => { $('#lv-empty')?.remove(); $('#lv-list').insertAdjacentHTML('beforeend', lvRow()); });
+  $('#lv-list').addEventListener('click', (e) => { if (e.target.dataset.lvrm !== undefined) e.target.closest('.lvrow').remove(); });
+  $('#lv-save').addEventListener('click', () => act('#lv-ok', '#lv-err', () => api('bot/config', { method: 'POST', body: {
+    levelStack: $('#lv-stack').checked,
+    levelRoles: [...document.querySelectorAll('#lv-list .lvrow')].map((r) => ({ level: r.querySelector('[data-lv]').value, roleId: r.querySelector('[data-role]').value })).filter((x) => x.level && x.roleId),
+  } })));
+  $('#lv-sync').addEventListener('click', async () => {
+    $('#lv-err').textContent = '';
+    try { const r = await api('bot/levels-sync', { method: 'POST' }); flash('#lv-ok', `Zmieniono role u ${r.changed} graczy ✓`); } catch (err) { $('#lv-err').textContent = err.message; }
+  });
+
+  // ---------- wykresy ----------
+  const SRC = [['organic', 'Sami (bez kodu)', '#8f84a6'], ['creator', 'Kod twórcy', '#b45cff'], ['friend', 'Zaproszenie znajomego', '#5ce1e6']];
+  const dm = (k) => k.slice(8, 10) + '.' + k.slice(5, 7);
+  // górna granica osi: 4 równe, całkowite kroki (1, 2, 5, 10, 20, 50…)
+  const niceMax = (v) => {
+    const raw = Math.max(1, v) / 4;
+    if (raw <= 10) return 4 * Math.ceil(raw);
+    const p = 10 ** Math.floor(Math.log10(raw));
+    return 4 * [1, 1.5, 2, 2.5, 3, 4, 5, 6, 8, 10].find((n) => n * p >= raw) * p;
+  };
+  function axes(max, n, W, H, L, B, labels) {
+    let g = '<g class="grid">';
+    for (let i = 0; i <= 4; i++) {
+      const y = H - B - (H - B - 10) * i / 4;
+      g += `<line x1="${L}" x2="${W - 6}" y1="${y}" y2="${y}" /><text x="${L - 6}" y="${y + 4}" text-anchor="end">${Math.round(max * i / 4)}</text>`;
+    }
+    g += '</g>';
+    const step = Math.ceil(n / 12);
+    const cw = (W - L - 6) / n;
+    labels.forEach((l, i) => { if (i % step === 0 || i === n - 1) g += `<text x="${L + cw * i + cw / 2}" y="${H - 8}" text-anchor="middle">${esc(l)}</text>`; });
+    return { g, cw };
+  }
+  function stacked(rows) {
+    const W = 1000, H = 260, L = 38, B = 26;
+    const tot = rows.map((r) => SRC.reduce((a, [k]) => a + r[k], 0));
+    const max = niceMax(Math.max(1, ...tot));
+    const { g, cw } = axes(max, rows.length, W, H, L, B, rows.map((r) => dm(r.day)));
+    let bars = '';
+    rows.forEach((r, i) => {
+      let y = H - B;
+      const x = L + cw * i + cw * 0.15, w = Math.max(1, cw * 0.7);
+      for (const [k, label, color] of SRC) {
+        if (!r[k]) continue;
+        const h = (H - B - 10) * r[k] / max;
+        y -= h;
+        bars += `<rect x="${x.toFixed(1)}" y="${y.toFixed(1)}" width="${w.toFixed(1)}" height="${h.toFixed(1)}" fill="${color}"><title>${dm(r.day)} · ${label}: ${r[k]}</title></rect>`;
+      }
+      if (tot[i]) bars += `<rect x="${x.toFixed(1)}" y="${(H - B - (H - B - 10) * tot[i] / max - 1).toFixed(1)}" width="${w.toFixed(1)}" height="1" fill="transparent"><title>${dm(r.day)} · razem: ${tot[i]}</title></rect>`;
+    });
+    return `<svg class="chart" viewBox="0 0 ${W} ${H}" role="img" aria-label="Nowi gracze dziennie">${g}${bars}</svg>`;
+  }
+  function lines(rows, series, since) {
+    const W = 1000, H = 220, L = 38, B = 26;
+    const max = niceMax(Math.max(1, ...rows.flatMap((r) => series.map(([k]) => r[k]))));
+    const { g, cw } = axes(max, rows.length, W, H, L, B, rows.map((r) => dm(r.day)));
+    let out = '';
+    for (const [k, label, color] of series) {
+      // dni sprzed początku pomiarów pomijamy (zamiast rysować fałszywe zera)
+      const pts = rows.map((r, i) => (since && r.day >= since ? [L + cw * i + cw / 2, H - B - (H - B - 10) * r[k] / max, i] : null)).filter(Boolean);
+      out += `<polyline fill="none" stroke="${color}" stroke-width="2" points="${pts.map((p) => p[0].toFixed(1) + ',' + p[1].toFixed(1)).join(' ')}" />`;
+      out += pts.map((p) => `<circle cx="${p[0].toFixed(1)}" cy="${p[1].toFixed(1)}" r="3.5" fill="${color}"><title>${dm(rows[p[2]].day)} · ${label}: ${rows[p[2]][k]}</title></circle>`).join('');
+    }
+    return `<svg class="chart" viewBox="0 0 ${W} ${H}" role="img" aria-label="Aktywni gracze">${g}${out}</svg>`;
+  }
+  const miniRows = (list, unit = '') => list.map((x) => `<tr><td>${esc(x.name)}</td><td style="text-align:right"><b>${x.n}</b>${unit}</td></tr>`).join('') || '<tr><td class="muted">Brak danych.</td></tr>';
+  async function loadGrowth() {
+    const g = await api('growth?days=' + $('#gr-days').value);
+    $('#gr-legend').innerHTML = SRC.map(([, label, color]) => `<span><i style="background:${color}"></i>${label}</span>`).join('');
+    $('#gr-new').innerHTML = stacked(g.days);
+    $('#gr-active').innerHTML = lines(g.days, [['active', 'Aktywni', '#dcaaff'], ['peak', 'Szczyt online', '#7dffb2']], g.trackedSince);
+    $('#gr-tracked').textContent = g.trackedSince ? `Aktywność liczymy od ${g.trackedSince} (wcześniejszych dni nie ma w danych).` : 'Aktywność zacznie się liczyć od pierwszego logowania po aktualizacji serwera.';
+    const T = g.totals;
+    const pct = (n) => (T.all ? Math.round(n * 100 / T.all) : 0);
+    $('#gr-sources').innerHTML = `<p><b style="font-size:22px;color:var(--hot)">${T.all}</b> <span class="muted">nowych graczy</span></p>
+      <div class="srcbar">${SRC.map(([k, , color]) => `<span style="width:${pct(T[k])}%;background:${color}" title="${pct(T[k])}%"></span>`).join('')}</div>
+      <table class="mini">${SRC.map(([k, label, color]) => `<tr><td><i style="display:inline-block;width:10px;height:10px;background:${color};margin-right:6px"></i>${label}</td><td style="text-align:right"><b>${T[k]}</b> <span class="muted">${pct(T[k])}%</span></td></tr>`).join('')}</table>
+      <p class="muted" style="margin-top:10px">Wróciło po ≥1 dniu: <b>${g.retention.back}</b> z ${g.retention.fresh} nowych (${g.retention.fresh ? Math.round(g.retention.back * 100 / g.retention.fresh) : 0}%).</p>`;
+    $('#gr-creators').innerHTML = miniRows(g.creators);
+    $('#gr-inviters').innerHTML = miniRows(g.inviters);
+    $('#gr-versions').innerHTML = miniRows(g.versions.map((v) => ({ ...v, name: 'v' + v.name })));
+  }
+  $('#gr-days').addEventListener('change', () => loadGrowth().catch(() => {}));
+
+  // ---------- zadania i ranking ----------
+  let qCos = [];
+  const streakRow = (x = { days: '', cosmetic: '' }) => `<div class="tier"><span class="muted">seria</span><input type="number" min="1" max="365" value="${esc(x.days)}" data-days /><span class="muted">dni →</span><select data-cos>${cosOpts(x.cosmetic, qCos)}</select><button class="ghost danger" data-qrm>Usuń</button></div>`;
+  async function loadQuests() {
+    const q = await api('quests');
+    qCos = q.cosmetics;
+    $('#q-today').textContent = `Dziś zadania otworzyło ${q.today.players} graczy, komplet zrobiło ${q.today.complete}. Zadania zmieniają się o północy.`;
+    $('#q-list').innerHTML = q.quests.map((x) => `<tr><td>${esc(x.pl)}<div class="muted" style="font-size:12px">${esc(x.en)}</div></td><td>${x.goal}</td>
+      <td><input type="number" min="1" max="1000" value="${x.xp}" data-qxp="${esc(x.id)}" style="width:70px" /></td><td>${x.claimedToday}</td></tr>`).join('');
+    $('#q-streak').innerHTML = q.streak.map(streakRow).join('');
+    $('#w-title').textContent = 'Ranking tygodnia · ' + q.week;
+    $('#w-list').innerHTML = q.weekly.map((u, i) => `<tr><td>${i + 1}</td><td><img src="https://mc-heads.net/avatar/${esc(u.uuid)}/22" alt="">${esc(u.name)}</td><td><b>${u.xp}</b></td></tr>`).join('') || '<tr><td colspan="3" class="muted">Nikt jeszcze nie zdobył XP w tym tygodniu.</td></tr>';
+    $('#w-places').value = q.weeklyReward.places || 0;
+    $('#w-cos').innerHTML = cosOpts(q.weeklyReward.cosmetic, qCos, '— bez nagrody —');
+    const lw = q.lastWeekly;
+    $('#w-last').innerHTML = lw ? `${esc(lw.week)}: ${lw.top.slice(0, 3).map((x, i) => `${['🥇', '🥈', '🥉'][i]} ${esc(x.name)} (${x.xp} XP)`).join(' · ') || 'brak wyników'}` : 'Jeszcze nie było podsumowania.';
+    $('#q-streaks').innerHTML = q.streaks.map((x) => `<tr><td>${esc(x.name)}</td><td style="text-align:right"><b>${x.n}</b> dni <span class="muted">(rekord ${x.best})</span></td></tr>`).join('') || '<tr><td class="muted">Brak.</td></tr>';
+  }
+  $('#q-streak-add').addEventListener('click', () => $('#q-streak').insertAdjacentHTML('beforeend', streakRow()));
+  $('#q-streak').addEventListener('click', (e) => { if (e.target.dataset.qrm !== undefined) e.target.closest('.tier').remove(); });
+  async function qAct(okId, errId, fn) {
+    $(errId).textContent = '';
+    try { const r = await fn(); flash(okId, r?.url ? 'Wysłano ✓' : 'Zapisano ✓'); await loadQuests(); } catch (err) { $(errId).textContent = err.message; }
+  }
+  $('#q-save').addEventListener('click', () => qAct('#q-ok', '#q-err', () => api('quests', { method: 'POST', body: {
+    xp: Object.fromEntries([...document.querySelectorAll('[data-qxp]')].map((i) => [i.dataset.qxp, i.value])),
+    streak: [...document.querySelectorAll('#q-streak .tier')].map((r) => ({ days: r.querySelector('[data-days]').value, cosmetic: r.querySelector('[data-cos]').value })),
+  } })));
+  $('#w-save').addEventListener('click', () => qAct('#w-ok', '#w-err', () => api('quests', { method: 'POST', body: { weeklyReward: { places: $('#w-places').value, cosmetic: $('#w-cos').value } } })));
+  $('#w-post').addEventListener('click', () => qAct('#w-ok', '#w-err', () => api('bot/ranking', { method: 'POST' })));
+
+  function start() { show('app'); loadStats().catch(() => {}); }
+  if (!ENABLED) show('disabled');
+  else if (token) start();
+  else show('login');
+})();
+</script>
+</body>
+</html>
