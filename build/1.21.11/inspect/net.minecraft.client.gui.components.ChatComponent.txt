@@ -1,66 +1,172 @@
 Compiled from "ChatComponent.java"
 public class net.minecraft.client.gui.components.ChatComponent {
   private static final org.slf4j.Logger LOGGER;
+    descriptor: Lorg/slf4j/Logger;
   private static final int MAX_CHAT_HISTORY;
+    descriptor: I
   private static final int MESSAGE_INDENT;
+    descriptor: I
   private static final int BOTTOM_MARGIN;
+    descriptor: I
   private static final int TOOLTIP_MAX_WIDTH;
+    descriptor: I
   private static final int TIME_BEFORE_MESSAGE_DELETION;
+    descriptor: I
   private static final net.minecraft.network.chat.Component DELETED_CHAT_MESSAGE;
+    descriptor: Lnet/minecraft/network/chat/Component;
   public static final int MESSAGE_BOTTOM_TO_MESSAGE_TOP;
+    descriptor: I
   public static final net.minecraft.resources.Identifier QUEUE_EXPAND_ID;
+    descriptor: Lnet/minecraft/resources/Identifier;
   private static final net.minecraft.network.chat.Style QUEUE_EXPAND_TEXT_STYLE;
+    descriptor: Lnet/minecraft/network/chat/Style;
   final net.minecraft.client.Minecraft minecraft;
+    descriptor: Lnet/minecraft/client/Minecraft;
   private final net.minecraft.util.ArrayListDeque<java.lang.String> recentChat;
+    descriptor: Lnet/minecraft/util/ArrayListDeque;
   private final java.util.List<net.minecraft.client.GuiMessage> allMessages;
+    descriptor: Ljava/util/List;
   private final java.util.List<net.minecraft.client.GuiMessage$Line> trimmedMessages;
+    descriptor: Ljava/util/List;
   private int chatScrollbarPos;
+    descriptor: I
   private boolean newMessageSinceScroll;
+    descriptor: Z
   private net.minecraft.client.gui.components.ChatComponent$Draft latestDraft;
+    descriptor: Lnet/minecraft/client/gui/components/ChatComponent$Draft;
   private net.minecraft.client.gui.screens.ChatScreen preservedScreen;
+    descriptor: Lnet/minecraft/client/gui/screens/ChatScreen;
   private final java.util.List<net.minecraft.client.gui.components.ChatComponent$DelayedMessageDeletion> messageDeletionQueue;
+    descriptor: Ljava/util/List;
   public net.minecraft.client.gui.components.ChatComponent(net.minecraft.client.Minecraft);
+    descriptor: (Lnet/minecraft/client/Minecraft;)V
+
   public void tick();
+    descriptor: ()V
+
   private int forEachLine(net.minecraft.client.gui.components.ChatComponent$AlphaCalculator, net.minecraft.client.gui.components.ChatComponent$LineConsumer);
+    descriptor: (Lnet/minecraft/client/gui/components/ChatComponent$AlphaCalculator;Lnet/minecraft/client/gui/components/ChatComponent$LineConsumer;)I
+
   public void render(net.minecraft.client.gui.GuiGraphics, net.minecraft.client.gui.Font, int, int, int, boolean, boolean);
+    descriptor: (Lnet/minecraft/client/gui/GuiGraphics;Lnet/minecraft/client/gui/Font;IIIZZ)V
+
   public void captureClickableText(net.minecraft.client.gui.ActiveTextCollector, int, int, boolean);
+    descriptor: (Lnet/minecraft/client/gui/ActiveTextCollector;IIZ)V
+
   private void render(net.minecraft.client.gui.components.ChatComponent$ChatGraphicsAccess, int, int, boolean);
+    descriptor: (Lnet/minecraft/client/gui/components/ChatComponent$ChatGraphicsAccess;IIZ)V
+
   private boolean isChatHidden();
+    descriptor: ()Z
+
   public void clearMessages(boolean);
+    descriptor: (Z)V
+
   public void addMessage(net.minecraft.network.chat.Component);
+    descriptor: (Lnet/minecraft/network/chat/Component;)V
+
   public void addMessage(net.minecraft.network.chat.Component, net.minecraft.network.chat.MessageSignature, net.minecraft.client.GuiMessageTag);
+    descriptor: (Lnet/minecraft/network/chat/Component;Lnet/minecraft/network/chat/MessageSignature;Lnet/minecraft/client/GuiMessageTag;)V
+
   private void logChatMessage(net.minecraft.client.GuiMessage);
+    descriptor: (Lnet/minecraft/client/GuiMessage;)V
+
   private void addMessageToDisplayQueue(net.minecraft.client.GuiMessage);
+    descriptor: (Lnet/minecraft/client/GuiMessage;)V
+
   private void addMessageToQueue(net.minecraft.client.GuiMessage);
+    descriptor: (Lnet/minecraft/client/GuiMessage;)V
+
   private void processMessageDeletionQueue();
+    descriptor: ()V
+
   public void deleteMessage(net.minecraft.network.chat.MessageSignature);
+    descriptor: (Lnet/minecraft/network/chat/MessageSignature;)V
+
   private net.minecraft.client.gui.components.ChatComponent$DelayedMessageDeletion deleteMessageOrDelay(net.minecraft.network.chat.MessageSignature);
+    descriptor: (Lnet/minecraft/network/chat/MessageSignature;)Lnet/minecraft/client/gui/components/ChatComponent$DelayedMessageDeletion;
+
   private net.minecraft.client.GuiMessage createDeletedMarker(net.minecraft.client.GuiMessage);
+    descriptor: (Lnet/minecraft/client/GuiMessage;)Lnet/minecraft/client/GuiMessage;
+
   public void rescaleChat();
+    descriptor: ()V
+
   private void refreshTrimmedMessages();
+    descriptor: ()V
+
   public net.minecraft.util.ArrayListDeque<java.lang.String> getRecentChat();
+    descriptor: ()Lnet/minecraft/util/ArrayListDeque;
+
   public void addRecentChat(java.lang.String);
+    descriptor: (Ljava/lang/String;)V
+
   public void resetChatScroll();
+    descriptor: ()V
+
   public void scrollChat(int);
+    descriptor: (I)V
+
   public boolean isChatFocused();
+    descriptor: ()Z
+
   private int getWidth();
+    descriptor: ()I
+
   private int getHeight();
+    descriptor: ()I
+
   private double getScale();
+    descriptor: ()D
+
   public static int getWidth(double);
+    descriptor: (D)I
+
   public static int getHeight(double);
+    descriptor: (D)I
+
   public static double defaultUnfocusedPct();
+    descriptor: ()D
+
   public int getLinesPerPage();
+    descriptor: ()I
+
   private int getLineHeight();
+    descriptor: ()I
+
   public void saveAsDraft(java.lang.String);
+    descriptor: (Ljava/lang/String;)V
+
   public void discardDraft();
+    descriptor: ()V
+
   public <T extends net.minecraft.client.gui.screens.ChatScreen> T createScreen(net.minecraft.client.gui.components.ChatComponent$ChatMethod, net.minecraft.client.gui.screens.ChatScreen$ChatConstructor<T>);
+    descriptor: (Lnet/minecraft/client/gui/components/ChatComponent$ChatMethod;Lnet/minecraft/client/gui/screens/ChatScreen$ChatConstructor;)Lnet/minecraft/client/gui/screens/ChatScreen;
+
   public void openScreen(net.minecraft.client.gui.components.ChatComponent$ChatMethod, net.minecraft.client.gui.screens.ChatScreen$ChatConstructor<?>);
+    descriptor: (Lnet/minecraft/client/gui/components/ChatComponent$ChatMethod;Lnet/minecraft/client/gui/screens/ChatScreen$ChatConstructor;)V
+
   public void preserveCurrentChatScreen();
+    descriptor: ()V
+
   public net.minecraft.client.gui.screens.ChatScreen restoreChatScreen();
+    descriptor: ()Lnet/minecraft/client/gui/screens/ChatScreen;
+
   public net.minecraft.client.gui.components.ChatComponent$State storeState();
+    descriptor: ()Lnet/minecraft/client/gui/components/ChatComponent$State;
+
   public void restoreState(net.minecraft.client.gui.components.ChatComponent$State);
+    descriptor: (Lnet/minecraft/client/gui/components/ChatComponent$State;)V
+
   private boolean method_45585(int, net.minecraft.client.gui.components.ChatComponent$DelayedMessageDeletion);
+    descriptor: (ILnet/minecraft/client/gui/components/ChatComponent$DelayedMessageDeletion;)Z
+
   private static void method_75802(int, int, net.minecraft.client.gui.components.ChatComponent$ChatGraphicsAccess, int, float, net.minecraft.client.GuiMessage$Line, int, float);
+    descriptor: (IILnet/minecraft/client/gui/components/ChatComponent$ChatGraphicsAccess;IFLnet/minecraft/client/GuiMessage$Line;IF)V
+
   private static void method_75801(float, org.joml.Matrix3x2f);
+    descriptor: (FLorg/joml/Matrix3x2f;)V
+
   static {};
+    descriptor: ()V
 }

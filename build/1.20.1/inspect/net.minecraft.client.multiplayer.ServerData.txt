@@ -1,31 +1,71 @@
 Compiled from "ServerData.java"
 public class net.minecraft.client.multiplayer.ServerData {
   private static final org.slf4j.Logger LOGGER;
+    descriptor: Lorg/slf4j/Logger;
   public java.lang.String name;
+    descriptor: Ljava/lang/String;
   public java.lang.String ip;
+    descriptor: Ljava/lang/String;
   public net.minecraft.network.chat.Component status;
+    descriptor: Lnet/minecraft/network/chat/Component;
   public net.minecraft.network.chat.Component motd;
+    descriptor: Lnet/minecraft/network/chat/Component;
   public net.minecraft.network.protocol.status.ServerStatus$Players players;
+    descriptor: Lnet/minecraft/network/protocol/status/ServerStatus$Players;
   public long ping;
+    descriptor: J
   public int protocol;
+    descriptor: I
   public net.minecraft.network.chat.Component version;
+    descriptor: Lnet/minecraft/network/chat/Component;
   public boolean pinged;
+    descriptor: Z
   public java.util.List<net.minecraft.network.chat.Component> playerList;
+    descriptor: Ljava/util/List;
   private net.minecraft.client.multiplayer.ServerData$ServerPackStatus packStatus;
+    descriptor: Lnet/minecraft/client/multiplayer/ServerData$ServerPackStatus;
   private byte[] iconBytes;
+    descriptor: [B
   private boolean lan;
+    descriptor: Z
   private boolean enforcesSecureChat;
+    descriptor: Z
   public net.minecraft.client.multiplayer.ServerData(java.lang.String, java.lang.String, boolean);
+    descriptor: (Ljava/lang/String;Ljava/lang/String;Z)V
+
   public net.minecraft.nbt.CompoundTag write();
+    descriptor: ()Lnet/minecraft/nbt/CompoundTag;
+
   public net.minecraft.client.multiplayer.ServerData$ServerPackStatus getResourcePackStatus();
+    descriptor: ()Lnet/minecraft/client/multiplayer/ServerData$ServerPackStatus;
+
   public void setResourcePackStatus(net.minecraft.client.multiplayer.ServerData$ServerPackStatus);
+    descriptor: (Lnet/minecraft/client/multiplayer/ServerData$ServerPackStatus;)V
+
   public static net.minecraft.client.multiplayer.ServerData read(net.minecraft.nbt.CompoundTag);
+    descriptor: (Lnet/minecraft/nbt/CompoundTag;)Lnet/minecraft/client/multiplayer/ServerData;
+
   public byte[] getIconBytes();
+    descriptor: ()[B
+
   public void setIconBytes(byte[]);
+    descriptor: ([B)V
+
   public boolean isLan();
+    descriptor: ()Z
+
   public void setEnforcesSecureChat(boolean);
+    descriptor: (Z)V
+
   public boolean enforcesSecureChat();
+    descriptor: ()Z
+
   public void copyNameIconFrom(net.minecraft.client.multiplayer.ServerData);
+    descriptor: (Lnet/minecraft/client/multiplayer/ServerData;)V
+
   public void copyFrom(net.minecraft.client.multiplayer.ServerData);
+    descriptor: (Lnet/minecraft/client/multiplayer/ServerData;)V
+
   static {};
+    descriptor: ()V
 }

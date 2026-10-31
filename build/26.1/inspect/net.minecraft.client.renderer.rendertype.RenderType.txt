@@ -1,0 +1,67 @@
+Compiled from "RenderType.java"
+public class net.minecraft.client.renderer.rendertype.RenderType {
+  private static final int MEGABYTE;
+    descriptor: I
+  public static final int BIG_BUFFER_SIZE;
+    descriptor: I
+  public static final int SMALL_BUFFER_SIZE;
+    descriptor: I
+  public static final int TRANSIENT_BUFFER_SIZE;
+    descriptor: I
+  private final net.minecraft.client.renderer.rendertype.RenderSetup state;
+    descriptor: Lnet/minecraft/client/renderer/rendertype/RenderSetup;
+  private final java.util.Optional<net.minecraft.client.renderer.rendertype.RenderType> outline;
+    descriptor: Ljava/util/Optional;
+  protected final java.lang.String name;
+    descriptor: Ljava/lang/String;
+  private net.minecraft.client.renderer.rendertype.RenderType(java.lang.String, net.minecraft.client.renderer.rendertype.RenderSetup);
+    descriptor: (Ljava/lang/String;Lnet/minecraft/client/renderer/rendertype/RenderSetup;)V
+
+  static net.minecraft.client.renderer.rendertype.RenderType create(java.lang.String, net.minecraft.client.renderer.rendertype.RenderSetup);
+    descriptor: (Ljava/lang/String;Lnet/minecraft/client/renderer/rendertype/RenderSetup;)Lnet/minecraft/client/renderer/rendertype/RenderType;
+
+  public java.lang.String toString();
+    descriptor: ()Ljava/lang/String;
+
+  public boolean hasBlending();
+    descriptor: ()Z
+
+  public net.minecraft.client.renderer.rendertype.OutputTarget outputTarget();
+    descriptor: ()Lnet/minecraft/client/renderer/rendertype/OutputTarget;
+
+  public void draw(com.mojang.blaze3d.vertex.MeshData);
+    descriptor: (Lcom/mojang/blaze3d/vertex/MeshData;)V
+
+  public int bufferSize();
+    descriptor: ()I
+
+  public com.mojang.blaze3d.vertex.VertexFormat format();
+    descriptor: ()Lcom/mojang/blaze3d/vertex/VertexFormat;
+
+  public com.mojang.blaze3d.vertex.VertexFormat$Mode mode();
+    descriptor: ()Lcom/mojang/blaze3d/vertex/VertexFormat$Mode;
+
+  public java.util.Optional<net.minecraft.client.renderer.rendertype.RenderType> outline();
+    descriptor: ()Ljava/util/Optional;
+
+  public boolean isOutline();
+    descriptor: ()Z
+
+  public com.mojang.blaze3d.pipeline.RenderPipeline pipeline();
+    descriptor: ()Lcom/mojang/blaze3d/pipeline/RenderPipeline;
+
+  public boolean affectsCrumbling();
+    descriptor: ()Z
+
+  public boolean canConsolidateConsecutiveGeometry();
+    descriptor: ()Z
+
+  public boolean sortOnUpload();
+    descriptor: ()Z
+
+  private java.lang.String lambda$draw$0();
+    descriptor: ()Ljava/lang/String;
+
+  private static net.minecraft.client.renderer.rendertype.RenderType lambda$new$0(net.minecraft.client.renderer.rendertype.RenderSetup, net.minecraft.client.renderer.rendertype.RenderSetup$TextureBinding);
+    descriptor: (Lnet/minecraft/client/renderer/rendertype/RenderSetup;Lnet/minecraft/client/renderer/rendertype/RenderSetup$TextureBinding;)Lnet/minecraft/client/renderer/rendertype/RenderType;
+}

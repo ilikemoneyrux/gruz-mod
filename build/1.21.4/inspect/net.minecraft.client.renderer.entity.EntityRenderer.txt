@@ -1,30 +1,76 @@
 Compiled from "EntityRenderer.java"
 public abstract class net.minecraft.client.renderer.entity.EntityRenderer<T extends net.minecraft.world.entity.Entity, S extends net.minecraft.client.renderer.entity.state.EntityRenderState> {
   protected static final float NAMETAG_SCALE;
+    descriptor: F
   public static final int LEASH_RENDER_STEPS;
+    descriptor: I
   protected final net.minecraft.client.renderer.entity.EntityRenderDispatcher entityRenderDispatcher;
+    descriptor: Lnet/minecraft/client/renderer/entity/EntityRenderDispatcher;
   private final net.minecraft.client.gui.Font font;
+    descriptor: Lnet/minecraft/client/gui/Font;
   protected float shadowRadius;
+    descriptor: F
   protected float shadowStrength;
+    descriptor: F
   private final S reusedState;
+    descriptor: Lnet/minecraft/client/renderer/entity/state/EntityRenderState;
   protected net.minecraft.client.renderer.entity.EntityRenderer(net.minecraft.client.renderer.entity.EntityRendererProvider$Context);
+    descriptor: (Lnet/minecraft/client/renderer/entity/EntityRendererProvider$Context;)V
+
   public final int getPackedLightCoords(T, float);
+    descriptor: (Lnet/minecraft/world/entity/Entity;F)I
+
   protected int getSkyLightLevel(T, net.minecraft.core.BlockPos);
+    descriptor: (Lnet/minecraft/world/entity/Entity;Lnet/minecraft/core/BlockPos;)I
+
   protected int getBlockLightLevel(T, net.minecraft.core.BlockPos);
+    descriptor: (Lnet/minecraft/world/entity/Entity;Lnet/minecraft/core/BlockPos;)I
+
   public boolean shouldRender(T, net.minecraft.client.renderer.culling.Frustum, double, double, double);
+    descriptor: (Lnet/minecraft/world/entity/Entity;Lnet/minecraft/client/renderer/culling/Frustum;DDD)Z
+
   protected net.minecraft.world.phys.AABB getBoundingBoxForCulling(T);
+    descriptor: (Lnet/minecraft/world/entity/Entity;)Lnet/minecraft/world/phys/AABB;
+
   protected boolean affectedByCulling(T);
+    descriptor: (Lnet/minecraft/world/entity/Entity;)Z
+
   public net.minecraft.world.phys.Vec3 getRenderOffset(S);
+    descriptor: (Lnet/minecraft/client/renderer/entity/state/EntityRenderState;)Lnet/minecraft/world/phys/Vec3;
+
   public void render(S, com.mojang.blaze3d.vertex.PoseStack, net.minecraft.client.renderer.MultiBufferSource, int);
+    descriptor: (Lnet/minecraft/client/renderer/entity/state/EntityRenderState;Lcom/mojang/blaze3d/vertex/PoseStack;Lnet/minecraft/client/renderer/MultiBufferSource;I)V
+
   private static void renderLeash(com.mojang.blaze3d.vertex.PoseStack, net.minecraft.client.renderer.MultiBufferSource, net.minecraft.client.renderer.entity.state.EntityRenderState$LeashState);
+    descriptor: (Lcom/mojang/blaze3d/vertex/PoseStack;Lnet/minecraft/client/renderer/MultiBufferSource;Lnet/minecraft/client/renderer/entity/state/EntityRenderState$LeashState;)V
+
   private static void addVertexPair(com.mojang.blaze3d.vertex.VertexConsumer, org.joml.Matrix4f, float, float, float, int, int, int, int, float, float, float, float, int, boolean);
+    descriptor: (Lcom/mojang/blaze3d/vertex/VertexConsumer;Lorg/joml/Matrix4f;FFFIIIIFFFFIZ)V
+
   protected boolean shouldShowName(T, double);
+    descriptor: (Lnet/minecraft/world/entity/Entity;D)Z
+
   public net.minecraft.client.gui.Font getFont();
+    descriptor: ()Lnet/minecraft/client/gui/Font;
+
   protected void renderNameTag(S, net.minecraft.network.chat.Component, com.mojang.blaze3d.vertex.PoseStack, net.minecraft.client.renderer.MultiBufferSource, int);
+    descriptor: (Lnet/minecraft/client/renderer/entity/state/EntityRenderState;Lnet/minecraft/network/chat/Component;Lcom/mojang/blaze3d/vertex/PoseStack;Lnet/minecraft/client/renderer/MultiBufferSource;I)V
+
   protected net.minecraft.network.chat.Component getNameTag(T);
+    descriptor: (Lnet/minecraft/world/entity/Entity;)Lnet/minecraft/network/chat/Component;
+
   protected float getShadowRadius(S);
+    descriptor: (Lnet/minecraft/client/renderer/entity/state/EntityRenderState;)F
+
   protected float getShadowStrength(S);
+    descriptor: (Lnet/minecraft/client/renderer/entity/state/EntityRenderState;)F
+
   public abstract S createRenderState();
+    descriptor: ()Lnet/minecraft/client/renderer/entity/state/EntityRenderState;
+
   public final S createRenderState(T, float);
+    descriptor: (Lnet/minecraft/world/entity/Entity;F)Lnet/minecraft/client/renderer/entity/state/EntityRenderState;
+
   public void extractRenderState(T, S, float);
+    descriptor: (Lnet/minecraft/world/entity/Entity;Lnet/minecraft/client/renderer/entity/state/EntityRenderState;F)V
 }

@@ -1,30 +1,71 @@
 Compiled from "PostChain.java"
 public class net.minecraft.client.renderer.PostChain implements java.lang.AutoCloseable {
   private static final java.lang.String MAIN_RENDER_TARGET;
+    descriptor: Ljava/lang/String;
   private final com.mojang.blaze3d.pipeline.RenderTarget screenTarget;
+    descriptor: Lcom/mojang/blaze3d/pipeline/RenderTarget;
   private final net.minecraft.server.packs.resources.ResourceManager resourceManager;
+    descriptor: Lnet/minecraft/server/packs/resources/ResourceManager;
   private final java.lang.String name;
+    descriptor: Ljava/lang/String;
   private final java.util.List<net.minecraft.client.renderer.PostPass> passes;
+    descriptor: Ljava/util/List;
   private final java.util.Map<java.lang.String, com.mojang.blaze3d.pipeline.RenderTarget> customRenderTargets;
+    descriptor: Ljava/util/Map;
   private final java.util.List<com.mojang.blaze3d.pipeline.RenderTarget> fullSizedTargets;
+    descriptor: Ljava/util/List;
   private org.joml.Matrix4f shaderOrthoMatrix;
+    descriptor: Lorg/joml/Matrix4f;
   private int screenWidth;
+    descriptor: I
   private int screenHeight;
+    descriptor: I
   private float time;
+    descriptor: F
   private float lastStamp;
+    descriptor: F
   public net.minecraft.client.renderer.PostChain(net.minecraft.client.renderer.texture.TextureManager, net.minecraft.server.packs.resources.ResourceManager, com.mojang.blaze3d.pipeline.RenderTarget, net.minecraft.resources.ResourceLocation) throws java.io.IOException, com.google.gson.JsonSyntaxException;
+    descriptor: (Lnet/minecraft/client/renderer/texture/TextureManager;Lnet/minecraft/server/packs/resources/ResourceManager;Lcom/mojang/blaze3d/pipeline/RenderTarget;Lnet/minecraft/resources/ResourceLocation;)V
+
   private void load(net.minecraft.client.renderer.texture.TextureManager, net.minecraft.resources.ResourceLocation) throws java.io.IOException, com.google.gson.JsonSyntaxException;
+    descriptor: (Lnet/minecraft/client/renderer/texture/TextureManager;Lnet/minecraft/resources/ResourceLocation;)V
+
   private void parseTargetNode(com.google.gson.JsonElement) throws net.minecraft.server.ChainedJsonException;
+    descriptor: (Lcom/google/gson/JsonElement;)V
+
   private void parsePassNode(net.minecraft.client.renderer.texture.TextureManager, com.google.gson.JsonElement) throws java.io.IOException;
+    descriptor: (Lnet/minecraft/client/renderer/texture/TextureManager;Lcom/google/gson/JsonElement;)V
+
   private void parseUniformNode(com.google.gson.JsonElement) throws net.minecraft.server.ChainedJsonException;
+    descriptor: (Lcom/google/gson/JsonElement;)V
+
   public com.mojang.blaze3d.pipeline.RenderTarget getTempTarget(java.lang.String);
+    descriptor: (Ljava/lang/String;)Lcom/mojang/blaze3d/pipeline/RenderTarget;
+
   public void addTempTarget(java.lang.String, int, int);
+    descriptor: (Ljava/lang/String;II)V
+
   public void close();
+    descriptor: ()V
+
   public net.minecraft.client.renderer.PostPass addPass(java.lang.String, com.mojang.blaze3d.pipeline.RenderTarget, com.mojang.blaze3d.pipeline.RenderTarget) throws java.io.IOException;
+    descriptor: (Ljava/lang/String;Lcom/mojang/blaze3d/pipeline/RenderTarget;Lcom/mojang/blaze3d/pipeline/RenderTarget;)Lnet/minecraft/client/renderer/PostPass;
+
   private void updateOrthoMatrix();
+    descriptor: ()V
+
   public void resize(int, int);
+    descriptor: (II)V
+
   public void process(float);
+    descriptor: (F)V
+
   public final java.lang.String getName();
+    descriptor: ()Ljava/lang/String;
+
   private com.mojang.blaze3d.pipeline.RenderTarget getRenderTarget(java.lang.String);
+    descriptor: (Ljava/lang/String;)Lcom/mojang/blaze3d/pipeline/RenderTarget;
+
   private static net.minecraft.server.ChainedJsonException method_43210(java.lang.String);
+    descriptor: (Ljava/lang/String;)Lnet/minecraft/server/ChainedJsonException;
 }

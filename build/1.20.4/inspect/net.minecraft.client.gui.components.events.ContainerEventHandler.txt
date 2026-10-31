@@ -1,0 +1,83 @@
+Compiled from "ContainerEventHandler.java"
+public interface net.minecraft.client.gui.components.events.ContainerEventHandler extends net.minecraft.client.gui.components.events.GuiEventListener {
+  public abstract java.util.List<? extends net.minecraft.client.gui.components.events.GuiEventListener> children();
+    descriptor: ()Ljava/util/List;
+
+  public default java.util.Optional<net.minecraft.client.gui.components.events.GuiEventListener> getChildAt(double, double);
+    descriptor: (DD)Ljava/util/Optional;
+
+  public default boolean mouseClicked(double, double, int);
+    descriptor: (DDI)Z
+
+  public default boolean mouseReleased(double, double, int);
+    descriptor: (DDI)Z
+
+  public default boolean mouseDragged(double, double, int, double, double);
+    descriptor: (DDIDD)Z
+
+  public abstract boolean isDragging();
+    descriptor: ()Z
+
+  public abstract void setDragging(boolean);
+    descriptor: (Z)V
+
+  public default boolean mouseScrolled(double, double, double, double);
+    descriptor: (DDDD)Z
+
+  public default boolean keyPressed(int, int, int);
+    descriptor: (III)Z
+
+  public default boolean keyReleased(int, int, int);
+    descriptor: (III)Z
+
+  public default boolean charTyped(char, int);
+    descriptor: (CI)Z
+
+  public abstract net.minecraft.client.gui.components.events.GuiEventListener getFocused();
+    descriptor: ()Lnet/minecraft/client/gui/components/events/GuiEventListener;
+
+  public abstract void setFocused(net.minecraft.client.gui.components.events.GuiEventListener);
+    descriptor: (Lnet/minecraft/client/gui/components/events/GuiEventListener;)V
+
+  public default void setFocused(boolean);
+    descriptor: (Z)V
+
+  public default boolean isFocused();
+    descriptor: ()Z
+
+  public default net.minecraft.client.gui.ComponentPath getCurrentFocusPath();
+    descriptor: ()Lnet/minecraft/client/gui/ComponentPath;
+
+  public default void magicalSpecialHackyFocus(net.minecraft.client.gui.components.events.GuiEventListener);
+    descriptor: (Lnet/minecraft/client/gui/components/events/GuiEventListener;)V
+
+  public default net.minecraft.client.gui.ComponentPath nextFocusPath(net.minecraft.client.gui.navigation.FocusNavigationEvent);
+    descriptor: (Lnet/minecraft/client/gui/navigation/FocusNavigationEvent;)Lnet/minecraft/client/gui/ComponentPath;
+
+  private net.minecraft.client.gui.ComponentPath handleTabNavigation(net.minecraft.client.gui.navigation.FocusNavigationEvent$TabNavigation);
+    descriptor: (Lnet/minecraft/client/gui/navigation/FocusNavigationEvent$TabNavigation;)Lnet/minecraft/client/gui/ComponentPath;
+
+  private net.minecraft.client.gui.ComponentPath handleArrowNavigation(net.minecraft.client.gui.navigation.FocusNavigationEvent$ArrowNavigation);
+    descriptor: (Lnet/minecraft/client/gui/navigation/FocusNavigationEvent$ArrowNavigation;)Lnet/minecraft/client/gui/ComponentPath;
+
+  private net.minecraft.client.gui.ComponentPath nextFocusPathInDirection(net.minecraft.client.gui.navigation.ScreenRectangle, net.minecraft.client.gui.navigation.ScreenDirection, net.minecraft.client.gui.components.events.GuiEventListener, net.minecraft.client.gui.navigation.FocusNavigationEvent);
+    descriptor: (Lnet/minecraft/client/gui/navigation/ScreenRectangle;Lnet/minecraft/client/gui/navigation/ScreenDirection;Lnet/minecraft/client/gui/components/events/GuiEventListener;Lnet/minecraft/client/gui/navigation/FocusNavigationEvent;)Lnet/minecraft/client/gui/ComponentPath;
+
+  private net.minecraft.client.gui.ComponentPath nextFocusPathVaguelyInDirection(net.minecraft.client.gui.navigation.ScreenRectangle, net.minecraft.client.gui.navigation.ScreenDirection, net.minecraft.client.gui.components.events.GuiEventListener, net.minecraft.client.gui.navigation.FocusNavigationEvent);
+    descriptor: (Lnet/minecraft/client/gui/navigation/ScreenRectangle;Lnet/minecraft/client/gui/navigation/ScreenDirection;Lnet/minecraft/client/gui/components/events/GuiEventListener;Lnet/minecraft/client/gui/navigation/FocusNavigationEvent;)Lnet/minecraft/client/gui/ComponentPath;
+
+  private static java.lang.Integer method_48216(net.minecraft.client.gui.navigation.ScreenDirection, net.minecraft.client.gui.components.events.GuiEventListener);
+    descriptor: (Lnet/minecraft/client/gui/navigation/ScreenDirection;Lnet/minecraft/client/gui/components/events/GuiEventListener;)Ljava/lang/Integer;
+
+  private static java.lang.Integer method_48219(net.minecraft.client.gui.navigation.ScreenDirection, net.minecraft.client.gui.components.events.GuiEventListener);
+    descriptor: (Lnet/minecraft/client/gui/navigation/ScreenDirection;Lnet/minecraft/client/gui/components/events/GuiEventListener;)Ljava/lang/Integer;
+
+  private static int method_48609(net.minecraft.client.gui.components.events.GuiEventListener);
+    descriptor: (Lnet/minecraft/client/gui/components/events/GuiEventListener;)I
+
+  private static boolean method_20082(double, double, double, double, net.minecraft.client.gui.components.events.GuiEventListener);
+    descriptor: (DDDDLnet/minecraft/client/gui/components/events/GuiEventListener;)Z
+
+  private static boolean method_20083(double, double, int, net.minecraft.client.gui.components.events.GuiEventListener);
+    descriptor: (DDILnet/minecraft/client/gui/components/events/GuiEventListener;)Z
+}

@@ -1,4 +1,4 @@
-errors: 341
+errors: 338
 pl/gruzclient/status/Benchmark.java:9: cannot find symbol
     import net.minecraft.Util;
                         ^
@@ -171,30 +171,30 @@ pl/gruzclient/mixin/WorldRendererMixin.java:7: cannot find symbol
     import net.minecraft.client.renderer.RenderType;
                                         ^
       symbol:   class RenderType
-pl/gruzclient/mixin/ChatHudMixin.java:18: cannot find symbol
+pl/gruzclient/mixin/ChatHudMixin.java:19: cannot find symbol
     import net.minecraft.client.GuiMessage;
                                ^
       symbol:   class GuiMessage
-pl/gruzclient/mixin/ChatHudMixin.java:19: cannot find symbol
+pl/gruzclient/mixin/ChatHudMixin.java:20: cannot find symbol
     import net.minecraft.client.GuiMessageTag;
                                ^
       symbol:   class GuiMessageTag
-pl/gruzclient/mixin/ChatHudMixin.java:30: cannot find symbol
+pl/gruzclient/mixin/ChatHudMixin.java:31: cannot find symbol
         @Shadow @Final private List<GuiMessage> allMessages;
                                     ^
       symbol:   class GuiMessage
-pl/gruzclient/mixin/ChatHudMixin.java:31: package GuiMessage does not exist
+pl/gruzclient/mixin/ChatHudMixin.java:32: package GuiMessage does not exist
         @Shadow @Final private List<GuiMessage.Line> trimmedMessages;
                                               ^
-pl/gruzclient/mixin/ChatHudMixin.java:34: cannot find symbol
+pl/gruzclient/mixin/ChatHudMixin.java:35: cannot find symbol
         @Shadow private void addMessageToDisplayQueue(GuiMessage message) { throw new AssertionError(); }
                                                       ^
       symbol:   class GuiMessage
-pl/gruzclient/mixin/ChatHudMixin.java:44: cannot find symbol
+pl/gruzclient/mixin/ChatHudMixin.java:45: cannot find symbol
         private Component gruz$onMessage(Component message, Component original, MessageSignature signature, GuiMessageTag indicator) {
                                                                                                             ^
       symbol:   class GuiMessageTag
-pl/gruzclient/mixin/ChatHudMixin.java:76: cannot find symbol
+pl/gruzclient/mixin/ChatHudMixin.java:77: cannot find symbol
         private void gruz$filter(GuiMessage message, CallbackInfo ci) {
                                  ^
       symbol:   class GuiMessage
@@ -206,10 +206,6 @@ pl/gruzclient/mixin/ChatScreenMixin.java:82: cannot find symbol
         private void gruz$render(GuiGraphics context, int mouseX, int mouseY, float delta, CallbackInfo ci) {
                                  ^
       symbol:   class GuiGraphics
-pl/gruzclient/mixin/BackgroundRendererMixin.java:6: cannot find symbol
-    import net.minecraft.client.renderer.FogRenderer;
-                                        ^
-      symbol:   class FogRenderer
 pl/gruzclient/mixin/PlayerEntityRendererMixin.java:3: cannot find symbol
     import net.minecraft.client.model.PlayerModel;
                                      ^
@@ -778,10 +774,6 @@ pl/gruzclient/mixin/LightmapTextureManagerMixin.java:14: cannot find symbol
     @Mixin(LightTexture.class)
            ^
       symbol: class LightTexture
-pl/gruzclient/mixin/BackgroundRendererMixin.java:17: cannot find symbol
-    @Mixin(FogRenderer.class)
-           ^
-      symbol: class FogRenderer
 pl/gruzclient/mixin/PlayerEntityRendererMixin.java:15: cannot find symbol
     @Mixin(PlayerRenderer.class)
            ^
@@ -856,15 +848,15 @@ pl/gruzclient/mixin/HeldItemRendererMixin.java:46: cannot find symbol
             if (!(item.getItem() instanceof net.minecraft.world.item.SwordItem) || !Modules.OLD_ANIM.swordBlocking(player)) return;
                                                                     ^
       symbol:   class SwordItem
-pl/gruzclient/mixin/WorldRendererMixin.java:45: cannot find symbol
+pl/gruzclient/mixin/WorldRendererMixin.java:49: cannot find symbol
             VertexConsumer fill = mc.renderBuffers().bufferSource().getBuffer(RenderType.debugFilledBox());
                                                                               ^
       symbol:   variable RenderType
-pl/gruzclient/mixin/WorldRendererMixin.java:53: cannot find symbol
+pl/gruzclient/mixin/WorldRendererMixin.java:57: cannot find symbol
                 shape.forAllEdges((x1, y1, z1, x2, y2, z2) -> net.minecraft.client.renderer.ShapeRenderer.addChainedFilledBoxVertices(matrices, fill,
                                                                                                          ^
       symbol:   method addChainedFilledBoxVertices(PoseStack,VertexConsumer,double,double,double,double,double,double,float,float,float,float)
-pl/gruzclient/mixin/WorldRendererMixin.java:61: cannot find symbol
+pl/gruzclient/mixin/WorldRendererMixin.java:65: cannot find symbol
                 net.minecraft.client.renderer.ShapeRenderer.addChainedFilledBoxVertices(matrices, fill,
                                                            ^
       symbol:   method addChainedFilledBoxVertices(PoseStack,VertexConsumer,double,double,double,double,double,double,float,float,float,float)
@@ -876,10 +868,6 @@ pl/gruzclient/mixin/ChatScreenMixin.java:66: method keyPressed in class EditBox 
                 cir.setReturnValue(gruz$search.keyPressed(keyCode, scanCode, modifiers));
                                               ^
       required: KeyEvent
-pl/gruzclient/mixin/BackgroundRendererMixin.java:31: cannot find symbol
-            RenderSystem.clearColor(fogRed, fogGreen, fogBlue, 0f);
-                        ^
-      symbol:   method clearColor(float,float,float,float)
 pl/gruzclient/mixin/ClientPlayNetworkHandlerMixin.java:48: cannot find symbol
             for (String line : Lang.t("net.help").split("\\|")) mc.player.displayClientMessage(Component.literal(line).withStyle(ChatFormatting.GRAY), false);
                                                                          ^
@@ -1317,7 +1305,7 @@ pl/gruzclient/screen/GruzButton.java:15: GruzButton is not abstract and does not
 pl/gruzclient/screen/GruzButton.java:28: method does not override or implement a method from a supertype
         @Override
         ^
-    351 errors
+    348 errors
 --- What went wrong ---
 Execution failed for task ':26.1:compileJava' (registered by plugin class 'org.gradle.api.plugins.JavaBasePlugin').
 > Compilation failed; see the compiler output below.

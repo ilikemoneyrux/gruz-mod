@@ -1,0 +1,13 @@
+Compiled from "EntityModel.java"
+public abstract class net.minecraft.client.model.EntityModel<T extends net.minecraft.client.renderer.entity.state.EntityRenderState> extends net.minecraft.client.model.Model {
+  public static final float MODEL_Y_OFFSET;
+    descriptor: F
+  protected net.minecraft.client.model.EntityModel(net.minecraft.client.model.geom.ModelPart);
+    descriptor: (Lnet/minecraft/client/model/geom/ModelPart;)V
+
+  protected net.minecraft.client.model.EntityModel(net.minecraft.client.model.geom.ModelPart, java.util.function.Function<net.minecraft.resources.ResourceLocation, net.minecraft.client.renderer.RenderType>);
+    descriptor: (Lnet/minecraft/client/model/geom/ModelPart;Ljava/util/function/Function;)V
+
+  public void setupAnim(T);
+    descriptor: (Lnet/minecraft/client/renderer/entity/state/EntityRenderState;)V
+}

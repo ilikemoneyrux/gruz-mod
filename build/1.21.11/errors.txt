@@ -1,4 +1,4 @@
-errors: 201
+errors: 198
 pl/gruzclient/status/Benchmark.java:9: cannot find symbol
     import net.minecraft.Util;
                         ^
@@ -67,10 +67,6 @@ pl/gruzclient/mixin/WorldRendererMixin.java:7: cannot find symbol
     import net.minecraft.client.renderer.RenderType;
                                         ^
       symbol:   class RenderType
-pl/gruzclient/mixin/BackgroundRendererMixin.java:6: cannot find symbol
-    import net.minecraft.client.renderer.FogRenderer;
-                                        ^
-      symbol:   class FogRenderer
 pl/gruzclient/mixin/PlayerEntityRendererMixin.java:3: cannot find symbol
     import net.minecraft.client.model.PlayerModel;
                                      ^
@@ -215,10 +211,6 @@ pl/gruzclient/screen/WorldMapScreen.java:27: cannot find symbol
         private static final ResourceLocation ID = Compat.id(GruzClient.MOD_ID, "worldmap");
                              ^
       symbol:   class ResourceLocation
-pl/gruzclient/mixin/BackgroundRendererMixin.java:17: cannot find symbol
-    @Mixin(FogRenderer.class)
-           ^
-      symbol: class FogRenderer
 pl/gruzclient/mixin/PlayerEntityRendererMixin.java:15: cannot find symbol
     @Mixin(PlayerRenderer.class)
            ^
@@ -302,15 +294,15 @@ pl/gruzclient/mixin/HeldItemRendererMixin.java:46: cannot find symbol
             if (!(item.getItem() instanceof net.minecraft.world.item.SwordItem) || !Modules.OLD_ANIM.swordBlocking(player)) return;
                                                                     ^
       symbol:   class SwordItem
-pl/gruzclient/mixin/WorldRendererMixin.java:45: cannot find symbol
+pl/gruzclient/mixin/WorldRendererMixin.java:49: cannot find symbol
             VertexConsumer fill = mc.renderBuffers().bufferSource().getBuffer(RenderType.debugFilledBox());
                                                                               ^
       symbol:   variable RenderType
-pl/gruzclient/mixin/WorldRendererMixin.java:53: cannot find symbol
+pl/gruzclient/mixin/WorldRendererMixin.java:57: cannot find symbol
                 shape.forAllEdges((x1, y1, z1, x2, y2, z2) -> net.minecraft.client.renderer.ShapeRenderer.addChainedFilledBoxVertices(matrices, fill,
                                                                                                          ^
       symbol:   method addChainedFilledBoxVertices(PoseStack,VertexConsumer,double,double,double,double,double,double,float,float,float,float)
-pl/gruzclient/mixin/WorldRendererMixin.java:61: cannot find symbol
+pl/gruzclient/mixin/WorldRendererMixin.java:65: cannot find symbol
                 net.minecraft.client.renderer.ShapeRenderer.addChainedFilledBoxVertices(matrices, fill,
                                                            ^
       symbol:   method addChainedFilledBoxVertices(PoseStack,VertexConsumer,double,double,double,double,double,double,float,float,float,float)
@@ -322,10 +314,6 @@ pl/gruzclient/mixin/ChatScreenMixin.java:66: method keyPressed in class EditBox 
                 cir.setReturnValue(gruz$search.keyPressed(keyCode, scanCode, modifiers));
                                               ^
       required: KeyEvent
-pl/gruzclient/mixin/BackgroundRendererMixin.java:31: cannot find symbol
-            RenderSystem.clearColor(fogRed, fogGreen, fogBlue, 0f);
-                        ^
-      symbol:   method clearColor(float,float,float,float)
 pl/gruzclient/mixin/AbstractClientPlayerEntityMixin.java:21: cannot find symbol
             PlayerSkin t = cir.getReturnValue();
             ^

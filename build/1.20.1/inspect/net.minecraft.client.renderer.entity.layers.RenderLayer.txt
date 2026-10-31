@@ -1,10 +1,22 @@
 Compiled from "RenderLayer.java"
 public abstract class net.minecraft.client.renderer.entity.layers.RenderLayer<T extends net.minecraft.world.entity.Entity, M extends net.minecraft.client.model.EntityModel<T>> {
   private final net.minecraft.client.renderer.entity.RenderLayerParent<T, M> renderer;
+    descriptor: Lnet/minecraft/client/renderer/entity/RenderLayerParent;
   public net.minecraft.client.renderer.entity.layers.RenderLayer(net.minecraft.client.renderer.entity.RenderLayerParent<T, M>);
+    descriptor: (Lnet/minecraft/client/renderer/entity/RenderLayerParent;)V
+
   protected static <T extends net.minecraft.world.entity.LivingEntity> void coloredCutoutModelCopyLayerRender(net.minecraft.client.model.EntityModel<T>, net.minecraft.client.model.EntityModel<T>, net.minecraft.resources.ResourceLocation, com.mojang.blaze3d.vertex.PoseStack, net.minecraft.client.renderer.MultiBufferSource, int, T, float, float, float, float, float, float, float, float, float);
+    descriptor: (Lnet/minecraft/client/model/EntityModel;Lnet/minecraft/client/model/EntityModel;Lnet/minecraft/resources/ResourceLocation;Lcom/mojang/blaze3d/vertex/PoseStack;Lnet/minecraft/client/renderer/MultiBufferSource;ILnet/minecraft/world/entity/LivingEntity;FFFFFFFFF)V
+
   protected static <T extends net.minecraft.world.entity.LivingEntity> void renderColoredCutoutModel(net.minecraft.client.model.EntityModel<T>, net.minecraft.resources.ResourceLocation, com.mojang.blaze3d.vertex.PoseStack, net.minecraft.client.renderer.MultiBufferSource, int, T, float, float, float);
+    descriptor: (Lnet/minecraft/client/model/EntityModel;Lnet/minecraft/resources/ResourceLocation;Lcom/mojang/blaze3d/vertex/PoseStack;Lnet/minecraft/client/renderer/MultiBufferSource;ILnet/minecraft/world/entity/LivingEntity;FFF)V
+
   public M getParentModel();
+    descriptor: ()Lnet/minecraft/client/model/EntityModel;
+
   protected net.minecraft.resources.ResourceLocation getTextureLocation(T);
+    descriptor: (Lnet/minecraft/world/entity/Entity;)Lnet/minecraft/resources/ResourceLocation;
+
   public abstract void render(com.mojang.blaze3d.vertex.PoseStack, net.minecraft.client.renderer.MultiBufferSource, int, T, float, float, float, float, float, float);
+    descriptor: (Lcom/mojang/blaze3d/vertex/PoseStack;Lnet/minecraft/client/renderer/MultiBufferSource;ILnet/minecraft/world/entity/Entity;FFFFFF)V
 }

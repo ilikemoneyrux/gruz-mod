@@ -1,14 +1,47 @@
-/mixin/WorldRendererMixin.java:45: error: cannot find symbol
+symbol
+        RenderSystem.enableBlend();
+                    ^
+  symbol:   method enableBlend()
+  location: class RenderSystem
+/home/runner/work/gruz-mod/gruz-mod/versions/1.21.11/build/pp/java/pl/gruzclient/render/Ui.java:68: error: cannot find symbol
+        RenderSystem.defaultBlendFunc();
+                    ^
+  symbol:   method defaultBlendFunc()
+  location: class RenderSystem
+/home/runner/work/gruz-mod/gruz-mod/versions/1.21.11/build/pp/java/pl/gruzclient/render/WindowIcon.java:25: error: cannot find symbol
+        if (Util.getPlatform() == Util.OS.OSX) return; // macOS bierze ikonę z aplikacji
+            ^
+  symbol:   variable Util
+  location: class WindowIcon
+/home/runner/work/gruz-mod/gruz-mod/versions/1.21.11/build/pp/java/pl/gruzclient/render/WindowIcon.java:25: error: package Util does not exist
+        if (Util.getPlatform() == Util.OS.OSX) return; // macOS bierze ikonę z aplikacji
+                                      ^
+/home/runner/work/gruz-mod/gruz-mod/versions/1.21.11/build/pp/java/pl/gruzclient/render/WindowIcon.java:26: error: cannot find symbol
+        long handle = Minecraft.getInstance().getWindow().getWindow();
+                                                         ^
+  symbol:   method getWindow()
+  location: class Window
+/home/runner/work/gruz-mod/gruz-mod/versions/1.21.11/build/pp/java/pl/gruzclient/mixin/SplashOverlayMixin.java:38: error: cannot find symbol
+        long now = Util.getMillis();
+                   ^
+  symbol:   variable Util
+  location: class SplashOverlayMixin
+/home/runner/work/gruz-mod/gruz-mod/versions/1.21.11/build/pp/java/pl/gruzclient/mixin/HeldItemRendererMixin.java:46: error: cannot find symbol
+        if (!(item.getItem() instanceof net.minecraft.world.item.SwordItem) || !Modules.OLD_ANIM.swordBlocking(player)) return;
+                                                                ^
+  symbol:   class SwordItem
+  location: package net.minecraft.world.item
+/home/runner/work/gruz-mod/gruz-mod/versions/1.21.11/build/pp/java/pl/gruzclient/mixin/WorldRendererMixin.java:49: error: cannot find symbol
         VertexConsumer fill = mc.renderBuffers().bufferSource().getBuffer(RenderType.debugFilledBox());
                                                                           ^
   symbol:   variable RenderType
   location: class WorldRendererMixin
-/home/runner/work/gruz-mod/gruz-mod/versions/1.21.11/build/pp/java/pl/gruzclient/mixin/WorldRendererMixin.java:53: error: cannot find symbol
+/home/runner/work/gruz-mod/gruz-mod/versions/1.21.11/build/pp/java/pl/gruzclient/mixin/WorldRendererMixin.java:57: error: cannot find symbol
             shape.forAllEdges((x1, y1, z1, x2, y2, z2) -> net.minecraft.client.renderer.ShapeRenderer.addChainedFilledBoxVertices(matrices, fill,
                                                                                                      ^
   symbol:   method addChainedFilledBoxVertices(PoseStack,VertexConsumer,double,double,double,double,double,double,float,float,float,float)
   location: class ShapeRenderer
-/home/runner/work/gruz-mod/gruz-mod/versions/1.21.11/build/pp/java/pl/gruzclient/mixin/WorldRendererMixin.java:61: error: cannot find symbol
+/home/runner/work/gruz-mod/gruz-mod/versions/1.21.11/build/pp/java/pl/gruzclient/mixin/WorldRendererMixin.java:65: error: cannot find symbol
             net.minecraft.client.renderer.ShapeRenderer.addChainedFilledBoxVertices(matrices, fill,
                                                        ^
   symbol:   method addChainedFilledBoxVertices(PoseStack,VertexConsumer,double,double,double,double,double,double,float,float,float,float)
@@ -24,11 +57,6 @@
   required: KeyEvent
   found:    int,int,int
   reason: actual and formal argument lists differ in length
-/home/runner/work/gruz-mod/gruz-mod/versions/1.21.11/build/pp/java/pl/gruzclient/mixin/BackgroundRendererMixin.java:31: error: cannot find symbol
-        RenderSystem.clearColor(fogRed, fogGreen, fogBlue, 0f);
-                    ^
-  symbol:   method clearColor(float,float,float,float)
-  location: class RenderSystem
 /home/runner/work/gruz-mod/gruz-mod/versions/1.21.11/build/pp/java/pl/gruzclient/mixin/AbstractClientPlayerEntityMixin.java:21: error: cannot find symbol
         PlayerSkin t = cir.getReturnValue();
         ^
@@ -583,7 +611,7 @@ public class GruzButton extends Button {
                 ^
   overridden method is final
 Note: Some messages have been simplified; recompile with -Xdiags:verbose to get full output
-207 errors
+204 errors
 
 > Task :1.21.11:compileJava FAILED
 
@@ -683,11 +711,6 @@ Execution failed for task ':1.21.11:compileJava' (registered by plugin class 'or
   import net.minecraft.client.renderer.RenderType;
                                       ^
     symbol:   class RenderType
-    location: package net.minecraft.client.renderer
-  /home/runner/work/gruz-mod/gruz-mod/versions/1.21.11/build/pp/java/pl/gruzclient/mixin/BackgroundRendererMixin.java:6: error: cannot find symbol
-  import net.minecraft.client.renderer.FogRenderer;
-                                      ^
-    symbol:   class FogRenderer
     location: package net.minecraft.client.renderer
   /home/runner/work/gruz-mod/gruz-mod/versions/1.21.11/build/pp/java/pl/gruzclient/mixin/PlayerEntityRendererMixin.java:3: error: cannot find symbol
   import net.minecraft.client.model.PlayerModel;
@@ -904,7 +927,7 @@ Execution failed for task ':1.21.11:compileJava' (registered by plugin class 'or
                                                                   ^
     symbol:   class SwordItem
     location: package net.minecraft.world.item
-  /home/runner/work/gruz-mod/gruz-mod/versions/1.21.11/build/pp/java/pl/gruzclient/mixin/WorldRendererMixin.java:45: error: cannot find symbol
+  /home/runner/work/gruz-mod/gruz-mod/versions/1.21.11/build/pp/java/pl/gruzclient/mixin/WorldRendererMixin.java:49: error: cannot find symbol
           VertexConsumer fill = mc.renderBuffers().bufferSource().getBuffer(RenderType.debugFilledBox());
                                                                             ^
     symbol:   variable RenderType
@@ -997,10 +1020,6 @@ Execution failed for task ':1.21.11:compileJava' (registered by plugin class 'or
   public class CosmeticsFeature extends RenderLayer<net.minecraft.client.renderer.entity.state.PlayerRenderState, PlayerModel> {
                                                                                                                   ^
     symbol: class PlayerModel
-  /home/runner/work/gruz-mod/gruz-mod/versions/1.21.11/build/pp/java/pl/gruzclient/mixin/BackgroundRendererMixin.java:17: error: cannot find symbol
-  @Mixin(FogRenderer.class)
-         ^
-    symbol: class FogRenderer
   /home/runner/work/gruz-mod/gruz-mod/versions/1.21.11/build/pp/java/pl/gruzclient/mixin/PlayerEntityRendererMixin.java:15: error: cannot find symbol
   @Mixin(PlayerRenderer.class)
          ^
@@ -1102,12 +1121,12 @@ Execution failed for task ':1.21.11:compileJava' (registered by plugin class 'or
                                                            ^
     symbol:   method getWindow()
     location: class Window
-  /home/runner/work/gruz-mod/gruz-mod/versions/1.21.11/build/pp/java/pl/gruzclient/mixin/WorldRendererMixin.java:53: error: cannot find symbol
+  /home/runner/work/gruz-mod/gruz-mod/versions/1.21.11/build/pp/java/pl/gruzclient/mixin/WorldRendererMixin.java:57: error: cannot find symbol
               shape.forAllEdges((x1, y1, z1, x2, y2, z2) -> net.minecraft.client.renderer.ShapeRenderer.addChainedFilledBoxVertices(matrices, fill,
                                                                                                        ^
     symbol:   method addChainedFilledBoxVertices(PoseStack,VertexConsumer,double,double,double,double,double,double,float,float,float,float)
     location: class ShapeRenderer
-  /home/runner/work/gruz-mod/gruz-mod/versions/1.21.11/build/pp/java/pl/gruzclient/mixin/WorldRendererMixin.java:61: error: cannot find symbol
+  /home/runner/work/gruz-mod/gruz-mod/versions/1.21.11/build/pp/java/pl/gruzclient/mixin/WorldRendererMixin.java:65: error: cannot find symbol
               net.minecraft.client.renderer.ShapeRenderer.addChainedFilledBoxVertices(matrices, fill,
                                                          ^
     symbol:   method addChainedFilledBoxVertices(PoseStack,VertexConsumer,double,double,double,double,double,double,float,float,float,float)
@@ -1117,11 +1136,6 @@ Execution failed for task ':1.21.11:compileJava' (registered by plugin class 'or
                                                   ^
     symbol:   method hasControlDown()
     location: class Screen
-  /home/runner/work/gruz-mod/gruz-mod/versions/1.21.11/build/pp/java/pl/gruzclient/mixin/BackgroundRendererMixin.java:31: error: cannot find symbol
-          RenderSystem.clearColor(fogRed, fogGreen, fogBlue, 0f);
-                      ^
-    symbol:   method clearColor(float,float,float,float)
-    location: class RenderSystem
   /home/runner/work/gruz-mod/gruz-mod/versions/1.21.11/build/pp/java/pl/gruzclient/network/GruzNetwork.java:197: error: cannot find symbol
                           mc.getMinecraftSessionService().joinServer(session.getProfileId(), session.getAccessToken(), serverId);
                             ^
@@ -1577,7 +1591,7 @@ Execution failed for task ':1.21.11:compileJava' (registered by plugin class 'or
                   ^
     overridden method is final
   Note: Some messages have been simplified; recompile with -Xdiags:verbose to get full output
-  207 errors
+  204 errors
 
 * Try:
 > Check your code and dependencies to fix the compilation error(s)
@@ -1733,11 +1747,6 @@ import net.minecraft.Util;
 import net.minecraft.client.renderer.RenderType;
                                     ^
   symbol:   class RenderType
-  location: package net.minecraft.client.renderer
-/home/runner/work/gruz-mod/gruz-mod/versions/1.21.11/build/pp/java/pl/gruzclient/mixin/BackgroundRendererMixin.java:6: error: cannot find symbol
-import net.minecraft.client.renderer.FogRenderer;
-                                    ^
-  symbol:   class FogRenderer
   location: package net.minecraft.client.renderer
 /home/runner/work/gruz-mod/gruz-mod/versions/1.21.11/build/pp/java/pl/gruzclient/mixin/PlayerEntityRendererMixin.java:3: error: cannot find symbol
 import net.minecraft.client.model.PlayerModel;
@@ -1932,10 +1941,6 @@ import net.minecraft.resources.ResourceLocation;
                          ^
   symbol:   class ResourceLocation
   location: class WorldMapScreen
-/home/runner/work/gruz-mod/gruz-mod/versions/1.21.11/build/pp/java/pl/gruzclient/mixin/BackgroundRendererMixin.java:17: error: cannot find symbol
-@Mixin(FogRenderer.class)
-       ^
-  symbol: class FogRenderer
 /home/runner/work/gruz-mod/gruz-mod/versions/1.21.11/build/pp/java/pl/gruzclient/mixin/PlayerEntityRendererMixin.java:15: error: cannot find symbol
 @Mixin(PlayerRenderer.class)
        ^
@@ -2042,17 +2047,17 @@ import net.minecraft.resources.ResourceLocation;
                                                                 ^
   symbol:   class SwordItem
   location: package net.minecraft.world.item
-/home/runner/work/gruz-mod/gruz-mod/versions/1.21.11/build/pp/java/pl/gruzclient/mixin/WorldRendererMixin.java:45: error: cannot find symbol
+/home/runner/work/gruz-mod/gruz-mod/versions/1.21.11/build/pp/java/pl/gruzclient/mixin/WorldRendererMixin.java:49: error: cannot find symbol
         VertexConsumer fill = mc.renderBuffers().bufferSource().getBuffer(RenderType.debugFilledBox());
                                                                           ^
   symbol:   variable RenderType
   location: class WorldRendererMixin
-/home/runner/work/gruz-mod/gruz-mod/versions/1.21.11/build/pp/java/pl/gruzclient/mixin/WorldRendererMixin.java:53: error: cannot find symbol
+/home/runner/work/gruz-mod/gruz-mod/versions/1.21.11/build/pp/java/pl/gruzclient/mixin/WorldRendererMixin.java:57: error: cannot find symbol
             shape.forAllEdges((x1, y1, z1, x2, y2, z2) -> net.minecraft.client.renderer.ShapeRenderer.addChainedFilledBoxVertices(matrices, fill,
                                                                                                      ^
   symbol:   method addChainedFilledBoxVertices(PoseStack,VertexConsumer,double,double,double,double,double,double,float,float,float,float)
   location: class ShapeRenderer
-/home/runner/work/gruz-mod/gruz-mod/versions/1.21.11/build/pp/java/pl/gruzclient/mixin/WorldRendererMixin.java:61: error: cannot find symbol
+/home/runner/work/gruz-mod/gruz-mod/versions/1.21.11/build/pp/java/pl/gruzclient/mixin/WorldRendererMixin.java:65: error: cannot find symbol
             net.minecraft.client.renderer.ShapeRenderer.addChainedFilledBoxVertices(matrices, fill,
                                                        ^
   symbol:   method addChainedFilledBoxVertices(PoseStack,VertexConsumer,double,double,double,double,double,double,float,float,float,float)
@@ -2068,11 +2073,6 @@ import net.minecraft.resources.ResourceLocation;
   required: KeyEvent
   found:    int,int,int
   reason: actual and formal argument lists differ in length
-/home/runner/work/gruz-mod/gruz-mod/versions/1.21.11/build/pp/java/pl/gruzclient/mixin/BackgroundRendererMixin.java:31: error: cannot find symbol
-        RenderSystem.clearColor(fogRed, fogGreen, fogBlue, 0f);
-                    ^
-  symbol:   method clearColor(float,float,float,float)
-  location: class RenderSystem
 /home/runner/work/gruz-mod/gruz-mod/versions/1.21.11/build/pp/java/pl/gruzclient/mixin/AbstractClientPlayerEntityMixin.java:21: error: cannot find symbol
         PlayerSkin t = cir.getReturnValue();
         ^
@@ -2627,7 +2627,7 @@ public class GruzButton extends Button {
                 ^
   overridden method is final
 Note: Some messages have been simplified; recompile with -Xdiags:verbose to get full output
-207 errors
+204 errors
 	at org.gradle.api.internal.tasks.compile.JdkJavaCompiler.execute(JdkJavaCompiler.java:88)
 	at org.gradle.api.internal.tasks.compile.JdkJavaCompiler.execute(JdkJavaCompiler.java:49)
 	at org.gradle.api.internal.tasks.compile.NormalizingJavaCompiler.delegateAndHandleErrors(NormalizingJavaCompiler.java:98)
@@ -2773,5 +2773,5 @@ You can use '--warning-mode all' to show the individual deprecation warnings and
 
 For more on this, please refer to https://docs.gradle.org/9.8.0/userguide/command_line_interface.html#sec:command_line_warnings in the Gradle documentation.
 
-BUILD FAILED in 45s
+BUILD FAILED in 52s
 2 actionable tasks: 2 executed

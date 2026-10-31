@@ -1,11 +1,22 @@
 Compiled from "PanoramaRenderer.java"
 public class net.minecraft.client.renderer.PanoramaRenderer {
   public static final net.minecraft.resources.ResourceLocation PANORAMA_OVERLAY;
+    descriptor: Lnet/minecraft/resources/ResourceLocation;
   private final net.minecraft.client.Minecraft minecraft;
+    descriptor: Lnet/minecraft/client/Minecraft;
   private final net.minecraft.client.renderer.CubeMap cubeMap;
+    descriptor: Lnet/minecraft/client/renderer/CubeMap;
   private float spin;
+    descriptor: F
   public net.minecraft.client.renderer.PanoramaRenderer(net.minecraft.client.renderer.CubeMap);
+    descriptor: (Lnet/minecraft/client/renderer/CubeMap;)V
+
   public void render(net.minecraft.client.gui.GuiGraphics, int, int, float, float);
+    descriptor: (Lnet/minecraft/client/gui/GuiGraphics;IIFF)V
+
   private static float wrap(float, float);
+    descriptor: (FF)F
+
   static {};
+    descriptor: ()V
 }

@@ -1,0 +1,15 @@
+Compiled from "CubeMap.java"
+public class net.minecraft.client.renderer.CubeMap {
+  private static final int SIDES;
+    descriptor: I
+  private final net.minecraft.resources.ResourceLocation[] images;
+    descriptor: [Lnet/minecraft/resources/ResourceLocation;
+  public net.minecraft.client.renderer.CubeMap(net.minecraft.resources.ResourceLocation);
+    descriptor: (Lnet/minecraft/resources/ResourceLocation;)V
+
+  public void render(net.minecraft.client.Minecraft, float, float, float);
+    descriptor: (Lnet/minecraft/client/Minecraft;FFF)V
+
+  public java.util.concurrent.CompletableFuture<java.lang.Void> preload(net.minecraft.client.renderer.texture.TextureManager, java.util.concurrent.Executor);
+    descriptor: (Lnet/minecraft/client/renderer/texture/TextureManager;Ljava/util/concurrent/Executor;)Ljava/util/concurrent/CompletableFuture;
+}

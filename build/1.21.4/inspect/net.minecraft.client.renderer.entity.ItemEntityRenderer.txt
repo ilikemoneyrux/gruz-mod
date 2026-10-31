@@ -1,17 +1,38 @@
 Compiled from "ItemEntityRenderer.java"
 public class net.minecraft.client.renderer.entity.ItemEntityRenderer extends net.minecraft.client.renderer.entity.EntityRenderer<net.minecraft.world.entity.item.ItemEntity, net.minecraft.client.renderer.entity.state.ItemEntityRenderState> {
   private static final float ITEM_BUNDLE_OFFSET_SCALE;
+    descriptor: F
   private static final float FLAT_ITEM_BUNDLE_OFFSET_X;
+    descriptor: F
   private static final float FLAT_ITEM_BUNDLE_OFFSET_Y;
+    descriptor: F
   private static final float FLAT_ITEM_BUNDLE_OFFSET_Z;
+    descriptor: F
   private final net.minecraft.client.renderer.item.ItemModelResolver itemModelResolver;
+    descriptor: Lnet/minecraft/client/renderer/item/ItemModelResolver;
   private final net.minecraft.util.RandomSource random;
+    descriptor: Lnet/minecraft/util/RandomSource;
   public net.minecraft.client.renderer.entity.ItemEntityRenderer(net.minecraft.client.renderer.entity.EntityRendererProvider$Context);
+    descriptor: (Lnet/minecraft/client/renderer/entity/EntityRendererProvider$Context;)V
+
   public net.minecraft.client.renderer.entity.state.ItemEntityRenderState createRenderState();
+    descriptor: ()Lnet/minecraft/client/renderer/entity/state/ItemEntityRenderState;
+
   public void extractRenderState(net.minecraft.world.entity.item.ItemEntity, net.minecraft.client.renderer.entity.state.ItemEntityRenderState, float);
+    descriptor: (Lnet/minecraft/world/entity/item/ItemEntity;Lnet/minecraft/client/renderer/entity/state/ItemEntityRenderState;F)V
+
   public void render(net.minecraft.client.renderer.entity.state.ItemEntityRenderState, com.mojang.blaze3d.vertex.PoseStack, net.minecraft.client.renderer.MultiBufferSource, int);
+    descriptor: (Lnet/minecraft/client/renderer/entity/state/ItemEntityRenderState;Lcom/mojang/blaze3d/vertex/PoseStack;Lnet/minecraft/client/renderer/MultiBufferSource;I)V
+
   public static void renderMultipleFromCount(com.mojang.blaze3d.vertex.PoseStack, net.minecraft.client.renderer.MultiBufferSource, int, net.minecraft.client.renderer.entity.state.ItemClusterRenderState, net.minecraft.util.RandomSource);
+    descriptor: (Lcom/mojang/blaze3d/vertex/PoseStack;Lnet/minecraft/client/renderer/MultiBufferSource;ILnet/minecraft/client/renderer/entity/state/ItemClusterRenderState;Lnet/minecraft/util/RandomSource;)V
+
   public void extractRenderState(net.minecraft.world.entity.Entity, net.minecraft.client.renderer.entity.state.EntityRenderState, float);
+    descriptor: (Lnet/minecraft/world/entity/Entity;Lnet/minecraft/client/renderer/entity/state/EntityRenderState;F)V
+
   public net.minecraft.client.renderer.entity.state.EntityRenderState createRenderState();
+    descriptor: ()Lnet/minecraft/client/renderer/entity/state/EntityRenderState;
+
   public void render(net.minecraft.client.renderer.entity.state.EntityRenderState, com.mojang.blaze3d.vertex.PoseStack, net.minecraft.client.renderer.MultiBufferSource, int);
+    descriptor: (Lnet/minecraft/client/renderer/entity/state/EntityRenderState;Lcom/mojang/blaze3d/vertex/PoseStack;Lnet/minecraft/client/renderer/MultiBufferSource;I)V
 }

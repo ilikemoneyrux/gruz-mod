@@ -1,0 +1,57 @@
+Compiled from "PlayerModel.java"
+public class net.minecraft.client.model.player.PlayerModel extends net.minecraft.client.model.HumanoidModel<net.minecraft.client.renderer.entity.state.AvatarRenderState> {
+  protected static final java.lang.String LEFT_SLEEVE;
+    descriptor: Ljava/lang/String;
+  protected static final java.lang.String RIGHT_SLEEVE;
+    descriptor: Ljava/lang/String;
+  protected static final java.lang.String LEFT_PANTS;
+    descriptor: Ljava/lang/String;
+  protected static final java.lang.String RIGHT_PANTS;
+    descriptor: Ljava/lang/String;
+  private final java.util.List<net.minecraft.client.model.geom.ModelPart> bodyParts;
+    descriptor: Ljava/util/List;
+  public final net.minecraft.client.model.geom.ModelPart leftSleeve;
+    descriptor: Lnet/minecraft/client/model/geom/ModelPart;
+  public final net.minecraft.client.model.geom.ModelPart rightSleeve;
+    descriptor: Lnet/minecraft/client/model/geom/ModelPart;
+  public final net.minecraft.client.model.geom.ModelPart leftPants;
+    descriptor: Lnet/minecraft/client/model/geom/ModelPart;
+  public final net.minecraft.client.model.geom.ModelPart rightPants;
+    descriptor: Lnet/minecraft/client/model/geom/ModelPart;
+  public final net.minecraft.client.model.geom.ModelPart jacket;
+    descriptor: Lnet/minecraft/client/model/geom/ModelPart;
+  private final boolean slim;
+    descriptor: Z
+  public net.minecraft.client.model.player.PlayerModel(net.minecraft.client.model.geom.ModelPart, boolean);
+    descriptor: (Lnet/minecraft/client/model/geom/ModelPart;Z)V
+
+  public static net.minecraft.client.model.geom.builders.MeshDefinition createMesh(net.minecraft.client.model.geom.builders.CubeDeformation, boolean);
+    descriptor: (Lnet/minecraft/client/model/geom/builders/CubeDeformation;Z)Lnet/minecraft/client/model/geom/builders/MeshDefinition;
+
+  public static net.minecraft.client.renderer.entity.ArmorModelSet<net.minecraft.client.model.geom.builders.MeshDefinition> createArmorMeshSet(net.minecraft.client.model.geom.builders.CubeDeformation, net.minecraft.client.model.geom.builders.CubeDeformation);
+    descriptor: (Lnet/minecraft/client/model/geom/builders/CubeDeformation;Lnet/minecraft/client/model/geom/builders/CubeDeformation;)Lnet/minecraft/client/renderer/entity/ArmorModelSet;
+
+  public void setupAnim(net.minecraft.client.renderer.entity.state.AvatarRenderState);
+    descriptor: (Lnet/minecraft/client/renderer/entity/state/AvatarRenderState;)V
+
+  public void setAllVisible(boolean);
+    descriptor: (Z)V
+
+  public void translateToHand(net.minecraft.client.renderer.entity.state.AvatarRenderState, net.minecraft.world.entity.HumanoidArm, com.mojang.blaze3d.vertex.PoseStack);
+    descriptor: (Lnet/minecraft/client/renderer/entity/state/AvatarRenderState;Lnet/minecraft/world/entity/HumanoidArm;Lcom/mojang/blaze3d/vertex/PoseStack;)V
+
+  public net.minecraft.client.model.geom.ModelPart getRandomBodyPart(net.minecraft.util.RandomSource);
+    descriptor: (Lnet/minecraft/util/RandomSource;)Lnet/minecraft/client/model/geom/ModelPart;
+
+  public void setupAnim(net.minecraft.client.renderer.entity.state.HumanoidRenderState);
+    descriptor: (Lnet/minecraft/client/renderer/entity/state/HumanoidRenderState;)V
+
+  public void translateToHand(net.minecraft.client.renderer.entity.state.EntityRenderState, net.minecraft.world.entity.HumanoidArm, com.mojang.blaze3d.vertex.PoseStack);
+    descriptor: (Lnet/minecraft/client/renderer/entity/state/EntityRenderState;Lnet/minecraft/world/entity/HumanoidArm;Lcom/mojang/blaze3d/vertex/PoseStack;)V
+
+  public void setupAnim(java.lang.Object);
+    descriptor: (Ljava/lang/Object;)V
+
+  private static net.minecraft.client.model.geom.builders.MeshDefinition method_72858(net.minecraft.client.model.geom.builders.MeshDefinition);
+    descriptor: (Lnet/minecraft/client/model/geom/builders/MeshDefinition;)Lnet/minecraft/client/model/geom/builders/MeshDefinition;
+}

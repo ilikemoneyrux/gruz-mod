@@ -1,117 +1,303 @@
 Compiled from "LevelRenderer.java"
 public class net.minecraft.client.renderer.LevelRenderer implements java.lang.AutoCloseable {
   public static final int OIT_WAVELET_RANK;
+    descriptor: I
   public static final int OIT_COEFFICIENT_COUNT;
+    descriptor: I
   public static final int OIT_TRANSMITTANCE_TARGET_COUNT;
+    descriptor: I
   private static final net.minecraft.resources.Identifier ENTITY_OUTLINE_POST_CHAIN_ID;
+    descriptor: Lnet/minecraft/resources/Identifier;
   private static final int MINIMUM_TRANSPARENT_SORT_COUNT;
+    descriptor: I
   private static final float CHUNK_VISIBILITY_THRESHOLD;
+    descriptor: F
   private static final org.joml.Vector4fc DEPTH_BOUNDS_CLEAR_COLOR;
+    descriptor: Lorg/joml/Vector4fc;
   private static final org.joml.Vector4fc ZERO_CLEAR_COLOR;
+    descriptor: Lorg/joml/Vector4fc;
   private final net.minecraft.client.renderer.GameRenderer gameRenderer;
+    descriptor: Lnet/minecraft/client/renderer/GameRenderer;
   private final net.minecraft.client.renderer.entity.EntityRenderDispatcher entityRenderDispatcher;
+    descriptor: Lnet/minecraft/client/renderer/entity/EntityRenderDispatcher;
   private final net.minecraft.client.renderer.blockentity.BlockEntityRenderDispatcher blockEntityRenderDispatcher;
+    descriptor: Lnet/minecraft/client/renderer/blockentity/BlockEntityRenderDispatcher;
   private final net.minecraft.client.renderer.RenderBuffers renderBuffers;
+    descriptor: Lnet/minecraft/client/renderer/RenderBuffers;
   private final net.minecraft.client.renderer.feature.FeatureRenderDispatcher featureRenderDispatcher;
+    descriptor: Lnet/minecraft/client/renderer/feature/FeatureRenderDispatcher;
   private final net.minecraft.client.renderer.SubmitNodeStorage submitNodeStorage;
+    descriptor: Lnet/minecraft/client/renderer/SubmitNodeStorage;
   private final net.minecraft.client.resources.model.ModelManager modelManager;
+    descriptor: Lnet/minecraft/client/resources/model/ModelManager;
   private final net.minecraft.client.renderer.texture.TextureManager textureManager;
+    descriptor: Lnet/minecraft/client/renderer/texture/TextureManager;
   private final net.minecraft.client.resources.model.sprite.AtlasManager atlasManager;
+    descriptor: Lnet/minecraft/client/resources/model/sprite/AtlasManager;
   private final net.minecraft.client.renderer.ShaderManager shaderManager;
+    descriptor: Lnet/minecraft/client/renderer/ShaderManager;
   private final net.minecraft.client.renderer.state.level.LevelRenderState levelRenderState;
+    descriptor: Lnet/minecraft/client/renderer/state/level/LevelRenderState;
   private final net.minecraft.client.renderer.state.OptionsRenderState optionsRenderState;
+    descriptor: Lnet/minecraft/client/renderer/state/OptionsRenderState;
   private net.minecraft.client.renderer.SkyRenderer skyRenderer;
+    descriptor: Lnet/minecraft/client/renderer/SkyRenderer;
   private final net.minecraft.client.renderer.CloudRenderer cloudRenderer;
+    descriptor: Lnet/minecraft/client/renderer/CloudRenderer;
   private final net.minecraft.client.renderer.WorldBorderRenderer worldBorderRenderer;
+    descriptor: Lnet/minecraft/client/renderer/WorldBorderRenderer;
   private final net.minecraft.client.renderer.WeatherEffectRenderer weatherEffectRenderer;
+    descriptor: Lnet/minecraft/client/renderer/WeatherEffectRenderer;
   private final net.minecraft.client.renderer.SectionOcclusionGraph sectionOcclusionGraph;
+    descriptor: Lnet/minecraft/client/renderer/SectionOcclusionGraph;
   private final it.unimi.dsi.fastutil.objects.ObjectArrayList<net.minecraft.client.renderer.chunk.SectionRenderDispatcher$RenderSection> visibleSections;
+    descriptor: Lit/unimi/dsi/fastutil/objects/ObjectArrayList;
   private final it.unimi.dsi.fastutil.objects.ObjectArrayList<net.minecraft.client.renderer.chunk.SectionRenderDispatcher$RenderSection> nearbyVisibleSections;
+    descriptor: Lit/unimi/dsi/fastutil/objects/ObjectArrayList;
   private final it.unimi.dsi.fastutil.longs.Long2ObjectLinkedOpenHashMap<net.minecraft.client.renderer.state.level.TransientBlockRenderState> transientBlocks;
+    descriptor: Lit/unimi/dsi/fastutil/longs/Long2ObjectLinkedOpenHashMap;
   private final java.util.concurrent.BlockingQueue<net.minecraft.client.renderer.state.level.TransientBlockRenderState$Removal> transientBlockRemovalQueue;
+    descriptor: Ljava/util/concurrent/BlockingQueue;
   private net.minecraft.client.renderer.ViewArea viewArea;
+    descriptor: Lnet/minecraft/client/renderer/ViewArea;
   private final com.mojang.blaze3d.pipeline.RenderTarget entityOutlineTarget;
+    descriptor: Lcom/mojang/blaze3d/pipeline/RenderTarget;
   private final net.minecraft.client.renderer.LevelTargetBundle targets;
+    descriptor: Lnet/minecraft/client/renderer/LevelTargetBundle;
   private net.minecraft.client.renderer.chunk.SectionRenderDispatcher sectionRenderDispatcher;
+    descriptor: Lnet/minecraft/client/renderer/chunk/SectionRenderDispatcher;
   private net.minecraft.core.BlockPos lastTranslucentSortBlockPos;
+    descriptor: Lnet/minecraft/core/BlockPos;
   private int translucencyResortIterationIndex;
+    descriptor: I
   private com.mojang.renderpearl.api.textures.GpuSampler chunkLayerSampler;
+    descriptor: Lcom/mojang/renderpearl/api/textures/GpuSampler;
   private boolean currentFrameRendersEntityOutline;
+    descriptor: Z
   private final boolean multiDrawIndirectAvailable;
+    descriptor: Z
   private boolean usingMultiDrawIndirectForTerrain;
+    descriptor: Z
   private final net.minecraft.gizmos.SimpleGizmoCollector renderThreadGizmos;
+    descriptor: Lnet/minecraft/gizmos/SimpleGizmoCollector;
   private net.minecraft.client.renderer.LevelRenderer$FinalizedGizmos finalizedGizmos;
+    descriptor: Lnet/minecraft/client/renderer/LevelRenderer$FinalizedGizmos;
   public net.minecraft.client.renderer.LevelRenderer(net.minecraft.client.renderer.entity.EntityRenderDispatcher, net.minecraft.client.renderer.blockentity.BlockEntityRenderDispatcher, net.minecraft.client.resources.model.ModelManager, net.minecraft.client.renderer.texture.TextureManager, net.minecraft.client.resources.model.sprite.AtlasManager, net.minecraft.client.renderer.ShaderManager, net.minecraft.client.renderer.GameRenderer, int, int);
+    descriptor: (Lnet/minecraft/client/renderer/entity/EntityRenderDispatcher;Lnet/minecraft/client/renderer/blockentity/BlockEntityRenderDispatcher;Lnet/minecraft/client/resources/model/ModelManager;Lnet/minecraft/client/renderer/texture/TextureManager;Lnet/minecraft/client/resources/model/sprite/AtlasManager;Lnet/minecraft/client/renderer/ShaderManager;Lnet/minecraft/client/renderer/GameRenderer;II)V
+
   public void render(com.mojang.blaze3d.resource.GraphicsResourceAllocator, boolean, net.minecraft.client.renderer.state.level.CameraRenderState, com.mojang.renderpearl.api.buffers.GpuBufferSlice, org.joml.Vector4f, boolean, boolean);
+    descriptor: (Lcom/mojang/blaze3d/resource/GraphicsResourceAllocator;ZLnet/minecraft/client/renderer/state/level/CameraRenderState;Lcom/mojang/renderpearl/api/buffers/GpuBufferSlice;Lorg/joml/Vector4f;ZZ)V
+
   private void submitFeatures(net.minecraft.client.renderer.state.level.LevelRenderState, net.minecraft.client.renderer.SubmitNodeCollector, boolean);
+    descriptor: (Lnet/minecraft/client/renderer/state/level/LevelRenderState;Lnet/minecraft/client/renderer/SubmitNodeCollector;Z)V
+
   private void repositionCamera(net.minecraft.client.renderer.state.level.CameraRenderState);
+    descriptor: (Lnet/minecraft/client/renderer/state/level/CameraRenderState;)V
+
   private void addSkyPass(com.mojang.blaze3d.framegraph.FrameGraphBuilder, net.minecraft.client.renderer.state.level.CameraRenderState, com.mojang.renderpearl.api.buffers.GpuBufferSlice);
+    descriptor: (Lcom/mojang/blaze3d/framegraph/FrameGraphBuilder;Lnet/minecraft/client/renderer/state/level/CameraRenderState;Lcom/mojang/renderpearl/api/buffers/GpuBufferSlice;)V
+
   private void addMainPass(com.mojang.blaze3d.framegraph.FrameGraphBuilder, net.minecraft.client.renderer.feature.FeatureRenderDispatcher$PreparedFrame, com.mojang.renderpearl.api.buffers.GpuBufferSlice, net.minecraft.client.renderer.chunk.ChunkSectionsToRender, boolean);
+    descriptor: (Lcom/mojang/blaze3d/framegraph/FrameGraphBuilder;Lnet/minecraft/client/renderer/feature/FeatureRenderDispatcher$PreparedFrame;Lcom/mojang/renderpearl/api/buffers/GpuBufferSlice;Lnet/minecraft/client/renderer/chunk/ChunkSectionsToRender;Z)V
+
   private void executeSeeThrough(net.minecraft.client.renderer.feature.FeatureRenderDispatcher$PreparedFrame, com.mojang.blaze3d.pipeline.RenderTarget);
+    descriptor: (Lnet/minecraft/client/renderer/feature/FeatureRenderDispatcher$PreparedFrame;Lcom/mojang/blaze3d/pipeline/RenderTarget;)V
+
   private void executeAlwaysOnTop(net.minecraft.client.renderer.feature.FeatureRenderDispatcher$PreparedFrame, com.mojang.blaze3d.pipeline.RenderTarget, boolean);
+    descriptor: (Lnet/minecraft/client/renderer/feature/FeatureRenderDispatcher$PreparedFrame;Lcom/mojang/blaze3d/pipeline/RenderTarget;Z)V
+
   private boolean frameHasAlwaysOnTopGizmos();
+    descriptor: ()Z
+
   private void executeSolid(net.minecraft.client.renderer.chunk.ChunkSectionsToRender, net.minecraft.client.renderer.feature.FeatureRenderDispatcher$PreparedFrame, com.mojang.renderpearl.api.commands.RenderPass);
+    descriptor: (Lnet/minecraft/client/renderer/chunk/ChunkSectionsToRender;Lnet/minecraft/client/renderer/feature/FeatureRenderDispatcher$PreparedFrame;Lcom/mojang/renderpearl/api/commands/RenderPass;)V
+
   private void prepareTranslucents();
+    descriptor: ()V
+
   private void executeOit(net.minecraft.client.renderer.chunk.ChunkSectionsToRender, net.minecraft.client.renderer.feature.FeatureRenderDispatcher$PreparedFrame);
+    descriptor: (Lnet/minecraft/client/renderer/chunk/ChunkSectionsToRender;Lnet/minecraft/client/renderer/feature/FeatureRenderDispatcher$PreparedFrame;)V
+
   private void executeDepthBoundsCull();
+    descriptor: ()V
+
   private void executeOitWaterMask(net.minecraft.client.renderer.feature.FeatureRenderDispatcher$PreparedFrame, com.mojang.blaze3d.pipeline.RenderTarget);
+    descriptor: (Lnet/minecraft/client/renderer/feature/FeatureRenderDispatcher$PreparedFrame;Lcom/mojang/blaze3d/pipeline/RenderTarget;)V
+
   private void executeClassicTransparency(net.minecraft.client.renderer.chunk.ChunkSectionsToRender, net.minecraft.client.renderer.feature.FeatureRenderDispatcher$PreparedFrame, com.mojang.renderpearl.api.commands.RenderPass);
+    descriptor: (Lnet/minecraft/client/renderer/chunk/ChunkSectionsToRender;Lnet/minecraft/client/renderer/feature/FeatureRenderDispatcher$PreparedFrame;Lcom/mojang/renderpearl/api/commands/RenderPass;)V
+
   private void executeOutline(net.minecraft.client.renderer.feature.FeatureRenderDispatcher$PreparedFrame);
+    descriptor: (Lnet/minecraft/client/renderer/feature/FeatureRenderDispatcher$PreparedFrame;)V
+
   private int extractSectionDrawGroups(boolean, java.util.List<net.minecraft.client.renderer.DynamicGpuData$ChunkSectionInfo>, java.util.Map<net.minecraft.client.renderer.chunk.ChunkSectionLayer, java.util.List<net.minecraft.client.renderer.LevelRenderer$ChunkDrawGroup>>);
+    descriptor: (ZLjava/util/List;Ljava/util/Map;)I
+
   public net.minecraft.client.renderer.chunk.ChunkSectionsToRender prepareChunkRenders(org.joml.Matrix4fc, boolean);
+    descriptor: (Lorg/joml/Matrix4fc;Z)Lnet/minecraft/client/renderer/chunk/ChunkSectionsToRender;
+
   public void addTransientBlock(long, net.minecraft.client.renderer.state.level.TransientBlockRenderState);
+    descriptor: (JLnet/minecraft/client/renderer/state/level/TransientBlockRenderState;)V
+
   public void removeTransientBlocksInSection(long, long);
+    descriptor: (JJ)V
+
   private void performTransientBlockRemovals();
+    descriptor: ()V
+
   public net.minecraft.client.renderer.chunk.ChunkSectionsToRender prepareChunkRendersIndirect(org.joml.Matrix4fc, boolean);
+    descriptor: (Lorg/joml/Matrix4fc;Z)Lnet/minecraft/client/renderer/chunk/ChunkSectionsToRender;
+
   private void compileSections(net.minecraft.client.renderer.state.level.CameraRenderState);
+    descriptor: (Lnet/minecraft/client/renderer/state/level/CameraRenderState;)V
+
   private void checkPoseStack(com.mojang.blaze3d.vertex.PoseStack);
+    descriptor: (Lcom/mojang/blaze3d/vertex/PoseStack;)V
+
   private void submitEntities(com.mojang.blaze3d.vertex.PoseStack, net.minecraft.client.renderer.state.level.LevelRenderState, net.minecraft.client.renderer.SubmitNodeCollector);
+    descriptor: (Lcom/mojang/blaze3d/vertex/PoseStack;Lnet/minecraft/client/renderer/state/level/LevelRenderState;Lnet/minecraft/client/renderer/SubmitNodeCollector;)V
+
   private void submitBlockEntities(com.mojang.blaze3d.vertex.PoseStack, net.minecraft.client.renderer.state.level.LevelRenderState, net.minecraft.client.renderer.SubmitNodeCollector);
+    descriptor: (Lcom/mojang/blaze3d/vertex/PoseStack;Lnet/minecraft/client/renderer/state/level/LevelRenderState;Lnet/minecraft/client/renderer/SubmitNodeCollector;)V
+
   private void submitBlockDestroyAnimation(com.mojang.blaze3d.vertex.PoseStack, net.minecraft.client.renderer.SubmitNodeCollector, net.minecraft.client.renderer.state.level.LevelRenderState);
+    descriptor: (Lcom/mojang/blaze3d/vertex/PoseStack;Lnet/minecraft/client/renderer/SubmitNodeCollector;Lnet/minecraft/client/renderer/state/level/LevelRenderState;)V
+
   private void submitTransientBlocks(com.mojang.blaze3d.vertex.PoseStack, net.minecraft.client.renderer.SubmitNodeCollector, net.minecraft.client.renderer.state.level.LevelRenderState);
+    descriptor: (Lcom/mojang/blaze3d/vertex/PoseStack;Lnet/minecraft/client/renderer/SubmitNodeCollector;Lnet/minecraft/client/renderer/state/level/LevelRenderState;)V
+
   private void submitBlockOutline(com.mojang.blaze3d.vertex.PoseStack, net.minecraft.client.renderer.SubmitNodeCollector, net.minecraft.client.renderer.state.level.LevelRenderState);
+    descriptor: (Lcom/mojang/blaze3d/vertex/PoseStack;Lnet/minecraft/client/renderer/SubmitNodeCollector;Lnet/minecraft/client/renderer/state/level/LevelRenderState;)V
+
   private void submitHitOutline(com.mojang.blaze3d.vertex.PoseStack, net.minecraft.client.renderer.SubmitNodeCollector, net.minecraft.client.renderer.rendertype.RenderType, net.minecraft.client.renderer.state.level.BlockOutlineRenderState, int, float, boolean);
+    descriptor: (Lcom/mojang/blaze3d/vertex/PoseStack;Lnet/minecraft/client/renderer/SubmitNodeCollector;Lnet/minecraft/client/renderer/rendertype/RenderType;Lnet/minecraft/client/renderer/state/level/BlockOutlineRenderState;IFZ)V
+
   public void resize(int, int);
+    descriptor: (II)V
+
   public void endFrame();
+    descriptor: ()V
+
   public void close();
+    descriptor: ()V
+
   public void blitEntityOutline();
+    descriptor: ()V
+
   public void invalidateCompiledGeometry(net.minecraft.client.multiplayer.ClientLevel, net.minecraft.client.Options, net.minecraft.client.Camera, net.minecraft.client.color.block.BlockColors);
+    descriptor: (Lnet/minecraft/client/multiplayer/ClientLevel;Lnet/minecraft/client/Options;Lnet/minecraft/client/Camera;Lnet/minecraft/client/color/block/BlockColors;)V
+
   private void scheduleTranslucentSectionResort(net.minecraft.world.phys.Vec3);
+    descriptor: (Lnet/minecraft/world/phys/Vec3;)V
+
   private void scheduleResort(net.minecraft.client.renderer.chunk.SectionRenderDispatcher$RenderSection, net.minecraft.client.renderer.chunk.TranslucencyPointOfView, net.minecraft.world.phys.Vec3, boolean, boolean);
+    descriptor: (Lnet/minecraft/client/renderer/chunk/SectionRenderDispatcher$RenderSection;Lnet/minecraft/client/renderer/chunk/TranslucencyPointOfView;Lnet/minecraft/world/phys/Vec3;ZZ)V
+
   public void clearVisibleSections();
+    descriptor: ()V
+
   public void resetLevelRenderData();
+    descriptor: ()V
+
   public boolean hasRenderedAllSections();
+    descriptor: ()Z
+
   public boolean isSectionCompiledAndVisible(net.minecraft.core.BlockPos, long);
+    descriptor: (Lnet/minecraft/core/BlockPos;J)Z
+
   public net.minecraft.client.renderer.chunk.SectionRenderDispatcher sectionRenderDispatcher();
+    descriptor: ()Lnet/minecraft/client/renderer/chunk/SectionRenderDispatcher;
+
   public net.minecraft.client.renderer.entity.EntityRenderDispatcher entityRenderDispatcher();
+    descriptor: ()Lnet/minecraft/client/renderer/entity/EntityRenderDispatcher;
+
   public net.minecraft.client.renderer.blockentity.BlockEntityRenderDispatcher blockEntityRenderDispatcher();
+    descriptor: ()Lnet/minecraft/client/renderer/blockentity/BlockEntityRenderDispatcher;
+
   public net.minecraft.client.renderer.CloudRenderer cloudRenderer();
+    descriptor: ()Lnet/minecraft/client/renderer/CloudRenderer;
+
   public net.minecraft.client.renderer.SkyRenderer skyRenderer();
+    descriptor: ()Lnet/minecraft/client/renderer/SkyRenderer;
+
   public net.minecraft.client.renderer.WeatherEffectRenderer weatherEffectRenderer();
+    descriptor: ()Lnet/minecraft/client/renderer/WeatherEffectRenderer;
+
   public net.minecraft.client.renderer.WorldBorderRenderer worldBorderRenderer();
+    descriptor: ()Lnet/minecraft/client/renderer/WorldBorderRenderer;
+
   public net.minecraft.client.renderer.ViewArea viewArea();
+    descriptor: ()Lnet/minecraft/client/renderer/ViewArea;
+
   public it.unimi.dsi.fastutil.objects.ObjectArrayList<net.minecraft.client.renderer.chunk.SectionRenderDispatcher$RenderSection> visibleSections();
+    descriptor: ()Lit/unimi/dsi/fastutil/objects/ObjectArrayList;
+
   public it.unimi.dsi.fastutil.objects.ObjectArrayList<net.minecraft.client.renderer.chunk.SectionRenderDispatcher$RenderSection> nearbyVisibleSections();
+    descriptor: ()Lit/unimi/dsi/fastutil/objects/ObjectArrayList;
+
   public it.unimi.dsi.fastutil.longs.LongCollection expectedChunks();
+    descriptor: ()Lit/unimi/dsi/fastutil/longs/LongCollection;
+
   public net.minecraft.client.renderer.SectionOcclusionGraph sectionOcclusionGraph();
+    descriptor: ()Lnet/minecraft/client/renderer/SectionOcclusionGraph;
+
   public net.minecraft.gizmos.Gizmos$TemporaryCollection collectPerFrameRenderThreadGizmos();
+    descriptor: ()Lnet/minecraft/gizmos/Gizmos$TemporaryCollection;
+
   public boolean isChunkRenderingUsingMultiDrawIndirect();
+    descriptor: ()Z
+
   private void finalizeGizmoCollection();
+    descriptor: ()V
+
   public void addMainThreadGizmos(java.util.List<net.minecraft.gizmos.SimpleGizmoCollector$GizmoInstance>);
+    descriptor: (Ljava/util/List;)V
+
   private static void lambda$prepareChunkRenders$2(int, com.mojang.renderpearl.api.buffers.GpuBufferSlice[], com.mojang.renderpearl.api.commands.RenderPass$UniformUploader);
+    descriptor: (I[Lcom/mojang/renderpearl/api/buffers/GpuBufferSlice;Lcom/mojang/renderpearl/api/commands/RenderPass$UniformUploader;)V
+
   private static java.util.List lambda$prepareChunkRenders$1(net.minecraft.client.renderer.chunk.ChunkSectionLayer);
+    descriptor: (Lnet/minecraft/client/renderer/chunk/ChunkSectionLayer;)Ljava/util/List;
+
   private static java.util.List lambda$prepareChunkRenders$0(net.minecraft.client.renderer.chunk.ChunkSectionLayer);
+    descriptor: (Lnet/minecraft/client/renderer/chunk/ChunkSectionLayer;)Ljava/util/List;
+
   private static java.lang.String lambda$executeOutline$0();
+    descriptor: ()Ljava/lang/String;
+
   private static java.lang.String lambda$executeOitWaterMask$0();
+    descriptor: ()Ljava/lang/String;
+
   private static java.lang.String lambda$executeDepthBoundsCull$0();
+    descriptor: ()Ljava/lang/String;
+
   private static java.lang.String lambda$executeOit$1();
+    descriptor: ()Ljava/lang/String;
+
   private static java.lang.String lambda$executeOit$0();
+    descriptor: ()Ljava/lang/String;
+
   private static java.lang.String lambda$executeAlwaysOnTop$1();
+    descriptor: ()Ljava/lang/String;
+
   private static java.lang.String lambda$executeAlwaysOnTop$0();
+    descriptor: ()Ljava/lang/String;
+
   private static java.lang.String lambda$executeSeeThrough$0();
+    descriptor: ()Ljava/lang/String;
+
   private void lambda$addMainPass$0(com.mojang.renderpearl.api.buffers.GpuBufferSlice, boolean, net.minecraft.client.renderer.chunk.ChunkSectionsToRender, net.minecraft.client.renderer.feature.FeatureRenderDispatcher$PreparedFrame, boolean, boolean);
+    descriptor: (Lcom/mojang/renderpearl/api/buffers/GpuBufferSlice;ZLnet/minecraft/client/renderer/chunk/ChunkSectionsToRender;Lnet/minecraft/client/renderer/feature/FeatureRenderDispatcher$PreparedFrame;ZZ)V
+
   private static java.lang.String lambda$addMainPass$1(boolean);
+    descriptor: (Z)Ljava/lang/String;
+
   private void lambda$addSkyPass$0(com.mojang.renderpearl.api.buffers.GpuBufferSlice, net.minecraft.client.renderer.state.level.SkyRenderState);
+    descriptor: (Lcom/mojang/renderpearl/api/buffers/GpuBufferSlice;Lnet/minecraft/client/renderer/state/level/SkyRenderState;)V
+
   private void lambda$render$0(org.joml.Vector4f);
+    descriptor: (Lorg/joml/Vector4f;)V
+
   static {};
+    descriptor: ()V
 }

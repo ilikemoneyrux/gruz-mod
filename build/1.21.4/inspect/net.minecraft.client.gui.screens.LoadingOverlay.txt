@@ -1,32 +1,70 @@
 Compiled from "LoadingOverlay.java"
 public class net.minecraft.client.gui.screens.LoadingOverlay extends net.minecraft.client.gui.screens.Overlay {
   public static final net.minecraft.resources.ResourceLocation MOJANG_STUDIOS_LOGO_LOCATION;
+    descriptor: Lnet/minecraft/resources/ResourceLocation;
   private static final int LOGO_BACKGROUND_COLOR;
+    descriptor: I
   private static final int LOGO_BACKGROUND_COLOR_DARK;
+    descriptor: I
   private static final java.util.function.IntSupplier BRAND_BACKGROUND;
+    descriptor: Ljava/util/function/IntSupplier;
   private static final int LOGO_SCALE;
+    descriptor: I
   private static final float LOGO_QUARTER_FLOAT;
+    descriptor: F
   private static final int LOGO_QUARTER;
+    descriptor: I
   private static final int LOGO_HALF;
+    descriptor: I
   private static final float LOGO_OVERLAP;
+    descriptor: F
   private static final float SMOOTHING;
+    descriptor: F
   public static final long FADE_OUT_TIME;
+    descriptor: J
   public static final long FADE_IN_TIME;
+    descriptor: J
   private final net.minecraft.client.Minecraft minecraft;
+    descriptor: Lnet/minecraft/client/Minecraft;
   private final net.minecraft.server.packs.resources.ReloadInstance reload;
+    descriptor: Lnet/minecraft/server/packs/resources/ReloadInstance;
   private final java.util.function.Consumer<java.util.Optional<java.lang.Throwable>> onFinish;
+    descriptor: Ljava/util/function/Consumer;
   private final boolean fadeIn;
+    descriptor: Z
   private float currentProgress;
+    descriptor: F
   private long fadeOutStart;
+    descriptor: J
   private long fadeInStart;
+    descriptor: J
   public net.minecraft.client.gui.screens.LoadingOverlay(net.minecraft.client.Minecraft, net.minecraft.server.packs.resources.ReloadInstance, java.util.function.Consumer<java.util.Optional<java.lang.Throwable>>, boolean);
+    descriptor: (Lnet/minecraft/client/Minecraft;Lnet/minecraft/server/packs/resources/ReloadInstance;Ljava/util/function/Consumer;Z)V
+
   public static void registerTextures(net.minecraft.client.renderer.texture.TextureManager);
+    descriptor: (Lnet/minecraft/client/renderer/texture/TextureManager;)V
+
   private static int replaceAlpha(int, int);
+    descriptor: (II)I
+
   public void render(net.minecraft.client.gui.GuiGraphics, int, int, float);
+    descriptor: (Lnet/minecraft/client/gui/GuiGraphics;IIF)V
+
   private void drawProgressBar(net.minecraft.client.gui.GuiGraphics, int, int, int, int, float);
+    descriptor: (Lnet/minecraft/client/gui/GuiGraphics;IIIIF)V
+
   public boolean isPauseScreen();
+    descriptor: ()Z
+
   private static net.minecraft.client.renderer.RenderType method_61996(net.minecraft.resources.ResourceLocation);
+    descriptor: (Lnet/minecraft/resources/ResourceLocation;)Lnet/minecraft/client/renderer/RenderType;
+
   private static net.minecraft.client.renderer.RenderType method_61997(net.minecraft.resources.ResourceLocation);
+    descriptor: (Lnet/minecraft/resources/ResourceLocation;)Lnet/minecraft/client/renderer/RenderType;
+
   private static int method_35733();
+    descriptor: ()I
+
   static {};
+    descriptor: ()V
 }

@@ -1,0 +1,136 @@
+Compiled from "PauseScreen.java"
+public class net.minecraft.client.gui.screens.PauseScreen extends net.minecraft.client.gui.screens.Screen {
+  private static final net.minecraft.resources.Identifier DRAFT_REPORT_SPRITE;
+    descriptor: Lnet/minecraft/resources/Identifier;
+  private static final int COLUMNS;
+    descriptor: I
+  private static final int MENU_PADDING_TOP;
+    descriptor: I
+  private static final int BUTTON_PADDING;
+    descriptor: I
+  private static final int BUTTON_WIDTH_FULL;
+    descriptor: I
+  private static final int BUTTON_WIDTH_HALF;
+    descriptor: I
+  private static final net.minecraft.network.chat.Component RETURN_TO_GAME;
+    descriptor: Lnet/minecraft/network/chat/Component;
+  private static final net.minecraft.network.chat.Component ADVANCEMENTS;
+    descriptor: Lnet/minecraft/network/chat/Component;
+  private static final net.minecraft.network.chat.Component STATS;
+    descriptor: Lnet/minecraft/network/chat/Component;
+  private static final net.minecraft.network.chat.Component SEND_FEEDBACK;
+    descriptor: Lnet/minecraft/network/chat/Component;
+  private static final net.minecraft.network.chat.Component REPORT_BUGS;
+    descriptor: Lnet/minecraft/network/chat/Component;
+  private static final net.minecraft.network.chat.Component OPTIONS;
+    descriptor: Lnet/minecraft/network/chat/Component;
+  private static final net.minecraft.network.chat.Component MULTIPLAYER_OPTIONS;
+    descriptor: Lnet/minecraft/network/chat/Component;
+  private static final net.minecraft.network.chat.Component PLAYER_REPORTING;
+    descriptor: Lnet/minecraft/network/chat/Component;
+  private static final net.minecraft.network.chat.Component GAME;
+    descriptor: Lnet/minecraft/network/chat/Component;
+  private static final net.minecraft.network.chat.Component PAUSED;
+    descriptor: Lnet/minecraft/network/chat/Component;
+  private static final net.minecraft.client.gui.components.Tooltip CUSTOM_OPTIONS_TOOLTIP;
+    descriptor: Lnet/minecraft/client/gui/components/Tooltip;
+  private static final net.minecraft.client.gui.components.Tooltip NO_PLAYERS_TO_REPORT_TOOLTIP;
+    descriptor: Lnet/minecraft/client/gui/components/Tooltip;
+  private final java.lang.Runnable friendListUpdateListener;
+    descriptor: Ljava/lang/Runnable;
+  private net.minecraft.client.gui.components.FriendsButton friends;
+    descriptor: Lnet/minecraft/client/gui/components/FriendsButton;
+  private final boolean showPauseMenu;
+    descriptor: Z
+  private net.minecraft.client.gui.components.Button disconnectButton;
+    descriptor: Lnet/minecraft/client/gui/components/Button;
+  public net.minecraft.client.gui.screens.PauseScreen(boolean);
+    descriptor: (Z)V
+
+  public boolean showsPauseMenu();
+    descriptor: ()Z
+
+  protected void init();
+    descriptor: ()V
+
+  private void createPauseMenu();
+    descriptor: ()V
+
+  private java.util.Optional<? extends net.minecraft.core.Holder<net.minecraft.server.dialog.Dialog>> getCustomAdditions();
+    descriptor: ()Ljava/util/Optional;
+
+  private void addCustomDialogButtons(net.minecraft.client.Minecraft, net.minecraft.core.Holder<net.minecraft.server.dialog.Dialog>, net.minecraft.client.gui.layouts.GridLayout$RowHelper);
+    descriptor: (Lnet/minecraft/client/Minecraft;Lnet/minecraft/core/Holder;Lnet/minecraft/client/gui/layouts/GridLayout$RowHelper;)V
+
+  public void tick();
+    descriptor: ()V
+
+  public void extractRenderState(net.minecraft.client.gui.GuiGraphicsExtractor, int, int, float);
+    descriptor: (Lnet/minecraft/client/gui/GuiGraphicsExtractor;IIF)V
+
+  public void extractBackground(net.minecraft.client.gui.GuiGraphicsExtractor, int, int, float);
+    descriptor: (Lnet/minecraft/client/gui/GuiGraphicsExtractor;IIF)V
+
+  public void onClose();
+    descriptor: ()V
+
+  public boolean rendersNowPlayingToast();
+    descriptor: ()Z
+
+  private boolean isTopmostScreen();
+    descriptor: ()Z
+
+  private net.minecraft.client.gui.components.Button openScreenButton(net.minecraft.network.chat.Component, java.util.function.Supplier<net.minecraft.client.gui.screens.Screen>);
+    descriptor: (Lnet/minecraft/network/chat/Component;Ljava/util/function/Supplier;)Lnet/minecraft/client/gui/components/Button;
+
+  private void onFriendListUpdate();
+    descriptor: ()V
+
+  private void lambda$openScreenButton$0(java.util.function.Supplier, net.minecraft.client.gui.components.Button);
+    descriptor: (Ljava/util/function/Supplier;Lnet/minecraft/client/gui/components/Button;)V
+
+  private void lambda$addCustomDialogButtons$0(net.minecraft.client.Minecraft, net.minecraft.core.Holder, net.minecraft.client.gui.components.Button);
+    descriptor: (Lnet/minecraft/client/Minecraft;Lnet/minecraft/core/Holder;Lnet/minecraft/client/gui/components/Button;)V
+
+  private void lambda$createPauseMenu$11(net.minecraft.client.gui.components.Button);
+    descriptor: (Lnet/minecraft/client/gui/components/Button;)V
+
+  private void lambda$createPauseMenu$12();
+    descriptor: ()V
+
+  private void lambda$createPauseMenu$10(net.minecraft.client.gui.components.Button);
+    descriptor: (Lnet/minecraft/client/gui/components/Button;)V
+
+  private net.minecraft.client.gui.screens.Screen lambda$createPauseMenu$9();
+    descriptor: ()Lnet/minecraft/client/gui/screens/Screen;
+
+  private net.minecraft.client.gui.screens.Screen lambda$createPauseMenu$8();
+    descriptor: ()Lnet/minecraft/client/gui/screens/Screen;
+
+  private void lambda$createPauseMenu$7(net.minecraft.client.gui.layouts.GridLayout$RowHelper, net.minecraft.core.Holder);
+    descriptor: (Lnet/minecraft/client/gui/layouts/GridLayout$RowHelper;Lnet/minecraft/core/Holder;)V
+
+  private boolean lambda$createPauseMenu$6(java.util.Map$Entry);
+    descriptor: (Ljava/util/Map$Entry;)Z
+
+  private void lambda$createPauseMenu$5(net.minecraft.client.gui.components.Button);
+    descriptor: (Lnet/minecraft/client/gui/components/Button;)V
+
+  private void lambda$createPauseMenu$3(net.minecraft.client.gui.components.Button);
+    descriptor: (Lnet/minecraft/client/gui/components/Button;)V
+
+  private void lambda$createPauseMenu$4();
+    descriptor: ()V
+
+  private net.minecraft.client.gui.screens.Screen lambda$createPauseMenu$2();
+    descriptor: ()Lnet/minecraft/client/gui/screens/Screen;
+
+  private net.minecraft.client.gui.screens.Screen lambda$createPauseMenu$1();
+    descriptor: ()Lnet/minecraft/client/gui/screens/Screen;
+
+  private void lambda$createPauseMenu$0(net.minecraft.client.gui.components.Button);
+    descriptor: (Lnet/minecraft/client/gui/components/Button;)V
+
+  static {};
+    descriptor: ()V
+}

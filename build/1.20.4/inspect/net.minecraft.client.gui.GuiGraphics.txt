@@ -1,90 +1,254 @@
 Compiled from "GuiGraphics.java"
 public class net.minecraft.client.gui.GuiGraphics {
   public static final float MAX_GUI_Z;
+    descriptor: F
   public static final float MIN_GUI_Z;
+    descriptor: F
   private static final int EXTRA_SPACE_AFTER_FIRST_TOOLTIP_LINE;
+    descriptor: I
   private final net.minecraft.client.Minecraft minecraft;
+    descriptor: Lnet/minecraft/client/Minecraft;
   private final com.mojang.blaze3d.vertex.PoseStack pose;
+    descriptor: Lcom/mojang/blaze3d/vertex/PoseStack;
   private final net.minecraft.client.renderer.MultiBufferSource$BufferSource bufferSource;
+    descriptor: Lnet/minecraft/client/renderer/MultiBufferSource$BufferSource;
   private final net.minecraft.client.gui.GuiGraphics$ScissorStack scissorStack;
+    descriptor: Lnet/minecraft/client/gui/GuiGraphics$ScissorStack;
   private final net.minecraft.client.gui.GuiSpriteManager sprites;
+    descriptor: Lnet/minecraft/client/gui/GuiSpriteManager;
   private boolean managed;
+    descriptor: Z
   private net.minecraft.client.gui.GuiGraphics(net.minecraft.client.Minecraft, com.mojang.blaze3d.vertex.PoseStack, net.minecraft.client.renderer.MultiBufferSource$BufferSource);
+    descriptor: (Lnet/minecraft/client/Minecraft;Lcom/mojang/blaze3d/vertex/PoseStack;Lnet/minecraft/client/renderer/MultiBufferSource$BufferSource;)V
+
   public net.minecraft.client.gui.GuiGraphics(net.minecraft.client.Minecraft, net.minecraft.client.renderer.MultiBufferSource$BufferSource);
+    descriptor: (Lnet/minecraft/client/Minecraft;Lnet/minecraft/client/renderer/MultiBufferSource$BufferSource;)V
+
   public void drawManaged(java.lang.Runnable);
+    descriptor: (Ljava/lang/Runnable;)V
+
   private void flushIfUnmanaged();
+    descriptor: ()V
+
   private void flushIfManaged();
+    descriptor: ()V
+
   public int guiWidth();
+    descriptor: ()I
+
   public int guiHeight();
+    descriptor: ()I
+
   public com.mojang.blaze3d.vertex.PoseStack pose();
+    descriptor: ()Lcom/mojang/blaze3d/vertex/PoseStack;
+
   public net.minecraft.client.renderer.MultiBufferSource$BufferSource bufferSource();
+    descriptor: ()Lnet/minecraft/client/renderer/MultiBufferSource$BufferSource;
+
   public void flush();
+    descriptor: ()V
+
   public void hLine(int, int, int, int);
+    descriptor: (IIII)V
+
   public void hLine(net.minecraft.client.renderer.RenderType, int, int, int, int);
+    descriptor: (Lnet/minecraft/client/renderer/RenderType;IIII)V
+
   public void vLine(int, int, int, int);
+    descriptor: (IIII)V
+
   public void vLine(net.minecraft.client.renderer.RenderType, int, int, int, int);
+    descriptor: (Lnet/minecraft/client/renderer/RenderType;IIII)V
+
   public void enableScissor(int, int, int, int);
+    descriptor: (IIII)V
+
   public void disableScissor();
+    descriptor: ()V
+
   private void applyScissor(net.minecraft.client.gui.navigation.ScreenRectangle);
+    descriptor: (Lnet/minecraft/client/gui/navigation/ScreenRectangle;)V
+
   public void setColor(float, float, float, float);
+    descriptor: (FFFF)V
+
   public void fill(int, int, int, int, int);
+    descriptor: (IIIII)V
+
   public void fill(int, int, int, int, int, int);
+    descriptor: (IIIIII)V
+
   public void fill(net.minecraft.client.renderer.RenderType, int, int, int, int, int);
+    descriptor: (Lnet/minecraft/client/renderer/RenderType;IIIII)V
+
   public void fill(net.minecraft.client.renderer.RenderType, int, int, int, int, int, int);
+    descriptor: (Lnet/minecraft/client/renderer/RenderType;IIIIII)V
+
   public void fillGradient(int, int, int, int, int, int);
+    descriptor: (IIIIII)V
+
   public void fillGradient(int, int, int, int, int, int, int);
+    descriptor: (IIIIIII)V
+
   public void fillGradient(net.minecraft.client.renderer.RenderType, int, int, int, int, int, int, int);
+    descriptor: (Lnet/minecraft/client/renderer/RenderType;IIIIIII)V
+
   private void fillGradient(com.mojang.blaze3d.vertex.VertexConsumer, int, int, int, int, int, int, int);
+    descriptor: (Lcom/mojang/blaze3d/vertex/VertexConsumer;IIIIIII)V
+
   public void drawCenteredString(net.minecraft.client.gui.Font, java.lang.String, int, int, int);
+    descriptor: (Lnet/minecraft/client/gui/Font;Ljava/lang/String;III)V
+
   public void drawCenteredString(net.minecraft.client.gui.Font, net.minecraft.network.chat.Component, int, int, int);
+    descriptor: (Lnet/minecraft/client/gui/Font;Lnet/minecraft/network/chat/Component;III)V
+
   public void drawCenteredString(net.minecraft.client.gui.Font, net.minecraft.util.FormattedCharSequence, int, int, int);
+    descriptor: (Lnet/minecraft/client/gui/Font;Lnet/minecraft/util/FormattedCharSequence;III)V
+
   public int drawString(net.minecraft.client.gui.Font, java.lang.String, int, int, int);
+    descriptor: (Lnet/minecraft/client/gui/Font;Ljava/lang/String;III)I
+
   public int drawString(net.minecraft.client.gui.Font, java.lang.String, int, int, int, boolean);
+    descriptor: (Lnet/minecraft/client/gui/Font;Ljava/lang/String;IIIZ)I
+
   public int drawString(net.minecraft.client.gui.Font, net.minecraft.util.FormattedCharSequence, int, int, int);
+    descriptor: (Lnet/minecraft/client/gui/Font;Lnet/minecraft/util/FormattedCharSequence;III)I
+
   public int drawString(net.minecraft.client.gui.Font, net.minecraft.util.FormattedCharSequence, int, int, int, boolean);
+    descriptor: (Lnet/minecraft/client/gui/Font;Lnet/minecraft/util/FormattedCharSequence;IIIZ)I
+
   public int drawString(net.minecraft.client.gui.Font, net.minecraft.network.chat.Component, int, int, int);
+    descriptor: (Lnet/minecraft/client/gui/Font;Lnet/minecraft/network/chat/Component;III)I
+
   public int drawString(net.minecraft.client.gui.Font, net.minecraft.network.chat.Component, int, int, int, boolean);
+    descriptor: (Lnet/minecraft/client/gui/Font;Lnet/minecraft/network/chat/Component;IIIZ)I
+
   public void drawWordWrap(net.minecraft.client.gui.Font, net.minecraft.network.chat.FormattedText, int, int, int, int);
+    descriptor: (Lnet/minecraft/client/gui/Font;Lnet/minecraft/network/chat/FormattedText;IIII)V
+
   public void blit(int, int, int, int, int, net.minecraft.client.renderer.texture.TextureAtlasSprite);
+    descriptor: (IIIIILnet/minecraft/client/renderer/texture/TextureAtlasSprite;)V
+
   public void blit(int, int, int, int, int, net.minecraft.client.renderer.texture.TextureAtlasSprite, float, float, float, float);
+    descriptor: (IIIIILnet/minecraft/client/renderer/texture/TextureAtlasSprite;FFFF)V
+
   public void renderOutline(int, int, int, int, int);
+    descriptor: (IIIII)V
+
   public void blitSprite(net.minecraft.resources.ResourceLocation, int, int, int, int);
+    descriptor: (Lnet/minecraft/resources/ResourceLocation;IIII)V
+
   public void blitSprite(net.minecraft.resources.ResourceLocation, int, int, int, int, int);
+    descriptor: (Lnet/minecraft/resources/ResourceLocation;IIIII)V
+
   public void blitSprite(net.minecraft.resources.ResourceLocation, int, int, int, int, int, int, int, int);
+    descriptor: (Lnet/minecraft/resources/ResourceLocation;IIIIIIII)V
+
   public void blitSprite(net.minecraft.resources.ResourceLocation, int, int, int, int, int, int, int, int, int);
+    descriptor: (Lnet/minecraft/resources/ResourceLocation;IIIIIIIII)V
+
   private void blitSprite(net.minecraft.client.renderer.texture.TextureAtlasSprite, int, int, int, int, int, int, int, int, int);
+    descriptor: (Lnet/minecraft/client/renderer/texture/TextureAtlasSprite;IIIIIIIII)V
+
   private void blitSprite(net.minecraft.client.renderer.texture.TextureAtlasSprite, int, int, int, int, int);
+    descriptor: (Lnet/minecraft/client/renderer/texture/TextureAtlasSprite;IIIII)V
+
   public void blit(net.minecraft.resources.ResourceLocation, int, int, int, int, int, int);
+    descriptor: (Lnet/minecraft/resources/ResourceLocation;IIIIII)V
+
   public void blit(net.minecraft.resources.ResourceLocation, int, int, int, float, float, int, int, int, int);
+    descriptor: (Lnet/minecraft/resources/ResourceLocation;IIIFFIIII)V
+
   public void blit(net.minecraft.resources.ResourceLocation, int, int, int, int, float, float, int, int, int, int);
+    descriptor: (Lnet/minecraft/resources/ResourceLocation;IIIIFFIIII)V
+
   public void blit(net.minecraft.resources.ResourceLocation, int, int, float, float, int, int, int, int);
+    descriptor: (Lnet/minecraft/resources/ResourceLocation;IIFFIIII)V
+
   void blit(net.minecraft.resources.ResourceLocation, int, int, int, int, int, int, int, float, float, int, int);
+    descriptor: (Lnet/minecraft/resources/ResourceLocation;IIIIIIIFFII)V
+
   void innerBlit(net.minecraft.resources.ResourceLocation, int, int, int, int, int, float, float, float, float);
+    descriptor: (Lnet/minecraft/resources/ResourceLocation;IIIIIFFFF)V
+
   void innerBlit(net.minecraft.resources.ResourceLocation, int, int, int, int, int, float, float, float, float, float, float, float, float);
+    descriptor: (Lnet/minecraft/resources/ResourceLocation;IIIIIFFFFFFFF)V
+
   private void blitNineSlicedSprite(net.minecraft.client.renderer.texture.TextureAtlasSprite, net.minecraft.client.resources.metadata.gui.GuiSpriteScaling$NineSlice, int, int, int, int, int);
+    descriptor: (Lnet/minecraft/client/renderer/texture/TextureAtlasSprite;Lnet/minecraft/client/resources/metadata/gui/GuiSpriteScaling$NineSlice;IIIII)V
+
   private void blitTiledSprite(net.minecraft.client.renderer.texture.TextureAtlasSprite, int, int, int, int, int, int, int, int, int, int, int);
+    descriptor: (Lnet/minecraft/client/renderer/texture/TextureAtlasSprite;IIIIIIIIIII)V
+
   public void renderItem(net.minecraft.world.item.ItemStack, int, int);
+    descriptor: (Lnet/minecraft/world/item/ItemStack;II)V
+
   public void renderItem(net.minecraft.world.item.ItemStack, int, int, int);
+    descriptor: (Lnet/minecraft/world/item/ItemStack;III)V
+
   public void renderItem(net.minecraft.world.item.ItemStack, int, int, int, int);
+    descriptor: (Lnet/minecraft/world/item/ItemStack;IIII)V
+
   public void renderFakeItem(net.minecraft.world.item.ItemStack, int, int);
+    descriptor: (Lnet/minecraft/world/item/ItemStack;II)V
+
   public void renderFakeItem(net.minecraft.world.item.ItemStack, int, int, int);
+    descriptor: (Lnet/minecraft/world/item/ItemStack;III)V
+
   public void renderItem(net.minecraft.world.entity.LivingEntity, net.minecraft.world.item.ItemStack, int, int, int);
+    descriptor: (Lnet/minecraft/world/entity/LivingEntity;Lnet/minecraft/world/item/ItemStack;III)V
+
   private void renderItem(net.minecraft.world.entity.LivingEntity, net.minecraft.world.level.Level, net.minecraft.world.item.ItemStack, int, int, int);
+    descriptor: (Lnet/minecraft/world/entity/LivingEntity;Lnet/minecraft/world/level/Level;Lnet/minecraft/world/item/ItemStack;III)V
+
   private void renderItem(net.minecraft.world.entity.LivingEntity, net.minecraft.world.level.Level, net.minecraft.world.item.ItemStack, int, int, int, int);
+    descriptor: (Lnet/minecraft/world/entity/LivingEntity;Lnet/minecraft/world/level/Level;Lnet/minecraft/world/item/ItemStack;IIII)V
+
   public void renderItemDecorations(net.minecraft.client.gui.Font, net.minecraft.world.item.ItemStack, int, int);
+    descriptor: (Lnet/minecraft/client/gui/Font;Lnet/minecraft/world/item/ItemStack;II)V
+
   public void renderItemDecorations(net.minecraft.client.gui.Font, net.minecraft.world.item.ItemStack, int, int, java.lang.String);
+    descriptor: (Lnet/minecraft/client/gui/Font;Lnet/minecraft/world/item/ItemStack;IILjava/lang/String;)V
+
   public void renderTooltip(net.minecraft.client.gui.Font, net.minecraft.world.item.ItemStack, int, int);
+    descriptor: (Lnet/minecraft/client/gui/Font;Lnet/minecraft/world/item/ItemStack;II)V
+
   public void renderTooltip(net.minecraft.client.gui.Font, java.util.List<net.minecraft.network.chat.Component>, java.util.Optional<net.minecraft.world.inventory.tooltip.TooltipComponent>, int, int);
+    descriptor: (Lnet/minecraft/client/gui/Font;Ljava/util/List;Ljava/util/Optional;II)V
+
   public void renderTooltip(net.minecraft.client.gui.Font, net.minecraft.network.chat.Component, int, int);
+    descriptor: (Lnet/minecraft/client/gui/Font;Lnet/minecraft/network/chat/Component;II)V
+
   public void renderComponentTooltip(net.minecraft.client.gui.Font, java.util.List<net.minecraft.network.chat.Component>, int, int);
+    descriptor: (Lnet/minecraft/client/gui/Font;Ljava/util/List;II)V
+
   public void renderTooltip(net.minecraft.client.gui.Font, java.util.List<? extends net.minecraft.util.FormattedCharSequence>, int, int);
+    descriptor: (Lnet/minecraft/client/gui/Font;Ljava/util/List;II)V
+
   public void renderTooltip(net.minecraft.client.gui.Font, java.util.List<net.minecraft.util.FormattedCharSequence>, net.minecraft.client.gui.screens.inventory.tooltip.ClientTooltipPositioner, int, int);
+    descriptor: (Lnet/minecraft/client/gui/Font;Ljava/util/List;Lnet/minecraft/client/gui/screens/inventory/tooltip/ClientTooltipPositioner;II)V
+
   private void renderTooltipInternal(net.minecraft.client.gui.Font, java.util.List<net.minecraft.client.gui.screens.inventory.tooltip.ClientTooltipComponent>, int, int, net.minecraft.client.gui.screens.inventory.tooltip.ClientTooltipPositioner);
+    descriptor: (Lnet/minecraft/client/gui/Font;Ljava/util/List;IILnet/minecraft/client/gui/screens/inventory/tooltip/ClientTooltipPositioner;)V
+
   public void renderComponentHoverEffect(net.minecraft.client.gui.Font, net.minecraft.network.chat.Style, int, int);
+    descriptor: (Lnet/minecraft/client/gui/Font;Lnet/minecraft/network/chat/Style;II)V
+
   private void method_51743(int, int, int, int);
+    descriptor: (IIII)V
+
   private static void method_51442(java.util.List, net.minecraft.world.inventory.tooltip.TooltipComponent);
+    descriptor: (Ljava/util/List;Lnet/minecraft/world/inventory/tooltip/TooltipComponent;)V
+
   private static java.lang.String method_51426(net.minecraft.world.item.ItemStack) throws java.lang.Exception;
+    descriptor: (Lnet/minecraft/world/item/ItemStack;)Ljava/lang/String;
+
   private static java.lang.String method_51444(net.minecraft.world.item.ItemStack) throws java.lang.Exception;
+    descriptor: (Lnet/minecraft/world/item/ItemStack;)Ljava/lang/String;
+
   private static java.lang.String method_51449(net.minecraft.world.item.ItemStack) throws java.lang.Exception;
+    descriptor: (Lnet/minecraft/world/item/ItemStack;)Ljava/lang/String;
+
   private static java.lang.String method_51451(net.minecraft.world.item.ItemStack) throws java.lang.Exception;
+    descriptor: (Lnet/minecraft/world/item/ItemStack;)Ljava/lang/String;
 }

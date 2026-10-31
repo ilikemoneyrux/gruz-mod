@@ -1,4 +1,4 @@
-metics/CosmeticsFeature.java:243: error: no suitable method found for mulPose(Quaternionf)
+ionf)
                   m.mulPose(Axis.YP.rotationDegrees(side * (-(28f + flap))));
                    ^
       method PoseStack.mulPose(Matrix4fc) is not applicable
@@ -314,7 +314,7 @@ metics/CosmeticsFeature.java:243: error: no suitable method found for mulPose(Qu
               this.renderBlurredBackground();
                   ^
     symbol: method renderBlurredBackground()
-  477 errors
+  476 errors
 
 * Try:
 > Check your code and dependencies to fix the compilation error(s)
@@ -627,6 +627,16 @@ import net.minecraft.client.renderer.MultiBufferSource;
                                                                                           ^
   symbol:   class MultiBufferSource
   location: class HeldItemRendererMixin
+/home/runner/work/gruz-mod/gruz-mod/versions/26.3/build/pp/java/pl/gruzclient/mixin/InGameOverlayRendererMixin.java:17: error: cannot find symbol
+    private static void gruz$fireDown(PoseStack matrices, net.minecraft.client.renderer.MultiBufferSource buffers, CallbackInfo ci) {
+                                                                                       ^
+  symbol:   class MultiBufferSource
+  location: package net.minecraft.client.renderer
+/home/runner/work/gruz-mod/gruz-mod/versions/26.3/build/pp/java/pl/gruzclient/mixin/InGameOverlayRendererMixin.java:27: error: cannot find symbol
+    private static void gruz$fireRestore(PoseStack matrices, net.minecraft.client.renderer.MultiBufferSource buffers, CallbackInfo ci) {
+                                                                                          ^
+  symbol:   class MultiBufferSource
+  location: package net.minecraft.client.renderer
 /home/runner/work/gruz-mod/gruz-mod/versions/26.3/build/pp/java/pl/gruzclient/mixin/LightmapTextureManagerMixin.java:4: error: cannot find symbol
 import net.minecraft.client.renderer.LightTexture;
                                     ^
@@ -637,35 +647,35 @@ import net.minecraft.client.renderer.RenderType;
                                     ^
   symbol:   class RenderType
   location: package net.minecraft.client.renderer
-/home/runner/work/gruz-mod/gruz-mod/versions/26.3/build/pp/java/pl/gruzclient/mixin/ChatHudMixin.java:18: error: cannot find symbol
+/home/runner/work/gruz-mod/gruz-mod/versions/26.3/build/pp/java/pl/gruzclient/mixin/ChatHudMixin.java:19: error: cannot find symbol
 import net.minecraft.client.GuiMessage;
                            ^
   symbol:   class GuiMessage
   location: package net.minecraft.client
-/home/runner/work/gruz-mod/gruz-mod/versions/26.3/build/pp/java/pl/gruzclient/mixin/ChatHudMixin.java:19: error: cannot find symbol
+/home/runner/work/gruz-mod/gruz-mod/versions/26.3/build/pp/java/pl/gruzclient/mixin/ChatHudMixin.java:20: error: cannot find symbol
 import net.minecraft.client.GuiMessageTag;
                            ^
   symbol:   class GuiMessageTag
   location: package net.minecraft.client
-/home/runner/work/gruz-mod/gruz-mod/versions/26.3/build/pp/java/pl/gruzclient/mixin/ChatHudMixin.java:30: error: cannot find symbol
+/home/runner/work/gruz-mod/gruz-mod/versions/26.3/build/pp/java/pl/gruzclient/mixin/ChatHudMixin.java:31: error: cannot find symbol
     @Shadow @Final private List<GuiMessage> allMessages;
                                 ^
   symbol:   class GuiMessage
   location: class ChatHudMixin
-/home/runner/work/gruz-mod/gruz-mod/versions/26.3/build/pp/java/pl/gruzclient/mixin/ChatHudMixin.java:31: error: package GuiMessage does not exist
+/home/runner/work/gruz-mod/gruz-mod/versions/26.3/build/pp/java/pl/gruzclient/mixin/ChatHudMixin.java:32: error: package GuiMessage does not exist
     @Shadow @Final private List<GuiMessage.Line> trimmedMessages;
                                           ^
-/home/runner/work/gruz-mod/gruz-mod/versions/26.3/build/pp/java/pl/gruzclient/mixin/ChatHudMixin.java:34: error: cannot find symbol
+/home/runner/work/gruz-mod/gruz-mod/versions/26.3/build/pp/java/pl/gruzclient/mixin/ChatHudMixin.java:35: error: cannot find symbol
     @Shadow private void addMessageToDisplayQueue(GuiMessage message) { throw new AssertionError(); }
                                                   ^
   symbol:   class GuiMessage
   location: class ChatHudMixin
-/home/runner/work/gruz-mod/gruz-mod/versions/26.3/build/pp/java/pl/gruzclient/mixin/ChatHudMixin.java:44: error: cannot find symbol
+/home/runner/work/gruz-mod/gruz-mod/versions/26.3/build/pp/java/pl/gruzclient/mixin/ChatHudMixin.java:45: error: cannot find symbol
     private Component gruz$onMessage(Component message, Component original, MessageSignature signature, GuiMessageTag indicator) {
                                                                                                         ^
   symbol:   class GuiMessageTag
   location: class ChatHudMixin
-/home/runner/work/gruz-mod/gruz-mod/versions/26.3/build/pp/java/pl/gruzclient/mixin/ChatHudMixin.java:76: error: cannot find symbol
+/home/runner/work/gruz-mod/gruz-mod/versions/26.3/build/pp/java/pl/gruzclient/mixin/ChatHudMixin.java:77: error: cannot find symbol
     private void gruz$filter(GuiMessage message, CallbackInfo ci) {
                              ^
   symbol:   class GuiMessage
@@ -683,11 +693,6 @@ import org.lwjgl.glfw.GLFW;
                              ^
   symbol:   class GuiGraphics
   location: class ChatScreenMixin
-/home/runner/work/gruz-mod/gruz-mod/versions/26.3/build/pp/java/pl/gruzclient/mixin/BackgroundRendererMixin.java:6: error: cannot find symbol
-import net.minecraft.client.renderer.FogRenderer;
-                                    ^
-  symbol:   class FogRenderer
-  location: package net.minecraft.client.renderer
 /home/runner/work/gruz-mod/gruz-mod/versions/26.3/build/pp/java/pl/gruzclient/mixin/PlayerEntityRendererMixin.java:3: error: cannot find symbol
 import net.minecraft.client.model.PlayerModel;
                                  ^
@@ -1502,10 +1507,6 @@ import net.minecraft.client.gui.GuiGraphics;
 @Mixin(LightTexture.class)
        ^
   symbol: class LightTexture
-/home/runner/work/gruz-mod/gruz-mod/versions/26.3/build/pp/java/pl/gruzclient/mixin/BackgroundRendererMixin.java:17: error: cannot find symbol
-@Mixin(FogRenderer.class)
-       ^
-  symbol: class FogRenderer
 /home/runner/work/gruz-mod/gruz-mod/versions/26.3/build/pp/java/pl/gruzclient/mixin/PlayerEntityRendererMixin.java:15: error: cannot find symbol
 @Mixin(PlayerRenderer.class)
        ^
@@ -1693,22 +1694,22 @@ import net.minecraft.client.gui.GuiGraphics;
       (argument mismatch; Quaternionf cannot be converted to Matrix4fc)
     method PoseStack.mulPose(Transformation) is not applicable
       (argument mismatch; Quaternionf cannot be converted to Transformation)
-/home/runner/work/gruz-mod/gruz-mod/versions/26.3/build/pp/java/pl/gruzclient/mixin/WorldRendererMixin.java:45: error: cannot find symbol
+/home/runner/work/gruz-mod/gruz-mod/versions/26.3/build/pp/java/pl/gruzclient/mixin/WorldRendererMixin.java:49: error: cannot find symbol
         VertexConsumer fill = mc.renderBuffers().bufferSource().getBuffer(RenderType.debugFilledBox());
                                 ^
   symbol:   method renderBuffers()
   location: variable mc of type Minecraft
-/home/runner/work/gruz-mod/gruz-mod/versions/26.3/build/pp/java/pl/gruzclient/mixin/WorldRendererMixin.java:45: error: cannot find symbol
+/home/runner/work/gruz-mod/gruz-mod/versions/26.3/build/pp/java/pl/gruzclient/mixin/WorldRendererMixin.java:49: error: cannot find symbol
         VertexConsumer fill = mc.renderBuffers().bufferSource().getBuffer(RenderType.debugFilledBox());
                                                                           ^
   symbol:   variable RenderType
   location: class WorldRendererMixin
-/home/runner/work/gruz-mod/gruz-mod/versions/26.3/build/pp/java/pl/gruzclient/mixin/WorldRendererMixin.java:53: error: cannot find symbol
+/home/runner/work/gruz-mod/gruz-mod/versions/26.3/build/pp/java/pl/gruzclient/mixin/WorldRendererMixin.java:57: error: cannot find symbol
             shape.forAllEdges((x1, y1, z1, x2, y2, z2) -> net.minecraft.client.renderer.ShapeRenderer.addChainedFilledBoxVertices(matrices, fill,
                                                                                        ^
   symbol:   class ShapeRenderer
   location: package net.minecraft.client.renderer
-/home/runner/work/gruz-mod/gruz-mod/versions/26.3/build/pp/java/pl/gruzclient/mixin/WorldRendererMixin.java:61: error: cannot find symbol
+/home/runner/work/gruz-mod/gruz-mod/versions/26.3/build/pp/java/pl/gruzclient/mixin/WorldRendererMixin.java:65: error: cannot find symbol
             net.minecraft.client.renderer.ShapeRenderer.addChainedFilledBoxVertices(matrices, fill,
                                          ^
   symbol:   class ShapeRenderer
@@ -1759,11 +1760,6 @@ import net.minecraft.client.gui.GuiGraphics;
                       ^
   symbol:   variable GLFW
   location: class ChatScreenMixin
-/home/runner/work/gruz-mod/gruz-mod/versions/26.3/build/pp/java/pl/gruzclient/mixin/BackgroundRendererMixin.java:31: error: cannot find symbol
-        RenderSystem.clearColor(fogRed, fogGreen, fogBlue, 0f);
-                    ^
-  symbol:   method clearColor(float,float,float,float)
-  location: class RenderSystem
 /home/runner/work/gruz-mod/gruz-mod/versions/26.3/build/pp/java/pl/gruzclient/mixin/MouseMixin.java:18: error: cannot find symbol
         if (action == GLFW.GLFW_PRESS && Minecraft.getInstance().screen == null) CpsModule.click(button);
                       ^
@@ -2701,7 +2697,7 @@ public class GruzButton extends Button {
 /home/runner/work/gruz-mod/gruz-mod/versions/26.3/build/pp/java/pl/gruzclient/screen/GruzButton.java:28: error: method does not override or implement a method from a supertype
     @Override
     ^
-477 errors
+476 errors
 	at org.gradle.api.internal.tasks.compile.JdkJavaCompiler.execute(JdkJavaCompiler.java:88)
 	at org.gradle.api.internal.tasks.compile.JdkJavaCompiler.execute(JdkJavaCompiler.java:49)
 	at org.gradle.api.internal.tasks.compile.NormalizingJavaCompiler.delegateAndHandleErrors(NormalizingJavaCompiler.java:98)
@@ -2847,5 +2843,5 @@ You can use '--warning-mode all' to show the individual deprecation warnings and
 
 For more on this, please refer to https://docs.gradle.org/9.8.0/userguide/command_line_interface.html#sec:command_line_warnings in the Gradle documentation.
 
-BUILD FAILED in 34s
+BUILD FAILED in 28s
 2 actionable tasks: 2 executed

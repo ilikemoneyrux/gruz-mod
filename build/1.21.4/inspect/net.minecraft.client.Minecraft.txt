@@ -1,368 +1,967 @@
 Compiled from "Minecraft.java"
 public class net.minecraft.client.Minecraft extends net.minecraft.util.thread.ReentrantBlockableEventLoop<java.lang.Runnable> implements com.mojang.blaze3d.platform.WindowEventHandler {
   static net.minecraft.client.Minecraft instance;
+    descriptor: Lnet/minecraft/client/Minecraft;
   private static final org.slf4j.Logger LOGGER;
+    descriptor: Lorg/slf4j/Logger;
   public static final boolean ON_OSX;
+    descriptor: Z
   private static final int MAX_TICKS_PER_UPDATE;
+    descriptor: I
   public static final net.minecraft.resources.ResourceLocation DEFAULT_FONT;
+    descriptor: Lnet/minecraft/resources/ResourceLocation;
   public static final net.minecraft.resources.ResourceLocation UNIFORM_FONT;
+    descriptor: Lnet/minecraft/resources/ResourceLocation;
   public static final net.minecraft.resources.ResourceLocation ALT_FONT;
+    descriptor: Lnet/minecraft/resources/ResourceLocation;
   private static final net.minecraft.resources.ResourceLocation REGIONAL_COMPLIANCIES;
+    descriptor: Lnet/minecraft/resources/ResourceLocation;
   private static final java.util.concurrent.CompletableFuture<net.minecraft.util.Unit> RESOURCE_RELOAD_INITIAL_TASK;
+    descriptor: Ljava/util/concurrent/CompletableFuture;
   private static final net.minecraft.network.chat.Component SOCIAL_INTERACTIONS_NOT_AVAILABLE;
+    descriptor: Lnet/minecraft/network/chat/Component;
   public static final java.lang.String UPDATE_DRIVERS_ADVICE;
+    descriptor: Ljava/lang/String;
   private final long canary;
+    descriptor: J
   private final java.nio.file.Path resourcePackDirectory;
+    descriptor: Ljava/nio/file/Path;
   private final java.util.concurrent.CompletableFuture<com.mojang.authlib.yggdrasil.ProfileResult> profileFuture;
+    descriptor: Ljava/util/concurrent/CompletableFuture;
   private final net.minecraft.client.renderer.texture.TextureManager textureManager;
+    descriptor: Lnet/minecraft/client/renderer/texture/TextureManager;
   private final net.minecraft.client.renderer.ShaderManager shaderManager;
+    descriptor: Lnet/minecraft/client/renderer/ShaderManager;
   private final com.mojang.datafixers.DataFixer fixerUpper;
+    descriptor: Lcom/mojang/datafixers/DataFixer;
   private final net.minecraft.client.renderer.VirtualScreen virtualScreen;
+    descriptor: Lnet/minecraft/client/renderer/VirtualScreen;
   private final com.mojang.blaze3d.platform.Window window;
+    descriptor: Lcom/mojang/blaze3d/platform/Window;
   private final net.minecraft.client.DeltaTracker$Timer deltaTracker;
+    descriptor: Lnet/minecraft/client/DeltaTracker$Timer;
   private final net.minecraft.client.renderer.RenderBuffers renderBuffers;
+    descriptor: Lnet/minecraft/client/renderer/RenderBuffers;
   public final net.minecraft.client.renderer.LevelRenderer levelRenderer;
+    descriptor: Lnet/minecraft/client/renderer/LevelRenderer;
   private final net.minecraft.client.renderer.entity.EntityRenderDispatcher entityRenderDispatcher;
+    descriptor: Lnet/minecraft/client/renderer/entity/EntityRenderDispatcher;
   private final net.minecraft.client.renderer.item.ItemModelResolver itemModelResolver;
+    descriptor: Lnet/minecraft/client/renderer/item/ItemModelResolver;
   private final net.minecraft.client.renderer.entity.ItemRenderer itemRenderer;
+    descriptor: Lnet/minecraft/client/renderer/entity/ItemRenderer;
   private final net.minecraft.client.renderer.MapRenderer mapRenderer;
+    descriptor: Lnet/minecraft/client/renderer/MapRenderer;
   public final net.minecraft.client.particle.ParticleEngine particleEngine;
+    descriptor: Lnet/minecraft/client/particle/ParticleEngine;
   private final net.minecraft.client.User user;
+    descriptor: Lnet/minecraft/client/User;
   public final net.minecraft.client.gui.Font font;
+    descriptor: Lnet/minecraft/client/gui/Font;
   public final net.minecraft.client.gui.Font fontFilterFishy;
+    descriptor: Lnet/minecraft/client/gui/Font;
   public final net.minecraft.client.renderer.GameRenderer gameRenderer;
+    descriptor: Lnet/minecraft/client/renderer/GameRenderer;
   public final net.minecraft.client.renderer.debug.DebugRenderer debugRenderer;
+    descriptor: Lnet/minecraft/client/renderer/debug/DebugRenderer;
   private final java.util.concurrent.atomic.AtomicReference<net.minecraft.server.level.progress.StoringChunkProgressListener> progressListener;
+    descriptor: Ljava/util/concurrent/atomic/AtomicReference;
   public final net.minecraft.client.gui.Gui gui;
+    descriptor: Lnet/minecraft/client/gui/Gui;
   public final net.minecraft.client.Options options;
+    descriptor: Lnet/minecraft/client/Options;
   private final net.minecraft.client.HotbarManager hotbarManager;
+    descriptor: Lnet/minecraft/client/HotbarManager;
   public final net.minecraft.client.MouseHandler mouseHandler;
+    descriptor: Lnet/minecraft/client/MouseHandler;
   public final net.minecraft.client.KeyboardHandler keyboardHandler;
+    descriptor: Lnet/minecraft/client/KeyboardHandler;
   private net.minecraft.client.InputType lastInputType;
+    descriptor: Lnet/minecraft/client/InputType;
   public final java.io.File gameDirectory;
+    descriptor: Ljava/io/File;
   private final java.lang.String launchedVersion;
+    descriptor: Ljava/lang/String;
   private final java.lang.String versionType;
+    descriptor: Ljava/lang/String;
   private final java.net.Proxy proxy;
+    descriptor: Ljava/net/Proxy;
   private final net.minecraft.world.level.storage.LevelStorageSource levelSource;
+    descriptor: Lnet/minecraft/world/level/storage/LevelStorageSource;
   private final boolean demo;
+    descriptor: Z
   private final boolean allowsMultiplayer;
+    descriptor: Z
   private final boolean allowsChat;
+    descriptor: Z
   private final net.minecraft.server.packs.resources.ReloadableResourceManager resourceManager;
+    descriptor: Lnet/minecraft/server/packs/resources/ReloadableResourceManager;
   private final net.minecraft.server.packs.VanillaPackResources vanillaPackResources;
+    descriptor: Lnet/minecraft/server/packs/VanillaPackResources;
   private final net.minecraft.client.resources.server.DownloadedPackSource downloadedPackSource;
+    descriptor: Lnet/minecraft/client/resources/server/DownloadedPackSource;
   private final net.minecraft.server.packs.repository.PackRepository resourcePackRepository;
+    descriptor: Lnet/minecraft/server/packs/repository/PackRepository;
   private final net.minecraft.client.resources.language.LanguageManager languageManager;
+    descriptor: Lnet/minecraft/client/resources/language/LanguageManager;
   private final net.minecraft.client.color.block.BlockColors blockColors;
+    descriptor: Lnet/minecraft/client/color/block/BlockColors;
   private final com.mojang.blaze3d.pipeline.RenderTarget mainRenderTarget;
+    descriptor: Lcom/mojang/blaze3d/pipeline/RenderTarget;
   private final com.mojang.blaze3d.TracyFrameCapture tracyFrameCapture;
+    descriptor: Lcom/mojang/blaze3d/TracyFrameCapture;
   private final net.minecraft.client.sounds.SoundManager soundManager;
+    descriptor: Lnet/minecraft/client/sounds/SoundManager;
   private final net.minecraft.client.sounds.MusicManager musicManager;
+    descriptor: Lnet/minecraft/client/sounds/MusicManager;
   private final net.minecraft.client.gui.font.FontManager fontManager;
+    descriptor: Lnet/minecraft/client/gui/font/FontManager;
   private final net.minecraft.client.resources.SplashManager splashManager;
+    descriptor: Lnet/minecraft/client/resources/SplashManager;
   private final net.minecraft.client.renderer.GpuWarnlistManager gpuWarnlistManager;
+    descriptor: Lnet/minecraft/client/renderer/GpuWarnlistManager;
   private final net.minecraft.client.PeriodicNotificationManager regionalCompliancies;
+    descriptor: Lnet/minecraft/client/PeriodicNotificationManager;
   private final com.mojang.authlib.yggdrasil.YggdrasilAuthenticationService authenticationService;
+    descriptor: Lcom/mojang/authlib/yggdrasil/YggdrasilAuthenticationService;
   private final com.mojang.authlib.minecraft.MinecraftSessionService minecraftSessionService;
+    descriptor: Lcom/mojang/authlib/minecraft/MinecraftSessionService;
   private final com.mojang.authlib.minecraft.UserApiService userApiService;
+    descriptor: Lcom/mojang/authlib/minecraft/UserApiService;
   private final java.util.concurrent.CompletableFuture<com.mojang.authlib.minecraft.UserApiService$UserProperties> userPropertiesFuture;
+    descriptor: Ljava/util/concurrent/CompletableFuture;
   private final net.minecraft.client.resources.SkinManager skinManager;
+    descriptor: Lnet/minecraft/client/resources/SkinManager;
   private final net.minecraft.client.resources.model.ModelManager modelManager;
+    descriptor: Lnet/minecraft/client/resources/model/ModelManager;
   private final net.minecraft.client.renderer.block.BlockRenderDispatcher blockRenderer;
+    descriptor: Lnet/minecraft/client/renderer/block/BlockRenderDispatcher;
   private final net.minecraft.client.resources.PaintingTextureManager paintingTextures;
+    descriptor: Lnet/minecraft/client/resources/PaintingTextureManager;
   private final net.minecraft.client.resources.MobEffectTextureManager mobEffectTextures;
+    descriptor: Lnet/minecraft/client/resources/MobEffectTextureManager;
   private final net.minecraft.client.resources.MapTextureManager mapTextureManager;
+    descriptor: Lnet/minecraft/client/resources/MapTextureManager;
   private final net.minecraft.client.resources.MapDecorationTextureManager mapDecorationTextures;
+    descriptor: Lnet/minecraft/client/resources/MapDecorationTextureManager;
   private final net.minecraft.client.gui.GuiSpriteManager guiSprites;
+    descriptor: Lnet/minecraft/client/gui/GuiSpriteManager;
   private final net.minecraft.client.gui.components.toasts.ToastManager toastManager;
+    descriptor: Lnet/minecraft/client/gui/components/toasts/ToastManager;
   private final net.minecraft.client.tutorial.Tutorial tutorial;
+    descriptor: Lnet/minecraft/client/tutorial/Tutorial;
   private final net.minecraft.client.gui.screens.social.PlayerSocialManager playerSocialManager;
+    descriptor: Lnet/minecraft/client/gui/screens/social/PlayerSocialManager;
   private final net.minecraft.client.renderer.blockentity.BlockEntityRenderDispatcher blockEntityRenderDispatcher;
+    descriptor: Lnet/minecraft/client/renderer/blockentity/BlockEntityRenderDispatcher;
   private final net.minecraft.client.telemetry.ClientTelemetryManager telemetryManager;
+    descriptor: Lnet/minecraft/client/telemetry/ClientTelemetryManager;
   private final net.minecraft.client.multiplayer.ProfileKeyPairManager profileKeyPairManager;
+    descriptor: Lnet/minecraft/client/multiplayer/ProfileKeyPairManager;
   private final com.mojang.realmsclient.gui.RealmsDataFetcher realmsDataFetcher;
+    descriptor: Lcom/mojang/realmsclient/gui/RealmsDataFetcher;
   private final net.minecraft.client.quickplay.QuickPlayLog quickPlayLog;
+    descriptor: Lnet/minecraft/client/quickplay/QuickPlayLog;
   public net.minecraft.client.multiplayer.MultiPlayerGameMode gameMode;
+    descriptor: Lnet/minecraft/client/multiplayer/MultiPlayerGameMode;
   public net.minecraft.client.multiplayer.ClientLevel level;
+    descriptor: Lnet/minecraft/client/multiplayer/ClientLevel;
   public net.minecraft.client.player.LocalPlayer player;
+    descriptor: Lnet/minecraft/client/player/LocalPlayer;
   private net.minecraft.client.server.IntegratedServer singleplayerServer;
+    descriptor: Lnet/minecraft/client/server/IntegratedServer;
   private net.minecraft.network.Connection pendingConnection;
+    descriptor: Lnet/minecraft/network/Connection;
   private boolean isLocalServer;
+    descriptor: Z
   public net.minecraft.world.entity.Entity cameraEntity;
+    descriptor: Lnet/minecraft/world/entity/Entity;
   public net.minecraft.world.entity.Entity crosshairPickEntity;
+    descriptor: Lnet/minecraft/world/entity/Entity;
   public net.minecraft.world.phys.HitResult hitResult;
+    descriptor: Lnet/minecraft/world/phys/HitResult;
   private int rightClickDelay;
+    descriptor: I
   protected int missTime;
+    descriptor: I
   private volatile boolean pause;
+    descriptor: Z
   private long lastNanoTime;
+    descriptor: J
   private long lastTime;
+    descriptor: J
   private int frames;
+    descriptor: I
   public boolean noRender;
+    descriptor: Z
   public net.minecraft.client.gui.screens.Screen screen;
+    descriptor: Lnet/minecraft/client/gui/screens/Screen;
   private net.minecraft.client.gui.screens.Overlay overlay;
+    descriptor: Lnet/minecraft/client/gui/screens/Overlay;
   private boolean clientLevelTeardownInProgress;
+    descriptor: Z
   java.lang.Thread gameThread;
+    descriptor: Ljava/lang/Thread;
   private volatile boolean running;
+    descriptor: Z
   private java.util.function.Supplier<net.minecraft.CrashReport> delayedCrash;
+    descriptor: Ljava/util/function/Supplier;
   private static int fps;
+    descriptor: I
   public java.lang.String fpsString;
+    descriptor: Ljava/lang/String;
   private long frameTimeNs;
+    descriptor: J
   private final com.mojang.blaze3d.platform.FramerateLimitTracker framerateLimitTracker;
+    descriptor: Lcom/mojang/blaze3d/platform/FramerateLimitTracker;
   public boolean wireframe;
+    descriptor: Z
   public boolean sectionPath;
+    descriptor: Z
   public boolean sectionVisibility;
+    descriptor: Z
   public boolean smartCull;
+    descriptor: Z
   private boolean windowActive;
+    descriptor: Z
   private final java.util.Queue<java.lang.Runnable> progressTasks;
+    descriptor: Ljava/util/Queue;
   private java.util.concurrent.CompletableFuture<java.lang.Void> pendingReload;
+    descriptor: Ljava/util/concurrent/CompletableFuture;
   private net.minecraft.client.gui.components.toasts.TutorialToast socialInteractionsToast;
+    descriptor: Lnet/minecraft/client/gui/components/toasts/TutorialToast;
   private int fpsPieRenderTicks;
+    descriptor: I
   private final net.minecraft.util.profiling.ContinuousProfiler fpsPieProfiler;
+    descriptor: Lnet/minecraft/util/profiling/ContinuousProfiler;
   private net.minecraft.util.profiling.metrics.profiling.MetricsRecorder metricsRecorder;
+    descriptor: Lnet/minecraft/util/profiling/metrics/profiling/MetricsRecorder;
   private final net.minecraft.client.ResourceLoadStateTracker reloadStateTracker;
+    descriptor: Lnet/minecraft/client/ResourceLoadStateTracker;
   private long savedCpuDuration;
+    descriptor: J
   private double gpuUtilization;
+    descriptor: D
   private com.mojang.blaze3d.systems.TimerQuery$FrameProfile currentFrameProfile;
+    descriptor: Lcom/mojang/blaze3d/systems/TimerQuery$FrameProfile;
   private final net.minecraft.client.GameNarrator narrator;
+    descriptor: Lnet/minecraft/client/GameNarrator;
   private final net.minecraft.client.multiplayer.chat.ChatListener chatListener;
+    descriptor: Lnet/minecraft/client/multiplayer/chat/ChatListener;
   private net.minecraft.client.multiplayer.chat.report.ReportingContext reportingContext;
+    descriptor: Lnet/minecraft/client/multiplayer/chat/report/ReportingContext;
   private final net.minecraft.client.CommandHistory commandHistory;
+    descriptor: Lnet/minecraft/client/CommandHistory;
   private final net.minecraft.world.level.validation.DirectoryValidator directoryValidator;
+    descriptor: Lnet/minecraft/world/level/validation/DirectoryValidator;
   private boolean gameLoadFinished;
+    descriptor: Z
   private final long clientStartTimeMs;
+    descriptor: J
   private long clientTickCount;
+    descriptor: J
   public net.minecraft.client.Minecraft(net.minecraft.client.main.GameConfig);
+    descriptor: (Lnet/minecraft/client/main/GameConfig;)V
+
   private void onResourceLoadFinished(net.minecraft.client.Minecraft$GameLoadCookie);
+    descriptor: (Lnet/minecraft/client/Minecraft$GameLoadCookie;)V
+
   private void onGameLoadFinished(net.minecraft.client.Minecraft$GameLoadCookie);
+    descriptor: (Lnet/minecraft/client/Minecraft$GameLoadCookie;)V
+
   public boolean isGameLoadFinished();
+    descriptor: ()Z
+
   private java.lang.Runnable buildInitialScreens(net.minecraft.client.Minecraft$GameLoadCookie);
+    descriptor: (Lnet/minecraft/client/Minecraft$GameLoadCookie;)Ljava/lang/Runnable;
+
   private void addInitialScreens(java.util.List<java.util.function.Function<java.lang.Runnable, net.minecraft.client.gui.screens.Screen>>);
+    descriptor: (Ljava/util/List;)V
+
   private static boolean countryEqualsISO3(java.lang.Object);
+    descriptor: (Ljava/lang/Object;)Z
+
   public void updateTitle();
+    descriptor: ()V
+
   private java.lang.String createTitle();
+    descriptor: ()Ljava/lang/String;
+
   private com.mojang.authlib.minecraft.UserApiService createUserApiService(com.mojang.authlib.yggdrasil.YggdrasilAuthenticationService, net.minecraft.client.main.GameConfig);
+    descriptor: (Lcom/mojang/authlib/yggdrasil/YggdrasilAuthenticationService;Lnet/minecraft/client/main/GameConfig;)Lcom/mojang/authlib/minecraft/UserApiService;
+
   public static net.minecraft.util.ModCheck checkModStatus();
+    descriptor: ()Lnet/minecraft/util/ModCheck;
+
   private void rollbackResourcePacks(java.lang.Throwable, net.minecraft.client.Minecraft$GameLoadCookie);
+    descriptor: (Ljava/lang/Throwable;Lnet/minecraft/client/Minecraft$GameLoadCookie;)V
+
   public void clearResourcePacksOnError(java.lang.Throwable, net.minecraft.network.chat.Component, net.minecraft.client.Minecraft$GameLoadCookie);
+    descriptor: (Ljava/lang/Throwable;Lnet/minecraft/network/chat/Component;Lnet/minecraft/client/Minecraft$GameLoadCookie;)V
+
   private void abortResourcePackRecovery();
+    descriptor: ()V
+
   private void addResourcePackLoadFailToast(net.minecraft.network.chat.Component);
+    descriptor: (Lnet/minecraft/network/chat/Component;)V
+
   public void triggerResourcePackRecovery(java.lang.Exception);
+    descriptor: (Ljava/lang/Exception;)V
+
   public void run();
+    descriptor: ()V
+
   void updateFontOptions();
+    descriptor: ()V
+
   private void onFullscreenError(int, long);
+    descriptor: (IJ)V
+
   public com.mojang.blaze3d.pipeline.RenderTarget getMainRenderTarget();
+    descriptor: ()Lcom/mojang/blaze3d/pipeline/RenderTarget;
+
   public java.lang.String getLaunchedVersion();
+    descriptor: ()Ljava/lang/String;
+
   public java.lang.String getVersionType();
+    descriptor: ()Ljava/lang/String;
+
   public void delayCrash(net.minecraft.CrashReport);
+    descriptor: (Lnet/minecraft/CrashReport;)V
+
   public void delayCrashRaw(net.minecraft.CrashReport);
+    descriptor: (Lnet/minecraft/CrashReport;)V
+
   private void handleDelayedCrash();
+    descriptor: ()V
+
   public void emergencySaveAndCrash(net.minecraft.CrashReport);
+    descriptor: (Lnet/minecraft/CrashReport;)V
+
   public static int saveReport(java.io.File, net.minecraft.CrashReport);
+    descriptor: (Ljava/io/File;Lnet/minecraft/CrashReport;)I
+
   public static void crash(net.minecraft.client.Minecraft, java.io.File, net.minecraft.CrashReport);
+    descriptor: (Lnet/minecraft/client/Minecraft;Ljava/io/File;Lnet/minecraft/CrashReport;)V
+
   public boolean isEnforceUnicode();
+    descriptor: ()Z
+
   public java.util.concurrent.CompletableFuture<java.lang.Void> reloadResourcePacks();
+    descriptor: ()Ljava/util/concurrent/CompletableFuture;
+
   private java.util.concurrent.CompletableFuture<java.lang.Void> reloadResourcePacks(boolean, net.minecraft.client.Minecraft$GameLoadCookie);
+    descriptor: (ZLnet/minecraft/client/Minecraft$GameLoadCookie;)Ljava/util/concurrent/CompletableFuture;
+
   private void selfTest();
+    descriptor: ()V
+
   public net.minecraft.world.level.storage.LevelStorageSource getLevelSource();
+    descriptor: ()Lnet/minecraft/world/level/storage/LevelStorageSource;
+
   private void openChatScreen(java.lang.String);
+    descriptor: (Ljava/lang/String;)V
+
   public void setScreen(net.minecraft.client.gui.screens.Screen);
+    descriptor: (Lnet/minecraft/client/gui/screens/Screen;)V
+
   public void setOverlay(net.minecraft.client.gui.screens.Overlay);
+    descriptor: (Lnet/minecraft/client/gui/screens/Overlay;)V
+
   public void destroy();
+    descriptor: ()V
+
   public void close();
+    descriptor: ()V
+
   private void runTick(boolean);
+    descriptor: (Z)V
+
   private net.minecraft.util.profiling.ProfilerFiller constructProfiler(boolean, net.minecraft.util.profiling.SingleTickProfiler);
+    descriptor: (ZLnet/minecraft/util/profiling/SingleTickProfiler;)Lnet/minecraft/util/profiling/ProfilerFiller;
+
   private void finishProfilers(boolean, net.minecraft.util.profiling.SingleTickProfiler);
+    descriptor: (ZLnet/minecraft/util/profiling/SingleTickProfiler;)V
+
   public void resizeDisplay();
+    descriptor: ()V
+
   public void cursorEntered();
+    descriptor: ()V
+
   public int getFps();
+    descriptor: ()I
+
   public long getFrameTimeNs();
+    descriptor: ()J
+
   private void emergencySave();
+    descriptor: ()V
+
   public boolean debugClientMetricsStart(java.util.function.Consumer<net.minecraft.network.chat.Component>);
+    descriptor: (Ljava/util/function/Consumer;)Z
+
   private void debugClientMetricsStop();
+    descriptor: ()V
+
   private void debugClientMetricsCancel();
+    descriptor: ()V
+
   private java.nio.file.Path archiveProfilingReport(net.minecraft.SystemReport, java.util.List<java.nio.file.Path>);
+    descriptor: (Lnet/minecraft/SystemReport;Ljava/util/List;)Ljava/nio/file/Path;
+
   public void stop();
+    descriptor: ()V
+
   public boolean isRunning();
+    descriptor: ()Z
+
   public void pauseGame(boolean);
+    descriptor: (Z)V
+
   private void continueAttack(boolean);
+    descriptor: (Z)V
+
   private boolean startAttack();
+    descriptor: ()Z
+
   private void startUseItem();
+    descriptor: ()V
+
   public net.minecraft.client.sounds.MusicManager getMusicManager();
+    descriptor: ()Lnet/minecraft/client/sounds/MusicManager;
+
   public void tick();
+    descriptor: ()V
+
   private boolean isLevelRunningNormally();
+    descriptor: ()Z
+
   private boolean isMultiplayerServer();
+    descriptor: ()Z
+
   private void handleKeybinds();
+    descriptor: ()V
+
   public net.minecraft.client.telemetry.ClientTelemetryManager getTelemetryManager();
+    descriptor: ()Lnet/minecraft/client/telemetry/ClientTelemetryManager;
+
   public double getGpuUtilization();
+    descriptor: ()D
+
   public net.minecraft.client.multiplayer.ProfileKeyPairManager getProfileKeyPairManager();
+    descriptor: ()Lnet/minecraft/client/multiplayer/ProfileKeyPairManager;
+
   public net.minecraft.client.gui.screens.worldselection.WorldOpenFlows createWorldOpenFlows();
+    descriptor: ()Lnet/minecraft/client/gui/screens/worldselection/WorldOpenFlows;
+
   public void doWorldLoad(net.minecraft.world.level.storage.LevelStorageSource$LevelStorageAccess, net.minecraft.server.packs.repository.PackRepository, net.minecraft.server.WorldStem, boolean);
+    descriptor: (Lnet/minecraft/world/level/storage/LevelStorageSource$LevelStorageAccess;Lnet/minecraft/server/packs/repository/PackRepository;Lnet/minecraft/server/WorldStem;Z)V
+
   public void setLevel(net.minecraft.client.multiplayer.ClientLevel, net.minecraft.client.gui.screens.ReceivingLevelScreen$Reason);
+    descriptor: (Lnet/minecraft/client/multiplayer/ClientLevel;Lnet/minecraft/client/gui/screens/ReceivingLevelScreen$Reason;)V
+
   public void disconnect();
+    descriptor: ()V
+
   public void disconnect(net.minecraft.client.gui.screens.Screen);
+    descriptor: (Lnet/minecraft/client/gui/screens/Screen;)V
+
   public void disconnect(net.minecraft.client.gui.screens.Screen, boolean);
+    descriptor: (Lnet/minecraft/client/gui/screens/Screen;Z)V
+
   public void clearDownloadedResourcePacks();
+    descriptor: ()V
+
   public void clearClientLevel(net.minecraft.client.gui.screens.Screen);
+    descriptor: (Lnet/minecraft/client/gui/screens/Screen;)V
+
   private void updateScreenAndTick(net.minecraft.client.gui.screens.Screen);
+    descriptor: (Lnet/minecraft/client/gui/screens/Screen;)V
+
   public void forceSetScreen(net.minecraft.client.gui.screens.Screen);
+    descriptor: (Lnet/minecraft/client/gui/screens/Screen;)V
+
   private void updateLevelInEngines(net.minecraft.client.multiplayer.ClientLevel);
+    descriptor: (Lnet/minecraft/client/multiplayer/ClientLevel;)V
+
   private com.mojang.authlib.minecraft.UserApiService$UserProperties userProperties();
+    descriptor: ()Lcom/mojang/authlib/minecraft/UserApiService$UserProperties;
+
   public boolean telemetryOptInExtra();
+    descriptor: ()Z
+
   public boolean extraTelemetryAvailable();
+    descriptor: ()Z
+
   public boolean allowsTelemetry();
+    descriptor: ()Z
+
   public boolean allowsMultiplayer();
+    descriptor: ()Z
+
   public boolean allowsRealms();
+    descriptor: ()Z
+
   public com.mojang.authlib.minecraft.BanDetails multiplayerBan();
+    descriptor: ()Lcom/mojang/authlib/minecraft/BanDetails;
+
   public boolean isNameBanned();
+    descriptor: ()Z
+
   public boolean isBlocked(java.util.UUID);
+    descriptor: (Ljava/util/UUID;)Z
+
   public net.minecraft.client.Minecraft$ChatStatus getChatStatus();
+    descriptor: ()Lnet/minecraft/client/Minecraft$ChatStatus;
+
   public final boolean isDemo();
+    descriptor: ()Z
+
   public net.minecraft.client.multiplayer.ClientPacketListener getConnection();
+    descriptor: ()Lnet/minecraft/client/multiplayer/ClientPacketListener;
+
   public static boolean renderNames();
+    descriptor: ()Z
+
   public static boolean useFancyGraphics();
+    descriptor: ()Z
+
   public static boolean useShaderTransparency();
+    descriptor: ()Z
+
   public static boolean useAmbientOcclusion();
+    descriptor: ()Z
+
   private void pickBlock();
+    descriptor: ()V
+
   public net.minecraft.CrashReport fillReport(net.minecraft.CrashReport);
+    descriptor: (Lnet/minecraft/CrashReport;)Lnet/minecraft/CrashReport;
+
   public static void fillReport(net.minecraft.client.Minecraft, net.minecraft.client.resources.language.LanguageManager, java.lang.String, net.minecraft.client.Options, net.minecraft.CrashReport);
+    descriptor: (Lnet/minecraft/client/Minecraft;Lnet/minecraft/client/resources/language/LanguageManager;Ljava/lang/String;Lnet/minecraft/client/Options;Lnet/minecraft/CrashReport;)V
+
   private static java.lang.String formatSeconds(double);
+    descriptor: (D)Ljava/lang/String;
+
   private void fillUptime(net.minecraft.CrashReportCategory);
+    descriptor: (Lnet/minecraft/CrashReportCategory;)V
+
   private static net.minecraft.SystemReport fillSystemReport(net.minecraft.SystemReport, net.minecraft.client.Minecraft, net.minecraft.client.resources.language.LanguageManager, java.lang.String, net.minecraft.client.Options);
+    descriptor: (Lnet/minecraft/SystemReport;Lnet/minecraft/client/Minecraft;Lnet/minecraft/client/resources/language/LanguageManager;Ljava/lang/String;Lnet/minecraft/client/Options;)Lnet/minecraft/SystemReport;
+
   public static net.minecraft.client.Minecraft getInstance();
+    descriptor: ()Lnet/minecraft/client/Minecraft;
+
   public java.util.concurrent.CompletableFuture<java.lang.Void> delayTextureReload();
+    descriptor: ()Ljava/util/concurrent/CompletableFuture;
+
   public void updateReportEnvironment(net.minecraft.client.multiplayer.chat.report.ReportEnvironment);
+    descriptor: (Lnet/minecraft/client/multiplayer/chat/report/ReportEnvironment;)V
+
   public net.minecraft.client.multiplayer.ServerData getCurrentServer();
+    descriptor: ()Lnet/minecraft/client/multiplayer/ServerData;
+
   public boolean isLocalServer();
+    descriptor: ()Z
+
   public boolean hasSingleplayerServer();
+    descriptor: ()Z
+
   public net.minecraft.client.server.IntegratedServer getSingleplayerServer();
+    descriptor: ()Lnet/minecraft/client/server/IntegratedServer;
+
   public boolean isSingleplayer();
+    descriptor: ()Z
+
   public boolean isLocalPlayer(java.util.UUID);
+    descriptor: (Ljava/util/UUID;)Z
+
   public net.minecraft.client.User getUser();
+    descriptor: ()Lnet/minecraft/client/User;
+
   public com.mojang.authlib.GameProfile getGameProfile();
+    descriptor: ()Lcom/mojang/authlib/GameProfile;
+
   public java.net.Proxy getProxy();
+    descriptor: ()Ljava/net/Proxy;
+
   public net.minecraft.client.renderer.texture.TextureManager getTextureManager();
+    descriptor: ()Lnet/minecraft/client/renderer/texture/TextureManager;
+
   public net.minecraft.client.renderer.ShaderManager getShaderManager();
+    descriptor: ()Lnet/minecraft/client/renderer/ShaderManager;
+
   public net.minecraft.server.packs.resources.ResourceManager getResourceManager();
+    descriptor: ()Lnet/minecraft/server/packs/resources/ResourceManager;
+
   public net.minecraft.server.packs.repository.PackRepository getResourcePackRepository();
+    descriptor: ()Lnet/minecraft/server/packs/repository/PackRepository;
+
   public net.minecraft.server.packs.VanillaPackResources getVanillaPackResources();
+    descriptor: ()Lnet/minecraft/server/packs/VanillaPackResources;
+
   public net.minecraft.client.resources.server.DownloadedPackSource getDownloadedPackSource();
+    descriptor: ()Lnet/minecraft/client/resources/server/DownloadedPackSource;
+
   public java.nio.file.Path getResourcePackDirectory();
+    descriptor: ()Ljava/nio/file/Path;
+
   public net.minecraft.client.resources.language.LanguageManager getLanguageManager();
+    descriptor: ()Lnet/minecraft/client/resources/language/LanguageManager;
+
   public java.util.function.Function<net.minecraft.resources.ResourceLocation, net.minecraft.client.renderer.texture.TextureAtlasSprite> getTextureAtlas(net.minecraft.resources.ResourceLocation);
+    descriptor: (Lnet/minecraft/resources/ResourceLocation;)Ljava/util/function/Function;
+
   public boolean isPaused();
+    descriptor: ()Z
+
   public net.minecraft.client.renderer.GpuWarnlistManager getGpuWarnlistManager();
+    descriptor: ()Lnet/minecraft/client/renderer/GpuWarnlistManager;
+
   public net.minecraft.client.sounds.SoundManager getSoundManager();
+    descriptor: ()Lnet/minecraft/client/sounds/SoundManager;
+
   public net.minecraft.client.sounds.MusicInfo getSituationalMusic();
+    descriptor: ()Lnet/minecraft/client/sounds/MusicInfo;
+
   public com.mojang.authlib.minecraft.MinecraftSessionService getMinecraftSessionService();
+    descriptor: ()Lcom/mojang/authlib/minecraft/MinecraftSessionService;
+
   public net.minecraft.client.resources.SkinManager getSkinManager();
+    descriptor: ()Lnet/minecraft/client/resources/SkinManager;
+
   public net.minecraft.world.entity.Entity getCameraEntity();
+    descriptor: ()Lnet/minecraft/world/entity/Entity;
+
   public void setCameraEntity(net.minecraft.world.entity.Entity);
+    descriptor: (Lnet/minecraft/world/entity/Entity;)V
+
   public boolean shouldEntityAppearGlowing(net.minecraft.world.entity.Entity);
+    descriptor: (Lnet/minecraft/world/entity/Entity;)Z
+
   protected java.lang.Thread getRunningThread();
+    descriptor: ()Ljava/lang/Thread;
+
   public java.lang.Runnable wrapRunnable(java.lang.Runnable);
+    descriptor: (Ljava/lang/Runnable;)Ljava/lang/Runnable;
+
   protected boolean shouldRun(java.lang.Runnable);
+    descriptor: (Ljava/lang/Runnable;)Z
+
   public net.minecraft.client.renderer.block.BlockRenderDispatcher getBlockRenderer();
+    descriptor: ()Lnet/minecraft/client/renderer/block/BlockRenderDispatcher;
+
   public net.minecraft.client.renderer.entity.EntityRenderDispatcher getEntityRenderDispatcher();
+    descriptor: ()Lnet/minecraft/client/renderer/entity/EntityRenderDispatcher;
+
   public net.minecraft.client.renderer.blockentity.BlockEntityRenderDispatcher getBlockEntityRenderDispatcher();
+    descriptor: ()Lnet/minecraft/client/renderer/blockentity/BlockEntityRenderDispatcher;
+
   public net.minecraft.client.renderer.entity.ItemRenderer getItemRenderer();
+    descriptor: ()Lnet/minecraft/client/renderer/entity/ItemRenderer;
+
   public net.minecraft.client.renderer.MapRenderer getMapRenderer();
+    descriptor: ()Lnet/minecraft/client/renderer/MapRenderer;
+
   public com.mojang.datafixers.DataFixer getFixerUpper();
+    descriptor: ()Lcom/mojang/datafixers/DataFixer;
+
   public net.minecraft.client.DeltaTracker getDeltaTracker();
+    descriptor: ()Lnet/minecraft/client/DeltaTracker;
+
   public net.minecraft.client.color.block.BlockColors getBlockColors();
+    descriptor: ()Lnet/minecraft/client/color/block/BlockColors;
+
   public boolean showOnlyReducedInfo();
+    descriptor: ()Z
+
   public net.minecraft.client.gui.components.toasts.ToastManager getToastManager();
+    descriptor: ()Lnet/minecraft/client/gui/components/toasts/ToastManager;
+
   public net.minecraft.client.tutorial.Tutorial getTutorial();
+    descriptor: ()Lnet/minecraft/client/tutorial/Tutorial;
+
   public boolean isWindowActive();
+    descriptor: ()Z
+
   public net.minecraft.client.HotbarManager getHotbarManager();
+    descriptor: ()Lnet/minecraft/client/HotbarManager;
+
   public net.minecraft.client.resources.model.ModelManager getModelManager();
+    descriptor: ()Lnet/minecraft/client/resources/model/ModelManager;
+
   public net.minecraft.client.resources.PaintingTextureManager getPaintingTextures();
+    descriptor: ()Lnet/minecraft/client/resources/PaintingTextureManager;
+
   public net.minecraft.client.resources.MobEffectTextureManager getMobEffectTextures();
+    descriptor: ()Lnet/minecraft/client/resources/MobEffectTextureManager;
+
   public net.minecraft.client.resources.MapTextureManager getMapTextureManager();
+    descriptor: ()Lnet/minecraft/client/resources/MapTextureManager;
+
   public net.minecraft.client.resources.MapDecorationTextureManager getMapDecorationTextures();
+    descriptor: ()Lnet/minecraft/client/resources/MapDecorationTextureManager;
+
   public net.minecraft.client.gui.GuiSpriteManager getGuiSprites();
+    descriptor: ()Lnet/minecraft/client/gui/GuiSpriteManager;
+
   public void setWindowActive(boolean);
+    descriptor: (Z)V
+
   public net.minecraft.network.chat.Component grabPanoramixScreenshot(java.io.File, int, int);
+    descriptor: (Ljava/io/File;II)Lnet/minecraft/network/chat/Component;
+
   private net.minecraft.network.chat.Component grabHugeScreenshot(java.io.File, int, int, int, int);
+    descriptor: (Ljava/io/File;IIII)Lnet/minecraft/network/chat/Component;
+
   public net.minecraft.server.level.progress.StoringChunkProgressListener getProgressListener();
+    descriptor: ()Lnet/minecraft/server/level/progress/StoringChunkProgressListener;
+
   public net.minecraft.client.resources.SplashManager getSplashManager();
+    descriptor: ()Lnet/minecraft/client/resources/SplashManager;
+
   public net.minecraft.client.gui.screens.Overlay getOverlay();
+    descriptor: ()Lnet/minecraft/client/gui/screens/Overlay;
+
   public net.minecraft.client.gui.screens.social.PlayerSocialManager getPlayerSocialManager();
+    descriptor: ()Lnet/minecraft/client/gui/screens/social/PlayerSocialManager;
+
   public com.mojang.blaze3d.platform.Window getWindow();
+    descriptor: ()Lcom/mojang/blaze3d/platform/Window;
+
   public com.mojang.blaze3d.platform.FramerateLimitTracker getFramerateLimitTracker();
+    descriptor: ()Lcom/mojang/blaze3d/platform/FramerateLimitTracker;
+
   public net.minecraft.client.gui.components.DebugScreenOverlay getDebugOverlay();
+    descriptor: ()Lnet/minecraft/client/gui/components/DebugScreenOverlay;
+
   public net.minecraft.client.renderer.RenderBuffers renderBuffers();
+    descriptor: ()Lnet/minecraft/client/renderer/RenderBuffers;
+
   public void updateMaxMipLevel(int);
+    descriptor: (I)V
+
   public net.minecraft.client.model.geom.EntityModelSet getEntityModels();
+    descriptor: ()Lnet/minecraft/client/model/geom/EntityModelSet;
+
   public boolean isTextFilteringEnabled();
+    descriptor: ()Z
+
   public void prepareForMultiplayer();
+    descriptor: ()V
+
   public net.minecraft.util.SignatureValidator getProfileKeySignatureValidator();
+    descriptor: ()Lnet/minecraft/util/SignatureValidator;
+
   public boolean canValidateProfileKeys();
+    descriptor: ()Z
+
   public net.minecraft.client.InputType getLastInputType();
+    descriptor: ()Lnet/minecraft/client/InputType;
+
   public void setLastInputType(net.minecraft.client.InputType);
+    descriptor: (Lnet/minecraft/client/InputType;)V
+
   public net.minecraft.client.GameNarrator getNarrator();
+    descriptor: ()Lnet/minecraft/client/GameNarrator;
+
   public net.minecraft.client.multiplayer.chat.ChatListener getChatListener();
+    descriptor: ()Lnet/minecraft/client/multiplayer/chat/ChatListener;
+
   public net.minecraft.client.multiplayer.chat.report.ReportingContext getReportingContext();
+    descriptor: ()Lnet/minecraft/client/multiplayer/chat/report/ReportingContext;
+
   public com.mojang.realmsclient.gui.RealmsDataFetcher realmsDataFetcher();
+    descriptor: ()Lcom/mojang/realmsclient/gui/RealmsDataFetcher;
+
   public net.minecraft.client.quickplay.QuickPlayLog quickPlayLog();
+    descriptor: ()Lnet/minecraft/client/quickplay/QuickPlayLog;
+
   public net.minecraft.client.CommandHistory commandHistory();
+    descriptor: ()Lnet/minecraft/client/CommandHistory;
+
   public net.minecraft.world.level.validation.DirectoryValidator directoryValidator();
+    descriptor: ()Lnet/minecraft/world/level/validation/DirectoryValidator;
+
   private float getTickTargetMillis(float);
+    descriptor: (F)F
+
   public net.minecraft.client.renderer.item.ItemModelResolver getItemModelResolver();
+    descriptor: ()Lnet/minecraft/client/renderer/item/ItemModelResolver;
+
   public static java.lang.String getLauncherBrand();
+    descriptor: ()Ljava/lang/String;
+
   private static net.minecraft.network.chat.Style method_35700(java.io.File, net.minecraft.network.chat.Style);
+    descriptor: (Ljava/io/File;Lnet/minecraft/network/chat/Style;)Lnet/minecraft/network/chat/Style;
+
   private static net.minecraft.network.chat.Style method_35704(java.io.File, net.minecraft.network.chat.Style);
+    descriptor: (Ljava/io/File;Lnet/minecraft/network/chat/Style;)Lnet/minecraft/network/chat/Style;
+
   private static void method_35701(net.minecraft.network.chat.Component);
+    descriptor: (Lnet/minecraft/network/chat/Component;)V
+
   private static java.util.concurrent.CompletionStage method_18507(java.util.concurrent.CompletableFuture);
+    descriptor: (Ljava/util/concurrent/CompletableFuture;)Ljava/util/concurrent/CompletionStage;
+
   private static java.lang.String method_60864();
+    descriptor: ()Ljava/lang/String;
+
   private static java.lang.String method_37288();
+    descriptor: ()Ljava/lang/String;
+
   private static java.lang.String method_37280(net.minecraft.client.resources.language.LanguageManager);
+    descriptor: (Lnet/minecraft/client/resources/language/LanguageManager;)Ljava/lang/String;
+
   private static java.lang.String method_37279(net.minecraft.client.Minecraft);
+    descriptor: (Lnet/minecraft/client/Minecraft;)Ljava/lang/String;
+
   private static java.lang.String method_53905(net.minecraft.client.Minecraft);
+    descriptor: (Lnet/minecraft/client/Minecraft;)Ljava/lang/String;
+
   private static java.lang.String method_37287();
+    descriptor: ()Ljava/lang/String;
+
   private static java.lang.String method_37289();
+    descriptor: ()Ljava/lang/String;
+
   private static java.lang.String method_37278(net.minecraft.client.Minecraft);
+    descriptor: (Lnet/minecraft/client/Minecraft;)Ljava/lang/String;
+
   private static java.lang.String method_37292(java.lang.String);
+    descriptor: (Ljava/lang/String;)Ljava/lang/String;
+
   private java.lang.String method_54118() throws java.lang.Exception;
+    descriptor: ()Ljava/lang/String;
+
   private static java.lang.String method_54119() throws java.lang.Exception;
+    descriptor: ()Ljava/lang/String;
+
   private java.lang.String method_54120() throws java.lang.Exception;
+    descriptor: ()Ljava/lang/String;
+
   private static java.lang.String method_54121() throws java.lang.Exception;
+    descriptor: ()Ljava/lang/String;
+
   private static boolean method_59834();
+    descriptor: ()Z
+
   private static void method_1510(net.minecraft.network.chat.Component);
+    descriptor: (Lnet/minecraft/network/chat/Component;)V
+
   private static java.lang.String method_41732(net.minecraft.server.WorldStem) throws java.lang.Exception;
+    descriptor: (Lnet/minecraft/server/WorldStem;)Ljava/lang/String;
+
   private net.minecraft.client.server.IntegratedServer method_29603(net.minecraft.world.level.storage.LevelStorageSource$LevelStorageAccess, net.minecraft.server.packs.repository.PackRepository, net.minecraft.server.WorldStem, net.minecraft.server.Services, java.lang.Thread);
+    descriptor: (Lnet/minecraft/world/level/storage/LevelStorageSource$LevelStorageAccess;Lnet/minecraft/server/packs/repository/PackRepository;Lnet/minecraft/server/WorldStem;Lnet/minecraft/server/Services;Ljava/lang/Thread;)Lnet/minecraft/client/server/IntegratedServer;
+
   private net.minecraft.server.level.progress.ChunkProgressListener method_17533(int);
+    descriptor: (I)Lnet/minecraft/server/level/progress/ChunkProgressListener;
+
   private static boolean method_1491();
+    descriptor: ()Z
+
   private void method_34746(java.util.function.Consumer, net.minecraft.util.profiling.ProfileResults);
+    descriptor: (Ljava/util/function/Consumer;Lnet/minecraft/util/profiling/ProfileResults;)V
+
   private static void method_37277(net.minecraft.util.profiling.ProfileResults);
+    descriptor: (Lnet/minecraft/util/profiling/ProfileResults;)V
+
   private static void method_37284(java.util.function.Consumer, java.util.concurrent.CompletableFuture, java.util.concurrent.CompletableFuture);
+    descriptor: (Ljava/util/function/Consumer;Ljava/util/concurrent/CompletableFuture;Ljava/util/concurrent/CompletableFuture;)V
+
   private static void method_37283(java.util.function.Consumer, java.nio.file.Path);
+    descriptor: (Ljava/util/function/Consumer;Ljava/nio/file/Path;)V
+
   private void method_37276(net.minecraft.SystemReport, java.util.function.Consumer, java.util.List);
+    descriptor: (Lnet/minecraft/SystemReport;Ljava/util/function/Consumer;Ljava/util/List;)V
+
   private void method_37291(java.util.function.Consumer, java.nio.file.Path);
+    descriptor: (Ljava/util/function/Consumer;Ljava/nio/file/Path;)V
+
   private static void method_37285(java.util.function.Consumer, net.minecraft.network.chat.Component);
+    descriptor: (Ljava/util/function/Consumer;Lnet/minecraft/network/chat/Component;)V
+
   private static net.minecraft.network.chat.Style method_37281(java.nio.file.Path, net.minecraft.network.chat.Style);
+    descriptor: (Ljava/nio/file/Path;Lnet/minecraft/network/chat/Style;)Lnet/minecraft/network/chat/Style;
+
   private void method_37290(java.util.function.Consumer, net.minecraft.util.profiling.ProfileResults);
+    descriptor: (Ljava/util/function/Consumer;Lnet/minecraft/util/profiling/ProfileResults;)V
+
   private static void method_37282(java.util.function.Consumer, double, int);
+    descriptor: (Ljava/util/function/Consumer;DI)V
+
   private void method_41731(com.mojang.blaze3d.systems.TimerQuery);
+    descriptor: (Lcom/mojang/blaze3d/systems/TimerQuery;)V
+
   private static void method_18508(java.util.concurrent.CompletableFuture);
+    descriptor: (Ljava/util/concurrent/CompletableFuture;)V
+
   private void method_44352(boolean);
+    descriptor: (Z)V
+
   private static void method_64035(net.minecraft.core.Holder$Reference);
+    descriptor: (Lnet/minecraft/core/Holder$Reference;)V
+
   private void method_24228(boolean, net.minecraft.client.Minecraft$GameLoadCookie, java.util.concurrent.CompletableFuture, java.util.Optional);
+    descriptor: (ZLnet/minecraft/client/Minecraft$GameLoadCookie;Ljava/util/concurrent/CompletableFuture;Ljava/util/Optional;)V
+
   private void method_29339(java.util.concurrent.CompletableFuture, net.minecraft.client.Minecraft$GameLoadCookie);
+    descriptor: (Ljava/util/concurrent/CompletableFuture;Lnet/minecraft/client/Minecraft$GameLoadCookie;)V
+
   private void method_49293(boolean, net.minecraft.client.Minecraft$GameLoadCookie, java.lang.Throwable);
+    descriptor: (ZLnet/minecraft/client/Minecraft$GameLoadCookie;Ljava/lang/Throwable;)V
+
   private static net.minecraft.CrashReport method_43588(net.minecraft.CrashReport);
+    descriptor: (Lnet/minecraft/CrashReport;)Lnet/minecraft/CrashReport;
+
   private net.minecraft.CrashReport method_43589(net.minecraft.CrashReport);
+    descriptor: (Lnet/minecraft/CrashReport;)Lnet/minecraft/CrashReport;
+
   private void method_24229(net.minecraft.network.chat.Component);
+    descriptor: (Lnet/minecraft/network/chat/Component;)V
+
   private static net.minecraft.client.gui.screens.Screen method_53519(com.mojang.authlib.GameProfile, java.lang.Runnable);
+    descriptor: (Lcom/mojang/authlib/GameProfile;Ljava/lang/Runnable;)Lnet/minecraft/client/gui/screens/Screen;
+
   private static net.minecraft.client.gui.screens.Screen method_53520(com.mojang.authlib.minecraft.BanDetails, java.lang.Runnable);
+    descriptor: (Lcom/mojang/authlib/minecraft/BanDetails;Ljava/lang/Runnable;)Lnet/minecraft/client/gui/screens/Screen;
+
   private static void method_53524(java.lang.Runnable, boolean);
+    descriptor: (Ljava/lang/Runnable;Z)V
+
   private net.minecraft.client.gui.screens.Screen method_53523(java.lang.Runnable);
+    descriptor: (Ljava/lang/Runnable;)Lnet/minecraft/client/gui/screens/Screen;
+
   private void method_53529(net.minecraft.client.gui.screens.Screen);
+    descriptor: (Lnet/minecraft/client/gui/screens/Screen;)V
+
   private void method_53528(net.minecraft.client.Minecraft$GameLoadCookie);
+    descriptor: (Lnet/minecraft/client/Minecraft$GameLoadCookie;)V
+
   private void method_53522(net.minecraft.client.Minecraft$GameLoadCookie, java.util.Optional);
+    descriptor: (Lnet/minecraft/client/Minecraft$GameLoadCookie;Ljava/util/Optional;)V
+
   private void method_29338(net.minecraft.client.Minecraft$GameLoadCookie);
+    descriptor: (Lnet/minecraft/client/Minecraft$GameLoadCookie;)V
+
   private void method_53521(net.minecraft.client.Minecraft$GameLoadCookie, java.lang.Throwable);
+    descriptor: (Lnet/minecraft/client/Minecraft$GameLoadCookie;Ljava/lang/Throwable;)V
+
   private void method_60320(net.minecraft.client.resources.language.ClientLanguage);
+    descriptor: (Lnet/minecraft/client/resources/language/ClientLanguage;)V
+
   private com.mojang.authlib.minecraft.UserApiService$UserProperties method_55608();
+    descriptor: ()Lcom/mojang/authlib/minecraft/UserApiService$UserProperties;
+
   private com.mojang.authlib.yggdrasil.ProfileResult method_53464();
+    descriptor: ()Lcom/mojang/authlib/yggdrasil/ProfileResult;
+
   private int method_16010();
+    descriptor: ()I
+
   static {};
+    descriptor: ()V
 }

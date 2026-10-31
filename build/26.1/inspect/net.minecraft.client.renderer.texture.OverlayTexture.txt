@@ -1,17 +1,38 @@
 Compiled from "OverlayTexture.java"
 public class net.minecraft.client.renderer.texture.OverlayTexture implements java.lang.AutoCloseable {
   private static final int SIZE;
+    descriptor: I
   public static final int NO_WHITE_U;
+    descriptor: I
   public static final int RED_OVERLAY_V;
+    descriptor: I
   public static final int WHITE_OVERLAY_V;
+    descriptor: I
   public static final int NO_OVERLAY;
+    descriptor: I
   private final net.minecraft.client.renderer.texture.DynamicTexture texture;
+    descriptor: Lnet/minecraft/client/renderer/texture/DynamicTexture;
   public net.minecraft.client.renderer.texture.OverlayTexture();
+    descriptor: ()V
+
   public void close();
+    descriptor: ()V
+
   public static int u(float);
+    descriptor: (F)I
+
   public static int v(boolean);
+    descriptor: (Z)I
+
   public static int pack(int, int);
+    descriptor: (II)I
+
   public static int pack(float, boolean);
+    descriptor: (FZ)I
+
   public com.mojang.blaze3d.textures.GpuTextureView getTextureView();
+    descriptor: ()Lcom/mojang/blaze3d/textures/GpuTextureView;
+
   static {};
+    descriptor: ()V
 }

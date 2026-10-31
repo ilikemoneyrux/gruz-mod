@@ -1,19 +1,40 @@
 Compiled from "ItemEntityRenderer.java"
 public class net.minecraft.client.renderer.entity.ItemEntityRenderer extends net.minecraft.client.renderer.entity.EntityRenderer<net.minecraft.world.entity.item.ItemEntity> {
   private static final float ITEM_BUNDLE_OFFSET_SCALE;
+    descriptor: F
   private static final int ITEM_COUNT_FOR_5_BUNDLE;
+    descriptor: I
   private static final int ITEM_COUNT_FOR_4_BUNDLE;
+    descriptor: I
   private static final int ITEM_COUNT_FOR_3_BUNDLE;
+    descriptor: I
   private static final int ITEM_COUNT_FOR_2_BUNDLE;
+    descriptor: I
   private static final float FLAT_ITEM_BUNDLE_OFFSET_X;
+    descriptor: F
   private static final float FLAT_ITEM_BUNDLE_OFFSET_Y;
+    descriptor: F
   private static final float FLAT_ITEM_BUNDLE_OFFSET_Z;
+    descriptor: F
   private final net.minecraft.client.renderer.entity.ItemRenderer itemRenderer;
+    descriptor: Lnet/minecraft/client/renderer/entity/ItemRenderer;
   private final net.minecraft.util.RandomSource random;
+    descriptor: Lnet/minecraft/util/RandomSource;
   public net.minecraft.client.renderer.entity.ItemEntityRenderer(net.minecraft.client.renderer.entity.EntityRendererProvider$Context);
+    descriptor: (Lnet/minecraft/client/renderer/entity/EntityRendererProvider$Context;)V
+
   private int getRenderAmount(net.minecraft.world.item.ItemStack);
+    descriptor: (Lnet/minecraft/world/item/ItemStack;)I
+
   public void render(net.minecraft.world.entity.item.ItemEntity, float, float, com.mojang.blaze3d.vertex.PoseStack, net.minecraft.client.renderer.MultiBufferSource, int);
+    descriptor: (Lnet/minecraft/world/entity/item/ItemEntity;FFLcom/mojang/blaze3d/vertex/PoseStack;Lnet/minecraft/client/renderer/MultiBufferSource;I)V
+
   public net.minecraft.resources.ResourceLocation getTextureLocation(net.minecraft.world.entity.item.ItemEntity);
+    descriptor: (Lnet/minecraft/world/entity/item/ItemEntity;)Lnet/minecraft/resources/ResourceLocation;
+
   public net.minecraft.resources.ResourceLocation getTextureLocation(net.minecraft.world.entity.Entity);
+    descriptor: (Lnet/minecraft/world/entity/Entity;)Lnet/minecraft/resources/ResourceLocation;
+
   public void render(net.minecraft.world.entity.Entity, float, float, com.mojang.blaze3d.vertex.PoseStack, net.minecraft.client.renderer.MultiBufferSource, int);
+    descriptor: (Lnet/minecraft/world/entity/Entity;FFLcom/mojang/blaze3d/vertex/PoseStack;Lnet/minecraft/client/renderer/MultiBufferSource;I)V
 }

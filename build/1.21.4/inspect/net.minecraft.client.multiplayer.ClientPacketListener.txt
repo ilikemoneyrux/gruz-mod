@@ -1,0 +1,647 @@
+Compiled from "ClientPacketListener.java"
+public class net.minecraft.client.multiplayer.ClientPacketListener extends net.minecraft.client.multiplayer.ClientCommonPacketListenerImpl implements net.minecraft.network.protocol.game.ClientGamePacketListener,net.minecraft.network.TickablePacketListener {
+  private static final org.slf4j.Logger LOGGER;
+    descriptor: Lorg/slf4j/Logger;
+  private static final net.minecraft.network.chat.Component UNSECURE_SERVER_TOAST_TITLE;
+    descriptor: Lnet/minecraft/network/chat/Component;
+  private static final net.minecraft.network.chat.Component UNSERURE_SERVER_TOAST;
+    descriptor: Lnet/minecraft/network/chat/Component;
+  private static final net.minecraft.network.chat.Component INVALID_PACKET;
+    descriptor: Lnet/minecraft/network/chat/Component;
+  private static final net.minecraft.network.chat.Component RECONFIGURE_SCREEN_MESSAGE;
+    descriptor: Lnet/minecraft/network/chat/Component;
+  private static final int PENDING_OFFSET_THRESHOLD;
+    descriptor: I
+  public static final int TELEPORT_INTERPOLATION_THRESHOLD;
+    descriptor: I
+  private final com.mojang.authlib.GameProfile localGameProfile;
+    descriptor: Lcom/mojang/authlib/GameProfile;
+  private net.minecraft.client.multiplayer.ClientLevel level;
+    descriptor: Lnet/minecraft/client/multiplayer/ClientLevel;
+  private net.minecraft.client.multiplayer.ClientLevel$ClientLevelData levelData;
+    descriptor: Lnet/minecraft/client/multiplayer/ClientLevel$ClientLevelData;
+  private final java.util.Map<java.util.UUID, net.minecraft.client.multiplayer.PlayerInfo> playerInfoMap;
+    descriptor: Ljava/util/Map;
+  private final java.util.Set<net.minecraft.client.multiplayer.PlayerInfo> listedPlayers;
+    descriptor: Ljava/util/Set;
+  private final net.minecraft.client.multiplayer.ClientAdvancements advancements;
+    descriptor: Lnet/minecraft/client/multiplayer/ClientAdvancements;
+  private final net.minecraft.client.multiplayer.ClientSuggestionProvider suggestionsProvider;
+    descriptor: Lnet/minecraft/client/multiplayer/ClientSuggestionProvider;
+  private final net.minecraft.client.DebugQueryHandler debugQueryHandler;
+    descriptor: Lnet/minecraft/client/DebugQueryHandler;
+  private int serverChunkRadius;
+    descriptor: I
+  private int serverSimulationDistance;
+    descriptor: I
+  private final net.minecraft.util.RandomSource random;
+    descriptor: Lnet/minecraft/util/RandomSource;
+  private com.mojang.brigadier.CommandDispatcher<net.minecraft.commands.SharedSuggestionProvider> commands;
+    descriptor: Lcom/mojang/brigadier/CommandDispatcher;
+  private net.minecraft.client.multiplayer.ClientRecipeContainer recipes;
+    descriptor: Lnet/minecraft/client/multiplayer/ClientRecipeContainer;
+  private final java.util.UUID id;
+    descriptor: Ljava/util/UUID;
+  private java.util.Set<net.minecraft.resources.ResourceKey<net.minecraft.world.level.Level>> levels;
+    descriptor: Ljava/util/Set;
+  private final net.minecraft.core.RegistryAccess$Frozen registryAccess;
+    descriptor: Lnet/minecraft/core/RegistryAccess$Frozen;
+  private final net.minecraft.world.flag.FeatureFlagSet enabledFeatures;
+    descriptor: Lnet/minecraft/world/flag/FeatureFlagSet;
+  private final net.minecraft.world.item.alchemy.PotionBrewing potionBrewing;
+    descriptor: Lnet/minecraft/world/item/alchemy/PotionBrewing;
+  private net.minecraft.world.level.block.entity.FuelValues fuelValues;
+    descriptor: Lnet/minecraft/world/level/block/entity/FuelValues;
+  private java.util.OptionalInt removedPlayerVehicleId;
+    descriptor: Ljava/util/OptionalInt;
+  private net.minecraft.network.chat.LocalChatSession chatSession;
+    descriptor: Lnet/minecraft/network/chat/LocalChatSession;
+  private net.minecraft.network.chat.SignedMessageChain$Encoder signedMessageEncoder;
+    descriptor: Lnet/minecraft/network/chat/SignedMessageChain$Encoder;
+  private net.minecraft.network.chat.LastSeenMessagesTracker lastSeenMessages;
+    descriptor: Lnet/minecraft/network/chat/LastSeenMessagesTracker;
+  private net.minecraft.network.chat.MessageSignatureCache messageSignatureCache;
+    descriptor: Lnet/minecraft/network/chat/MessageSignatureCache;
+  private java.util.concurrent.CompletableFuture<java.util.Optional<net.minecraft.world.entity.player.ProfileKeyPair>> keyPairFuture;
+    descriptor: Ljava/util/concurrent/CompletableFuture;
+  private net.minecraft.server.level.ClientInformation remoteClientInformation;
+    descriptor: Lnet/minecraft/server/level/ClientInformation;
+  private final net.minecraft.client.multiplayer.ChunkBatchSizeCalculator chunkBatchSizeCalculator;
+    descriptor: Lnet/minecraft/client/multiplayer/ChunkBatchSizeCalculator;
+  private final net.minecraft.client.multiplayer.PingDebugMonitor pingDebugMonitor;
+    descriptor: Lnet/minecraft/client/multiplayer/PingDebugMonitor;
+  private final net.minecraft.client.multiplayer.DebugSampleSubscriber debugSampleSubscriber;
+    descriptor: Lnet/minecraft/client/multiplayer/DebugSampleSubscriber;
+  private net.minecraft.client.multiplayer.LevelLoadStatusManager levelLoadStatusManager;
+    descriptor: Lnet/minecraft/client/multiplayer/LevelLoadStatusManager;
+  private boolean serverEnforcesSecureChat;
+    descriptor: Z
+  private boolean seenInsecureChatWarning;
+    descriptor: Z
+  private volatile boolean closed;
+    descriptor: Z
+  private final net.minecraft.world.scores.Scoreboard scoreboard;
+    descriptor: Lnet/minecraft/world/scores/Scoreboard;
+  private final net.minecraft.client.multiplayer.SessionSearchTrees searchTrees;
+    descriptor: Lnet/minecraft/client/multiplayer/SessionSearchTrees;
+  public net.minecraft.client.multiplayer.ClientPacketListener(net.minecraft.client.Minecraft, net.minecraft.network.Connection, net.minecraft.client.multiplayer.CommonListenerCookie);
+    descriptor: (Lnet/minecraft/client/Minecraft;Lnet/minecraft/network/Connection;Lnet/minecraft/client/multiplayer/CommonListenerCookie;)V
+
+  public net.minecraft.client.multiplayer.ClientSuggestionProvider getSuggestionsProvider();
+    descriptor: ()Lnet/minecraft/client/multiplayer/ClientSuggestionProvider;
+
+  public void close();
+    descriptor: ()V
+
+  public void clearLevel();
+    descriptor: ()V
+
+  public net.minecraft.world.item.crafting.RecipeAccess recipes();
+    descriptor: ()Lnet/minecraft/world/item/crafting/RecipeAccess;
+
+  public void handleLogin(net.minecraft.network.protocol.game.ClientboundLoginPacket);
+    descriptor: (Lnet/minecraft/network/protocol/game/ClientboundLoginPacket;)V
+
+  public void handleAddEntity(net.minecraft.network.protocol.game.ClientboundAddEntityPacket);
+    descriptor: (Lnet/minecraft/network/protocol/game/ClientboundAddEntityPacket;)V
+
+  private net.minecraft.world.entity.Entity createEntityFromPacket(net.minecraft.network.protocol.game.ClientboundAddEntityPacket);
+    descriptor: (Lnet/minecraft/network/protocol/game/ClientboundAddEntityPacket;)Lnet/minecraft/world/entity/Entity;
+
+  private void postAddEntitySoundInstance(net.minecraft.world.entity.Entity);
+    descriptor: (Lnet/minecraft/world/entity/Entity;)V
+
+  public void handleAddExperienceOrb(net.minecraft.network.protocol.game.ClientboundAddExperienceOrbPacket);
+    descriptor: (Lnet/minecraft/network/protocol/game/ClientboundAddExperienceOrbPacket;)V
+
+  public void handleSetEntityMotion(net.minecraft.network.protocol.game.ClientboundSetEntityMotionPacket);
+    descriptor: (Lnet/minecraft/network/protocol/game/ClientboundSetEntityMotionPacket;)V
+
+  public void handleSetEntityData(net.minecraft.network.protocol.game.ClientboundSetEntityDataPacket);
+    descriptor: (Lnet/minecraft/network/protocol/game/ClientboundSetEntityDataPacket;)V
+
+  public void handleEntityPositionSync(net.minecraft.network.protocol.game.ClientboundEntityPositionSyncPacket);
+    descriptor: (Lnet/minecraft/network/protocol/game/ClientboundEntityPositionSyncPacket;)V
+
+  public void handleTeleportEntity(net.minecraft.network.protocol.game.ClientboundTeleportEntityPacket);
+    descriptor: (Lnet/minecraft/network/protocol/game/ClientboundTeleportEntityPacket;)V
+
+  public void handleTickingState(net.minecraft.network.protocol.game.ClientboundTickingStatePacket);
+    descriptor: (Lnet/minecraft/network/protocol/game/ClientboundTickingStatePacket;)V
+
+  public void handleTickingStep(net.minecraft.network.protocol.game.ClientboundTickingStepPacket);
+    descriptor: (Lnet/minecraft/network/protocol/game/ClientboundTickingStepPacket;)V
+
+  public void handleSetHeldSlot(net.minecraft.network.protocol.game.ClientboundSetHeldSlotPacket);
+    descriptor: (Lnet/minecraft/network/protocol/game/ClientboundSetHeldSlotPacket;)V
+
+  public void handleMoveEntity(net.minecraft.network.protocol.game.ClientboundMoveEntityPacket);
+    descriptor: (Lnet/minecraft/network/protocol/game/ClientboundMoveEntityPacket;)V
+
+  public void handleMinecartAlongTrack(net.minecraft.network.protocol.game.ClientboundMoveMinecartPacket);
+    descriptor: (Lnet/minecraft/network/protocol/game/ClientboundMoveMinecartPacket;)V
+
+  public void handleRotateMob(net.minecraft.network.protocol.game.ClientboundRotateHeadPacket);
+    descriptor: (Lnet/minecraft/network/protocol/game/ClientboundRotateHeadPacket;)V
+
+  public void handleRemoveEntities(net.minecraft.network.protocol.game.ClientboundRemoveEntitiesPacket);
+    descriptor: (Lnet/minecraft/network/protocol/game/ClientboundRemoveEntitiesPacket;)V
+
+  public void handleMovePlayer(net.minecraft.network.protocol.game.ClientboundPlayerPositionPacket);
+    descriptor: (Lnet/minecraft/network/protocol/game/ClientboundPlayerPositionPacket;)V
+
+  private static boolean setValuesFromPositionPacket(net.minecraft.world.entity.PositionMoveRotation, java.util.Set<net.minecraft.world.entity.Relative>, net.minecraft.world.entity.Entity, boolean);
+    descriptor: (Lnet/minecraft/world/entity/PositionMoveRotation;Ljava/util/Set;Lnet/minecraft/world/entity/Entity;Z)Z
+
+  public void handleRotatePlayer(net.minecraft.network.protocol.game.ClientboundPlayerRotationPacket);
+    descriptor: (Lnet/minecraft/network/protocol/game/ClientboundPlayerRotationPacket;)V
+
+  public void handleChunkBlocksUpdate(net.minecraft.network.protocol.game.ClientboundSectionBlocksUpdatePacket);
+    descriptor: (Lnet/minecraft/network/protocol/game/ClientboundSectionBlocksUpdatePacket;)V
+
+  public void handleLevelChunkWithLight(net.minecraft.network.protocol.game.ClientboundLevelChunkWithLightPacket);
+    descriptor: (Lnet/minecraft/network/protocol/game/ClientboundLevelChunkWithLightPacket;)V
+
+  public void handleChunksBiomes(net.minecraft.network.protocol.game.ClientboundChunksBiomesPacket);
+    descriptor: (Lnet/minecraft/network/protocol/game/ClientboundChunksBiomesPacket;)V
+
+  private void updateLevelChunk(int, int, net.minecraft.network.protocol.game.ClientboundLevelChunkPacketData);
+    descriptor: (IILnet/minecraft/network/protocol/game/ClientboundLevelChunkPacketData;)V
+
+  private void enableChunkLight(net.minecraft.world.level.chunk.LevelChunk, int, int);
+    descriptor: (Lnet/minecraft/world/level/chunk/LevelChunk;II)V
+
+  public void handleForgetLevelChunk(net.minecraft.network.protocol.game.ClientboundForgetLevelChunkPacket);
+    descriptor: (Lnet/minecraft/network/protocol/game/ClientboundForgetLevelChunkPacket;)V
+
+  private void queueLightRemoval(net.minecraft.network.protocol.game.ClientboundForgetLevelChunkPacket);
+    descriptor: (Lnet/minecraft/network/protocol/game/ClientboundForgetLevelChunkPacket;)V
+
+  public void handleBlockUpdate(net.minecraft.network.protocol.game.ClientboundBlockUpdatePacket);
+    descriptor: (Lnet/minecraft/network/protocol/game/ClientboundBlockUpdatePacket;)V
+
+  public void handleConfigurationStart(net.minecraft.network.protocol.game.ClientboundStartConfigurationPacket);
+    descriptor: (Lnet/minecraft/network/protocol/game/ClientboundStartConfigurationPacket;)V
+
+  public void handleTakeItemEntity(net.minecraft.network.protocol.game.ClientboundTakeItemEntityPacket);
+    descriptor: (Lnet/minecraft/network/protocol/game/ClientboundTakeItemEntityPacket;)V
+
+  public void handleSystemChat(net.minecraft.network.protocol.game.ClientboundSystemChatPacket);
+    descriptor: (Lnet/minecraft/network/protocol/game/ClientboundSystemChatPacket;)V
+
+  public void handlePlayerChat(net.minecraft.network.protocol.game.ClientboundPlayerChatPacket);
+    descriptor: (Lnet/minecraft/network/protocol/game/ClientboundPlayerChatPacket;)V
+
+  public void handleDisguisedChat(net.minecraft.network.protocol.game.ClientboundDisguisedChatPacket);
+    descriptor: (Lnet/minecraft/network/protocol/game/ClientboundDisguisedChatPacket;)V
+
+  public void handleDeleteChat(net.minecraft.network.protocol.game.ClientboundDeleteChatPacket);
+    descriptor: (Lnet/minecraft/network/protocol/game/ClientboundDeleteChatPacket;)V
+
+  public void handleAnimate(net.minecraft.network.protocol.game.ClientboundAnimatePacket);
+    descriptor: (Lnet/minecraft/network/protocol/game/ClientboundAnimatePacket;)V
+
+  public void handleHurtAnimation(net.minecraft.network.protocol.game.ClientboundHurtAnimationPacket);
+    descriptor: (Lnet/minecraft/network/protocol/game/ClientboundHurtAnimationPacket;)V
+
+  public void handleSetTime(net.minecraft.network.protocol.game.ClientboundSetTimePacket);
+    descriptor: (Lnet/minecraft/network/protocol/game/ClientboundSetTimePacket;)V
+
+  public void handleSetSpawn(net.minecraft.network.protocol.game.ClientboundSetDefaultSpawnPositionPacket);
+    descriptor: (Lnet/minecraft/network/protocol/game/ClientboundSetDefaultSpawnPositionPacket;)V
+
+  public void handleSetEntityPassengersPacket(net.minecraft.network.protocol.game.ClientboundSetPassengersPacket);
+    descriptor: (Lnet/minecraft/network/protocol/game/ClientboundSetPassengersPacket;)V
+
+  public void handleEntityLinkPacket(net.minecraft.network.protocol.game.ClientboundSetEntityLinkPacket);
+    descriptor: (Lnet/minecraft/network/protocol/game/ClientboundSetEntityLinkPacket;)V
+
+  private static net.minecraft.world.item.ItemStack findTotem(net.minecraft.world.entity.player.Player);
+    descriptor: (Lnet/minecraft/world/entity/player/Player;)Lnet/minecraft/world/item/ItemStack;
+
+  public void handleEntityEvent(net.minecraft.network.protocol.game.ClientboundEntityEventPacket);
+    descriptor: (Lnet/minecraft/network/protocol/game/ClientboundEntityEventPacket;)V
+
+  public void handleDamageEvent(net.minecraft.network.protocol.game.ClientboundDamageEventPacket);
+    descriptor: (Lnet/minecraft/network/protocol/game/ClientboundDamageEventPacket;)V
+
+  public void handleSetHealth(net.minecraft.network.protocol.game.ClientboundSetHealthPacket);
+    descriptor: (Lnet/minecraft/network/protocol/game/ClientboundSetHealthPacket;)V
+
+  public void handleSetExperience(net.minecraft.network.protocol.game.ClientboundSetExperiencePacket);
+    descriptor: (Lnet/minecraft/network/protocol/game/ClientboundSetExperiencePacket;)V
+
+  public void handleRespawn(net.minecraft.network.protocol.game.ClientboundRespawnPacket);
+    descriptor: (Lnet/minecraft/network/protocol/game/ClientboundRespawnPacket;)V
+
+  private net.minecraft.client.gui.screens.ReceivingLevelScreen$Reason determineLevelLoadingReason(boolean, net.minecraft.resources.ResourceKey<net.minecraft.world.level.Level>, net.minecraft.resources.ResourceKey<net.minecraft.world.level.Level>);
+    descriptor: (ZLnet/minecraft/resources/ResourceKey;Lnet/minecraft/resources/ResourceKey;)Lnet/minecraft/client/gui/screens/ReceivingLevelScreen$Reason;
+
+  public void handleExplosion(net.minecraft.network.protocol.game.ClientboundExplodePacket);
+    descriptor: (Lnet/minecraft/network/protocol/game/ClientboundExplodePacket;)V
+
+  public void handleHorseScreenOpen(net.minecraft.network.protocol.game.ClientboundHorseScreenOpenPacket);
+    descriptor: (Lnet/minecraft/network/protocol/game/ClientboundHorseScreenOpenPacket;)V
+
+  public void handleOpenScreen(net.minecraft.network.protocol.game.ClientboundOpenScreenPacket);
+    descriptor: (Lnet/minecraft/network/protocol/game/ClientboundOpenScreenPacket;)V
+
+  public void handleContainerSetSlot(net.minecraft.network.protocol.game.ClientboundContainerSetSlotPacket);
+    descriptor: (Lnet/minecraft/network/protocol/game/ClientboundContainerSetSlotPacket;)V
+
+  public void handleSetCursorItem(net.minecraft.network.protocol.game.ClientboundSetCursorItemPacket);
+    descriptor: (Lnet/minecraft/network/protocol/game/ClientboundSetCursorItemPacket;)V
+
+  public void handleSetPlayerInventory(net.minecraft.network.protocol.game.ClientboundSetPlayerInventoryPacket);
+    descriptor: (Lnet/minecraft/network/protocol/game/ClientboundSetPlayerInventoryPacket;)V
+
+  public void handleContainerContent(net.minecraft.network.protocol.game.ClientboundContainerSetContentPacket);
+    descriptor: (Lnet/minecraft/network/protocol/game/ClientboundContainerSetContentPacket;)V
+
+  public void handleOpenSignEditor(net.minecraft.network.protocol.game.ClientboundOpenSignEditorPacket);
+    descriptor: (Lnet/minecraft/network/protocol/game/ClientboundOpenSignEditorPacket;)V
+
+  public void handleBlockEntityData(net.minecraft.network.protocol.game.ClientboundBlockEntityDataPacket);
+    descriptor: (Lnet/minecraft/network/protocol/game/ClientboundBlockEntityDataPacket;)V
+
+  public void handleContainerSetData(net.minecraft.network.protocol.game.ClientboundContainerSetDataPacket);
+    descriptor: (Lnet/minecraft/network/protocol/game/ClientboundContainerSetDataPacket;)V
+
+  public void handleSetEquipment(net.minecraft.network.protocol.game.ClientboundSetEquipmentPacket);
+    descriptor: (Lnet/minecraft/network/protocol/game/ClientboundSetEquipmentPacket;)V
+
+  public void handleContainerClose(net.minecraft.network.protocol.game.ClientboundContainerClosePacket);
+    descriptor: (Lnet/minecraft/network/protocol/game/ClientboundContainerClosePacket;)V
+
+  public void handleBlockEvent(net.minecraft.network.protocol.game.ClientboundBlockEventPacket);
+    descriptor: (Lnet/minecraft/network/protocol/game/ClientboundBlockEventPacket;)V
+
+  public void handleBlockDestruction(net.minecraft.network.protocol.game.ClientboundBlockDestructionPacket);
+    descriptor: (Lnet/minecraft/network/protocol/game/ClientboundBlockDestructionPacket;)V
+
+  public void handleGameEvent(net.minecraft.network.protocol.game.ClientboundGameEventPacket);
+    descriptor: (Lnet/minecraft/network/protocol/game/ClientboundGameEventPacket;)V
+
+  private void startWaitingForNewLevel(net.minecraft.client.player.LocalPlayer, net.minecraft.client.multiplayer.ClientLevel, net.minecraft.client.gui.screens.ReceivingLevelScreen$Reason);
+    descriptor: (Lnet/minecraft/client/player/LocalPlayer;Lnet/minecraft/client/multiplayer/ClientLevel;Lnet/minecraft/client/gui/screens/ReceivingLevelScreen$Reason;)V
+
+  public void handleMapItemData(net.minecraft.network.protocol.game.ClientboundMapItemDataPacket);
+    descriptor: (Lnet/minecraft/network/protocol/game/ClientboundMapItemDataPacket;)V
+
+  public void handleLevelEvent(net.minecraft.network.protocol.game.ClientboundLevelEventPacket);
+    descriptor: (Lnet/minecraft/network/protocol/game/ClientboundLevelEventPacket;)V
+
+  public void handleUpdateAdvancementsPacket(net.minecraft.network.protocol.game.ClientboundUpdateAdvancementsPacket);
+    descriptor: (Lnet/minecraft/network/protocol/game/ClientboundUpdateAdvancementsPacket;)V
+
+  public void handleSelectAdvancementsTab(net.minecraft.network.protocol.game.ClientboundSelectAdvancementsTabPacket);
+    descriptor: (Lnet/minecraft/network/protocol/game/ClientboundSelectAdvancementsTabPacket;)V
+
+  public void handleCommands(net.minecraft.network.protocol.game.ClientboundCommandsPacket);
+    descriptor: (Lnet/minecraft/network/protocol/game/ClientboundCommandsPacket;)V
+
+  public void handleStopSoundEvent(net.minecraft.network.protocol.game.ClientboundStopSoundPacket);
+    descriptor: (Lnet/minecraft/network/protocol/game/ClientboundStopSoundPacket;)V
+
+  public void handleCommandSuggestions(net.minecraft.network.protocol.game.ClientboundCommandSuggestionsPacket);
+    descriptor: (Lnet/minecraft/network/protocol/game/ClientboundCommandSuggestionsPacket;)V
+
+  public void handleUpdateRecipes(net.minecraft.network.protocol.game.ClientboundUpdateRecipesPacket);
+    descriptor: (Lnet/minecraft/network/protocol/game/ClientboundUpdateRecipesPacket;)V
+
+  public void handleLookAt(net.minecraft.network.protocol.game.ClientboundPlayerLookAtPacket);
+    descriptor: (Lnet/minecraft/network/protocol/game/ClientboundPlayerLookAtPacket;)V
+
+  public void handleTagQueryPacket(net.minecraft.network.protocol.game.ClientboundTagQueryPacket);
+    descriptor: (Lnet/minecraft/network/protocol/game/ClientboundTagQueryPacket;)V
+
+  public void handleAwardStats(net.minecraft.network.protocol.game.ClientboundAwardStatsPacket);
+    descriptor: (Lnet/minecraft/network/protocol/game/ClientboundAwardStatsPacket;)V
+
+  public void handleRecipeBookAdd(net.minecraft.network.protocol.game.ClientboundRecipeBookAddPacket);
+    descriptor: (Lnet/minecraft/network/protocol/game/ClientboundRecipeBookAddPacket;)V
+
+  public void handleRecipeBookRemove(net.minecraft.network.protocol.game.ClientboundRecipeBookRemovePacket);
+    descriptor: (Lnet/minecraft/network/protocol/game/ClientboundRecipeBookRemovePacket;)V
+
+  public void handleRecipeBookSettings(net.minecraft.network.protocol.game.ClientboundRecipeBookSettingsPacket);
+    descriptor: (Lnet/minecraft/network/protocol/game/ClientboundRecipeBookSettingsPacket;)V
+
+  private void refreshRecipeBook(net.minecraft.client.ClientRecipeBook);
+    descriptor: (Lnet/minecraft/client/ClientRecipeBook;)V
+
+  public void handleUpdateMobEffect(net.minecraft.network.protocol.game.ClientboundUpdateMobEffectPacket);
+    descriptor: (Lnet/minecraft/network/protocol/game/ClientboundUpdateMobEffectPacket;)V
+
+  private <T> net.minecraft.core.Registry$PendingTags<T> updateTags(net.minecraft.resources.ResourceKey<? extends net.minecraft.core.Registry<? extends T>>, net.minecraft.tags.TagNetworkSerialization$NetworkPayload);
+    descriptor: (Lnet/minecraft/resources/ResourceKey;Lnet/minecraft/tags/TagNetworkSerialization$NetworkPayload;)Lnet/minecraft/core/Registry$PendingTags;
+
+  public void handleUpdateTags(net.minecraft.network.protocol.common.ClientboundUpdateTagsPacket);
+    descriptor: (Lnet/minecraft/network/protocol/common/ClientboundUpdateTagsPacket;)V
+
+  public void handlePlayerCombatEnd(net.minecraft.network.protocol.game.ClientboundPlayerCombatEndPacket);
+    descriptor: (Lnet/minecraft/network/protocol/game/ClientboundPlayerCombatEndPacket;)V
+
+  public void handlePlayerCombatEnter(net.minecraft.network.protocol.game.ClientboundPlayerCombatEnterPacket);
+    descriptor: (Lnet/minecraft/network/protocol/game/ClientboundPlayerCombatEnterPacket;)V
+
+  public void handlePlayerCombatKill(net.minecraft.network.protocol.game.ClientboundPlayerCombatKillPacket);
+    descriptor: (Lnet/minecraft/network/protocol/game/ClientboundPlayerCombatKillPacket;)V
+
+  public void handleChangeDifficulty(net.minecraft.network.protocol.game.ClientboundChangeDifficultyPacket);
+    descriptor: (Lnet/minecraft/network/protocol/game/ClientboundChangeDifficultyPacket;)V
+
+  public void handleSetCamera(net.minecraft.network.protocol.game.ClientboundSetCameraPacket);
+    descriptor: (Lnet/minecraft/network/protocol/game/ClientboundSetCameraPacket;)V
+
+  public void handleInitializeBorder(net.minecraft.network.protocol.game.ClientboundInitializeBorderPacket);
+    descriptor: (Lnet/minecraft/network/protocol/game/ClientboundInitializeBorderPacket;)V
+
+  public void handleSetBorderCenter(net.minecraft.network.protocol.game.ClientboundSetBorderCenterPacket);
+    descriptor: (Lnet/minecraft/network/protocol/game/ClientboundSetBorderCenterPacket;)V
+
+  public void handleSetBorderLerpSize(net.minecraft.network.protocol.game.ClientboundSetBorderLerpSizePacket);
+    descriptor: (Lnet/minecraft/network/protocol/game/ClientboundSetBorderLerpSizePacket;)V
+
+  public void handleSetBorderSize(net.minecraft.network.protocol.game.ClientboundSetBorderSizePacket);
+    descriptor: (Lnet/minecraft/network/protocol/game/ClientboundSetBorderSizePacket;)V
+
+  public void handleSetBorderWarningDistance(net.minecraft.network.protocol.game.ClientboundSetBorderWarningDistancePacket);
+    descriptor: (Lnet/minecraft/network/protocol/game/ClientboundSetBorderWarningDistancePacket;)V
+
+  public void handleSetBorderWarningDelay(net.minecraft.network.protocol.game.ClientboundSetBorderWarningDelayPacket);
+    descriptor: (Lnet/minecraft/network/protocol/game/ClientboundSetBorderWarningDelayPacket;)V
+
+  public void handleTitlesClear(net.minecraft.network.protocol.game.ClientboundClearTitlesPacket);
+    descriptor: (Lnet/minecraft/network/protocol/game/ClientboundClearTitlesPacket;)V
+
+  public void handleServerData(net.minecraft.network.protocol.game.ClientboundServerDataPacket);
+    descriptor: (Lnet/minecraft/network/protocol/game/ClientboundServerDataPacket;)V
+
+  public void handleCustomChatCompletions(net.minecraft.network.protocol.game.ClientboundCustomChatCompletionsPacket);
+    descriptor: (Lnet/minecraft/network/protocol/game/ClientboundCustomChatCompletionsPacket;)V
+
+  public void setActionBarText(net.minecraft.network.protocol.game.ClientboundSetActionBarTextPacket);
+    descriptor: (Lnet/minecraft/network/protocol/game/ClientboundSetActionBarTextPacket;)V
+
+  public void setTitleText(net.minecraft.network.protocol.game.ClientboundSetTitleTextPacket);
+    descriptor: (Lnet/minecraft/network/protocol/game/ClientboundSetTitleTextPacket;)V
+
+  public void setSubtitleText(net.minecraft.network.protocol.game.ClientboundSetSubtitleTextPacket);
+    descriptor: (Lnet/minecraft/network/protocol/game/ClientboundSetSubtitleTextPacket;)V
+
+  public void setTitlesAnimation(net.minecraft.network.protocol.game.ClientboundSetTitlesAnimationPacket);
+    descriptor: (Lnet/minecraft/network/protocol/game/ClientboundSetTitlesAnimationPacket;)V
+
+  public void handleTabListCustomisation(net.minecraft.network.protocol.game.ClientboundTabListPacket);
+    descriptor: (Lnet/minecraft/network/protocol/game/ClientboundTabListPacket;)V
+
+  public void handleRemoveMobEffect(net.minecraft.network.protocol.game.ClientboundRemoveMobEffectPacket);
+    descriptor: (Lnet/minecraft/network/protocol/game/ClientboundRemoveMobEffectPacket;)V
+
+  public void handlePlayerInfoRemove(net.minecraft.network.protocol.game.ClientboundPlayerInfoRemovePacket);
+    descriptor: (Lnet/minecraft/network/protocol/game/ClientboundPlayerInfoRemovePacket;)V
+
+  public void handlePlayerInfoUpdate(net.minecraft.network.protocol.game.ClientboundPlayerInfoUpdatePacket);
+    descriptor: (Lnet/minecraft/network/protocol/game/ClientboundPlayerInfoUpdatePacket;)V
+
+  private void applyPlayerInfoUpdate(net.minecraft.network.protocol.game.ClientboundPlayerInfoUpdatePacket$Action, net.minecraft.network.protocol.game.ClientboundPlayerInfoUpdatePacket$Entry, net.minecraft.client.multiplayer.PlayerInfo);
+    descriptor: (Lnet/minecraft/network/protocol/game/ClientboundPlayerInfoUpdatePacket$Action;Lnet/minecraft/network/protocol/game/ClientboundPlayerInfoUpdatePacket$Entry;Lnet/minecraft/client/multiplayer/PlayerInfo;)V
+
+  private void initializeChatSession(net.minecraft.network.protocol.game.ClientboundPlayerInfoUpdatePacket$Entry, net.minecraft.client.multiplayer.PlayerInfo);
+    descriptor: (Lnet/minecraft/network/protocol/game/ClientboundPlayerInfoUpdatePacket$Entry;Lnet/minecraft/client/multiplayer/PlayerInfo;)V
+
+  private boolean enforcesSecureChat();
+    descriptor: ()Z
+
+  public void handlePlayerAbilities(net.minecraft.network.protocol.game.ClientboundPlayerAbilitiesPacket);
+    descriptor: (Lnet/minecraft/network/protocol/game/ClientboundPlayerAbilitiesPacket;)V
+
+  public void handleSoundEvent(net.minecraft.network.protocol.game.ClientboundSoundPacket);
+    descriptor: (Lnet/minecraft/network/protocol/game/ClientboundSoundPacket;)V
+
+  public void handleSoundEntityEvent(net.minecraft.network.protocol.game.ClientboundSoundEntityPacket);
+    descriptor: (Lnet/minecraft/network/protocol/game/ClientboundSoundEntityPacket;)V
+
+  public void handleBossUpdate(net.minecraft.network.protocol.game.ClientboundBossEventPacket);
+    descriptor: (Lnet/minecraft/network/protocol/game/ClientboundBossEventPacket;)V
+
+  public void handleItemCooldown(net.minecraft.network.protocol.game.ClientboundCooldownPacket);
+    descriptor: (Lnet/minecraft/network/protocol/game/ClientboundCooldownPacket;)V
+
+  public void handleMoveVehicle(net.minecraft.network.protocol.game.ClientboundMoveVehiclePacket);
+    descriptor: (Lnet/minecraft/network/protocol/game/ClientboundMoveVehiclePacket;)V
+
+  public void handleOpenBook(net.minecraft.network.protocol.game.ClientboundOpenBookPacket);
+    descriptor: (Lnet/minecraft/network/protocol/game/ClientboundOpenBookPacket;)V
+
+  public void handleCustomPayload(net.minecraft.network.protocol.common.custom.CustomPacketPayload);
+    descriptor: (Lnet/minecraft/network/protocol/common/custom/CustomPacketPayload;)V
+
+  private void handleUnknownCustomPayload(net.minecraft.network.protocol.common.custom.CustomPacketPayload);
+    descriptor: (Lnet/minecraft/network/protocol/common/custom/CustomPacketPayload;)V
+
+  public void handleAddObjective(net.minecraft.network.protocol.game.ClientboundSetObjectivePacket);
+    descriptor: (Lnet/minecraft/network/protocol/game/ClientboundSetObjectivePacket;)V
+
+  public void handleSetScore(net.minecraft.network.protocol.game.ClientboundSetScorePacket);
+    descriptor: (Lnet/minecraft/network/protocol/game/ClientboundSetScorePacket;)V
+
+  public void handleResetScore(net.minecraft.network.protocol.game.ClientboundResetScorePacket);
+    descriptor: (Lnet/minecraft/network/protocol/game/ClientboundResetScorePacket;)V
+
+  public void handleSetDisplayObjective(net.minecraft.network.protocol.game.ClientboundSetDisplayObjectivePacket);
+    descriptor: (Lnet/minecraft/network/protocol/game/ClientboundSetDisplayObjectivePacket;)V
+
+  public void handleSetPlayerTeamPacket(net.minecraft.network.protocol.game.ClientboundSetPlayerTeamPacket);
+    descriptor: (Lnet/minecraft/network/protocol/game/ClientboundSetPlayerTeamPacket;)V
+
+  public void handleParticleEvent(net.minecraft.network.protocol.game.ClientboundLevelParticlesPacket);
+    descriptor: (Lnet/minecraft/network/protocol/game/ClientboundLevelParticlesPacket;)V
+
+  public void handleUpdateAttributes(net.minecraft.network.protocol.game.ClientboundUpdateAttributesPacket);
+    descriptor: (Lnet/minecraft/network/protocol/game/ClientboundUpdateAttributesPacket;)V
+
+  public void handlePlaceRecipe(net.minecraft.network.protocol.game.ClientboundPlaceGhostRecipePacket);
+    descriptor: (Lnet/minecraft/network/protocol/game/ClientboundPlaceGhostRecipePacket;)V
+
+  public void handleLightUpdatePacket(net.minecraft.network.protocol.game.ClientboundLightUpdatePacket);
+    descriptor: (Lnet/minecraft/network/protocol/game/ClientboundLightUpdatePacket;)V
+
+  private void applyLightData(int, int, net.minecraft.network.protocol.game.ClientboundLightUpdatePacketData, boolean);
+    descriptor: (IILnet/minecraft/network/protocol/game/ClientboundLightUpdatePacketData;Z)V
+
+  public void handleMerchantOffers(net.minecraft.network.protocol.game.ClientboundMerchantOffersPacket);
+    descriptor: (Lnet/minecraft/network/protocol/game/ClientboundMerchantOffersPacket;)V
+
+  public void handleSetChunkCacheRadius(net.minecraft.network.protocol.game.ClientboundSetChunkCacheRadiusPacket);
+    descriptor: (Lnet/minecraft/network/protocol/game/ClientboundSetChunkCacheRadiusPacket;)V
+
+  public void handleSetSimulationDistance(net.minecraft.network.protocol.game.ClientboundSetSimulationDistancePacket);
+    descriptor: (Lnet/minecraft/network/protocol/game/ClientboundSetSimulationDistancePacket;)V
+
+  public void handleSetChunkCacheCenter(net.minecraft.network.protocol.game.ClientboundSetChunkCacheCenterPacket);
+    descriptor: (Lnet/minecraft/network/protocol/game/ClientboundSetChunkCacheCenterPacket;)V
+
+  public void handleBlockChangedAck(net.minecraft.network.protocol.game.ClientboundBlockChangedAckPacket);
+    descriptor: (Lnet/minecraft/network/protocol/game/ClientboundBlockChangedAckPacket;)V
+
+  public void handleBundlePacket(net.minecraft.network.protocol.game.ClientboundBundlePacket);
+    descriptor: (Lnet/minecraft/network/protocol/game/ClientboundBundlePacket;)V
+
+  public void handleProjectilePowerPacket(net.minecraft.network.protocol.game.ClientboundProjectilePowerPacket);
+    descriptor: (Lnet/minecraft/network/protocol/game/ClientboundProjectilePowerPacket;)V
+
+  public void handleChunkBatchStart(net.minecraft.network.protocol.game.ClientboundChunkBatchStartPacket);
+    descriptor: (Lnet/minecraft/network/protocol/game/ClientboundChunkBatchStartPacket;)V
+
+  public void handleChunkBatchFinished(net.minecraft.network.protocol.game.ClientboundChunkBatchFinishedPacket);
+    descriptor: (Lnet/minecraft/network/protocol/game/ClientboundChunkBatchFinishedPacket;)V
+
+  public void handleDebugSample(net.minecraft.network.protocol.game.ClientboundDebugSamplePacket);
+    descriptor: (Lnet/minecraft/network/protocol/game/ClientboundDebugSamplePacket;)V
+
+  public void handlePongResponse(net.minecraft.network.protocol.ping.ClientboundPongResponsePacket);
+    descriptor: (Lnet/minecraft/network/protocol/ping/ClientboundPongResponsePacket;)V
+
+  private void readSectionList(int, int, net.minecraft.world.level.lighting.LevelLightEngine, net.minecraft.world.level.LightLayer, java.util.BitSet, java.util.BitSet, java.util.Iterator<byte[]>, boolean);
+    descriptor: (IILnet/minecraft/world/level/lighting/LevelLightEngine;Lnet/minecraft/world/level/LightLayer;Ljava/util/BitSet;Ljava/util/BitSet;Ljava/util/Iterator;Z)V
+
+  public net.minecraft.network.Connection getConnection();
+    descriptor: ()Lnet/minecraft/network/Connection;
+
+  public boolean isAcceptingMessages();
+    descriptor: ()Z
+
+  public java.util.Collection<net.minecraft.client.multiplayer.PlayerInfo> getListedOnlinePlayers();
+    descriptor: ()Ljava/util/Collection;
+
+  public java.util.Collection<net.minecraft.client.multiplayer.PlayerInfo> getOnlinePlayers();
+    descriptor: ()Ljava/util/Collection;
+
+  public java.util.Collection<java.util.UUID> getOnlinePlayerIds();
+    descriptor: ()Ljava/util/Collection;
+
+  public net.minecraft.client.multiplayer.PlayerInfo getPlayerInfo(java.util.UUID);
+    descriptor: (Ljava/util/UUID;)Lnet/minecraft/client/multiplayer/PlayerInfo;
+
+  public net.minecraft.client.multiplayer.PlayerInfo getPlayerInfo(java.lang.String);
+    descriptor: (Ljava/lang/String;)Lnet/minecraft/client/multiplayer/PlayerInfo;
+
+  public com.mojang.authlib.GameProfile getLocalGameProfile();
+    descriptor: ()Lcom/mojang/authlib/GameProfile;
+
+  public net.minecraft.client.multiplayer.ClientAdvancements getAdvancements();
+    descriptor: ()Lnet/minecraft/client/multiplayer/ClientAdvancements;
+
+  public com.mojang.brigadier.CommandDispatcher<net.minecraft.commands.SharedSuggestionProvider> getCommands();
+    descriptor: ()Lcom/mojang/brigadier/CommandDispatcher;
+
+  public net.minecraft.client.multiplayer.ClientLevel getLevel();
+    descriptor: ()Lnet/minecraft/client/multiplayer/ClientLevel;
+
+  public net.minecraft.client.DebugQueryHandler getDebugQueryHandler();
+    descriptor: ()Lnet/minecraft/client/DebugQueryHandler;
+
+  public java.util.UUID getId();
+    descriptor: ()Ljava/util/UUID;
+
+  public java.util.Set<net.minecraft.resources.ResourceKey<net.minecraft.world.level.Level>> levels();
+    descriptor: ()Ljava/util/Set;
+
+  public net.minecraft.core.RegistryAccess$Frozen registryAccess();
+    descriptor: ()Lnet/minecraft/core/RegistryAccess$Frozen;
+
+  public void markMessageAsProcessed(net.minecraft.network.chat.PlayerChatMessage, boolean);
+    descriptor: (Lnet/minecraft/network/chat/PlayerChatMessage;Z)V
+
+  private void sendChatAcknowledgement();
+    descriptor: ()V
+
+  public void sendChat(java.lang.String);
+    descriptor: (Ljava/lang/String;)V
+
+  public void sendCommand(java.lang.String);
+    descriptor: (Ljava/lang/String;)V
+
+  public boolean sendUnsignedCommand(java.lang.String);
+    descriptor: (Ljava/lang/String;)Z
+
+  private com.mojang.brigadier.ParseResults<net.minecraft.commands.SharedSuggestionProvider> parseCommand(java.lang.String);
+    descriptor: (Ljava/lang/String;)Lcom/mojang/brigadier/ParseResults;
+
+  public void broadcastClientInformation(net.minecraft.server.level.ClientInformation);
+    descriptor: (Lnet/minecraft/server/level/ClientInformation;)V
+
+  public void tick();
+    descriptor: ()V
+
+  public void prepareKeyPair();
+    descriptor: ()V
+
+  private void setKeyPair(net.minecraft.world.entity.player.ProfileKeyPair);
+    descriptor: (Lnet/minecraft/world/entity/player/ProfileKeyPair;)V
+
+  public net.minecraft.client.multiplayer.ServerData getServerData();
+    descriptor: ()Lnet/minecraft/client/multiplayer/ServerData;
+
+  public net.minecraft.world.flag.FeatureFlagSet enabledFeatures();
+    descriptor: ()Lnet/minecraft/world/flag/FeatureFlagSet;
+
+  public boolean isFeatureEnabled(net.minecraft.world.flag.FeatureFlagSet);
+    descriptor: (Lnet/minecraft/world/flag/FeatureFlagSet;)Z
+
+  public net.minecraft.world.scores.Scoreboard scoreboard();
+    descriptor: ()Lnet/minecraft/world/scores/Scoreboard;
+
+  public net.minecraft.world.item.alchemy.PotionBrewing potionBrewing();
+    descriptor: ()Lnet/minecraft/world/item/alchemy/PotionBrewing;
+
+  public net.minecraft.world.level.block.entity.FuelValues fuelValues();
+    descriptor: ()Lnet/minecraft/world/level/block/entity/FuelValues;
+
+  public void updateSearchTrees();
+    descriptor: ()V
+
+  public net.minecraft.client.multiplayer.SessionSearchTrees searchTrees();
+    descriptor: ()Lnet/minecraft/client/multiplayer/SessionSearchTrees;
+
+  public net.minecraft.server.ServerLinks serverLinks();
+    descriptor: ()Lnet/minecraft/server/ServerLinks;
+
+  private net.minecraft.network.chat.MessageSignature method_45722(java.time.Instant, long, net.minecraft.network.chat.LastSeenMessagesTracker$Update, java.lang.String);
+    descriptor: (Ljava/time/Instant;JLnet/minecraft/network/chat/LastSeenMessagesTracker$Update;Ljava/lang/String;)Lnet/minecraft/network/chat/MessageSignature;
+
+  private void method_38545(int, int, net.minecraft.network.protocol.game.ClientboundLightUpdatePacketData);
+    descriptor: (IILnet/minecraft/network/protocol/game/ClientboundLightUpdatePacketData;)V
+
+  private static void method_34010(net.minecraft.world.scores.PlayerTeam, net.minecraft.network.protocol.game.ClientboundSetPlayerTeamPacket$Parameters);
+    descriptor: (Lnet/minecraft/world/scores/PlayerTeam;Lnet/minecraft/network/protocol/game/ClientboundSetPlayerTeamPacket$Parameters;)V
+
+  private void method_62150(boolean, java.util.List, net.minecraft.resources.ResourceKey, net.minecraft.tags.TagNetworkSerialization$NetworkPayload);
+    descriptor: (ZLjava/util/List;Lnet/minecraft/resources/ResourceKey;Lnet/minecraft/tags/TagNetworkSerialization$NetworkPayload;)V
+
+  private void method_34018();
+    descriptor: ()V
+
+  private static void method_34008(net.minecraft.world.entity.LivingEntity, com.mojang.datafixers.util.Pair);
+    descriptor: (Lnet/minecraft/world/entity/LivingEntity;Lcom/mojang/datafixers/util/Pair;)V
+
+  private void method_38542(net.minecraft.network.protocol.game.ClientboundBlockEntityDataPacket, net.minecraft.world.level.block.entity.BlockEntity);
+    descriptor: (Lnet/minecraft/network/protocol/game/ClientboundBlockEntityDataPacket;Lnet/minecraft/world/level/block/entity/BlockEntity;)V
+
+  private void method_51685(net.minecraft.world.level.ChunkPos);
+    descriptor: (Lnet/minecraft/world/level/ChunkPos;)V
+
+  private void method_51769(int, int, net.minecraft.network.protocol.game.ClientboundLightUpdatePacketData);
+    descriptor: (IILnet/minecraft/network/protocol/game/ClientboundLightUpdatePacketData;)V
+
+  private void method_34007(net.minecraft.core.BlockPos, net.minecraft.world.level.block.state.BlockState);
+    descriptor: (Lnet/minecraft/core/BlockPos;Lnet/minecraft/world/level/block/state/BlockState;)V
+
+  private void method_64896(int);
+    descriptor: (I)V
+
+  static {};
+    descriptor: ()V
+}
