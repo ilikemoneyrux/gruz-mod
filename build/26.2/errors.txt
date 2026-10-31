@@ -1,4 +1,4 @@
-errors: 389
+errors: 394
 pl/gruzclient/status/Benchmark.java:9: cannot find symbol
     import net.minecraft.Util;
                         ^
@@ -826,6 +826,26 @@ pl/gruzclient/mixin/DrawContextMixin.java:11: cannot find symbol
     @Mixin(GuiGraphics.class)
            ^
       symbol: class GuiGraphics
+pl/gruzclient/status/SmokeTest.java:20: cannot find symbol
+            if (mc.screen == null || mc.getOverlay() != null) return;
+                  ^
+      symbol:   variable screen
+pl/gruzclient/status/SmokeTest.java:23: cannot find symbol
+            GruzClient.LOG.info("GRUZ_SMOKE step {} screen {}", step, mc.screen.getClass().getName());
+                                                                        ^
+      symbol:   variable screen
+pl/gruzclient/status/SmokeTest.java:25: cannot find symbol
+                case 0 -> mc.setScreen(new pl.gruzclient.screen.GruzModsScreen(mc.screen));
+                                                                                 ^
+      symbol:   variable screen
+pl/gruzclient/status/SmokeTest.java:26: cannot find symbol
+                case 1 -> mc.setScreen(new pl.gruzclient.screen.HudEditorScreen(null));
+                            ^
+      symbol:   method setScreen(HudEditorScreen)
+pl/gruzclient/status/SmokeTest.java:27: cannot find symbol
+                case 2 -> mc.setScreen(new net.minecraft.client.gui.screens.TitleScreen());
+                            ^
+      symbol:   method setScreen(TitleScreen)
 pl/gruzclient/render/GruzDraw.java:50: no suitable constructor found for DynamicTexture(NativeImage)
                 DynamicTexture t = new DynamicTexture(NativeImage.read(in));
                                    ^
@@ -1509,7 +1529,7 @@ pl/gruzclient/screen/GruzButton.java:15: GruzButton is not abstract and does not
 pl/gruzclient/screen/GruzButton.java:28: method does not override or implement a method from a supertype
         @Override
         ^
-    403 errors
+    410 errors
 --- What went wrong ---
 Execution failed for task ':26.2:compileJava' (registered by plugin class 'org.gradle.api.plugins.JavaBasePlugin').
 > Compilation failed; see the compiler output below.

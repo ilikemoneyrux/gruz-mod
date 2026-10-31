@@ -1,58 +1,4 @@
-/Benchmark.java:43: error: cannot find symbol
-            long nano = Util.getNanos();
-                        ^
-  symbol:   variable Util
-  location: class Benchmark
-/home/runner/work/gruz-mod/gruz-mod/versions/1.21.11/build/pp/java/pl/gruzclient/render/Ui.java:47: error: cannot find symbol
-        m.pushPose();
-         ^
-  symbol:   method pushPose()
-  location: variable m of type Matrix3x2fStack
-/home/runner/work/gruz-mod/gruz-mod/versions/1.21.11/build/pp/java/pl/gruzclient/render/Ui.java:48: error: incompatible types: int cannot be converted to Matrix3x2f
-        m.translate(x, y, 0);
-                          ^
-/home/runner/work/gruz-mod/gruz-mod/versions/1.21.11/build/pp/java/pl/gruzclient/render/Ui.java:49: error: incompatible types: float cannot be converted to Matrix3x2f
-        m.scale(scale, scale, 1f);
-                              ^
-/home/runner/work/gruz-mod/gruz-mod/versions/1.21.11/build/pp/java/pl/gruzclient/render/Ui.java:51: error: cannot find symbol
-        m.popPose();
-         ^
-  symbol:   method popPose()
-  location: variable m of type Matrix3x2fStack
-/home/runner/work/gruz-mod/gruz-mod/versions/1.21.11/build/pp/java/pl/gruzclient/render/Ui.java:67: error: cannot find symbol
-        RenderSystem.enableBlend();
-                    ^
-  symbol:   method enableBlend()
-  location: class RenderSystem
-/home/runner/work/gruz-mod/gruz-mod/versions/1.21.11/build/pp/java/pl/gruzclient/render/Ui.java:68: error: cannot find symbol
-        RenderSystem.defaultBlendFunc();
-                    ^
-  symbol:   method defaultBlendFunc()
-  location: class RenderSystem
-/home/runner/work/gruz-mod/gruz-mod/versions/1.21.11/build/pp/java/pl/gruzclient/render/WindowIcon.java:25: error: cannot find symbol
-        if (Util.getPlatform() == Util.OS.OSX) return; // macOS bierze ikonę z aplikacji
-            ^
-  symbol:   variable Util
-  location: class WindowIcon
-/home/runner/work/gruz-mod/gruz-mod/versions/1.21.11/build/pp/java/pl/gruzclient/render/WindowIcon.java:25: error: package Util does not exist
-        if (Util.getPlatform() == Util.OS.OSX) return; // macOS bierze ikonę z aplikacji
-                                      ^
-/home/runner/work/gruz-mod/gruz-mod/versions/1.21.11/build/pp/java/pl/gruzclient/render/WindowIcon.java:26: error: cannot find symbol
-        long handle = Minecraft.getInstance().getWindow().getWindow();
-                                                         ^
-  symbol:   method getWindow()
-  location: class Window
-/home/runner/work/gruz-mod/gruz-mod/versions/1.21.11/build/pp/java/pl/gruzclient/mixin/SplashOverlayMixin.java:38: error: cannot find symbol
-        long now = Util.getMillis();
-                   ^
-  symbol:   variable Util
-  location: class SplashOverlayMixin
-/home/runner/work/gruz-mod/gruz-mod/versions/1.21.11/build/pp/java/pl/gruzclient/mixin/HeldItemRendererMixin.java:46: error: cannot find symbol
-        if (!(item.getItem() instanceof net.minecraft.world.item.SwordItem) || !Modules.OLD_ANIM.swordBlocking(player)) return;
-                                                                ^
-  symbol:   class SwordItem
-  location: package net.minecraft.world.item
-/home/runner/work/gruz-mod/gruz-mod/versions/1.21.11/build/pp/java/pl/gruzclient/mixin/WorldRendererMixin.java:45: error: cannot find symbol
+/mixin/WorldRendererMixin.java:45: error: cannot find symbol
         VertexConsumer fill = mc.renderBuffers().bufferSource().getBuffer(RenderType.debugFilledBox());
                                                                           ^
   symbol:   variable RenderType
@@ -1665,6 +1611,36 @@ org.gradle.api.tasks.TaskExecutionException: Execution failed for task ':1.21.11
 	at org.gradle.internal.operations.CurrentBuildOperationRef.with(CurrentBuildOperationRef.java:85)
 	at org.gradle.execution.plan.DefaultPlanExecutor$ExecutorWorker.execute(DefaultPlanExecutor.java:475)
 	at org.gradle.execution.plan.DefaultPlanExecutor$ExecutorWorker.run(DefaultPlanExecutor.java:392)
+	at org.gradle.execution.plan.DefaultPlanExecutor.process(DefaultPlanExecutor.java:118)
+	at org.gradle.execution.DefaultBuildWorkExecutor.executePlan(DefaultBuildWorkExecutor.java:143)
+	at org.gradle.execution.DefaultBuildWorkExecutor.displayOrExecutePlan(DefaultBuildWorkExecutor.java:128)
+	at org.gradle.execution.DefaultBuildWorkExecutor$1.call(DefaultBuildWorkExecutor.java:79)
+	at org.gradle.execution.DefaultBuildWorkExecutor$1.call(DefaultBuildWorkExecutor.java:75)
+	at org.gradle.internal.operations.DefaultBuildOperationRunner$CallableBuildOperationWorker.execute(DefaultBuildOperationRunner.java:210)
+	at org.gradle.internal.operations.DefaultBuildOperationRunner$CallableBuildOperationWorker.execute(DefaultBuildOperationRunner.java:205)
+	at org.gradle.internal.operations.DefaultBuildOperationRunner$2.execute(DefaultBuildOperationRunner.java:67)
+	at org.gradle.internal.operations.DefaultBuildOperationRunner$2.execute(DefaultBuildOperationRunner.java:60)
+	at org.gradle.internal.operations.DefaultBuildOperationRunner.execute(DefaultBuildOperationRunner.java:167)
+	at org.gradle.internal.operations.DefaultBuildOperationRunner.execute(DefaultBuildOperationRunner.java:60)
+	at org.gradle.internal.operations.DefaultBuildOperationRunner.call(DefaultBuildOperationRunner.java:54)
+	at org.gradle.execution.DefaultBuildWorkExecutor.execute(DefaultBuildWorkExecutor.java:75)
+	at org.gradle.internal.build.DefaultBuildLifecycleController.lambda$executeTasks$0(DefaultBuildLifecycleController.java:323)
+	at org.gradle.internal.model.StateTransitionController.doTransition(StateTransitionController.java:324)
+	at org.gradle.internal.model.StateTransitionController.lambda$tryTransition$0(StateTransitionController.java:235)
+	at org.gradle.internal.work.DefaultSynchronizer.withLock(DefaultSynchronizer.java:45)
+	at org.gradle.internal.model.StateTransitionController.tryTransition(StateTransitionController.java:235)
+	at org.gradle.internal.build.DefaultBuildLifecycleController.executeTasks(DefaultBuildLifecycleController.java:314)
+	at org.gradle.internal.build.DefaultBuildWorkGraphController$DefaultBuildWorkGraph.runWork(DefaultBuildWorkGraphController.java:207)
+	at org.gradle.internal.work.DefaultWorkerLeaseService.lambda$runAndReleaseLocks$0(DefaultWorkerLeaseService.java:296)
+	at org.gradle.internal.work.ResourceLockStatistics$1.measure(ResourceLockStatistics.java:43)
+	at org.gradle.internal.work.DefaultWorkerLeaseService.runAndReleaseLocks(DefaultWorkerLeaseService.java:294)
+	at org.gradle.internal.work.DefaultWorkerLeaseService.withLocksAcquired(DefaultWorkerLeaseService.java:290)
+	at org.gradle.internal.work.DefaultWorkerLeaseService.withLocks(DefaultWorkerLeaseService.java:282)
+	at org.gradle.internal.work.DefaultWorkerLeaseService.runAsWorkerThread(DefaultWorkerLeaseService.java:132)
+	at org.gradle.composite.internal.DefaultBuildController.doRun(DefaultBuildController.java:182)
+	at org.gradle.composite.internal.DefaultBuildController$BuildOpRunnable.lambda$run$0(DefaultBuildController.java:199)
+	at org.gradle.internal.operations.CurrentBuildOperationRef.with(CurrentBuildOperationRef.java:85)
+	at org.gradle.composite.internal.DefaultBuildController$BuildOpRunnable.run(DefaultBuildController.java:199)
 	at org.gradle.internal.concurrent.ExecutorPolicy$CatchAndRecordFailures.onExecute(ExecutorPolicy.java:65)
 	at org.gradle.internal.concurrent.AbstractManagedExecutor$1.run(AbstractManagedExecutor.java:47)
 Caused by: org.gradle.api.internal.tasks.compile.CompilationFailedException: Compilation failed; see the compiler output below.
@@ -2788,7 +2764,7 @@ Note: Some messages have been simplified; recompile with -Xdiags:verbose to get 
 	at org.gradle.internal.execution.steps.IdentifyStep.execute(IdentifyStep.java:38)
 	at org.gradle.internal.execution.impl.DefaultExecutionEngine$1.execute(DefaultExecutionEngine.java:68)
 	at org.gradle.api.internal.tasks.execution.DefaultTaskNodeExecutor.doExecute(DefaultTaskNodeExecutor.java:364)
-	... 25 more
+	... 55 more
 
 
 Deprecated Gradle features were used in this build, making it incompatible with Gradle 10.
@@ -2797,5 +2773,5 @@ You can use '--warning-mode all' to show the individual deprecation warnings and
 
 For more on this, please refer to https://docs.gradle.org/9.8.0/userguide/command_line_interface.html#sec:command_line_warnings in the Gradle documentation.
 
-BUILD FAILED in 43s
+BUILD FAILED in 45s
 2 actionable tasks: 2 executed

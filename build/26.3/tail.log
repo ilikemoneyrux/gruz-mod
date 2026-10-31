@@ -1,114 +1,42 @@
-
-  /home/runner/work/gruz-mod/gruz-mod/versions/26.3/build/pp/java/pl/gruzclient/screen/GruzTitleScreen.java:80: error: cannot find symbol
-                  b -> this.minecraft.setScreen(new GruzModsScreen(this))).big());
-                                     ^
-    symbol:   method setScreen(GruzModsScreen)
-    location: variable minecraft of type Minecraft
-  /home/runner/work/gruz-mod/gruz-mod/versions/26.3/build/pp/java/pl/gruzclient/screen/GruzTitleScreen.java:83: error: cannot find symbol
-                  b -> this.minecraft.setScreen(new GruzModsScreen(this, Module.Category.COSMETICS))).big());
-                                     ^
-    symbol:   method setScreen(GruzModsScreen)
-    location: variable minecraft of type Minecraft
-  /home/runner/work/gruz-mod/gruz-mod/versions/26.3/build/pp/java/pl/gruzclient/screen/GruzTitleScreen.java:106: error: cannot find symbol
-          add(new UiButton(ix, 10, s, s, Ui.Icon.GEAR, null, b -> this.minecraft.setScreen(new OptionsScreen(this, this.minecraft.options))).kind(UiButton.Kind.ICON));
-                                                                                ^
-    symbol:   method setScreen(OptionsScreen)
-    location: variable minecraft of type Minecraft
-  /home/runner/work/gruz-mod/gruz-mod/versions/26.3/build/pp/java/pl/gruzclient/screen/GruzTitleScreen.java:111: error: cannot find symbol
-          add(new UiButton(ix, 10, s, s, Ui.Icon.GRID, null, b -> this.minecraft.setScreen(new GruzModsScreen(this))).kind(UiButton.Kind.ICON));
-                                                                                ^
-    symbol:   method setScreen(GruzModsScreen)
-    location: variable minecraft of type Minecraft
-  /home/runner/work/gruz-mod/gruz-mod/versions/26.3/build/pp/java/pl/gruzclient/screen/GruzTitleScreen.java:200: error: cannot find symbol
-              Component v = Ui.text("Gruz Client " + GruzClient.version() + "  ·  Minecraft " + SharedConstants.getCurrentVersion().getName() + "  ·  Fabric");
-                                                                                                                                   ^
-    symbol:   method getName()
-    location: interface WorldVersion
-  /home/runner/work/gruz-mod/gruz-mod/versions/26.3/build/pp/java/pl/gruzclient/screen/WorldMapScreen.java:70: error: cannot find symbol
-      public void onClose() { minecraft.setScreen(parent); }
-                                       ^
-    symbol:   method setScreen(Screen)
-    location: variable minecraft of type Minecraft
-  /home/runner/work/gruz-mod/gruz-mod/versions/26.3/build/pp/java/pl/gruzclient/screen/HudEditorScreen.java:132: error: cannot find symbol
-                  b -> this.minecraft.setScreen(new GruzModsScreen(this))).kind(UiButton.Kind.ACCENT).big());
-                                     ^
-    symbol:   method setScreen(GruzModsScreen)
-    location: variable minecraft of type Minecraft
-  /home/runner/work/gruz-mod/gruz-mod/versions/26.3/build/pp/java/pl/gruzclient/screen/HudEditorScreen.java:149: error: cannot find symbol
-              case "hud.act.cosmetics" -> this.minecraft.setScreen(new GruzModsScreen(this, Module.Category.COSMETICS));
-                                                        ^
-    symbol:   method setScreen(GruzModsScreen)
-    location: variable minecraft of type Minecraft
-  /home/runner/work/gruz-mod/gruz-mod/versions/26.3/build/pp/java/pl/gruzclient/screen/HudEditorScreen.java:150: error: cannot find symbol
-              case "hud.act.emotes" -> { if (this.minecraft.player != null) this.minecraft.setScreen(new EmoteWheelScreen(Modules.COSMETICS)); }
-                                                                                          ^
-    symbol:   method setScreen(EmoteWheelScreen)
-    location: variable minecraft of type Minecraft
-  /home/runner/work/gruz-mod/gruz-mod/versions/26.3/build/pp/java/pl/gruzclient/screen/HudEditorScreen.java:173: error: cannot find symbol
-          this.minecraft.setScreen(parent);
+metics/CosmeticsFeature.java:243: error: no suitable method found for mulPose(Quaternionf)
+                  m.mulPose(Axis.YP.rotationDegrees(side * (-(28f + flap))));
+                   ^
+      method PoseStack.mulPose(Matrix4fc) is not applicable
+        (argument mismatch; Quaternionf cannot be converted to Matrix4fc)
+      method PoseStack.mulPose(Transformation) is not applicable
+        (argument mismatch; Quaternionf cannot be converted to Transformation)
+  /home/runner/work/gruz-mod/gruz-mod/versions/26.3/build/pp/java/pl/gruzclient/cosmetics/CosmeticsFeature.java:244: error: no suitable method found for mulPose(Quaternionf)
+                  m.mulPose(Axis.ZP.rotationDegrees(side * -12f));
+                   ^
+      method PoseStack.mulPose(Matrix4fc) is not applicable
+        (argument mismatch; Quaternionf cannot be converted to Matrix4fc)
+      method PoseStack.mulPose(Transformation) is not applicable
+        (argument mismatch; Quaternionf cannot be converted to Transformation)
+  /home/runner/work/gruz-mod/gruz-mod/versions/26.3/build/pp/java/pl/gruzclient/cosmetics/CapeTextures.java:33: error: no suitable constructor found for DynamicTexture(int,int,boolean)
+          DynamicTexture tex = new DynamicTexture(64 * SCALE, 32 * SCALE, true);
+                               ^
+      constructor DynamicTexture.DynamicTexture(Supplier<String>,NativeImage) is not applicable
+        (actual and formal argument lists differ in length)
+      constructor DynamicTexture.DynamicTexture(String,int,int,boolean) is not applicable
+        (actual and formal argument lists differ in length)
+      constructor DynamicTexture.DynamicTexture(Supplier<String>,int,int,boolean) is not applicable
+        (actual and formal argument lists differ in length)
+  /home/runner/work/gruz-mod/gruz-mod/versions/26.3/build/pp/java/pl/gruzclient/screen/WorldMapScreen.java:52: error: no suitable constructor found for DynamicTexture(int,int,boolean)
+              texture = new DynamicTexture(texW, texH, true);
                         ^
-    symbol:   method setScreen(Screen)
-    location: variable minecraft of type Minecraft
-  /home/runner/work/gruz-mod/gruz-mod/versions/26.3/build/pp/java/pl/gruzclient/screen/HudEditorScreen.java:217: error: cannot find symbol
-                  this.minecraft.gui.getBossOverlay().render(c);
-                                    ^
-    symbol:   method getBossOverlay()
-    location: variable gui of type Gui
-  /home/runner/work/gruz-mod/gruz-mod/versions/26.3/build/pp/java/pl/gruzclient/screen/HudEditorScreen.java:298: error: cannot find symbol
-              if (Ui.inside(mx, my, bx - 12, by, 10, 10)) { this.minecraft.setScreen(new GruzModsScreen(this, hovered.settings())); return true; }
-                                                                          ^
-    symbol:   method setScreen(GruzModsScreen)
-    location: variable minecraft of type Minecraft
-  /home/runner/work/gruz-mod/gruz-mod/versions/26.3/build/pp/java/pl/gruzclient/screen/HudEditorScreen.java:304: error: cannot find symbol
-          if (button == 1) { this.minecraft.setScreen(new GruzModsScreen(this, e.settings())); return true; }
-                                           ^
-    symbol:   method setScreen(GruzModsScreen)
-    location: variable minecraft of type Minecraft
-  /home/runner/work/gruz-mod/gruz-mod/versions/26.3/build/pp/java/pl/gruzclient/screen/HudEditorScreen.java:322: error: cannot find symbol
-          if (snapOn && !hasAltDown()) {
-                         ^
-    symbol:   method hasAltDown()
-    location: class HudEditorScreen
-  /home/runner/work/gruz-mod/gruz-mod/versions/26.3/build/pp/java/pl/gruzclient/screen/CrosshairEditorScreen.java:61: error: cannot find symbol
-          addRenderableWidget(new GruzButton(this.width / 2 - 126, by, 120, 20, Component.literal(Lang.t("common.cancel")), b -> this.minecraft.setScreen(parent)));
-                                                                                                                                               ^
-    symbol:   method setScreen(Screen)
-    location: variable minecraft of type Minecraft
-  /home/runner/work/gruz-mod/gruz-mod/versions/26.3/build/pp/java/pl/gruzclient/screen/CrosshairEditorScreen.java:72: error: cannot find symbol
-          this.minecraft.setScreen(parent);
-                        ^
-    symbol:   method setScreen(Screen)
-    location: variable minecraft of type Minecraft
-  /home/runner/work/gruz-mod/gruz-mod/versions/26.3/build/pp/java/pl/gruzclient/screen/CrosshairEditorScreen.java:76: error: cannot find symbol
-      public void onClose() { this.minecraft.setScreen(parent); }
-                                            ^
-    symbol:   method setScreen(Screen)
-    location: variable minecraft of type Minecraft
-  /home/runner/work/gruz-mod/gruz-mod/versions/26.3/build/pp/java/pl/gruzclient/screen/GruzModsScreen.java:115: error: cannot find symbol
-                  b -> this.minecraft.setScreen(new HudEditorScreen(this))));
-                                     ^
-    symbol:   method setScreen(HudEditorScreen)
-    location: variable minecraft of type Minecraft
-  /home/runner/work/gruz-mod/gruz-mod/versions/26.3/build/pp/java/pl/gruzclient/screen/GruzModsScreen.java:121: error: cannot find symbol
-          this.minecraft.setScreen(parent);
-                        ^
-    symbol:   method setScreen(Screen)
-    location: variable minecraft of type Minecraft
-  /home/runner/work/gruz-mod/gruz-mod/versions/26.3/build/pp/java/pl/gruzclient/screen/GruzModsScreen.java:378: error: cannot find symbol
-                  if (s instanceof Setting.Text tx) { this.minecraft.setScreen(new TextInputScreen(this, tx)); return true; }
-                                                                    ^
-    symbol:   method setScreen(TextInputScreen)
-    location: variable minecraft of type Minecraft
-  /home/runner/work/gruz-mod/gruz-mod/versions/26.3/build/pp/java/pl/gruzclient/screen/TextInputScreen.java:33: error: cannot find symbol
-          if (setting.secret) field.setFormatter((s, i) -> net.minecraft.util.FormattedCharSequence.forward("•".repeat(s.length()), net.minecraft.network.chat.Style.EMPTY));
-                                   ^
-    symbol:   method setFormatter((s,i)->net[...]MPTY))
-    location: variable field of type EditBox
-  /home/runner/work/gruz-mod/gruz-mod/versions/26.3/build/pp/java/pl/gruzclient/screen/TextInputScreen.java:53: error: cannot find symbol
-      public void onClose() { minecraft.setScreen(parent); }
-                                       ^
-    symbol:   method setScreen(Screen)
-    location: variable minecraft of type Minecraft
+      constructor DynamicTexture.DynamicTexture(Supplier<String>,NativeImage) is not applicable
+        (actual and formal argument lists differ in length)
+      constructor DynamicTexture.DynamicTexture(String,int,int,boolean) is not applicable
+        (actual and formal argument lists differ in length)
+      constructor DynamicTexture.DynamicTexture(Supplier<String>,int,int,boolean) is not applicable
+        (actual and formal argument lists differ in length)
+  /home/runner/work/gruz-mod/gruz-mod/versions/26.3/build/pp/java/pl/gruzclient/screen/WorldMapScreen.java:135: error: no suitable method found for mulPose(Quaternionf)
+              m.mulPose(Axis.ZP.rotationDegrees(minecraft.player.getYRot() + 180f));
+               ^
+      method PoseStack.mulPose(Matrix4fc) is not applicable
+        (argument mismatch; Quaternionf cannot be converted to Matrix4fc)
+      method PoseStack.mulPose(Transformation) is not applicable
+        (argument mismatch; Quaternionf cannot be converted to Transformation)
   /home/runner/work/gruz-mod/gruz-mod/versions/26.3/build/pp/java/pl/gruzclient/mixin/ChatScreenMixin.java:66: error: method keyPressed in class EditBox cannot be applied to given types;
               cir.setReturnValue(gruz$search.keyPressed(keyCode, scanCode, modifiers));
                                             ^
@@ -386,7 +314,7 @@
               this.renderBlurredBackground();
                   ^
     symbol: method renderBlurredBackground()
-  470 errors
+  477 errors
 
 * Try:
 > Check your code and dependencies to fix the compilation error(s)
@@ -420,6 +348,36 @@ org.gradle.api.tasks.TaskExecutionException: Execution failed for task ':26.3:co
 	at org.gradle.internal.operations.CurrentBuildOperationRef.with(CurrentBuildOperationRef.java:85)
 	at org.gradle.execution.plan.DefaultPlanExecutor$ExecutorWorker.execute(DefaultPlanExecutor.java:475)
 	at org.gradle.execution.plan.DefaultPlanExecutor$ExecutorWorker.run(DefaultPlanExecutor.java:392)
+	at org.gradle.execution.plan.DefaultPlanExecutor.process(DefaultPlanExecutor.java:118)
+	at org.gradle.execution.DefaultBuildWorkExecutor.executePlan(DefaultBuildWorkExecutor.java:143)
+	at org.gradle.execution.DefaultBuildWorkExecutor.displayOrExecutePlan(DefaultBuildWorkExecutor.java:128)
+	at org.gradle.execution.DefaultBuildWorkExecutor$1.call(DefaultBuildWorkExecutor.java:79)
+	at org.gradle.execution.DefaultBuildWorkExecutor$1.call(DefaultBuildWorkExecutor.java:75)
+	at org.gradle.internal.operations.DefaultBuildOperationRunner$CallableBuildOperationWorker.execute(DefaultBuildOperationRunner.java:210)
+	at org.gradle.internal.operations.DefaultBuildOperationRunner$CallableBuildOperationWorker.execute(DefaultBuildOperationRunner.java:205)
+	at org.gradle.internal.operations.DefaultBuildOperationRunner$2.execute(DefaultBuildOperationRunner.java:67)
+	at org.gradle.internal.operations.DefaultBuildOperationRunner$2.execute(DefaultBuildOperationRunner.java:60)
+	at org.gradle.internal.operations.DefaultBuildOperationRunner.execute(DefaultBuildOperationRunner.java:167)
+	at org.gradle.internal.operations.DefaultBuildOperationRunner.execute(DefaultBuildOperationRunner.java:60)
+	at org.gradle.internal.operations.DefaultBuildOperationRunner.call(DefaultBuildOperationRunner.java:54)
+	at org.gradle.execution.DefaultBuildWorkExecutor.execute(DefaultBuildWorkExecutor.java:75)
+	at org.gradle.internal.build.DefaultBuildLifecycleController.lambda$executeTasks$0(DefaultBuildLifecycleController.java:323)
+	at org.gradle.internal.model.StateTransitionController.doTransition(StateTransitionController.java:324)
+	at org.gradle.internal.model.StateTransitionController.lambda$tryTransition$0(StateTransitionController.java:235)
+	at org.gradle.internal.work.DefaultSynchronizer.withLock(DefaultSynchronizer.java:45)
+	at org.gradle.internal.model.StateTransitionController.tryTransition(StateTransitionController.java:235)
+	at org.gradle.internal.build.DefaultBuildLifecycleController.executeTasks(DefaultBuildLifecycleController.java:314)
+	at org.gradle.internal.build.DefaultBuildWorkGraphController$DefaultBuildWorkGraph.runWork(DefaultBuildWorkGraphController.java:207)
+	at org.gradle.internal.work.DefaultWorkerLeaseService.lambda$runAndReleaseLocks$0(DefaultWorkerLeaseService.java:296)
+	at org.gradle.internal.work.ResourceLockStatistics$1.measure(ResourceLockStatistics.java:43)
+	at org.gradle.internal.work.DefaultWorkerLeaseService.runAndReleaseLocks(DefaultWorkerLeaseService.java:294)
+	at org.gradle.internal.work.DefaultWorkerLeaseService.withLocksAcquired(DefaultWorkerLeaseService.java:290)
+	at org.gradle.internal.work.DefaultWorkerLeaseService.withLocks(DefaultWorkerLeaseService.java:282)
+	at org.gradle.internal.work.DefaultWorkerLeaseService.runAsWorkerThread(DefaultWorkerLeaseService.java:132)
+	at org.gradle.composite.internal.DefaultBuildController.doRun(DefaultBuildController.java:182)
+	at org.gradle.composite.internal.DefaultBuildController$BuildOpRunnable.lambda$run$0(DefaultBuildController.java:199)
+	at org.gradle.internal.operations.CurrentBuildOperationRef.with(CurrentBuildOperationRef.java:85)
+	at org.gradle.composite.internal.DefaultBuildController$BuildOpRunnable.run(DefaultBuildController.java:199)
 	at org.gradle.internal.concurrent.ExecutorPolicy$CatchAndRecordFailures.onExecute(ExecutorPolicy.java:65)
 	at org.gradle.internal.concurrent.AbstractManagedExecutor$1.run(AbstractManagedExecutor.java:47)
 Caused by: org.gradle.api.internal.tasks.compile.CompilationFailedException: Compilation failed; see the compiler output below.
@@ -1556,6 +1514,41 @@ import net.minecraft.client.gui.GuiGraphics;
 @Mixin(GuiGraphics.class)
        ^
   symbol: class GuiGraphics
+/home/runner/work/gruz-mod/gruz-mod/versions/26.3/build/pp/java/pl/gruzclient/status/SmokeTest.java:20: error: cannot find symbol
+        if (mc.screen == null || mc.getOverlay() != null) return;
+              ^
+  symbol:   variable screen
+  location: variable mc of type Minecraft
+/home/runner/work/gruz-mod/gruz-mod/versions/26.3/build/pp/java/pl/gruzclient/status/SmokeTest.java:20: error: cannot find symbol
+        if (mc.screen == null || mc.getOverlay() != null) return;
+                                   ^
+  symbol:   method getOverlay()
+  location: variable mc of type Minecraft
+/home/runner/work/gruz-mod/gruz-mod/versions/26.3/build/pp/java/pl/gruzclient/status/SmokeTest.java:23: error: cannot find symbol
+        GruzClient.LOG.info("GRUZ_SMOKE step {} screen {}", step, mc.screen.getClass().getName());
+                                                                    ^
+  symbol:   variable screen
+  location: variable mc of type Minecraft
+/home/runner/work/gruz-mod/gruz-mod/versions/26.3/build/pp/java/pl/gruzclient/status/SmokeTest.java:25: error: cannot find symbol
+            case 0 -> mc.setScreen(new pl.gruzclient.screen.GruzModsScreen(mc.screen));
+                                                                             ^
+  symbol:   variable screen
+  location: variable mc of type Minecraft
+/home/runner/work/gruz-mod/gruz-mod/versions/26.3/build/pp/java/pl/gruzclient/status/SmokeTest.java:25: error: cannot find symbol
+            case 0 -> mc.setScreen(new pl.gruzclient.screen.GruzModsScreen(mc.screen));
+                        ^
+  symbol:   method setScreen(GruzModsScreen)
+  location: variable mc of type Minecraft
+/home/runner/work/gruz-mod/gruz-mod/versions/26.3/build/pp/java/pl/gruzclient/status/SmokeTest.java:26: error: cannot find symbol
+            case 1 -> mc.setScreen(new pl.gruzclient.screen.HudEditorScreen(null));
+                        ^
+  symbol:   method setScreen(HudEditorScreen)
+  location: variable mc of type Minecraft
+/home/runner/work/gruz-mod/gruz-mod/versions/26.3/build/pp/java/pl/gruzclient/status/SmokeTest.java:27: error: cannot find symbol
+            case 2 -> mc.setScreen(new net.minecraft.client.gui.screens.TitleScreen());
+                        ^
+  symbol:   method setScreen(TitleScreen)
+  location: variable mc of type Minecraft
 /home/runner/work/gruz-mod/gruz-mod/versions/26.3/build/pp/java/pl/gruzclient/render/GruzDraw.java:50: error: no suitable constructor found for DynamicTexture(NativeImage)
             DynamicTexture t = new DynamicTexture(NativeImage.read(in));
                                ^
@@ -2708,7 +2701,7 @@ public class GruzButton extends Button {
 /home/runner/work/gruz-mod/gruz-mod/versions/26.3/build/pp/java/pl/gruzclient/screen/GruzButton.java:28: error: method does not override or implement a method from a supertype
     @Override
     ^
-470 errors
+477 errors
 	at org.gradle.api.internal.tasks.compile.JdkJavaCompiler.execute(JdkJavaCompiler.java:88)
 	at org.gradle.api.internal.tasks.compile.JdkJavaCompiler.execute(JdkJavaCompiler.java:49)
 	at org.gradle.api.internal.tasks.compile.NormalizingJavaCompiler.delegateAndHandleErrors(NormalizingJavaCompiler.java:98)
@@ -2845,7 +2838,7 @@ public class GruzButton extends Button {
 	at org.gradle.internal.execution.steps.IdentifyStep.execute(IdentifyStep.java:38)
 	at org.gradle.internal.execution.impl.DefaultExecutionEngine$1.execute(DefaultExecutionEngine.java:68)
 	at org.gradle.api.internal.tasks.execution.DefaultTaskNodeExecutor.doExecute(DefaultTaskNodeExecutor.java:364)
-	... 25 more
+	... 55 more
 
 
 Deprecated Gradle features were used in this build, making it incompatible with Gradle 10.
@@ -2854,5 +2847,5 @@ You can use '--warning-mode all' to show the individual deprecation warnings and
 
 For more on this, please refer to https://docs.gradle.org/9.8.0/userguide/command_line_interface.html#sec:command_line_warnings in the Gradle documentation.
 
-BUILD FAILED in 35s
+BUILD FAILED in 34s
 2 actionable tasks: 2 executed

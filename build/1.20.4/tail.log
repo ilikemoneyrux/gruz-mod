@@ -32,13 +32,12 @@ Please make sure to read and understand the following license:
 > Task :1.20.4:classes
 > Task :1.20.4:jar
 > Task :1.20.4:processIncludeJars
-
-> Task :1.20.4:remapJar
-Cannot remap addMessageToDisplayQueue because it does not exist in any of the targets [net/minecraft/client/gui/components/ChatComponent] or their parents.
-
 Cannot remap addMessageToDisplayQueue because it does not exist in any of the targets [net/minecraft/client/gui/components/ChatComponent]
 Cannot remap addMessageToQueue(Lnet/minecraft/client/GuiMessage;)V because it does not exist in any of the targets [net/minecraft/client/gui/components/ChatComponent]
 Cannot remap addMessageToDisplayQueue because it does not exist in any of the targets [net/minecraft/client/gui/components/ChatComponent]
+
+> Task :1.20.4:remapJar
+Cannot remap addMessageToDisplayQueue because it does not exist in any of the targets [net/minecraft/client/gui/components/ChatComponent] or their parents.
 
 > Task :1.20.4:collect
 
@@ -50,5 +49,5 @@ You can use '--warning-mode all' to show the individual deprecation warnings and
 
 For more on this, please refer to https://docs.gradle.org/9.8.0/userguide/command_line_interface.html#sec:command_line_warnings in the Gradle documentation.
 
-BUILD SUCCESSFUL in 56s
+BUILD SUCCESSFUL in 51s
 7 actionable tasks: 7 executed
