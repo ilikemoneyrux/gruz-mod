@@ -1,5 +1,6 @@
 package pl.gruzclient.module.impl;
 
+import pl.gruzclient.compat.Compat;
 import pl.gruzclient.combat.Combat;
 import pl.gruzclient.i18n.Lang;
 import pl.gruzclient.module.HudModule;
@@ -31,7 +32,7 @@ public class FightModule extends HudModule {
                 .replace("{combo}", String.valueOf(Combat.fightBestCombo))
                 .replace("{dmg}", String.format("%.1f", Combat.fightDamageTaken / 2f));
         lastShownUntil = System.currentTimeMillis() + 5000;
-        if (summary.value && mc.player != null) mc.player.displayClientMessage(Component.literal("§d[Gruz] §f" + lastLine), false);
+        if (summary.value && mc.player != null) Compat.chat(mc.player, Component.literal("§d[Gruz] §f" + lastLine), false);
     }
 
     @Override

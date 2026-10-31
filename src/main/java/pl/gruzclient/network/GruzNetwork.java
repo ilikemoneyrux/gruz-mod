@@ -177,7 +177,7 @@ public final class GruzNetwork {
 
     private static void chat(Component t) {
         Minecraft mc = Minecraft.getInstance();
-        if (mc.player != null) mc.player.displayClientMessage(prefix().append(t), false);
+        if (mc.player != null) Compat.chat(mc.player, prefix().append(t), false);
     }
 
     private static MutableComponent prefix() {

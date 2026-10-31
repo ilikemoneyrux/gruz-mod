@@ -1,27 +1,25 @@
 package pl.gruzclient.module.impl;
 
+//#if MC < 1.21.2
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.math.Axis;
 import net.minecraft.client.renderer.MultiBufferSource;
 import net.minecraft.client.renderer.entity.ItemRenderer;
 import net.minecraft.client.renderer.texture.OverlayTexture;
-//#if MC < 1.21.2
 import net.minecraft.client.resources.model.BakedModel;
-//#endif
 import net.minecraft.world.entity.item.ItemEntity;
 import net.minecraft.world.item.ItemDisplayContext;
 import net.minecraft.world.item.ItemStack;
+//#endif
 import pl.gruzclient.module.Module;
 
 /** Item physics: przedmioty leżą płasko na ziemi zamiast unosić się i obracać. */
 public class ItemPhysicsModule extends Module {
     public ItemPhysicsModule() { super("itemphysics", Category.VISUAL, false); }
 
+    //#if MC < 1.21.2
     /** Rysuje przedmiot leżący na ziemi. Zwraca false, gdy ma zostać zwykłe renderowanie. */
     public boolean render(ItemEntity entity, float tickDelta, PoseStack m, MultiBufferSource buffers, int light, ItemRenderer itemRenderer) {
-        //#if MC >= 1.21.2
-        return false; // TODO: nowy system modeli przedmiotów (1.21.2+)
-        //#else
         if (!isEnabled()) return false;
         ItemStack stack = entity.getItem();
         if (stack.isEmpty()) return false;
@@ -59,6 +57,7 @@ public class ItemPhysicsModule extends Module {
         }
         m.popPose();
         return true;
-        //#endif
     }
+    //#endif
+    // TODO: od 1.21.2 przedmioty na ziemi rysuje nowy system modeli – item physics do przeniesienia
 }

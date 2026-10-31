@@ -18,3 +18,25 @@ MC >= 1.21.11 | RenderType.entityTranslucent => net.minecraft.client.renderer.re
 MC >= 1.21.11 | RenderType.eyes => net.minecraft.client.renderer.rendertype.RenderTypes.eyes
 MC >= 1.21.9 | protected void renderWidget(GuiGraphics => protected void renderContents(GuiGraphics
 MC >= 1.21.9 | public void renderWidget(GuiGraphics => public void renderContents(GuiGraphics
+# 26.1: rysowanie GUI to teraz "wydobywanie stanu" (GuiGraphicsExtractor, extract*)
+MC >= 26.1 | void render(GuiGraphics => void extractRenderState(GuiGraphics
+MC >= 26.1 | super.render( => super.extractRenderState(
+MC >= 26.1 | renderBackground( => extractBackground(
+MC >= 26.1 | renderPanorama( => extractPanorama(
+MC >= 26.1 | renderContents(GuiGraphics => extractContents(GuiGraphics
+MC >= 26.1 | drawString( => text(
+MC >= 26.1 | drawCenteredString( => centeredText(
+MC >= 26.1 | renderItemDecorations( => itemDecorations(
+MC >= 26.1 | renderItem( => item(
+MC >= 26.1 | renderOutline( => outline(
+MC >= 26.1 | net.minecraft.client.gui.GuiGraphics => net.minecraft.client.gui.GuiGraphicsExtractor
+MC >= 26.1 | GuiGraphics => GuiGraphicsExtractor
+MC >= 26.1 | net.minecraft.client.gui.components.PlayerFaceRenderer.draw( => net.minecraft.client.gui.components.PlayerFaceExtractor.extractRenderState(
+MC >= 26.1 | Lnet/minecraft/client/GuiMessage; => Lnet/minecraft/client/multiplayer/chat/GuiMessage;
+MC >= 26.1 | Lnet/minecraft/client/GuiMessageTag; => Lnet/minecraft/client/multiplayer/chat/GuiMessageTag;
+MC >= 26.1 | net.minecraft.client.GuiMessageTag => net.minecraft.client.multiplayer.chat.GuiMessageTag
+MC >= 26.1 | net.minecraft.client.GuiMessage => net.minecraft.client.multiplayer.chat.GuiMessage
+MC >= 26.1 | import net.minecraft.client.renderer.LightTexture; => import net.minecraft.util.LightCoordsUtil;
+MC >= 26.1 | LightTexture.FULL_BRIGHT => LightCoordsUtil.FULL_BRIGHT
+MC >= 26.1 | ChunkPos.asLong( => ChunkPos.pack(
+MC >= 26.1 | getBossOverlay().render( => getBossOverlay().extractRenderState(

@@ -1,5 +1,6 @@
 package pl.gruzclient.status;
 
+import pl.gruzclient.compat.Compat;
 import com.google.gson.JsonObject;
 import pl.gruzclient.i18n.Lang;
 
@@ -85,6 +86,6 @@ public final class Benchmark {
             Files.writeString(mc.gameDirectory.toPath().resolve("gruz-benchmark.json"), o.toString(), StandardCharsets.UTF_8);
         } catch (Exception ignored) {}
         result = Lang.t("bench.done").replace("{avg}", String.valueOf(Math.round(avg))).replace("{low}", String.valueOf(Math.round(low1)));
-        if (mc.player != null) mc.player.displayClientMessage(Component.literal("§d[Gruz] §f" + result), false);
+        if (mc.player != null) Compat.chat(mc.player, Component.literal("§d[Gruz] §f" + result), false);
     }
 }

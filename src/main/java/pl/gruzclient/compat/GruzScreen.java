@@ -63,10 +63,20 @@ public abstract class GruzScreen extends Screen {
     @Override
     public boolean charTyped(CharacterEvent e) {
         int cp = e.codepoint();
+        //#if MC >= 26.1
+        return Character.isBmpCodePoint(cp) && charTyped((char) cp, 0);
+        //#else
         return Character.isBmpCodePoint(cp) && charTyped((char) cp, e.modifiers());
+        //#endif
     }
 
-    public boolean charTyped(char chr, int modifiers) { return super.charTyped(new CharacterEvent(chr, modifiers)); }
+    public boolean charTyped(char chr, int modifiers) {
+        //#if MC >= 26.1
+        return super.charTyped(new CharacterEvent(chr));
+        //#else
+        return super.charTyped(new CharacterEvent(chr, modifiers));
+        //#endif
+    }
     //#endif
 
     // ---------------- modyfikatory ----------------

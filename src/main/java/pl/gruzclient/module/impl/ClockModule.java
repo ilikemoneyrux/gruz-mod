@@ -1,5 +1,6 @@
 package pl.gruzclient.module.impl;
 
+import pl.gruzclient.compat.Compat;
 import pl.gruzclient.i18n.Lang;
 import pl.gruzclient.module.Setting;
 import pl.gruzclient.module.TextHudModule;
@@ -21,7 +22,7 @@ public class ClockModule extends TextHudModule {
         switch (mode.index) {
             case 1 -> {
                 if (mc.level == null) return "06:00";
-                long t = mc.level.getDayTime();
+                long t = Compat.dayTime(mc.level);
                 long day = t / 24000 + 1;
                 long ticks = (t + 6000) % 24000; // 0 ticków = 6:00
                 int hh = (int) (ticks / 1000), mm = (int) ((ticks % 1000) * 60 / 1000);

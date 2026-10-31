@@ -4,7 +4,6 @@ import pl.gruzclient.compat.Compat;
 import net.minecraft.SharedConstants;
 import net.minecraft.Util;
 import net.minecraft.client.gui.GuiGraphics;
-import net.minecraft.client.gui.components.PlayerFaceRenderer;
 import net.minecraft.client.gui.screens.ConnectScreen;
 import net.minecraft.client.gui.screens.Screen;
 import net.minecraft.client.gui.screens.multiplayer.JoinMultiplayerScreen;
@@ -16,8 +15,10 @@ import net.minecraft.client.gui.screens.OptionsScreen;
 import net.minecraft.client.gui.screens.worldselection.SelectWorldScreen;
 import net.minecraft.client.multiplayer.ServerData;
 import net.minecraft.client.multiplayer.resolver.ServerAddress;
+//#if MC < 26.1
 import net.minecraft.client.renderer.CubeMap;
 import net.minecraft.client.renderer.PanoramaRenderer;
+//#endif
 import net.minecraft.client.resources.PlayerSkin;
 import net.minecraft.network.chat.Component;
 import pl.gruzclient.GruzClient;
@@ -42,7 +43,9 @@ import static pl.gruzclient.render.GruzDraw.*;
 public class GruzTitleScreen extends pl.gruzclient.compat.GruzScreen {
     private static boolean firstOpen = true;
     private static final CrystalField CRYSTALS = new CrystalField(26);
+    //#if MC < 26.1
     private static PanoramaRenderer ownPanorama;
+    //#endif
 
     private final List<UiButton> buttons = new ArrayList<>();
     private final long openedAt = System.currentTimeMillis();
@@ -140,8 +143,12 @@ public class GruzTitleScreen extends pl.gruzclient.compat.GruzScreen {
         float bg = reveal(0, 1400);
 
         if (Modules.MENU.usePanorama()) {
+            //#if MC >= 26.1
+            this.renderPanorama(c, delta); // 26.1: własna panorama jeszcze nieprzeniesiona, pokazujemy zwykłą
+            //#else
             if (ownPanorama == null) ownPanorama = new PanoramaRenderer(new CubeMap(MenuModule.PANORAMA));
             Compat.panorama(ownPanorama, c, w, h, 1f, delta);
+            //#endif
         } else if (Modules.MENU.crystals()) {
             c.fill(0, 0, w, h, 0xFF000000);
         } else {

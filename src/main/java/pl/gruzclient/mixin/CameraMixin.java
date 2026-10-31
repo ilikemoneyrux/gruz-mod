@@ -1,3 +1,4 @@
+//#swap MC >= 26.1 | "setup" => "alignWithEntity"
 package pl.gruzclient.mixin;
 
 import net.minecraft.client.Camera;
@@ -11,7 +12,7 @@ import pl.gruzclient.module.Modules;
 @Mixin(Camera.class)
 public abstract class CameraMixin {
     @ModifyArgs(method = "setup", at = @At(value = "INVOKE",
-            target = "Lnet/minecraft/client/Camera;setRotation(FF)V", ordinal = 0))
+            target = "Lnet/minecraft/client/Camera;setRotation(FF)V", ordinal = 0), require = 0)
     private void gruz$freelookRotation(Args args) {
         if (Modules.FREELOOK.isActive()) {
             args.set(0, Modules.FREELOOK.yaw);

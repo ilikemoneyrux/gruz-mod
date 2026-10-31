@@ -1,3 +1,4 @@
+//#swap MC >= 26.1 | "render" => "extractRenderState"
 package pl.gruzclient.mixin;
 
 import net.minecraft.Util;

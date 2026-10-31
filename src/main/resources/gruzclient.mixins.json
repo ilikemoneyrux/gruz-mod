@@ -38,7 +38,8 @@
     "ScoreboardObjectiveMixin",
     "DrawContextMixin",
     "BossBarHudAccessor",
-    "InGameHudInvoker"
+    "InGameHudInvoker",
+    "ClientClockMixin"
   ],
   "injectors": {
     "defaultRequire": 1

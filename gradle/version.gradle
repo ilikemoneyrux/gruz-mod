@@ -59,6 +59,13 @@ def evalCond = { String cond, String where ->
     return Eval.me(expr) as boolean
 }
 
+// wzorzec podmiany: granica słowa tylko po stronie, gdzie wzorzec zaczyna/kończy się literą lub cyfrą
+def swapPattern = { String from ->
+    def pre = (from[0] ==~ /[\w$]/) ? '(?<![\\w$])' : ''
+    def post = (from[-1] ==~ /[\w$]/) ? '(?![\\w$])' : ''
+    java.util.regex.Pattern.compile(pre + java.util.regex.Pattern.quote(from) + post)
+}
+
 def ppJava = layout.buildDirectory.dir('pp/java')
 def ppRes = layout.buildDirectory.dir('pp/resources')
 def srcJava = rootProject.file('src/main/java')
@@ -85,7 +92,7 @@ def preprocess = tasks.register('preprocess') {
             if (!l || l.startsWith('#')) return
             def (cond, rule) = l.split(/\s*\|\s*/, 2) as List
             def (from, to) = rule.split(/\s*=>\s*/, 2) as List
-            if (evalCond(cond, 'swaps.txt')) swaps << [java.util.regex.Pattern.compile('(?<![\\w$])' + java.util.regex.Pattern.quote(from) + '(?![\\w$])'), to]
+            if (evalCond(cond, 'swaps.txt')) swaps << [swapPattern(from), to]
         }
         srcJava.eachFileRecurse(groovy.io.FileType.FILES) { f ->
             def rel = srcJava.toPath().relativize(f.toPath()).toString().replace('\\', '/')
@@ -129,7 +136,7 @@ def preprocess = tasks.register('preprocess') {
                 if (!t.startsWith('//#swap ')) return
                 def (cond, rule) = t.substring(8).split(/\s*\|\s*/, 2) as List
                 def (from, to) = rule.split(/\s*=>\s*/, 2) as List
-                if (evalCond(cond, rel)) local << [java.util.regex.Pattern.compile('(?<![\\w$])' + java.util.regex.Pattern.quote(from) + '(?![\\w$])'), to]
+                if (evalCond(cond, rel)) local << [swapPattern(from), to]
             }
             (local + swaps).each { p, to -> text = p.matcher(text).replaceAll(java.util.regex.Matcher.quoteReplacement(to)) }
             def dst = new File(outJ, rel)

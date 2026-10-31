@@ -27,6 +27,12 @@ def cond(expr, mc):
     return eval(e)
 
 
+def swap_re(a):
+    pre = r'(?<![\w$])' if re.match(r'[\w$]', a[0]) else ''
+    post = r'(?![\w$])' if re.match(r'[\w$]', a[-1]) else ''
+    return re.compile(pre + re.escape(a) + post)
+
+
 def swaps(mc):
     out = []
     for l in open(os.path.join(ROOT, 'src/swaps.txt'), encoding='utf-8'):
@@ -34,7 +40,7 @@ def swaps(mc):
         if not l or l.startswith('#'): continue
         c, rule = [x.strip() for x in l.split('|', 1)]
         a, b = [x.strip() for x in rule.split('=>', 1)]
-        if cond(c, mc): out.append((re.compile(r'(?<![\w$])' + re.escape(a) + r'(?![\w$])'), b))
+        if cond(c, mc): out.append((swap_re(a), b))
     return out
 
 
@@ -65,7 +71,7 @@ def preprocess(text, mc, sw):
         if t.startswith('//#swap '):
             c, rule = [x.strip() for x in t[8:].split('|', 1)]
             a, b = [x.strip() for x in rule.split('=>', 1)]
-            if cond(c, mc): local.append((re.compile(r'(?<![\w$])' + re.escape(a) + r'(?![\w$])'), b))
+            if cond(c, mc): local.append((swap_re(a), b))
     for p, b in local + sw: s = p.sub(b, s)
     return s
 

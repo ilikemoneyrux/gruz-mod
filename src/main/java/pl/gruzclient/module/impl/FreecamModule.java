@@ -1,5 +1,6 @@
 package pl.gruzclient.module.impl;
 
+import pl.gruzclient.compat.Compat;
 import com.mojang.authlib.GameProfile;
 import org.lwjgl.glfw.GLFW;
 import pl.gruzclient.i18n.Lang;
@@ -56,7 +57,7 @@ public class FreecamModule extends Module {
     private void start() {
         if (mc.player == null || mc.level == null) return;
         if (!mc.isLocalServer()) {
-            mc.player.displayClientMessage(Component.literal("§d[Gruz] §f" + Lang.t("freecam.onlySp")), true);
+            Compat.chat(mc.player, Component.literal("§d[Gruz] §f" + Lang.t("freecam.onlySp")), true);
             return;
         }
         camera = new RemotePlayer(mc.level, new GameProfile(UUID.randomUUID(), "GruzCam"));

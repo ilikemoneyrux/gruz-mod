@@ -51,7 +51,7 @@ public class MinimapModule extends HudModule {
         if (a && !wasAdd) {
             var p = Waypoints.add(Lang.t("map.point") + " " + (Waypoints.current().size() + 1),
                     mc.player.getBlockX(), mc.player.getBlockY(), mc.player.getBlockZ(), false);
-            mc.player.displayClientMessage(net.minecraft.network.chat.Component.literal("§d[Gruz] §f" + Lang.t("map.added").replace("{name}", p.name)), true);
+            Compat.chat(mc.player, net.minecraft.network.chat.Component.literal("§d[Gruz] §f" + Lang.t("map.added").replace("{name}", p.name)), true);
         }
         wasMap = m; wasAdd = a;
         boolean dead = mc.player.isDeadOrDying();

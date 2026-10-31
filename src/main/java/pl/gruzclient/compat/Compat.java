@@ -7,7 +7,9 @@ import net.minecraft.client.gui.screens.ConnectScreen;
 import net.minecraft.client.gui.screens.Screen;
 import net.minecraft.client.multiplayer.ServerData;
 import net.minecraft.client.multiplayer.resolver.ServerAddress;
+//#if MC < 26.1
 import net.minecraft.client.renderer.PanoramaRenderer;
+//#endif
 import net.minecraft.client.renderer.texture.TextureAtlasSprite;
 import net.minecraft.core.particles.DustParticleOptions;
 import net.minecraft.resources.ResourceLocation;
@@ -104,6 +106,7 @@ public final class Compat {
         return ((Math.round(Math.max(0f, Math.min(1f, alpha)) * 255f)) << 24) | 0xFFFFFF;
     }
 
+    //#if MC < 26.1
     public static void panorama(PanoramaRenderer p, GuiGraphics c, int w, int h, float alpha, float delta) {
         //#if MC >= 1.21.6
         p.render(c, w, h, true);
@@ -113,6 +116,7 @@ public final class Compat {
         p.render(delta, alpha);
         //#endif
     }
+    //#endif
 
     // ---------------- tekstury ----------------
 
@@ -148,6 +152,24 @@ public final class Compat {
     }
 
     // ---------------- różne ----------------
+
+    /** Wiadomość dla gracza: na czacie albo nad paskiem (overlay) */
+    public static void chat(net.minecraft.world.entity.player.Player p, net.minecraft.network.chat.Component c, boolean overlay) {
+        //#if MC >= 26.1
+        if (overlay) p.sendOverlayMessage(c); else p.sendSystemMessage(c);
+        //#else
+        p.displayClientMessage(c, overlay);
+        //#endif
+    }
+
+    /** Pora dnia świata w tickach (od 26.1 czas liczą "zegary") */
+    public static long dayTime(Level level) {
+        //#if MC >= 26.1
+        return level.getDefaultClockTime();
+        //#else
+        return level.getDayTime();
+        //#endif
+    }
 
     public static long windowHandle() {
         //#if MC >= 1.21.9

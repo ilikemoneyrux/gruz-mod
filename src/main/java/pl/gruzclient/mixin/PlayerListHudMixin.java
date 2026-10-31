@@ -1,3 +1,4 @@
+//#swap MC >= 26.1 | "renderPingIcon" => "extractPingIcon"
 package pl.gruzclient.mixin;
 
 import net.minecraft.client.gui.GuiGraphics;

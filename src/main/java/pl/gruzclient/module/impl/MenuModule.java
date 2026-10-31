@@ -92,10 +92,10 @@ public class MenuModule extends Module {
             loaded = false;
             background.index = 2;
             Modules.save();
-            if (mc.player != null) mc.player.displayClientMessage(Component.literal("§d[Gruz] §f" + Lang.t("menu.panoramaSaved")), false);
+            if (mc.player != null) Compat.chat(mc.player, Component.literal("§d[Gruz] §f" + Lang.t("menu.panoramaSaved")), false);
         } catch (Exception e) {
             GruzClient.LOG.warn("Panorama nie wyszła", e);
-            if (mc.player != null) mc.player.displayClientMessage(Component.literal("§c[Gruz] " + Lang.t("menu.panoramaFailed")), false);
+            if (mc.player != null) Compat.chat(mc.player, Component.literal("§c[Gruz] " + Lang.t("menu.panoramaFailed")), false);
         }
     }
 }

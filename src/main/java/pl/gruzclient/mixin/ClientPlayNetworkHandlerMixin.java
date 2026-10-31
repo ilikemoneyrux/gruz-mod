@@ -1,5 +1,6 @@
 package pl.gruzclient.mixin;
 
+import pl.gruzclient.compat.Compat;
 import net.minecraft.ChatFormatting;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.multiplayer.ClientPacketListener;
@@ -45,6 +46,6 @@ public abstract class ClientPlayNetworkHandlerMixin {
     private static void help() {
         var mc = Minecraft.getInstance();
         if (mc.player == null) return;
-        for (String line : Lang.t("net.help").split("\\|")) mc.player.displayClientMessage(Component.literal(line).withStyle(ChatFormatting.GRAY), false);
+        for (String line : Lang.t("net.help").split("\\|")) Compat.chat(mc.player, Component.literal(line).withStyle(ChatFormatting.GRAY), false);
     }
 }

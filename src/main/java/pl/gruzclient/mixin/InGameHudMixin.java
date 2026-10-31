@@ -1,3 +1,6 @@
+//#swap MC >= 26.1 | "render" => "extractRenderState"
+//#swap MC >= 26.1 | "renderTitle" => "extractTitle"
+//#swap MC >= 26.1 | "renderCrosshair" => "extractCrosshair"
 package pl.gruzclient.mixin;
 
 //#if MC >= 1.21

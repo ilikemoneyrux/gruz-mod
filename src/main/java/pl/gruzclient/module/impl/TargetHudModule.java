@@ -8,7 +8,6 @@ import pl.gruzclient.module.HudModule;
 import static pl.gruzclient.render.GruzDraw.*;
 
 import net.minecraft.client.gui.GuiGraphics;
-import net.minecraft.client.gui.components.PlayerFaceRenderer;
 import net.minecraft.client.multiplayer.PlayerInfo;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;

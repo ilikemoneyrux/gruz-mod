@@ -1,5 +1,6 @@
 package pl.gruzclient.module.impl;
 
+import pl.gruzclient.compat.Compat;
 import net.minecraft.network.chat.Component;
 import org.lwjgl.glfw.GLFW;
 import pl.gruzclient.i18n.Lang;
@@ -41,7 +42,7 @@ public class ClipModule extends Module {
 
     private void save(boolean test) {
         ObsClient.saveReplay(Math.round(port.value), password.value, test, result -> mc.execute(() -> {
-            if (mc.player != null) mc.player.displayClientMessage(Component.literal("§d[Gruz] §f" + Lang.t("clip." + result)), true);
+            if (mc.player != null) Compat.chat(mc.player, Component.literal("§d[Gruz] §f" + Lang.t("clip." + result)), true);
             else if (mc.screen != null) pl.gruzclient.GruzClient.LOG.info("OBS: {}", result);
         }));
     }
