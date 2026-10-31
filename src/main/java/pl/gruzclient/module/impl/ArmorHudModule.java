@@ -26,10 +26,10 @@ public class ArmorHudModule extends HudModule {
             if (!mc.player.getMainHandItem().isEmpty()) items.add(mc.player.getMainHandItem());
         }
         if (items.isEmpty() && editing) {
-            items.add(new ItemStack(Items.DIAMOND_HELMET));
-            items.add(new ItemStack(Items.DIAMOND_CHESTPLATE));
-            items.add(new ItemStack(Items.DIAMOND_LEGGINGS));
-            items.add(new ItemStack(Items.DIAMOND_BOOTS));
+            items.add(Compat.stack(Items.DIAMOND_HELMET));
+            items.add(Compat.stack(Items.DIAMOND_CHESTPLATE));
+            items.add(Compat.stack(Items.DIAMOND_LEGGINGS));
+            items.add(Compat.stack(Items.DIAMOND_BOOTS));
         }
         var tr = mc.font;
         int w = 0;

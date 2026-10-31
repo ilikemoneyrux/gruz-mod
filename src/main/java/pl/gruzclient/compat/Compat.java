@@ -153,6 +153,14 @@ public final class Compat {
 
     // ---------------- różne ----------------
 
+    /** Przedmiot do podglądu. Od 26.1 przedmiotów nie da się tworzyć przed wejściem do świata – wtedy pusty. */
+    public static net.minecraft.world.item.ItemStack stack(net.minecraft.world.item.Item item) {
+        //#if MC >= 26.1
+        if (Minecraft.getInstance().level == null) return net.minecraft.world.item.ItemStack.EMPTY;
+        //#endif
+        return new net.minecraft.world.item.ItemStack(item);
+    }
+
     /** Wiadomość dla gracza: na czacie albo nad paskiem (overlay) */
     public static void chat(net.minecraft.world.entity.player.Player p, net.minecraft.network.chat.Component c, boolean overlay) {
         //#if MC >= 26.1

@@ -29,7 +29,7 @@ public class ItemCounterModule extends HudModule {
     @Override
     protected int[] draw(GuiGraphics c, boolean editing) {
         int nBlocks = 0, nPearls = 0, nArrows = 0, nGapples = 0;
-        ItemStack blockIcon = new ItemStack(Items.WHITE_WOOL);
+        ItemStack blockIcon = Compat.stack(Items.WHITE_WOOL);
         if (mc.player != null) {
             List<ItemStack> all = Compat.allItems(mc.player);
             int bestBlocks = 0;
@@ -49,9 +49,9 @@ public class ItemCounterModule extends HudModule {
         List<Row> rows = new ArrayList<>();
         boolean hide = hideEmpty.value && !editing;
         if (blocks.value && !(hide && nBlocks == 0)) rows.add(new Row(blockIcon, nBlocks));
-        if (pearls.value && !(hide && nPearls == 0)) rows.add(new Row(new ItemStack(Items.ENDER_PEARL), nPearls));
-        if (arrows.value && !(hide && nArrows == 0)) rows.add(new Row(new ItemStack(Items.ARROW), nArrows));
-        if (gapples.value && !(hide && nGapples == 0)) rows.add(new Row(new ItemStack(Items.GOLDEN_APPLE), nGapples));
+        if (pearls.value && !(hide && nPearls == 0)) rows.add(new Row(Compat.stack(Items.ENDER_PEARL), nPearls));
+        if (arrows.value && !(hide && nArrows == 0)) rows.add(new Row(Compat.stack(Items.ARROW), nArrows));
+        if (gapples.value && !(hide && nGapples == 0)) rows.add(new Row(Compat.stack(Items.GOLDEN_APPLE), nGapples));
         if (rows.isEmpty()) return new int[]{0, 0};
 
         var tr = mc.font;
