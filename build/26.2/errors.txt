@@ -250,10 +250,6 @@ pl/gruzclient/mixin/EntityRendererMixin.java:4: cannot find symbol
     import net.minecraft.client.renderer.MultiBufferSource;
                                         ^
       symbol:   class MultiBufferSource
-pl/gruzclient/mixin/EntityRendererMixin.java:17: cannot find symbol
-        private Component gruz$recolor(Component text, T entity, Component original, PoseStack matrices, MultiBufferSource vertexConsumers,
-                                                                                                         ^
-      symbol:   class MultiBufferSource
 pl/gruzclient/mixin/PlayerListHudMixin.java:3: cannot find symbol
     import net.minecraft.client.gui.GuiGraphics;
                                    ^
@@ -904,7 +900,7 @@ pl/gruzclient/render/WindowIcon.java:26: cannot find symbol
             long handle = Minecraft.getInstance().getWindow().getWindow();
                                                              ^
       symbol:   method getWindow()
-pl/gruzclient/mixin/LivingEntityRendererMixin.java:19: cannot find symbol
+pl/gruzclient/mixin/LivingEntityRendererMixin.java:24: cannot find symbol
                     && !mc.options.getCameraType().isFirstPerson() && !mc.options.hideGui) {
                                                                                  ^
       symbol:   variable hideGui
@@ -948,6 +944,10 @@ pl/gruzclient/mixin/ChatScreenMixin.java:66: method keyPressed in class EditBox 
                 cir.setReturnValue(gruz$search.keyPressed(keyCode, scanCode, modifiers));
                                               ^
       required: KeyEvent
+pl/gruzclient/mixin/BipedEntityModelMixin.java:19: cannot find symbol
+            if (!(state instanceof net.minecraft.client.renderer.entity.state.PlayerRenderState ps)) return;
+                                                                             ^
+      symbol:   class PlayerRenderState
 pl/gruzclient/mixin/MouseMixin.java:18: cannot find symbol
             if (action == GLFW.GLFW_PRESS && Minecraft.getInstance().screen == null) CpsModule.click(button);
                                                                     ^

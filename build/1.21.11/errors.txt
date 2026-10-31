@@ -1,4 +1,4 @@
-errors: 198
+errors: 199
 pl/gruzclient/status/Benchmark.java:9: cannot find symbol
     import net.minecraft.Util;
                         ^
@@ -314,6 +314,10 @@ pl/gruzclient/mixin/ChatScreenMixin.java:66: method keyPressed in class EditBox 
                 cir.setReturnValue(gruz$search.keyPressed(keyCode, scanCode, modifiers));
                                               ^
       required: KeyEvent
+pl/gruzclient/mixin/BipedEntityModelMixin.java:19: cannot find symbol
+            if (!(state instanceof net.minecraft.client.renderer.entity.state.PlayerRenderState ps)) return;
+                                                                             ^
+      symbol:   class PlayerRenderState
 pl/gruzclient/mixin/AbstractClientPlayerEntityMixin.java:21: cannot find symbol
             PlayerSkin t = cir.getReturnValue();
             ^

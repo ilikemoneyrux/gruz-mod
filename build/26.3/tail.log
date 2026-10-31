@@ -1,4 +1,46 @@
-ionf)
+/work/gruz-mod/gruz-mod/versions/26.3/build/pp/java/pl/gruzclient/module/impl/MinimapModule.java:119: error: no suitable method found for mulPose(Quaternionf)
+          if (!rotate.value) m.mulPose(Axis.ZP.rotationDegrees(mc.player.getYRot() + 180f));
+                              ^
+      method PoseStack.mulPose(Matrix4fc) is not applicable
+        (argument mismatch; Quaternionf cannot be converted to Matrix4fc)
+      method PoseStack.mulPose(Transformation) is not applicable
+        (argument mismatch; Quaternionf cannot be converted to Transformation)
+  /home/runner/work/gruz-mod/gruz-mod/versions/26.3/build/pp/java/pl/gruzclient/cosmetics/CosmeticsFeature.java:108: error: no suitable method found for mulPose(Quaternionf)
+              m.mulPose(Axis.YP.rotation(t * 2f));
+               ^
+      method PoseStack.mulPose(Matrix4fc) is not applicable
+        (argument mismatch; Quaternionf cannot be converted to Matrix4fc)
+      method PoseStack.mulPose(Transformation) is not applicable
+        (argument mismatch; Quaternionf cannot be converted to Transformation)
+  /home/runner/work/gruz-mod/gruz-mod/versions/26.3/build/pp/java/pl/gruzclient/cosmetics/CosmeticsFeature.java:121: error: no suitable method found for mulPose(Quaternionf)
+          m.mulPose(Axis.YP.rotation(t * 0.6f));
+           ^
+      method PoseStack.mulPose(Matrix4fc) is not applicable
+        (argument mismatch; Quaternionf cannot be converted to Matrix4fc)
+      method PoseStack.mulPose(Transformation) is not applicable
+        (argument mismatch; Quaternionf cannot be converted to Transformation)
+  /home/runner/work/gruz-mod/gruz-mod/versions/26.3/build/pp/java/pl/gruzclient/cosmetics/CosmeticsFeature.java:147: error: no suitable method found for mulPose(Quaternionf)
+              m.mulPose(Axis.YP.rotation((float) -a));
+               ^
+      method PoseStack.mulPose(Matrix4fc) is not applicable
+        (argument mismatch; Quaternionf cannot be converted to Matrix4fc)
+      method PoseStack.mulPose(Transformation) is not applicable
+        (argument mismatch; Quaternionf cannot be converted to Transformation)
+  /home/runner/work/gruz-mod/gruz-mod/versions/26.3/build/pp/java/pl/gruzclient/cosmetics/CosmeticsFeature.java:206: error: no suitable method found for mulPose(Quaternionf)
+              m.mulPose(Axis.YP.rotationDegrees(side * (-(28f + flap))));
+               ^
+      method PoseStack.mulPose(Matrix4fc) is not applicable
+        (argument mismatch; Quaternionf cannot be converted to Matrix4fc)
+      method PoseStack.mulPose(Transformation) is not applicable
+        (argument mismatch; Quaternionf cannot be converted to Transformation)
+  /home/runner/work/gruz-mod/gruz-mod/versions/26.3/build/pp/java/pl/gruzclient/cosmetics/CosmeticsFeature.java:207: error: no suitable method found for mulPose(Quaternionf)
+              m.mulPose(Axis.ZP.rotationDegrees(side * -12f));
+               ^
+      method PoseStack.mulPose(Matrix4fc) is not applicable
+        (argument mismatch; Quaternionf cannot be converted to Matrix4fc)
+      method PoseStack.mulPose(Transformation) is not applicable
+        (argument mismatch; Quaternionf cannot be converted to Transformation)
+  /home/runner/work/gruz-mod/gruz-mod/versions/26.3/build/pp/java/pl/gruzclient/cosmetics/CosmeticsFeature.java:243: error: no suitable method found for mulPose(Quaternionf)
                   m.mulPose(Axis.YP.rotationDegrees(side * (-(28f + flap))));
                    ^
       method PoseStack.mulPose(Matrix4fc) is not applicable
@@ -348,36 +390,6 @@ org.gradle.api.tasks.TaskExecutionException: Execution failed for task ':26.3:co
 	at org.gradle.internal.operations.CurrentBuildOperationRef.with(CurrentBuildOperationRef.java:85)
 	at org.gradle.execution.plan.DefaultPlanExecutor$ExecutorWorker.execute(DefaultPlanExecutor.java:475)
 	at org.gradle.execution.plan.DefaultPlanExecutor$ExecutorWorker.run(DefaultPlanExecutor.java:392)
-	at org.gradle.execution.plan.DefaultPlanExecutor.process(DefaultPlanExecutor.java:118)
-	at org.gradle.execution.DefaultBuildWorkExecutor.executePlan(DefaultBuildWorkExecutor.java:143)
-	at org.gradle.execution.DefaultBuildWorkExecutor.displayOrExecutePlan(DefaultBuildWorkExecutor.java:128)
-	at org.gradle.execution.DefaultBuildWorkExecutor$1.call(DefaultBuildWorkExecutor.java:79)
-	at org.gradle.execution.DefaultBuildWorkExecutor$1.call(DefaultBuildWorkExecutor.java:75)
-	at org.gradle.internal.operations.DefaultBuildOperationRunner$CallableBuildOperationWorker.execute(DefaultBuildOperationRunner.java:210)
-	at org.gradle.internal.operations.DefaultBuildOperationRunner$CallableBuildOperationWorker.execute(DefaultBuildOperationRunner.java:205)
-	at org.gradle.internal.operations.DefaultBuildOperationRunner$2.execute(DefaultBuildOperationRunner.java:67)
-	at org.gradle.internal.operations.DefaultBuildOperationRunner$2.execute(DefaultBuildOperationRunner.java:60)
-	at org.gradle.internal.operations.DefaultBuildOperationRunner.execute(DefaultBuildOperationRunner.java:167)
-	at org.gradle.internal.operations.DefaultBuildOperationRunner.execute(DefaultBuildOperationRunner.java:60)
-	at org.gradle.internal.operations.DefaultBuildOperationRunner.call(DefaultBuildOperationRunner.java:54)
-	at org.gradle.execution.DefaultBuildWorkExecutor.execute(DefaultBuildWorkExecutor.java:75)
-	at org.gradle.internal.build.DefaultBuildLifecycleController.lambda$executeTasks$0(DefaultBuildLifecycleController.java:323)
-	at org.gradle.internal.model.StateTransitionController.doTransition(StateTransitionController.java:324)
-	at org.gradle.internal.model.StateTransitionController.lambda$tryTransition$0(StateTransitionController.java:235)
-	at org.gradle.internal.work.DefaultSynchronizer.withLock(DefaultSynchronizer.java:45)
-	at org.gradle.internal.model.StateTransitionController.tryTransition(StateTransitionController.java:235)
-	at org.gradle.internal.build.DefaultBuildLifecycleController.executeTasks(DefaultBuildLifecycleController.java:314)
-	at org.gradle.internal.build.DefaultBuildWorkGraphController$DefaultBuildWorkGraph.runWork(DefaultBuildWorkGraphController.java:207)
-	at org.gradle.internal.work.DefaultWorkerLeaseService.lambda$runAndReleaseLocks$0(DefaultWorkerLeaseService.java:296)
-	at org.gradle.internal.work.ResourceLockStatistics$1.measure(ResourceLockStatistics.java:43)
-	at org.gradle.internal.work.DefaultWorkerLeaseService.runAndReleaseLocks(DefaultWorkerLeaseService.java:294)
-	at org.gradle.internal.work.DefaultWorkerLeaseService.withLocksAcquired(DefaultWorkerLeaseService.java:290)
-	at org.gradle.internal.work.DefaultWorkerLeaseService.withLocks(DefaultWorkerLeaseService.java:282)
-	at org.gradle.internal.work.DefaultWorkerLeaseService.runAsWorkerThread(DefaultWorkerLeaseService.java:132)
-	at org.gradle.composite.internal.DefaultBuildController.doRun(DefaultBuildController.java:182)
-	at org.gradle.composite.internal.DefaultBuildController$BuildOpRunnable.lambda$run$0(DefaultBuildController.java:199)
-	at org.gradle.internal.operations.CurrentBuildOperationRef.with(CurrentBuildOperationRef.java:85)
-	at org.gradle.composite.internal.DefaultBuildController$BuildOpRunnable.run(DefaultBuildController.java:199)
 	at org.gradle.internal.concurrent.ExecutorPolicy$CatchAndRecordFailures.onExecute(ExecutorPolicy.java:65)
 	at org.gradle.internal.concurrent.AbstractManagedExecutor$1.run(AbstractManagedExecutor.java:47)
 Caused by: org.gradle.api.internal.tasks.compile.CompilationFailedException: Compilation failed; see the compiler output below.
@@ -722,13 +734,6 @@ import net.minecraft.client.renderer.MultiBufferSource;
                                     ^
   symbol:   class MultiBufferSource
   location: package net.minecraft.client.renderer
-/home/runner/work/gruz-mod/gruz-mod/versions/26.3/build/pp/java/pl/gruzclient/mixin/EntityRendererMixin.java:17: error: cannot find symbol
-    private Component gruz$recolor(Component text, T entity, Component original, PoseStack matrices, MultiBufferSource vertexConsumers,
-                                                                                                     ^
-  symbol:   class MultiBufferSource
-  location: class EntityRendererMixin<T>
-  where T is a type-variable:
-    T extends Entity declared in class EntityRendererMixin
 /home/runner/work/gruz-mod/gruz-mod/versions/26.3/build/pp/java/pl/gruzclient/mixin/MouseMixin.java:5: error: package org.lwjgl.glfw does not exist
 import org.lwjgl.glfw.GLFW;
                      ^
@@ -1648,7 +1653,7 @@ import net.minecraft.client.gui.GuiGraphics;
             ^
   symbol:   variable GLFW
   location: class WindowIcon
-/home/runner/work/gruz-mod/gruz-mod/versions/26.3/build/pp/java/pl/gruzclient/mixin/LivingEntityRendererMixin.java:19: error: cannot find symbol
+/home/runner/work/gruz-mod/gruz-mod/versions/26.3/build/pp/java/pl/gruzclient/mixin/LivingEntityRendererMixin.java:24: error: cannot find symbol
                 && !mc.options.getCameraType().isFirstPerson() && !mc.options.hideGui) {
                                                                              ^
   symbol:   variable hideGui
@@ -1760,6 +1765,11 @@ import net.minecraft.client.gui.GuiGraphics;
                       ^
   symbol:   variable GLFW
   location: class ChatScreenMixin
+/home/runner/work/gruz-mod/gruz-mod/versions/26.3/build/pp/java/pl/gruzclient/mixin/BipedEntityModelMixin.java:19: error: cannot find symbol
+        if (!(state instanceof net.minecraft.client.renderer.entity.state.PlayerRenderState ps)) return;
+                                                                         ^
+  symbol:   class PlayerRenderState
+  location: package net.minecraft.client.renderer.entity.state
 /home/runner/work/gruz-mod/gruz-mod/versions/26.3/build/pp/java/pl/gruzclient/mixin/MouseMixin.java:18: error: cannot find symbol
         if (action == GLFW.GLFW_PRESS && Minecraft.getInstance().screen == null) CpsModule.click(button);
                       ^
@@ -2834,7 +2844,7 @@ public class GruzButton extends Button {
 	at org.gradle.internal.execution.steps.IdentifyStep.execute(IdentifyStep.java:38)
 	at org.gradle.internal.execution.impl.DefaultExecutionEngine$1.execute(DefaultExecutionEngine.java:68)
 	at org.gradle.api.internal.tasks.execution.DefaultTaskNodeExecutor.doExecute(DefaultTaskNodeExecutor.java:364)
-	... 55 more
+	... 25 more
 
 
 Deprecated Gradle features were used in this build, making it incompatible with Gradle 10.
@@ -2843,5 +2853,5 @@ You can use '--warning-mode all' to show the individual deprecation warnings and
 
 For more on this, please refer to https://docs.gradle.org/9.8.0/userguide/command_line_interface.html#sec:command_line_warnings in the Gradle documentation.
 
-BUILD FAILED in 28s
+BUILD FAILED in 36s
 2 actionable tasks: 2 executed

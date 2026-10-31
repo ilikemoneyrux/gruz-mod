@@ -1,4 +1,4 @@
-errors: 338
+errors: 339
 pl/gruzclient/status/Benchmark.java:9: cannot find symbol
     import net.minecraft.Util;
                         ^
@@ -868,6 +868,10 @@ pl/gruzclient/mixin/ChatScreenMixin.java:66: method keyPressed in class EditBox 
                 cir.setReturnValue(gruz$search.keyPressed(keyCode, scanCode, modifiers));
                                               ^
       required: KeyEvent
+pl/gruzclient/mixin/BipedEntityModelMixin.java:19: cannot find symbol
+            if (!(state instanceof net.minecraft.client.renderer.entity.state.PlayerRenderState ps)) return;
+                                                                             ^
+      symbol:   class PlayerRenderState
 pl/gruzclient/mixin/ClientPlayNetworkHandlerMixin.java:48: cannot find symbol
             for (String line : Lang.t("net.help").split("\\|")) mc.player.displayClientMessage(Component.literal(line).withStyle(ChatFormatting.GRAY), false);
                                                                          ^
@@ -1305,7 +1309,7 @@ pl/gruzclient/screen/GruzButton.java:15: GruzButton is not abstract and does not
 pl/gruzclient/screen/GruzButton.java:28: method does not override or implement a method from a supertype
         @Override
         ^
-    348 errors
+    349 errors
 --- What went wrong ---
 Execution failed for task ':26.1:compileJava' (registered by plugin class 'org.gradle.api.plugins.JavaBasePlugin').
 > Compilation failed; see the compiler output below.

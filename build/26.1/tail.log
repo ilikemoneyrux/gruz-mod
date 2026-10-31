@@ -1,15 +1,4 @@
-uild/pp/java/pl/gruzclient/cosmetics/CosmeticsFeature.java:37: error: cannot find symbol
-      private RenderType solidLayer, glowLayer, litLayer;
-              ^
-    symbol:   class RenderType
-    location: class CosmeticsFeature
-  /home/runner/work/gruz-mod/gruz-mod/versions/26.1/build/pp/java/pl/gruzclient/cosmetics/CosmeticsFeature.java:40: error: cannot find symbol
-      public CosmeticsFeature(RenderLayerParent<net.minecraft.client.renderer.entity.state.PlayerRenderState, PlayerModel> context) {
-                                                                                          ^
-    symbol:   class PlayerRenderState
-    location: package net.minecraft.client.renderer.entity.state
-  /home/runner/work/gruz-mod/gruz-mod/versions/26.1/build/pp/java/pl/gruzclient/cosmetics/CosmeticsFeature.java:40: error: cannot find symbol
-      public CosmeticsFeature(RenderLayerParent<net.minecraft.client.renderer.entity.state.PlayerRenderState, PlayerModel> context) {
+public CosmeticsFeature(RenderLayerParent<net.minecraft.client.renderer.entity.state.PlayerRenderState, PlayerModel> context) {
                                                                                                               ^
     symbol:   class PlayerModel
     location: class CosmeticsFeature
@@ -358,6 +347,11 @@ uild/pp/java/pl/gruzclient/cosmetics/CosmeticsFeature.java:37: error: cannot fin
                                                                             ^
     symbol:   variable RenderType
     location: class WorldRendererMixin
+  /home/runner/work/gruz-mod/gruz-mod/versions/26.1/build/pp/java/pl/gruzclient/mixin/BipedEntityModelMixin.java:19: error: cannot find symbol
+          if (!(state instanceof net.minecraft.client.renderer.entity.state.PlayerRenderState ps)) return;
+                                                                           ^
+    symbol:   class PlayerRenderState
+    location: package net.minecraft.client.renderer.entity.state
   /home/runner/work/gruz-mod/gruz-mod/versions/26.1/build/pp/java/pl/gruzclient/mixin/AbstractClientPlayerEntityMixin.java:21: error: cannot find symbol
           PlayerSkin t = cir.getReturnValue();
           ^
@@ -1015,7 +1009,7 @@ uild/pp/java/pl/gruzclient/cosmetics/CosmeticsFeature.java:37: error: cannot fin
               this.renderBlurredBackground();
                   ^
     symbol: method renderBlurredBackground()
-  348 errors
+  349 errors
 
 * Try:
 > Check your code and dependencies to fix the compilation error(s)
@@ -2179,6 +2173,11 @@ import net.minecraft.client.gui.GuiGraphics;
   required: KeyEvent
   found:    int,int,int
   reason: actual and formal argument lists differ in length
+/home/runner/work/gruz-mod/gruz-mod/versions/26.1/build/pp/java/pl/gruzclient/mixin/BipedEntityModelMixin.java:19: error: cannot find symbol
+        if (!(state instanceof net.minecraft.client.renderer.entity.state.PlayerRenderState ps)) return;
+                                                                         ^
+  symbol:   class PlayerRenderState
+  location: package net.minecraft.client.renderer.entity.state
 /home/runner/work/gruz-mod/gruz-mod/versions/26.1/build/pp/java/pl/gruzclient/mixin/ClientPlayNetworkHandlerMixin.java:48: error: cannot find symbol
         for (String line : Lang.t("net.help").split("\\|")) mc.player.displayClientMessage(Component.literal(line).withStyle(ChatFormatting.GRAY), false);
                                                                      ^
@@ -2734,7 +2733,7 @@ public class GruzButton extends Button {
 /home/runner/work/gruz-mod/gruz-mod/versions/26.1/build/pp/java/pl/gruzclient/screen/GruzButton.java:28: error: method does not override or implement a method from a supertype
     @Override
     ^
-348 errors
+349 errors
 	at org.gradle.api.internal.tasks.compile.JdkJavaCompiler.execute(JdkJavaCompiler.java:88)
 	at org.gradle.api.internal.tasks.compile.JdkJavaCompiler.execute(JdkJavaCompiler.java:49)
 	at org.gradle.api.internal.tasks.compile.NormalizingJavaCompiler.delegateAndHandleErrors(NormalizingJavaCompiler.java:98)
