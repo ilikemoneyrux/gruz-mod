@@ -1,4 +1,4 @@
-# Build 23 (31548c67)
+# Build 24 (a345c22e)
 
 - 1.20.1: build FAIL (errors: 26), w grze: -
 - 1.20.4: build OK (errors: 0), w grze: OK
