@@ -22,6 +22,14 @@ if not jars: sys.exit(0)
 jar = sorted(jars, key=lambda p: ('named' not in p and 'merged' not in p, len(p)))[0]
 cp = jar + ':' + ':'.join(glob.glob(home + '/.gradle/caches/modules-2/**/*.jar', recursive=True))
 for cls in want:
+    if cls == 'ALL':
+        import gzip
+        names = sorted(n[:-6].replace('/', '.') for n in zipfile.ZipFile(jar).namelist() if n.endswith('.class') and n.startswith(('net/minecraft/', 'com/mojang/blaze3d/', 'com/mojang/math/')))
+        with gzip.open(out + '/inspect/ALL.txt.gz', 'wt') as g:
+            for i in range(0, len(names), 400):
+                r = subprocess.run(['javap', '-p', '-s', '-cp', cp] + names[i:i + 400], capture_output=True, text=True)
+                g.write(r.stdout)
+        continue
     if cls == 'LIST':
         names = sorted(n[:-6].replace('/', '.') for n in zipfile.ZipFile(jar).namelist() if n.endswith('.class') and '$' not in n)
         open(out + '/inspect/LIST.txt', 'w').write('\n'.join(names))
