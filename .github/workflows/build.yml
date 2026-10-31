@@ -87,25 +87,37 @@ jobs:
       - uses: actions/download-artifact@v4
         continue-on-error: true
         with: { path: art }
+      - name: Publish jars that passed the smoke test (release "mod")
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          set +e
+          mkdir -p rel
+          for d in art/out-*; do
+            v=${d##*/out-}
+            if [ "$(cat $d/smoke 2>/dev/null)" = "OK" ]; then cp $d/gruzclient-*.jar rel/ 2>/dev/null; fi
+          done
+          {
+            ls -la rel
+            if ls rel/*.jar >/dev/null 2>&1; then
+              python3 ci/manifest.py rel > rel/versions.json && cat rel/versions.json
+              gh release delete mod -y --cleanup-tag
+              gh release create mod rel/* --title "Gruz Client mod" --notes "Automatyczny build z ${{ github.sha }}" --latest --target ${{ github.sha }}
+              echo "release exit $?"
+            else
+              echo "no jars passed"
+            fi
+          } > /tmp/publish.log 2>&1
+          cat /tmp/publish.log
       - name: Summary + publish to ci-results
+        if: always()
         run: |
           python3 ci/summary.py art "${{ github.sha }}" "${{ github.run_number }}" > /tmp/STATUS.md || echo "summary failed $(ls art)" > /tmp/STATUS.md
-          cat /tmp/STATUS.md
           cd /tmp && rm -rf res && mkdir res && cd res && git init -q && git checkout -q -b ci-results
           git config user.name gruz-ci; git config user.email ci@gruz.invalid
           git remote add origin "https://x-access-token:${{ secrets.GITHUB_TOKEN }}@github.com/${{ github.repository }}"
           (git fetch -q origin ci-results && git reset -q --hard origin/ci-results) || true
           rm -rf build && mkdir -p build
           cp /tmp/STATUS.md build/STATUS.md
-          for d in "$GITHUB_WORKSPACE"/art/out-*; do v=${d##*/out-}; mkdir -p build/$v; cp "$d"/errors.txt "$d"/exit build/$v/ 2>/dev/null; tail -c 200000 "$d"/full.log > build/$v/tail.log 2>/dev/null; cp -r "$d"/inspect build/$v/ 2>/dev/null; done
+          cp /tmp/publish.log build/publish.log 2>/dev/null
           (git add -A && git commit -qm "build run ${{ github.run_number }} (${{ github.sha }})" && git push -q origin ci-results) || (sleep 5; git pull -q --rebase origin ci-results && git push -q origin ci-results)
-      - name: Publish jars (release "nightly")
-        env:
-          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        run: |
-          mkdir -p rel
-          cp art/out-*/gruzclient-*.jar rel/ 2>/dev/null || true
-          ls rel/*.jar >/dev/null 2>&1 || { echo "no jars"; exit 0; }
-          python3 ci/manifest.py rel > rel/versions.json
-          gh release delete mod -y --cleanup-tag 2>/dev/null || true
-          gh release create mod rel/* --title "Gruz Client mod" --notes "Automatyczny build z ${{ github.sha }}" --latest

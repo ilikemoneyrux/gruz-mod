@@ -8,4 +8,5 @@ for d in sorted(os.listdir(art)):
     code = open(os.path.join(p, 'exit')).read().strip() if os.path.exists(os.path.join(p, 'exit')) else '?'
     errs = open(os.path.join(p, 'errors.txt'), encoding='utf-8').readline().strip() if os.path.exists(os.path.join(p, 'errors.txt')) else ''
     jar = any(f.endswith('.jar') for f in os.listdir(p))
-    print(f"- {v}: {'OK' if code == '0' and jar else 'FAIL'} (exit {code}, {errs})")
+    smoke = open(os.path.join(p, 'smoke')).read().strip() if os.path.exists(os.path.join(p, 'smoke')) else '-'
+    print(f"- {v}: build {'OK' if code == '0' and jar else 'FAIL'} ({errs}), w grze: {smoke}")
