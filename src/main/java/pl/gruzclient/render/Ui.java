@@ -1,7 +1,6 @@
 package pl.gruzclient.render;
 
 import pl.gruzclient.compat.Compat;
-import com.mojang.blaze3d.systems.RenderSystem;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.Font;
 import net.minecraft.client.gui.GuiGraphics;
@@ -43,12 +42,12 @@ public final class Ui {
 
     /** Tekst w skali (np. duże tytuły) */
     public static void drawScaled(GuiGraphics c, Component t, float x, float y, float scale, int argb, boolean centered) {
-        var m = c.pose();
-        m.pushPose();
-        m.translate(x, y, 0);
-        m.scale(scale, scale, 1f);
+        var m = pl.gruzclient.compat.Pose2D.of(c);
+        m.push();
+        m.translate(x, y);
+        m.scale(scale, scale);
         c.drawString(tr(), t, centered ? -width(t) / 2 : 0, 0, argb, false);
-        m.popPose();
+        m.pop();
     }
 
     /** Ucina tekst do szerokości z "…" */
@@ -64,8 +63,6 @@ public final class Ui {
     public static void icon(GuiGraphics c, Icon icon, int x, int y, int size, int argb) {
         GruzDraw.tex(ICONS);
         int i = icon.ordinal();
-        RenderSystem.enableBlend();
-        RenderSystem.defaultBlendFunc();
         Compat.blit(c, ICONS, x, y, size, size, (i % 8) * 32f, (i / 8) * 32f, 32, 32, 256, 128, argb);
     }
 

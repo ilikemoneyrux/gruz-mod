@@ -25,14 +25,14 @@ public class HudTweaksModule extends Module {
     public void bossBegin(GuiGraphics c) {
         bossPushed = isEnabled() || pl.gruzclient.module.Modules.MINIMAP.compassShown();
         if (!bossPushed) return;
-        var m = c.pose();
-        m.pushPose();
+        var m = pl.gruzclient.compat.Pose2D.of(c);
+        m.push();
         float cx = c.guiWidth() / 2f;
         float top = bossY + (pl.gruzclient.module.Modules.MINIMAP.compassShown() ? 16 : 0);
-        m.translate(cx + bossX, top, 0);
+        m.translate(cx + bossX, top);
         float k = isEnabled() ? bossSize.value : 1f;
-        m.scale(k, k, 1f);
-        m.translate(-cx, 0, 0);
+        m.scale(k, k);
+        m.translate(-cx, 0);
     }
 
     /** Prostokąt paska bossa na ekranie {x, y, w, h} (dla edytora HUD) */
@@ -60,23 +60,23 @@ public class HudTweaksModule extends Module {
     }
 
     public void bossEnd(GuiGraphics c) {
-        if (bossPushed) c.pose().popPose();
+        if (bossPushed) pl.gruzclient.compat.Pose2D.of(c).pop();
         bossPushed = false;
     }
 
     public void titleBegin(GuiGraphics c) {
         titlePushed = isEnabled();
         if (!titlePushed) return;
-        var m = c.pose();
-        m.pushPose();
+        var m = pl.gruzclient.compat.Pose2D.of(c);
+        m.push();
         float cx = c.guiWidth() / 2f, cy = c.guiHeight() / 2f;
-        m.translate(cx, cy + titleY.value, 0);
-        m.scale(titleSize.value, titleSize.value, 1f);
-        m.translate(-cx, -cy, 0);
+        m.translate(cx, cy + titleY.value);
+        m.scale(titleSize.value, titleSize.value);
+        m.translate(-cx, -cy);
     }
 
     public void titleEnd(GuiGraphics c) {
-        if (titlePushed) c.pose().popPose();
+        if (titlePushed) pl.gruzclient.compat.Pose2D.of(c).pop();
         titlePushed = false;
     }
 }

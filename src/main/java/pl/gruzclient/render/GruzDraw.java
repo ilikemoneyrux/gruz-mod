@@ -1,9 +1,7 @@
 package pl.gruzclient.render;
 
 import pl.gruzclient.compat.Compat;
-import com.mojang.blaze3d.platform.GlStateManager;
 import com.mojang.blaze3d.platform.NativeImage;
-import com.mojang.blaze3d.systems.RenderSystem;
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.math.Axis;
 import pl.gruzclient.GruzClient;
@@ -47,8 +45,7 @@ public final class GruzDraw {
         String path = "/assets/" + id.getNamespace() + "/" + id.getPath();
         try (InputStream in = GruzDraw.class.getResourceAsStream(path)) {
             if (in == null) throw new IllegalStateException("Brak pliku " + path);
-            DynamicTexture t = new DynamicTexture(NativeImage.read(in));
-            t.setFilter(true, false); // gładkie skalowanie
+            DynamicTexture t = Compat.texture(id.toString(), NativeImage.read(in), true); // gładkie skalowanie
             Minecraft.getInstance().getTextureManager().register(id, t);
         } catch (Exception e) {
             GruzClient.LOG.error("Nie udało się wczytać tekstury {}", id, e);
@@ -62,18 +59,16 @@ public final class GruzDraw {
                               float alpha, boolean additive, float rotation) {
         if (alpha <= 0.003f) return;
         tex(id);
-        RenderSystem.enableBlend();
-        if (additive) RenderSystem.blendFunc(GlStateManager.SourceFactor.SRC_ALPHA, GlStateManager.DestFactor.ONE);
-        else RenderSystem.defaultBlendFunc();
-        PoseStack m = c.pose();
-        m.pushPose();
-        m.translate(x + w / 2f, y + h / 2f, 0);
-        if (rotation != 0) m.mulPose(Axis.ZP.rotation(rotation));
-        m.scale(w / texSize, h / texSize, 1f);
-        m.translate(-texSize / 2f, -texSize / 2f, 0);
+        Compat.blend(additive);
+        var m = pl.gruzclient.compat.Pose2D.of(c);
+        m.push();
+        m.translate(x + w / 2f, y + h / 2f);
+        if (rotation != 0) m.rotate(rotation);
+        m.scale(w / texSize, h / texSize);
+        m.translate(-texSize / 2f, -texSize / 2f);
         Compat.blitWhole(c, id, 0, 0, texSize, texSize, (Math.round(Math.min(1f, alpha) * 255f) << 24) | 0xFFFFFF);
-        m.popPose();
-        RenderSystem.defaultBlendFunc();
+        m.pop();
+        Compat.blend(false);
     }
 
     private static int accent() {

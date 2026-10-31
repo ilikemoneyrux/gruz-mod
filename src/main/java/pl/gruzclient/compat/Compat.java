@@ -14,11 +14,14 @@ import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.material.MapColor;
-//#if MC >= 1.21.2
+//#if MC >= 1.21.6
+import net.minecraft.client.renderer.RenderPipelines;
+//#elif MC >= 1.21.2
 import net.minecraft.client.renderer.RenderType;
 //#else
 import com.mojang.blaze3d.systems.RenderSystem;
 //#endif
+import net.minecraft.client.renderer.texture.DynamicTexture;
 //#if MC < 1.21.2
 import org.joml.Vector3f;
 //#endif
@@ -43,10 +46,12 @@ public final class Compat {
     /** Fragment tekstury (u, v, rw x rh z tekstury tw x th) narysowany jako prostokąt w x h, z kolorem ARGB */
     public static void blit(GuiGraphics c, ResourceLocation tex, int x, int y, int w, int h,
                             float u, float v, int rw, int rh, int tw, int th, int argb) {
-        //#if MC >= 1.21.2
+        //#if MC >= 1.21.6
+        c.blit(RenderPipelines.GUI_TEXTURED, tex, x, y, u, v, w, h, rw, rh, tw, th, argb);
+        //#elif MC >= 1.21.2
         c.blit(RenderType::guiTextured, tex, x, y, u, v, w, h, rw, rh, tw, th, argb);
         //#else
-        RenderSystem.enableBlend();
+        blend(false);
         c.setColor(((argb >> 16) & 255) / 255f, ((argb >> 8) & 255) / 255f, (argb & 255) / 255f, ((argb >>> 24) & 255) / 255f);
         c.blit(tex, x, y, w, h, u, v, rw, rh, tw, th);
         c.setColor(1f, 1f, 1f, 1f);
@@ -59,7 +64,9 @@ public final class Compat {
     }
 
     public static void sprite(GuiGraphics c, TextureAtlasSprite sprite, int x, int y, int w, int h) {
-        //#if MC >= 1.21.2
+        //#if MC >= 1.21.6
+        c.blitSprite(RenderPipelines.GUI_TEXTURED, sprite, x, y, w, h);
+        //#elif MC >= 1.21.2
         c.blitSprite(RenderType::guiTextured, sprite, x, y, w, h);
         //#else
         c.blit(x, y, 0, w, h, sprite);
@@ -98,6 +105,39 @@ public final class Compat {
         p.render(c, w, h, alpha, delta);
         //#else
         p.render(delta, alpha);
+        //#endif
+    }
+
+    // ---------------- tekstury ----------------
+
+    /** Tekstura z obrazka; smooth = gładkie skalowanie (tam, gdzie wersja na to pozwala) */
+    public static DynamicTexture texture(String name, NativeImage img, boolean smooth) {
+        //#if MC >= 1.21.5
+        DynamicTexture t = new DynamicTexture(() -> name, img);
+        //#else
+        DynamicTexture t = new DynamicTexture(img);
+        //#endif
+        //#if MC < 1.21.6
+        if (smooth) t.setFilter(true, false);
+        //#endif
+        return t;
+    }
+
+    /** Pusta tekstura do rysowania pikseli (mapa, peleryny) */
+    public static DynamicTexture texture(String name, int w, int h) {
+        //#if MC >= 1.21.5
+        return new DynamicTexture(() -> name, w, h, true);
+        //#else
+        return new DynamicTexture(w, h, true);
+        //#endif
+    }
+
+    /** Ustawienia mieszania kolorów przed rysowaniem (od 1.21.5 robi to pipeline) */
+    public static void blend(boolean additive) {
+        //#if MC < 1.21.5
+        RenderSystem.enableBlend();
+        if (additive) RenderSystem.blendFunc(com.mojang.blaze3d.platform.GlStateManager.SourceFactor.SRC_ALPHA, com.mojang.blaze3d.platform.GlStateManager.DestFactor.ONE);
+        else RenderSystem.defaultBlendFunc();
         //#endif
     }
 

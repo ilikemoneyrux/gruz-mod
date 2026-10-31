@@ -66,7 +66,7 @@ public class MinimapModule extends HudModule {
 
     private void ensureTexture() {
         if (texture != null) return;
-        texture = new DynamicTexture(TEX, TEX, true);
+        texture = Compat.texture("gruz_minimap", TEX, TEX);
         mc.getTextureManager().register(ID, texture);
     }
 
@@ -91,14 +91,14 @@ public class MinimapModule extends HudModule {
         // ramka i mapa (przycięta do kwadratu)
         c.fill(-2, -2, s + 2, s + 2, argb(0.85f, SLAB));
         c.renderOutline(-2, -2, s + 4, s + 4, argb(0.9f, NEON));
-        PoseStack m = c.pose();
+        var m = pl.gruzclient.compat.Pose2D.of(c);
         c.enableScissor(Math.round(screenX()), Math.round(screenY()), Math.round(screenX() + s * scale), Math.round(screenY() + s * scale));
-        m.pushPose();
-        m.translate(s / 2f, s / 2f, 0);
-        if (rotate.value) m.mulPose(Axis.ZP.rotationDegrees(180f - mc.player.getYRot()));
+        m.push();
+        m.translate(s / 2f, s / 2f);
+        if (rotate.value) m.rotateDeg(180f - mc.player.getYRot());
         float k = (float) s / TEX * 1.42f; // zapas na obrót
         if (!rotate.value) k = (float) s / TEX;
-        m.scale(k, k, 1f);
+        m.scale(k, k);
         Compat.blitWhole(c, ID, -half, -half, TEX, TEX, -1);
         // waypointy
         for (Waypoints.Point p : Waypoints.current()) {
@@ -110,17 +110,17 @@ public class MinimapModule extends HudModule {
             c.fill(Math.round(dx) - d, Math.round(dz) - d, Math.round(dx) + d, Math.round(dz) + d, 0xFF000000);
             c.fill(Math.round(dx) - d + 1, Math.round(dz) - d + 1, Math.round(dx) + d - 1, Math.round(dz) + d - 1, 0xFF000000 | p.color);
         }
-        m.popPose();
+        m.pop();
         c.disableScissor();
 
         // strzałka gracza
-        m.pushPose();
-        m.translate(s / 2f, s / 2f, 0);
-        if (!rotate.value) m.mulPose(Axis.ZP.rotationDegrees(mc.player.getYRot() + 180f));
+        m.push();
+        m.translate(s / 2f, s / 2f);
+        if (!rotate.value) m.rotateDeg(mc.player.getYRot() + 180f);
         c.fill(-1, -4, 1, 3, 0xFFFFFFFF);
         c.fill(-3, -1, 3, 1, argb(1f, NEON_HOT));
         c.fill(-1, -5, 1, -3, argb(1f, NEON));
-        m.popPose();
+        m.pop();
 
         // koordynaty pod mapą
         String xyz = mc.player.getBlockX() + ", " + mc.player.getBlockY() + ", " + mc.player.getBlockZ();

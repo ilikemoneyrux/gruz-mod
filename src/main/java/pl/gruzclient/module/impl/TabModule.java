@@ -48,14 +48,14 @@ public class TabModule extends Module {
         int ms = entry.getLatency();
         String s = ms <= 0 ? "?" : String.valueOf(ms);
         int col = ms <= 0 ? 0x9488A8 : ms < 60 ? 0x7DFFB2 : ms < 120 ? 0xC8FF5C : ms < 200 ? 0xFFD35C : ms < 350 ? 0xFF9A5C : 0xFF5C8A;
-        var m = c.pose();
-        m.pushPose();
+        var m = pl.gruzclient.compat.Pose2D.of(c);
+        m.push();
         float k = 0.75f;
         float tx = x + width - 1 - mc.font.width(s) * k;
-        m.translate(tx, y + 1.5f, 0);
-        m.scale(k, k, 1f);
+        m.translate(tx, y + 1.5f);
+        m.scale(k, k);
         c.drawString(mc.font, s, 0, 0, 0xFF000000 | col, true);
-        m.popPose();
+        m.pop();
         return true;
     }
 }

@@ -30,7 +30,7 @@ public final class CapeTextures {
         String key = style + "_" + Integer.toHexString(color & 0xFFFFFF);
         ResourceLocation id = IDS.get(key);
         if (id != null) return id;
-        DynamicTexture tex = new DynamicTexture(64 * SCALE, 32 * SCALE, true);
+        DynamicTexture tex = Compat.texture("gruz_cape", 64 * SCALE, 32 * SCALE);
         id = Compat.id(GruzClient.MOD_ID, "cape/" + key);
         Minecraft.getInstance().getTextureManager().register(id, tex);
         TEXTURES.put(key, tex);

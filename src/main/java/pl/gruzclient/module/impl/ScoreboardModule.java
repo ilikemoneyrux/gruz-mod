@@ -27,12 +27,12 @@ public class ScoreboardModule extends Module {
     public void begin(GuiGraphics c) {
         drawing = isEnabled();
         if (!drawing) return;
-        var m = c.pose();
-        m.pushPose();
+        var m = pl.gruzclient.compat.Pose2D.of(c);
+        m.push();
         float w = c.guiWidth(), h = c.guiHeight();
-        m.translate(w + offX, h / 2f + offY, 0);
-        m.scale(size.value, size.value, 1f);
-        m.translate(-w, -h / 2f, 0);
+        m.translate(w + offX, h / 2f + offY);
+        m.scale(size.value, size.value);
+        m.translate(-w, -h / 2f);
         rx1 = ry1 = Integer.MAX_VALUE;
         rx2 = ry2 = Integer.MIN_VALUE;
     }
@@ -59,7 +59,7 @@ public class ScoreboardModule extends Module {
         if (!drawing) return;
         drawing = false;
         if (rx2 > rx1) { lastRect = new int[]{rx1, ry1, rx2, ry2}; lastSeen = System.currentTimeMillis(); }
-        c.pose().popPose();
+        pl.gruzclient.compat.Pose2D.of(c).pop();
     }
 
     /** Kolor tła wierszy; tytuł dostaje trochę mocniejsze tło jak w grze */

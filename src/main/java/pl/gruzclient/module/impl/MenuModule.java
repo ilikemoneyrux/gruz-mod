@@ -53,8 +53,7 @@ public class MenuModule extends Module {
         try {
             for (int i = 0; i < 6; i++) {
                 try (InputStream in = Files.newInputStream(dir().resolve("panorama_" + i + ".png"))) {
-                    DynamicTexture t = new DynamicTexture(NativeImage.read(in));
-                    t.setFilter(true, false);
+                    DynamicTexture t = Compat.texture("gruz_menu", NativeImage.read(in), true);
                     mc.getTextureManager().register(PANORAMA.withPath(PANORAMA.getPath() + "_" + i + ".png"), t);
                 }
             }

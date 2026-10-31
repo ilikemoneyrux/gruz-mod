@@ -49,7 +49,7 @@ public class WorldMapScreen extends Screen {
         if (texture == null || texW != mapW || texH != mapH) {
             if (texture != null) texture.close();
             texW = mapW; texH = mapH;
-            texture = new DynamicTexture(texW, texH, true);
+            texture = Compat.texture("gruz_worldmap", texW, texH);
             minecraft.getTextureManager().register(ID, texture);
         }
         dirty = true;
@@ -129,13 +129,13 @@ public class WorldMapScreen extends Screen {
         // gracz
         if (minecraft.player != null) {
             float px = (float) ((minecraft.player.getX() - cx) * zoom + texW / 2.0), pz = (float) ((minecraft.player.getZ() - cz) * zoom + texH / 2.0);
-            PoseStack m = c.pose();
-            m.pushPose();
-            m.translate(px, pz, 0);
-            m.mulPose(Axis.ZP.rotationDegrees(minecraft.player.getYRot() + 180f));
+            var m = pl.gruzclient.compat.Pose2D.of(c);
+            m.push();
+            m.translate(px, pz);
+            m.rotateDeg(minecraft.player.getYRot() + 180f);
             c.fill(-1, -5, 1, 4, 0xFFFFFFFF);
             c.fill(-3, -1, 3, 1, argb(1f, NEON_HOT));
-            m.popPose();
+            m.pop();
         }
 
         // pasek boczny

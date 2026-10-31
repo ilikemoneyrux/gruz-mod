@@ -1,3 +1,18 @@
 # Podmiany nazw w kodzie dla wybranych wersji (całe słowa).
 # warunek | stara => nowa
 MC >= 1.21.2 | LevelRenderer.addChainedFilledBoxVertices => net.minecraft.client.renderer.ShapeRenderer.addChainedFilledBoxVertices
+# 1.21.11: Mojang przemianował sporo klas
+MC >= 1.21.11 | net.minecraft.resources.ResourceLocation => net.minecraft.resources.Identifier
+MC >= 1.21.11 | ResourceLocation => Identifier
+MC >= 1.21.11 | net.minecraft.Util => net.minecraft.util.Util
+MC >= 1.21.11 | net.minecraft.client.renderer.RenderType => net.minecraft.client.renderer.rendertype.RenderType
+MC >= 1.21.11 | net.minecraft.client.resources.PlayerSkin => net.minecraft.world.entity.player.PlayerSkin
+MC >= 1.21.11 | net.minecraft.client.model.PlayerModel => net.minecraft.client.model.player.PlayerModel
+MC >= 1.21.11 | net.minecraft.client.renderer.entity.state.PlayerRenderState => net.minecraft.client.renderer.entity.state.AvatarRenderState
+MC >= 1.21.11 | net.minecraft.client.renderer.entity.player.PlayerRenderer => net.minecraft.client.renderer.entity.player.AvatarRenderer
+MC >= 1.21.11 | PlayerRenderer => AvatarRenderer
+MC >= 1.21.11 | com.mojang.blaze3d.platform.GlStateManager => com.mojang.blaze3d.opengl.GlStateManager
+MC >= 1.21.11 | RenderType.debugFilledBox => net.minecraft.client.renderer.rendertype.RenderTypes.debugFilledBox
+MC >= 1.21.11 | RenderType.entityTranslucentEmissive => net.minecraft.client.renderer.rendertype.RenderTypes.entityTranslucentEmissive
+MC >= 1.21.11 | RenderType.entityTranslucent => net.minecraft.client.renderer.rendertype.RenderTypes.entityTranslucent
+MC >= 1.21.11 | RenderType.eyes => net.minecraft.client.renderer.rendertype.RenderTypes.eyes

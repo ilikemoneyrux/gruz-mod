@@ -303,11 +303,11 @@ public class GruzModsScreen extends Screen {
             } else if (s instanceof Setting.Choice ch) {
                 Ui.round(c, ctrlX, cy - 1, ctrlW, 14, 3, argb(r, 0x1C1626));
                 Ui.icon(c, Ui.Icon.BACK, ctrlX + 4, cy + 2, 7, argb(r, NEON_HOT));
-                c.pose().pushPose();
-                c.pose().translate(ctrlX + ctrlW - 4, cy + 9, 0);
-                c.pose().mulPose(com.mojang.math.Axis.ZP.rotationDegrees(180));
+                pl.gruzclient.compat.Pose2D.of(c).push();
+                pl.gruzclient.compat.Pose2D.of(c).translate(ctrlX + ctrlW - 4, cy + 9);
+                pl.gruzclient.compat.Pose2D.of(c).rotateDeg(180);
                 Ui.icon(c, Ui.Icon.BACK, 0, 0, 7, argb(r, NEON_HOT));
-                c.pose().popPose();
+                pl.gruzclient.compat.Pose2D.of(c).pop();
                 Component v = Ui.fit(ch.display(), ctrlW - 34, true);
                 int sx = ctrlX + (ctrlW - Ui.width(v)) / 2;
                 if (s instanceof Setting.Color col) {

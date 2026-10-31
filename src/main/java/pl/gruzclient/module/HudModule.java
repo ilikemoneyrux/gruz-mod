@@ -31,15 +31,15 @@ public abstract class HudModule extends Module {
     protected abstract int[] draw(GuiGraphics c, boolean editing);
 
     public void render(GuiGraphics c, int screenW, int screenH, boolean editing) {
-        PoseStack m = c.pose();
-        m.pushPose();
+        var m = pl.gruzclient.compat.Pose2D.of(c);
+        m.push();
         int px = Math.round(x * screenW), py = Math.round(y * screenH);
-        m.translate(px, py, 0);
-        m.scale(scale, scale, 1f);
+        m.translate(px, py);
+        m.scale(scale, scale);
         int[] size = draw(c, editing);
         lastW = size[0];
         lastH = size[1];
-        m.popPose();
+        m.pop();
     }
 
     /** Wspólne tło "pastylki" HUD */

@@ -74,11 +74,11 @@ public class KeystrokesModule extends HudModule {
         int col = argb(1f, lerpColor(color.rgb(), 0x0D0414, a));
         String s = cps + " CPS";
         c.drawString(tr, label, x + (w - tr.width(label)) / 2, y + 3, col, false);
-        c.pose().pushPose();
-        c.pose().translate(x + w / 2f, y + 13, 0);
-        c.pose().scale(0.75f, 0.75f, 1f);
+        pl.gruzclient.compat.Pose2D.of(c).push();
+        pl.gruzclient.compat.Pose2D.of(c).translate(x + w / 2f, y + 13);
+        pl.gruzclient.compat.Pose2D.of(c).scale(0.75f, 0.75f);
         c.drawString(tr, s, -tr.width(s) / 2, 0, argb(0.85f, lerpColor(MUTE, 0x2A1040, a)), false);
-        c.pose().popPose();
+        pl.gruzclient.compat.Pose2D.of(c).pop();
     }
 
     private void box(GuiGraphics c, int x, int y, int w, int h, float a) {
