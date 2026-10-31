@@ -1,10 +1,10 @@
-# Build 12 (48fe728a)
+# Build 14 (44fb5896)
 
-- 1.20.1: FAIL (exit 1, errors: 28)
-- 1.20.4: OK (exit 0, errors: 0)
-- 1.21.1: OK (exit 0, errors: 0)
-- 1.21.11: FAIL (exit 1, errors: 199)
-- 1.21.4: OK (exit 0, errors: 0)
-- 26.1: FAIL (exit 1, errors: 339)
-- 26.2: FAIL (exit 1, errors: 393)
-- 26.3: FAIL (exit 1, errors: 449)
+- 1.20.1: build FAIL (errors: 28), w grze: -
+- 1.20.4: build OK (errors: 0), w grze: OK
+- 1.21.1: build OK (errors: 0), w grze: OK
+- 1.21.11: build FAIL (errors: 199), w grze: -
+- 1.21.4: build OK (errors: 0), w grze: OK
+- 26.1: build FAIL (errors: 339), w grze: -
+- 26.2: build FAIL (errors: 393), w grze: -
+- 26.3: build FAIL (errors: 449), w grze: -

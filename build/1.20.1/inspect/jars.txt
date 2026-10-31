@@ -1,2 +1,0 @@
-/home/runner/.gradle/caches/fabric-loom/minecraftMaven/net/minecraft/minecraft-merged/1.20.1-loom.mappings.1_20_1.layered+hash.2120374037-v2/minecraft-merged-1.20.1-loom.mappings.1_20_1.layered+hash.2120374037-v2.jar
-/home/runner/.gradle/caches/fabric-loom/minecraftMaven/net/minecraft/minecraft-merged/1.20.1-loom.mappings.1_20_1.layered+hash.2120374037-v2/minecraft-merged-1.20.1-loom.mappings.1_20_1.layered+hash.2120374037-v2.jar
