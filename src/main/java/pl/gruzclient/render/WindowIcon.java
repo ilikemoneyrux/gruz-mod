@@ -1,5 +1,6 @@
 package pl.gruzclient.render;
 
+import pl.gruzclient.compat.Compat;
 import org.lwjgl.glfw.GLFW;
 import org.lwjgl.glfw.GLFWImage;
 import org.lwjgl.system.MemoryUtil;
@@ -37,7 +38,7 @@ public final class WindowIcon {
                 buffers.add(buf);
                 for (int y = 0; y < s; y++) {
                     for (int x = 0; x < s; x++) {
-                        int abgr = scaled.getPixelRGBA(x, y);
+                        int abgr = Compat.getPixelABGR(scaled, x, y);
                         buf.put((byte) (abgr & 255)).put((byte) ((abgr >> 8) & 255)).put((byte) ((abgr >> 16) & 255)).put((byte) ((abgr >>> 24) & 255));
                     }
                 }

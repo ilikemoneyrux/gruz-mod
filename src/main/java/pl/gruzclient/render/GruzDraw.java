@@ -1,5 +1,6 @@
 package pl.gruzclient.render;
 
+import pl.gruzclient.compat.Compat;
 import com.mojang.blaze3d.platform.GlStateManager;
 import com.mojang.blaze3d.platform.NativeImage;
 import com.mojang.blaze3d.systems.RenderSystem;
@@ -31,9 +32,9 @@ public final class GruzDraw {
     public static final int TEXT = 0xF1ECF8;
     public static final int MUTE = 0x9488A8;
 
-    public static final ResourceLocation LOGO = ResourceLocation.fromNamespaceAndPath(GruzClient.MOD_ID, "textures/gui/logo.png");
-    public static final ResourceLocation GLOW = ResourceLocation.fromNamespaceAndPath(GruzClient.MOD_ID, "textures/gui/glow.png");
-    public static final ResourceLocation CRYSTAL = ResourceLocation.fromNamespaceAndPath(GruzClient.MOD_ID, "textures/gui/crystal.png");
+    public static final ResourceLocation LOGO = Compat.id(GruzClient.MOD_ID, "textures/gui/logo.png");
+    public static final ResourceLocation GLOW = Compat.id(GruzClient.MOD_ID, "textures/gui/glow.png");
+    public static final ResourceLocation CRYSTAL = Compat.id(GruzClient.MOD_ID, "textures/gui/crystal.png");
 
     private static final Set<ResourceLocation> LOADED = new HashSet<>();
 
@@ -64,16 +65,14 @@ public final class GruzDraw {
         RenderSystem.enableBlend();
         if (additive) RenderSystem.blendFunc(GlStateManager.SourceFactor.SRC_ALPHA, GlStateManager.DestFactor.ONE);
         else RenderSystem.defaultBlendFunc();
-        c.setColor(1f, 1f, 1f, Math.min(1f, alpha));
         PoseStack m = c.pose();
         m.pushPose();
         m.translate(x + w / 2f, y + h / 2f, 0);
         if (rotation != 0) m.mulPose(Axis.ZP.rotation(rotation));
         m.scale(w / texSize, h / texSize, 1f);
         m.translate(-texSize / 2f, -texSize / 2f, 0);
-        c.blit(id, 0, 0, 0f, 0f, texSize, texSize, texSize, texSize);
+        Compat.blitWhole(c, id, 0, 0, texSize, texSize, (Math.round(Math.min(1f, alpha) * 255f) << 24) | 0xFFFFFF);
         m.popPose();
-        c.setColor(1f, 1f, 1f, 1f);
         RenderSystem.defaultBlendFunc();
     }
 

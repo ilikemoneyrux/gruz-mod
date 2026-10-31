@@ -1,3 +1,4 @@
+//#only MC >= 1.21
 package pl.gruzclient.mixin;
 
 import net.minecraft.client.DeltaTracker;

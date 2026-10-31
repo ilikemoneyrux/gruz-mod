@@ -1,5 +1,6 @@
 package pl.gruzclient.map;
 
+import pl.gruzclient.compat.Compat;
 import pl.gruzclient.GruzClient;
 
 import java.io.DataInputStream;
@@ -116,7 +117,7 @@ public final class MapCache {
                 pos.set(bx, y - 1, bz);
                 BlockState st = w.getBlockState(pos);
                 int guard = 0;
-                while (st.getMapColor(w, pos) == MapColor.NONE && pos.getY() > w.getMinBuildHeight() && guard++ < 64) {
+                while (st.getMapColor(w, pos) == MapColor.NONE && pos.getY() > Compat.minY(w) && guard++ < 64) {
                     pos.move(0, -1, 0);
                     st = w.getBlockState(pos);
                 }
@@ -126,7 +127,7 @@ public final class MapCache {
                 int north = (z == 0) ? pos.getY() : HEIGHTS[(z - 1) * 16 + x];
                 MapColor.Brightness b = pos.getY() > north ? MapColor.Brightness.HIGH : pos.getY() < north ? MapColor.Brightness.LOW : MapColor.Brightness.NORMAL;
                 if (st.getFluidState().isSource() && !st.getFluidState().isEmpty()) b = MapColor.Brightness.NORMAL;
-                int abgr = mc.calculateRGBColor(b);
+                int abgr = Compat.mapColorABGR(mc, b);
                 int r = abgr & 255, g = (abgr >> 8) & 255, bl = (abgr >> 16) & 255;
                 colors[z * 16 + x] = 0xFF000000 | (r << 16) | (g << 8) | bl;
                 HEIGHTS[z * 16 + x] = pos.getY();

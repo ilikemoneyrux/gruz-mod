@@ -1,5 +1,6 @@
 package pl.gruzclient.module.impl;
 
+import pl.gruzclient.compat.Compat;
 import pl.gruzclient.combat.Combat;
 import pl.gruzclient.i18n.Lang;
 import pl.gruzclient.module.HudModule;
@@ -48,9 +49,7 @@ public class TargetHudModule extends HudModule {
         if (e instanceof Player p && mc.getConnection() != null) {
             PlayerInfo entry = mc.getConnection().getPlayerInfo(p.getUUID());
             if (entry != null) {
-                c.setColor(1f, 1f, 1f, fade);
-                PlayerFaceRenderer.draw(c, entry.getSkin(), 6, 6, 28);
-                c.setColor(1f, 1f, 1f, 1f);
+                Compat.face(c, entry, 6, 6, 28, fade);
             } else c.fill(6, 6, 34, 34, argb(fade, SEAM));
         } else c.fill(6, 6, 34, 34, argb(fade * 0.8f, NEON_DEEP));
 

@@ -1,5 +1,6 @@
 package pl.gruzclient.module.impl;
 
+import pl.gruzclient.compat.Compat;
 import com.mojang.blaze3d.platform.NativeImage;
 import net.minecraft.client.renderer.texture.DynamicTexture;
 import pl.gruzclient.module.Module;
@@ -41,7 +42,7 @@ public class HitColorModule extends Module {
         if (img == null) return;
         int r = (rgb >> 16) & 255, g = (rgb >> 8) & 255, b = rgb & 255;
         int abgr = (alpha << 24) | (b << 16) | (g << 8) | r; // NativeImage w 1.21.1 trzyma kolory jako ABGR
-        for (int y = 0; y < 8; y++) for (int x = 0; x < 16; x++) img.setPixelRGBA(x, y, abgr);
+        for (int y = 0; y < 8; y++) for (int x = 0; x < 16; x++) Compat.setPixelABGR(img, x, y, abgr);
         texture.upload();
     }
 }

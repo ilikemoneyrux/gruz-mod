@@ -1,5 +1,6 @@
 package pl.gruzclient.screen;
 
+import pl.gruzclient.compat.Compat;
 import net.minecraft.SharedConstants;
 import net.minecraft.Util;
 import net.minecraft.client.gui.GuiGraphics;
@@ -7,7 +8,11 @@ import net.minecraft.client.gui.components.PlayerFaceRenderer;
 import net.minecraft.client.gui.screens.ConnectScreen;
 import net.minecraft.client.gui.screens.Screen;
 import net.minecraft.client.gui.screens.multiplayer.JoinMultiplayerScreen;
+//#if MC >= 1.20.5
 import net.minecraft.client.gui.screens.options.OptionsScreen;
+//#else
+import net.minecraft.client.gui.screens.OptionsScreen;
+//#endif
 import net.minecraft.client.gui.screens.worldselection.SelectWorldScreen;
 import net.minecraft.client.multiplayer.ServerData;
 import net.minecraft.client.multiplayer.resolver.ServerAddress;
@@ -111,9 +116,7 @@ public class GruzTitleScreen extends Screen {
 
     private void rejoin(String address, String name) {
         // typ "zwykły serwer" (ostatni w enumie: LAN, REALM, OTHER)
-        ServerData.Type[] types = ServerData.Type.values();
-        ServerData info = new ServerData(name, address, types[types.length - 1]);
-        ConnectScreen.startConnecting(this, this.minecraft, ServerAddress.parseString(address), info, false, null);
+        Compat.connect(this, this.minecraft, address, Compat.server(name, address));
     }
 
     private UiButton add(UiButton b) {
@@ -138,14 +141,22 @@ public class GruzTitleScreen extends Screen {
 
         if (Modules.MENU.usePanorama()) {
             if (ownPanorama == null) ownPanorama = new PanoramaRenderer(new CubeMap(MenuModule.PANORAMA));
-            ownPanorama.render(c, w, h, 1f, delta);
+            Compat.panorama(ownPanorama, c, w, h, 1f, delta);
         } else if (Modules.MENU.crystals()) {
             c.fill(0, 0, w, h, 0xFF000000);
         } else {
+            //#if MC >= 1.20.5
             this.renderPanorama(c, delta);
+            //#else
+            c.fill(0, 0, w, h, 0xFF101018);
+            //#endif
         }
         if (!Modules.MENU.crystals()) {
+            //#if MC >= 1.21.2
+            this.renderBlurredBackground();
+            //#elif MC >= 1.20.5
             this.renderBlurredBackground(delta);
+            //#endif
         }
         // przyciemnienie + delikatny kolor motywu od dołu
         c.fill(0, 0, w, h, argb(0.45f, 0x000000));
@@ -200,10 +211,7 @@ public class GruzTitleScreen extends Screen {
         int cw = Ui.width(name) + 34, x = chipRight - cw, y = 10;
         Ui.round(c, x, y, cw, 22, 4, argb(a * 0.8f, 0x0A0810));
         Ui.roundBorder(c, x, y, cw, 22, 4, argb(a * 0.1f, 0xFFFFFF));
-        PlayerSkin skin = this.minecraft.getSkinManager().getInsecureSkin(this.minecraft.getGameProfile());
-        c.setColor(1f, 1f, 1f, a);
-        PlayerFaceRenderer.draw(c, skin, x + 5, y + 4, 14);
-        c.setColor(1f, 1f, 1f, 1f);
+        Compat.ownFace(c, this.minecraft, x + 5, y + 4, 14, a);
         c.drawString(Ui.tr(), name, x + 25, y + 7, argb(a, 0xFFFFFF), false);
     }
 

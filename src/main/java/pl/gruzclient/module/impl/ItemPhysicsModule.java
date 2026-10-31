@@ -17,6 +17,9 @@ public class ItemPhysicsModule extends Module {
 
     /** Rysuje przedmiot leżący na ziemi. Zwraca false, gdy ma zostać zwykłe renderowanie. */
     public boolean render(ItemEntity entity, float tickDelta, PoseStack m, MultiBufferSource buffers, int light, ItemRenderer itemRenderer) {
+        //#if MC >= 1.21.2
+        return false; // TODO: nowy system modeli przedmiotów (1.21.2+)
+        //#else
         if (!isEnabled()) return false;
         ItemStack stack = entity.getItem();
         if (stack.isEmpty()) return false;
@@ -54,5 +57,6 @@ public class ItemPhysicsModule extends Module {
         }
         m.popPose();
         return true;
+        //#endif
     }
 }

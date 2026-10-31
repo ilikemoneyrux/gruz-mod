@@ -1,5 +1,6 @@
 package pl.gruzclient.module.impl;
 
+import pl.gruzclient.compat.Compat;
 import org.lwjgl.glfw.GLFW;
 import pl.gruzclient.GruzClient;
 import pl.gruzclient.i18n.Lang;
@@ -27,7 +28,7 @@ public class MenuModule extends Module {
     public final Setting.Key key = add(new Setting.Key("key", "setting.panoramaKey", GLFW.GLFW_KEY_F7));
     public final Setting.Bool seasonal = add(new Setting.Bool("seasonal", "setting.seasonal", true));
 
-    public static final ResourceLocation PANORAMA = ResourceLocation.fromNamespaceAndPath(GruzClient.MOD_ID, "panorama/menu");
+    public static final ResourceLocation PANORAMA = Compat.id(GruzClient.MOD_ID, "panorama/menu");
     private boolean wasDown;
     private boolean pending;
     private boolean loaded;

@@ -1,5 +1,6 @@
 package pl.gruzclient.network;
 
+import pl.gruzclient.compat.Compat;
 import com.google.gson.Gson;
 import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
@@ -286,8 +287,7 @@ public final class GruzNetwork {
             mc.level.disconnect();
             mc.disconnect();
         }
-        ServerData info = new ServerData(address, address, ServerData.Type.OTHER);
-        ConnectScreen.startConnecting(new TitleScreen(), mc, ServerAddress.parseString(address), info, false, null);
+        Compat.connect(new TitleScreen(), mc, address, Compat.server(address, address));
     }
 
     // ---------------- WebSocket ----------------

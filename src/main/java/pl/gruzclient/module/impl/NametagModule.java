@@ -1,5 +1,6 @@
 package pl.gruzclient.module.impl;
 
+import pl.gruzclient.compat.Compat;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.Style;
 import net.minecraft.network.chat.TextColor;
@@ -29,7 +30,7 @@ public class NametagModule extends Module {
         return out;
     }
 
-    private static final ResourceLocation ICON_FONT = ResourceLocation.fromNamespaceAndPath("gruzclient", "icons");
+    private static final ResourceLocation ICON_FONT = Compat.id("gruzclient", "icons");
 
     /** Logo Gruz (znak z własnej czcionki) przed nickiem */
     public static Component withIcon(Component name) {

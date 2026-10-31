@@ -1,5 +1,6 @@
 package pl.gruzclient.module.impl;
 
+import pl.gruzclient.compat.Compat;
 import org.lwjgl.glfw.GLFW;
 import pl.gruzclient.GruzClient;
 import pl.gruzclient.i18n.Lang;
@@ -33,7 +34,7 @@ public class MinimapModule extends HudModule {
     public final Setting.Key addKey = add(new Setting.Key("addKey", "setting.waypointKey", GLFW.GLFW_KEY_N));
 
     private static final int TEX = 160;
-    private static final ResourceLocation ID = ResourceLocation.fromNamespaceAndPath(GruzClient.MOD_ID, "minimap");
+    private static final ResourceLocation ID = Compat.id(GruzClient.MOD_ID, "minimap");
     private DynamicTexture texture;
     private boolean wasMap, wasAdd, wasDead;
     private int saveTicks = 0;
@@ -98,7 +99,7 @@ public class MinimapModule extends HudModule {
         float k = (float) s / TEX * 1.42f; // zapas na obrót
         if (!rotate.value) k = (float) s / TEX;
         m.scale(k, k, 1f);
-        c.blit(ID, -half, -half, 0f, 0f, TEX, TEX, TEX, TEX);
+        Compat.blitWhole(c, ID, -half, -half, TEX, TEX, -1);
         // waypointy
         for (Waypoints.Point p : Waypoints.current()) {
             float dx = (float) ((p.x + 0.5 - px) / bpp), dz = (float) ((p.z + 0.5 - pz) / bpp);
@@ -140,7 +141,7 @@ public class MinimapModule extends HudModule {
                 int col = MapCache.colorAt(bx, bz);
                 if (col == 0) col = 0xFF0C0912;
                 int r = (col >> 16) & 255, g = (col >> 8) & 255, b = col & 255;
-                img.setPixelRGBA(tx, ty, 0xFF000000 | (b << 16) | (g << 8) | r); // NativeImage = ABGR
+                Compat.setPixelABGR(img, tx, ty, 0xFF000000 | (b << 16) | (g << 8) | r); // NativeImage = ABGR
             }
         }
         texture.upload();

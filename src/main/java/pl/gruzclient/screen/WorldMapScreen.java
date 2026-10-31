@@ -1,5 +1,6 @@
 package pl.gruzclient.screen;
 
+import pl.gruzclient.compat.Compat;
 import pl.gruzclient.GruzClient;
 import pl.gruzclient.i18n.Lang;
 import pl.gruzclient.map.MapCache;
@@ -23,7 +24,7 @@ import com.mojang.math.Axis;
  * Przeciąganie = przesuwanie, kółko = przybliżenie, PPM = nowy waypoint, klik w punkt na liście = usuń.
  */
 public class WorldMapScreen extends Screen {
-    private static final ResourceLocation ID = ResourceLocation.fromNamespaceAndPath(GruzClient.MOD_ID, "worldmap");
+    private static final ResourceLocation ID = Compat.id(GruzClient.MOD_ID, "worldmap");
     private static final int SIDE = 130;
     private final Screen parent;
     private DynamicTexture texture;
@@ -94,7 +95,7 @@ public class WorldMapScreen extends Screen {
                     col = grid ? 0xFF0B0911 : 0xFF0E0B16;
                 }
                 int r = (col >> 16) & 255, g = (col >> 8) & 255, b = col & 255;
-                img.setPixelRGBA(x, y, 0xFF000000 | (b << 16) | (g << 8) | r);
+                Compat.setPixelABGR(img, x, y, 0xFF000000 | (b << 16) | (g << 8) | r);
             }
         }
         texture.upload();
@@ -114,7 +115,7 @@ public class WorldMapScreen extends Screen {
         long now = System.currentTimeMillis();
         if (now - lastAuto > 1000) { dirty = true; lastAuto = now; } // dociągaj świeżo odkryte chunki
         if (dirty && texture != null) rebuild();
-        c.blit(ID, 0, 0, 0f, 0f, texW, texH, texW, texH);
+        Compat.blitWhole(c, ID, 0, 0, texW, texH, -1);
 
         // waypointy
         var tr = font;

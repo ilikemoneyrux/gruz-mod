@@ -179,7 +179,11 @@ public class HudEditorScreen extends Screen {
     @Override
     public void renderBackground(GuiGraphics c, int mouseX, int mouseY, float delta) {
         if (this.minecraft.level != null) {
+            //#if MC >= 1.21.2
+            this.renderBlurredBackground();
+            //#elif MC >= 1.20.5
             this.renderBlurredBackground(delta);
+            //#endif
             c.fill(0, 0, this.width, this.height, 0x40000000);
         } else {
             c.fill(0, 0, this.width, this.height, 0xFF07050C);
@@ -205,7 +209,11 @@ public class HudEditorScreen extends Screen {
         if (this.minecraft.level != null && this.minecraft.player != null) {
             drawingVanilla = true;
             try {
+                //#if MC >= 1.21.2
+                ((pl.gruzclient.mixin.InGameHudInvoker) this.minecraft.gui).gruz$renderScoreboard(c, this.minecraft.getDeltaTracker());
+                //#elif MC >= 1.21
                 ((pl.gruzclient.mixin.InGameHudInvoker) this.minecraft.gui).gruz$renderScoreboard(c, this.minecraft.getTimer());
+                //#endif
                 this.minecraft.gui.getBossOverlay().render(c);
             } catch (Exception ignored) {
                 // brak tablicy itp.

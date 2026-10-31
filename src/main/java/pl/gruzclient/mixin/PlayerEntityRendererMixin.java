@@ -13,10 +13,17 @@ import pl.gruzclient.cosmetics.CosmeticsFeature;
 
 /** Dokłada warstwę kosmetyków (aureola, korona, pet) do renderera gracza. */
 @Mixin(PlayerRenderer.class)
+//#if MC >= 1.21.2
+public abstract class PlayerEntityRendererMixin extends LivingEntityRenderer<AbstractClientPlayer, net.minecraft.client.renderer.entity.state.PlayerRenderState, PlayerModel> {
+    protected PlayerEntityRendererMixin(EntityRendererProvider.Context ctx, PlayerModel model, float shadowRadius) {
+        super(ctx, model, shadowRadius);
+    }
+//#else
 public abstract class PlayerEntityRendererMixin extends LivingEntityRenderer<AbstractClientPlayer, PlayerModel<AbstractClientPlayer>> {
     protected PlayerEntityRendererMixin(EntityRendererProvider.Context ctx, PlayerModel<AbstractClientPlayer> model, float shadowRadius) {
         super(ctx, model, shadowRadius);
     }
+//#endif
 
     @Inject(method = "<init>", at = @At("TAIL"), require = 0)
     private void gruz$addCosmetics(EntityRendererProvider.Context ctx, boolean slim, CallbackInfo ci) {

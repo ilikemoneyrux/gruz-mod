@@ -1,5 +1,6 @@
 package pl.gruzclient.module.impl;
 
+import pl.gruzclient.compat.Compat;
 import org.joml.Vector3f;
 import org.lwjgl.glfw.GLFW;
 import pl.gruzclient.GruzClient;
@@ -120,7 +121,13 @@ public class CosmeticsModule extends Module {
         // emotka kończy się po czasie albo gdy zaczniesz iść
         Emote.Playing mine = Cosmetics.EMOTES.get(mc.player.getUUID());
         if (mine != null) {
-            boolean moving = mc.player.input != null && (mc.player.input.forwardImpulse != 0 || mc.player.input.leftImpulse != 0 || mc.player.input.jumping);
+            boolean moving = mc.player.input != null && (mc.player.input.forwardImpulse != 0 || mc.player.input.leftImpulse != 0 || 
+                    //#if MC >= 1.21.2
+                    mc.player.input.keyPresses.jump()
+                    //#else
+                    mc.player.input.jumping
+                    //#endif
+                    );
             if (mine.finished() || (moving && mine.progress() > 0.1f)) endEmote();
         }
         Cosmetics.EMOTES.entrySet().removeIf(en -> en.getValue().finished() && !en.getKey().equals(mc.player.getUUID()));
@@ -152,7 +159,7 @@ public class CosmeticsModule extends Module {
                 case "snow" -> ParticleTypes.SNOWFLAKE;
                 default -> {
                     int c = random.nextFloat() < 0.3f ? GruzDraw.NEON_HOT : set.color();
-                    yield new DustParticleOptions(new Vector3f(((c >> 16) & 255) / 255f, ((c >> 8) & 255) / 255f, (c & 255) / 255f), 0.9f);
+                    yield Compat.dust(c, 0.9f);
                 }
             };
             double vy = "stars".equals(set.trail()) ? 0.02 : 0.0;

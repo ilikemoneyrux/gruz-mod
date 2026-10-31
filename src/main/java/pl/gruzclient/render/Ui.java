@@ -1,5 +1,6 @@
 package pl.gruzclient.render;
 
+import pl.gruzclient.compat.Compat;
 import com.mojang.blaze3d.systems.RenderSystem;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.Font;
@@ -19,9 +20,9 @@ import static pl.gruzclient.render.GruzDraw.*;
 public final class Ui {
     private Ui() {}
 
-    public static final ResourceLocation FONT = ResourceLocation.fromNamespaceAndPath(GruzClient.MOD_ID, "ui");
-    public static final ResourceLocation FONT_BOLD = ResourceLocation.fromNamespaceAndPath(GruzClient.MOD_ID, "ui_bold");
-    public static final ResourceLocation ICONS = ResourceLocation.fromNamespaceAndPath(GruzClient.MOD_ID, "textures/gui/icons.png");
+    public static final ResourceLocation FONT = Compat.id(GruzClient.MOD_ID, "ui");
+    public static final ResourceLocation FONT_BOLD = Compat.id(GruzClient.MOD_ID, "ui_bold");
+    public static final ResourceLocation ICONS = Compat.id(GruzClient.MOD_ID, "textures/gui/icons.png");
 
     /** Ikony w atlasie icons.png (8 x 4, po 32 px) */
     public enum Icon {
@@ -65,9 +66,7 @@ public final class Ui {
         int i = icon.ordinal();
         RenderSystem.enableBlend();
         RenderSystem.defaultBlendFunc();
-        c.setColor(((argb >> 16) & 255) / 255f, ((argb >> 8) & 255) / 255f, (argb & 255) / 255f, ((argb >>> 24) & 255) / 255f);
-        c.blit(ICONS, x, y, size, size, (i % 8) * 32f, (i / 8) * 32f, 32, 32, 256, 128);
-        c.setColor(1f, 1f, 1f, 1f);
+        Compat.blit(c, ICONS, x, y, size, size, (i % 8) * 32f, (i / 8) * 32f, 32, 32, 256, 128, argb);
     }
 
     // ---------------- kształty ----------------

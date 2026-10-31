@@ -1,6 +1,8 @@
 package pl.gruzclient.mixin;
 
+//#if MC >= 1.21
 import net.minecraft.client.DeltaTracker;
+//#endif
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.Gui;
 import net.minecraft.client.gui.GuiGraphics;
@@ -15,13 +17,25 @@ import pl.gruzclient.module.Modules;
 public abstract class InGameHudMixin {
     /** Tryb nagrywania: cały HUD znika (ręka zostaje, bo nie jest częścią HUD) */
     @Inject(method = "render", at = @At("HEAD"), cancellable = true)
-    private void gruz$recording(GuiGraphics context, DeltaTracker tickCounter, CallbackInfo ci) {
+    private void gruz$recording(GuiGraphics context,
+            //#if MC >= 1.21
+            DeltaTracker tickCounter,
+            //#else
+            float tickCounter,
+            //#endif
+            CallbackInfo ci) {
         if (Modules.RECORDING.hidingHud()) ci.cancel();
     }
 
     /** Ostrzeżenie o niskim HP i elementy HUD Gruz rysowane na wierzchu standardowego HUD */
     @Inject(method = "render", at = @At("TAIL"))
-    private void gruz$renderHud(GuiGraphics context, DeltaTracker tickCounter, CallbackInfo ci) {
+    private void gruz$renderHud(GuiGraphics context,
+            //#if MC >= 1.21
+            DeltaTracker tickCounter,
+            //#else
+            float tickCounter,
+            //#endif
+            CallbackInfo ci) {
         Modules.LOW_HP.render(context);
         Modules.renderHud(context);
     }
@@ -40,6 +54,7 @@ public abstract class InGameHudMixin {
         Modules.SCOREBOARD.end(context);
     }
 
+    //#if MC >= 1.21
     /** Duże napisy na środku ekranu (title / subtitle) */
     @Inject(method = "renderTitle", at = @At("HEAD"), cancellable = true, require = 0)
     private void gruz$titleHead(GuiGraphics context, DeltaTracker tickCounter, CallbackInfo ci) {
@@ -51,6 +66,7 @@ public abstract class InGameHudMixin {
     private void gruz$titleTail(GuiGraphics context, DeltaTracker tickCounter, CallbackInfo ci) {
         Modules.HUD_TWEAKS.titleEnd(context);
     }
+    //#endif
 
     /** W edytorze HUD gra jest rozmyta, więc tablicę i pasek bossa rysuje sam edytor (ostro, na wierzchu) */
     private static boolean editorHidesVanilla() {
@@ -60,7 +76,11 @@ public abstract class InGameHudMixin {
 
     /** Własny celownik */
     @Inject(method = "renderCrosshair", at = @At("HEAD"), cancellable = true)
-    private void gruz$crosshair(GuiGraphics context, DeltaTracker tickCounter, CallbackInfo ci) {
+    private void gruz$crosshair(GuiGraphics context,
+            //#if MC >= 1.21
+            DeltaTracker tickCounter,
+            //#endif
+            CallbackInfo ci) {
         if (!Modules.CROSSHAIR.isEnabled()) return;
         Minecraft mc = Minecraft.getInstance();
         ci.cancel();

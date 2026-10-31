@@ -141,11 +141,23 @@ public class GruzModsScreen extends Screen {
     @Override
     public void renderBackground(GuiGraphics c, int mouseX, int mouseY, float delta) {
         if (this.minecraft.level != null) {
+            //#if MC >= 1.21.2
+            this.renderBlurredBackground();
+            //#elif MC >= 1.20.5
             this.renderBlurredBackground(delta);
+            //#endif
             c.fill(0, 0, this.width, this.height, 0x66000000);
         } else {
+            //#if MC >= 1.20.5
             this.renderPanorama(c, delta);
+            //#else
+            c.fill(0, 0, this.width, this.height, 0xFF101018);
+            //#endif
+            //#if MC >= 1.21.2
+            this.renderBlurredBackground();
+            //#elif MC >= 1.20.5
             this.renderBlurredBackground(delta);
+            //#endif
             c.fill(0, 0, this.width, this.height, 0x99000000);
         }
     }

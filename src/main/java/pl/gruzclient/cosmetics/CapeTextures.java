@@ -1,5 +1,6 @@
 package pl.gruzclient.cosmetics;
 
+import pl.gruzclient.compat.Compat;
 import pl.gruzclient.GruzClient;
 import pl.gruzclient.render.GruzDraw;
 import com.mojang.blaze3d.platform.NativeImage;
@@ -25,12 +26,12 @@ public final class CapeTextures {
 
     public static ResourceLocation id(String style, int color) {
         // peleryny HD to gotowe obrazki 1024x512 z zasobów moda
-        if (CosmeticSet.HD_CAPES.contains(style)) return ResourceLocation.fromNamespaceAndPath(GruzClient.MOD_ID, "textures/cape/" + style + ".png");
+        if (CosmeticSet.HD_CAPES.contains(style)) return Compat.id(GruzClient.MOD_ID, "textures/cape/" + style + ".png");
         String key = style + "_" + Integer.toHexString(color & 0xFFFFFF);
         ResourceLocation id = IDS.get(key);
         if (id != null) return id;
         DynamicTexture tex = new DynamicTexture(64 * SCALE, 32 * SCALE, true);
-        id = ResourceLocation.fromNamespaceAndPath(GruzClient.MOD_ID, "cape/" + key);
+        id = Compat.id(GruzClient.MOD_ID, "cape/" + key);
         Minecraft.getInstance().getTextureManager().register(id, tex);
         TEXTURES.put(key, tex);
         IDS.put(key, id);
@@ -133,7 +134,7 @@ public final class CapeTextures {
                         }
                     }
                 }
-                img.setPixelRGBA(px, py, abgr(rgb, 255));
+                Compat.setPixelABGR(img, px, py, abgr(rgb, 255));
             }
         }
         tex.upload();

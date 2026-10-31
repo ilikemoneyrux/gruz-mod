@@ -1,5 +1,6 @@
 package pl.gruzclient.module.impl;
 
+import pl.gruzclient.compat.Compat;
 import pl.gruzclient.module.HudModule;
 
 import java.util.ArrayList;
@@ -35,7 +36,7 @@ public class PotionHudModule extends HudModule {
             MobEffectInstance e = effects.get(i);
             int y = i * 24;
             TextureAtlasSprite sprite = mc.getMobEffectTextures().get(e.getEffect());
-            c.blit(5, y + 3, 0, 18, 18, sprite);
+            Compat.sprite(c, sprite, 5, y + 3, 18, 18);
             c.drawString(tr, name(e), 26, y + 4, textColor(), !background.value);
             boolean blink = !e.isInfiniteDuration() && e.getDuration() < 200 && (System.currentTimeMillis() / 400) % 2 == 0;
             c.drawString(tr, time(e), 26, y + 14, argb(blink ? 0.4f : 1f, MUTE), !background.value);
@@ -44,7 +45,7 @@ public class PotionHudModule extends HudModule {
     }
 
     private static String name(MobEffectInstance e) {
-        String n = e.getEffect().value().getDisplayName().getString();
+        String n = Compat.effectName(e);
         int lvl = e.getAmplifier() + 1;
         return lvl > 1 ? n + " " + roman(lvl) : n;
     }

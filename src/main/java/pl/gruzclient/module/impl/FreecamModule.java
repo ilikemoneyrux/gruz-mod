@@ -8,7 +8,11 @@ import pl.gruzclient.module.Modules;
 import pl.gruzclient.module.Setting;
 
 import java.util.UUID;
+//#if MC >= 1.21.2
+import net.minecraft.client.player.ClientInput;
+//#else
 import net.minecraft.client.player.Input;
+//#endif
 import net.minecraft.client.player.RemotePlayer;
 import net.minecraft.network.chat.Component;
 import net.minecraft.util.Mth;
@@ -23,7 +27,11 @@ public class FreecamModule extends Module {
     public final Setting.Number speed = add(new Setting.Number("speed", "setting.flySpeed", 1f, 0.2f, 5f, 0.1f, "x"));
 
     private RemotePlayer camera;
+    //#if MC >= 1.21.2
+    private ClientInput savedInput;
+    //#else
     private Input savedInput;
+    //#endif
     private boolean wasDown;
 
     public FreecamModule() { super("freecam", Category.UTILITY, true); }
@@ -56,7 +64,11 @@ public class FreecamModule extends Module {
         camera.setYHeadRot(mc.player.getYHeadRot());
         camera.noPhysics = true;
         savedInput = mc.player.input;
+        //#if MC >= 1.21.2
+        mc.player.input = new ClientInput(); // postać przestaje reagować na klawisze
+        //#else
         mc.player.input = new Input(); // postać przestaje reagować na klawisze
+        //#endif
         mc.setCameraEntity(camera);
     }
 

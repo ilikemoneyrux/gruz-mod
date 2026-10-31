@@ -1,2 +1,3 @@
 # Podmiany nazw w kodzie dla wybranych wersji (całe słowa).
 # warunek | stara => nowa
+MC >= 1.21.2 | LevelRenderer.addChainedFilledBoxVertices => net.minecraft.client.renderer.ShapeRenderer.addChainedFilledBoxVertices

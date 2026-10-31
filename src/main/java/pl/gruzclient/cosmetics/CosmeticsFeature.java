@@ -1,5 +1,6 @@
 package pl.gruzclient.cosmetics;
 
+import pl.gruzclient.compat.Compat;
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.blaze3d.vertex.VertexConsumer;
 import com.mojang.math.Axis;
@@ -23,15 +24,23 @@ import pl.gruzclient.render.GruzDraw;
  * Ważne: bufor warstwy bierzemy tuż przed rysowaniem i nie przeplatamy dwóch warstw –
  * w ekwipunku pobranie drugiej warstwy zamyka pierwszą ("Not building!").
  */
+//#if MC >= 1.21.2
+public class CosmeticsFeature extends RenderLayer<net.minecraft.client.renderer.entity.state.PlayerRenderState, PlayerModel> {
+//#else
 public class CosmeticsFeature extends RenderLayer<AbstractClientPlayer, PlayerModel<AbstractClientPlayer>> {
-    private static final ResourceLocation WHITE = ResourceLocation.fromNamespaceAndPath(GruzClient.MOD_ID, "textures/gui/white.png");
+//#endif
+    private static final ResourceLocation WHITE = Compat.id(GruzClient.MOD_ID, "textures/gui/white.png");
     private static final int FULL = LightTexture.FULL_BRIGHT;
     private static final float PX = 1f / 16f;
 
     private MultiBufferSource buffers;
     private RenderType solidLayer, glowLayer, litLayer;
 
+    //#if MC >= 1.21.2
+    public CosmeticsFeature(RenderLayerParent<net.minecraft.client.renderer.entity.state.PlayerRenderState, PlayerModel> context) {
+    //#else
     public CosmeticsFeature(RenderLayerParent<AbstractClientPlayer, PlayerModel<AbstractClientPlayer>> context) {
+    //#endif
         super(context);
     }
 
@@ -40,10 +49,20 @@ public class CosmeticsFeature extends RenderLayer<AbstractClientPlayer, PlayerMo
     /** Zwykłe oświetlenie (ciemnieje w nocy) – czapki, plecaki, skrzydła z piór */
     private VertexConsumer lit() { return buffers.getBuffer(litLayer); }
 
+    //#if MC >= 1.21.2
+    @Override
+    public void render(PoseStack m, MultiBufferSource buffers, int light, net.minecraft.client.renderer.entity.state.PlayerRenderState state,
+                       float headYaw, float headPitch) {
+        if (state.isInvisible) return;
+        var level = net.minecraft.client.Minecraft.getInstance().level;
+        if (level == null || !(level.getEntity(state.id) instanceof AbstractClientPlayer player)) return;
+        float tickDelta = state.ageInTicks - player.tickCount;
+    //#else
     @Override
     public void render(PoseStack m, MultiBufferSource buffers, int light, AbstractClientPlayer player,
                        float limbAngle, float limbDistance, float tickDelta, float animationProgress, float headYaw, float headPitch) {
         if (player.isInvisible()) return;
+    //#endif
         CosmeticSet set = Cosmetics.of(player);
         if (!set.has3d()) return;
         GruzDraw.tex(WHITE);
@@ -331,11 +350,21 @@ public class CosmeticsFeature extends RenderLayer<AbstractClientPlayer, PlayerMo
     }
 
     private void vertex(VertexConsumer vc, PoseStack.Pose e, float x, float y, float z, int rgb, int alpha, int light) {
+        //#if MC >= 1.21
         vc.addVertex(e, x, y, z)
                 .setColor((rgb >> 16) & 255, (rgb >> 8) & 255, rgb & 255, alpha)
                 .setUv(0.5f, 0.5f)
                 .setOverlay(OverlayTexture.NO_OVERLAY)
                 .setLight(light)
                 .setNormal(e, 0f, -1f, 0f);
+        //#else
+        vc.vertex(e.pose(), x, y, z)
+                .color((rgb >> 16) & 255, (rgb >> 8) & 255, rgb & 255, alpha)
+                .uv(0.5f, 0.5f)
+                .overlayCoords(OverlayTexture.NO_OVERLAY)
+                .uv2(light)
+                .normal(e.normal(), 0f, -1f, 0f)
+                .endVertex();
+        //#endif
     }
 }
