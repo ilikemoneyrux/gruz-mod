@@ -20,6 +20,11 @@ public abstract class AbstractClientPlayerEntityMixin {
         if (!set.hasCape()) return;
         PlayerSkin t = cir.getReturnValue();
         ResourceLocation cape = CapeTextures.id(set.cape(), set.color());
+        //#if MC >= 1.21.9
+        var tex = new net.minecraft.core.ClientAsset.ResourceTexture(cape, cape);
+        cir.setReturnValue(new PlayerSkin(t.body(), tex, tex, t.model(), t.secure()));
+        //#else
         cir.setReturnValue(new PlayerSkin(t.texture(), t.textureUrl(), cape, cape, t.model(), t.secure()));
+        //#endif
     }
 }
