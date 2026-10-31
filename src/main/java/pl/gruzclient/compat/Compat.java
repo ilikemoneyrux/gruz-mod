@@ -141,9 +141,9 @@ public final class Compat {
     /** Ustawienia mieszania kolorów przed rysowaniem (od 1.21.5 robi to pipeline) */
     public static void blend(boolean additive) {
         //#if MC < 1.21.5
-        RenderSystem.enableBlend();
-        if (additive) RenderSystem.blendFunc(com.mojang.blaze3d.platform.GlStateManager.SourceFactor.SRC_ALPHA, com.mojang.blaze3d.platform.GlStateManager.DestFactor.ONE);
-        else RenderSystem.defaultBlendFunc();
+        com.mojang.blaze3d.systems.RenderSystem.enableBlend();
+        if (additive) com.mojang.blaze3d.systems.RenderSystem.blendFunc(com.mojang.blaze3d.platform.GlStateManager.SourceFactor.SRC_ALPHA, com.mojang.blaze3d.platform.GlStateManager.DestFactor.ONE);
+        else com.mojang.blaze3d.systems.RenderSystem.defaultBlendFunc();
         //#endif
     }
 

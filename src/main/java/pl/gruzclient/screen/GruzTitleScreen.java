@@ -153,7 +153,7 @@ public class GruzTitleScreen extends pl.gruzclient.compat.GruzScreen {
         }
         if (!Modules.MENU.crystals()) {
             //#if MC >= 1.21.6
-            this.renderBlurredBackground(c);
+            // od 1.21.6 rozmycie robi sam Minecraft (i tylko raz na klatkę)
             //#elif MC >= 1.21.2
             this.renderBlurredBackground();
             //#elif MC >= 1.20.5

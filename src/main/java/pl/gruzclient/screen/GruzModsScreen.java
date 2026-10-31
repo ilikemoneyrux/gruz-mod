@@ -142,7 +142,7 @@ public class GruzModsScreen extends pl.gruzclient.compat.GruzScreen {
     public void renderBackground(GuiGraphics c, int mouseX, int mouseY, float delta) {
         if (this.minecraft.level != null) {
             //#if MC >= 1.21.6
-            this.renderBlurredBackground(c);
+            // od 1.21.6 rozmycie robi sam Minecraft (i tylko raz na klatkę)
             //#elif MC >= 1.21.2
             this.renderBlurredBackground();
             //#elif MC >= 1.20.5
@@ -156,7 +156,7 @@ public class GruzModsScreen extends pl.gruzclient.compat.GruzScreen {
             c.fill(0, 0, this.width, this.height, 0xFF101018);
             //#endif
             //#if MC >= 1.21.6
-            this.renderBlurredBackground(c);
+            // od 1.21.6 rozmycie robi sam Minecraft (i tylko raz na klatkę)
             //#elif MC >= 1.21.2
             this.renderBlurredBackground();
             //#elif MC >= 1.20.5

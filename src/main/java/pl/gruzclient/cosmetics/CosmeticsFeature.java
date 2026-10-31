@@ -65,14 +65,14 @@ public class CosmeticsFeature extends RenderLayer<AbstractClientPlayer, PlayerMo
         private float[] data = new float[1024];
         private int n;
         //#else
-        private Sink vc;
+        private VertexConsumer out;
         //#endif
 
         Sink(RenderType layer) { this.layer = layer; }
 
         Sink open() {
             //#if MC < 1.21.9
-            vc = buffers.getBuffer(layer); // bufor bierzemy tuż przed rysowaniem – nie przeplatamy warstw
+            out = buffers.getBuffer(layer); // bufor bierzemy tuż przed rysowaniem – nie przeplatamy warstw
             //#endif
             return this;
         }
@@ -88,14 +88,14 @@ public class CosmeticsFeature extends RenderLayer<AbstractClientPlayer, PlayerMo
             data[n++] = nr.x; data[n++] = nr.y; data[n++] = nr.z;
             data[n++] = 0f;
             //#elif MC >= 1.21
-            vc.addVertex(e, x, y, z)
+            out.addVertex(e, x, y, z)
                     .setColor((rgb >> 16) & 255, (rgb >> 8) & 255, rgb & 255, alpha)
                     .setUv(0.5f, 0.5f)
                     .setOverlay(OverlayTexture.NO_OVERLAY)
                     .setLight(light)
                     .setNormal(e, 0f, -1f, 0f);
             //#else
-            vc.vertex(e.pose(), x, y, z)
+            out.vertex(e.pose(), x, y, z)
                     .color((rgb >> 16) & 255, (rgb >> 8) & 255, rgb & 255, alpha)
                     .uv(0.5f, 0.5f)
                     .overlayCoords(OverlayTexture.NO_OVERLAY)
