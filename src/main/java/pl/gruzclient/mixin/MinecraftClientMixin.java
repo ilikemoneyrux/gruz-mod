@@ -33,6 +33,7 @@ public abstract class MinecraftClientMixin {
         Combat.tick();
         GameStatus.tick();
         GruzNetwork.tick();
+        pl.gruzclient.status.SmokeTest.tick();
     }
 
     /** Nowy świat / serwer – czyścimy cel i combo */

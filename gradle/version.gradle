@@ -171,3 +171,15 @@ tasks.register('collect', Copy) {
     into rootProject.layout.buildDirectory.dir('out')
     rename { "gruzclient-${mc}.jar" }
 }
+
+// test uruchomienia w CI: GRUZ_SMOKE=1 ./gradlew :<mc>:runClient
+if (System.getenv('GRUZ_SMOKE')) {
+    loom {
+        runs {
+            client {
+                vmArg '-Dgruz.smoketest=true'
+                programArgs '--username', 'GruzCI'
+            }
+        }
+    }
+}

@@ -23,7 +23,7 @@ jobs:
           git add -A && git commit -qm "start ${{ github.run_number }}" && git push -q origin ci-results || true
   build:
     runs-on: ubuntu-latest
-    timeout-minutes: 40
+    timeout-minutes: 50
     strategy:
       fail-fast: false
       matrix:
@@ -42,7 +42,20 @@ jobs:
           timeout 25m ./gradlew --no-daemon --stacktrace --console=plain :${{ matrix.mc }}:collect > out/${{ matrix.mc }}/full.log 2>&1
           echo $? > out/${{ matrix.mc }}/exit
           python3 ci/errors.py out/${{ matrix.mc }}/full.log > out/${{ matrix.mc }}/errors.txt
-          cp build/out/*.jar out/${{ matrix.mc }}/ 2>/dev/null
+          cp build/out/*.jar out/${{ matrix.mc }}/ 2>/dev/null && touch out/${{ matrix.mc }}/ok
+          exit 0
+      - name: Smoke test ${{ matrix.mc }} (start the game)
+        if: hashFiles(format('out/{0}/ok', matrix.mc)) != ''
+        env:
+          GRUZ_MC: ${{ matrix.mc }}
+          GRUZ_SMOKE: '1'
+        run: |
+          sudo apt-get update -qq && sudo apt-get install -y -qq xvfb libgl1-mesa-dri mesa-utils > /dev/null
+          set +e
+          xvfb-run -a -s "-screen 0 1280x720x24" timeout 15m ./gradlew --no-daemon --console=plain :${{ matrix.mc }}:runClient > out/${{ matrix.mc }}/smoke.log 2>&1
+          if grep -q GRUZ_SMOKE_OK out/${{ matrix.mc }}/smoke.log; then echo OK > out/${{ matrix.mc }}/smoke; else echo FAIL > out/${{ matrix.mc }}/smoke; fi
+          grep -n -i -E "mixin|error|exception|GRUZ_SMOKE|Caused by" out/${{ matrix.mc }}/smoke.log | grep -v -i "warn.*sound" | head -300 > out/${{ matrix.mc }}/smoke-errors.txt
+          cp versions/${{ matrix.mc }}/run/crash-reports/*.txt out/${{ matrix.mc }}/ 2>/dev/null
           exit 0
       - name: Inspect classes (ci/inspect.txt)
         if: hashFiles('ci/inspect.txt') != ''
@@ -56,6 +69,7 @@ jobs:
           git config user.name gruz-ci; git config user.email ci@gruz.invalid
           cp -r "$GITHUB_WORKSPACE/out/${{ matrix.mc }}/." . ; rm -f *.jar
           [ -f full.log ] && tail -c 300000 full.log > tail.log && rm full.log
+          [ -f smoke.log ] && tail -c 400000 smoke.log > smoke-tail.log && rm smoke.log
           git add -A && git commit -qm "log ${{ matrix.mc }} run ${{ github.run_number }}"
           git push -qf "https://x-access-token:${{ secrets.GITHUB_TOKEN }}@github.com/${{ github.repository }}" ci-log-${{ matrix.mc }}
       - uses: actions/upload-artifact@v4
