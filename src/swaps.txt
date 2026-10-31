@@ -22,8 +22,8 @@ MC >= 1.21.9 | public void renderWidget(GuiGraphics => public void renderContent
 MC >= 26.1 | renderContents(GuiGraphics => extractContents(GuiGraphics
 MC >= 26.1 | drawString( => text(
 MC >= 26.1 | drawCenteredString( => centeredText(
-MC >= 26.1 | renderItemDecorations( => itemDecorations(
-MC >= 26.1 | renderItem( => item(
+MC >= 26.1 | c.renderItemDecorations( => c.itemDecorations(
+MC >= 26.1 | c.renderItem( => c.item(
 MC >= 26.1 | renderOutline( => outline(
 MC >= 26.1 | net.minecraft.client.gui.GuiGraphics => net.minecraft.client.gui.GuiGraphicsExtractor
 MC >= 26.1 | GuiGraphics => GuiGraphicsExtractor

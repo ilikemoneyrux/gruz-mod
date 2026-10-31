@@ -39,7 +39,8 @@
     "DrawContextMixin",
     "BossBarHudAccessor",
     "InGameHudInvoker",
-    "ClientClockMixin"
+    "ClientClockMixin",
+    "CameraFovMixin"
   ],
   "injectors": {
     "defaultRequire": 1

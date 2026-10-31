@@ -15,7 +15,8 @@ import pl.gruzclient.module.Modules;
 
 @Mixin(GameRenderer.class)
 public abstract class GameRendererMixin {
-    /** Zoom: dzielimy pole widzenia przez aktualny mnożnik */
+    //#if MC < 26.1
+    /** Zoom: dzielimy pole widzenia przez aktualny mnożnik (od 26.1: CameraFovMixin) */
     @Inject(method = "getFov", at = @At("RETURN"), cancellable = true)
     //#if MC >= 1.21.2
     private void gruz$zoom(Camera camera, float tickDelta, boolean changingFov, CallbackInfoReturnable<Float> cir) {
@@ -25,6 +26,7 @@ public abstract class GameRendererMixin {
         float f = Modules.ZOOM.factor();
         if (f > 1.001f) cir.setReturnValue(cir.getReturnValue() / f);
     }
+    //#endif
 
     /** Fullbright: pełna siła "widzenia w ciemności" */
     @Inject(method = "getNightVisionScale", at = @At("HEAD"), cancellable = true)

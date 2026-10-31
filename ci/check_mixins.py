@@ -163,6 +163,7 @@ class Dumps:
         unknown = False
         if depth < 6:
             for s in dmp.supers:
+                if s.startswith('java.') or s.startswith('javax.'): continue
                 f, r = self.lookup(s, attr, name, depth + 1)
                 if f: return True, r
                 if f is None: unknown = True
