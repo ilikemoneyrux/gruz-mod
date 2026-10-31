@@ -1,10 +1,11 @@
-total 7228
-drwxr-xr-x  2 runner runner    4096 Oct 31 00:55 .
-drwxr-xr-x 10 runner runner    4096 Oct 31 00:55 ..
--rw-r--r--  1 runner runner 1845525 Oct 31 00:55 gruzclient-1.20.4.jar
--rw-r--r--  1 runner runner 1849303 Oct 31 00:55 gruzclient-1.21.1.jar
--rw-r--r--  1 runner runner 1843718 Oct 31 00:55 gruzclient-1.21.11.jar
--rw-r--r--  1 runner runner 1845073 Oct 31 00:55 gruzclient-1.21.4.jar
+total 9032
+drwxr-xr-x  2 runner runner    4096 Oct 31 01:00 .
+drwxr-xr-x 10 runner runner    4096 Oct 31 01:00 ..
+-rw-r--r--  1 runner runner 1845589 Oct 31 01:00 gruzclient-1.20.4.jar
+-rw-r--r--  1 runner runner 1849365 Oct 31 01:00 gruzclient-1.21.1.jar
+-rw-r--r--  1 runner runner 1843777 Oct 31 01:00 gruzclient-1.21.11.jar
+-rw-r--r--  1 runner runner 1845132 Oct 31 01:00 gruzclient-1.21.4.jar
+-rw-r--r--  1 runner runner 1845525 Oct 31 01:00 gruzclient-26.1.jar
 {
   "mod": "0.4.0",
   "builds": [
@@ -31,6 +32,12 @@ drwxr-xr-x 10 runner runner    4096 Oct 31 00:55 ..
       "range": "1.21.4",
       "file": "gruzclient-1.21.4.jar",
       "java": 21
+    },
+    {
+      "mc": "26.1",
+      "range": ">=26.1 <26.2",
+      "file": "gruzclient-26.1.jar",
+      "java": 25
     }
   ]
 }
