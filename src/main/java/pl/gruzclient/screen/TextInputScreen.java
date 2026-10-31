@@ -30,7 +30,13 @@ public class TextInputScreen extends pl.gruzclient.compat.GruzScreen {
         field = new EditBox(font, x, y, w, 20, Component.literal(setting.label()));
         field.setMaxLength(200);
         field.setValue(setting.value);
-        if (setting.secret) field.setFormatter((s, i) -> net.minecraft.util.FormattedCharSequence.forward("•".repeat(s.length()), net.minecraft.network.chat.Style.EMPTY));
+        if (setting.secret) field.
+                //#if MC >= 1.21.9
+                addFormatter(
+                //#else
+                setFormatter(
+                //#endif
+                (s, i) -> net.minecraft.util.FormattedCharSequence.forward("•".repeat(s.length()), net.minecraft.network.chat.Style.EMPTY));
         addRenderableWidget(field);
         setInitialFocus(field);
         addRenderableWidget(new GruzButton(x, y + 30, w / 2 - 3, 20, Component.literal(Lang.t("mods.save")), b -> save()).primary());
