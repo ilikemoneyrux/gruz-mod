@@ -1,3 +1,4 @@
+//#only MC >= 1.20.5
 package pl.gruzclient.mixin;
 
 import org.spongepowered.asm.mixin.Final;

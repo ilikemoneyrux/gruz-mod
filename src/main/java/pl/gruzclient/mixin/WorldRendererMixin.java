@@ -36,7 +36,11 @@ public abstract class WorldRendererMixin {
 
     @Inject(method = "renderHitOutline", at = @At("TAIL"), require = 0)
     private void gruz$fill(PoseStack matrices, VertexConsumer vertexConsumer, Entity entity, double cameraX, double cameraY, double cameraZ,
-                           BlockPos pos, BlockState state, CallbackInfo ci) {
+                           BlockPos pos, BlockState state,
+                           //#if MC >= 1.21.2
+                           int outlineColor,
+                           //#endif
+                           CallbackInfo ci) {
         BlockOverlayModule m = Modules.BLOCK_OVERLAY;
         if (!m.isEnabled() || (!m.fill.value && !m.thick())) return;
         Minecraft mc = Minecraft.getInstance();
