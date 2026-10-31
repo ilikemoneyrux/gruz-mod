@@ -29,7 +29,11 @@ public abstract class ChatScreenMixin extends Screen {
     protected ChatScreenMixin(Component title) { super(title); }
 
     @Unique
-    private GruzChat gruz$chat() { return (GruzChat) this.minecraft.gui.getChat(); }
+    /** Dodatki czatu (ChatHudMixin) są tylko od 1.20.5 – na starszych wersjach zwracamy atrapę */
+    private GruzChat gruz$chat() {
+        Object chat = this.minecraft.gui.getChat();
+        return chat instanceof GruzChat g ? g : GruzChat.NONE;
+    }
 
     @Inject(method = "init", at = @At("TAIL"), require = 0)
     private void gruz$init(CallbackInfo ci) {
