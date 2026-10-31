@@ -106,7 +106,11 @@ public class GruzTitleScreen extends pl.gruzclient.compat.GruzScreen {
         add(new UiButton(ix, 10, s, s, Ui.Icon.GLOBE, null, b -> { Lang.cycle(); this.rebuildWidgets(); })
                 .kind(UiButton.Kind.ICON).badge(Lang.badge().replace("*", "")));
         ix -= s + 5;
-        add(new UiButton(ix, 10, s, s, Ui.Icon.GEAR, null, b -> this.minecraft.setScreen(new OptionsScreen(this, this.minecraft.options))).kind(UiButton.Kind.ICON));
+        add(new UiButton(ix, 10, s, s, Ui.Icon.GEAR, null, b -> this.minecraft.setScreen(new OptionsScreen(this, this.minecraft.options
+                //#if MC >= 26.1
+                , false
+                //#endif
+                ))).kind(UiButton.Kind.ICON));
         ix -= s + 5;
         add(new UiButton(ix, 10, s, s, Ui.Icon.CAMERA, null,
                 b -> Util.getPlatform().openFile(this.minecraft.gameDirectory.toPath().resolve("screenshots").toFile())).kind(UiButton.Kind.ICON));

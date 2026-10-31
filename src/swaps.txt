@@ -19,10 +19,6 @@ MC >= 1.21.11 | RenderType.eyes => net.minecraft.client.renderer.rendertype.Rend
 MC >= 1.21.9 | protected void renderWidget(GuiGraphics => protected void renderContents(GuiGraphics
 MC >= 1.21.9 | public void renderWidget(GuiGraphics => public void renderContents(GuiGraphics
 # 26.1: rysowanie GUI to teraz "wydobywanie stanu" (GuiGraphicsExtractor, extract*)
-MC >= 26.1 | void render(GuiGraphics => void extractRenderState(GuiGraphics
-MC >= 26.1 | super.render( => super.extractRenderState(
-MC >= 26.1 | renderBackground( => extractBackground(
-MC >= 26.1 | renderPanorama( => extractPanorama(
 MC >= 26.1 | renderContents(GuiGraphics => extractContents(GuiGraphics
 MC >= 26.1 | drawString( => text(
 MC >= 26.1 | drawCenteredString( => centeredText(
@@ -40,3 +36,8 @@ MC >= 26.1 | import net.minecraft.client.renderer.LightTexture; => import net.mi
 MC >= 26.1 | LightTexture.FULL_BRIGHT => LightCoordsUtil.FULL_BRIGHT
 MC >= 26.1 | ChunkPos.asLong( => ChunkPos.pack(
 MC >= 26.1 | getBossOverlay().render( => getBossOverlay().extractRenderState(
+MC >= 26.1 | b.render(c, mouseX, mouseY, delta) => b.extractRenderState(c, mouseX, mouseY, delta)
+MC >= 26.1 | d.render(c, mouseX, mouseY, delta) => d.extractRenderState(c, mouseX, mouseY, delta)
+MC >= 26.1 | search.render(c, mouseX, mouseY, delta) => search.extractRenderState(c, mouseX, mouseY, delta)
+MC >= 26.1 | chunkPosition().x => chunkPosition().x()
+MC >= 26.1 | chunkPosition().z => chunkPosition().z()

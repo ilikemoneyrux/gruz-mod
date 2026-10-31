@@ -79,6 +79,21 @@ public abstract class GruzScreen extends Screen {
     }
     //#endif
 
+    //#if MC >= 26.1
+    // 26.1: render -> extractRenderState itd. Ekrany moda dalej nadpisują render/renderBackground.
+    @Override
+    public void extractRenderState(net.minecraft.client.gui.GuiGraphics c, int mouseX, int mouseY, float delta) { render(c, mouseX, mouseY, delta); }
+
+    public void render(net.minecraft.client.gui.GuiGraphics c, int mouseX, int mouseY, float delta) { super.extractRenderState(c, mouseX, mouseY, delta); }
+
+    @Override
+    public void extractBackground(net.minecraft.client.gui.GuiGraphics c, int mouseX, int mouseY, float delta) { renderBackground(c, mouseX, mouseY, delta); }
+
+    public void renderBackground(net.minecraft.client.gui.GuiGraphics c, int mouseX, int mouseY, float delta) { super.extractBackground(c, mouseX, mouseY, delta); }
+
+    protected void renderPanorama(net.minecraft.client.gui.GuiGraphics c, float delta) { super.extractPanorama(c, delta); }
+    //#endif
+
     // ---------------- modyfikatory ----------------
     public static boolean ctrl() { return key(org.lwjgl.glfw.GLFW.GLFW_KEY_LEFT_CONTROL) || key(org.lwjgl.glfw.GLFW.GLFW_KEY_RIGHT_CONTROL); }
     public static boolean shift() { return key(org.lwjgl.glfw.GLFW.GLFW_KEY_LEFT_SHIFT) || key(org.lwjgl.glfw.GLFW.GLFW_KEY_RIGHT_SHIFT); }
