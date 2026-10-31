@@ -23,7 +23,7 @@ public final class WindowIcon {
         if (done) return;
         done = true;
         if (Util.getPlatform() == Util.OS.OSX) return; // macOS bierze ikonę z aplikacji
-        long handle = Minecraft.getInstance().getWindow().getWindow();
+        long handle = Compat.windowHandle();
         List<ByteBuffer> buffers = new ArrayList<>();
         try (InputStream in = WindowIcon.class.getResourceAsStream("/assets/gruzclient/textures/gui/logo.png")) {
             if (in == null) return;

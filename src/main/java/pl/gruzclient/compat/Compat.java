@@ -86,7 +86,11 @@ public final class Compat {
 
     /** Twarz własnego gracza (menu główne) */
     public static void ownFace(GuiGraphics c, Minecraft mc, int x, int y, int size, float alpha) {
+        //#if MC >= 1.21.9
+        var skin = mc.getSkinManager().createLookup(mc.getGameProfile(), false).get();
+        //#else
         var skin = mc.getSkinManager().getInsecureSkin(mc.getGameProfile());
+        //#endif
         //#if MC >= 1.21.2
         net.minecraft.client.gui.components.PlayerFaceRenderer.draw(c, skin, x, y, size, argb(alpha));
         //#else
@@ -101,7 +105,9 @@ public final class Compat {
     }
 
     public static void panorama(PanoramaRenderer p, GuiGraphics c, int w, int h, float alpha, float delta) {
-        //#if MC >= 1.20.5
+        //#if MC >= 1.21.6
+        p.render(c, w, h, true);
+        //#elif MC >= 1.20.5
         p.render(c, w, h, alpha, delta);
         //#else
         p.render(delta, alpha);
@@ -138,6 +144,147 @@ public final class Compat {
         RenderSystem.enableBlend();
         if (additive) RenderSystem.blendFunc(com.mojang.blaze3d.platform.GlStateManager.SourceFactor.SRC_ALPHA, com.mojang.blaze3d.platform.GlStateManager.DestFactor.ONE);
         else RenderSystem.defaultBlendFunc();
+        //#endif
+    }
+
+    // ---------------- różne ----------------
+
+    public static long windowHandle() {
+        //#if MC >= 1.21.9
+        return Minecraft.getInstance().getWindow().handle();
+        //#else
+        return Minecraft.getInstance().getWindow().getWindow();
+        //#endif
+    }
+
+    /** Styl tekstu z własną czcionką z zasobów */
+    public static net.minecraft.network.chat.Style font(ResourceLocation font) {
+        //#if MC >= 1.21.9
+        return net.minecraft.network.chat.Style.EMPTY.withFont(new net.minecraft.network.chat.FontDescription.Resource(font));
+        //#else
+        return net.minecraft.network.chat.Style.EMPTY.withFont(font);
+        //#endif
+    }
+
+    public static boolean isSword(net.minecraft.world.item.ItemStack stack) {
+        //#if MC >= 1.21.5
+        return stack.is(net.minecraft.tags.ItemTags.SWORDS);
+        //#else
+        return stack.getItem() instanceof net.minecraft.world.item.SwordItem;
+        //#endif
+    }
+
+    public static String profileName(com.mojang.authlib.GameProfile p) {
+        //#if MC >= 1.21.9
+        return p.name();
+        //#else
+        return p.getName();
+        //#endif
+    }
+
+    public static java.util.UUID profileId(com.mojang.authlib.GameProfile p) {
+        //#if MC >= 1.21.9
+        return p.id();
+        //#else
+        return p.getId();
+        //#endif
+    }
+
+    /** Potwierdzenie konta w Mojangu (tak jak przy wejściu na serwer) */
+    public static void joinServer(Minecraft mc, String serverId) throws Exception {
+        var user = mc.getUser();
+        //#if MC >= 1.21.9
+        mc.services().sessionService().joinServer(user.getProfileId(), user.getAccessToken(), serverId);
+        //#elif MC >= 1.20.2
+        mc.getMinecraftSessionService().joinServer(user.getProfileId(), user.getAccessToken(), serverId);
+        //#else
+        mc.getMinecraftSessionService().joinServer(user.getGameProfile(), user.getAccessToken(), serverId);
+        //#endif
+    }
+
+    /** Wyjście ze świata / z serwera */
+    public static void leaveWorld(Minecraft mc) {
+        if (mc.level == null) return;
+        //#if MC >= 1.21.9
+        mc.disconnectFromWorld(net.minecraft.network.chat.Component.empty());
+        //#elif MC >= 1.20.2
+        mc.level.disconnect();
+        mc.disconnect();
+        //#else
+        mc.level.disconnect();
+        mc.clearLevel();
+        //#endif
+    }
+
+    /** Założona zbroja od hełmu do butów */
+    public static java.util.List<net.minecraft.world.item.ItemStack> armor(net.minecraft.world.entity.player.Player p) {
+        java.util.List<net.minecraft.world.item.ItemStack> out = new java.util.ArrayList<>();
+        for (var slot : new net.minecraft.world.entity.EquipmentSlot[]{net.minecraft.world.entity.EquipmentSlot.HEAD, net.minecraft.world.entity.EquipmentSlot.CHEST,
+                net.minecraft.world.entity.EquipmentSlot.LEGS, net.minecraft.world.entity.EquipmentSlot.FEET}) {
+            out.add(p.getItemBySlot(slot));
+        }
+        return out;
+    }
+
+    /** Wszystkie przedmioty gracza (ekwipunek, zbroja, druga ręka) */
+    public static java.util.List<net.minecraft.world.item.ItemStack> allItems(net.minecraft.world.entity.player.Player p) {
+        var inv = p.getInventory();
+        java.util.List<net.minecraft.world.item.ItemStack> out = new java.util.ArrayList<>();
+        for (int i = 0; i < inv.getContainerSize(); i++) out.add(inv.getItem(i));
+        return out;
+    }
+
+    /** Ikona efektu mikstury */
+    public static void effectIcon(GuiGraphics c, MobEffectInstance e, int x, int y, int size) {
+        //#if MC >= 1.21.9
+        c.blitSprite(RenderPipelines.GUI_TEXTURED, net.minecraft.client.gui.Gui.getMobEffectSprite(e.getEffect()), x, y, size, size);
+        //#else
+        sprite(c, Minecraft.getInstance().getMobEffectTextures().get(e.getEffect()), x, y, size, size);
+        //#endif
+    }
+
+    public static void hitboxes(Minecraft mc, boolean on) {
+        //#if MC >= 1.21.9
+        mc.debugEntries.setStatus(net.minecraft.client.gui.components.debug.DebugScreenEntries.ENTITY_HITBOXES,
+                on ? net.minecraft.client.gui.components.debug.DebugScreenEntryStatus.ALWAYS_ON : net.minecraft.client.gui.components.debug.DebugScreenEntryStatus.NEVER);
+        //#else
+        mc.getEntityRenderDispatcher().setRenderHitBoxes(on);
+        //#endif
+    }
+
+    public static String dimensionId(Level level) {
+        //#if MC >= 1.21.11
+        return level.dimension().identifier().toString();
+        //#else
+        return level.dimension().location().toString();
+        //#endif
+    }
+
+    public static String mcVersion() {
+        //#if MC >= 1.21.6
+        return net.minecraft.SharedConstants.getCurrentVersion().name();
+        //#else
+        return net.minecraft.SharedConstants.getCurrentVersion().getName();
+        //#endif
+    }
+
+    public static void panoramaShot(Minecraft mc, java.io.File dir) {
+        //#if MC >= 1.21.6
+        mc.grabPanoramixScreenshot(dir);
+        //#else
+        mc.grabPanoramixScreenshot(dir, 1024, 1024);
+        //#endif
+    }
+
+    /** Czy gracz próbuje się ruszyć (klawisze ruchu albo skok) */
+    public static boolean moving(net.minecraft.client.player.LocalPlayer p) {
+        if (p.input == null) return false;
+        //#if MC >= 1.21.5
+        return p.input.getMoveVector().lengthSquared() > 0 || p.input.keyPresses.jump();
+        //#elif MC >= 1.21.2
+        return p.input.forwardImpulse != 0 || p.input.leftImpulse != 0 || p.input.keyPresses.jump();
+        //#else
+        return p.input.forwardImpulse != 0 || p.input.leftImpulse != 0 || p.input.jumping;
         //#endif
     }
 

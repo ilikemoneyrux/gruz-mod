@@ -46,9 +46,14 @@ public abstract class ChatScreenMixin extends Screen {
     }
 
     @Inject(method = "keyPressed", at = @At("HEAD"), cancellable = true, require = 0)
+    //#if MC >= 1.21.9
+    private void gruz$keys(net.minecraft.client.input.KeyEvent event, CallbackInfoReturnable<Boolean> cir) {
+        int keyCode = event.key();
+    //#else
     private void gruz$keys(int keyCode, int scanCode, int modifiers, CallbackInfoReturnable<Boolean> cir) {
+    //#endif
         if (gruz$search == null) return;
-        if (keyCode == GLFW.GLFW_KEY_F && Screen.hasControlDown()) {
+        if (keyCode == GLFW.GLFW_KEY_F && pl.gruzclient.compat.GruzScreen.ctrl()) {
             boolean show = !gruz$search.isVisible();
             gruz$search.setVisible(show);
             if (show) { this.setFocused(gruz$search); gruz$search.setFocused(true); }
@@ -63,12 +68,22 @@ public abstract class ChatScreenMixin extends Screen {
                 cir.setReturnValue(true);
                 return;
             }
+            //#if MC >= 1.21.9
+            cir.setReturnValue(gruz$search.keyPressed(event));
+            //#else
             cir.setReturnValue(gruz$search.keyPressed(keyCode, scanCode, modifiers));
+            //#endif
         }
     }
 
     @Inject(method = "mouseClicked", at = @At("HEAD"), cancellable = true, require = 0)
+    //#if MC >= 1.21.9
+    private void gruz$copy(net.minecraft.client.input.MouseButtonEvent event, boolean doubleClick, CallbackInfoReturnable<Boolean> cir) {
+        double mouseX = event.x(), mouseY = event.y();
+        int button = event.button();
+    //#else
     private void gruz$copy(double mouseX, double mouseY, int button, CallbackInfoReturnable<Boolean> cir) {
+    //#endif
         if (button != GLFW.GLFW_MOUSE_BUTTON_RIGHT || !Modules.BETTER_CHAT.copying()) return;
         String msg = gruz$chat().gruz$messageAt(mouseX, mouseY);
         if (msg == null || msg.isEmpty()) return;

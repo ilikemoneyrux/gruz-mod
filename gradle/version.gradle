@@ -114,7 +114,7 @@ def preprocess = tasks.register('preprocess') {
                 } else if (t == '//#endif') {
                     if (!stack) throw new GradleException("//#endif bez //#if w ${where}")
                     stack.removeLast(); out << ''
-                } else if (t.startsWith('//#only ')) {
+                } else if (t.startsWith('//#only ') || t.startsWith('//#swap ')) {
                     out << ''
                 } else {
                     out << (active() ? line : '')
@@ -122,7 +122,16 @@ def preprocess = tasks.register('preprocess') {
             }
             if (stack) throw new GradleException("Brak //#endif w ${rel}")
             def text = out.join('\n')
-            swaps.each { p, to -> text = p.matcher(text).replaceAll(java.util.regex.Matcher.quoteReplacement(to)) }
+            // podmiany tylko dla tego pliku: //#swap MC >= 1.21.9 | stare => nowe
+            def local = []
+            lines.each { l ->
+                def t = l.trim()
+                if (!t.startsWith('//#swap ')) return
+                def (cond, rule) = t.substring(8).split(/\s*\|\s*/, 2) as List
+                def (from, to) = rule.split(/\s*=>\s*/, 2) as List
+                if (evalCond(cond, rel)) local << [java.util.regex.Pattern.compile('(?<![\\w$])' + java.util.regex.Pattern.quote(from) + '(?![\\w$])'), to]
+            }
+            (local + swaps).each { p, to -> text = p.matcher(text).replaceAll(java.util.regex.Matcher.quoteReplacement(to)) }
             def dst = new File(outJ, rel)
             dst.parentFile.mkdirs()
             dst.setText(text, 'UTF-8')

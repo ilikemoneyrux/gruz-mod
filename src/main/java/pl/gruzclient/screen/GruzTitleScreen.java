@@ -39,7 +39,7 @@ import static pl.gruzclient.render.GruzDraw.*;
  * rozmyta panorama, logo, kolumna dużych przycisków z ikonami, pasek ikon u góry z graczem,
  * karty z newsami i skrótami po lewej, "Wyjdź z gry" na dole.
  */
-public class GruzTitleScreen extends Screen {
+public class GruzTitleScreen extends pl.gruzclient.compat.GruzScreen {
     private static boolean firstOpen = true;
     private static final CrystalField CRYSTALS = new CrystalField(26);
     private static PanoramaRenderer ownPanorama;
@@ -152,7 +152,9 @@ public class GruzTitleScreen extends Screen {
             //#endif
         }
         if (!Modules.MENU.crystals()) {
-            //#if MC >= 1.21.2
+            //#if MC >= 1.21.6
+            this.renderBlurredBackground(c);
+            //#elif MC >= 1.21.2
             this.renderBlurredBackground();
             //#elif MC >= 1.20.5
             this.renderBlurredBackground(delta);
@@ -197,7 +199,7 @@ public class GruzTitleScreen extends Screen {
 
         float rv = reveal(900, 900);
         if (textVisible(rv)) {
-            Component v = Ui.text("Gruz Client " + GruzClient.version() + "  ·  Minecraft " + SharedConstants.getCurrentVersion().getName() + "  ·  Fabric");
+            Component v = Ui.text("Gruz Client " + GruzClient.version() + "  ·  Minecraft " + Compat.mcVersion() + "  ·  Fabric");
             Ui.drawCentered(c, v, w / 2, h - 14, argb(rv * 0.7f, MUTE));
             Component cr = Ui.text("Copyright Mojang AB. Do not distribute!");
             Ui.draw(c, cr, w - Ui.width(cr) - 8, h - 14, argb(rv * 0.45f, MUTE));

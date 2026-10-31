@@ -121,13 +121,7 @@ public class CosmeticsModule extends Module {
         // emotka kończy się po czasie albo gdy zaczniesz iść
         Emote.Playing mine = Cosmetics.EMOTES.get(mc.player.getUUID());
         if (mine != null) {
-            boolean moving = mc.player.input != null && (mc.player.input.forwardImpulse != 0 || mc.player.input.leftImpulse != 0 || 
-                    //#if MC >= 1.21.2
-                    mc.player.input.keyPresses.jump()
-                    //#else
-                    mc.player.input.jumping
-                    //#endif
-                    );
+            boolean moving = Compat.moving(mc.player);
             if (mine.finished() || (moving && mine.progress() > 0.1f)) endEmote();
         }
         Cosmetics.EMOTES.entrySet().removeIf(en -> en.getValue().finished() && !en.getKey().equals(mc.player.getUUID()));

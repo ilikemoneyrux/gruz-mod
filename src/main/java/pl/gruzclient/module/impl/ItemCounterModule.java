@@ -1,5 +1,6 @@
 package pl.gruzclient.module.impl;
 
+import pl.gruzclient.compat.Compat;
 import pl.gruzclient.module.HudModule;
 import pl.gruzclient.module.Setting;
 
@@ -30,9 +31,7 @@ public class ItemCounterModule extends HudModule {
         int nBlocks = 0, nPearls = 0, nArrows = 0, nGapples = 0;
         ItemStack blockIcon = new ItemStack(Items.WHITE_WOOL);
         if (mc.player != null) {
-            var inv = mc.player.getInventory();
-            List<ItemStack> all = new ArrayList<>(inv.items);
-            all.addAll(inv.offhand);
+            List<ItemStack> all = Compat.allItems(mc.player);
             int bestBlocks = 0;
             for (ItemStack s : all) {
                 if (s.isEmpty()) continue;

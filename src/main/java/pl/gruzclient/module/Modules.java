@@ -1,5 +1,6 @@
 package pl.gruzclient.module;
 
+import pl.gruzclient.compat.Compat;
 import com.google.gson.JsonObject;
 import com.mojang.blaze3d.platform.InputConstants;
 import pl.gruzclient.config.GruzConfig;
@@ -126,6 +127,12 @@ public final class Modules {
     public static boolean keyDown(int code) {
         Minecraft mc = Minecraft.getInstance();
         if (mc.screen != null || code <= 0) return false;
-        return InputConstants.isKeyDown(mc.getWindow().getWindow(), code);
+        return InputConstants.isKeyDown(
+                //#if MC >= 1.21.9
+                mc.getWindow(),
+                //#else
+                mc.getWindow().getWindow(),
+                //#endif
+                code);
     }
 }

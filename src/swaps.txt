@@ -16,3 +16,5 @@ MC >= 1.21.11 | RenderType.debugFilledBox => net.minecraft.client.renderer.rende
 MC >= 1.21.11 | RenderType.entityTranslucentEmissive => net.minecraft.client.renderer.rendertype.RenderTypes.entityTranslucentEmissive
 MC >= 1.21.11 | RenderType.entityTranslucent => net.minecraft.client.renderer.rendertype.RenderTypes.entityTranslucent
 MC >= 1.21.11 | RenderType.eyes => net.minecraft.client.renderer.rendertype.RenderTypes.eyes
+MC >= 1.21.9 | protected void renderWidget(GuiGraphics => protected void renderContents(GuiGraphics
+MC >= 1.21.9 | public void renderWidget(GuiGraphics => public void renderContents(GuiGraphics

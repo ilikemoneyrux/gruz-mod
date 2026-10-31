@@ -35,8 +35,7 @@ public class PotionHudModule extends HudModule {
         for (int i = 0; i < effects.size(); i++) {
             MobEffectInstance e = effects.get(i);
             int y = i * 24;
-            TextureAtlasSprite sprite = mc.getMobEffectTextures().get(e.getEffect());
-            Compat.sprite(c, sprite, 5, y + 3, 18, 18);
+            Compat.effectIcon(c, e, 5, y + 3, 18);
             c.drawString(tr, name(e), 26, y + 4, textColor(), !background.value);
             boolean blink = !e.isInfiniteDuration() && e.getDuration() < 200 && (System.currentTimeMillis() / 400) % 2 == 0;
             c.drawString(tr, time(e), 26, y + 14, argb(blink ? 0.4f : 1f, MUTE), !background.value);

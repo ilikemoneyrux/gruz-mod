@@ -1,5 +1,6 @@
 package pl.gruzclient.module.impl;
 
+import pl.gruzclient.compat.Compat;
 import pl.gruzclient.module.Module;
 
 /** Hitboxy encji (to samo co F3+B, ale zapamiętane między uruchomieniami gry). */
@@ -12,7 +13,7 @@ public class HitboxesModule extends Module {
     public void tick() {
         // ustawiamy raz po wejściu do świata; F3+B dalej działa normalnie
         if (!applied && mc.level != null) {
-            mc.getEntityRenderDispatcher().setRenderHitBoxes(true);
+            Compat.hitboxes(mc, true);
             applied = true;
         }
         if (mc.level == null) applied = false;
@@ -24,6 +25,6 @@ public class HitboxesModule extends Module {
     @Override
     protected void onDisable() {
         applied = false;
-        if (mc.level != null) mc.getEntityRenderDispatcher().setRenderHitBoxes(false);
+        if (mc.level != null) Compat.hitboxes(mc, false);
     }
 }

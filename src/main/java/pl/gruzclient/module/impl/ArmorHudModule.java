@@ -1,5 +1,6 @@
 package pl.gruzclient.module.impl;
 
+import pl.gruzclient.compat.Compat;
 import pl.gruzclient.module.HudModule;
 import pl.gruzclient.module.Setting;
 
@@ -21,8 +22,7 @@ public class ArmorHudModule extends HudModule {
     protected int[] draw(GuiGraphics c, boolean editing) {
         List<ItemStack> items = new ArrayList<>();
         if (mc.player != null) {
-            var armor = mc.player.getInventory().armor;
-            for (int i = armor.size() - 1; i >= 0; i--) if (!armor.get(i).isEmpty()) items.add(armor.get(i));
+            for (var it : Compat.armor(mc.player)) if (!it.isEmpty()) items.add(it);
             if (!mc.player.getMainHandItem().isEmpty()) items.add(mc.player.getMainHandItem());
         }
         if (items.isEmpty() && editing) {

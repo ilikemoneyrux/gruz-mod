@@ -25,7 +25,7 @@ public class NametagModule extends Module {
     public Component label(Entity entity, Component text) {
         if (!isEnabled() || !(entity instanceof Player)) return text;
         Component out = recolor.value ? Component.literal(text.getString()).setStyle(Style.EMPTY.withColor(TextColor.fromRgb(color.rgb()))) : text;
-        out = pl.gruzclient.cosmetics.NameEffects.apply(out, Cosmetics.of((Player) entity), ((Player) entity).getGameProfile().getName());
+        out = pl.gruzclient.cosmetics.NameEffects.apply(out, Cosmetics.of((Player) entity), Compat.profileName(((Player) entity).getGameProfile()));
         if (gruzIcon.value && Cosmetics.isGruzUser(entity.getUUID())) return withIcon(out);
         return out;
     }
@@ -34,7 +34,7 @@ public class NametagModule extends Module {
 
     /** Logo Gruz (znak z własnej czcionki) przed nickiem */
     public static Component withIcon(Component name) {
-        Component icon = Component.literal("\uE000").setStyle(Style.EMPTY.withFont(ICON_FONT).withColor(TextColor.fromRgb(0xFFFFFF)));
+        Component icon = Component.literal("\uE000").setStyle(Compat.font(ICON_FONT).withColor(TextColor.fromRgb(0xFFFFFF)));
         return Component.empty().append(icon).append(Component.literal(" ")).append(name);
     }
 

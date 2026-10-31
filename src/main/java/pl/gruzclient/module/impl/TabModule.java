@@ -1,5 +1,6 @@
 package pl.gruzclient.module.impl;
 
+import pl.gruzclient.compat.Compat;
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.client.multiplayer.PlayerInfo;
 import net.minecraft.network.chat.Component;
@@ -25,8 +26,8 @@ public class TabModule extends Module {
 
     public Component name(PlayerInfo entry, Component name) {
         if (!isEnabled()) return name;
-        var id = entry.getProfile().getId();
-        Component out = pl.gruzclient.cosmetics.NameEffects.apply(name, Cosmetics.ofUuid(id), entry.getProfile().getName());
+        var id = Compat.profileId(entry.getProfile());
+        Component out = pl.gruzclient.cosmetics.NameEffects.apply(name, Cosmetics.ofUuid(id), Compat.profileName(entry.getProfile()));
         if (hypixel.value) {
             HypixelStats.Stats s = HypixelStats.get(id);
             if (s != null) {

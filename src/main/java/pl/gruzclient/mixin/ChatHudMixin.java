@@ -33,9 +33,11 @@ public abstract class ChatHudMixin implements GruzChat {
     @Shadow private int chatScrollbarPos;
 
     @Shadow private void addMessageToDisplayQueue(GuiMessage message) { throw new AssertionError(); }
+    //#if MC < 1.21.9
     @Shadow private double screenToChatX(double x) { throw new AssertionError(); }
     @Shadow private double screenToChatY(double y) { throw new AssertionError(); }
     @Shadow private int getMessageLineIndexAt(double chatLineX, double chatLineY) { throw new AssertionError(); }
+    //#endif
 
     @Unique private String gruz$lastPlain = null;
     @Unique private int gruz$count = 1;
@@ -87,6 +89,9 @@ public abstract class ChatHudMixin implements GruzChat {
 
     @Override
     public String gruz$messageAt(double mouseX, double mouseY) {
+        //#if MC >= 1.21.9
+        return null; // TODO: kopiowanie wiadomości – nowy układ czatu w 1.21.9+
+        //#else
         int idx = this.getMessageLineIndexAt(this.screenToChatX(mouseX), this.screenToChatY(mouseY));
         if (idx < 0 || idx >= this.trimmedMessages.size()) return null;
         // linie jednej wiadomości: od dolnej (endOfEntry) w górę do następnej endOfEntry
@@ -97,5 +102,6 @@ public abstract class ChatHudMixin implements GruzChat {
         StringBuilder sb = new StringBuilder();
         for (int i = top; i >= bottom; i--) sb.append(GruzChat.plain(this.trimmedMessages.get(i).content()));
         return sb.toString();
+        //#endif
     }
 }

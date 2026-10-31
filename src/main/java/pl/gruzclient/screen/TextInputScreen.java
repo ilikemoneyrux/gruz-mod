@@ -13,7 +13,7 @@ import net.minecraft.client.gui.screens.Screen;
 import net.minecraft.network.chat.Component;
 
 /** Małe okienko do wpisania tekstu ustawienia (np. hasło OBS). Enter zapisuje, Esc wraca. */
-public class TextInputScreen extends Screen {
+public class TextInputScreen extends pl.gruzclient.compat.GruzScreen {
     private final Screen parent;
     private final Setting.Text setting;
     private EditBox field;

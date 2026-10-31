@@ -13,8 +13,14 @@ import pl.gruzclient.module.impl.CpsModule;
 @Mixin(MouseHandler.class)
 public abstract class MouseMixin {
     /** Liczenie kliknięć do CPS (tylko w trakcie gry, bez otwartego ekranu) */
+    //#if MC >= 1.21.9
+    @Inject(method = "onButton", at = @At("HEAD"))
+    private void gruz$cps(long window, net.minecraft.client.input.MouseButtonInfo info, int action, CallbackInfo ci) {
+        int button = info.button();
+    //#else
     @Inject(method = "onPress", at = @At("HEAD"))
     private void gruz$cps(long window, int button, int action, int mods, CallbackInfo ci) {
+    //#endif
         if (action == GLFW.GLFW_PRESS && Minecraft.getInstance().screen == null) CpsModule.click(button);
     }
 

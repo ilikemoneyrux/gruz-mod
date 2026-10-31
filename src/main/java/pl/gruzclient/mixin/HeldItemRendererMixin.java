@@ -1,5 +1,8 @@
+//#swap MC >= 1.21.9 | MultiBufferSource vertexConsumers => net.minecraft.client.renderer.SubmitNodeCollector vertexConsumers
+//#swap MC >= 1.21.9 | ItemDisplayContext;ZLcom/mojang/blaze3d/vertex/PoseStack;Lnet/minecraft/client/renderer/MultiBufferSource;I)V => ItemDisplayContext;Lcom/mojang/blaze3d/vertex/PoseStack;Lnet/minecraft/client/renderer/SubmitNodeCollector;I)V
 package pl.gruzclient.mixin;
 
+import pl.gruzclient.compat.Compat;
 import com.mojang.blaze3d.vertex.PoseStack;
 import net.minecraft.client.player.AbstractClientPlayer;
 import net.minecraft.client.player.LocalPlayer;
@@ -43,7 +46,7 @@ public abstract class HeldItemRendererMixin {
     private void gruz$swordBlock(AbstractClientPlayer player, float tickDelta, float pitch, InteractionHand hand, float swingProgress,
                                  ItemStack item, float equipProgress, PoseStack matrices, MultiBufferSource vertexConsumers,
                                  int light, CallbackInfo ci) {
-        if (!(item.getItem() instanceof net.minecraft.world.item.SwordItem) || !Modules.OLD_ANIM.swordBlocking(player)) return;
+        if (!Compat.isSword(item) || !Modules.OLD_ANIM.swordBlocking(player)) return;
         boolean right = (hand == InteractionHand.MAIN_HAND) == (player.getMainArm() == net.minecraft.world.entity.HumanoidArm.RIGHT);
         float a = right ? 1f : -1f;
         matrices.translate(a * -0.14142136f, 0.08f, 0.14142136f);

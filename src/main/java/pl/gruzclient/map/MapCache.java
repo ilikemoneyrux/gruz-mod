@@ -38,7 +38,7 @@ public final class MapCache {
         String base = mc.isLocalServer() && mc.getSingleplayerServer() != null
                 ? "sp_" + mc.getSingleplayerServer().getWorldData().getLevelName()
                 : "mp_" + (mc.getCurrentServer() != null ? mc.getCurrentServer().ip : "unknown");
-        String dim = mc.level.dimension().location().toString();
+        String dim = Compat.dimensionId(mc.level);
         return (base + "_" + dim).replaceAll("[^a-zA-Z0-9_.-]", "_");
     }
 

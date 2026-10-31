@@ -31,8 +31,8 @@ public final class Ui {
     }
 
     // ---------------- tekst ----------------
-    public static MutableComponent text(String s) { return Component.literal(s).setStyle(Style.EMPTY.withFont(FONT)); }
-    public static MutableComponent bold(String s) { return Component.literal(s).setStyle(Style.EMPTY.withFont(FONT_BOLD)); }
+    public static MutableComponent text(String s) { return Component.literal(s).setStyle(Compat.font(FONT)); }
+    public static MutableComponent bold(String s) { return Component.literal(s).setStyle(Compat.font(FONT_BOLD)); }
 
     public static Font tr() { return Minecraft.getInstance().font; }
     public static int width(Component t) { return tr().width(t); }

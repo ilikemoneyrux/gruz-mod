@@ -22,7 +22,7 @@ import static pl.gruzclient.render.GruzDraw.*;
  * moduły HUD Gruz, tablica wyników i pasek bossa. Przy każdym są ⚙ (ustawienia) i ⊖ (wyłącz).
  * Kółko myszy nad elementem zmienia rozmiar. Na środku logo, "Edytuj mody Gruz" i szybkie akcje.
  */
-public class HudEditorScreen extends Screen {
+public class HudEditorScreen extends pl.gruzclient.compat.GruzScreen {
     private static final int SNAP = 4;
     /** true, gdy edytor sam rysuje tablicę wyników i pasek bossa (ponad rozmyciem) */
     public static boolean drawingVanilla = false;
@@ -179,7 +179,9 @@ public class HudEditorScreen extends Screen {
     @Override
     public void renderBackground(GuiGraphics c, int mouseX, int mouseY, float delta) {
         if (this.minecraft.level != null) {
-            //#if MC >= 1.21.2
+            //#if MC >= 1.21.6
+            this.renderBlurredBackground(c);
+            //#elif MC >= 1.21.2
             this.renderBlurredBackground();
             //#elif MC >= 1.20.5
             this.renderBlurredBackground(delta);
@@ -319,7 +321,7 @@ public class HudEditorScreen extends Screen {
         int w = r[2], h = r[3];
         double nx = mx - offX, ny = my - offY;
         snapX = snapY = false;
-        if (snapOn && !hasAltDown()) {
+        if (snapOn && !pl.gruzclient.compat.GruzScreen.alt()) {
             double centerX = this.width / 2.0 - w / 2.0, centerY = this.height / 2.0 - h / 2.0;
             if (Math.abs(nx - centerX) < SNAP) { nx = centerX; snapX = true; }
             if (Math.abs(ny - centerY) < SNAP) { ny = centerY; snapY = true; }

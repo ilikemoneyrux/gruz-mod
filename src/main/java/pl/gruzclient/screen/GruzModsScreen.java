@@ -24,7 +24,7 @@ import static pl.gruzclient.render.GruzDraw.*;
  * i kartami modułów (ikona, nazwa, opis, przycisk WŁ./WYŁ., ⚙ ustawienia).
  * Ustawienia modułu otwierają się w tym samym panelu.
  */
-public class GruzModsScreen extends Screen {
+public class GruzModsScreen extends pl.gruzclient.compat.GruzScreen {
     private final Screen parent;
     private final long openedAt = System.currentTimeMillis();
     private static Module.Category category = null; // null = wszystkie
@@ -141,7 +141,9 @@ public class GruzModsScreen extends Screen {
     @Override
     public void renderBackground(GuiGraphics c, int mouseX, int mouseY, float delta) {
         if (this.minecraft.level != null) {
-            //#if MC >= 1.21.2
+            //#if MC >= 1.21.6
+            this.renderBlurredBackground(c);
+            //#elif MC >= 1.21.2
             this.renderBlurredBackground();
             //#elif MC >= 1.20.5
             this.renderBlurredBackground(delta);
@@ -153,7 +155,9 @@ public class GruzModsScreen extends Screen {
             //#else
             c.fill(0, 0, this.width, this.height, 0xFF101018);
             //#endif
-            //#if MC >= 1.21.2
+            //#if MC >= 1.21.6
+            this.renderBlurredBackground(c);
+            //#elif MC >= 1.21.2
             this.renderBlurredBackground();
             //#elif MC >= 1.20.5
             this.renderBlurredBackground(delta);

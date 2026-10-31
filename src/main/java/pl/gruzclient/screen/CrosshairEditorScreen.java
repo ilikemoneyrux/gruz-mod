@@ -14,7 +14,7 @@ import net.minecraft.network.chat.Component;
  * Edytor celownika piksel po pikselu. Lewy przycisk rysuje, prawy ściera (można przeciągać).
  * Kod celownika można skopiować i wysłać znajomym, a ich kod wkleić.
  */
-public class CrosshairEditorScreen extends Screen {
+public class CrosshairEditorScreen extends pl.gruzclient.compat.GruzScreen {
     private static final int N = CrosshairModule.GRID;
     private final Screen parent;
     private final CrosshairModule module;

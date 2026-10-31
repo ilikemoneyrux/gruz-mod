@@ -13,7 +13,9 @@ import pl.gruzclient.module.Modules;
 @Mixin(ScreenEffectRenderer.class)
 public abstract class InGameOverlayRendererMixin {
     @Inject(method = "renderFire", at = @At("HEAD"), require = 0)
-    //#if MC >= 1.21.2
+    //#if MC >= 1.21.9
+    private static void gruz$fireDown(PoseStack matrices, net.minecraft.client.renderer.MultiBufferSource buffers, net.minecraft.client.renderer.texture.TextureAtlasSprite sprite, CallbackInfo ci) {
+    //#elif MC >= 1.21.2
     private static void gruz$fireDown(PoseStack matrices, net.minecraft.client.renderer.MultiBufferSource buffers, CallbackInfo ci) {
     //#else
     private static void gruz$fireDown(Minecraft client, PoseStack matrices, CallbackInfo ci) {
@@ -23,7 +25,9 @@ public abstract class InGameOverlayRendererMixin {
     }
 
     @Inject(method = "renderFire", at = @At("RETURN"), require = 0)
-    //#if MC >= 1.21.2
+    //#if MC >= 1.21.9
+    private static void gruz$fireRestore(PoseStack matrices, net.minecraft.client.renderer.MultiBufferSource buffers, net.minecraft.client.renderer.texture.TextureAtlasSprite sprite, CallbackInfo ci) {
+    //#elif MC >= 1.21.2
     private static void gruz$fireRestore(PoseStack matrices, net.minecraft.client.renderer.MultiBufferSource buffers, CallbackInfo ci) {
     //#else
     private static void gruz$fireRestore(Minecraft client, PoseStack matrices, CallbackInfo ci) {

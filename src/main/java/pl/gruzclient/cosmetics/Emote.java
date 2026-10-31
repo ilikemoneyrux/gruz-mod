@@ -81,6 +81,8 @@ public enum Emote {
             }
             case POINT -> set(m.rightArm, -1.6f + Mth.sin(t * 5f) * 0.04f, 0f, 0f, k);
         }
-        m.hat.copyFrom(m.head);
+        //#if MC < 1.21.2
+        m.hat.copyFrom(m.head); // od 1.21.2 czapka jest dzieckiem głowy i idzie za nią sama
+        //#endif
     }
 }

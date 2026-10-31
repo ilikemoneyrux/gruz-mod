@@ -194,7 +194,7 @@ public final class GruzNetwork {
                 CompletableFuture.runAsync(() -> {
                     try {
                         var session = mc.getUser();
-                        mc.getMinecraftSessionService().joinServer(session.getProfileId(), session.getAccessToken(), serverId);
+                        Compat.joinServer(mc, serverId);
                         JsonObject o = msg("auth");
                         o.addProperty("name", session.getName());
                         send(o);
@@ -283,10 +283,7 @@ public final class GruzNetwork {
         ServerData current = mc.getCurrentServer();
         if (current != null && current.ip.equalsIgnoreCase(address)) return;
         if (!ServerAddress.isValidAddress(address)) return;
-        if (mc.level != null) {
-            mc.level.disconnect();
-            mc.disconnect();
-        }
+        Compat.leaveWorld(mc);
         Compat.connect(new TitleScreen(), mc, address, Compat.server(address, address));
     }
 

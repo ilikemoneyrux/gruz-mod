@@ -1,5 +1,6 @@
 package pl.gruzclient.module.impl;
 
+import pl.gruzclient.compat.Compat;
 import pl.gruzclient.module.Module;
 import pl.gruzclient.module.Setting;
 
@@ -22,7 +23,7 @@ public class OldAnimationsModule extends Module {
         var hand = p.getUsedItemHand();
         var other = hand == net.minecraft.world.InteractionHand.MAIN_HAND ? net.minecraft.world.InteractionHand.OFF_HAND : net.minecraft.world.InteractionHand.MAIN_HAND;
         return p.getItemInHand(hand).is(net.minecraft.world.item.Items.SHIELD)
-                && p.getItemInHand(other).getItem() instanceof net.minecraft.world.item.SwordItem;
+                && Compat.isSword(p.getItemInHand(other));
     }
 
     public int swingDuration(int vanilla) { return isEnabled() ? Math.round(swing.value) + (vanilla - 6) : vanilla; }

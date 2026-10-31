@@ -23,7 +23,7 @@ import com.mojang.math.Axis;
  * Pełna mapa odkrytego świata (klawisz M).
  * Przeciąganie = przesuwanie, kółko = przybliżenie, PPM = nowy waypoint, klik w punkt na liście = usuń.
  */
-public class WorldMapScreen extends Screen {
+public class WorldMapScreen extends pl.gruzclient.compat.GruzScreen {
     private static final ResourceLocation ID = Compat.id(GruzClient.MOD_ID, "worldmap");
     private static final int SIDE = 130;
     private final Screen parent;

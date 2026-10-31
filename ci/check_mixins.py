@@ -54,12 +54,19 @@ def preprocess(text, mc, sw):
             f = st[-1]; f[2] = f[0] and not f[1]; f[1] = True; out.append('')
         elif t == '//#endif':
             st.pop(); out.append('')
-        elif t.startswith('//#only '):
+        elif t.startswith('//#only ') or t.startswith('//#swap '):
             out.append('')
         else:
             out.append(l if act() else '')
     s = '\n'.join(out)
-    for p, b in sw: s = p.sub(b, s)
+    local = []
+    for l in lines:
+        t = l.strip()
+        if t.startswith('//#swap '):
+            c, rule = [x.strip() for x in t[8:].split('|', 1)]
+            a, b = [x.strip() for x in rule.split('=>', 1)]
+            if cond(c, mc): local.append((re.compile(r'(?<![\w$])' + re.escape(a) + r'(?![\w$])'), b))
+    for p, b in local + sw: s = p.sub(b, s)
     return s
 
 

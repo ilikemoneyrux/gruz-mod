@@ -78,7 +78,7 @@ public class MenuModule extends Module {
         pending = false;
         try {
             File work = dir().resolve("capture").toFile();
-            mc.grabPanoramixScreenshot(work, 1024, 1024);
+            Compat.panoramaShot(mc, work);
             Path shots;
             try (Stream<Path> s = Files.walk(work.toPath())) {
                 Optional<Path> first = s.filter(p -> p.getFileName().toString().equals("panorama_0.png")).findFirst();

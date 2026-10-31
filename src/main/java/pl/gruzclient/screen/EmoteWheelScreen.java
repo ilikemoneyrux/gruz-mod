@@ -12,7 +12,7 @@ import net.minecraft.client.gui.screens.Screen;
 import net.minecraft.network.chat.Component;
 
 /** Koło emotek: najedź na wycinek i puść klawisz (albo kliknij). */
-public class EmoteWheelScreen extends Screen {
+public class EmoteWheelScreen extends pl.gruzclient.compat.GruzScreen {
     private final CosmeticsModule module;
     private final Emote[] emotes = Emote.values();
     private final long openedAt = System.currentTimeMillis();

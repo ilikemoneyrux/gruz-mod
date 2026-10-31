@@ -1,3 +1,4 @@
+//#only MC < 1.21.9
 package pl.gruzclient.mixin;
 
 import com.mojang.blaze3d.vertex.PoseStack;
