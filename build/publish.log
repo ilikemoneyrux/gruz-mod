@@ -1,24 +1,4 @@
-total 3612
-drwxr-xr-x  2 runner runner    4096 Oct 31 00:27 .
-drwxr-xr-x 10 runner runner    4096 Oct 31 00:27 ..
--rw-r--r--  1 runner runner 1842012 Oct 31 00:27 gruzclient-1.20.4.jar
--rw-r--r--  1 runner runner 1845819 Oct 31 00:27 gruzclient-1.21.1.jar
-{
-  "mod": "0.4.0",
-  "builds": [
-    {
-      "mc": "1.20.4",
-      "range": ">=1.20.3 <=1.20.4",
-      "file": "gruzclient-1.20.4.jar",
-      "java": 17
-    },
-    {
-      "mc": "1.21.1",
-      "range": ">=1.21 <=1.21.1",
-      "file": "gruzclient-1.21.1.jar",
-      "java": 21
-    }
-  ]
-}
-https://github.com/ilikemoneyrux/gruz-mod/releases/tag/mod
-release exit 0
+total 8
+drwxr-xr-x  2 runner runner 4096 Oct 31 00:30 .
+drwxr-xr-x 10 runner runner 4096 Oct 31 00:30 ..
+no jars passed
