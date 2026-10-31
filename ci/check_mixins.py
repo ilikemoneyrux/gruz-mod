@@ -238,9 +238,14 @@ def check(d, mc):
                     cand = [want]
                 else:
                     cand = overloads
+                if kind == 'ModifyVariable' and len(hparams) > 1:
+                    eq = lambda a, b: len(a) == len(b) and all(x == y or re.fullmatch(r'[A-Z]', x) for x, y in zip(a, b))
+                    if not any(eq(hparams[1:], c) for c in cand):
+                        problems.append(f'X  {f}: @ModifyVariable {name}: parametry {hparams[1:]} nie pasują do {cand}')
                 if kind == 'Inject':
                     hp = [p for p in hparams if p not in ('CallbackInfo', 'CallbackInfoReturnable')]
-                    if hp and not any(hp == c[:len(hp)] and len(hp) == len(c) for c in cand):
+                    eq = lambda a, b: len(a) == len(b) and all(x == y or re.fullmatch(r'[A-Z]', x) for x, y in zip(a, b))
+                    if hp and not any(eq(hp, c) for c in cand):
                         problems.append(f'X  {f}: @Inject {name}: parametry {hp} nie pasują do {cand}')
         # cele @At(INVOKE)
         for m in re.finditer(r'target\s*=\s*"L([\w/$]+);([\w<>$]+)(\([^"]*\)[^"]*)"', s):
