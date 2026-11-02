@@ -71,6 +71,7 @@ public class FreecamModule extends Module {
         mc.player.input = new Input(); // postać przestaje reagować na klawisze
         //#endif
         mc.setCameraEntity(camera);
+        Compat.chat(mc.player, Component.literal("§d[Gruz] §f" + Lang.t("freecam.on").replace("{key}", key.display())), true);
     }
 
     public void stop() {
@@ -78,6 +79,7 @@ public class FreecamModule extends Module {
         if (mc.player != null) {
             if (savedInput != null) mc.player.input = savedInput;
             mc.setCameraEntity(mc.player);
+            Compat.chat(mc.player, Component.literal("§d[Gruz] §f" + Lang.t("freecam.off")), true);
         }
         camera = null;
         savedInput = null;

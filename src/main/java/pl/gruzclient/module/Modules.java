@@ -123,10 +123,21 @@ public final class Modules {
         MINIMAP.renderCompass(c);
     }
 
-    /** Czy klawisz jest wciśnięty (tylko gdy nie ma otwartego ekranu) */
+    /** Klawisze wciśnięte razem z F3 – ignorujemy je, dopóki ich nie puścisz */
+    private static final java.util.Set<Integer> F3_COMBO = new java.util.HashSet<>();
+
+    /** Czy klawisz jest wciśnięty (tylko gdy nie ma otwartego ekranu i nie jest to skrót z F3, np. F3+F4) */
     public static boolean keyDown(int code) {
         Minecraft mc = Minecraft.getInstance();
         if (mc.screen != null || code <= 0) return false;
+        boolean down = rawDown(code);
+        if (!down) { F3_COMBO.remove(code); return false; }
+        if (code != org.lwjgl.glfw.GLFW.GLFW_KEY_F3 && rawDown(org.lwjgl.glfw.GLFW.GLFW_KEY_F3)) F3_COMBO.add(code);
+        return !F3_COMBO.contains(code);
+    }
+
+    private static boolean rawDown(int code) {
+        Minecraft mc = Minecraft.getInstance();
         return InputConstants.isKeyDown(
                 //#if MC >= 26.3
                 //#elif MC >= 1.21.9

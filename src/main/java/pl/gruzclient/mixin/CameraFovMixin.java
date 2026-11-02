@@ -8,11 +8,12 @@ import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 import pl.gruzclient.module.Modules;
 
-/** Zoom (26.1+): pole widzenia liczy teraz kamera. */
+/** Zoom (26.1+): pole widzenia liczy kamera w calculateFov() i zapisuje do pola fov, z którego
+ *  bierze je projekcja. getFov() to tylko getter, więc zmiana tam nic nie dawała. */
 @Mixin(Camera.class)
 public abstract class CameraFovMixin {
-    @Inject(method = "getFov", at = @At("RETURN"), cancellable = true, require = 0)
-    private void gruz$zoom(CallbackInfoReturnable<Float> cir) {
+    @Inject(method = "calculateFov", at = @At("RETURN"), cancellable = true, require = 0)
+    private void gruz$zoom(float partialTick, CallbackInfoReturnable<Float> cir) {
         float f = Modules.ZOOM.factor();
         if (f > 1.001f) cir.setReturnValue(cir.getReturnValue() / f);
     }

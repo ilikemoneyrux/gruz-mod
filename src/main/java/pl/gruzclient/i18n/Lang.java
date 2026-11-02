@@ -355,6 +355,8 @@ public final class Lang {
         put("setting.pingMs", "Ping w ms", "Ping in ms");
         put("setting.hypixelStats", "Statystyki Hypixela (BedWars)", "Hypixel stats (BedWars)");
         put("setting.flySpeed", "Prędkość lotu", "Fly speed");
+        put("freecam.on", "Freecam włączony – {key} wraca do postaci (zmienisz to w Mody → Freecam)", "Freecam on – {key} returns to your player (change it in Mods → Freecam)");
+        put("freecam.off", "Freecam wyłączony", "Freecam off");
         put("freecam.onlySp", "Freecam działa tylko w świecie jednoosobowym", "Freecam works in singleplayer only");
         put("map.title", "Mapa świata", "World map");
         put("map.waypoints", "Waypointy", "Waypoints");

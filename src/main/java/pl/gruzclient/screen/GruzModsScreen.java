@@ -31,6 +31,8 @@ public class GruzModsScreen extends pl.gruzclient.compat.GruzScreen {
     private static Module.Category category = null; // null = wszystkie
     private Module settingsOf = null;
     private Setting.Key capturing = null;
+    /** Po złapaniu klawisza zjadamy znak, który zaraz przyjdzie (inaczej "Z" trafiało do wyszukiwarki) */
+    private boolean swallowChar = false;
     private Setting.Number dragging = null;
     private int dragX, dragW;
     private float scroll = 0, scrollTarget = 0;
@@ -382,7 +384,7 @@ public class GruzModsScreen extends pl.gruzclient.compat.GruzScreen {
                 if (s instanceof Setting.Action a) { Modules.save(); a.action.run(); return true; }
                 if (s instanceof Setting.Text tx) { this.minecraft.setScreen(new TextInputScreen(this, tx)); return true; }
                 if (s instanceof Setting.Bool b) b.toggle();
-                else if (s instanceof Setting.Key k) capturing = k;
+                else if (s instanceof Setting.Key k) { capturing = k; search.setFocused(false); this.setFocused(null); }
                 else if (s instanceof Setting.Number n) {
                     int vw = Ui.width(Ui.bold(n.display()));
                     dragging = n; dragX = ctrlX; dragW = ctrlW - vw - 10;
@@ -423,7 +425,9 @@ public class GruzModsScreen extends pl.gruzclient.compat.GruzScreen {
 
     @Override
     public boolean keyPressed(int keyCode, int scanCode, int modifiers) {
+        swallowChar = false;
         if (capturing != null) {
+            swallowChar = true;
             if (keyCode == GLFW.GLFW_KEY_BACKSPACE || keyCode == GLFW.GLFW_KEY_DELETE) capturing.code = -1;
             else if (keyCode != GLFW.GLFW_KEY_ESCAPE) capturing.code = keyCode;
             capturing = null;
@@ -436,5 +440,11 @@ public class GruzModsScreen extends pl.gruzclient.compat.GruzScreen {
             this.setFocused(search);
         }
         return super.keyPressed(keyCode, scanCode, modifiers);
+    }
+
+    @Override
+    public boolean charTyped(char chr, int modifiers) {
+        if (capturing != null || swallowChar) { swallowChar = false; return true; }
+        return super.charTyped(chr, modifiers);
     }
 }
