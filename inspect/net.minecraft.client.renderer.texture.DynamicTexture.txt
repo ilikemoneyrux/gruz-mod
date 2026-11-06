@@ -1,0 +1,39 @@
+Compiled from "DynamicTexture.java"
+public class net.minecraft.client.renderer.texture.DynamicTexture extends net.minecraft.client.renderer.texture.AbstractTexture implements net.minecraft.client.renderer.texture.Dumpable {
+  private static final org.slf4j.Logger LOGGER;
+    descriptor: Lorg/slf4j/Logger;
+  private com.mojang.blaze3d.platform.NativeImage pixels;
+    descriptor: Lcom/mojang/blaze3d/platform/NativeImage;
+  public net.minecraft.client.renderer.texture.DynamicTexture(java.util.function.Supplier<java.lang.String>, com.mojang.blaze3d.platform.NativeImage);
+    descriptor: (Ljava/util/function/Supplier;Lcom/mojang/blaze3d/platform/NativeImage;)V
+
+  public net.minecraft.client.renderer.texture.DynamicTexture(java.lang.String, int, int, boolean);
+    descriptor: (Ljava/lang/String;IIZ)V
+
+  public net.minecraft.client.renderer.texture.DynamicTexture(java.util.function.Supplier<java.lang.String>, int, int, boolean);
+    descriptor: (Ljava/util/function/Supplier;IIZ)V
+
+  private void createTexture(java.util.function.Supplier<java.lang.String>);
+    descriptor: (Ljava/util/function/Supplier;)V
+
+  private void createTexture(java.lang.String);
+    descriptor: (Ljava/lang/String;)V
+
+  public void upload();
+    descriptor: ()V
+
+  public com.mojang.blaze3d.platform.NativeImage getPixels();
+    descriptor: ()Lcom/mojang/blaze3d/platform/NativeImage;
+
+  public void setPixels(com.mojang.blaze3d.platform.NativeImage);
+    descriptor: (Lcom/mojang/blaze3d/platform/NativeImage;)V
+
+  public void close();
+    descriptor: ()V
+
+  public void dumpContents(net.minecraft.resources.Identifier, java.nio.file.Path) throws java.io.IOException;
+    descriptor: (Lnet/minecraft/resources/Identifier;Ljava/nio/file/Path;)V
+
+  static {};
+    descriptor: ()V
+}

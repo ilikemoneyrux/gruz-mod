@@ -1,0 +1,53 @@
+Compiled from "ScreenEffectRenderer.java"
+public class net.minecraft.client.renderer.ScreenEffectRenderer {
+  private static final net.minecraft.resources.Identifier UNDERWATER_LOCATION;
+    descriptor: Lnet/minecraft/resources/Identifier;
+  private final net.minecraft.client.Minecraft minecraft;
+    descriptor: Lnet/minecraft/client/Minecraft;
+  private final net.minecraft.client.resources.model.MaterialSet materials;
+    descriptor: Lnet/minecraft/client/resources/model/MaterialSet;
+  private final net.minecraft.client.renderer.MultiBufferSource bufferSource;
+    descriptor: Lnet/minecraft/client/renderer/MultiBufferSource;
+  public static final int ITEM_ACTIVATION_ANIMATION_LENGTH;
+    descriptor: I
+  private net.minecraft.world.item.ItemStack itemActivationItem;
+    descriptor: Lnet/minecraft/world/item/ItemStack;
+  private int itemActivationTicks;
+    descriptor: I
+  private float itemActivationOffX;
+    descriptor: F
+  private float itemActivationOffY;
+    descriptor: F
+  public net.minecraft.client.renderer.ScreenEffectRenderer(net.minecraft.client.Minecraft, net.minecraft.client.resources.model.MaterialSet, net.minecraft.client.renderer.MultiBufferSource);
+    descriptor: (Lnet/minecraft/client/Minecraft;Lnet/minecraft/client/resources/model/MaterialSet;Lnet/minecraft/client/renderer/MultiBufferSource;)V
+
+  public void tick();
+    descriptor: ()V
+
+  public void renderScreenEffect(boolean, float, net.minecraft.client.renderer.SubmitNodeCollector);
+    descriptor: (ZFLnet/minecraft/client/renderer/SubmitNodeCollector;)V
+
+  private void renderItemActivationAnimation(com.mojang.blaze3d.vertex.PoseStack, float, net.minecraft.client.renderer.SubmitNodeCollector);
+    descriptor: (Lcom/mojang/blaze3d/vertex/PoseStack;FLnet/minecraft/client/renderer/SubmitNodeCollector;)V
+
+  public void resetItemActivation();
+    descriptor: ()V
+
+  public void displayItemActivation(net.minecraft.world.item.ItemStack, net.minecraft.util.RandomSource);
+    descriptor: (Lnet/minecraft/world/item/ItemStack;Lnet/minecraft/util/RandomSource;)V
+
+  private static net.minecraft.world.level.block.state.BlockState getViewBlockingState(net.minecraft.world.entity.player.Player);
+    descriptor: (Lnet/minecraft/world/entity/player/Player;)Lnet/minecraft/world/level/block/state/BlockState;
+
+  private static void renderTex(net.minecraft.client.renderer.texture.TextureAtlasSprite, com.mojang.blaze3d.vertex.PoseStack, net.minecraft.client.renderer.MultiBufferSource);
+    descriptor: (Lnet/minecraft/client/renderer/texture/TextureAtlasSprite;Lcom/mojang/blaze3d/vertex/PoseStack;Lnet/minecraft/client/renderer/MultiBufferSource;)V
+
+  private static void renderWater(net.minecraft.client.Minecraft, com.mojang.blaze3d.vertex.PoseStack, net.minecraft.client.renderer.MultiBufferSource);
+    descriptor: (Lnet/minecraft/client/Minecraft;Lcom/mojang/blaze3d/vertex/PoseStack;Lnet/minecraft/client/renderer/MultiBufferSource;)V
+
+  private static void renderFire(com.mojang.blaze3d.vertex.PoseStack, net.minecraft.client.renderer.MultiBufferSource, net.minecraft.client.renderer.texture.TextureAtlasSprite);
+    descriptor: (Lcom/mojang/blaze3d/vertex/PoseStack;Lnet/minecraft/client/renderer/MultiBufferSource;Lnet/minecraft/client/renderer/texture/TextureAtlasSprite;)V
+
+  static {};
+    descriptor: ()V
+}
