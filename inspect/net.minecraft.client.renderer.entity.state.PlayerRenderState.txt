@@ -1,0 +1,58 @@
+Compiled from "PlayerRenderState.java"
+public class net.minecraft.client.renderer.entity.state.PlayerRenderState extends net.minecraft.client.renderer.entity.state.HumanoidRenderState {
+  public net.minecraft.client.resources.PlayerSkin skin;
+    descriptor: Lnet/minecraft/client/resources/PlayerSkin;
+  public float capeFlap;
+    descriptor: F
+  public float capeLean;
+    descriptor: F
+  public float capeLean2;
+    descriptor: F
+  public int arrowCount;
+    descriptor: I
+  public int stingerCount;
+    descriptor: I
+  public int useItemRemainingTicks;
+    descriptor: I
+  public boolean isSpectator;
+    descriptor: Z
+  public boolean showHat;
+    descriptor: Z
+  public boolean showJacket;
+    descriptor: Z
+  public boolean showLeftPants;
+    descriptor: Z
+  public boolean showRightPants;
+    descriptor: Z
+  public boolean showLeftSleeve;
+    descriptor: Z
+  public boolean showRightSleeve;
+    descriptor: Z
+  public boolean showCape;
+    descriptor: Z
+  public float fallFlyingTimeInTicks;
+    descriptor: F
+  public boolean shouldApplyFlyingYRot;
+    descriptor: Z
+  public float flyingYRot;
+    descriptor: F
+  public boolean swinging;
+    descriptor: Z
+  public net.minecraft.network.chat.Component scoreText;
+    descriptor: Lnet/minecraft/network/chat/Component;
+  public net.minecraft.world.entity.animal.Parrot$Variant parrotOnLeftShoulder;
+    descriptor: Lnet/minecraft/world/entity/animal/Parrot$Variant;
+  public net.minecraft.world.entity.animal.Parrot$Variant parrotOnRightShoulder;
+    descriptor: Lnet/minecraft/world/entity/animal/Parrot$Variant;
+  public int id;
+    descriptor: I
+  public java.lang.String name;
+    descriptor: Ljava/lang/String;
+  public final net.minecraft.client.renderer.item.ItemStackRenderState heldOnHead;
+    descriptor: Lnet/minecraft/client/renderer/item/ItemStackRenderState;
+  public net.minecraft.client.renderer.entity.state.PlayerRenderState();
+    descriptor: ()V
+
+  public float fallFlyingScale();
+    descriptor: ()F
+}

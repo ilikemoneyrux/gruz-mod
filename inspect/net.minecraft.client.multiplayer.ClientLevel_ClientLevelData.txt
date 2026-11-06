@@ -1,0 +1,77 @@
+Compiled from "ClientLevel.java"
+public class net.minecraft.client.multiplayer.ClientLevel$ClientLevelData implements net.minecraft.world.level.storage.WritableLevelData {
+  private final boolean hardcore;
+    descriptor: Z
+  private final boolean isFlat;
+    descriptor: Z
+  private net.minecraft.core.BlockPos spawnPos;
+    descriptor: Lnet/minecraft/core/BlockPos;
+  private float spawnAngle;
+    descriptor: F
+  private long gameTime;
+    descriptor: J
+  private long dayTime;
+    descriptor: J
+  private boolean raining;
+    descriptor: Z
+  private net.minecraft.world.Difficulty difficulty;
+    descriptor: Lnet/minecraft/world/Difficulty;
+  private boolean difficultyLocked;
+    descriptor: Z
+  public net.minecraft.client.multiplayer.ClientLevel$ClientLevelData(net.minecraft.world.Difficulty, boolean, boolean);
+    descriptor: (Lnet/minecraft/world/Difficulty;ZZ)V
+
+  public net.minecraft.core.BlockPos getSpawnPos();
+    descriptor: ()Lnet/minecraft/core/BlockPos;
+
+  public float getSpawnAngle();
+    descriptor: ()F
+
+  public long getGameTime();
+    descriptor: ()J
+
+  public long getDayTime();
+    descriptor: ()J
+
+  public void setGameTime(long);
+    descriptor: (J)V
+
+  public void setDayTime(long);
+    descriptor: (J)V
+
+  public void setSpawn(net.minecraft.core.BlockPos, float);
+    descriptor: (Lnet/minecraft/core/BlockPos;F)V
+
+  public boolean isThundering();
+    descriptor: ()Z
+
+  public boolean isRaining();
+    descriptor: ()Z
+
+  public void setRaining(boolean);
+    descriptor: (Z)V
+
+  public boolean isHardcore();
+    descriptor: ()Z
+
+  public net.minecraft.world.Difficulty getDifficulty();
+    descriptor: ()Lnet/minecraft/world/Difficulty;
+
+  public boolean isDifficultyLocked();
+    descriptor: ()Z
+
+  public void fillCrashReportCategory(net.minecraft.CrashReportCategory, net.minecraft.world.level.LevelHeightAccessor);
+    descriptor: (Lnet/minecraft/CrashReportCategory;Lnet/minecraft/world/level/LevelHeightAccessor;)V
+
+  public void setDifficulty(net.minecraft.world.Difficulty);
+    descriptor: (Lnet/minecraft/world/Difficulty;)V
+
+  public void setDifficultyLocked(boolean);
+    descriptor: (Z)V
+
+  public double getHorizonHeight(net.minecraft.world.level.LevelHeightAccessor);
+    descriptor: (Lnet/minecraft/world/level/LevelHeightAccessor;)D
+
+  public float getClearColorScale();
+    descriptor: ()F
+}

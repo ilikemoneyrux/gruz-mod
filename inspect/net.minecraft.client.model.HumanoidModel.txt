@@ -1,0 +1,90 @@
+Compiled from "HumanoidModel.java"
+public class net.minecraft.client.model.HumanoidModel<T extends net.minecraft.client.renderer.entity.state.HumanoidRenderState> extends net.minecraft.client.model.EntityModel<T> implements net.minecraft.client.model.ArmedModel, net.minecraft.client.model.HeadedModel {
+  public static final net.minecraft.client.model.geom.builders.MeshTransformer BABY_TRANSFORMER;
+    descriptor: Lnet/minecraft/client/model/geom/builders/MeshTransformer;
+  public static final float OVERLAY_SCALE;
+    descriptor: F
+  public static final float HAT_OVERLAY_SCALE;
+    descriptor: F
+  public static final float LEGGINGS_OVERLAY_SCALE;
+    descriptor: F
+  private static final float DUCK_WALK_ROTATION;
+    descriptor: F
+  private static final float SPYGLASS_ARM_ROT_Y;
+    descriptor: F
+  private static final float SPYGLASS_ARM_ROT_X;
+    descriptor: F
+  private static final float SPYGLASS_ARM_CROUCH_ROT_X;
+    descriptor: F
+  private static final float HIGHEST_SHIELD_BLOCKING_ANGLE;
+    descriptor: F
+  private static final float LOWEST_SHIELD_BLOCKING_ANGLE;
+    descriptor: F
+  private static final float HORIZONTAL_SHIELD_MOVEMENT_LIMIT;
+    descriptor: F
+  public static final float TOOT_HORN_XROT_BASE;
+    descriptor: F
+  public static final float TOOT_HORN_YROT_BASE;
+    descriptor: F
+  public final net.minecraft.client.model.geom.ModelPart head;
+    descriptor: Lnet/minecraft/client/model/geom/ModelPart;
+  public final net.minecraft.client.model.geom.ModelPart hat;
+    descriptor: Lnet/minecraft/client/model/geom/ModelPart;
+  public final net.minecraft.client.model.geom.ModelPart body;
+    descriptor: Lnet/minecraft/client/model/geom/ModelPart;
+  public final net.minecraft.client.model.geom.ModelPart rightArm;
+    descriptor: Lnet/minecraft/client/model/geom/ModelPart;
+  public final net.minecraft.client.model.geom.ModelPart leftArm;
+    descriptor: Lnet/minecraft/client/model/geom/ModelPart;
+  public final net.minecraft.client.model.geom.ModelPart rightLeg;
+    descriptor: Lnet/minecraft/client/model/geom/ModelPart;
+  public final net.minecraft.client.model.geom.ModelPart leftLeg;
+    descriptor: Lnet/minecraft/client/model/geom/ModelPart;
+  public net.minecraft.client.model.HumanoidModel(net.minecraft.client.model.geom.ModelPart);
+    descriptor: (Lnet/minecraft/client/model/geom/ModelPart;)V
+
+  public net.minecraft.client.model.HumanoidModel(net.minecraft.client.model.geom.ModelPart, java.util.function.Function<net.minecraft.resources.ResourceLocation, net.minecraft.client.renderer.RenderType>);
+    descriptor: (Lnet/minecraft/client/model/geom/ModelPart;Ljava/util/function/Function;)V
+
+  public static net.minecraft.client.model.geom.builders.MeshDefinition createMesh(net.minecraft.client.model.geom.builders.CubeDeformation, float);
+    descriptor: (Lnet/minecraft/client/model/geom/builders/CubeDeformation;F)Lnet/minecraft/client/model/geom/builders/MeshDefinition;
+
+  public void setupAnim(T);
+    descriptor: (Lnet/minecraft/client/renderer/entity/state/HumanoidRenderState;)V
+
+  private void poseRightArm(T, net.minecraft.client.model.HumanoidModel$ArmPose);
+    descriptor: (Lnet/minecraft/client/renderer/entity/state/HumanoidRenderState;Lnet/minecraft/client/model/HumanoidModel$ArmPose;)V
+
+  private void poseLeftArm(T, net.minecraft.client.model.HumanoidModel$ArmPose);
+    descriptor: (Lnet/minecraft/client/renderer/entity/state/HumanoidRenderState;Lnet/minecraft/client/model/HumanoidModel$ArmPose;)V
+
+  private void poseBlockingArm(net.minecraft.client.model.geom.ModelPart, boolean);
+    descriptor: (Lnet/minecraft/client/model/geom/ModelPart;Z)V
+
+  protected void setupAttackAnimation(T, float);
+    descriptor: (Lnet/minecraft/client/renderer/entity/state/HumanoidRenderState;F)V
+
+  private float quadraticArmUpdate(float);
+    descriptor: (F)F
+
+  public void copyPropertiesTo(net.minecraft.client.model.HumanoidModel<T>);
+    descriptor: (Lnet/minecraft/client/model/HumanoidModel;)V
+
+  public void setAllVisible(boolean);
+    descriptor: (Z)V
+
+  public void translateToHand(net.minecraft.world.entity.HumanoidArm, com.mojang.blaze3d.vertex.PoseStack);
+    descriptor: (Lnet/minecraft/world/entity/HumanoidArm;Lcom/mojang/blaze3d/vertex/PoseStack;)V
+
+  protected net.minecraft.client.model.geom.ModelPart getArm(net.minecraft.world.entity.HumanoidArm);
+    descriptor: (Lnet/minecraft/world/entity/HumanoidArm;)Lnet/minecraft/client/model/geom/ModelPart;
+
+  public net.minecraft.client.model.geom.ModelPart getHead();
+    descriptor: ()Lnet/minecraft/client/model/geom/ModelPart;
+
+  public void setupAnim(net.minecraft.client.renderer.entity.state.EntityRenderState);
+    descriptor: (Lnet/minecraft/client/renderer/entity/state/EntityRenderState;)V
+
+  static {};
+    descriptor: ()V
+}
