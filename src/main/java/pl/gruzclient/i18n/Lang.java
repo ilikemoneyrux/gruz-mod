@@ -18,6 +18,8 @@ public final class Lang {
     private static final Map<String, String> EN = new HashMap<>();
 
     private static void put(String key, String pl, String en) { PL.put(key, pl); EN.put(key, en); }
+    /** Tłumaczenie dodane w trakcie gry (np. nazwy własnych peleryn z panelu, CustomCapes) */
+    public static void define(String key, String pl, String en) { put(key, pl, en); }
 
     static {
         // menu główne
@@ -138,6 +140,22 @@ public final class Lang {
         put("setting.showOthers", "Pokaż kosmetyki innych", "Show others' cosmetics");
         put("setting.emoteKey", "Klawisz emotek", "Emote key");
         put("setting.emoteCamera", "Kamera z przodu przy emotce", "Front camera during emote");
+        put("setting.wardrobeKey", "Klawisz Szafy", "Wardrobe key");
+        put("wardrobe.title", "Szafa", "Wardrobe");
+        put("wardrobe.sub", "Kliknij, żeby założyć · gra się nie pauzuje", "Click to wear · the game keeps running");
+        put("wardrobe.slot.cape", "Peleryna", "Cape");
+        put("wardrobe.slot.head", "Głowa", "Head");
+        put("wardrobe.slot.wings", "Skrzydła", "Wings");
+        put("wardrobe.slot.back", "Plecy", "Back");
+        put("wardrobe.slot.trail", "Ślad", "Trail");
+        put("wardrobe.slot.pet", "Pet", "Pet");
+        put("wardrobe.slot.name", "Nick", "Name");
+        put("wardrobe.worn", "założone", "worn");
+        put("wardrobe.trying", "przymierzasz", "trying on");
+        put("wardrobe.locked", "zablokowane", "locked");
+        put("wardrobe.hint", "Zablokowane możesz przymierzyć. Kody kupisz na gruzclient.com/cosmetics i wpiszesz w launcherze.", "You can try on locked items. Buy codes at gruzclient.com/cosmetics and redeem them in the launcher.");
+        put("wardrobe.tryHint", "Przymierzasz – tylko Ty to widzisz. Po zamknięciu wracają Twoje kosmetyki.", "Trying on – only you can see it. Your cosmetics come back when you close.");
+        put("wardrobe.close", "Zamknij", "Close");
         put("setting.gruzIcon", "Ikona Gruz przy nicku", "Gruz icon next to names");
         put("cos.none", "Brak", "None");
         put("cape.flow", "Fioletowy płomień", "Violet flame");
@@ -156,6 +174,19 @@ public final class Lang {
         put("trail.witch", "Magia", "Magic");
         put("pet.crystal", "Kryształ", "Crystal");
         put("emote.wave", "Machanie", "Wave");
+        put("emote.highfive", "Przybij piątkę", "High five");
+        put("emote.hug", "Przytulas", "Hug");
+        put("emote.duodance", "Taniec w parze", "Duo dance");
+        put("setting.duoKey", "Przyjmij emotkę we dwoje", "Accept duo emote");
+        put("duo.sent", "Zaproszenie wysłane do {name} – czeka na przyjęcie.", "Invite sent to {name} – waiting for them to accept.");
+        put("duo.invited", "{name} zaprasza Cię: {emote}", "{name} invites you: {emote}");
+        put("duo.press", "Wciśnij [{key}], żeby przyjąć", "Press [{key}] to accept");
+        put("duo.noTarget", "Stań obok gracza (do 4 kratek) i spójrz na niego.", "Stand next to a player (up to 4 blocks) and look at them.");
+        put("duo.notGruz", "{name} nie używa Gruz Client – emotki we dwoje działają tylko między graczami Gruz.", "{name} isn't using Gruz Client – duo emotes only work between Gruz players.");
+        put("duo.offline", "Brak połączenia z serwerem Gruz.", "Not connected to the Gruz server.");
+        put("net.err.DUO_LOCKED", "Tej emotki jeszcze nie masz – kod kupisz na gruzclient.com/cosmetics.", "You don't own this emote yet – get a code at gruzclient.com/cosmetics.");
+        put("net.err.DUO_FAR", "Ten gracz nie jest z Tobą na tym samym serwerze.", "That player isn't on the same server as you.");
+        put("net.err.DUO_EXPIRED", "Zaproszenie wygasło.", "The invite expired.");
         put("emote.cheer", "Hura!", "Cheer");
         put("emote.clap", "Brawa", "Clap");
         put("emote.dance", "Taniec", "Dance");
@@ -163,7 +194,7 @@ public final class Lang {
         put("emote.facepalm", "Facepalm", "Facepalm");
         put("emote.bow", "Ukłon", "Bow");
         put("emote.point", "Wskaż", "Point");
-        put("emote.hint", "Najedź i puść klawisz · cyfry 1–8", "Hover and release · keys 1–8");
+        put("emote.hint", "Najedź i puść klawisz · cyfry 1–9 · ♥ = we dwoje (spójrz na gracza obok)", "Hover and release · keys 1–9 · ♥ = duo (look at a player next to you)");
         put("mods.cat.pvp", "PvP", "PvP");
         put("mods.open", "Otwórz", "Open");
         put("common.cancel", "Anuluj", "Cancel");

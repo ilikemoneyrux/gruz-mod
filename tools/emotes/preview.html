@@ -1,0 +1,72 @@
+<!doctype html>
+<html><head><meta charset="utf-8"><title>Gruz – podgląd emotek z zginaniem</title>
+<style>body{margin:0;background:#15111c;color:#ddd;font:14px sans-serif}#ui{position:fixed;top:8px;left:8px}button{margin:2px;padding:6px 10px}</style></head>
+<body><div id="ui"></div><canvas id="c" width="600" height="600"></canvas>
+<script src="https://unpkg.com/three@0.149.0/build/three.min.js"></script>
+<script src="emotes.js"></script>
+<script>
+// Uproszczona postać z klocków (jak model gracza), z łokciami, kolanami i zgięciem tułowia –
+// te same zasady co w Player Animation Library: tułów obraca całą postać wokół bioder,
+// zgięcie tułowia pochyla górną połowę razem z głową i rękami. Model MC: y w dół → three: (x, -y, -z).
+const D = Math.PI / 180;
+const r = new THREE.WebGLRenderer({ canvas: document.getElementById('c'), antialias: true, preserveDrawingBuffer: true });
+r.setClearColor(0x1a1424);
+const scene = new THREE.Scene();
+const cam = new THREE.PerspectiveCamera(35, 1, 1, 500);
+scene.add(new THREE.HemisphereLight(0xffffff, 0x443355, 1.1));
+const sun = new THREE.DirectionalLight(0xffffff, 0.6); sun.position.set(20, 40, 30); scene.add(sun);
+const mat = (col) => new THREE.MeshLambertMaterial({ color: col });
+const SKIN = mat(0xe2b08c), HOOD = mat(0x3a2860), HOOD2 = mat(0x5a3a90), JEANS = mat(0x2a3048), SHOE = mat(0x1a161e), HAIR = mat(0x3a2418);
+function box(w, h, d, m, y) { const g = new THREE.Mesh(new THREE.BoxGeometry(w, h, d), m); g.position.y = y; return g; }
+const G = () => new THREE.Group();
+// three: stopy na y=0, biodra y=12, szyja y=24
+const world = G(); scene.add(world);
+const torso = G(); torso.position.set(0, 12, 0); world.add(torso);        // obrót całej postaci wokół bioder
+const lower = G(); torso.add(lower); lower.add(box(8, 6, 4, HOOD, 3));      // dolna połowa tułowia (biodra → pas)
+const upper = G(); upper.position.y = 6; torso.add(upper); upper.add(box(8, 6, 4, HOOD2, 3)); // górna, zgina się w pasie
+const head = G(); head.position.y = 12; upper.add(head);
+head.add(box(8, 8, 8, SKIN, 4)); head.add(box(8.4, 2.2, 8.4, HAIR, 7.2));
+const eye = box(1.4, 1, 0.3, mat(0x5b3fa0), 3.6); eye.position.set(-1.8, 3.6, 4.1); head.add(eye); const eye2 = eye.clone(); eye2.position.x = 1.8; head.add(eye2);
+function limb(x, y, parent, upMat, lowMat, endMat, len = 12) {
+  const top = G(); top.position.set(x, y, 0); parent.add(top);
+  top.add(box(4, len / 2, 4, upMat, -len / 4));
+  const low = G(); low.position.y = -len / 2; top.add(low);
+  low.add(box(3.9, len / 2, 3.9, lowMat, -len / 4)); low.add(box(4.05, 1.5, 4.05, endMat, -len / 2 + 0.75));
+  return { top, low };
+}
+// ręce: bark 2 px pod szyją (MC y=2), łokieć w połowie ręki
+const rArm = limb(-6, 10, upper, HOOD2, HOOD, SKIN);
+const lArm = limb(6, 10, upper, HOOD2, HOOD, SKIN);
+// MC: ręka zaczyna się 2 px nad barkiem – przesuwamy klocki
+for (const a of [rArm, lArm]) { a.top.children[0].position.y += 2; a.low.position.y += 2; }
+const rLeg = limb(-2, 0, torso, JEANS, JEANS, SHOE);
+const lLeg = limb(2, 0, torso, JEANS, JEANS, SHOE);
+for (const g of [torso, head, rArm.top, lArm.top, rLeg.top, lLeg.top]) g.rotation.order = 'ZYX';
+
+function apply(p) {
+  const rot = (g, a) => { a = a || {}; g.rotation.set((a.pitch || 0) * D, -(a.yaw || 0) * D, -(a.roll || 0) * D); };
+  rot(torso, p.torso); upper.rotation.x = ((p.torso || {}).bend || 0) * D;
+  rot(head, p.head);
+  for (const [name, l] of [['rightArm', rArm], ['leftArm', lArm], ['rightLeg', rLeg], ['leftLeg', lLeg]]) {
+    rot(l.top, p[name]); l.low.rotation.x = ((p[name] || {}).bend || 0) * D;
+  }
+}
+let cur = 'wave', t0 = performance.now(), fixedT = null, yaw = 0.6;
+function place() { cam.position.set(Math.sin(yaw) * 82, 24, Math.cos(yaw) * 82); cam.lookAt(0, 17, 0); }
+function frame(t) {
+  const e = GruzEmotes.EMOTES[cur];
+  const b = GruzEmotes.BEGIN / 20, end = e.dur - GruzEmotes.OUT / 20;
+  const tt = Math.max(b, Math.min(end, t));
+  const p = e.pose(tt, e.dur);
+  // wejście/wyjście jak w bibliotece: mieszanie z pozą neutralną
+  const k = t < b ? t / b : t > end ? Math.max(0, (e.dur - t) / (e.dur - end)) : 1;
+  const sk = k * k * (3 - 2 * k);
+  for (const part of Object.values(p)) for (const a of Object.keys(part)) part[a] *= sk;
+  apply(p);
+}
+function loop() { const e = GruzEmotes.EMOTES[cur]; const t = fixedT ?? ((performance.now() - t0) / 1000) % (e.dur + 0.5); frame(t); place(); r.render(scene, cam); requestAnimationFrame(loop); }
+loop();
+window.play = (id) => { cur = id; t0 = performance.now(); fixedT = null; };
+window.at = (id, t, y = 0.6) => { cur = id; fixedT = t; yaw = y; frame(t); place(); r.render(scene, cam); return document.getElementById('c').toDataURL('image/jpeg', 0.85); };
+document.getElementById('ui').innerHTML = Object.keys(GruzEmotes.EMOTES).map((id) => `<button onclick="play('${id}')">${id}</button>`).join('');
+</script></body></html>

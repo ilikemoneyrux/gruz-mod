@@ -14,6 +14,7 @@ import pl.gruzclient.module.Setting;
 import pl.gruzclient.network.GruzNetwork;
 import pl.gruzclient.render.GruzDraw;
 import pl.gruzclient.screen.EmoteWheelScreen;
+import pl.gruzclient.screen.WardrobeScreen;
 
 import java.util.Random;
 import net.minecraft.client.CameraType;
@@ -46,9 +47,15 @@ public class CosmeticsModule extends Module {
     public final Setting.Bool showOthers = add(new Setting.Bool("others", "setting.showOthers", true));
     public final Setting.Key emoteKey = add(new Setting.Key("emoteKey", "setting.emoteKey", GLFW.GLFW_KEY_B));
     public final Setting.Bool emoteCamera = add(new Setting.Bool("emoteCam", "setting.emoteCamera", true));
+    /** Szafa w grze (WardrobeScreen) */
+    public final Setting.Key wardrobeKey = add(new Setting.Key("wardrobeKey", "setting.wardrobeKey", GLFW.GLFW_KEY_O));
+    /** Przyjęcie zaproszenia do emotki we dwoje */
+    public final Setting.Key duoKey = add(new Setting.Key("duoKey", "setting.duoKey", GLFW.GLFW_KEY_Y));
 
     private final Random random = new Random();
-    private boolean wasDown;
+    private boolean wasDown, wasWardrobe;
+    /** przymierzanie w Szafie w grze: slot + wartość widoczne tylko u Ciebie */
+    private String previewSlot, previewValue;
     private CameraType beforeEmote;
     private CosmeticSet cached;
     private String cachedKey = "";
@@ -85,14 +92,30 @@ public class CosmeticsModule extends Module {
             cachedKey = key;
             GruzNetwork.publishCosmetics(cached);
         }
+        if (previewSlot != null) return withSlot(cached, previewSlot, previewValue); // przymierzanie – bez wysyłania innym
         return cached;
+    }
+
+    /** Przymierzanie zablokowanej rzeczy w Szafie w grze (null = koniec) */
+    public void preview(String slot, String value) { previewSlot = slot; previewValue = value; }
+
+    /** Zapis wyboru z Szafy w grze */
+    public void saveChoice() { cached = null; pl.gruzclient.config.GruzConfig.save(); }
+
+    private static CosmeticSet withSlot(CosmeticSet s, String slot, String v) {
+        return new CosmeticSet("cape".equals(slot) ? v : s.cape(), "head".equals(slot) ? v : s.head(), "wings".equals(slot) ? v : s.wings(),
+                "back".equals(slot) ? v : s.back(), "trail".equals(slot) ? v : s.trail(), "pet".equals(slot) ? v : s.pet(),
+                "name".equals(slot) ? v : s.name(), s.color());
     }
 
     // ---------------- emotki ----------------
 
     public void playEmote(Emote e) {
         if (mc.player == null) return;
-        Cosmetics.EMOTES.put(mc.player.getUUID(), new Emote.Playing(e, System.currentTimeMillis()));
+        if (e.duo) { pl.gruzclient.cosmetics.Duo.invite(e); return; } // we dwoje: najpierw zaproszenie
+        Emote.Playing play = new Emote.Playing(e, System.currentTimeMillis());
+        Cosmetics.EMOTES.put(mc.player.getUUID(), play);
+        pl.gruzclient.cosmetics.EmoteAnim.start(mc.player.getUUID(), play);
         if (emoteCamera.value && beforeEmote == null) {
             beforeEmote = mc.options.getCameraType();
             mc.options.setCameraType(CameraType.THIRD_PERSON_FRONT);
@@ -100,8 +123,19 @@ public class CosmeticsModule extends Module {
         GruzNetwork.publishEmote(e);
     }
 
+    /** Emotka we dwoje wystartowała (z serwera) – kamera z przodu jak przy zwykłej emotce */
+    public void emoteStarted() {
+        if (emoteCamera.value && beforeEmote == null && mc.player != null) {
+            beforeEmote = mc.options.getCameraType();
+            mc.options.setCameraType(CameraType.THIRD_PERSON_FRONT);
+        }
+    }
+
     private void endEmote() {
-        if (mc.player != null) Cosmetics.EMOTES.remove(mc.player.getUUID());
+        if (mc.player != null) {
+            Cosmetics.EMOTES.remove(mc.player.getUUID());
+            pl.gruzclient.cosmetics.EmoteAnim.stop(mc.player.getUUID());
+        }
         if (beforeEmote != null) {
             mc.options.setCameraType(beforeEmote);
             beforeEmote = null;
@@ -117,6 +151,11 @@ public class CosmeticsModule extends Module {
         boolean down = Modules.keyDown(emoteKey.code);
         if (down && !wasDown) mc.setScreen(new EmoteWheelScreen(this));
         wasDown = down;
+        // klawisz Szafy (domyślnie O) – przebieranie w grze
+        boolean wd = mc.screen == null && Modules.keyDown(wardrobeKey.code);
+        if (wd && !wasWardrobe) mc.setScreen(new WardrobeScreen(this));
+        wasWardrobe = wd;
+        pl.gruzclient.cosmetics.Duo.tick(this);
 
         // emotka kończy się po czasie albo gdy zaczniesz iść
         Emote.Playing mine = Cosmetics.EMOTES.get(mc.player.getUUID());
@@ -124,7 +163,11 @@ public class CosmeticsModule extends Module {
             boolean moving = Compat.moving(mc.player);
             if (mine.finished() || (moving && mine.progress() > 0.1f)) endEmote();
         }
-        Cosmetics.EMOTES.entrySet().removeIf(en -> en.getValue().finished() && !en.getKey().equals(mc.player.getUUID()));
+        Cosmetics.EMOTES.entrySet().removeIf(en -> {
+            boolean done = en.getValue().finished() && !en.getKey().equals(mc.player.getUUID());
+            if (done) pl.gruzclient.cosmetics.EmoteAnim.forget(en.getKey());
+            return done;
+        });
 
         // ślady cząsteczek: Twoje i innych graczy Gruz w pobliżu
         if (mc.level != null) {

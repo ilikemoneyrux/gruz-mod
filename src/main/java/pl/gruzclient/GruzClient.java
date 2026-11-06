@@ -21,6 +21,7 @@ public class GruzClient implements ClientModInitializer {
     public void onInitializeClient() {
         GruzConfig.load();
         Modules.load();
+        pl.gruzclient.cosmetics.EmoteAnim.init(); // emotki z zginaniem (Player Animation Library, jeśli jest)
         LOG.info("Gruz Client {} wczytany, moduły: {}", version(), Modules.ALL.size());
     }
 }

@@ -36,7 +36,7 @@ public class EmoteWheelScreen extends pl.gruzclient.compat.GruzScreen {
         this.renderBackground(c, mouseX, mouseY, delta);
         float r = outExpo(clamp01((System.currentTimeMillis() - openedAt) / 260f));
         int cx = this.width / 2, cy = this.height / 2;
-        float radius = 70 * (0.85f + 0.15f * r);
+        float radius = (70 + Math.max(0, emotes.length - 8) * 9) * (0.85f + 0.15f * r);
         double ang = Math.atan2(mouseY - cy, mouseX - cx);
         double dist = Math.hypot(mouseX - cx, mouseY - cy);
         int n = emotes.length;
@@ -47,10 +47,10 @@ public class EmoteWheelScreen extends pl.gruzclient.compat.GruzScreen {
             double a = -Math.PI / 2 + i * Math.PI * 2 / n;
             int x = cx + (int) (Math.cos(a) * radius), y = cy + (int) (Math.sin(a) * radius);
             boolean hov = i == hovered;
-            int w = 64, h = 22;
+            int w = emotes[i].duo ? 84 : 64, h = 22;
             c.fill(x - w / 2, y - h / 2, x + w / 2, y + h / 2, argb(r * (hov ? 0.95f : 0.75f), hov ? 0x22143A : SLAB));
             c.renderOutline(x - w / 2, y - h / 2, w, h, argb(r, hov ? NEON : SEAM));
-            String label = Lang.t("emote." + emotes[i].id);
+            String label = (emotes[i].duo ? "♥ " : "") + Lang.t("emote." + emotes[i].id);
             if (textVisible(r)) c.drawString(this.font, label, x - this.font.width(label) / 2, y - 4, argb(r, hov ? NEON_HOT : TEXT), false);
         }
         // środek

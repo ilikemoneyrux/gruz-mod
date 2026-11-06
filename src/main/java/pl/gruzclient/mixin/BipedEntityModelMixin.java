@@ -21,6 +21,7 @@ public abstract class BipedEntityModelMixin {
         if (level == null || !(level.getEntity(ps.id) instanceof Player entity)) return;
         Emote.Playing play = Cosmetics.EMOTES.get(entity.getUUID());
         if (play == null || play.finished()) return;
+        if (pl.gruzclient.cosmetics.EmoteAnim.handled(entity.getUUID(), play)) return; // gra biblioteka animacji (zginanie)
         play.emote().apply((HumanoidModel<?>) (Object) this, play);
     }
 }
@@ -31,6 +32,7 @@ public abstract class BipedEntityModelMixin<T extends LivingEntity> {
         if (!(entity instanceof Player)) return;
         Emote.Playing play = Cosmetics.EMOTES.get(entity.getUUID());
         if (play == null || play.finished()) return;
+        if (pl.gruzclient.cosmetics.EmoteAnim.handled(entity.getUUID(), play)) return; // gra biblioteka animacji (zginanie)
         play.emote().apply((HumanoidModel<?>) (Object) this, play);
     }
 }

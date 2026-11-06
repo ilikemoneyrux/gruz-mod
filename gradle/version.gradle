@@ -26,6 +26,11 @@ version = "${rootProject.property('mod_version')}+${mc}"
 group = 'pl.gruzclient'
 base { archivesName = 'gruzclient' }
 
+repositories {
+    // Player Animation Library (emotki z zginaniem) – z Modrinth, tylko do kompilacji
+    maven { url = 'https://api.modrinth.com/maven'; content { includeGroup 'maven.modrinth' } }
+}
+
 dependencies {
     minecraft "com.mojang:minecraft:${mc}"
     if (obf) {
@@ -33,6 +38,11 @@ dependencies {
         modImplementation "net.fabricmc:fabric-loader:${rootProject.property('loader_version')}"
     } else {
         implementation "net.fabricmc:fabric-loader:${rootProject.property('loader_version')}"
+    }
+    // versions/<mc>/gradle.properties: pal_version=<id wersji na Modrinth> – emotki z zginaniem (EmoteAnimPal)
+    if (project.hasProperty('pal_version')) {
+        def pal = "maven.modrinth:player-animation-library:${project.property('pal_version')}"
+        if (obf) modCompileOnly(pal) { transitive = false } else compileOnly(pal) { transitive = false }
     }
 }
 

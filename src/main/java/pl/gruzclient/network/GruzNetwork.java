@@ -129,6 +129,22 @@ public final class GruzNetwork {
         send(o);
     }
 
+    /** Emotka we dwoje: zaproszenie dla gracza obok i przyjęcie (Duo.java) */
+    public static void sendDuoInvite(UUID to, String emote) {
+        if (!connected()) return;
+        JsonObject o = msg("duo.invite");
+        o.addProperty("to", to.toString());
+        o.addProperty("emote", emote);
+        send(o);
+    }
+
+    public static void sendDuoAccept(UUID from) {
+        if (!connected()) return;
+        JsonObject o = msg("duo.accept");
+        o.addProperty("from", from.toString());
+        send(o);
+    }
+
     public static void publishEmote(Emote e) {
         if (!connected()) return;
         JsonObject o = msg("emote");
@@ -225,8 +241,16 @@ public final class GruzNetwork {
             }
             case "emote" -> {
                 Emote e = Emote.byId(m.get("id").getAsString());
-                if (e != null) Cosmetics.EMOTES.put(UUID.fromString(m.get("uuid").getAsString()), new Emote.Playing(e, System.currentTimeMillis()));
+                if (e != null) {
+                    UUID who = UUID.fromString(m.get("uuid").getAsString());
+                    Emote.Playing play = new Emote.Playing(e, System.currentTimeMillis());
+                    Cosmetics.EMOTES.put(who, play);
+                    // zginanie przez bibliotekę animacji – na wątku gry
+                    net.minecraft.client.Minecraft.getInstance().execute(() -> pl.gruzclient.cosmetics.EmoteAnim.start(who, play));
+                }
             }
+            case "duo.invite" -> pl.gruzclient.cosmetics.Duo.onInvite(UUID.fromString(str(m, "from")), str(m, "name"), str(m, "emote"));
+            case "duo.start" -> pl.gruzclient.cosmetics.Duo.onStart(UUID.fromString(str(m, "a")), UUID.fromString(str(m, "b")), str(m, "emote"));
             case "friends" -> {
                 friendNames.clear();
                 for (var el : m.getAsJsonArray("friends")) {

@@ -25,6 +25,8 @@ public final class CapeTextures {
     private static final int SCALE = 4;
 
     public static ResourceLocation id(String style, int color) {
+        // własne peleryny z panelu admina – obrazek z serwera Gruz
+        if (CustomCapes.isId(style)) return CustomCapes.id(style);
         // peleryny HD to gotowe obrazki 1024x512 z zasobów moda
         if (CosmeticSet.HD_CAPES.contains(style)) return Compat.id(GruzClient.MOD_ID, "textures/cape/" + style + ".png");
         String key = style + "_" + Integer.toHexString(color & 0xFFFFFF);
