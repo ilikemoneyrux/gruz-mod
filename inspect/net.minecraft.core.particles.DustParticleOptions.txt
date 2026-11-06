@@ -1,0 +1,33 @@
+Compiled from "DustParticleOptions.java"
+public class net.minecraft.core.particles.DustParticleOptions extends net.minecraft.core.particles.ScalableParticleOptionsBase {
+  public static final int REDSTONE_PARTICLE_COLOR;
+    descriptor: I
+  public static final net.minecraft.core.particles.DustParticleOptions REDSTONE;
+    descriptor: Lnet/minecraft/core/particles/DustParticleOptions;
+  public static final com.mojang.serialization.MapCodec<net.minecraft.core.particles.DustParticleOptions> CODEC;
+    descriptor: Lcom/mojang/serialization/MapCodec;
+  public static final net.minecraft.network.codec.StreamCodec<net.minecraft.network.RegistryFriendlyByteBuf, net.minecraft.core.particles.DustParticleOptions> STREAM_CODEC;
+    descriptor: Lnet/minecraft/network/codec/StreamCodec;
+  private final int color;
+    descriptor: I
+  public net.minecraft.core.particles.DustParticleOptions(int, float);
+    descriptor: (IF)V
+
+  public net.minecraft.core.particles.ParticleType<net.minecraft.core.particles.DustParticleOptions> getType();
+    descriptor: ()Lnet/minecraft/core/particles/ParticleType;
+
+  public org.joml.Vector3f getColor();
+    descriptor: ()Lorg/joml/Vector3f;
+
+  private static java.lang.Integer lambda$static$2(net.minecraft.core.particles.DustParticleOptions);
+    descriptor: (Lnet/minecraft/core/particles/DustParticleOptions;)Ljava/lang/Integer;
+
+  private static com.mojang.datafixers.kinds.App lambda$static$0(com.mojang.serialization.codecs.RecordCodecBuilder$Instance);
+    descriptor: (Lcom/mojang/serialization/codecs/RecordCodecBuilder$Instance;)Lcom/mojang/datafixers/kinds/App;
+
+  private static java.lang.Integer lambda$static$1(net.minecraft.core.particles.DustParticleOptions);
+    descriptor: (Lnet/minecraft/core/particles/DustParticleOptions;)Ljava/lang/Integer;
+
+  static {};
+    descriptor: ()V
+}
