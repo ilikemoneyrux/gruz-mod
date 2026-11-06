@@ -1,0 +1,47 @@
+Compiled from "Objective.java"
+public class net.minecraft.world.scores.Objective {
+  private final net.minecraft.world.scores.Scoreboard scoreboard;
+    descriptor: Lnet/minecraft/world/scores/Scoreboard;
+  private final java.lang.String name;
+    descriptor: Ljava/lang/String;
+  private final net.minecraft.world.scores.criteria.ObjectiveCriteria criteria;
+    descriptor: Lnet/minecraft/world/scores/criteria/ObjectiveCriteria;
+  private net.minecraft.network.chat.Component displayName;
+    descriptor: Lnet/minecraft/network/chat/Component;
+  private net.minecraft.network.chat.Component formattedDisplayName;
+    descriptor: Lnet/minecraft/network/chat/Component;
+  private net.minecraft.world.scores.criteria.ObjectiveCriteria$RenderType renderType;
+    descriptor: Lnet/minecraft/world/scores/criteria/ObjectiveCriteria$RenderType;
+  public net.minecraft.world.scores.Objective(net.minecraft.world.scores.Scoreboard, java.lang.String, net.minecraft.world.scores.criteria.ObjectiveCriteria, net.minecraft.network.chat.Component, net.minecraft.world.scores.criteria.ObjectiveCriteria$RenderType);
+    descriptor: (Lnet/minecraft/world/scores/Scoreboard;Ljava/lang/String;Lnet/minecraft/world/scores/criteria/ObjectiveCriteria;Lnet/minecraft/network/chat/Component;Lnet/minecraft/world/scores/criteria/ObjectiveCriteria$RenderType;)V
+
+  public net.minecraft.world.scores.Scoreboard getScoreboard();
+    descriptor: ()Lnet/minecraft/world/scores/Scoreboard;
+
+  public java.lang.String getName();
+    descriptor: ()Ljava/lang/String;
+
+  public net.minecraft.world.scores.criteria.ObjectiveCriteria getCriteria();
+    descriptor: ()Lnet/minecraft/world/scores/criteria/ObjectiveCriteria;
+
+  public net.minecraft.network.chat.Component getDisplayName();
+    descriptor: ()Lnet/minecraft/network/chat/Component;
+
+  private net.minecraft.network.chat.Component createFormattedDisplayName();
+    descriptor: ()Lnet/minecraft/network/chat/Component;
+
+  public net.minecraft.network.chat.Component getFormattedDisplayName();
+    descriptor: ()Lnet/minecraft/network/chat/Component;
+
+  public void setDisplayName(net.minecraft.network.chat.Component);
+    descriptor: (Lnet/minecraft/network/chat/Component;)V
+
+  public net.minecraft.world.scores.criteria.ObjectiveCriteria$RenderType getRenderType();
+    descriptor: ()Lnet/minecraft/world/scores/criteria/ObjectiveCriteria$RenderType;
+
+  public void setRenderType(net.minecraft.world.scores.criteria.ObjectiveCriteria$RenderType);
+    descriptor: (Lnet/minecraft/world/scores/criteria/ObjectiveCriteria$RenderType;)V
+
+  private net.minecraft.network.chat.Style method_1119(net.minecraft.network.chat.Style);
+    descriptor: (Lnet/minecraft/network/chat/Style;)Lnet/minecraft/network/chat/Style;
+}

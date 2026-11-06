@@ -1,0 +1,34 @@
+Compiled from "PlayerFaceRenderer.java"
+public class net.minecraft.client.gui.components.PlayerFaceRenderer {
+  public static final int SKIN_HEAD_U;
+    descriptor: I
+  public static final int SKIN_HEAD_V;
+    descriptor: I
+  public static final int SKIN_HEAD_WIDTH;
+    descriptor: I
+  public static final int SKIN_HEAD_HEIGHT;
+    descriptor: I
+  public static final int SKIN_HAT_U;
+    descriptor: I
+  public static final int SKIN_HAT_V;
+    descriptor: I
+  public static final int SKIN_HAT_WIDTH;
+    descriptor: I
+  public static final int SKIN_HAT_HEIGHT;
+    descriptor: I
+  public static final int SKIN_TEX_WIDTH;
+    descriptor: I
+  public static final int SKIN_TEX_HEIGHT;
+    descriptor: I
+  public net.minecraft.client.gui.components.PlayerFaceRenderer();
+    descriptor: ()V
+
+  public static void draw(net.minecraft.client.gui.GuiGraphics, net.minecraft.resources.ResourceLocation, int, int, int);
+    descriptor: (Lnet/minecraft/client/gui/GuiGraphics;Lnet/minecraft/resources/ResourceLocation;III)V
+
+  public static void draw(net.minecraft.client.gui.GuiGraphics, net.minecraft.resources.ResourceLocation, int, int, int, boolean, boolean);
+    descriptor: (Lnet/minecraft/client/gui/GuiGraphics;Lnet/minecraft/resources/ResourceLocation;IIIZZ)V
+
+  private static void drawHat(net.minecraft.client.gui.GuiGraphics, net.minecraft.resources.ResourceLocation, int, int, int, boolean);
+    descriptor: (Lnet/minecraft/client/gui/GuiGraphics;Lnet/minecraft/resources/ResourceLocation;IIIZ)V
+}
