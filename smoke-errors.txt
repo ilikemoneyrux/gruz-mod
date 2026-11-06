@@ -1,0 +1,77 @@
+25:	- mixinextras 0.5.5
+26:[23:01:15] [main/INFO] (FabricLoader/Mixin) SpongePowered MIXIN Subsystem Version=0.8.7 Source=file:/home/runner/.gradle/caches/modules-2/files-2.1/net.fabricmc/sponge-mixin/0.17.5+mixin.0.8.7/cef8519a91129d0c21fa03bb9378f0e8ca810e5/sponge-mixin-0.17.5+mixin.0.8.7.jar Service=Knot/Fabric Env=CLIENT
+28:[23:01:18] [main/INFO] (FabricLoader/MixinExtras|Service) Initializing MixinExtras via com.llamalad7.mixinextras.service.MixinExtrasServiceImpl(version=0.5.5).
+29:[23:01:22] [Render thread/ERROR] (FabricLoader/Mixin) Mixin apply for mod gruzclient failed gruzclient.mixins.json:MinecraftClientMixin from mod gruzclient -> net.minecraft.client.Minecraft: org.spongepowered.asm.mixin.injection.throwables.InvalidInjectionException Critical injection failure: @ModifyVariable annotation on gruz$replaceTitleScreen could not find any targets matching 'setScreen' in net/minecraft/client/Minecraft. No refMap loaded. [INJECT_PREPARE_LEGACY Applicator Phase -> gruzclient.mixins.json:MinecraftClientMixin from mod gruzclient -> Prepare Legacy Injections -> localvar$zzb000$gruzclient$gruz$replaceTitleScreen(Lnet/minecraft/client/gui/screens/Screen;)Lnet/minecraft/client/gui/screens/Screen; -> Parse ->  -> Validate Targets]
+31:org.spongepowered.asm.mixin.injection.throwables.InvalidInjectionException: Critical injection failure: @ModifyVariable annotation on gruz$replaceTitleScreen could not find any targets matching 'setScreen' in net/minecraft/client/Minecraft. No refMap loaded. [INJECT_PREPARE_LEGACY Applicator Phase -> gruzclient.mixins.json:MinecraftClientMixin from mod gruzclient -> Prepare Legacy Injections -> localvar$zzb000$gruzclient$gruz$replaceTitleScreen(Lnet/minecraft/client/gui/screens/Screen;)Lnet/minecraft/client/gui/screens/Screen; -> Parse ->  -> Validate Targets]
+32:	at org.spongepowered.asm.mixin.injection.selectors.TargetSelectors.validate(TargetSelectors.java:423)
+33:	at org.spongepowered.asm.mixin.injection.struct.InjectionInfo.readAnnotation(InjectionInfo.java:364)
+34:	at org.spongepowered.asm.mixin.injection.struct.InjectionInfo.<init>(InjectionInfo.java:340)
+35:	at org.spongepowered.asm.mixin.injection.struct.InjectionInfo.<init>(InjectionInfo.java:331)
+36:	at org.spongepowered.asm.mixin.injection.struct.ModifyVariableInjectionInfo.<init>(ModifyVariableInjectionInfo.java:47)
+40:	at org.spongepowered.asm.mixin.injection.struct.InjectionInfo$InjectorEntry.create(InjectionInfo.java:196)
+41:	at org.spongepowered.asm.mixin.injection.struct.InjectionInfo.parse(InjectionInfo.java:659)
+42:	at org.spongepowered.asm.mixin.transformer.MixinTargetContext.prepareInjections(MixinTargetContext.java:1391)
+43:	at org.spongepowered.asm.mixin.transformer.MixinApplicatorStandard.prepareInjections(MixinApplicatorStandard.java:811)
+44:	at org.spongepowered.asm.mixin.transformer.MixinApplicatorStandard.lambda$runApplicatorPass$3(MixinApplicatorStandard.java:323)
+45:	at org.spongepowered.asm.mixin.transformer.MixinApplicatorStandard.processMixins(MixinApplicatorStandard.java:381)
+46:	at org.spongepowered.asm.mixin.transformer.MixinApplicatorStandard.runApplicatorPass(MixinApplicatorStandard.java:320)
+47:	at org.spongepowered.asm.mixin.transformer.MixinApplicatorStandard.apply(MixinApplicatorStandard.java:240)
+48:	at org.spongepowered.asm.mixin.transformer.TargetClassContext.apply(TargetClassContext.java:437)
+49:	at org.spongepowered.asm.mixin.transformer.TargetClassContext.applyMixins(TargetClassContext.java:418)
+50:	at org.spongepowered.asm.mixin.transformer.MixinProcessor.applyMixins(MixinProcessor.java:351)
+51:	at org.spongepowered.asm.mixin.transformer.MixinTransformer.transformClass(MixinTransformer.java:237)
+52:	at org.spongepowered.asm.mixin.transformer.MixinTransformer.transformClassBytes(MixinTransformer.java:202)
+53:	at net.fabricmc.loader.impl.launch.knot.KnotClassDelegate.getPostMixinClassByteArray(KnotClassDelegate.java:436)
+63:[23:01:23] [Render thread/ERROR] (FabricLoader/Mixin) Mixin apply for mod gruzclient failed gruzclient.mixins.json:MinecraftClientMixin from mod gruzclient -> net.minecraft.client.Minecraft: org.spongepowered.asm.mixin.injection.throwables.InvalidInjectionException Critical injection failure: @ModifyVariable annotation on gruz$replaceTitleScreen could not find any targets matching 'setScreen' in net/minecraft/client/Minecraft. No refMap loaded. [INJECT_PREPARE_LEGACY Applicator Phase -> gruzclient.mixins.json:MinecraftClientMixin from mod gruzclient -> Prepare Legacy Injections -> localvar$zzb000$gruzclient$gruz$replaceTitleScreen(Lnet/minecraft/client/gui/screens/Screen;)Lnet/minecraft/client/gui/screens/Screen; -> Parse ->  -> Validate Targets]
+65:org.spongepowered.asm.mixin.injection.throwables.InvalidInjectionException: Critical injection failure: @ModifyVariable annotation on gruz$replaceTitleScreen could not find any targets matching 'setScreen' in net/minecraft/client/Minecraft. No refMap loaded. [INJECT_PREPARE_LEGACY Applicator Phase -> gruzclient.mixins.json:MinecraftClientMixin from mod gruzclient -> Prepare Legacy Injections -> localvar$zzb000$gruzclient$gruz$replaceTitleScreen(Lnet/minecraft/client/gui/screens/Screen;)Lnet/minecraft/client/gui/screens/Screen; -> Parse ->  -> Validate Targets]
+66:	at org.spongepowered.asm.mixin.injection.selectors.TargetSelectors.validate(TargetSelectors.java:423)
+67:	at org.spongepowered.asm.mixin.injection.struct.InjectionInfo.readAnnotation(InjectionInfo.java:364)
+68:	at org.spongepowered.asm.mixin.injection.struct.InjectionInfo.<init>(InjectionInfo.java:340)
+69:	at org.spongepowered.asm.mixin.injection.struct.InjectionInfo.<init>(InjectionInfo.java:331)
+70:	at org.spongepowered.asm.mixin.injection.struct.ModifyVariableInjectionInfo.<init>(ModifyVariableInjectionInfo.java:47)
+74:	at org.spongepowered.asm.mixin.injection.struct.InjectionInfo$InjectorEntry.create(InjectionInfo.java:196)
+75:	at org.spongepowered.asm.mixin.injection.struct.InjectionInfo.parse(InjectionInfo.java:659)
+76:	at org.spongepowered.asm.mixin.transformer.MixinTargetContext.prepareInjections(MixinTargetContext.java:1391)
+77:	at org.spongepowered.asm.mixin.transformer.MixinApplicatorStandard.prepareInjections(MixinApplicatorStandard.java:811)
+78:	at org.spongepowered.asm.mixin.transformer.MixinApplicatorStandard.lambda$runApplicatorPass$3(MixinApplicatorStandard.java:323)
+79:	at org.spongepowered.asm.mixin.transformer.MixinApplicatorStandard.processMixins(MixinApplicatorStandard.java:381)
+80:	at org.spongepowered.asm.mixin.transformer.MixinApplicatorStandard.runApplicatorPass(MixinApplicatorStandard.java:320)
+81:	at org.spongepowered.asm.mixin.transformer.MixinApplicatorStandard.apply(MixinApplicatorStandard.java:240)
+82:	at org.spongepowered.asm.mixin.transformer.TargetClassContext.apply(TargetClassContext.java:437)
+83:	at org.spongepowered.asm.mixin.transformer.TargetClassContext.applyMixins(TargetClassContext.java:418)
+84:	at org.spongepowered.asm.mixin.transformer.MixinProcessor.applyMixins(MixinProcessor.java:351)
+85:	at org.spongepowered.asm.mixin.transformer.MixinTransformer.transformClass(MixinTransformer.java:237)
+86:	at org.spongepowered.asm.mixin.transformer.MixinTransformer.transformClassBytes(MixinTransformer.java:202)
+87:	at net.fabricmc.loader.impl.launch.knot.KnotClassDelegate.getPostMixinClassByteArray(KnotClassDelegate.java:436)
+97:[23:01:23] [Render thread/ERROR] (FabricLoader) Minecraft has crashed!
+99:net.fabricmc.loader.impl.FormattedException: java.lang.RuntimeException: Mixin transformation of net.minecraft.client.Minecraft failed
+100:	at net.fabricmc.loader.impl.FormattedException.ofLocalized(FormattedException.java:63)
+105:Caused by: java.lang.RuntimeException: Mixin transformation of net.minecraft.client.Minecraft failed
+106:	at net.fabricmc.loader.impl.launch.knot.KnotClassDelegate.getPostMixinClassByteArray(KnotClassDelegate.java:441)
+114:Caused by: org.spongepowered.asm.mixin.transformer.throwables.MixinTransformerError: An unexpected critical error was encountered
+115:	at org.spongepowered.asm.mixin.transformer.MixinProcessor.applyMixins(MixinProcessor.java:380)
+116:	at org.spongepowered.asm.mixin.transformer.MixinTransformer.transformClass(MixinTransformer.java:237)
+117:	at org.spongepowered.asm.mixin.transformer.MixinTransformer.transformClassBytes(MixinTransformer.java:202)
+118:	at net.fabricmc.loader.impl.launch.knot.KnotClassDelegate.getPostMixinClassByteArray(KnotClassDelegate.java:436)
+120:Caused by: org.spongepowered.asm.mixin.throwables.MixinApplyError: Mixin [gruzclient.mixins.json:MinecraftClientMixin from mod gruzclient] from phase [DEFAULT] in config [gruzclient.mixins.json] FAILED during APPLY
+121:	at org.spongepowered.asm.mixin.transformer.MixinProcessor.handleMixinError(MixinProcessor.java:685)
+122:	at org.spongepowered.asm.mixin.transformer.MixinProcessor.handleMixinApplyError(MixinProcessor.java:636)
+123:	at org.spongepowered.asm.mixin.transformer.MixinProcessor.applyMixins(MixinProcessor.java:367)
+125:Caused by: org.spongepowered.asm.mixin.injection.throwables.InvalidInjectionException: Critical injection failure: @ModifyVariable annotation on gruz$replaceTitleScreen could not find any targets matching 'setScreen' in net/minecraft/client/Minecraft. No refMap loaded. [INJECT_PREPARE_LEGACY Applicator Phase -> gruzclient.mixins.json:MinecraftClientMixin from mod gruzclient -> Prepare Legacy Injections -> localvar$zzb000$gruzclient$gruz$replaceTitleScreen(Lnet/minecraft/client/gui/screens/Screen;)Lnet/minecraft/client/gui/screens/Screen; -> Parse ->  -> Validate Targets]
+126:	at org.spongepowered.asm.mixin.injection.selectors.TargetSelectors.validate(TargetSelectors.java:423)
+127:	at org.spongepowered.asm.mixin.injection.struct.InjectionInfo.readAnnotation(InjectionInfo.java:364)
+128:	at org.spongepowered.asm.mixin.injection.struct.InjectionInfo.<init>(InjectionInfo.java:340)
+129:	at org.spongepowered.asm.mixin.injection.struct.InjectionInfo.<init>(InjectionInfo.java:331)
+130:	at org.spongepowered.asm.mixin.injection.struct.ModifyVariableInjectionInfo.<init>(ModifyVariableInjectionInfo.java:47)
+134:	at org.spongepowered.asm.mixin.injection.struct.InjectionInfo$InjectorEntry.create(InjectionInfo.java:196)
+135:	at org.spongepowered.asm.mixin.injection.struct.InjectionInfo.parse(InjectionInfo.java:659)
+136:	at org.spongepowered.asm.mixin.transformer.MixinTargetContext.prepareInjections(MixinTargetContext.java:1391)
+137:	at org.spongepowered.asm.mixin.transformer.MixinApplicatorStandard.prepareInjections(MixinApplicatorStandard.java:811)
+138:	at org.spongepowered.asm.mixin.transformer.MixinApplicatorStandard.lambda$runApplicatorPass$3(MixinApplicatorStandard.java:323)
+139:	at org.spongepowered.asm.mixin.transformer.MixinApplicatorStandard.processMixins(MixinApplicatorStandard.java:381)
+140:	at org.spongepowered.asm.mixin.transformer.MixinApplicatorStandard.runApplicatorPass(MixinApplicatorStandard.java:320)
+141:	at org.spongepowered.asm.mixin.transformer.MixinApplicatorStandard.apply(MixinApplicatorStandard.java:240)
+142:	at org.spongepowered.asm.mixin.transformer.TargetClassContext.apply(TargetClassContext.java:437)
+143:	at org.spongepowered.asm.mixin.transformer.TargetClassContext.applyMixins(TargetClassContext.java:418)
+144:	at org.spongepowered.asm.mixin.transformer.MixinProcessor.applyMixins(MixinProcessor.java:351)
+149:FAILURE: Build failed with an exception.
