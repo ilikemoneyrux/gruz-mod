@@ -1,0 +1,56 @@
+Compiled from "EntityRenderer.java"
+public abstract class net.minecraft.client.renderer.entity.EntityRenderer<T extends net.minecraft.world.entity.Entity> {
+  protected static final float NAMETAG_SCALE;
+    descriptor: F
+  public static final int LEASH_RENDER_STEPS;
+    descriptor: I
+  protected final net.minecraft.client.renderer.entity.EntityRenderDispatcher entityRenderDispatcher;
+    descriptor: Lnet/minecraft/client/renderer/entity/EntityRenderDispatcher;
+  private final net.minecraft.client.gui.Font font;
+    descriptor: Lnet/minecraft/client/gui/Font;
+  protected float shadowRadius;
+    descriptor: F
+  protected float shadowStrength;
+    descriptor: F
+  protected net.minecraft.client.renderer.entity.EntityRenderer(net.minecraft.client.renderer.entity.EntityRendererProvider$Context);
+    descriptor: (Lnet/minecraft/client/renderer/entity/EntityRendererProvider$Context;)V
+
+  public final int getPackedLightCoords(T, float);
+    descriptor: (Lnet/minecraft/world/entity/Entity;F)I
+
+  protected int getSkyLightLevel(T, net.minecraft.core.BlockPos);
+    descriptor: (Lnet/minecraft/world/entity/Entity;Lnet/minecraft/core/BlockPos;)I
+
+  protected int getBlockLightLevel(T, net.minecraft.core.BlockPos);
+    descriptor: (Lnet/minecraft/world/entity/Entity;Lnet/minecraft/core/BlockPos;)I
+
+  public boolean shouldRender(T, net.minecraft.client.renderer.culling.Frustum, double, double, double);
+    descriptor: (Lnet/minecraft/world/entity/Entity;Lnet/minecraft/client/renderer/culling/Frustum;DDD)Z
+
+  public net.minecraft.world.phys.Vec3 getRenderOffset(T, float);
+    descriptor: (Lnet/minecraft/world/entity/Entity;F)Lnet/minecraft/world/phys/Vec3;
+
+  public void render(T, float, float, com.mojang.blaze3d.vertex.PoseStack, net.minecraft.client.renderer.MultiBufferSource, int);
+    descriptor: (Lnet/minecraft/world/entity/Entity;FFLcom/mojang/blaze3d/vertex/PoseStack;Lnet/minecraft/client/renderer/MultiBufferSource;I)V
+
+  private <E extends net.minecraft.world.entity.Entity> void renderLeash(T, float, com.mojang.blaze3d.vertex.PoseStack, net.minecraft.client.renderer.MultiBufferSource, E);
+    descriptor: (Lnet/minecraft/world/entity/Entity;FLcom/mojang/blaze3d/vertex/PoseStack;Lnet/minecraft/client/renderer/MultiBufferSource;Lnet/minecraft/world/entity/Entity;)V
+
+  private static void addVertexPair(com.mojang.blaze3d.vertex.VertexConsumer, org.joml.Matrix4f, float, float, float, int, int, int, int, float, float, float, float, int, boolean);
+    descriptor: (Lcom/mojang/blaze3d/vertex/VertexConsumer;Lorg/joml/Matrix4f;FFFIIIIFFFFIZ)V
+
+  protected boolean shouldShowName(T);
+    descriptor: (Lnet/minecraft/world/entity/Entity;)Z
+
+  public abstract net.minecraft.resources.ResourceLocation getTextureLocation(T);
+    descriptor: (Lnet/minecraft/world/entity/Entity;)Lnet/minecraft/resources/ResourceLocation;
+
+  public net.minecraft.client.gui.Font getFont();
+    descriptor: ()Lnet/minecraft/client/gui/Font;
+
+  protected void renderNameTag(T, net.minecraft.network.chat.Component, com.mojang.blaze3d.vertex.PoseStack, net.minecraft.client.renderer.MultiBufferSource, int, float);
+    descriptor: (Lnet/minecraft/world/entity/Entity;Lnet/minecraft/network/chat/Component;Lcom/mojang/blaze3d/vertex/PoseStack;Lnet/minecraft/client/renderer/MultiBufferSource;IF)V
+
+  protected float getShadowRadius(T);
+    descriptor: (Lnet/minecraft/world/entity/Entity;)F
+}
