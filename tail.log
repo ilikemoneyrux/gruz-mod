@@ -1,0 +1,1142 @@
+Downloading https://services.gradle.org/distributions/gradle-9.8.0-bin.zip
+..............10%..............20%...............30%..............40%...............50%..............60%...............70%..............80%...............90%..............100%
+
+Welcome to Gradle 9.8.0!
+
+Here are the highlights of this release:
+ - Java 27 support
+ - Maven mirror settings reuse
+ - Linked problem locations in build output
+
+For more details see https://docs.gradle.org/9.8.0/release-notes.html
+
+To honour the JVM settings for this build a single-use Daemon process will be forked. For more on this, please refer to https://docs.gradle.org/9.8.0/userguide/gradle_daemon.html#sec:disabling_the_daemon in the Gradle documentation.
+Daemon will be stopped at the end of the build 
+
+> Configure project :
+Fabric Loom: 1.19.3
+
+> Task :26.3:preprocess
+[gruz 26.3] pominięte pliki: pl/gruzclient/mixin/BackgroundRendererMixin.java, pl/gruzclient/mixin/ClientWorldPropertiesMixin.java, pl/gruzclient/mixin/HeldItemRendererMixin.java, pl/gruzclient/mixin/ItemEntityRendererMixin.java, pl/gruzclient/mixin/LightmapTextureManagerMixin.java, pl/gruzclient/mixin/WorldRendererMixin.java
+
+> Task :26.3:compileJava
+/home/runner/work/gruz-mod/gruz-mod/versions/26.3/build/pp/java/pl/gruzclient/render/WindowIcon.java:4: error: package org.lwjgl.glfw does not exist
+import org.lwjgl.glfw.GLFW;
+                     ^
+/home/runner/work/gruz-mod/gruz-mod/versions/26.3/build/pp/java/pl/gruzclient/render/WindowIcon.java:5: error: package org.lwjgl.glfw does not exist
+import org.lwjgl.glfw.GLFWImage;
+                     ^
+/home/runner/work/gruz-mod/gruz-mod/versions/26.3/build/pp/java/pl/gruzclient/mixin/ChatScreenMixin.java:9: error: package org.lwjgl.glfw does not exist
+import org.lwjgl.glfw.GLFW;
+                     ^
+/home/runner/work/gruz-mod/gruz-mod/versions/26.3/build/pp/java/pl/gruzclient/mixin/MouseMixin.java:5: error: package org.lwjgl.glfw does not exist
+import org.lwjgl.glfw.GLFW;
+                     ^
+/home/runner/work/gruz-mod/gruz-mod/versions/26.3/build/pp/java/pl/gruzclient/module/impl/ZoomModule.java:3: error: package org.lwjgl.glfw does not exist
+import org.lwjgl.glfw.GLFW;
+                     ^
+/home/runner/work/gruz-mod/gruz-mod/versions/26.3/build/pp/java/pl/gruzclient/module/impl/FreelookModule.java:4: error: package org.lwjgl.glfw does not exist
+import org.lwjgl.glfw.GLFW;
+                     ^
+/home/runner/work/gruz-mod/gruz-mod/versions/26.3/build/pp/java/pl/gruzclient/module/impl/RecordingModule.java:3: error: package org.lwjgl.glfw does not exist
+import org.lwjgl.glfw.GLFW;
+                     ^
+/home/runner/work/gruz-mod/gruz-mod/versions/26.3/build/pp/java/pl/gruzclient/module/impl/ClipModule.java:5: error: package org.lwjgl.glfw does not exist
+import org.lwjgl.glfw.GLFW;
+                     ^
+/home/runner/work/gruz-mod/gruz-mod/versions/26.3/build/pp/java/pl/gruzclient/module/impl/MenuModule.java:4: error: package org.lwjgl.glfw does not exist
+import org.lwjgl.glfw.GLFW;
+                     ^
+/home/runner/work/gruz-mod/gruz-mod/versions/26.3/build/pp/java/pl/gruzclient/module/impl/FreecamModule.java:5: error: package org.lwjgl.glfw does not exist
+import org.lwjgl.glfw.GLFW;
+                     ^
+/home/runner/work/gruz-mod/gruz-mod/versions/26.3/build/pp/java/pl/gruzclient/module/impl/MinimapModule.java:4: error: package org.lwjgl.glfw does not exist
+import org.lwjgl.glfw.GLFW;
+                     ^
+/home/runner/work/gruz-mod/gruz-mod/versions/26.3/build/pp/java/pl/gruzclient/module/impl/CosmeticsModule.java:5: error: package org.lwjgl.glfw does not exist
+import org.lwjgl.glfw.GLFW;
+                     ^
+/home/runner/work/gruz-mod/gruz-mod/versions/26.3/build/pp/java/pl/gruzclient/screen/HudEditorScreen.java:4: error: package org.lwjgl.glfw does not exist
+import org.lwjgl.glfw.GLFW;
+                     ^
+/home/runner/work/gruz-mod/gruz-mod/versions/26.3/build/pp/java/pl/gruzclient/screen/GruzModsScreen.java:4: error: package org.lwjgl.glfw does not exist
+import org.lwjgl.glfw.GLFW;
+                     ^
+/home/runner/work/gruz-mod/gruz-mod/versions/26.3/build/pp/java/pl/gruzclient/screen/TextInputScreen.java:3: error: package org.lwjgl.glfw does not exist
+import org.lwjgl.glfw.GLFW;
+                     ^
+/home/runner/work/gruz-mod/gruz-mod/versions/26.3/build/pp/java/pl/gruzclient/render/WindowIcon.java:32: error: package GLFWImage does not exist
+            GLFWImage.Buffer icons = GLFWImage.malloc(sizes.length);
+                     ^
+/home/runner/work/gruz-mod/gruz-mod/versions/26.3/build/pp/java/pl/gruzclient/render/WindowIcon.java:32: error: cannot find symbol
+            GLFWImage.Buffer icons = GLFWImage.malloc(sizes.length);
+                                     ^
+  symbol:   variable GLFWImage
+  location: class WindowIcon
+/home/runner/work/gruz-mod/gruz-mod/versions/26.3/build/pp/java/pl/gruzclient/render/WindowIcon.java:50: error: cannot find symbol
+            GLFW.glfwSetWindowIcon(handle, icons);
+            ^
+  symbol:   variable GLFW
+  location: class WindowIcon
+/home/runner/work/gruz-mod/gruz-mod/versions/26.3/build/pp/java/pl/gruzclient/mixin/ChatScreenMixin.java:61: error: cannot find symbol
+        if (keyCode == GLFW.GLFW_KEY_F && pl.gruzclient.compat.GruzScreen.ctrl()) {
+                       ^
+  symbol:   variable GLFW
+  location: class ChatScreenMixin
+/home/runner/work/gruz-mod/gruz-mod/versions/26.3/build/pp/java/pl/gruzclient/mixin/ChatScreenMixin.java:70: error: cannot find symbol
+        if (gruz$search.isVisible() && gruz$search.isFocused() && keyCode != GLFW.GLFW_KEY_ESCAPE) {
+                                                                             ^
+  symbol:   variable GLFW
+  location: class ChatScreenMixin
+/home/runner/work/gruz-mod/gruz-mod/versions/26.3/build/pp/java/pl/gruzclient/mixin/ChatScreenMixin.java:71: error: cannot find symbol
+            if (keyCode == GLFW.GLFW_KEY_ENTER || keyCode == GLFW.GLFW_KEY_KP_ENTER || keyCode == GLFW.GLFW_KEY_TAB) {
+                           ^
+  symbol:   variable GLFW
+  location: class ChatScreenMixin
+/home/runner/work/gruz-mod/gruz-mod/versions/26.3/build/pp/java/pl/gruzclient/mixin/ChatScreenMixin.java:71: error: cannot find symbol
+            if (keyCode == GLFW.GLFW_KEY_ENTER || keyCode == GLFW.GLFW_KEY_KP_ENTER || keyCode == GLFW.GLFW_KEY_TAB) {
+                                                             ^
+  symbol:   variable GLFW
+  location: class ChatScreenMixin
+/home/runner/work/gruz-mod/gruz-mod/versions/26.3/build/pp/java/pl/gruzclient/mixin/ChatScreenMixin.java:71: error: cannot find symbol
+            if (keyCode == GLFW.GLFW_KEY_ENTER || keyCode == GLFW.GLFW_KEY_KP_ENTER || keyCode == GLFW.GLFW_KEY_TAB) {
+                                                                                                  ^
+  symbol:   variable GLFW
+  location: class ChatScreenMixin
+/home/runner/work/gruz-mod/gruz-mod/versions/26.3/build/pp/java/pl/gruzclient/mixin/ChatScreenMixin.java:92: error: cannot find symbol
+        if (button != GLFW.GLFW_MOUSE_BUTTON_RIGHT || !Modules.BETTER_CHAT.copying()) return;
+                      ^
+  symbol:   variable GLFW
+  location: class ChatScreenMixin
+/home/runner/work/gruz-mod/gruz-mod/versions/26.3/build/pp/java/pl/gruzclient/mixin/MouseMixin.java:24: error: cannot find symbol
+        if (action == GLFW.GLFW_PRESS && Minecraft.getInstance().gui.screen() == null) CpsModule.click(button);
+                      ^
+  symbol:   variable GLFW
+  location: class MouseMixin
+/home/runner/work/gruz-mod/gruz-mod/versions/26.3/build/pp/java/pl/gruzclient/module/Modules.java:103: error: package org.lwjgl.glfw does not exist
+    public static int HUB_KEY = org.lwjgl.glfw.GLFW.GLFW_KEY_RIGHT_SHIFT;
+                                              ^
+/home/runner/work/gruz-mod/gruz-mod/versions/26.3/build/pp/java/pl/gruzclient/module/Modules.java:135: error: package org.lwjgl.glfw does not exist
+        if (code != org.lwjgl.glfw.GLFW.GLFW_KEY_F3 && rawDown(org.lwjgl.glfw.GLFW.GLFW_KEY_F3)) F3_COMBO.add(code);
+                                  ^
+/home/runner/work/gruz-mod/gruz-mod/versions/26.3/build/pp/java/pl/gruzclient/module/Modules.java:135: error: package org.lwjgl.glfw does not exist
+        if (code != org.lwjgl.glfw.GLFW.GLFW_KEY_F3 && rawDown(org.lwjgl.glfw.GLFW.GLFW_KEY_F3)) F3_COMBO.add(code);
+                                                                             ^
+/home/runner/work/gruz-mod/gruz-mod/versions/26.3/build/pp/java/pl/gruzclient/module/impl/ZoomModule.java:10: error: cannot find symbol
+    public final Setting.Key key = add(new Setting.Key("key", "setting.key", GLFW.GLFW_KEY_C));
+                                                                             ^
+  symbol:   variable GLFW
+  location: class ZoomModule
+/home/runner/work/gruz-mod/gruz-mod/versions/26.3/build/pp/java/pl/gruzclient/module/impl/FreelookModule.java:14: error: cannot find symbol
+    public final Setting.Key key = add(new Setting.Key("key", "setting.key", GLFW.GLFW_KEY_LEFT_ALT));
+                                                                             ^
+  symbol:   variable GLFW
+  location: class FreelookModule
+/home/runner/work/gruz-mod/gruz-mod/versions/26.3/build/pp/java/pl/gruzclient/module/impl/RecordingModule.java:13: error: cannot find symbol
+    public final Setting.Key key = add(new Setting.Key("key", "setting.key", GLFW.GLFW_KEY_F6));
+                                                                             ^
+  symbol:   variable GLFW
+  location: class RecordingModule
+/home/runner/work/gruz-mod/gruz-mod/versions/26.3/build/pp/java/pl/gruzclient/module/impl/ClipModule.java:17: error: cannot find symbol
+    public final Setting.Key key = add(new Setting.Key("key", "setting.key", GLFW.GLFW_KEY_F8));
+                                                                             ^
+  symbol:   variable GLFW
+  location: class ClipModule
+/home/runner/work/gruz-mod/gruz-mod/versions/26.3/build/pp/java/pl/gruzclient/module/impl/MenuModule.java:28: error: cannot find symbol
+    public final Setting.Key key = add(new Setting.Key("key", "setting.panoramaKey", GLFW.GLFW_KEY_F7));
+                                                                                     ^
+  symbol:   variable GLFW
+  location: class MenuModule
+/home/runner/work/gruz-mod/gruz-mod/versions/26.3/build/pp/java/pl/gruzclient/module/impl/FreecamModule.java:27: error: cannot find symbol
+    public final Setting.Key key = add(new Setting.Key("key", "setting.key", GLFW.GLFW_KEY_F4));
+                                                                             ^
+  symbol:   variable GLFW
+  location: class FreecamModule
+/home/runner/work/gruz-mod/gruz-mod/versions/26.3/build/pp/java/pl/gruzclient/module/impl/MinimapModule.java:33: error: cannot find symbol
+    public final Setting.Key mapKey = add(new Setting.Key("mapKey", "setting.mapKey", GLFW.GLFW_KEY_M));
+                                                                                      ^
+  symbol:   variable GLFW
+  location: class MinimapModule
+/home/runner/work/gruz-mod/gruz-mod/versions/26.3/build/pp/java/pl/gruzclient/module/impl/MinimapModule.java:34: error: cannot find symbol
+    public final Setting.Key addKey = add(new Setting.Key("addKey", "setting.waypointKey", GLFW.GLFW_KEY_N));
+                                                                                           ^
+  symbol:   variable GLFW
+  location: class MinimapModule
+/home/runner/work/gruz-mod/gruz-mod/versions/26.3/build/pp/java/pl/gruzclient/module/impl/CosmeticsModule.java:48: error: cannot find symbol
+    public final Setting.Key emoteKey = add(new Setting.Key("emoteKey", "setting.emoteKey", GLFW.GLFW_KEY_B));
+                                                                                            ^
+  symbol:   variable GLFW
+  location: class CosmeticsModule
+/home/runner/work/gruz-mod/gruz-mod/versions/26.3/build/pp/java/pl/gruzclient/module/impl/CosmeticsModule.java:51: error: cannot find symbol
+    public final Setting.Key wardrobeKey = add(new Setting.Key("wardrobeKey", "setting.wardrobeKey", GLFW.GLFW_KEY_O));
+                                                                                                     ^
+  symbol:   variable GLFW
+  location: class CosmeticsModule
+/home/runner/work/gruz-mod/gruz-mod/versions/26.3/build/pp/java/pl/gruzclient/module/impl/CosmeticsModule.java:53: error: cannot find symbol
+    public final Setting.Key duoKey = add(new Setting.Key("duoKey", "setting.duoKey", GLFW.GLFW_KEY_Y));
+                                                                                      ^
+  symbol:   variable GLFW
+  location: class CosmeticsModule
+/home/runner/work/gruz-mod/gruz-mod/versions/26.3/build/pp/java/pl/gruzclient/cosmetics/CosmeticsFeature.java:209: error: no suitable method found for mulPose(Quaternionf)
+            m.mulPose(Axis.YP.rotation(t * 2f));
+             ^
+    method PoseStack.mulPose(Matrix4fc) is not applicable
+      (argument mismatch; Quaternionf cannot be converted to Matrix4fc)
+    method PoseStack.mulPose(Transformation) is not applicable
+      (argument mismatch; Quaternionf cannot be converted to Transformation)
+/home/runner/work/gruz-mod/gruz-mod/versions/26.3/build/pp/java/pl/gruzclient/cosmetics/CosmeticsFeature.java:222: error: no suitable method found for mulPose(Quaternionf)
+        m.mulPose(Axis.YP.rotation(t * 0.6f));
+         ^
+    method PoseStack.mulPose(Matrix4fc) is not applicable
+      (argument mismatch; Quaternionf cannot be converted to Matrix4fc)
+    method PoseStack.mulPose(Transformation) is not applicable
+      (argument mismatch; Quaternionf cannot be converted to Transformation)
+/home/runner/work/gruz-mod/gruz-mod/versions/26.3/build/pp/java/pl/gruzclient/cosmetics/CosmeticsFeature.java:248: error: no suitable method found for mulPose(Quaternionf)
+            m.mulPose(Axis.YP.rotation((float) -a));
+             ^
+    method PoseStack.mulPose(Matrix4fc) is not applicable
+      (argument mismatch; Quaternionf cannot be converted to Matrix4fc)
+    method PoseStack.mulPose(Transformation) is not applicable
+      (argument mismatch; Quaternionf cannot be converted to Transformation)
+/home/runner/work/gruz-mod/gruz-mod/versions/26.3/build/pp/java/pl/gruzclient/cosmetics/CosmeticsFeature.java:307: error: no suitable method found for mulPose(Quaternionf)
+            m.mulPose(Axis.YP.rotationDegrees(side * (-(28f + flap))));
+             ^
+    method PoseStack.mulPose(Matrix4fc) is not applicable
+      (argument mismatch; Quaternionf cannot be converted to Matrix4fc)
+    method PoseStack.mulPose(Transformation) is not applicable
+      (argument mismatch; Quaternionf cannot be converted to Transformation)
+/home/runner/work/gruz-mod/gruz-mod/versions/26.3/build/pp/java/pl/gruzclient/cosmetics/CosmeticsFeature.java:308: error: no suitable method found for mulPose(Quaternionf)
+            m.mulPose(Axis.ZP.rotationDegrees(side * -12f));
+             ^
+    method PoseStack.mulPose(Matrix4fc) is not applicable
+      (argument mismatch; Quaternionf cannot be converted to Matrix4fc)
+    method PoseStack.mulPose(Transformation) is not applicable
+      (argument mismatch; Quaternionf cannot be converted to Transformation)
+/home/runner/work/gruz-mod/gruz-mod/versions/26.3/build/pp/java/pl/gruzclient/cosmetics/CosmeticsFeature.java:344: error: no suitable method found for mulPose(Quaternionf)
+                m.mulPose(Axis.YP.rotationDegrees(side * (-(28f + flap))));
+                 ^
+    method PoseStack.mulPose(Matrix4fc) is not applicable
+      (argument mismatch; Quaternionf cannot be converted to Matrix4fc)
+    method PoseStack.mulPose(Transformation) is not applicable
+      (argument mismatch; Quaternionf cannot be converted to Transformation)
+/home/runner/work/gruz-mod/gruz-mod/versions/26.3/build/pp/java/pl/gruzclient/cosmetics/CosmeticsFeature.java:345: error: no suitable method found for mulPose(Quaternionf)
+                m.mulPose(Axis.ZP.rotationDegrees(side * -12f));
+                 ^
+    method PoseStack.mulPose(Matrix4fc) is not applicable
+      (argument mismatch; Quaternionf cannot be converted to Matrix4fc)
+    method PoseStack.mulPose(Transformation) is not applicable
+      (argument mismatch; Quaternionf cannot be converted to Transformation)
+warning: unknown enum constant Level.FULL
+  reason: class file for com.google.j2objc.annotations.ReflectionSupport$Level not found
+/home/runner/work/gruz-mod/gruz-mod/versions/26.3/build/pp/java/pl/gruzclient/compat/GruzScreen.java:116: error: package org.lwjgl.glfw does not exist
+    public static boolean ctrl() { return key(org.lwjgl.glfw.GLFW.GLFW_KEY_LEFT_CONTROL) || key(org.lwjgl.glfw.GLFW.GLFW_KEY_RIGHT_CONTROL); }
+                                                            ^
+/home/runner/work/gruz-mod/gruz-mod/versions/26.3/build/pp/java/pl/gruzclient/compat/GruzScreen.java:116: error: package org.lwjgl.glfw does not exist
+    public static boolean ctrl() { return key(org.lwjgl.glfw.GLFW.GLFW_KEY_LEFT_CONTROL) || key(org.lwjgl.glfw.GLFW.GLFW_KEY_RIGHT_CONTROL); }
+                                                                                                              ^
+/home/runner/work/gruz-mod/gruz-mod/versions/26.3/build/pp/java/pl/gruzclient/compat/GruzScreen.java:117: error: package org.lwjgl.glfw does not exist
+    public static boolean shift() { return key(org.lwjgl.glfw.GLFW.GLFW_KEY_LEFT_SHIFT) || key(org.lwjgl.glfw.GLFW.GLFW_KEY_RIGHT_SHIFT); }
+                                                             ^
+/home/runner/work/gruz-mod/gruz-mod/versions/26.3/build/pp/java/pl/gruzclient/compat/GruzScreen.java:117: error: package org.lwjgl.glfw does not exist
+    public static boolean shift() { return key(org.lwjgl.glfw.GLFW.GLFW_KEY_LEFT_SHIFT) || key(org.lwjgl.glfw.GLFW.GLFW_KEY_RIGHT_SHIFT); }
+                                                                                                             ^
+/home/runner/work/gruz-mod/gruz-mod/versions/26.3/build/pp/java/pl/gruzclient/compat/GruzScreen.java:118: error: package org.lwjgl.glfw does not exist
+    public static boolean alt() { return key(org.lwjgl.glfw.GLFW.GLFW_KEY_LEFT_ALT) || key(org.lwjgl.glfw.GLFW.GLFW_KEY_RIGHT_ALT); }
+                                                           ^
+/home/runner/work/gruz-mod/gruz-mod/versions/26.3/build/pp/java/pl/gruzclient/compat/GruzScreen.java:118: error: package org.lwjgl.glfw does not exist
+    public static boolean alt() { return key(org.lwjgl.glfw.GLFW.GLFW_KEY_LEFT_ALT) || key(org.lwjgl.glfw.GLFW.GLFW_KEY_RIGHT_ALT); }
+                                                                                                         ^
+/home/runner/work/gruz-mod/gruz-mod/versions/26.3/build/pp/java/pl/gruzclient/compat/GruzScreen.java:121: error: package org.lwjgl.glfw does not exist
+        return org.lwjgl.glfw.GLFW.glfwGetKey(Compat.windowHandle(), code) == org.lwjgl.glfw.GLFW.GLFW_PRESS;
+                             ^
+/home/runner/work/gruz-mod/gruz-mod/versions/26.3/build/pp/java/pl/gruzclient/compat/GruzScreen.java:121: error: package org.lwjgl.glfw does not exist
+        return org.lwjgl.glfw.GLFW.glfwGetKey(Compat.windowHandle(), code) == org.lwjgl.glfw.GLFW.GLFW_PRESS;
+                                                                                            ^
+/home/runner/work/gruz-mod/gruz-mod/versions/26.3/build/pp/java/pl/gruzclient/screen/HudEditorScreen.java:367: error: cannot find symbol
+        if (hovered != null && keyCode >= GLFW.GLFW_KEY_RIGHT && keyCode <= GLFW.GLFW_KEY_UP) {
+                                          ^
+  symbol:   variable GLFW
+  location: class HudEditorScreen
+/home/runner/work/gruz-mod/gruz-mod/versions/26.3/build/pp/java/pl/gruzclient/screen/HudEditorScreen.java:367: error: cannot find symbol
+        if (hovered != null && keyCode >= GLFW.GLFW_KEY_RIGHT && keyCode <= GLFW.GLFW_KEY_UP) {
+                                                                            ^
+  symbol:   variable GLFW
+  location: class HudEditorScreen
+/home/runner/work/gruz-mod/gruz-mod/versions/26.3/build/pp/java/pl/gruzclient/screen/HudEditorScreen.java:369: error: cannot find symbol
+            int dx = keyCode == GLFW.GLFW_KEY_RIGHT ? 1 : keyCode == GLFW.GLFW_KEY_LEFT ? -1 : 0;
+                                ^
+  symbol:   variable GLFW
+  location: class HudEditorScreen
+/home/runner/work/gruz-mod/gruz-mod/versions/26.3/build/pp/java/pl/gruzclient/screen/HudEditorScreen.java:369: error: cannot find symbol
+            int dx = keyCode == GLFW.GLFW_KEY_RIGHT ? 1 : keyCode == GLFW.GLFW_KEY_LEFT ? -1 : 0;
+                                                                     ^
+  symbol:   variable GLFW
+  location: class HudEditorScreen
+/home/runner/work/gruz-mod/gruz-mod/versions/26.3/build/pp/java/pl/gruzclient/screen/HudEditorScreen.java:370: error: cannot find symbol
+            int dy = keyCode == GLFW.GLFW_KEY_DOWN ? 1 : keyCode == GLFW.GLFW_KEY_UP ? -1 : 0;
+                                ^
+  symbol:   variable GLFW
+  location: class HudEditorScreen
+/home/runner/work/gruz-mod/gruz-mod/versions/26.3/build/pp/java/pl/gruzclient/screen/HudEditorScreen.java:370: error: cannot find symbol
+            int dy = keyCode == GLFW.GLFW_KEY_DOWN ? 1 : keyCode == GLFW.GLFW_KEY_UP ? -1 : 0;
+                                                                    ^
+  symbol:   variable GLFW
+  location: class HudEditorScreen
+/home/runner/work/gruz-mod/gruz-mod/versions/26.3/build/pp/java/pl/gruzclient/screen/GruzModsScreen.java:431: error: cannot find symbol
+            if (keyCode == GLFW.GLFW_KEY_BACKSPACE || keyCode == GLFW.GLFW_KEY_DELETE) capturing.code = -1;
+                           ^
+  symbol:   variable GLFW
+  location: class GruzModsScreen
+/home/runner/work/gruz-mod/gruz-mod/versions/26.3/build/pp/java/pl/gruzclient/screen/GruzModsScreen.java:431: error: cannot find symbol
+            if (keyCode == GLFW.GLFW_KEY_BACKSPACE || keyCode == GLFW.GLFW_KEY_DELETE) capturing.code = -1;
+                                                                 ^
+  symbol:   variable GLFW
+  location: class GruzModsScreen
+/home/runner/work/gruz-mod/gruz-mod/versions/26.3/build/pp/java/pl/gruzclient/screen/GruzModsScreen.java:432: error: cannot find symbol
+            else if (keyCode != GLFW.GLFW_KEY_ESCAPE) capturing.code = keyCode;
+                                ^
+  symbol:   variable GLFW
+  location: class GruzModsScreen
+/home/runner/work/gruz-mod/gruz-mod/versions/26.3/build/pp/java/pl/gruzclient/screen/GruzModsScreen.java:437: error: cannot find symbol
+        if (keyCode == GLFW.GLFW_KEY_ESCAPE && settingsOf != null) { settingsOf = null; scroll = scrollTarget = 0; return true; }
+                       ^
+  symbol:   variable GLFW
+  location: class GruzModsScreen
+/home/runner/work/gruz-mod/gruz-mod/versions/26.3/build/pp/java/pl/gruzclient/screen/GruzModsScreen.java:439: error: cannot find symbol
+        if (!search.isFocused() && keyCode >= GLFW.GLFW_KEY_A && keyCode <= GLFW.GLFW_KEY_Z && (modifiers & GLFW.GLFW_MOD_CONTROL) == 0) {
+                                              ^
+  symbol:   variable GLFW
+  location: class GruzModsScreen
+/home/runner/work/gruz-mod/gruz-mod/versions/26.3/build/pp/java/pl/gruzclient/screen/GruzModsScreen.java:439: error: cannot find symbol
+        if (!search.isFocused() && keyCode >= GLFW.GLFW_KEY_A && keyCode <= GLFW.GLFW_KEY_Z && (modifiers & GLFW.GLFW_MOD_CONTROL) == 0) {
+                                                                            ^
+  symbol:   variable GLFW
+  location: class GruzModsScreen
+/home/runner/work/gruz-mod/gruz-mod/versions/26.3/build/pp/java/pl/gruzclient/screen/GruzModsScreen.java:439: error: cannot find symbol
+        if (!search.isFocused() && keyCode >= GLFW.GLFW_KEY_A && keyCode <= GLFW.GLFW_KEY_Z && (modifiers & GLFW.GLFW_MOD_CONTROL) == 0) {
+                                                                                                            ^
+  symbol:   variable GLFW
+  location: class GruzModsScreen
+/home/runner/work/gruz-mod/gruz-mod/versions/26.3/build/pp/java/pl/gruzclient/screen/TextInputScreen.java:54: error: cannot find symbol
+        if (keyCode == GLFW.GLFW_KEY_ENTER || keyCode == GLFW.GLFW_KEY_KP_ENTER) { save(); return true; }
+                       ^
+  symbol:   variable GLFW
+  location: class TextInputScreen
+/home/runner/work/gruz-mod/gruz-mod/versions/26.3/build/pp/java/pl/gruzclient/screen/TextInputScreen.java:54: error: cannot find symbol
+        if (keyCode == GLFW.GLFW_KEY_ENTER || keyCode == GLFW.GLFW_KEY_KP_ENTER) { save(); return true; }
+                                                         ^
+  symbol:   variable GLFW
+  location: class TextInputScreen
+69 errors
+1 warning
+
+> Task :26.3:compileJava FAILED
+
+[Incubating] Problems report is available at: file:///home/runner/work/gruz-mod/gruz-mod/build/reports/problems/problems-report.html
+
+FAILURE: Build failed with an exception.
+
+* What went wrong:
+Execution failed for task ':26.3:compileJava' (registered by plugin class 'org.gradle.api.plugins.JavaBasePlugin').
+> Compilation failed; see the compiler output below.
+  /home/runner/work/gruz-mod/gruz-mod/versions/26.3/build/pp/java/pl/gruzclient/render/WindowIcon.java:4: error: package org.lwjgl.glfw does not exist
+  import org.lwjgl.glfw.GLFW;
+                       ^
+  /home/runner/work/gruz-mod/gruz-mod/versions/26.3/build/pp/java/pl/gruzclient/render/WindowIcon.java:5: error: package org.lwjgl.glfw does not exist
+  import org.lwjgl.glfw.GLFWImage;
+                       ^
+  /home/runner/work/gruz-mod/gruz-mod/versions/26.3/build/pp/java/pl/gruzclient/mixin/ChatScreenMixin.java:9: error: package org.lwjgl.glfw does not exist
+  import org.lwjgl.glfw.GLFW;
+                       ^
+  /home/runner/work/gruz-mod/gruz-mod/versions/26.3/build/pp/java/pl/gruzclient/mixin/MouseMixin.java:5: error: package org.lwjgl.glfw does not exist
+  import org.lwjgl.glfw.GLFW;
+                       ^
+  /home/runner/work/gruz-mod/gruz-mod/versions/26.3/build/pp/java/pl/gruzclient/module/impl/ZoomModule.java:3: error: package org.lwjgl.glfw does not exist
+  import org.lwjgl.glfw.GLFW;
+                       ^
+  /home/runner/work/gruz-mod/gruz-mod/versions/26.3/build/pp/java/pl/gruzclient/module/impl/FreelookModule.java:4: error: package org.lwjgl.glfw does not exist
+  import org.lwjgl.glfw.GLFW;
+                       ^
+  /home/runner/work/gruz-mod/gruz-mod/versions/26.3/build/pp/java/pl/gruzclient/module/impl/RecordingModule.java:3: error: package org.lwjgl.glfw does not exist
+  import org.lwjgl.glfw.GLFW;
+                       ^
+  /home/runner/work/gruz-mod/gruz-mod/versions/26.3/build/pp/java/pl/gruzclient/module/impl/ClipModule.java:5: error: package org.lwjgl.glfw does not exist
+  import org.lwjgl.glfw.GLFW;
+                       ^
+  /home/runner/work/gruz-mod/gruz-mod/versions/26.3/build/pp/java/pl/gruzclient/module/impl/MenuModule.java:4: error: package org.lwjgl.glfw does not exist
+  import org.lwjgl.glfw.GLFW;
+                       ^
+  /home/runner/work/gruz-mod/gruz-mod/versions/26.3/build/pp/java/pl/gruzclient/module/impl/FreecamModule.java:5: error: package org.lwjgl.glfw does not exist
+  import org.lwjgl.glfw.GLFW;
+                       ^
+  /home/runner/work/gruz-mod/gruz-mod/versions/26.3/build/pp/java/pl/gruzclient/module/impl/MinimapModule.java:4: error: package org.lwjgl.glfw does not exist
+  import org.lwjgl.glfw.GLFW;
+                       ^
+  /home/runner/work/gruz-mod/gruz-mod/versions/26.3/build/pp/java/pl/gruzclient/module/impl/CosmeticsModule.java:5: error: package org.lwjgl.glfw does not exist
+  import org.lwjgl.glfw.GLFW;
+                       ^
+  /home/runner/work/gruz-mod/gruz-mod/versions/26.3/build/pp/java/pl/gruzclient/screen/HudEditorScreen.java:4: error: package org.lwjgl.glfw does not exist
+  import org.lwjgl.glfw.GLFW;
+                       ^
+  /home/runner/work/gruz-mod/gruz-mod/versions/26.3/build/pp/java/pl/gruzclient/screen/GruzModsScreen.java:4: error: package org.lwjgl.glfw does not exist
+  import org.lwjgl.glfw.GLFW;
+                       ^
+  /home/runner/work/gruz-mod/gruz-mod/versions/26.3/build/pp/java/pl/gruzclient/screen/TextInputScreen.java:3: error: package org.lwjgl.glfw does not exist
+  import org.lwjgl.glfw.GLFW;
+                       ^
+  /home/runner/work/gruz-mod/gruz-mod/versions/26.3/build/pp/java/pl/gruzclient/render/WindowIcon.java:32: error: package GLFWImage does not exist
+              GLFWImage.Buffer icons = GLFWImage.malloc(sizes.length);
+                       ^
+  /home/runner/work/gruz-mod/gruz-mod/versions/26.3/build/pp/java/pl/gruzclient/module/Modules.java:103: error: package org.lwjgl.glfw does not exist
+      public static int HUB_KEY = org.lwjgl.glfw.GLFW.GLFW_KEY_RIGHT_SHIFT;
+                                                ^
+  /home/runner/work/gruz-mod/gruz-mod/versions/26.3/build/pp/java/pl/gruzclient/module/Modules.java:135: error: package org.lwjgl.glfw does not exist
+          if (code != org.lwjgl.glfw.GLFW.GLFW_KEY_F3 && rawDown(org.lwjgl.glfw.GLFW.GLFW_KEY_F3)) F3_COMBO.add(code);
+                                    ^
+  /home/runner/work/gruz-mod/gruz-mod/versions/26.3/build/pp/java/pl/gruzclient/module/Modules.java:135: error: package org.lwjgl.glfw does not exist
+          if (code != org.lwjgl.glfw.GLFW.GLFW_KEY_F3 && rawDown(org.lwjgl.glfw.GLFW.GLFW_KEY_F3)) F3_COMBO.add(code);
+                                                                               ^
+  /home/runner/work/gruz-mod/gruz-mod/versions/26.3/build/pp/java/pl/gruzclient/compat/GruzScreen.java:116: error: package org.lwjgl.glfw does not exist
+      public static boolean ctrl() { return key(org.lwjgl.glfw.GLFW.GLFW_KEY_LEFT_CONTROL) || key(org.lwjgl.glfw.GLFW.GLFW_KEY_RIGHT_CONTROL); }
+                                                              ^
+  /home/runner/work/gruz-mod/gruz-mod/versions/26.3/build/pp/java/pl/gruzclient/compat/GruzScreen.java:116: error: package org.lwjgl.glfw does not exist
+      public static boolean ctrl() { return key(org.lwjgl.glfw.GLFW.GLFW_KEY_LEFT_CONTROL) || key(org.lwjgl.glfw.GLFW.GLFW_KEY_RIGHT_CONTROL); }
+                                                                                                                ^
+  /home/runner/work/gruz-mod/gruz-mod/versions/26.3/build/pp/java/pl/gruzclient/compat/GruzScreen.java:117: error: package org.lwjgl.glfw does not exist
+      public static boolean shift() { return key(org.lwjgl.glfw.GLFW.GLFW_KEY_LEFT_SHIFT) || key(org.lwjgl.glfw.GLFW.GLFW_KEY_RIGHT_SHIFT); }
+                                                               ^
+  /home/runner/work/gruz-mod/gruz-mod/versions/26.3/build/pp/java/pl/gruzclient/compat/GruzScreen.java:117: error: package org.lwjgl.glfw does not exist
+      public static boolean shift() { return key(org.lwjgl.glfw.GLFW.GLFW_KEY_LEFT_SHIFT) || key(org.lwjgl.glfw.GLFW.GLFW_KEY_RIGHT_SHIFT); }
+                                                                                                               ^
+  /home/runner/work/gruz-mod/gruz-mod/versions/26.3/build/pp/java/pl/gruzclient/compat/GruzScreen.java:118: error: package org.lwjgl.glfw does not exist
+      public static boolean alt() { return key(org.lwjgl.glfw.GLFW.GLFW_KEY_LEFT_ALT) || key(org.lwjgl.glfw.GLFW.GLFW_KEY_RIGHT_ALT); }
+                                                             ^
+  /home/runner/work/gruz-mod/gruz-mod/versions/26.3/build/pp/java/pl/gruzclient/compat/GruzScreen.java:118: error: package org.lwjgl.glfw does not exist
+      public static boolean alt() { return key(org.lwjgl.glfw.GLFW.GLFW_KEY_LEFT_ALT) || key(org.lwjgl.glfw.GLFW.GLFW_KEY_RIGHT_ALT); }
+                                                                                                           ^
+  /home/runner/work/gruz-mod/gruz-mod/versions/26.3/build/pp/java/pl/gruzclient/compat/GruzScreen.java:121: error: package org.lwjgl.glfw does not exist
+          return org.lwjgl.glfw.GLFW.glfwGetKey(Compat.windowHandle(), code) == org.lwjgl.glfw.GLFW.GLFW_PRESS;
+                               ^
+  /home/runner/work/gruz-mod/gruz-mod/versions/26.3/build/pp/java/pl/gruzclient/compat/GruzScreen.java:121: error: package org.lwjgl.glfw does not exist
+          return org.lwjgl.glfw.GLFW.glfwGetKey(Compat.windowHandle(), code) == org.lwjgl.glfw.GLFW.GLFW_PRESS;
+                                                                                              ^
+  /home/runner/work/gruz-mod/gruz-mod/versions/26.3/build/pp/java/pl/gruzclient/render/WindowIcon.java:32: error: cannot find symbol
+              GLFWImage.Buffer icons = GLFWImage.malloc(sizes.length);
+                                       ^
+    symbol:   variable GLFWImage
+    location: class WindowIcon
+  /home/runner/work/gruz-mod/gruz-mod/versions/26.3/build/pp/java/pl/gruzclient/render/WindowIcon.java:50: error: cannot find symbol
+              GLFW.glfwSetWindowIcon(handle, icons);
+              ^
+    symbol:   variable GLFW
+    location: class WindowIcon
+  /home/runner/work/gruz-mod/gruz-mod/versions/26.3/build/pp/java/pl/gruzclient/mixin/ChatScreenMixin.java:61: error: cannot find symbol
+          if (keyCode == GLFW.GLFW_KEY_F && pl.gruzclient.compat.GruzScreen.ctrl()) {
+                         ^
+    symbol:   variable GLFW
+    location: class ChatScreenMixin
+  /home/runner/work/gruz-mod/gruz-mod/versions/26.3/build/pp/java/pl/gruzclient/mixin/ChatScreenMixin.java:70: error: cannot find symbol
+          if (gruz$search.isVisible() && gruz$search.isFocused() && keyCode != GLFW.GLFW_KEY_ESCAPE) {
+                                                                               ^
+    symbol:   variable GLFW
+    location: class ChatScreenMixin
+  /home/runner/work/gruz-mod/gruz-mod/versions/26.3/build/pp/java/pl/gruzclient/mixin/ChatScreenMixin.java:71: error: cannot find symbol
+              if (keyCode == GLFW.GLFW_KEY_ENTER || keyCode == GLFW.GLFW_KEY_KP_ENTER || keyCode == GLFW.GLFW_KEY_TAB) {
+                             ^
+    symbol:   variable GLFW
+    location: class ChatScreenMixin
+  /home/runner/work/gruz-mod/gruz-mod/versions/26.3/build/pp/java/pl/gruzclient/mixin/ChatScreenMixin.java:71: error: cannot find symbol
+              if (keyCode == GLFW.GLFW_KEY_ENTER || keyCode == GLFW.GLFW_KEY_KP_ENTER || keyCode == GLFW.GLFW_KEY_TAB) {
+                                                               ^
+    symbol:   variable GLFW
+    location: class ChatScreenMixin
+  /home/runner/work/gruz-mod/gruz-mod/versions/26.3/build/pp/java/pl/gruzclient/mixin/ChatScreenMixin.java:71: error: cannot find symbol
+              if (keyCode == GLFW.GLFW_KEY_ENTER || keyCode == GLFW.GLFW_KEY_KP_ENTER || keyCode == GLFW.GLFW_KEY_TAB) {
+                                                                                                    ^
+    symbol:   variable GLFW
+    location: class ChatScreenMixin
+  /home/runner/work/gruz-mod/gruz-mod/versions/26.3/build/pp/java/pl/gruzclient/mixin/ChatScreenMixin.java:92: error: cannot find symbol
+          if (button != GLFW.GLFW_MOUSE_BUTTON_RIGHT || !Modules.BETTER_CHAT.copying()) return;
+                        ^
+    symbol:   variable GLFW
+    location: class ChatScreenMixin
+  /home/runner/work/gruz-mod/gruz-mod/versions/26.3/build/pp/java/pl/gruzclient/mixin/MouseMixin.java:24: error: cannot find symbol
+          if (action == GLFW.GLFW_PRESS && Minecraft.getInstance().gui.screen() == null) CpsModule.click(button);
+                        ^
+    symbol:   variable GLFW
+    location: class MouseMixin
+  /home/runner/work/gruz-mod/gruz-mod/versions/26.3/build/pp/java/pl/gruzclient/module/impl/ZoomModule.java:10: error: cannot find symbol
+      public final Setting.Key key = add(new Setting.Key("key", "setting.key", GLFW.GLFW_KEY_C));
+                                                                               ^
+    symbol:   variable GLFW
+    location: class ZoomModule
+  /home/runner/work/gruz-mod/gruz-mod/versions/26.3/build/pp/java/pl/gruzclient/module/impl/FreelookModule.java:14: error: cannot find symbol
+      public final Setting.Key key = add(new Setting.Key("key", "setting.key", GLFW.GLFW_KEY_LEFT_ALT));
+                                                                               ^
+    symbol:   variable GLFW
+    location: class FreelookModule
+  /home/runner/work/gruz-mod/gruz-mod/versions/26.3/build/pp/java/pl/gruzclient/module/impl/RecordingModule.java:13: error: cannot find symbol
+      public final Setting.Key key = add(new Setting.Key("key", "setting.key", GLFW.GLFW_KEY_F6));
+                                                                               ^
+    symbol:   variable GLFW
+    location: class RecordingModule
+  /home/runner/work/gruz-mod/gruz-mod/versions/26.3/build/pp/java/pl/gruzclient/module/impl/ClipModule.java:17: error: cannot find symbol
+      public final Setting.Key key = add(new Setting.Key("key", "setting.key", GLFW.GLFW_KEY_F8));
+                                                                               ^
+    symbol:   variable GLFW
+    location: class ClipModule
+  /home/runner/work/gruz-mod/gruz-mod/versions/26.3/build/pp/java/pl/gruzclient/module/impl/MenuModule.java:28: error: cannot find symbol
+      public final Setting.Key key = add(new Setting.Key("key", "setting.panoramaKey", GLFW.GLFW_KEY_F7));
+                                                                                       ^
+    symbol:   variable GLFW
+    location: class MenuModule
+  /home/runner/work/gruz-mod/gruz-mod/versions/26.3/build/pp/java/pl/gruzclient/module/impl/FreecamModule.java:27: error: cannot find symbol
+      public final Setting.Key key = add(new Setting.Key("key", "setting.key", GLFW.GLFW_KEY_F4));
+                                                                               ^
+    symbol:   variable GLFW
+    location: class FreecamModule
+  /home/runner/work/gruz-mod/gruz-mod/versions/26.3/build/pp/java/pl/gruzclient/module/impl/MinimapModule.java:33: error: cannot find symbol
+      public final Setting.Key mapKey = add(new Setting.Key("mapKey", "setting.mapKey", GLFW.GLFW_KEY_M));
+                                                                                        ^
+    symbol:   variable GLFW
+    location: class MinimapModule
+  /home/runner/work/gruz-mod/gruz-mod/versions/26.3/build/pp/java/pl/gruzclient/module/impl/MinimapModule.java:34: error: cannot find symbol
+      public final Setting.Key addKey = add(new Setting.Key("addKey", "setting.waypointKey", GLFW.GLFW_KEY_N));
+                                                                                             ^
+    symbol:   variable GLFW
+    location: class MinimapModule
+  /home/runner/work/gruz-mod/gruz-mod/versions/26.3/build/pp/java/pl/gruzclient/module/impl/CosmeticsModule.java:48: error: cannot find symbol
+      public final Setting.Key emoteKey = add(new Setting.Key("emoteKey", "setting.emoteKey", GLFW.GLFW_KEY_B));
+                                                                                              ^
+    symbol:   variable GLFW
+    location: class CosmeticsModule
+  /home/runner/work/gruz-mod/gruz-mod/versions/26.3/build/pp/java/pl/gruzclient/module/impl/CosmeticsModule.java:51: error: cannot find symbol
+      public final Setting.Key wardrobeKey = add(new Setting.Key("wardrobeKey", "setting.wardrobeKey", GLFW.GLFW_KEY_O));
+                                                                                                       ^
+    symbol:   variable GLFW
+    location: class CosmeticsModule
+  /home/runner/work/gruz-mod/gruz-mod/versions/26.3/build/pp/java/pl/gruzclient/module/impl/CosmeticsModule.java:53: error: cannot find symbol
+      public final Setting.Key duoKey = add(new Setting.Key("duoKey", "setting.duoKey", GLFW.GLFW_KEY_Y));
+                                                                                        ^
+    symbol:   variable GLFW
+    location: class CosmeticsModule
+  /home/runner/work/gruz-mod/gruz-mod/versions/26.3/build/pp/java/pl/gruzclient/screen/HudEditorScreen.java:367: error: cannot find symbol
+          if (hovered != null && keyCode >= GLFW.GLFW_KEY_RIGHT && keyCode <= GLFW.GLFW_KEY_UP) {
+                                            ^
+    symbol:   variable GLFW
+    location: class HudEditorScreen
+  /home/runner/work/gruz-mod/gruz-mod/versions/26.3/build/pp/java/pl/gruzclient/screen/HudEditorScreen.java:367: error: cannot find symbol
+          if (hovered != null && keyCode >= GLFW.GLFW_KEY_RIGHT && keyCode <= GLFW.GLFW_KEY_UP) {
+                                                                              ^
+    symbol:   variable GLFW
+    location: class HudEditorScreen
+  /home/runner/work/gruz-mod/gruz-mod/versions/26.3/build/pp/java/pl/gruzclient/screen/HudEditorScreen.java:369: error: cannot find symbol
+              int dx = keyCode == GLFW.GLFW_KEY_RIGHT ? 1 : keyCode == GLFW.GLFW_KEY_LEFT ? -1 : 0;
+                                  ^
+    symbol:   variable GLFW
+    location: class HudEditorScreen
+  /home/runner/work/gruz-mod/gruz-mod/versions/26.3/build/pp/java/pl/gruzclient/screen/HudEditorScreen.java:369: error: cannot find symbol
+              int dx = keyCode == GLFW.GLFW_KEY_RIGHT ? 1 : keyCode == GLFW.GLFW_KEY_LEFT ? -1 : 0;
+                                                                       ^
+    symbol:   variable GLFW
+    location: class HudEditorScreen
+  /home/runner/work/gruz-mod/gruz-mod/versions/26.3/build/pp/java/pl/gruzclient/screen/HudEditorScreen.java:370: error: cannot find symbol
+              int dy = keyCode == GLFW.GLFW_KEY_DOWN ? 1 : keyCode == GLFW.GLFW_KEY_UP ? -1 : 0;
+                                  ^
+    symbol:   variable GLFW
+    location: class HudEditorScreen
+  /home/runner/work/gruz-mod/gruz-mod/versions/26.3/build/pp/java/pl/gruzclient/screen/HudEditorScreen.java:370: error: cannot find symbol
+              int dy = keyCode == GLFW.GLFW_KEY_DOWN ? 1 : keyCode == GLFW.GLFW_KEY_UP ? -1 : 0;
+                                                                      ^
+    symbol:   variable GLFW
+    location: class HudEditorScreen
+  /home/runner/work/gruz-mod/gruz-mod/versions/26.3/build/pp/java/pl/gruzclient/screen/GruzModsScreen.java:431: error: cannot find symbol
+              if (keyCode == GLFW.GLFW_KEY_BACKSPACE || keyCode == GLFW.GLFW_KEY_DELETE) capturing.code = -1;
+                             ^
+    symbol:   variable GLFW
+    location: class GruzModsScreen
+  /home/runner/work/gruz-mod/gruz-mod/versions/26.3/build/pp/java/pl/gruzclient/screen/GruzModsScreen.java:431: error: cannot find symbol
+              if (keyCode == GLFW.GLFW_KEY_BACKSPACE || keyCode == GLFW.GLFW_KEY_DELETE) capturing.code = -1;
+                                                                   ^
+    symbol:   variable GLFW
+    location: class GruzModsScreen
+  /home/runner/work/gruz-mod/gruz-mod/versions/26.3/build/pp/java/pl/gruzclient/screen/GruzModsScreen.java:432: error: cannot find symbol
+              else if (keyCode != GLFW.GLFW_KEY_ESCAPE) capturing.code = keyCode;
+                                  ^
+    symbol:   variable GLFW
+    location: class GruzModsScreen
+  /home/runner/work/gruz-mod/gruz-mod/versions/26.3/build/pp/java/pl/gruzclient/screen/GruzModsScreen.java:437: error: cannot find symbol
+          if (keyCode == GLFW.GLFW_KEY_ESCAPE && settingsOf != null) { settingsOf = null; scroll = scrollTarget = 0; return true; }
+                         ^
+    symbol:   variable GLFW
+    location: class GruzModsScreen
+  /home/runner/work/gruz-mod/gruz-mod/versions/26.3/build/pp/java/pl/gruzclient/screen/GruzModsScreen.java:439: error: cannot find symbol
+          if (!search.isFocused() && keyCode >= GLFW.GLFW_KEY_A && keyCode <= GLFW.GLFW_KEY_Z && (modifiers & GLFW.GLFW_MOD_CONTROL) == 0) {
+                                                ^
+    symbol:   variable GLFW
+    location: class GruzModsScreen
+  /home/runner/work/gruz-mod/gruz-mod/versions/26.3/build/pp/java/pl/gruzclient/screen/GruzModsScreen.java:439: error: cannot find symbol
+          if (!search.isFocused() && keyCode >= GLFW.GLFW_KEY_A && keyCode <= GLFW.GLFW_KEY_Z && (modifiers & GLFW.GLFW_MOD_CONTROL) == 0) {
+                                                                              ^
+    symbol:   variable GLFW
+    location: class GruzModsScreen
+  /home/runner/work/gruz-mod/gruz-mod/versions/26.3/build/pp/java/pl/gruzclient/screen/GruzModsScreen.java:439: error: cannot find symbol
+          if (!search.isFocused() && keyCode >= GLFW.GLFW_KEY_A && keyCode <= GLFW.GLFW_KEY_Z && (modifiers & GLFW.GLFW_MOD_CONTROL) == 0) {
+                                                                                                              ^
+    symbol:   variable GLFW
+    location: class GruzModsScreen
+  /home/runner/work/gruz-mod/gruz-mod/versions/26.3/build/pp/java/pl/gruzclient/screen/TextInputScreen.java:54: error: cannot find symbol
+          if (keyCode == GLFW.GLFW_KEY_ENTER || keyCode == GLFW.GLFW_KEY_KP_ENTER) { save(); return true; }
+                         ^
+    symbol:   variable GLFW
+    location: class TextInputScreen
+  /home/runner/work/gruz-mod/gruz-mod/versions/26.3/build/pp/java/pl/gruzclient/screen/TextInputScreen.java:54: error: cannot find symbol
+          if (keyCode == GLFW.GLFW_KEY_ENTER || keyCode == GLFW.GLFW_KEY_KP_ENTER) { save(); return true; }
+                                                           ^
+    symbol:   variable GLFW
+    location: class TextInputScreen
+  /home/runner/work/gruz-mod/gruz-mod/versions/26.3/build/pp/java/pl/gruzclient/cosmetics/CosmeticsFeature.java:209: error: no suitable method found for mulPose(Quaternionf)
+              m.mulPose(Axis.YP.rotation(t * 2f));
+               ^
+      method PoseStack.mulPose(Matrix4fc) is not applicable
+        (argument mismatch; Quaternionf cannot be converted to Matrix4fc)
+      method PoseStack.mulPose(Transformation) is not applicable
+        (argument mismatch; Quaternionf cannot be converted to Transformation)
+  /home/runner/work/gruz-mod/gruz-mod/versions/26.3/build/pp/java/pl/gruzclient/cosmetics/CosmeticsFeature.java:222: error: no suitable method found for mulPose(Quaternionf)
+          m.mulPose(Axis.YP.rotation(t * 0.6f));
+           ^
+      method PoseStack.mulPose(Matrix4fc) is not applicable
+        (argument mismatch; Quaternionf cannot be converted to Matrix4fc)
+      method PoseStack.mulPose(Transformation) is not applicable
+        (argument mismatch; Quaternionf cannot be converted to Transformation)
+  /home/runner/work/gruz-mod/gruz-mod/versions/26.3/build/pp/java/pl/gruzclient/cosmetics/CosmeticsFeature.java:248: error: no suitable method found for mulPose(Quaternionf)
+              m.mulPose(Axis.YP.rotation((float) -a));
+               ^
+      method PoseStack.mulPose(Matrix4fc) is not applicable
+        (argument mismatch; Quaternionf cannot be converted to Matrix4fc)
+      method PoseStack.mulPose(Transformation) is not applicable
+        (argument mismatch; Quaternionf cannot be converted to Transformation)
+  /home/runner/work/gruz-mod/gruz-mod/versions/26.3/build/pp/java/pl/gruzclient/cosmetics/CosmeticsFeature.java:307: error: no suitable method found for mulPose(Quaternionf)
+              m.mulPose(Axis.YP.rotationDegrees(side * (-(28f + flap))));
+               ^
+      method PoseStack.mulPose(Matrix4fc) is not applicable
+        (argument mismatch; Quaternionf cannot be converted to Matrix4fc)
+      method PoseStack.mulPose(Transformation) is not applicable
+        (argument mismatch; Quaternionf cannot be converted to Transformation)
+  /home/runner/work/gruz-mod/gruz-mod/versions/26.3/build/pp/java/pl/gruzclient/cosmetics/CosmeticsFeature.java:308: error: no suitable method found for mulPose(Quaternionf)
+              m.mulPose(Axis.ZP.rotationDegrees(side * -12f));
+               ^
+      method PoseStack.mulPose(Matrix4fc) is not applicable
+        (argument mismatch; Quaternionf cannot be converted to Matrix4fc)
+      method PoseStack.mulPose(Transformation) is not applicable
+        (argument mismatch; Quaternionf cannot be converted to Transformation)
+  /home/runner/work/gruz-mod/gruz-mod/versions/26.3/build/pp/java/pl/gruzclient/cosmetics/CosmeticsFeature.java:344: error: no suitable method found for mulPose(Quaternionf)
+                  m.mulPose(Axis.YP.rotationDegrees(side * (-(28f + flap))));
+                   ^
+      method PoseStack.mulPose(Matrix4fc) is not applicable
+        (argument mismatch; Quaternionf cannot be converted to Matrix4fc)
+      method PoseStack.mulPose(Transformation) is not applicable
+        (argument mismatch; Quaternionf cannot be converted to Transformation)
+  /home/runner/work/gruz-mod/gruz-mod/versions/26.3/build/pp/java/pl/gruzclient/cosmetics/CosmeticsFeature.java:345: error: no suitable method found for mulPose(Quaternionf)
+                  m.mulPose(Axis.ZP.rotationDegrees(side * -12f));
+                   ^
+      method PoseStack.mulPose(Matrix4fc) is not applicable
+        (argument mismatch; Quaternionf cannot be converted to Matrix4fc)
+      method PoseStack.mulPose(Transformation) is not applicable
+        (argument mismatch; Quaternionf cannot be converted to Transformation)
+  warning: unknown enum constant Level.FULL
+    reason: class file for com.google.j2objc.annotations.ReflectionSupport$Level not found
+  69 errors
+  1 warning
+
+* Try:
+> Check your code and dependencies to fix the compilation error(s)
+> Run with --scan to get full insights from a Build Scan (powered by Develocity).
+
+* Exception is:
+org.gradle.api.tasks.TaskExecutionException: Execution failed for task ':26.3:compileJava' (registered by plugin class 'org.gradle.api.plugins.JavaBasePlugin').
+	at org.gradle.api.internal.tasks.execution.DefaultTaskNodeExecutor.lambda$doExecute$1(DefaultTaskNodeExecutor.java:367)
+	at org.gradle.internal.Try$Failure.ifSuccessfulOrElse(Try.java:288)
+	at org.gradle.api.internal.tasks.execution.DefaultTaskNodeExecutor.doExecute(DefaultTaskNodeExecutor.java:365)
+	at org.gradle.api.internal.tasks.execution.DefaultTaskNodeExecutor.executeTrackingTaskIdentity(DefaultTaskNodeExecutor.java:332)
+	at org.gradle.api.internal.tasks.execution.DefaultTaskNodeExecutor.executeFinalizingProperties(DefaultTaskNodeExecutor.java:318)
+	at org.gradle.api.internal.tasks.execution.DefaultTaskNodeExecutor.executeSkippingWithNoActions(DefaultTaskNodeExecutor.java:289)
+	at org.gradle.api.internal.tasks.execution.DefaultTaskNodeExecutor.executeSkippingOnlyIf(DefaultTaskNodeExecutor.java:272)
+	at org.gradle.api.internal.tasks.execution.DefaultTaskNodeExecutor.executeCatchingFailures(DefaultTaskNodeExecutor.java:228)
+	at org.gradle.api.internal.tasks.execution.DefaultTaskNodeExecutor.executeWithFallbackOperationId(DefaultTaskNodeExecutor.java:197)
+	at org.gradle.api.internal.tasks.execution.DefaultTaskNodeExecutor.executeWithLifecycle(DefaultTaskNodeExecutor.java:171)
+	at org.gradle.api.internal.tasks.execution.DefaultTaskNodeExecutor.access$000(DefaultTaskNodeExecutor.java:67)
+	at org.gradle.api.internal.tasks.execution.DefaultTaskNodeExecutor$1.run(DefaultTaskNodeExecutor.java:136)
+	at org.gradle.internal.operations.DefaultBuildOperationRunner$1.execute(DefaultBuildOperationRunner.java:30)
+	at org.gradle.internal.operations.DefaultBuildOperationRunner$1.execute(DefaultBuildOperationRunner.java:27)
+	at org.gradle.internal.operations.DefaultBuildOperationRunner$2.execute(DefaultBuildOperationRunner.java:67)
+	at org.gradle.internal.operations.DefaultBuildOperationRunner$2.execute(DefaultBuildOperationRunner.java:60)
+	at org.gradle.internal.operations.DefaultBuildOperationRunner.execute(DefaultBuildOperationRunner.java:167)
+	at org.gradle.internal.operations.DefaultBuildOperationRunner.execute(DefaultBuildOperationRunner.java:60)
+	at org.gradle.internal.operations.DefaultBuildOperationRunner.run(DefaultBuildOperationRunner.java:48)
+	at org.gradle.api.internal.tasks.execution.DefaultTaskNodeExecutor.execute(DefaultTaskNodeExecutor.java:133)
+	at org.gradle.execution.plan.LocalTaskNode.execute(LocalTaskNode.java:229)
+	at org.gradle.execution.DefaultBuildWorkExecutor.lambda$executePlan$0(DefaultBuildWorkExecutor.java:153)
+	at org.gradle.execution.plan.DefaultPlanExecutor$ExecutorWorker.lambda$execute$0(DefaultPlanExecutor.java:476)
+	at org.gradle.internal.operations.CurrentBuildOperationRef.with(CurrentBuildOperationRef.java:85)
+	at org.gradle.execution.plan.DefaultPlanExecutor$ExecutorWorker.execute(DefaultPlanExecutor.java:475)
+	at org.gradle.execution.plan.DefaultPlanExecutor$ExecutorWorker.run(DefaultPlanExecutor.java:392)
+	at org.gradle.internal.concurrent.ExecutorPolicy$CatchAndRecordFailures.onExecute(ExecutorPolicy.java:65)
+	at org.gradle.internal.concurrent.AbstractManagedExecutor$1.run(AbstractManagedExecutor.java:47)
+Caused by: org.gradle.api.internal.tasks.compile.CompilationFailedException: Compilation failed; see the compiler output below.
+/home/runner/work/gruz-mod/gruz-mod/versions/26.3/build/pp/java/pl/gruzclient/render/WindowIcon.java:4: error: package org.lwjgl.glfw does not exist
+import org.lwjgl.glfw.GLFW;
+                     ^
+/home/runner/work/gruz-mod/gruz-mod/versions/26.3/build/pp/java/pl/gruzclient/render/WindowIcon.java:5: error: package org.lwjgl.glfw does not exist
+import org.lwjgl.glfw.GLFWImage;
+                     ^
+/home/runner/work/gruz-mod/gruz-mod/versions/26.3/build/pp/java/pl/gruzclient/mixin/ChatScreenMixin.java:9: error: package org.lwjgl.glfw does not exist
+import org.lwjgl.glfw.GLFW;
+                     ^
+/home/runner/work/gruz-mod/gruz-mod/versions/26.3/build/pp/java/pl/gruzclient/mixin/MouseMixin.java:5: error: package org.lwjgl.glfw does not exist
+import org.lwjgl.glfw.GLFW;
+                     ^
+/home/runner/work/gruz-mod/gruz-mod/versions/26.3/build/pp/java/pl/gruzclient/module/impl/ZoomModule.java:3: error: package org.lwjgl.glfw does not exist
+import org.lwjgl.glfw.GLFW;
+                     ^
+/home/runner/work/gruz-mod/gruz-mod/versions/26.3/build/pp/java/pl/gruzclient/module/impl/FreelookModule.java:4: error: package org.lwjgl.glfw does not exist
+import org.lwjgl.glfw.GLFW;
+                     ^
+/home/runner/work/gruz-mod/gruz-mod/versions/26.3/build/pp/java/pl/gruzclient/module/impl/RecordingModule.java:3: error: package org.lwjgl.glfw does not exist
+import org.lwjgl.glfw.GLFW;
+                     ^
+/home/runner/work/gruz-mod/gruz-mod/versions/26.3/build/pp/java/pl/gruzclient/module/impl/ClipModule.java:5: error: package org.lwjgl.glfw does not exist
+import org.lwjgl.glfw.GLFW;
+                     ^
+/home/runner/work/gruz-mod/gruz-mod/versions/26.3/build/pp/java/pl/gruzclient/module/impl/MenuModule.java:4: error: package org.lwjgl.glfw does not exist
+import org.lwjgl.glfw.GLFW;
+                     ^
+/home/runner/work/gruz-mod/gruz-mod/versions/26.3/build/pp/java/pl/gruzclient/module/impl/FreecamModule.java:5: error: package org.lwjgl.glfw does not exist
+import org.lwjgl.glfw.GLFW;
+                     ^
+/home/runner/work/gruz-mod/gruz-mod/versions/26.3/build/pp/java/pl/gruzclient/module/impl/MinimapModule.java:4: error: package org.lwjgl.glfw does not exist
+import org.lwjgl.glfw.GLFW;
+                     ^
+/home/runner/work/gruz-mod/gruz-mod/versions/26.3/build/pp/java/pl/gruzclient/module/impl/CosmeticsModule.java:5: error: package org.lwjgl.glfw does not exist
+import org.lwjgl.glfw.GLFW;
+                     ^
+/home/runner/work/gruz-mod/gruz-mod/versions/26.3/build/pp/java/pl/gruzclient/screen/HudEditorScreen.java:4: error: package org.lwjgl.glfw does not exist
+import org.lwjgl.glfw.GLFW;
+                     ^
+/home/runner/work/gruz-mod/gruz-mod/versions/26.3/build/pp/java/pl/gruzclient/screen/GruzModsScreen.java:4: error: package org.lwjgl.glfw does not exist
+import org.lwjgl.glfw.GLFW;
+                     ^
+/home/runner/work/gruz-mod/gruz-mod/versions/26.3/build/pp/java/pl/gruzclient/screen/TextInputScreen.java:3: error: package org.lwjgl.glfw does not exist
+import org.lwjgl.glfw.GLFW;
+                     ^
+/home/runner/work/gruz-mod/gruz-mod/versions/26.3/build/pp/java/pl/gruzclient/render/WindowIcon.java:32: error: package GLFWImage does not exist
+            GLFWImage.Buffer icons = GLFWImage.malloc(sizes.length);
+                     ^
+/home/runner/work/gruz-mod/gruz-mod/versions/26.3/build/pp/java/pl/gruzclient/render/WindowIcon.java:32: error: cannot find symbol
+            GLFWImage.Buffer icons = GLFWImage.malloc(sizes.length);
+                                     ^
+  symbol:   variable GLFWImage
+  location: class WindowIcon
+/home/runner/work/gruz-mod/gruz-mod/versions/26.3/build/pp/java/pl/gruzclient/render/WindowIcon.java:50: error: cannot find symbol
+            GLFW.glfwSetWindowIcon(handle, icons);
+            ^
+  symbol:   variable GLFW
+  location: class WindowIcon
+/home/runner/work/gruz-mod/gruz-mod/versions/26.3/build/pp/java/pl/gruzclient/mixin/ChatScreenMixin.java:61: error: cannot find symbol
+        if (keyCode == GLFW.GLFW_KEY_F && pl.gruzclient.compat.GruzScreen.ctrl()) {
+                       ^
+  symbol:   variable GLFW
+  location: class ChatScreenMixin
+/home/runner/work/gruz-mod/gruz-mod/versions/26.3/build/pp/java/pl/gruzclient/mixin/ChatScreenMixin.java:70: error: cannot find symbol
+        if (gruz$search.isVisible() && gruz$search.isFocused() && keyCode != GLFW.GLFW_KEY_ESCAPE) {
+                                                                             ^
+  symbol:   variable GLFW
+  location: class ChatScreenMixin
+/home/runner/work/gruz-mod/gruz-mod/versions/26.3/build/pp/java/pl/gruzclient/mixin/ChatScreenMixin.java:71: error: cannot find symbol
+            if (keyCode == GLFW.GLFW_KEY_ENTER || keyCode == GLFW.GLFW_KEY_KP_ENTER || keyCode == GLFW.GLFW_KEY_TAB) {
+                           ^
+  symbol:   variable GLFW
+  location: class ChatScreenMixin
+/home/runner/work/gruz-mod/gruz-mod/versions/26.3/build/pp/java/pl/gruzclient/mixin/ChatScreenMixin.java:71: error: cannot find symbol
+            if (keyCode == GLFW.GLFW_KEY_ENTER || keyCode == GLFW.GLFW_KEY_KP_ENTER || keyCode == GLFW.GLFW_KEY_TAB) {
+                                                             ^
+  symbol:   variable GLFW
+  location: class ChatScreenMixin
+/home/runner/work/gruz-mod/gruz-mod/versions/26.3/build/pp/java/pl/gruzclient/mixin/ChatScreenMixin.java:71: error: cannot find symbol
+            if (keyCode == GLFW.GLFW_KEY_ENTER || keyCode == GLFW.GLFW_KEY_KP_ENTER || keyCode == GLFW.GLFW_KEY_TAB) {
+                                                                                                  ^
+  symbol:   variable GLFW
+  location: class ChatScreenMixin
+/home/runner/work/gruz-mod/gruz-mod/versions/26.3/build/pp/java/pl/gruzclient/mixin/ChatScreenMixin.java:92: error: cannot find symbol
+        if (button != GLFW.GLFW_MOUSE_BUTTON_RIGHT || !Modules.BETTER_CHAT.copying()) return;
+                      ^
+  symbol:   variable GLFW
+  location: class ChatScreenMixin
+/home/runner/work/gruz-mod/gruz-mod/versions/26.3/build/pp/java/pl/gruzclient/mixin/MouseMixin.java:24: error: cannot find symbol
+        if (action == GLFW.GLFW_PRESS && Minecraft.getInstance().gui.screen() == null) CpsModule.click(button);
+                      ^
+  symbol:   variable GLFW
+  location: class MouseMixin
+/home/runner/work/gruz-mod/gruz-mod/versions/26.3/build/pp/java/pl/gruzclient/module/Modules.java:103: error: package org.lwjgl.glfw does not exist
+    public static int HUB_KEY = org.lwjgl.glfw.GLFW.GLFW_KEY_RIGHT_SHIFT;
+                                              ^
+/home/runner/work/gruz-mod/gruz-mod/versions/26.3/build/pp/java/pl/gruzclient/module/Modules.java:135: error: package org.lwjgl.glfw does not exist
+        if (code != org.lwjgl.glfw.GLFW.GLFW_KEY_F3 && rawDown(org.lwjgl.glfw.GLFW.GLFW_KEY_F3)) F3_COMBO.add(code);
+                                  ^
+/home/runner/work/gruz-mod/gruz-mod/versions/26.3/build/pp/java/pl/gruzclient/module/Modules.java:135: error: package org.lwjgl.glfw does not exist
+        if (code != org.lwjgl.glfw.GLFW.GLFW_KEY_F3 && rawDown(org.lwjgl.glfw.GLFW.GLFW_KEY_F3)) F3_COMBO.add(code);
+                                                                             ^
+/home/runner/work/gruz-mod/gruz-mod/versions/26.3/build/pp/java/pl/gruzclient/module/impl/ZoomModule.java:10: error: cannot find symbol
+    public final Setting.Key key = add(new Setting.Key("key", "setting.key", GLFW.GLFW_KEY_C));
+                                                                             ^
+  symbol:   variable GLFW
+  location: class ZoomModule
+/home/runner/work/gruz-mod/gruz-mod/versions/26.3/build/pp/java/pl/gruzclient/module/impl/FreelookModule.java:14: error: cannot find symbol
+    public final Setting.Key key = add(new Setting.Key("key", "setting.key", GLFW.GLFW_KEY_LEFT_ALT));
+                                                                             ^
+  symbol:   variable GLFW
+  location: class FreelookModule
+/home/runner/work/gruz-mod/gruz-mod/versions/26.3/build/pp/java/pl/gruzclient/module/impl/RecordingModule.java:13: error: cannot find symbol
+    public final Setting.Key key = add(new Setting.Key("key", "setting.key", GLFW.GLFW_KEY_F6));
+                                                                             ^
+  symbol:   variable GLFW
+  location: class RecordingModule
+/home/runner/work/gruz-mod/gruz-mod/versions/26.3/build/pp/java/pl/gruzclient/module/impl/ClipModule.java:17: error: cannot find symbol
+    public final Setting.Key key = add(new Setting.Key("key", "setting.key", GLFW.GLFW_KEY_F8));
+                                                                             ^
+  symbol:   variable GLFW
+  location: class ClipModule
+/home/runner/work/gruz-mod/gruz-mod/versions/26.3/build/pp/java/pl/gruzclient/module/impl/MenuModule.java:28: error: cannot find symbol
+    public final Setting.Key key = add(new Setting.Key("key", "setting.panoramaKey", GLFW.GLFW_KEY_F7));
+                                                                                     ^
+  symbol:   variable GLFW
+  location: class MenuModule
+/home/runner/work/gruz-mod/gruz-mod/versions/26.3/build/pp/java/pl/gruzclient/module/impl/FreecamModule.java:27: error: cannot find symbol
+    public final Setting.Key key = add(new Setting.Key("key", "setting.key", GLFW.GLFW_KEY_F4));
+                                                                             ^
+  symbol:   variable GLFW
+  location: class FreecamModule
+/home/runner/work/gruz-mod/gruz-mod/versions/26.3/build/pp/java/pl/gruzclient/module/impl/MinimapModule.java:33: error: cannot find symbol
+    public final Setting.Key mapKey = add(new Setting.Key("mapKey", "setting.mapKey", GLFW.GLFW_KEY_M));
+                                                                                      ^
+  symbol:   variable GLFW
+  location: class MinimapModule
+/home/runner/work/gruz-mod/gruz-mod/versions/26.3/build/pp/java/pl/gruzclient/module/impl/MinimapModule.java:34: error: cannot find symbol
+    public final Setting.Key addKey = add(new Setting.Key("addKey", "setting.waypointKey", GLFW.GLFW_KEY_N));
+                                                                                           ^
+  symbol:   variable GLFW
+  location: class MinimapModule
+/home/runner/work/gruz-mod/gruz-mod/versions/26.3/build/pp/java/pl/gruzclient/module/impl/CosmeticsModule.java:48: error: cannot find symbol
+    public final Setting.Key emoteKey = add(new Setting.Key("emoteKey", "setting.emoteKey", GLFW.GLFW_KEY_B));
+                                                                                            ^
+  symbol:   variable GLFW
+  location: class CosmeticsModule
+/home/runner/work/gruz-mod/gruz-mod/versions/26.3/build/pp/java/pl/gruzclient/module/impl/CosmeticsModule.java:51: error: cannot find symbol
+    public final Setting.Key wardrobeKey = add(new Setting.Key("wardrobeKey", "setting.wardrobeKey", GLFW.GLFW_KEY_O));
+                                                                                                     ^
+  symbol:   variable GLFW
+  location: class CosmeticsModule
+/home/runner/work/gruz-mod/gruz-mod/versions/26.3/build/pp/java/pl/gruzclient/module/impl/CosmeticsModule.java:53: error: cannot find symbol
+    public final Setting.Key duoKey = add(new Setting.Key("duoKey", "setting.duoKey", GLFW.GLFW_KEY_Y));
+                                                                                      ^
+  symbol:   variable GLFW
+  location: class CosmeticsModule
+/home/runner/work/gruz-mod/gruz-mod/versions/26.3/build/pp/java/pl/gruzclient/cosmetics/CosmeticsFeature.java:209: error: no suitable method found for mulPose(Quaternionf)
+            m.mulPose(Axis.YP.rotation(t * 2f));
+             ^
+    method PoseStack.mulPose(Matrix4fc) is not applicable
+      (argument mismatch; Quaternionf cannot be converted to Matrix4fc)
+    method PoseStack.mulPose(Transformation) is not applicable
+      (argument mismatch; Quaternionf cannot be converted to Transformation)
+/home/runner/work/gruz-mod/gruz-mod/versions/26.3/build/pp/java/pl/gruzclient/cosmetics/CosmeticsFeature.java:222: error: no suitable method found for mulPose(Quaternionf)
+        m.mulPose(Axis.YP.rotation(t * 0.6f));
+         ^
+    method PoseStack.mulPose(Matrix4fc) is not applicable
+      (argument mismatch; Quaternionf cannot be converted to Matrix4fc)
+    method PoseStack.mulPose(Transformation) is not applicable
+      (argument mismatch; Quaternionf cannot be converted to Transformation)
+/home/runner/work/gruz-mod/gruz-mod/versions/26.3/build/pp/java/pl/gruzclient/cosmetics/CosmeticsFeature.java:248: error: no suitable method found for mulPose(Quaternionf)
+            m.mulPose(Axis.YP.rotation((float) -a));
+             ^
+    method PoseStack.mulPose(Matrix4fc) is not applicable
+      (argument mismatch; Quaternionf cannot be converted to Matrix4fc)
+    method PoseStack.mulPose(Transformation) is not applicable
+      (argument mismatch; Quaternionf cannot be converted to Transformation)
+/home/runner/work/gruz-mod/gruz-mod/versions/26.3/build/pp/java/pl/gruzclient/cosmetics/CosmeticsFeature.java:307: error: no suitable method found for mulPose(Quaternionf)
+            m.mulPose(Axis.YP.rotationDegrees(side * (-(28f + flap))));
+             ^
+    method PoseStack.mulPose(Matrix4fc) is not applicable
+      (argument mismatch; Quaternionf cannot be converted to Matrix4fc)
+    method PoseStack.mulPose(Transformation) is not applicable
+      (argument mismatch; Quaternionf cannot be converted to Transformation)
+/home/runner/work/gruz-mod/gruz-mod/versions/26.3/build/pp/java/pl/gruzclient/cosmetics/CosmeticsFeature.java:308: error: no suitable method found for mulPose(Quaternionf)
+            m.mulPose(Axis.ZP.rotationDegrees(side * -12f));
+             ^
+    method PoseStack.mulPose(Matrix4fc) is not applicable
+      (argument mismatch; Quaternionf cannot be converted to Matrix4fc)
+    method PoseStack.mulPose(Transformation) is not applicable
+      (argument mismatch; Quaternionf cannot be converted to Transformation)
+/home/runner/work/gruz-mod/gruz-mod/versions/26.3/build/pp/java/pl/gruzclient/cosmetics/CosmeticsFeature.java:344: error: no suitable method found for mulPose(Quaternionf)
+                m.mulPose(Axis.YP.rotationDegrees(side * (-(28f + flap))));
+                 ^
+    method PoseStack.mulPose(Matrix4fc) is not applicable
+      (argument mismatch; Quaternionf cannot be converted to Matrix4fc)
+    method PoseStack.mulPose(Transformation) is not applicable
+      (argument mismatch; Quaternionf cannot be converted to Transformation)
+/home/runner/work/gruz-mod/gruz-mod/versions/26.3/build/pp/java/pl/gruzclient/cosmetics/CosmeticsFeature.java:345: error: no suitable method found for mulPose(Quaternionf)
+                m.mulPose(Axis.ZP.rotationDegrees(side * -12f));
+                 ^
+    method PoseStack.mulPose(Matrix4fc) is not applicable
+      (argument mismatch; Quaternionf cannot be converted to Matrix4fc)
+    method PoseStack.mulPose(Transformation) is not applicable
+      (argument mismatch; Quaternionf cannot be converted to Transformation)
+warning: unknown enum constant Level.FULL
+  reason: class file for com.google.j2objc.annotations.ReflectionSupport$Level not found
+/home/runner/work/gruz-mod/gruz-mod/versions/26.3/build/pp/java/pl/gruzclient/compat/GruzScreen.java:116: error: package org.lwjgl.glfw does not exist
+    public static boolean ctrl() { return key(org.lwjgl.glfw.GLFW.GLFW_KEY_LEFT_CONTROL) || key(org.lwjgl.glfw.GLFW.GLFW_KEY_RIGHT_CONTROL); }
+                                                            ^
+/home/runner/work/gruz-mod/gruz-mod/versions/26.3/build/pp/java/pl/gruzclient/compat/GruzScreen.java:116: error: package org.lwjgl.glfw does not exist
+    public static boolean ctrl() { return key(org.lwjgl.glfw.GLFW.GLFW_KEY_LEFT_CONTROL) || key(org.lwjgl.glfw.GLFW.GLFW_KEY_RIGHT_CONTROL); }
+                                                                                                              ^
+/home/runner/work/gruz-mod/gruz-mod/versions/26.3/build/pp/java/pl/gruzclient/compat/GruzScreen.java:117: error: package org.lwjgl.glfw does not exist
+    public static boolean shift() { return key(org.lwjgl.glfw.GLFW.GLFW_KEY_LEFT_SHIFT) || key(org.lwjgl.glfw.GLFW.GLFW_KEY_RIGHT_SHIFT); }
+                                                             ^
+/home/runner/work/gruz-mod/gruz-mod/versions/26.3/build/pp/java/pl/gruzclient/compat/GruzScreen.java:117: error: package org.lwjgl.glfw does not exist
+    public static boolean shift() { return key(org.lwjgl.glfw.GLFW.GLFW_KEY_LEFT_SHIFT) || key(org.lwjgl.glfw.GLFW.GLFW_KEY_RIGHT_SHIFT); }
+                                                                                                             ^
+/home/runner/work/gruz-mod/gruz-mod/versions/26.3/build/pp/java/pl/gruzclient/compat/GruzScreen.java:118: error: package org.lwjgl.glfw does not exist
+    public static boolean alt() { return key(org.lwjgl.glfw.GLFW.GLFW_KEY_LEFT_ALT) || key(org.lwjgl.glfw.GLFW.GLFW_KEY_RIGHT_ALT); }
+                                                           ^
+/home/runner/work/gruz-mod/gruz-mod/versions/26.3/build/pp/java/pl/gruzclient/compat/GruzScreen.java:118: error: package org.lwjgl.glfw does not exist
+    public static boolean alt() { return key(org.lwjgl.glfw.GLFW.GLFW_KEY_LEFT_ALT) || key(org.lwjgl.glfw.GLFW.GLFW_KEY_RIGHT_ALT); }
+                                                                                                         ^
+/home/runner/work/gruz-mod/gruz-mod/versions/26.3/build/pp/java/pl/gruzclient/compat/GruzScreen.java:121: error: package org.lwjgl.glfw does not exist
+        return org.lwjgl.glfw.GLFW.glfwGetKey(Compat.windowHandle(), code) == org.lwjgl.glfw.GLFW.GLFW_PRESS;
+                             ^
+/home/runner/work/gruz-mod/gruz-mod/versions/26.3/build/pp/java/pl/gruzclient/compat/GruzScreen.java:121: error: package org.lwjgl.glfw does not exist
+        return org.lwjgl.glfw.GLFW.glfwGetKey(Compat.windowHandle(), code) == org.lwjgl.glfw.GLFW.GLFW_PRESS;
+                                                                                            ^
+/home/runner/work/gruz-mod/gruz-mod/versions/26.3/build/pp/java/pl/gruzclient/screen/HudEditorScreen.java:367: error: cannot find symbol
+        if (hovered != null && keyCode >= GLFW.GLFW_KEY_RIGHT && keyCode <= GLFW.GLFW_KEY_UP) {
+                                          ^
+  symbol:   variable GLFW
+  location: class HudEditorScreen
+/home/runner/work/gruz-mod/gruz-mod/versions/26.3/build/pp/java/pl/gruzclient/screen/HudEditorScreen.java:367: error: cannot find symbol
+        if (hovered != null && keyCode >= GLFW.GLFW_KEY_RIGHT && keyCode <= GLFW.GLFW_KEY_UP) {
+                                                                            ^
+  symbol:   variable GLFW
+  location: class HudEditorScreen
+/home/runner/work/gruz-mod/gruz-mod/versions/26.3/build/pp/java/pl/gruzclient/screen/HudEditorScreen.java:369: error: cannot find symbol
+            int dx = keyCode == GLFW.GLFW_KEY_RIGHT ? 1 : keyCode == GLFW.GLFW_KEY_LEFT ? -1 : 0;
+                                ^
+  symbol:   variable GLFW
+  location: class HudEditorScreen
+/home/runner/work/gruz-mod/gruz-mod/versions/26.3/build/pp/java/pl/gruzclient/screen/HudEditorScreen.java:369: error: cannot find symbol
+            int dx = keyCode == GLFW.GLFW_KEY_RIGHT ? 1 : keyCode == GLFW.GLFW_KEY_LEFT ? -1 : 0;
+                                                                     ^
+  symbol:   variable GLFW
+  location: class HudEditorScreen
+/home/runner/work/gruz-mod/gruz-mod/versions/26.3/build/pp/java/pl/gruzclient/screen/HudEditorScreen.java:370: error: cannot find symbol
+            int dy = keyCode == GLFW.GLFW_KEY_DOWN ? 1 : keyCode == GLFW.GLFW_KEY_UP ? -1 : 0;
+                                ^
+  symbol:   variable GLFW
+  location: class HudEditorScreen
+/home/runner/work/gruz-mod/gruz-mod/versions/26.3/build/pp/java/pl/gruzclient/screen/HudEditorScreen.java:370: error: cannot find symbol
+            int dy = keyCode == GLFW.GLFW_KEY_DOWN ? 1 : keyCode == GLFW.GLFW_KEY_UP ? -1 : 0;
+                                                                    ^
+  symbol:   variable GLFW
+  location: class HudEditorScreen
+/home/runner/work/gruz-mod/gruz-mod/versions/26.3/build/pp/java/pl/gruzclient/screen/GruzModsScreen.java:431: error: cannot find symbol
+            if (keyCode == GLFW.GLFW_KEY_BACKSPACE || keyCode == GLFW.GLFW_KEY_DELETE) capturing.code = -1;
+                           ^
+  symbol:   variable GLFW
+  location: class GruzModsScreen
+/home/runner/work/gruz-mod/gruz-mod/versions/26.3/build/pp/java/pl/gruzclient/screen/GruzModsScreen.java:431: error: cannot find symbol
+            if (keyCode == GLFW.GLFW_KEY_BACKSPACE || keyCode == GLFW.GLFW_KEY_DELETE) capturing.code = -1;
+                                                                 ^
+  symbol:   variable GLFW
+  location: class GruzModsScreen
+/home/runner/work/gruz-mod/gruz-mod/versions/26.3/build/pp/java/pl/gruzclient/screen/GruzModsScreen.java:432: error: cannot find symbol
+            else if (keyCode != GLFW.GLFW_KEY_ESCAPE) capturing.code = keyCode;
+                                ^
+  symbol:   variable GLFW
+  location: class GruzModsScreen
+/home/runner/work/gruz-mod/gruz-mod/versions/26.3/build/pp/java/pl/gruzclient/screen/GruzModsScreen.java:437: error: cannot find symbol
+        if (keyCode == GLFW.GLFW_KEY_ESCAPE && settingsOf != null) { settingsOf = null; scroll = scrollTarget = 0; return true; }
+                       ^
+  symbol:   variable GLFW
+  location: class GruzModsScreen
+/home/runner/work/gruz-mod/gruz-mod/versions/26.3/build/pp/java/pl/gruzclient/screen/GruzModsScreen.java:439: error: cannot find symbol
+        if (!search.isFocused() && keyCode >= GLFW.GLFW_KEY_A && keyCode <= GLFW.GLFW_KEY_Z && (modifiers & GLFW.GLFW_MOD_CONTROL) == 0) {
+                                              ^
+  symbol:   variable GLFW
+  location: class GruzModsScreen
+/home/runner/work/gruz-mod/gruz-mod/versions/26.3/build/pp/java/pl/gruzclient/screen/GruzModsScreen.java:439: error: cannot find symbol
+        if (!search.isFocused() && keyCode >= GLFW.GLFW_KEY_A && keyCode <= GLFW.GLFW_KEY_Z && (modifiers & GLFW.GLFW_MOD_CONTROL) == 0) {
+                                                                            ^
+  symbol:   variable GLFW
+  location: class GruzModsScreen
+/home/runner/work/gruz-mod/gruz-mod/versions/26.3/build/pp/java/pl/gruzclient/screen/GruzModsScreen.java:439: error: cannot find symbol
+        if (!search.isFocused() && keyCode >= GLFW.GLFW_KEY_A && keyCode <= GLFW.GLFW_KEY_Z && (modifiers & GLFW.GLFW_MOD_CONTROL) == 0) {
+                                                                                                            ^
+  symbol:   variable GLFW
+  location: class GruzModsScreen
+/home/runner/work/gruz-mod/gruz-mod/versions/26.3/build/pp/java/pl/gruzclient/screen/TextInputScreen.java:54: error: cannot find symbol
+        if (keyCode == GLFW.GLFW_KEY_ENTER || keyCode == GLFW.GLFW_KEY_KP_ENTER) { save(); return true; }
+                       ^
+  symbol:   variable GLFW
+  location: class TextInputScreen
+/home/runner/work/gruz-mod/gruz-mod/versions/26.3/build/pp/java/pl/gruzclient/screen/TextInputScreen.java:54: error: cannot find symbol
+        if (keyCode == GLFW.GLFW_KEY_ENTER || keyCode == GLFW.GLFW_KEY_KP_ENTER) { save(); return true; }
+                                                         ^
+  symbol:   variable GLFW
+  location: class TextInputScreen
+69 errors
+1 warning
+	at org.gradle.api.internal.tasks.compile.JdkJavaCompiler.execute(JdkJavaCompiler.java:88)
+	at org.gradle.api.internal.tasks.compile.JdkJavaCompiler.execute(JdkJavaCompiler.java:49)
+	at org.gradle.api.internal.tasks.compile.NormalizingJavaCompiler.delegateAndHandleErrors(NormalizingJavaCompiler.java:98)
+	at org.gradle.api.internal.tasks.compile.NormalizingJavaCompiler.execute(NormalizingJavaCompiler.java:52)
+	at org.gradle.api.internal.tasks.compile.NormalizingJavaCompiler.execute(NormalizingJavaCompiler.java:38)
+	at org.gradle.api.internal.tasks.compile.AnnotationProcessorDiscoveringCompiler.execute(AnnotationProcessorDiscoveringCompiler.java:52)
+	at org.gradle.api.internal.tasks.compile.AnnotationProcessorDiscoveringCompiler.execute(AnnotationProcessorDiscoveringCompiler.java:38)
+	at org.gradle.api.internal.tasks.compile.ModuleApplicationNameWritingCompiler.execute(ModuleApplicationNameWritingCompiler.java:46)
+	at org.gradle.api.internal.tasks.compile.ModuleApplicationNameWritingCompiler.execute(ModuleApplicationNameWritingCompiler.java:36)
+	at org.gradle.jvm.toolchain.internal.DefaultToolchainJavaCompiler.execute(DefaultToolchainJavaCompiler.java:57)
+	at org.gradle.api.tasks.compile.JavaCompile.lambda$createToolchainCompiler$0(JavaCompile.java:213)
+	at org.gradle.api.internal.tasks.compile.CleaningJavaCompiler.execute(CleaningJavaCompiler.java:53)
+	at org.gradle.api.internal.tasks.compile.incremental.IncrementalCompilerFactory.lambda$createRebuildAllCompiler$0(IncrementalCompilerFactory.java:55)
+	at org.gradle.api.internal.tasks.compile.incremental.SelectiveCompiler.execute(SelectiveCompiler.java:70)
+	at org.gradle.api.internal.tasks.compile.incremental.SelectiveCompiler.execute(SelectiveCompiler.java:44)
+	at org.gradle.api.internal.tasks.compile.incremental.IncrementalResultStoringCompiler.execute(IncrementalResultStoringCompiler.java:66)
+	at org.gradle.api.internal.tasks.compile.incremental.IncrementalResultStoringCompiler.execute(IncrementalResultStoringCompiler.java:52)
+	at org.gradle.api.internal.tasks.compile.CompileJavaBuildOperationReportingCompiler$CompileOperation.call(CompileJavaBuildOperationReportingCompiler.java:78)
+	at org.gradle.api.internal.tasks.compile.CompileJavaBuildOperationReportingCompiler$CompileOperation.call(CompileJavaBuildOperationReportingCompiler.java:52)
+	at org.gradle.internal.operations.DefaultBuildOperationRunner$CallableBuildOperationWorker.execute(DefaultBuildOperationRunner.java:210)
+	at org.gradle.internal.operations.DefaultBuildOperationRunner$CallableBuildOperationWorker.execute(DefaultBuildOperationRunner.java:205)
+	at org.gradle.internal.operations.DefaultBuildOperationRunner$2.execute(DefaultBuildOperationRunner.java:67)
+	at org.gradle.internal.operations.DefaultBuildOperationRunner$2.execute(DefaultBuildOperationRunner.java:60)
+	at org.gradle.internal.operations.DefaultBuildOperationRunner.execute(DefaultBuildOperationRunner.java:167)
+	at org.gradle.internal.operations.DefaultBuildOperationRunner.execute(DefaultBuildOperationRunner.java:60)
+	at org.gradle.internal.operations.DefaultBuildOperationRunner.call(DefaultBuildOperationRunner.java:54)
+	at org.gradle.api.internal.tasks.compile.CompileJavaBuildOperationReportingCompiler.execute(CompileJavaBuildOperationReportingCompiler.java:49)
+	at org.gradle.api.tasks.compile.JavaCompile.performCompilation(JavaCompile.java:231)
+	at org.gradle.api.tasks.compile.JavaCompile.performIncrementalCompilation(JavaCompile.java:172)
+	at org.gradle.api.tasks.compile.JavaCompile.compile(JavaCompile.java:157)
+	at org.gradle.internal.reflect.JavaMethod.invoke(JavaMethod.java:125)
+	at org.gradle.api.internal.project.taskfactory.IncrementalTaskAction.doExecute(IncrementalTaskAction.java:45)
+	at org.gradle.api.internal.project.taskfactory.StandardTaskAction.execute(StandardTaskAction.java:51)
+	at org.gradle.api.internal.project.taskfactory.IncrementalTaskAction.execute(IncrementalTaskAction.java:26)
+	at org.gradle.api.internal.project.taskfactory.StandardTaskAction.execute(StandardTaskAction.java:29)
+	at org.gradle.api.internal.tasks.execution.TaskExecution$3.run(TaskExecution.java:268)
+	at org.gradle.internal.operations.DefaultBuildOperationRunner$1.execute(DefaultBuildOperationRunner.java:30)
+	at org.gradle.internal.operations.DefaultBuildOperationRunner$1.execute(DefaultBuildOperationRunner.java:27)
+	at org.gradle.internal.operations.DefaultBuildOperationRunner$2.execute(DefaultBuildOperationRunner.java:67)
+	at org.gradle.internal.operations.DefaultBuildOperationRunner$2.execute(DefaultBuildOperationRunner.java:60)
+	at org.gradle.internal.operations.DefaultBuildOperationRunner.execute(DefaultBuildOperationRunner.java:167)
+	at org.gradle.internal.operations.DefaultBuildOperationRunner.execute(DefaultBuildOperationRunner.java:60)
+	at org.gradle.internal.operations.DefaultBuildOperationRunner.run(DefaultBuildOperationRunner.java:48)
+	at org.gradle.api.internal.tasks.execution.TaskExecution.executeAction(TaskExecution.java:253)
+	at org.gradle.api.internal.tasks.execution.TaskExecution.executeActions(TaskExecution.java:236)
+	at org.gradle.api.internal.tasks.execution.TaskExecution.executeWithPreviousOutputFiles(TaskExecution.java:219)
+	at org.gradle.api.internal.tasks.execution.TaskExecution.execute(TaskExecution.java:185)
+	at org.gradle.internal.execution.steps.ExecuteStep.executeInternal(ExecuteStep.java:167)
+	at org.gradle.internal.execution.steps.ExecuteStep.access$000(ExecuteStep.java:47)
+	at org.gradle.internal.execution.steps.ExecuteStep$1.call(ExecuteStep.java:137)
+	at org.gradle.internal.execution.steps.ExecuteStep$1.call(ExecuteStep.java:134)
+	at org.gradle.internal.operations.DefaultBuildOperationRunner$CallableBuildOperationWorker.execute(DefaultBuildOperationRunner.java:210)
+	at org.gradle.internal.operations.DefaultBuildOperationRunner$CallableBuildOperationWorker.execute(DefaultBuildOperationRunner.java:205)
+	at org.gradle.internal.operations.DefaultBuildOperationRunner$2.execute(DefaultBuildOperationRunner.java:67)
+	at org.gradle.internal.operations.DefaultBuildOperationRunner$2.execute(DefaultBuildOperationRunner.java:60)
+	at org.gradle.internal.operations.DefaultBuildOperationRunner.execute(DefaultBuildOperationRunner.java:167)
+	at org.gradle.internal.operations.DefaultBuildOperationRunner.execute(DefaultBuildOperationRunner.java:60)
+	at org.gradle.internal.operations.DefaultBuildOperationRunner.call(DefaultBuildOperationRunner.java:54)
+	at org.gradle.internal.execution.steps.ExecuteStep.execute(ExecuteStep.java:134)
+	at org.gradle.internal.execution.steps.ExecuteStep$Mutable.execute(ExecuteStep.java:80)
+	at org.gradle.internal.execution.steps.CancelExecutionStep.execute(CancelExecutionStep.java:42)
+	at org.gradle.internal.execution.steps.TimeoutStep.executeWithoutTimeout(TimeoutStep.java:75)
+	at org.gradle.internal.execution.steps.TimeoutStep.execute(TimeoutStep.java:55)
+	at org.gradle.internal.execution.steps.PreCreateOutputParentsStep.execute(PreCreateOutputParentsStep.java:51)
+	at org.gradle.internal.execution.steps.PreCreateOutputParentsStep.execute(PreCreateOutputParentsStep.java:29)
+	at org.gradle.internal.execution.steps.RemovePreviousOutputsStep.executeMutable(RemovePreviousOutputsStep.java:67)
+	at org.gradle.internal.execution.steps.RemovePreviousOutputsStep.executeMutable(RemovePreviousOutputsStep.java:39)
+	at org.gradle.internal.execution.steps.MutableStep.execute(MutableStep.java:26)
+	at org.gradle.internal.execution.steps.BroadcastChangingOutputsStep.execute(BroadcastChangingOutputsStep.java:42)
+	at org.gradle.internal.execution.steps.BroadcastChangingOutputsStep.execute(BroadcastChangingOutputsStep.java:24)
+	at org.gradle.internal.execution.steps.CaptureOutputsAfterExecutionStep.execute(CaptureOutputsAfterExecutionStep.java:69)
+	at org.gradle.internal.execution.steps.CaptureOutputsAfterExecutionStep.execute(CaptureOutputsAfterExecutionStep.java:46)
+	at org.gradle.internal.execution.steps.ResolveInputChangesStep.executeMutable(ResolveInputChangesStep.java:39)
+	at org.gradle.internal.execution.steps.ResolveInputChangesStep.executeMutable(ResolveInputChangesStep.java:28)
+	at org.gradle.internal.execution.steps.MutableStep.execute(MutableStep.java:26)
+	at org.gradle.internal.execution.steps.BuildCacheStep.executeWithoutCache(BuildCacheStep.java:189)
+	at org.gradle.internal.execution.steps.BuildCacheStep.executeAndStoreInCache(BuildCacheStep.java:145)
+	at org.gradle.internal.execution.steps.BuildCacheStep.lambda$executeWithCache$3(BuildCacheStep.java:104)
+	at org.gradle.internal.execution.steps.BuildCacheStep.lambda$executeWithCache$1(BuildCacheStep.java:104)
+	at org.gradle.internal.Try$Success.map(Try.java:170)
+	at org.gradle.internal.execution.steps.BuildCacheStep.executeWithCache(BuildCacheStep.java:88)
+	at org.gradle.internal.execution.steps.BuildCacheStep.lambda$execute$0(BuildCacheStep.java:75)
+	at org.gradle.internal.Either$Left.fold(Either.java:116)
+	at org.gradle.internal.execution.caching.CachingState.fold(CachingState.java:62)
+	at org.gradle.internal.execution.steps.BuildCacheStep.execute(BuildCacheStep.java:74)
+	at org.gradle.internal.execution.steps.BuildCacheStep.execute(BuildCacheStep.java:49)
+	at org.gradle.internal.execution.steps.StoreExecutionStateStep.executeMutable(StoreExecutionStateStep.java:46)
+	at org.gradle.internal.execution.steps.StoreExecutionStateStep.executeMutable(StoreExecutionStateStep.java:35)
+	at org.gradle.internal.execution.steps.MutableStep.execute(MutableStep.java:26)
+	at org.gradle.internal.execution.steps.SkipUpToDateStep.executeBecause(SkipUpToDateStep.java:75)
+	at org.gradle.internal.execution.steps.SkipUpToDateStep.lambda$execute$2(SkipUpToDateStep.java:53)
+	at org.gradle.internal.execution.steps.SkipUpToDateStep.execute(SkipUpToDateStep.java:53)
+	at org.gradle.internal.execution.steps.SkipUpToDateStep.execute(SkipUpToDateStep.java:35)
+	at org.gradle.internal.execution.steps.legacy.MarkSnapshottingInputsFinishedStep.execute(MarkSnapshottingInputsFinishedStep.java:37)
+	at org.gradle.internal.execution.steps.legacy.MarkSnapshottingInputsFinishedStep.execute(MarkSnapshottingInputsFinishedStep.java:27)
+	at org.gradle.internal.execution.steps.ResolveMutableCachingStateStep.executeDelegate(ResolveMutableCachingStateStep.java:70)
+	at org.gradle.internal.execution.steps.ResolveMutableCachingStateStep.executeDelegate(ResolveMutableCachingStateStep.java:32)
+	at org.gradle.internal.execution.steps.AbstractResolveCachingStateStep.execute(AbstractResolveCachingStateStep.java:69)
+	at org.gradle.internal.execution.steps.AbstractResolveCachingStateStep.execute(AbstractResolveCachingStateStep.java:37)
+	at org.gradle.internal.execution.steps.ResolveChangesStep.executeMutable(ResolveChangesStep.java:63)
+	at org.gradle.internal.execution.steps.ResolveChangesStep.executeMutable(ResolveChangesStep.java:34)
+	at org.gradle.internal.execution.steps.MutableStep.execute(MutableStep.java:26)
+	at org.gradle.internal.execution.steps.ValidateStep$Mutable.executeDelegate(ValidateStep.java:79)
+	at org.gradle.internal.execution.steps.ValidateStep$Mutable.executeDelegate(ValidateStep.java:65)
+	at org.gradle.internal.execution.steps.ValidateStep.execute(ValidateStep.java:105)
+	at org.gradle.internal.execution.steps.ValidateStep$Mutable.execute(ValidateStep.java:65)
+	at org.gradle.internal.execution.steps.CaptureMutableStateBeforeExecutionStep.executeMutable(CaptureMutableStateBeforeExecutionStep.java:86)
+	at org.gradle.internal.execution.steps.CaptureMutableStateBeforeExecutionStep.execute(CaptureMutableStateBeforeExecutionStep.java:65)
+	at org.gradle.internal.execution.steps.CaptureMutableStateBeforeExecutionStep.execute(CaptureMutableStateBeforeExecutionStep.java:45)
+	at org.gradle.internal.execution.steps.SkipEmptyMutableWorkStep.executeWithNonEmptySources(SkipEmptyMutableWorkStep.java:210)
+	at org.gradle.internal.execution.steps.SkipEmptyMutableWorkStep.executeMutable(SkipEmptyMutableWorkStep.java:90)
+	at org.gradle.internal.execution.steps.SkipEmptyMutableWorkStep.executeMutable(SkipEmptyMutableWorkStep.java:53)
+	at org.gradle.internal.execution.steps.MutableStep.execute(MutableStep.java:26)
+	at org.gradle.internal.execution.steps.legacy.MarkSnapshottingInputsStartedStep.execute(MarkSnapshottingInputsStartedStep.java:38)
+	at org.gradle.internal.execution.steps.LoadPreviousExecutionStateStep.executeMutable(LoadPreviousExecutionStateStep.java:36)
+	at org.gradle.internal.execution.steps.LoadPreviousExecutionStateStep.executeMutable(LoadPreviousExecutionStateStep.java:23)
+	at org.gradle.internal.execution.steps.MutableStep.execute(MutableStep.java:26)
+	at org.gradle.internal.execution.steps.HandleStaleOutputsStep.executeMutable(HandleStaleOutputsStep.java:77)
+	at org.gradle.internal.execution.steps.HandleStaleOutputsStep.executeMutable(HandleStaleOutputsStep.java:43)
+	at org.gradle.internal.execution.steps.MutableStep.execute(MutableStep.java:26)
+	at org.gradle.internal.execution.steps.AssignMutableWorkspaceStep.lambda$executeMutable$0(AssignMutableWorkspaceStep.java:34)
+	at org.gradle.api.internal.tasks.execution.TaskExecution$4.withWorkspace(TaskExecution.java:314)
+	at org.gradle.internal.execution.steps.AssignMutableWorkspaceStep.executeMutable(AssignMutableWorkspaceStep.java:30)
+	at org.gradle.internal.execution.steps.AssignMutableWorkspaceStep.executeMutable(AssignMutableWorkspaceStep.java:21)
+	at org.gradle.internal.execution.steps.MutableStep.execute(MutableStep.java:26)
+	at org.gradle.internal.execution.steps.ChoosePipelineStep.execute(ChoosePipelineStep.java:40)
+	at org.gradle.internal.execution.steps.ChoosePipelineStep.execute(ChoosePipelineStep.java:23)
+	at org.gradle.internal.execution.steps.ExecuteWorkBuildOperationFiringStep.lambda$execute$2(ExecuteWorkBuildOperationFiringStep.java:67)
+	at org.gradle.internal.execution.steps.ExecuteWorkBuildOperationFiringStep.execute(ExecuteWorkBuildOperationFiringStep.java:67)
+	at org.gradle.internal.execution.steps.ExecuteWorkBuildOperationFiringStep.execute(ExecuteWorkBuildOperationFiringStep.java:39)
+	at org.gradle.internal.execution.steps.IdentityCacheStep.execute(IdentityCacheStep.java:46)
+	at org.gradle.internal.execution.steps.IdentityCacheStep.execute(IdentityCacheStep.java:34)
+	at org.gradle.internal.execution.steps.IdentifyStep.execute(IdentifyStep.java:56)
+	at org.gradle.internal.execution.steps.IdentifyStep.execute(IdentifyStep.java:38)
+	at org.gradle.internal.execution.impl.DefaultExecutionEngine$1.execute(DefaultExecutionEngine.java:68)
+	at org.gradle.api.internal.tasks.execution.DefaultTaskNodeExecutor.doExecute(DefaultTaskNodeExecutor.java:364)
+	... 25 more
+
+
+Deprecated Gradle features were used in this build, making it incompatible with Gradle 10.
+
+You can use '--warning-mode all' to show the individual deprecation warnings and determine if they come from your own scripts or plugins.
+
+For more on this, please refer to https://docs.gradle.org/9.8.0/userguide/command_line_interface.html#sec:command_line_warnings in the Gradle documentation.
+
+BUILD FAILED in 36s
+2 actionable tasks: 2 executed

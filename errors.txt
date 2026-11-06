@@ -1,0 +1,224 @@
+errors: 55
+pl/gruzclient/render/WindowIcon.java:4: package org.lwjgl.glfw does not exist
+    import org.lwjgl.glfw.GLFW;
+                         ^
+pl/gruzclient/render/WindowIcon.java:5: package org.lwjgl.glfw does not exist
+    import org.lwjgl.glfw.GLFWImage;
+                         ^
+pl/gruzclient/mixin/ChatScreenMixin.java:9: package org.lwjgl.glfw does not exist
+    import org.lwjgl.glfw.GLFW;
+                         ^
+pl/gruzclient/mixin/MouseMixin.java:5: package org.lwjgl.glfw does not exist
+    import org.lwjgl.glfw.GLFW;
+                         ^
+pl/gruzclient/module/impl/ZoomModule.java:3: package org.lwjgl.glfw does not exist
+    import org.lwjgl.glfw.GLFW;
+                         ^
+pl/gruzclient/module/impl/FreelookModule.java:4: package org.lwjgl.glfw does not exist
+    import org.lwjgl.glfw.GLFW;
+                         ^
+pl/gruzclient/module/impl/RecordingModule.java:3: package org.lwjgl.glfw does not exist
+    import org.lwjgl.glfw.GLFW;
+                         ^
+pl/gruzclient/module/impl/ClipModule.java:5: package org.lwjgl.glfw does not exist
+    import org.lwjgl.glfw.GLFW;
+                         ^
+pl/gruzclient/module/impl/MenuModule.java:4: package org.lwjgl.glfw does not exist
+    import org.lwjgl.glfw.GLFW;
+                         ^
+pl/gruzclient/module/impl/FreecamModule.java:5: package org.lwjgl.glfw does not exist
+    import org.lwjgl.glfw.GLFW;
+                         ^
+pl/gruzclient/module/impl/MinimapModule.java:4: package org.lwjgl.glfw does not exist
+    import org.lwjgl.glfw.GLFW;
+                         ^
+pl/gruzclient/module/impl/CosmeticsModule.java:5: package org.lwjgl.glfw does not exist
+    import org.lwjgl.glfw.GLFW;
+                         ^
+pl/gruzclient/screen/HudEditorScreen.java:4: package org.lwjgl.glfw does not exist
+    import org.lwjgl.glfw.GLFW;
+                         ^
+pl/gruzclient/screen/GruzModsScreen.java:4: package org.lwjgl.glfw does not exist
+    import org.lwjgl.glfw.GLFW;
+                         ^
+pl/gruzclient/screen/TextInputScreen.java:3: package org.lwjgl.glfw does not exist
+    import org.lwjgl.glfw.GLFW;
+                         ^
+pl/gruzclient/render/WindowIcon.java:32: package GLFWImage does not exist
+                GLFWImage.Buffer icons = GLFWImage.malloc(sizes.length);
+                         ^
+pl/gruzclient/render/WindowIcon.java:32: cannot find symbol
+                GLFWImage.Buffer icons = GLFWImage.malloc(sizes.length);
+                                         ^
+      symbol:   variable GLFWImage
+pl/gruzclient/render/WindowIcon.java:50: cannot find symbol
+                GLFW.glfwSetWindowIcon(handle, icons);
+                ^
+      symbol:   variable GLFW
+pl/gruzclient/mixin/ChatScreenMixin.java:61: cannot find symbol
+            if (keyCode == GLFW.GLFW_KEY_F && pl.gruzclient.compat.GruzScreen.ctrl()) {
+                           ^
+      symbol:   variable GLFW
+pl/gruzclient/mixin/ChatScreenMixin.java:70: cannot find symbol
+            if (gruz$search.isVisible() && gruz$search.isFocused() && keyCode != GLFW.GLFW_KEY_ESCAPE) {
+                                                                                 ^
+      symbol:   variable GLFW
+pl/gruzclient/mixin/ChatScreenMixin.java:71: cannot find symbol
+                if (keyCode == GLFW.GLFW_KEY_ENTER || keyCode == GLFW.GLFW_KEY_KP_ENTER || keyCode == GLFW.GLFW_KEY_TAB) {
+                               ^
+      symbol:   variable GLFW
+pl/gruzclient/mixin/ChatScreenMixin.java:92: cannot find symbol
+            if (button != GLFW.GLFW_MOUSE_BUTTON_RIGHT || !Modules.BETTER_CHAT.copying()) return;
+                          ^
+      symbol:   variable GLFW
+pl/gruzclient/mixin/MouseMixin.java:24: cannot find symbol
+            if (action == GLFW.GLFW_PRESS && Minecraft.getInstance().gui.screen() == null) CpsModule.click(button);
+                          ^
+      symbol:   variable GLFW
+pl/gruzclient/module/Modules.java:103: package org.lwjgl.glfw does not exist
+        public static int HUB_KEY = org.lwjgl.glfw.GLFW.GLFW_KEY_RIGHT_SHIFT;
+                                                  ^
+pl/gruzclient/module/Modules.java:135: package org.lwjgl.glfw does not exist
+            if (code != org.lwjgl.glfw.GLFW.GLFW_KEY_F3 && rawDown(org.lwjgl.glfw.GLFW.GLFW_KEY_F3)) F3_COMBO.add(code);
+                                      ^
+pl/gruzclient/module/impl/ZoomModule.java:10: cannot find symbol
+        public final Setting.Key key = add(new Setting.Key("key", "setting.key", GLFW.GLFW_KEY_C));
+                                                                                 ^
+      symbol:   variable GLFW
+pl/gruzclient/module/impl/FreelookModule.java:14: cannot find symbol
+        public final Setting.Key key = add(new Setting.Key("key", "setting.key", GLFW.GLFW_KEY_LEFT_ALT));
+                                                                                 ^
+      symbol:   variable GLFW
+pl/gruzclient/module/impl/RecordingModule.java:13: cannot find symbol
+        public final Setting.Key key = add(new Setting.Key("key", "setting.key", GLFW.GLFW_KEY_F6));
+                                                                                 ^
+      symbol:   variable GLFW
+pl/gruzclient/module/impl/ClipModule.java:17: cannot find symbol
+        public final Setting.Key key = add(new Setting.Key("key", "setting.key", GLFW.GLFW_KEY_F8));
+                                                                                 ^
+      symbol:   variable GLFW
+pl/gruzclient/module/impl/MenuModule.java:28: cannot find symbol
+        public final Setting.Key key = add(new Setting.Key("key", "setting.panoramaKey", GLFW.GLFW_KEY_F7));
+                                                                                         ^
+      symbol:   variable GLFW
+pl/gruzclient/module/impl/FreecamModule.java:27: cannot find symbol
+        public final Setting.Key key = add(new Setting.Key("key", "setting.key", GLFW.GLFW_KEY_F4));
+                                                                                 ^
+      symbol:   variable GLFW
+pl/gruzclient/module/impl/MinimapModule.java:33: cannot find symbol
+        public final Setting.Key mapKey = add(new Setting.Key("mapKey", "setting.mapKey", GLFW.GLFW_KEY_M));
+                                                                                          ^
+      symbol:   variable GLFW
+pl/gruzclient/module/impl/MinimapModule.java:34: cannot find symbol
+        public final Setting.Key addKey = add(new Setting.Key("addKey", "setting.waypointKey", GLFW.GLFW_KEY_N));
+                                                                                               ^
+      symbol:   variable GLFW
+pl/gruzclient/module/impl/CosmeticsModule.java:48: cannot find symbol
+        public final Setting.Key emoteKey = add(new Setting.Key("emoteKey", "setting.emoteKey", GLFW.GLFW_KEY_B));
+                                                                                                ^
+      symbol:   variable GLFW
+pl/gruzclient/module/impl/CosmeticsModule.java:51: cannot find symbol
+        public final Setting.Key wardrobeKey = add(new Setting.Key("wardrobeKey", "setting.wardrobeKey", GLFW.GLFW_KEY_O));
+                                                                                                         ^
+      symbol:   variable GLFW
+pl/gruzclient/module/impl/CosmeticsModule.java:53: cannot find symbol
+        public final Setting.Key duoKey = add(new Setting.Key("duoKey", "setting.duoKey", GLFW.GLFW_KEY_Y));
+                                                                                          ^
+      symbol:   variable GLFW
+pl/gruzclient/cosmetics/CosmeticsFeature.java:209: no suitable method found for mulPose(Quaternionf)
+                m.mulPose(Axis.YP.rotation(t * 2f));
+                 ^
+        method PoseStack.mulPose(Matrix4fc) is not applicable
+pl/gruzclient/cosmetics/CosmeticsFeature.java:222: no suitable method found for mulPose(Quaternionf)
+            m.mulPose(Axis.YP.rotation(t * 0.6f));
+             ^
+        method PoseStack.mulPose(Matrix4fc) is not applicable
+pl/gruzclient/cosmetics/CosmeticsFeature.java:248: no suitable method found for mulPose(Quaternionf)
+                m.mulPose(Axis.YP.rotation((float) -a));
+                 ^
+        method PoseStack.mulPose(Matrix4fc) is not applicable
+pl/gruzclient/cosmetics/CosmeticsFeature.java:307: no suitable method found for mulPose(Quaternionf)
+                m.mulPose(Axis.YP.rotationDegrees(side * (-(28f + flap))));
+                 ^
+        method PoseStack.mulPose(Matrix4fc) is not applicable
+pl/gruzclient/cosmetics/CosmeticsFeature.java:308: no suitable method found for mulPose(Quaternionf)
+                m.mulPose(Axis.ZP.rotationDegrees(side * -12f));
+                 ^
+        method PoseStack.mulPose(Matrix4fc) is not applicable
+pl/gruzclient/cosmetics/CosmeticsFeature.java:344: no suitable method found for mulPose(Quaternionf)
+                    m.mulPose(Axis.YP.rotationDegrees(side * (-(28f + flap))));
+                     ^
+        method PoseStack.mulPose(Matrix4fc) is not applicable
+pl/gruzclient/cosmetics/CosmeticsFeature.java:345: no suitable method found for mulPose(Quaternionf)
+                    m.mulPose(Axis.ZP.rotationDegrees(side * -12f));
+                     ^
+        method PoseStack.mulPose(Matrix4fc) is not applicable
+pl/gruzclient/compat/GruzScreen.java:116: package org.lwjgl.glfw does not exist
+        public static boolean ctrl() { return key(org.lwjgl.glfw.GLFW.GLFW_KEY_LEFT_CONTROL) || key(org.lwjgl.glfw.GLFW.GLFW_KEY_RIGHT_CONTROL); }
+                                                                ^
+pl/gruzclient/compat/GruzScreen.java:117: package org.lwjgl.glfw does not exist
+        public static boolean shift() { return key(org.lwjgl.glfw.GLFW.GLFW_KEY_LEFT_SHIFT) || key(org.lwjgl.glfw.GLFW.GLFW_KEY_RIGHT_SHIFT); }
+                                                                 ^
+pl/gruzclient/compat/GruzScreen.java:118: package org.lwjgl.glfw does not exist
+        public static boolean alt() { return key(org.lwjgl.glfw.GLFW.GLFW_KEY_LEFT_ALT) || key(org.lwjgl.glfw.GLFW.GLFW_KEY_RIGHT_ALT); }
+                                                               ^
+pl/gruzclient/compat/GruzScreen.java:121: package org.lwjgl.glfw does not exist
+            return org.lwjgl.glfw.GLFW.glfwGetKey(Compat.windowHandle(), code) == org.lwjgl.glfw.GLFW.GLFW_PRESS;
+                                 ^
+pl/gruzclient/screen/HudEditorScreen.java:367: cannot find symbol
+            if (hovered != null && keyCode >= GLFW.GLFW_KEY_RIGHT && keyCode <= GLFW.GLFW_KEY_UP) {
+                                              ^
+      symbol:   variable GLFW
+pl/gruzclient/screen/HudEditorScreen.java:369: cannot find symbol
+                int dx = keyCode == GLFW.GLFW_KEY_RIGHT ? 1 : keyCode == GLFW.GLFW_KEY_LEFT ? -1 : 0;
+                                    ^
+      symbol:   variable GLFW
+pl/gruzclient/screen/HudEditorScreen.java:370: cannot find symbol
+                int dy = keyCode == GLFW.GLFW_KEY_DOWN ? 1 : keyCode == GLFW.GLFW_KEY_UP ? -1 : 0;
+                                    ^
+      symbol:   variable GLFW
+pl/gruzclient/screen/GruzModsScreen.java:431: cannot find symbol
+                if (keyCode == GLFW.GLFW_KEY_BACKSPACE || keyCode == GLFW.GLFW_KEY_DELETE) capturing.code = -1;
+                               ^
+      symbol:   variable GLFW
+pl/gruzclient/screen/GruzModsScreen.java:432: cannot find symbol
+                else if (keyCode != GLFW.GLFW_KEY_ESCAPE) capturing.code = keyCode;
+                                    ^
+      symbol:   variable GLFW
+pl/gruzclient/screen/GruzModsScreen.java:437: cannot find symbol
+            if (keyCode == GLFW.GLFW_KEY_ESCAPE && settingsOf != null) { settingsOf = null; scroll = scrollTarget = 0; return true; }
+                           ^
+      symbol:   variable GLFW
+pl/gruzclient/screen/GruzModsScreen.java:439: cannot find symbol
+            if (!search.isFocused() && keyCode >= GLFW.GLFW_KEY_A && keyCode <= GLFW.GLFW_KEY_Z && (modifiers & GLFW.GLFW_MOD_CONTROL) == 0) {
+                                                  ^
+      symbol:   variable GLFW
+pl/gruzclient/screen/TextInputScreen.java:54: cannot find symbol
+            if (keyCode == GLFW.GLFW_KEY_ENTER || keyCode == GLFW.GLFW_KEY_KP_ENTER) { save(); return true; }
+                           ^
+      symbol:   variable GLFW
+--- What went wrong ---
+Execution failed for task ':26.3:compileJava' (registered by plugin class 'org.gradle.api.plugins.JavaBasePlugin').
+> Compilation failed; see the compiler output below.
+  /home/runner/work/gruz-mod/gruz-mod/versions/26.3/build/pp/java/pl/gruzclient/render/WindowIcon.java:4: error: package org.lwjgl.glfw does not exist
+  import org.lwjgl.glfw.GLFW;
+                       ^
+  /home/runner/work/gruz-mod/gruz-mod/versions/26.3/build/pp/java/pl/gruzclient/render/WindowIcon.java:5: error: package org.lwjgl.glfw does not exist
+  import org.lwjgl.glfw.GLFWImage;
+                       ^
+  /home/runner/work/gruz-mod/gruz-mod/versions/26.3/build/pp/java/pl/gruzclient/mixin/ChatScreenMixin.java:9: error: package org.lwjgl.glfw does not exist
+  import org.lwjgl.glfw.GLFW;
+                       ^
+  /home/runner/work/gruz-mod/gruz-mod/versions/26.3/build/pp/java/pl/gruzclient/mixin/MouseMixin.java:5: error: package org.lwjgl.glfw does not exist
+  import org.lwjgl.glfw.GLFW;
+                       ^
+  /home/runner/work/gruz-mod/gruz-mod/versions/26.3/build/pp/java/pl/gruzclient/module/impl/ZoomModule.java:3: error: package org.lwjgl.glfw does not exist
+  import org.lwjgl.glfw.GLFW;
+                       ^
+  /home/runner/work/gruz-mod/gruz-mod/versions/26.3/build/pp/java/pl/gruzclient/module/impl/FreelookModule.java:4: error: package org.lwjgl.glfw does not exist
+  import org.lwjgl.glfw.GLFW;
+                       ^
+  /home/runner/work/gruz-mod/gruz-mod/versions/26.3/build/pp/java/pl/gruzclient/module/impl/RecordingModule.java:3: error: package org.lwjgl.glfw does not exist
+  import org.lwjgl.glfw.GLFW;
+                       ^
+  /home/runner/work/gruz-mod/gruz-mod/versions/26.3/build/pp/java/pl/gruzclient/module/impl/ClipModule.java:5: error: package org.lwjgl.glfw does not exist

@@ -1,0 +1,451 @@
+Compiled from "LocalPlayer.java"
+public class net.minecraft.client.player.LocalPlayer extends net.minecraft.client.player.AbstractClientPlayer {
+  public static final org.slf4j.Logger LOGGER;
+    descriptor: Lorg/slf4j/Logger;
+  private static final int POSITION_REMINDER_INTERVAL;
+    descriptor: I
+  private static final int WATER_VISION_MAX_TIME;
+    descriptor: I
+  private static final int WATER_VISION_QUICK_TIME;
+    descriptor: I
+  private static final float WATER_VISION_QUICK_PERCENT;
+    descriptor: F
+  private static final double SUFFOCATING_COLLISION_CHECK_SCALE;
+    descriptor: D
+  private static final double MINOR_COLLISION_ANGLE_THRESHOLD_RADIAN;
+    descriptor: D
+  private static final float PORTAL_SPINNING_SPEED;
+    descriptor: F
+  private static final float NAUSEA_SPINNING_SPEED;
+    descriptor: F
+  public final net.minecraft.client.multiplayer.ClientPacketListener connection;
+    descriptor: Lnet/minecraft/client/multiplayer/ClientPacketListener;
+  private final net.minecraft.stats.StatsCounter stats;
+    descriptor: Lnet/minecraft/stats/StatsCounter;
+  private final net.minecraft.client.ClientRecipeBook recipeBook;
+    descriptor: Lnet/minecraft/client/ClientRecipeBook;
+  private final net.minecraft.util.TickThrottler dropSpamThrottler;
+    descriptor: Lnet/minecraft/util/TickThrottler;
+  private final java.util.List<net.minecraft.client.resources.sounds.AmbientSoundHandler> ambientSoundHandlers;
+    descriptor: Ljava/util/List;
+  private net.minecraft.server.permissions.PermissionSet permissions;
+    descriptor: Lnet/minecraft/server/permissions/PermissionSet;
+  private net.minecraft.client.multiplayer.chat.ChatAbilities chatAbilities;
+    descriptor: Lnet/minecraft/client/multiplayer/chat/ChatAbilities;
+  private double xLast;
+    descriptor: D
+  private double yLast;
+    descriptor: D
+  private double zLast;
+    descriptor: D
+  private float yRotLast;
+    descriptor: F
+  private float xRotLast;
+    descriptor: F
+  private boolean lastOnGround;
+    descriptor: Z
+  private boolean lastHorizontalCollision;
+    descriptor: Z
+  private boolean crouching;
+    descriptor: Z
+  private boolean wasSprinting;
+    descriptor: Z
+  private int positionReminder;
+    descriptor: I
+  private boolean flashOnSetHealth;
+    descriptor: Z
+  public net.minecraft.client.player.ClientInput input;
+    descriptor: Lnet/minecraft/client/player/ClientInput;
+  private net.minecraft.world.entity.player.Input lastSentInput;
+    descriptor: Lnet/minecraft/world/entity/player/Input;
+  protected final net.minecraft.client.Minecraft minecraft;
+    descriptor: Lnet/minecraft/client/Minecraft;
+  protected int sprintTriggerTime;
+    descriptor: I
+  private static final int EXPERIENCE_DISPLAY_UNREADY_TO_SET;
+    descriptor: I
+  private static final int EXPERIENCE_DISPLAY_READY_TO_SET;
+    descriptor: I
+  public int experienceDisplayStartTick;
+    descriptor: I
+  public float yBob;
+    descriptor: F
+  public float xBob;
+    descriptor: F
+  public float yBobO;
+    descriptor: F
+  public float xBobO;
+    descriptor: F
+  private int jumpRidingTicks;
+    descriptor: I
+  private float jumpRidingScale;
+    descriptor: F
+  public float portalEffectIntensity;
+    descriptor: F
+  public float oPortalEffectIntensity;
+    descriptor: F
+  private float spinningEffectTime;
+    descriptor: F
+  private float spinningEffectSpeed;
+    descriptor: F
+  private final net.minecraft.client.player.ItemActivation itemActivation;
+    descriptor: Lnet/minecraft/client/player/ItemActivation;
+  private final net.minecraft.client.player.FirstPersonHandsAndItems firstPersonHandsAndItems;
+    descriptor: Lnet/minecraft/client/player/FirstPersonHandsAndItems;
+  private boolean startedUsingItem;
+    descriptor: Z
+  private net.minecraft.world.InteractionHand usingItemHand;
+    descriptor: Lnet/minecraft/world/InteractionHand;
+  private boolean handsBusy;
+    descriptor: Z
+  private boolean autoJumpEnabled;
+    descriptor: Z
+  private int autoJumpTime;
+    descriptor: I
+  private boolean wasFallFlying;
+    descriptor: Z
+  private int waterVisionTime;
+    descriptor: I
+  private boolean showDeathScreen;
+    descriptor: Z
+  private boolean doLimitedCrafting;
+    descriptor: Z
+  public net.minecraft.client.player.LocalPlayer(net.minecraft.client.Minecraft, net.minecraft.client.multiplayer.ClientLevel, net.minecraft.client.multiplayer.ClientPacketListener, net.minecraft.stats.StatsCounter, net.minecraft.client.ClientRecipeBook, net.minecraft.world.entity.player.Input, boolean, net.minecraft.client.multiplayer.chat.ChatAbilities, net.minecraft.client.player.ItemActivation);
+    descriptor: (Lnet/minecraft/client/Minecraft;Lnet/minecraft/client/multiplayer/ClientLevel;Lnet/minecraft/client/multiplayer/ClientPacketListener;Lnet/minecraft/stats/StatsCounter;Lnet/minecraft/client/ClientRecipeBook;Lnet/minecraft/world/entity/player/Input;ZLnet/minecraft/client/multiplayer/chat/ChatAbilities;Lnet/minecraft/client/player/ItemActivation;)V
+
+  public void heal(float);
+    descriptor: (F)V
+
+  public boolean startRiding(net.minecraft.world.entity.Entity, boolean, boolean);
+    descriptor: (Lnet/minecraft/world/entity/Entity;ZZ)Z
+
+  public void removeVehicle();
+    descriptor: ()V
+
+  public float getViewYRot(float);
+    descriptor: (F)F
+
+  public void tick();
+    descriptor: ()V
+
+  public void displayItemActivation(net.minecraft.world.item.ItemStack);
+    descriptor: (Lnet/minecraft/world/item/ItemStack;)V
+
+  public void resetItemActivation();
+    descriptor: ()V
+
+  public net.minecraft.client.player.ItemActivation itemActivation();
+    descriptor: ()Lnet/minecraft/client/player/ItemActivation;
+
+  public void itemUsed(net.minecraft.world.InteractionHand);
+    descriptor: (Lnet/minecraft/world/InteractionHand;)V
+
+  public net.minecraft.client.player.FirstPersonHandsAndItems firstPersonHandsAndItems();
+    descriptor: ()Lnet/minecraft/client/player/FirstPersonHandsAndItems;
+
+  public void sendChanges();
+    descriptor: ()V
+
+  public float getCurrentMood();
+    descriptor: ()F
+
+  private void sendPosition();
+    descriptor: ()V
+
+  private void sendIsSprintingIfNeeded();
+    descriptor: ()V
+
+  public void respawn();
+    descriptor: ()V
+
+  public void closeContainer();
+    descriptor: ()V
+
+  public void clientSideCloseContainer();
+    descriptor: ()V
+
+  public void hurtTo(float);
+    descriptor: (F)V
+
+  public void onUpdateAbilities();
+    descriptor: ()V
+
+  public void setReducedDebugInfo(boolean);
+    descriptor: (Z)V
+
+  public boolean isLocalPlayer();
+    descriptor: ()Z
+
+  public boolean isSuppressingSlidingDownLadder();
+    descriptor: ()Z
+
+  public boolean canSpawnSprintParticle();
+    descriptor: ()Z
+
+  protected void sendRidingJump();
+    descriptor: ()V
+
+  public void sendOpenInventory();
+    descriptor: ()V
+
+  public net.minecraft.stats.StatsCounter getStats();
+    descriptor: ()Lnet/minecraft/stats/StatsCounter;
+
+  public net.minecraft.client.ClientRecipeBook getRecipeBook();
+    descriptor: ()Lnet/minecraft/client/ClientRecipeBook;
+
+  public void removeRecipeHighlight(net.minecraft.world.item.crafting.display.RecipeDisplayId);
+    descriptor: (Lnet/minecraft/world/item/crafting/display/RecipeDisplayId;)V
+
+  public net.minecraft.server.permissions.PermissionSet permissions();
+    descriptor: ()Lnet/minecraft/server/permissions/PermissionSet;
+
+  public void setPermissions(net.minecraft.server.permissions.PermissionSet);
+    descriptor: (Lnet/minecraft/server/permissions/PermissionSet;)V
+
+  public net.minecraft.client.multiplayer.chat.ChatAbilities chatAbilities();
+    descriptor: ()Lnet/minecraft/client/multiplayer/chat/ChatAbilities;
+
+  public void refreshChatAbilities();
+    descriptor: ()V
+
+  public void sendSystemMessage(net.minecraft.network.chat.Component);
+    descriptor: (Lnet/minecraft/network/chat/Component;)V
+
+  public void sendOverlayMessage(net.minecraft.network.chat.Component);
+    descriptor: (Lnet/minecraft/network/chat/Component;)V
+
+  private void moveTowardsClosestSpace(double, double);
+    descriptor: (DD)V
+
+  private boolean suffocatesAt(net.minecraft.core.BlockPos);
+    descriptor: (Lnet/minecraft/core/BlockPos;)Z
+
+  public void setExperienceValues(float, int, int);
+    descriptor: (FII)V
+
+  private void setExperienceDisplayStartTickToTickCount();
+    descriptor: ()V
+
+  public void handleEntityEvent(byte);
+    descriptor: (B)V
+
+  public void setShowDeathScreen(boolean);
+    descriptor: (Z)V
+
+  public boolean shouldShowDeathScreen();
+    descriptor: ()Z
+
+  public void setDoLimitedCrafting(boolean);
+    descriptor: (Z)V
+
+  public boolean getDoLimitedCrafting();
+    descriptor: ()Z
+
+  public void playSound(net.minecraft.sounds.SoundEvent, float, float);
+    descriptor: (Lnet/minecraft/sounds/SoundEvent;FF)V
+
+  public void startUsingItem(net.minecraft.world.InteractionHand);
+    descriptor: (Lnet/minecraft/world/InteractionHand;)V
+
+  public boolean isUsingItem();
+    descriptor: ()Z
+
+  private boolean isSlowDueToUsingItem();
+    descriptor: ()Z
+
+  private float itemUseSpeedMultiplier();
+    descriptor: ()F
+
+  public void stopUsingItem();
+    descriptor: ()V
+
+  public net.minecraft.world.InteractionHand getUsedItemHand();
+    descriptor: ()Lnet/minecraft/world/InteractionHand;
+
+  public void onSyncedDataUpdated(net.minecraft.network.syncher.EntityDataAccessor<?>);
+    descriptor: (Lnet/minecraft/network/syncher/EntityDataAccessor;)V
+
+  public net.minecraft.world.entity.PlayerRideableJumping jumpableVehicle();
+    descriptor: ()Lnet/minecraft/world/entity/PlayerRideableJumping;
+
+  public float getJumpRidingScale();
+    descriptor: ()F
+
+  public boolean isTextFilteringEnabled();
+    descriptor: ()Z
+
+  public void openTextEdit(net.minecraft.world.level.block.entity.SignBlockEntity, net.minecraft.world.level.block.entity.SignTextSlot);
+    descriptor: (Lnet/minecraft/world/level/block/entity/SignBlockEntity;Lnet/minecraft/world/level/block/entity/SignTextSlot;)V
+
+  public void openMinecartCommandBlock(net.minecraft.world.entity.vehicle.minecart.MinecartCommandBlock);
+    descriptor: (Lnet/minecraft/world/entity/vehicle/minecart/MinecartCommandBlock;)V
+
+  public void openCommandBlock(net.minecraft.world.level.block.entity.CommandBlockEntity);
+    descriptor: (Lnet/minecraft/world/level/block/entity/CommandBlockEntity;)V
+
+  public void openStructureBlock(net.minecraft.world.level.block.entity.StructureBlockEntity);
+    descriptor: (Lnet/minecraft/world/level/block/entity/StructureBlockEntity;)V
+
+  public void openTestBlock(net.minecraft.world.level.block.entity.TestBlockEntity);
+    descriptor: (Lnet/minecraft/world/level/block/entity/TestBlockEntity;)V
+
+  public void openTestInstanceBlock(net.minecraft.world.level.block.entity.TestInstanceBlockEntity);
+    descriptor: (Lnet/minecraft/world/level/block/entity/TestInstanceBlockEntity;)V
+
+  public void openJigsawBlock(net.minecraft.world.level.block.entity.JigsawBlockEntity);
+    descriptor: (Lnet/minecraft/world/level/block/entity/JigsawBlockEntity;)V
+
+  public void openDialog(net.minecraft.core.Holder<net.minecraft.server.dialog.Dialog>);
+    descriptor: (Lnet/minecraft/core/Holder;)V
+
+  public void openItemGui(net.minecraft.world.item.ItemStack, net.minecraft.world.InteractionHand);
+    descriptor: (Lnet/minecraft/world/item/ItemStack;Lnet/minecraft/world/InteractionHand;)V
+
+  public void crit(net.minecraft.world.entity.Entity);
+    descriptor: (Lnet/minecraft/world/entity/Entity;)V
+
+  public void magicCrit(net.minecraft.world.entity.Entity);
+    descriptor: (Lnet/minecraft/world/entity/Entity;)V
+
+  public boolean isShiftKeyDown();
+    descriptor: ()Z
+
+  public boolean isCrouching();
+    descriptor: ()Z
+
+  public boolean isMovingSlowly();
+    descriptor: ()Z
+
+  public void applyInput();
+    descriptor: ()V
+
+  private net.minecraft.world.phys.Vec2 modifyInput(net.minecraft.world.phys.Vec2);
+    descriptor: (Lnet/minecraft/world/phys/Vec2;)Lnet/minecraft/world/phys/Vec2;
+
+  private static net.minecraft.world.phys.Vec2 modifyInputSpeedForSquareMovement(net.minecraft.world.phys.Vec2);
+    descriptor: (Lnet/minecraft/world/phys/Vec2;)Lnet/minecraft/world/phys/Vec2;
+
+  private static float distanceToUnitSquare(net.minecraft.world.phys.Vec2);
+    descriptor: (Lnet/minecraft/world/phys/Vec2;)F
+
+  protected boolean isControlledCamera();
+    descriptor: ()Z
+
+  public void resetPos();
+    descriptor: ()V
+
+  public void aiStep();
+    descriptor: ()V
+
+  private boolean shouldStopRunSprinting();
+    descriptor: ()Z
+
+  private boolean shouldStopSwimSprinting();
+    descriptor: ()Z
+
+  public net.minecraft.world.level.block.Portal$Transition getActivePortalLocalTransition();
+    descriptor: ()Lnet/minecraft/world/level/block/Portal$Transition;
+
+  protected void tickDeath();
+    descriptor: ()V
+
+  private void handlePortalTransitionEffect(boolean);
+    descriptor: (Z)V
+
+  private void tickSpinningEffect();
+    descriptor: ()V
+
+  public float getSpinningEffectAngle(float);
+    descriptor: (F)F
+
+  public void rideTick();
+    descriptor: ()V
+
+  public boolean isHandsBusy();
+    descriptor: ()Z
+
+  public void move(net.minecraft.world.entity.MoverType, net.minecraft.world.phys.Vec3);
+    descriptor: (Lnet/minecraft/world/entity/MoverType;Lnet/minecraft/world/phys/Vec3;)V
+
+  public boolean isAutoJumpEnabled();
+    descriptor: ()Z
+
+  public boolean shouldRotateWithMinecart();
+    descriptor: ()Z
+
+  protected void updateAutoJump(float, float);
+    descriptor: (FF)V
+
+  protected boolean isHorizontalCollisionMinor(net.minecraft.world.phys.Vec3);
+    descriptor: (Lnet/minecraft/world/phys/Vec3;)Z
+
+  private boolean canAutoJump();
+    descriptor: ()Z
+
+  private boolean isMoving();
+    descriptor: ()Z
+
+  private boolean isSprintingPossible(boolean);
+    descriptor: (Z)Z
+
+  private boolean canStartSprinting();
+    descriptor: ()Z
+
+  private boolean vehicleCanSprint(net.minecraft.world.entity.Entity);
+    descriptor: (Lnet/minecraft/world/entity/Entity;)Z
+
+  public float getWaterVision();
+    descriptor: ()F
+
+  public void onGameModeChanged(net.minecraft.world.level.GameType);
+    descriptor: (Lnet/minecraft/world/level/GameType;)V
+
+  public boolean isUnderWater();
+    descriptor: ()Z
+
+  protected boolean updateIsUnderwater();
+    descriptor: ()Z
+
+  public net.minecraft.world.phys.Vec3 getRopeHoldPosition(float);
+    descriptor: (F)Lnet/minecraft/world/phys/Vec3;
+
+  public void updateTutorialInventoryAction(net.minecraft.world.item.ItemStack, net.minecraft.world.item.ItemStack, net.minecraft.world.inventory.ClickAction);
+    descriptor: (Lnet/minecraft/world/item/ItemStack;Lnet/minecraft/world/item/ItemStack;Lnet/minecraft/world/inventory/ClickAction;)V
+
+  public float getVisualRotationYInDegrees();
+    descriptor: ()F
+
+  public void handleCreativeModeItemDrop(net.minecraft.world.item.ItemStack);
+    descriptor: (Lnet/minecraft/world/item/ItemStack;)V
+
+  public boolean canDropItems();
+    descriptor: ()Z
+
+  public net.minecraft.util.TickThrottler getDropSpamThrottler();
+    descriptor: ()Lnet/minecraft/util/TickThrottler;
+
+  public net.minecraft.world.entity.player.Input getLastSentInput();
+    descriptor: ()Lnet/minecraft/world/entity/player/Input;
+
+  public net.minecraft.world.phys.HitResult raycastHitResult(float, net.minecraft.world.entity.Entity);
+    descriptor: (FLnet/minecraft/world/entity/Entity;)Lnet/minecraft/world/phys/HitResult;
+
+  private static net.minecraft.world.phys.HitResult pick(net.minecraft.world.entity.Entity, double, double, float);
+    descriptor: (Lnet/minecraft/world/entity/Entity;DDF)Lnet/minecraft/world/phys/HitResult;
+
+  private static net.minecraft.world.phys.HitResult filterHitResult(net.minecraft.world.phys.HitResult, net.minecraft.world.phys.Vec3, double);
+    descriptor: (Lnet/minecraft/world/phys/HitResult;Lnet/minecraft/world/phys/Vec3;D)Lnet/minecraft/world/phys/HitResult;
+
+  public void setActivePostEffects(java.util.List<net.minecraft.resources.Identifier>);
+    descriptor: (Ljava/util/List;)V
+
+  public java.util.List<net.minecraft.resources.Identifier> getActivePostEffects();
+    descriptor: ()Ljava/util/List;
+
+  private static java.util.stream.Stream lambda$updateAutoJump$0(net.minecraft.world.phys.shapes.VoxelShape);
+    descriptor: (Lnet/minecraft/world/phys/shapes/VoxelShape;)Ljava/util/stream/Stream;
+
+  static {};
+    descriptor: ()V
+}

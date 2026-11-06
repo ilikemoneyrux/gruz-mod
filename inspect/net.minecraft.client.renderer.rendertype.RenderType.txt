@@ -1,0 +1,69 @@
+Compiled from "RenderType.java"
+public class net.minecraft.client.renderer.rendertype.RenderType {
+  private static final int MEGABYTE;
+    descriptor: I
+  public static final int BIG_BUFFER_SIZE;
+    descriptor: I
+  public static final int SMALL_BUFFER_SIZE;
+    descriptor: I
+  public static final int TRANSIENT_BUFFER_SIZE;
+    descriptor: I
+  private final net.minecraft.client.renderer.rendertype.RenderSetup state;
+    descriptor: Lnet/minecraft/client/renderer/rendertype/RenderSetup;
+  private final boolean hasBlending;
+    descriptor: Z
+  private final java.util.Optional<net.minecraft.client.renderer.rendertype.RenderType> outline;
+    descriptor: Ljava/util/Optional;
+  protected final java.lang.String name;
+    descriptor: Ljava/lang/String;
+  private net.minecraft.client.renderer.rendertype.RenderType(java.lang.String, net.minecraft.client.renderer.rendertype.RenderSetup);
+    descriptor: (Ljava/lang/String;Lnet/minecraft/client/renderer/rendertype/RenderSetup;)V
+
+  static net.minecraft.client.renderer.rendertype.RenderType create(java.lang.String, net.minecraft.client.renderer.rendertype.RenderSetup);
+    descriptor: (Ljava/lang/String;Lnet/minecraft/client/renderer/rendertype/RenderSetup;)Lnet/minecraft/client/renderer/rendertype/RenderType;
+
+  public java.lang.String toString();
+    descriptor: ()Ljava/lang/String;
+
+  public boolean hasBlending();
+    descriptor: ()Z
+
+  private boolean calculateHasBlending();
+    descriptor: ()Z
+
+  public net.minecraft.client.renderer.rendertype.PreparedRenderType prepare();
+    descriptor: ()Lnet/minecraft/client/renderer/rendertype/PreparedRenderType;
+
+  private com.mojang.renderpearl.api.buffers.GpuBufferSlice writeDynamicTransforms(org.joml.Matrix4f);
+    descriptor: (Lorg/joml/Matrix4f;)Lcom/mojang/renderpearl/api/buffers/GpuBufferSlice;
+
+  public com.mojang.renderpearl.api.vertex.VertexFormat format();
+    descriptor: ()Lcom/mojang/renderpearl/api/vertex/VertexFormat;
+
+  public com.mojang.renderpearl.api.pipeline.PrimitiveTopology primitiveTopology();
+    descriptor: ()Lcom/mojang/renderpearl/api/pipeline/PrimitiveTopology;
+
+  public java.util.Optional<net.minecraft.client.renderer.rendertype.RenderType> outline();
+    descriptor: ()Ljava/util/Optional;
+
+  public boolean isOutline();
+    descriptor: ()Z
+
+  public com.mojang.renderpearl.api.pipeline.RenderPipeline pipeline();
+    descriptor: ()Lcom/mojang/renderpearl/api/pipeline/RenderPipeline;
+
+  public boolean affectsCrumbling();
+    descriptor: ()Z
+
+  public boolean canConsolidateConsecutiveGeometry();
+    descriptor: ()Z
+
+  public boolean sortOnUpload();
+    descriptor: ()Z
+
+  public boolean forceSolidModelPhase();
+    descriptor: ()Z
+
+  private static net.minecraft.client.renderer.rendertype.RenderType lambda$new$0(net.minecraft.client.renderer.rendertype.RenderSetup, net.minecraft.client.renderer.rendertype.RenderSetup$TextureBinding);
+    descriptor: (Lnet/minecraft/client/renderer/rendertype/RenderSetup;Lnet/minecraft/client/renderer/rendertype/RenderSetup$TextureBinding;)Lnet/minecraft/client/renderer/rendertype/RenderType;
+}
