@@ -196,7 +196,7 @@ public final class GruzNetwork {
         if (mc.player != null) Compat.chat(mc.player, prefix().append(t), false);
     }
 
-    private static MutableComponent prefix() {
+    static MutableComponent prefix() {
         return Component.literal("◆ Gruz ").setStyle(Style.EMPTY.withColor(TextColor.fromRgb(GruzDraw.NEON)));
     }
 
@@ -249,6 +249,7 @@ public final class GruzNetwork {
                     net.minecraft.client.Minecraft.getInstance().execute(() -> pl.gruzclient.cosmetics.EmoteAnim.start(who, play));
                 }
             }
+            case "serverRules" -> ServerRules.update(m.getAsJsonArray("rules"));
             case "duo.invite" -> pl.gruzclient.cosmetics.Duo.onInvite(UUID.fromString(str(m, "from")), str(m, "name"), str(m, "emote"));
             case "duo.start" -> pl.gruzclient.cosmetics.Duo.onStart(UUID.fromString(str(m, "a")), UUID.fromString(str(m, "b")), str(m, "emote"));
             case "friends" -> {

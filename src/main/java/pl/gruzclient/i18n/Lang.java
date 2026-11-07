@@ -449,6 +449,8 @@ public final class Lang {
         put("mods.nothing", "Nic nie znaleziono.", "Nothing found.");
         put("mods.enabled", "WŁĄCZONY", "ENABLED");
         put("mods.disabled", "WYŁĄCZONY", "DISABLED");
+        put("mods.blocked", "ZABLOKOWANY NA SERWERZE", "BLOCKED BY SERVER");
+        put("rules.blocked", "Serwer {server} nie pozwala na: {list}. Wrócą same po wyjściu z serwera.", "{server} doesn't allow: {list}. They come back when you leave.");
 
         // ---- kosmetyki: nowe ----
         put("cape.gruz", "Gruz Client (za darmo)", "Gruz Client (free)");

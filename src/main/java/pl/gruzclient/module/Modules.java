@@ -91,6 +91,7 @@ public final class Modules {
             }
         }
         COSMETICS.applyLauncherChoice();
+        pl.gruzclient.network.ServerRules.load();
     }
 
     public static void save() {
@@ -104,6 +105,7 @@ public final class Modules {
     private static boolean hubWasDown;
 
     public static void tick() {
+        pl.gruzclient.network.ServerRules.tick();
         for (Module m : ALL) if (m.isEnabled()) m.tick();
         Minecraft mc = Minecraft.getInstance();
         boolean down = keyDown(HUB_KEY);

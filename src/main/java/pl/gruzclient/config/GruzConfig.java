@@ -28,6 +28,8 @@ public class GruzConfig {
     public Map<String, JsonObject> elements = new LinkedHashMap<>();
     /** id modułu -> jego zapisany stan (włączony, ustawienia, pozycja HUD) */
     public Map<String, JsonObject> modules = new LinkedHashMap<>();
+    /** Tryb zgodny z serwerami: adres serwera -> zablokowane moduły (kopia listy z serwera Gruz) */
+    public Map<String, java.util.List<String>> serverRules = new LinkedHashMap<>();
 
     public static GruzConfig get() {
         if (instance == null) load();

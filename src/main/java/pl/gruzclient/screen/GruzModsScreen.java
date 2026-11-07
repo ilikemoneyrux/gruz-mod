@@ -250,6 +250,12 @@ public class GruzModsScreen extends pl.gruzclient.compat.GruzScreen {
             // przycisk WŁ./WYŁ.
             int by = y + cardH - 18;
             boolean bh = Ui.inside(mouseX, mouseY, x + 6, by, cardW - 12, 13);
+            if (m.isBlocked()) {
+                // zablokowany przez serwer: szary przycisk z kłódką, kliknięcie nic nie zmienia
+                Ui.round(c, x + 6, by, cardW - 12, 13, 3, argb(a, 0x1A1520));
+                Ui.drawCentered(c, Ui.fit("✖ " + Lang.t("mods.blocked"), cardW - 16, true), x + cardW / 2, by + 3, argb(a, 0xC9A35A));
+                continue;
+            }
             if (en) Ui.hGradient(c, x + 6, by, cardW - 12, 13, bh ? NEON_HOT : NEON, NEON_DEEP, a, 3);
             else Ui.round(c, x + 6, by, cardW - 12, 13, 3, argb(a, bh ? 0x2C2238 : 0x211A2B));
             Component st = Ui.bold(Lang.t(en ? "mods.enabled" : "mods.disabled"));
@@ -359,9 +365,9 @@ public class GruzModsScreen extends pl.gruzclient.compat.GruzScreen {
             int y = contentY + (i / cols) * (cardH + GAP) - Math.round(scroll);
             if (!Ui.inside(mx, my, x, y, cardW, cardH)) continue;
             Module m = list.get(i);
-            if (Ui.inside(mx, my, x + 6, y + cardH - 18, cardW - 12, 13)) { m.toggle(); Modules.save(); return true; }
+            if (Ui.inside(mx, my, x + 6, y + cardH - 18, cardW - 12, 13)) { if (!m.isBlocked()) { m.toggle(); Modules.save(); } return true; }
             if (!m.settings().isEmpty() && (Ui.inside(mx, my, x + cardW - 20, y + 6, 14, 14) || button == 1)) { openSettings(m); return true; }
-            if (!m.settings().isEmpty()) openSettings(m); else { m.toggle(); Modules.save(); }
+            if (!m.settings().isEmpty()) openSettings(m); else if (!m.isBlocked()) { m.toggle(); Modules.save(); }
             return true;
         }
         return false;
@@ -376,7 +382,7 @@ public class GruzModsScreen extends pl.gruzclient.compat.GruzScreen {
         Module m = settingsOf;
         int x = contentX, y = contentY - Math.round(scroll);
         if (Ui.inside(mx, my, x, y, 16, 16)) { settingsOf = null; scroll = scrollTarget = 0; return true; }
-        if (Ui.inside(mx, my, x + contentW - 26, y + 3, 22, 11)) { m.toggle(); Modules.save(); return true; }
+        if (Ui.inside(mx, my, x + contentW - 26, y + 3, 22, 11)) { if (!m.isBlocked()) { m.toggle(); Modules.save(); } return true; }
         int rowY = rowsTop() - Math.round(scroll);
         int ctrlW = Math.min(130, contentW / 2), ctrlX = x + contentW - ctrlW - 8;
         for (Setting s : m.settings()) {
