@@ -42,9 +42,14 @@ public abstract class ChatHudMixin implements GruzChat {
     @Unique private String gruz$lastPlain = null;
     @Unique private int gruz$count = 1;
 
+    // od 26.1 addMessage ma dodatkowy parametr GuiMessageSource – inaczej łączenie powtórzeń i AutoGG po cichu nie działają
+    //#if MC >= 26.1
+    @ModifyVariable(method = "addMessage(Lnet/minecraft/network/chat/Component;Lnet/minecraft/network/chat/MessageSignature;Lnet/minecraft/client/multiplayer/chat/GuiMessageSource;Lnet/minecraft/client/multiplayer/chat/GuiMessageTag;)V",
+    //#else
     @ModifyVariable(method = "addMessage(Lnet/minecraft/network/chat/Component;Lnet/minecraft/network/chat/MessageSignature;Lnet/minecraft/client/GuiMessageTag;)V",
+    //#endif
             at = @At("HEAD"), argsOnly = true, require = 0)
-    private Component gruz$onMessage(Component message, Component original, MessageSignature signature, GuiMessageTag indicator) {
+    private Component gruz$onMessage(Component message) {
         String plain = message.getString();
         Modules.AUTO_GG.onChat(plain);
         BetterChatModule chat = Modules.BETTER_CHAT;

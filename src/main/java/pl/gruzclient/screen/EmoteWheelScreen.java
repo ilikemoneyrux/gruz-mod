@@ -87,8 +87,8 @@ public class EmoteWheelScreen extends pl.gruzclient.compat.GruzScreen {
     @Override
     public boolean keyPressed(int keyCode, int scanCode, int modifiers) {
         // cyfry 1–8 wybierają emotkę od razu
-        if (keyCode >= 49 && keyCode < 49 + emotes.length) {
-            hovered = keyCode - 49;
+        if (keyCode >= com.mojang.blaze3d.platform.InputConstants.KEY_1 && keyCode < com.mojang.blaze3d.platform.InputConstants.KEY_1 + Math.min(9, emotes.length)) {
+            hovered = keyCode - com.mojang.blaze3d.platform.InputConstants.KEY_1;
             choose();
             return true;
         }

@@ -1,7 +1,7 @@
 package pl.gruzclient.module.impl;
 
 import pl.gruzclient.compat.Compat;
-import org.lwjgl.glfw.GLFW;
+import com.mojang.blaze3d.platform.InputConstants;
 import pl.gruzclient.GruzClient;
 import pl.gruzclient.i18n.Lang;
 import pl.gruzclient.module.Module;
@@ -25,7 +25,7 @@ import net.minecraft.resources.ResourceLocation;
  */
 public class MenuModule extends Module {
     public final Setting.Choice background = add(new Setting.Choice("background", "setting.menuBackground", 0, "menu.vanilla", "menu.crystals", "menu.panorama"));
-    public final Setting.Key key = add(new Setting.Key("key", "setting.panoramaKey", GLFW.GLFW_KEY_F7));
+    public final Setting.Key key = add(new Setting.Key("key", "setting.panoramaKey", InputConstants.KEY_F7));
     public final Setting.Bool seasonal = add(new Setting.Bool("seasonal", "setting.seasonal", true));
 
     public static final ResourceLocation PANORAMA = Compat.id(GruzClient.MOD_ID, "panorama/menu");

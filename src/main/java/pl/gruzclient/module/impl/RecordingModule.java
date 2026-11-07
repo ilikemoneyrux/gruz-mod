@@ -1,6 +1,6 @@
 package pl.gruzclient.module.impl;
 
-import org.lwjgl.glfw.GLFW;
+import com.mojang.blaze3d.platform.InputConstants;
 import pl.gruzclient.module.Module;
 import pl.gruzclient.module.Modules;
 import pl.gruzclient.module.Setting;
@@ -10,7 +10,7 @@ import pl.gruzclient.module.Setting;
  * (w odróżnieniu od F1). Idealne do klipów.
  */
 public class RecordingModule extends Module {
-    public final Setting.Key key = add(new Setting.Key("key", "setting.key", GLFW.GLFW_KEY_F6));
+    public final Setting.Key key = add(new Setting.Key("key", "setting.key", InputConstants.KEY_F6));
 
     private boolean active, wasDown;
 

@@ -54,3 +54,8 @@ MC >= 26.2 | mc.options.hideGui => mc.gui.hud.isHidden()
 MC >= 26.2 | Items.WHITE_WOOL => Items.WOOL.white()
 # 1.20.1: ekran debugowania to jeszcze flaga w opcjach
 MC < 1.20.2 | mc.getDebugOverlay().showDebugScreen() => mc.options.renderDebug
+# 26.2: GameRenderer.getNightVisionScale -> nightVisionScale
+MC >= 26.2 | method = "getNightVisionScale" => method = "nightVisionScale"
+# 26.3: PoseStack.mulPose(Quaternionf) -> rotate(Quaternionfc); okno i klawiatura na SDL3 (bez GLFW)
+MC >= 26.3 | m.mulPose(Axis. => m.rotate(Axis.
+MC >= 26.3 | method = "getCurrentSwingDuration" => method = "getModifiedSwingDuration"

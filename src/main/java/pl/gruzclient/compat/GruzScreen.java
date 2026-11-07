@@ -113,11 +113,15 @@ public abstract class GruzScreen extends Screen {
     //#endif
 
     // ---------------- modyfikatory ----------------
-    public static boolean ctrl() { return key(org.lwjgl.glfw.GLFW.GLFW_KEY_LEFT_CONTROL) || key(org.lwjgl.glfw.GLFW.GLFW_KEY_RIGHT_CONTROL); }
-    public static boolean shift() { return key(org.lwjgl.glfw.GLFW.GLFW_KEY_LEFT_SHIFT) || key(org.lwjgl.glfw.GLFW.GLFW_KEY_RIGHT_SHIFT); }
-    public static boolean alt() { return key(org.lwjgl.glfw.GLFW.GLFW_KEY_LEFT_ALT) || key(org.lwjgl.glfw.GLFW.GLFW_KEY_RIGHT_ALT); }
+    public static boolean ctrl() { return key(com.mojang.blaze3d.platform.InputConstants.KEY_LCONTROL) || key(com.mojang.blaze3d.platform.InputConstants.KEY_RCONTROL); }
+    public static boolean shift() { return key(com.mojang.blaze3d.platform.InputConstants.KEY_LSHIFT) || key(com.mojang.blaze3d.platform.InputConstants.KEY_RSHIFT); }
+    public static boolean alt() { return key(com.mojang.blaze3d.platform.InputConstants.KEY_LALT) || key(com.mojang.blaze3d.platform.InputConstants.KEY_RALT); }
 
     private static boolean key(int code) {
-        return org.lwjgl.glfw.GLFW.glfwGetKey(Compat.windowHandle(), code) == org.lwjgl.glfw.GLFW.GLFW_PRESS;
+        //#if MC >= 26.3
+        return com.mojang.blaze3d.platform.InputConstants.isKeyDown(code);
+        //#else
+        return com.mojang.blaze3d.platform.InputConstants.isKeyDown(Compat.windowHandle(), code);
+        //#endif
     }
 }

@@ -6,6 +6,7 @@
   "client": [
     "SplashOverlayMixin",
     "MinecraftClientMixin",
+    "GuiScreenMixin",
     "GameMenuScreenMixin",
     "InGameHudMixin",
     "GameRendererMixin",

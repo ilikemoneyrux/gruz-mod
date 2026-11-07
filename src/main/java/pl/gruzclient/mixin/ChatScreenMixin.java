@@ -6,7 +6,7 @@ import net.minecraft.client.gui.components.EditBox;
 import net.minecraft.client.gui.screens.ChatScreen;
 import net.minecraft.client.gui.screens.Screen;
 import net.minecraft.network.chat.Component;
-import org.lwjgl.glfw.GLFW;
+import com.mojang.blaze3d.platform.InputConstants;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Unique;
 import org.spongepowered.asm.mixin.injection.At;
@@ -58,7 +58,7 @@ public abstract class ChatScreenMixin extends Screen {
     private void gruz$keys(int keyCode, int scanCode, int modifiers, CallbackInfoReturnable<Boolean> cir) {
     //#endif
         if (gruz$search == null) return;
-        if (keyCode == GLFW.GLFW_KEY_F && pl.gruzclient.compat.GruzScreen.ctrl()) {
+        if (keyCode == InputConstants.KEY_F && pl.gruzclient.compat.GruzScreen.ctrl()) {
             boolean show = !gruz$search.isVisible();
             gruz$search.setVisible(show);
             if (show) { this.setFocused(gruz$search); gruz$search.setFocused(true); }
@@ -67,8 +67,8 @@ public abstract class ChatScreenMixin extends Screen {
             return;
         }
         // Enter/strzałki w polu wyszukiwania nie wysyłają wiadomości
-        if (gruz$search.isVisible() && gruz$search.isFocused() && keyCode != GLFW.GLFW_KEY_ESCAPE) {
-            if (keyCode == GLFW.GLFW_KEY_ENTER || keyCode == GLFW.GLFW_KEY_KP_ENTER || keyCode == GLFW.GLFW_KEY_TAB) {
+        if (gruz$search.isVisible() && gruz$search.isFocused() && keyCode != InputConstants.KEY_ESCAPE) {
+            if (keyCode == InputConstants.KEY_RETURN || keyCode == InputConstants.KEY_NUMPADENTER || keyCode == InputConstants.KEY_TAB) {
                 this.setFocused(null);
                 cir.setReturnValue(true);
                 return;
@@ -89,7 +89,7 @@ public abstract class ChatScreenMixin extends Screen {
     //#else
     private void gruz$copy(double mouseX, double mouseY, int button, CallbackInfoReturnable<Boolean> cir) {
     //#endif
-        if (button != GLFW.GLFW_MOUSE_BUTTON_RIGHT || !Modules.BETTER_CHAT.copying()) return;
+        if (button != InputConstants.MOUSE_BUTTON_RIGHT || !Modules.BETTER_CHAT.copying()) return;
         String msg = gruz$chat().gruz$messageAt(mouseX, mouseY);
         if (msg == null || msg.isEmpty()) return;
         this.minecraft.keyboardHandler.setClipboard(msg);

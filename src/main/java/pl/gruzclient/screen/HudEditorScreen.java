@@ -1,7 +1,7 @@
 //#swap MC >= 26.2 | (pl.gruzclient.mixin.InGameHudInvoker) this.minecraft.gui) => (pl.gruzclient.mixin.InGameHudInvoker) this.minecraft.gui.hud)
 package pl.gruzclient.screen;
 
-import org.lwjgl.glfw.GLFW;
+import com.mojang.blaze3d.platform.InputConstants;
 import pl.gruzclient.i18n.Lang;
 import pl.gruzclient.module.HudModule;
 import pl.gruzclient.module.HudPresets;
@@ -364,10 +364,10 @@ public class HudEditorScreen extends pl.gruzclient.compat.GruzScreen {
     public boolean keyPressed(int keyCode, int scanCode, int modifiers) {
         if (keyCode == Modules.HUB_KEY && this.minecraft.level != null) { onClose(); return true; }
         // strzałki przesuwają element pod kursorem o 1 px
-        if (hovered != null && keyCode >= GLFW.GLFW_KEY_RIGHT && keyCode <= GLFW.GLFW_KEY_UP) {
+        if (hovered != null && keyCode >= InputConstants.KEY_RIGHT && keyCode <= InputConstants.KEY_UP) {
             int[] r = hovered.rect(this.width, this.height);
-            int dx = keyCode == GLFW.GLFW_KEY_RIGHT ? 1 : keyCode == GLFW.GLFW_KEY_LEFT ? -1 : 0;
-            int dy = keyCode == GLFW.GLFW_KEY_DOWN ? 1 : keyCode == GLFW.GLFW_KEY_UP ? -1 : 0;
+            int dx = keyCode == InputConstants.KEY_RIGHT ? 1 : keyCode == InputConstants.KEY_LEFT ? -1 : 0;
+            int dy = keyCode == InputConstants.KEY_DOWN ? 1 : keyCode == InputConstants.KEY_UP ? -1 : 0;
             hovered.moveTo(r[0] + dx, r[1] + dy, this.width, this.height);
             return true;
         }

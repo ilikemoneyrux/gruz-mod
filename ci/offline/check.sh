@@ -15,6 +15,7 @@ rm -rf pp-$v out-$v; python3 -W ignore $H/pp.py $ROOT $v $obf pp-$v > /dev/null
 [ -d stubs-$v ] || python3 $H/stubgen.py dump-$v.txt stubs-$v > /dev/null
 rm -rf ext-$v; python3 $H/extstub.py stubs-$v $H/lib ext-$v $(find pp-$v -name "*.java") > /dev/null
 find stubs-$v $H/lib ext-$v pp-$v -name "*.java" > src-$v.txt
+if command -v cygpath >/dev/null; then sed -i 's#^/\([a-z]\)/#\1:/#' src-$v.txt; fi  # Git Bash na Windows: javac potrzebuje ścieżek C:/
 mkdir -p out-$v
 javac -J-Xmx6g --release 21 -proc:none -nowarn -Xmaxerrs 1000000 -encoding UTF-8 -d out-$v @src-$v.txt 2> javac-$v.log || true
 python3 - "$v" <<'PY'

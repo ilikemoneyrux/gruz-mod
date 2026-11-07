@@ -1,13 +1,13 @@
 package pl.gruzclient.module.impl;
 
-import org.lwjgl.glfw.GLFW;
+import com.mojang.blaze3d.platform.InputConstants;
 import pl.gruzclient.module.Module;
 import pl.gruzclient.module.Modules;
 import pl.gruzclient.module.Setting;
 
 /** Zoom pod klawiszem (domyślnie C). Kółko myszy w trakcie zooma zmienia przybliżenie. */
 public class ZoomModule extends Module {
-    public final Setting.Key key = add(new Setting.Key("key", "setting.key", GLFW.GLFW_KEY_C));
+    public final Setting.Key key = add(new Setting.Key("key", "setting.key", InputConstants.KEY_C));
     public final Setting.Choice mode = add(new Setting.Choice("mode", "setting.mode", 0, "setting.mode.hold", "setting.mode.toggle"));
     public final Setting.Number level = add(new Setting.Number("level", "setting.level", 4f, 2f, 12f, 1f, "x"));
     public final Setting.Bool smooth = add(new Setting.Bool("smooth", "setting.smooth", true));

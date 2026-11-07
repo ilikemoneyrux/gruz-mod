@@ -100,7 +100,7 @@ public final class Modules {
     }
 
     /** Klawisz centrum modów (edytor HUD) – domyślnie prawy Shift */
-    public static int HUB_KEY = org.lwjgl.glfw.GLFW.GLFW_KEY_RIGHT_SHIFT;
+    public static int HUB_KEY = com.mojang.blaze3d.platform.InputConstants.KEY_RSHIFT;
     private static boolean hubWasDown;
 
     public static void tick() {
@@ -132,7 +132,7 @@ public final class Modules {
         if (mc.screen != null || code <= 0) return false;
         boolean down = rawDown(code);
         if (!down) { F3_COMBO.remove(code); return false; }
-        if (code != org.lwjgl.glfw.GLFW.GLFW_KEY_F3 && rawDown(org.lwjgl.glfw.GLFW.GLFW_KEY_F3)) F3_COMBO.add(code);
+        if (code != com.mojang.blaze3d.platform.InputConstants.KEY_F3 && rawDown(com.mojang.blaze3d.platform.InputConstants.KEY_F3)) F3_COMBO.add(code);
         return !F3_COMBO.contains(code);
     }
 

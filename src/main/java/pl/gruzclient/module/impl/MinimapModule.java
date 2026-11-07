@@ -1,7 +1,7 @@
 package pl.gruzclient.module.impl;
 
 import pl.gruzclient.compat.Compat;
-import org.lwjgl.glfw.GLFW;
+import com.mojang.blaze3d.platform.InputConstants;
 import pl.gruzclient.GruzClient;
 import pl.gruzclient.i18n.Lang;
 import pl.gruzclient.map.MapCache;
@@ -30,8 +30,8 @@ public class MinimapModule extends HudModule {
     public final Setting.Bool rotate = add(new Setting.Bool("rotate", "setting.mapRotate", false));
     public final Setting.Bool compass = add(new Setting.Bool("compass", "setting.compass", true));
     public final Setting.Bool deathPoint = add(new Setting.Bool("death", "setting.deathPoint", true));
-    public final Setting.Key mapKey = add(new Setting.Key("mapKey", "setting.mapKey", GLFW.GLFW_KEY_M));
-    public final Setting.Key addKey = add(new Setting.Key("addKey", "setting.waypointKey", GLFW.GLFW_KEY_N));
+    public final Setting.Key mapKey = add(new Setting.Key("mapKey", "setting.mapKey", InputConstants.KEY_M));
+    public final Setting.Key addKey = add(new Setting.Key("addKey", "setting.waypointKey", InputConstants.KEY_N));
 
     private static final int TEX = 160;
     private static final ResourceLocation ID = Compat.id(GruzClient.MOD_ID, "minimap");

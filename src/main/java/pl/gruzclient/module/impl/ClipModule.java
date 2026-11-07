@@ -2,7 +2,7 @@ package pl.gruzclient.module.impl;
 
 import pl.gruzclient.compat.Compat;
 import net.minecraft.network.chat.Component;
-import org.lwjgl.glfw.GLFW;
+import com.mojang.blaze3d.platform.InputConstants;
 import pl.gruzclient.i18n.Lang;
 import pl.gruzclient.module.Module;
 import pl.gruzclient.module.Modules;
@@ -14,7 +14,7 @@ import pl.gruzclient.obs.ObsClient;
  * Opcjonalnie klip zapisuje się sam chwilę po każdym killu.
  */
 public class ClipModule extends Module {
-    public final Setting.Key key = add(new Setting.Key("key", "setting.key", GLFW.GLFW_KEY_F8));
+    public final Setting.Key key = add(new Setting.Key("key", "setting.key", InputConstants.KEY_F8));
     public final Setting.Bool onKill = add(new Setting.Bool("onKill", "setting.clipOnKill", false));
     public final Setting.Number port = add(new Setting.Number("port", "setting.obsPort", 4455f, 1024f, 65535f, 1f, ""));
     public final Setting.Text password = add(new Setting.Text("password", "setting.obsPassword", "").secret());

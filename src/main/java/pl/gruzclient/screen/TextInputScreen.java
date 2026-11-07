@@ -1,6 +1,6 @@
 package pl.gruzclient.screen;
 
-import org.lwjgl.glfw.GLFW;
+import com.mojang.blaze3d.platform.InputConstants;
 import pl.gruzclient.i18n.Lang;
 import pl.gruzclient.module.Modules;
 import pl.gruzclient.module.Setting;
@@ -51,7 +51,7 @@ public class TextInputScreen extends pl.gruzclient.compat.GruzScreen {
 
     @Override
     public boolean keyPressed(int keyCode, int scanCode, int modifiers) {
-        if (keyCode == GLFW.GLFW_KEY_ENTER || keyCode == GLFW.GLFW_KEY_KP_ENTER) { save(); return true; }
+        if (keyCode == InputConstants.KEY_RETURN || keyCode == InputConstants.KEY_NUMPADENTER) { save(); return true; }
         return super.keyPressed(keyCode, scanCode, modifiers);
     }
 

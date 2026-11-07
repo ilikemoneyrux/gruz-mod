@@ -2,7 +2,7 @@ package pl.gruzclient.module.impl;
 
 import pl.gruzclient.compat.Compat;
 import org.joml.Vector3f;
-import org.lwjgl.glfw.GLFW;
+import com.mojang.blaze3d.platform.InputConstants;
 import pl.gruzclient.GruzClient;
 import pl.gruzclient.cosmetics.CapeTextures;
 import pl.gruzclient.cosmetics.CosmeticSet;
@@ -45,12 +45,12 @@ public class CosmeticsModule extends Module {
         return out;
     }
     public final Setting.Bool showOthers = add(new Setting.Bool("others", "setting.showOthers", true));
-    public final Setting.Key emoteKey = add(new Setting.Key("emoteKey", "setting.emoteKey", GLFW.GLFW_KEY_B));
+    public final Setting.Key emoteKey = add(new Setting.Key("emoteKey", "setting.emoteKey", InputConstants.KEY_B));
     public final Setting.Bool emoteCamera = add(new Setting.Bool("emoteCam", "setting.emoteCamera", true));
     /** Szafa w grze (WardrobeScreen) */
-    public final Setting.Key wardrobeKey = add(new Setting.Key("wardrobeKey", "setting.wardrobeKey", GLFW.GLFW_KEY_O));
+    public final Setting.Key wardrobeKey = add(new Setting.Key("wardrobeKey", "setting.wardrobeKey", InputConstants.KEY_O));
     /** Przyjęcie zaproszenia do emotki we dwoje */
-    public final Setting.Key duoKey = add(new Setting.Key("duoKey", "setting.duoKey", GLFW.GLFW_KEY_Y));
+    public final Setting.Key duoKey = add(new Setting.Key("duoKey", "setting.duoKey", InputConstants.KEY_Y));
 
     private final Random random = new Random();
     private boolean wasDown, wasWardrobe;

@@ -1,8 +1,10 @@
 package pl.gruzclient.render;
 
 import pl.gruzclient.compat.Compat;
+//#if MC < 26.3
 import org.lwjgl.glfw.GLFW;
 import org.lwjgl.glfw.GLFWImage;
+//#endif
 import org.lwjgl.system.MemoryUtil;
 import pl.gruzclient.GruzClient;
 import com.mojang.blaze3d.platform.NativeImage;
@@ -29,7 +31,13 @@ public final class WindowIcon {
             if (in == null) return;
             NativeImage src = NativeImage.read(in);
             int[] sizes = {16, 32, 48, 64, 128};
+            //#if MC >= 26.3
+            // 26.3: okno na SDL3 – jedna powierzchnia 128 px + mniejsze jako obrazy zastępcze
+            org.lwjgl.sdl.SDL_Surface main = null;
+            List<org.lwjgl.sdl.SDL_Surface> alts = new ArrayList<>();
+            //#else
             GLFWImage.Buffer icons = GLFWImage.malloc(sizes.length);
+            //#endif
             for (int i = 0; i < sizes.length; i++) {
                 int s = sizes[i];
                 NativeImage scaled = new NativeImage(s, s, true);
@@ -44,11 +52,26 @@ public final class WindowIcon {
                 }
                 buf.flip();
                 scaled.close();
+                //#if MC >= 26.3
+                org.lwjgl.sdl.SDL_Surface surf = org.lwjgl.sdl.SDLSurface.SDL_CreateSurfaceFrom(s, s, org.lwjgl.sdl.SDLPixels.SDL_PIXELFORMAT_ABGR8888, buf, s * 4);
+                if (surf != null) alts.add(surf);
+                //#else
                 icons.position(i).width(s).height(s).pixels(buf);
+                //#endif
             }
+            //#if MC >= 26.3
+            if (!alts.isEmpty()) {
+                main = alts.remove(alts.size() - 1);
+                for (org.lwjgl.sdl.SDL_Surface a : alts) org.lwjgl.sdl.SDLSurface.SDL_AddSurfaceAlternateImage(main, a);
+                org.lwjgl.sdl.SDLVideo.SDL_SetWindowIcon(handle, main);
+                for (org.lwjgl.sdl.SDL_Surface a : alts) org.lwjgl.sdl.SDLSurface.SDL_DestroySurface(a);
+                org.lwjgl.sdl.SDLSurface.SDL_DestroySurface(main);
+            }
+            //#else
             icons.position(0);
             GLFW.glfwSetWindowIcon(handle, icons);
             icons.free();
+            //#endif
             src.close();
         } catch (Throwable t) {
             GruzClient.LOG.warn("Nie udało się ustawić ikony okna", t);

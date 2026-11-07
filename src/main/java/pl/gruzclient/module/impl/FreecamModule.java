@@ -2,7 +2,7 @@ package pl.gruzclient.module.impl;
 
 import pl.gruzclient.compat.Compat;
 import com.mojang.authlib.GameProfile;
-import org.lwjgl.glfw.GLFW;
+import com.mojang.blaze3d.platform.InputConstants;
 import pl.gruzclient.i18n.Lang;
 import pl.gruzclient.module.Module;
 import pl.gruzclient.module.Modules;
@@ -24,7 +24,7 @@ import net.minecraft.world.phys.Vec3;
  * (na serwerach to byłaby nieuczciwa przewaga). W trakcie nie da się bić ani kopać.
  */
 public class FreecamModule extends Module {
-    public final Setting.Key key = add(new Setting.Key("key", "setting.key", GLFW.GLFW_KEY_F4));
+    public final Setting.Key key = add(new Setting.Key("key", "setting.key", InputConstants.KEY_F4));
     public final Setting.Number speed = add(new Setting.Number("speed", "setting.flySpeed", 1f, 0.2f, 5f, 0.1f, "x"));
 
     private RemotePlayer camera;

@@ -18,12 +18,14 @@ import pl.gruzclient.status.GameStatus;
 
 @Mixin(Minecraft.class)
 public abstract class MinecraftClientMixin {
-    /** Za każdym razem, gdy gra chce pokazać menu główne, pokazujemy menu Gruz. */
+    //#if MC < 26.2
+    /** Za każdym razem, gdy gra chce pokazać menu główne, pokazujemy menu Gruz (od 26.2: GuiScreenMixin). */
     @ModifyVariable(method = "setScreen", at = @At("HEAD"), argsOnly = true)
     private Screen gruz$replaceTitleScreen(Screen screen) {
         if (screen instanceof TitleScreen) return new GruzTitleScreen();
         return screen;
     }
+    //#endif
 
     /** Logika modułów, walka i status dla Discorda – 20 razy na sekundę */
     @Inject(method = "tick", at = @At("TAIL"))

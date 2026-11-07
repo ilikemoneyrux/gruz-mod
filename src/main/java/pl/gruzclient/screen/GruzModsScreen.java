@@ -1,7 +1,7 @@
 //#swap MC < 1.20.3 | Ui.text(Lang.t("mods.search")).withColor(MUTE) => Ui.text(Lang.t("mods.search")).withStyle(st -> st.withColor(MUTE))
 package pl.gruzclient.screen;
 
-import org.lwjgl.glfw.GLFW;
+import com.mojang.blaze3d.platform.InputConstants;
 import pl.gruzclient.i18n.Lang;
 import pl.gruzclient.module.Module;
 import pl.gruzclient.module.Modules;
@@ -428,15 +428,15 @@ public class GruzModsScreen extends pl.gruzclient.compat.GruzScreen {
         swallowChar = false;
         if (capturing != null) {
             swallowChar = true;
-            if (keyCode == GLFW.GLFW_KEY_BACKSPACE || keyCode == GLFW.GLFW_KEY_DELETE) capturing.code = -1;
-            else if (keyCode != GLFW.GLFW_KEY_ESCAPE) capturing.code = keyCode;
+            if (keyCode == InputConstants.KEY_BACKSPACE || keyCode == InputConstants.KEY_DELETE) capturing.code = -1;
+            else if (keyCode != InputConstants.KEY_ESCAPE) capturing.code = keyCode;
             capturing = null;
             Modules.save();
             return true;
         }
-        if (keyCode == GLFW.GLFW_KEY_ESCAPE && settingsOf != null) { settingsOf = null; scroll = scrollTarget = 0; return true; }
+        if (keyCode == InputConstants.KEY_ESCAPE && settingsOf != null) { settingsOf = null; scroll = scrollTarget = 0; return true; }
         // pisanie od razu trafia do wyszukiwarki
-        if (!search.isFocused() && keyCode >= GLFW.GLFW_KEY_A && keyCode <= GLFW.GLFW_KEY_Z && (modifiers & GLFW.GLFW_MOD_CONTROL) == 0) {
+        if (!search.isFocused() && keyCode >= InputConstants.KEY_A && keyCode <= InputConstants.KEY_Z && (modifiers & InputConstants.MOD_CONTROL) == 0) {
             this.setFocused(search);
         }
         return super.keyPressed(keyCode, scanCode, modifiers);

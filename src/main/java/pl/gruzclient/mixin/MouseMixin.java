@@ -2,7 +2,7 @@ package pl.gruzclient.mixin;
 
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.MouseHandler;
-import org.lwjgl.glfw.GLFW;
+import com.mojang.blaze3d.platform.InputConstants;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
@@ -21,7 +21,7 @@ public abstract class MouseMixin {
     @Inject(method = "onPress", at = @At("HEAD"))
     private void gruz$cps(long window, int button, int action, int mods, CallbackInfo ci) {
     //#endif
-        if (action == GLFW.GLFW_PRESS && Minecraft.getInstance().screen == null) CpsModule.click(button);
+        if (action == InputConstants.PRESS && Minecraft.getInstance().screen == null) CpsModule.click(button);
     }
 
     /** Kółko myszy w trakcie zooma zmienia przybliżenie zamiast slotu */

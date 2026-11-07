@@ -1,7 +1,7 @@
 package pl.gruzclient.module.impl;
 
 import net.minecraft.client.CameraType;
-import org.lwjgl.glfw.GLFW;
+import com.mojang.blaze3d.platform.InputConstants;
 import pl.gruzclient.module.Module;
 import pl.gruzclient.module.Modules;
 import pl.gruzclient.module.Setting;
@@ -11,7 +11,7 @@ import pl.gruzclient.module.Setting;
  * Domyślnie lewy Alt (przytrzymaj).
  */
 public class FreelookModule extends Module {
-    public final Setting.Key key = add(new Setting.Key("key", "setting.key", GLFW.GLFW_KEY_LEFT_ALT));
+    public final Setting.Key key = add(new Setting.Key("key", "setting.key", InputConstants.KEY_LALT));
     public final Setting.Choice mode = add(new Setting.Choice("mode", "setting.mode", 0, "setting.mode.hold", "setting.mode.toggle"));
 
     private boolean active, wasDown;

@@ -239,8 +239,9 @@ def check(d, mc):
                 hparams = [simple(' '.join(p.split(' ')[:-1])) for p in split_top(raw)] if raw.strip() else []
             for spec in specs:
                 name = spec.split('(')[0]
-                found, overloads = dumps.lookup(fqn, 'method', name)
-                if found is None: continue
+                # wstrzyknięcia trafiają tylko w metody zadeklarowane w samej klasie docelowej (nie w nadklasach)
+                own = dumps.get(fqn).methods
+                found, overloads = (True, own[name]) if name in own else (False, None)
                 if not found:
                     problems.append(('~  ' if req0 else 'X  ') + f'{f}: {kind} -> metoda {name} nie istnieje w {fqn}' + (' (require=0: moduł po cichu nie działa)' if req0 else ''))
                     continue
