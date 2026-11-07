@@ -1,10 +1,10 @@
-# Build 28 (4b0b3b6d)
+# Build 29 (ebaa9443)
 
 - 1.20.1: build OK (errors: 0), w grze: OK
 - 1.20.4: build OK (errors: 0), w grze: OK
 - 1.21.1: build OK (errors: 0), w grze: OK
-- 1.21.11: build OK (errors: 0), w grze: OK
+- 1.21.11: build FAIL (errors: 1), w grze: -
 - 1.21.4: build OK (errors: 0), w grze: OK
-- 26.1: build OK (errors: 0), w grze: OK
-- 26.2: build OK (errors: 0), w grze: FAIL
-- 26.3: build FAIL (errors: 55), w grze: -
+- 26.1: build FAIL (errors: 1), w grze: -
+- 26.2: build FAIL (errors: 1), w grze: -
+- 26.3: build OK (errors: 0), w grze: FAIL

@@ -1,14 +1,12 @@
-total 11108
-drwxr-xr-x  2 runner runner    4096 Nov  6 23:03 .
-drwxr-xr-x 13 runner runner    4096 Nov  6 23:03 ..
--rw-r--r--  1 runner runner 1890495 Nov  6 23:03 gruzclient-1.20.1.jar
--rw-r--r--  1 runner runner 1891215 Nov  6 23:03 gruzclient-1.20.4.jar
--rw-r--r--  1 runner runner 1897344 Nov  6 23:03 gruzclient-1.21.1.jar
--rw-r--r--  1 runner runner 1891809 Nov  6 23:03 gruzclient-1.21.11.jar
--rw-r--r--  1 runner runner 1890740 Nov  6 23:03 gruzclient-1.21.4.jar
--rw-r--r--  1 runner runner 1893534 Nov  6 23:03 gruzclient-26.1.jar
+total 7408
+drwxr-xr-x  2 runner runner    4096 Nov  7 18:28 .
+drwxr-xr-x 13 runner runner    4096 Nov  7 18:28 ..
+-rw-r--r--  1 runner runner 1890484 Nov  7 18:28 gruzclient-1.20.1.jar
+-rw-r--r--  1 runner runner 1891212 Nov  7 18:28 gruzclient-1.20.4.jar
+-rw-r--r--  1 runner runner 1897260 Nov  7 18:28 gruzclient-1.21.1.jar
+-rw-r--r--  1 runner runner 1890656 Nov  7 18:28 gruzclient-1.21.4.jar
 {
-  "mod": "0.5.2",
+  "mod": "0.5.3",
   "builds": [
     {
       "mc": "1.20.1",
@@ -29,22 +27,10 @@ drwxr-xr-x 13 runner runner    4096 Nov  6 23:03 ..
       "java": 21
     },
     {
-      "mc": "1.21.11",
-      "range": "1.21.11",
-      "file": "gruzclient-1.21.11.jar",
-      "java": 21
-    },
-    {
       "mc": "1.21.4",
       "range": "1.21.4",
       "file": "gruzclient-1.21.4.jar",
       "java": 21
-    },
-    {
-      "mc": "26.1",
-      "range": ">=26.1 <26.2",
-      "file": "gruzclient-26.1.jar",
-      "java": 25
     }
   ]
 }
