@@ -15,7 +15,8 @@ rm -rf pp-$v out-$v; python3 -W ignore $H/pp.py $ROOT $v $obf pp-$v > /dev/null
 [ -d stubs-$v ] || python3 $H/stubgen.py dump-$v.txt stubs-$v > /dev/null
 rm -rf ext-$v; python3 $H/extstub.py stubs-$v $H/lib ext-$v $(find pp-$v -name "*.java") > /dev/null
 find stubs-$v $H/lib ext-$v pp-$v -name "*.java" > src-$v.txt
-if command -v cygpath >/dev/null; then sed -i 's#^/\([a-z]\)/#\1:/#' src-$v.txt; fi  # Git Bash na Windows: javac potrzebuje ścieżek C:/
+# Git Bash na Windows: javac potrzebuje ścieżek C:/… (także /tmp -> AppData\Local\Temp)
+if command -v cygpath >/dev/null; then cygpath -m -f src-$v.txt > src-$v.w && mv src-$v.w src-$v.txt; fi
 mkdir -p out-$v
 javac -J-Xmx6g --release 21 -proc:none -nowarn -Xmaxerrs 1000000 -encoding UTF-8 -d out-$v @src-$v.txt 2> javac-$v.log || true
 python3 - "$v" <<'PY'
@@ -24,7 +25,9 @@ v = sys.argv[1]
 log = open(f'javac-{v}.log', encoding='utf8', errors='replace').read().split('\n')
 errs = []
 for i, l in enumerate(log):
-    m = re.match(rf'^pp-{re.escape(v)}/(.+?\.java):(\d+): error: (.*)$', l)
+    m = re.match(rf'^(?:.*[/\\])?pp-{re.escape(v)}[/\\](.+?\.java):(\d+): error: (.*)$', l)
+    # błąd bez pliku (np. "file not found") = kompilacja w ogóle nie ruszyła – liczymy go, żeby nie było fałszywego "0"
+    if not m and l.startswith('error: '): errs.append(('(javac)', '0', l, '', '')); continue
     if not m: continue
     code = log[i + 1].strip() if i + 1 < len(log) else ''
     sym = ''

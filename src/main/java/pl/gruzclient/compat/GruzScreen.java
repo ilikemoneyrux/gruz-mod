@@ -120,6 +120,8 @@ public abstract class GruzScreen extends Screen {
     private static boolean key(int code) {
         //#if MC >= 26.3
         return com.mojang.blaze3d.platform.InputConstants.isKeyDown(code);
+        //#elif MC >= 1.21.9
+        return com.mojang.blaze3d.platform.InputConstants.isKeyDown(net.minecraft.client.Minecraft.getInstance().getWindow(), code);
         //#else
         return com.mojang.blaze3d.platform.InputConstants.isKeyDown(Compat.windowHandle(), code);
         //#endif
