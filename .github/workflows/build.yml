@@ -27,7 +27,7 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        mc: ['1.20.1', '1.20.4', '1.21.1', '1.21.4', '1.21.11', '26.1', '26.2', '26.3']
+        mc: ['1.8.9', '1.20.1', '1.20.4', '1.21.1', '1.21.4', '1.21.11', '26.1', '26.2', '26.3']
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-java@v4
@@ -39,10 +39,19 @@ jobs:
           mkdir -p out/${{ matrix.mc }}
           chmod +x gradlew
           set +e
+          if [ -d legacy/${{ matrix.mc }} ]; then
+            # 1.8.9: osobny projekt Legacy Fabric (yarn, Java 8) – nie ma go w versions/
+            (cd legacy/${{ matrix.mc }} && chmod +x gradlew && timeout 25m ./gradlew --no-daemon --stacktrace --console=plain build) > out/${{ matrix.mc }}/full.log 2>&1
+            echo $? > out/${{ matrix.mc }}/exit
+            python3 ci/errors.py out/${{ matrix.mc }}/full.log > out/${{ matrix.mc }}/errors.txt
+            f=$(ls legacy/${{ matrix.mc }}/build/libs/gruzclient-*.jar 2>/dev/null | grep -v sources | head -1)
+            [ -n "$f" ] && cp "$f" out/${{ matrix.mc }}/gruzclient-${{ matrix.mc }}.jar && touch out/${{ matrix.mc }}/ok
+          else
           timeout 25m ./gradlew --no-daemon --stacktrace --console=plain :${{ matrix.mc }}:collect > out/${{ matrix.mc }}/full.log 2>&1
           echo $? > out/${{ matrix.mc }}/exit
           python3 ci/errors.py out/${{ matrix.mc }}/full.log > out/${{ matrix.mc }}/errors.txt
           cp build/out/*.jar out/${{ matrix.mc }}/ 2>/dev/null && touch out/${{ matrix.mc }}/ok
+          fi
           exit 0
       - name: Smoke test ${{ matrix.mc }} (start the game)
         if: hashFiles(format('out/{0}/ok', matrix.mc)) != ''
@@ -54,7 +63,11 @@ jobs:
           set +e
           # 26.3+ (SDL3): bez GPU xvfb nie ma pasującego GLX visual – próbujemy EGL i programowego renderowania Mesy
           export SDL_VIDEO_FORCE_EGL=1 LIBGL_ALWAYS_SOFTWARE=1
+          if [ -d legacy/${{ matrix.mc }} ]; then
+            (cd legacy/${{ matrix.mc }} && xvfb-run -a -s "-screen 0 1280x720x24 +extension GLX +render" timeout 15m ./gradlew --no-daemon --console=plain runClient) > out/${{ matrix.mc }}/smoke.log 2>&1
+          else
           xvfb-run -a -s "-screen 0 1280x720x24 +extension GLX +render" timeout 15m ./gradlew --no-daemon --console=plain :${{ matrix.mc }}:runClient > out/${{ matrix.mc }}/smoke.log 2>&1
+          fi
           L=out/${{ matrix.mc }}/smoke.log
           if grep -q GRUZ_SMOKE_OK $L; then echo OK > out/${{ matrix.mc }}/smoke
           # gra nie dostała okna OpenGL/Vulkan na serwerze CI (nie wina moda) i nie ma błędów miksów -> publikujemy jako NOGPU
