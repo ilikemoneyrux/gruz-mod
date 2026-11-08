@@ -1,4 +1,4 @@
-# Build 30 (c364bac3)
+# Build 31 (a9916889)
 
 - 1.20.1: build OK (errors: 0), w grze: OK
 - 1.20.4: build OK (errors: 0), w grze: OK
