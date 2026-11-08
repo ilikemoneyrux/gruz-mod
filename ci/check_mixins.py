@@ -78,11 +78,11 @@ def preprocess(text, mc, sw):
 
 # ---------------- zrzuty javap ----------------
 class Dump:
-    def __init__(self, path):
+    def __init__(self, path, text=None):
         self.methods = {}  # name -> [list of param type lists]
         self.fields = set()
         self.supers = []
-        txt = open(path, encoding='utf-8', errors='replace').read()
+        txt = text if text is not None else open(path, encoding='utf-8', errors='replace').read()
         self.ok = 'class not found' not in txt
         m = re.search(r'(?:class|interface) ([\w.$]+)(?:<[^{]*?>)?(?: extends ([\w.$]+))?(?:<[^{]*?>)?(?: implements ([^{]+))?\s*\{', txt)
         if m:
@@ -150,9 +150,31 @@ class Dumps:
         if fqn in self.cache: return self.cache[fqn]
         p = os.path.join(self.dir, fqn.replace('$', '_') + '.txt')
         dmp = Dump(p) if os.path.exists(p) else None
+        if dmp is None and self.all() and fqn in self.blocks:
+            dmp = Dump(None, self.blocks[fqn])  # klasa spoza ci/inspect.txt – z pełnego zrzutu ALL.txt.gz
         if dmp is not None and not dmp.ok: dmp = None
         self.cache[fqn] = dmp
         return dmp
+
+    def all(self):
+        """Pełny zrzut (inspect/ALL.txt.gz z gałęzi ci-log-<wersja>) podzielony na klasy – wczytywany raz"""
+        if not hasattr(self, 'blocks'):
+            self.blocks = {}
+            p = os.path.join(self.dir, 'ALL.txt.gz')
+            if os.path.exists(p):
+                import gzip
+                cur, buf = None, []
+                for l in gzip.open(p, 'rt', encoding='utf-8', errors='replace'):
+                    if l.startswith('Compiled from'):
+                        if cur: self.blocks[cur] = ''.join(buf)
+                        cur, buf = None, [l]
+                        continue
+                    if cur is None:
+                        m = re.match(r'^(?:public |protected |private |abstract |final |static |sealed |non-sealed |strictfp )*(?:class|interface|enum|record|@interface) ([\w.$]+)', l)
+                        if m: cur = m.group(1)
+                    buf.append(l)
+                if cur: self.blocks[cur] = ''.join(buf)
+        return bool(self.blocks)
 
     def lookup(self, fqn, attr, name, depth=0):
         """Szuka metody/pola w klasie i nadklasach. Zwraca (znaleziono, wynik) albo (None, None) gdy brak zrzutu."""

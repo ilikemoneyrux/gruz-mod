@@ -36,6 +36,9 @@ public abstract class MinecraftClientMixin {
         GameStatus.tick();
         GruzNetwork.tick();
         pl.gruzclient.status.SmokeTest.tick();
+        //#if MC >= 26.1 && MC < 26.2
+        pl.gruzclient.status.FeatureTest.tick();
+        //#endif
     }
 
     /** Nowy świat / serwer – czyścimy cel i combo */

@@ -474,6 +474,7 @@ public final class Lang {
         put("mods.enabled", "WŁĄCZONY", "ENABLED");
         put("mods.disabled", "WYŁĄCZONY", "DISABLED");
         put("mods.blocked", "ZABLOKOWANY NA SERWERZE", "BLOCKED BY SERVER");
+        put("mods.unavailable", "NIEDOSTĘPNY NA TEJ WERSJI", "NOT ON THIS VERSION");
         put("rules.blocked", "Serwer {server} nie pozwala na: {list}. Wrócą same po wyjściu z serwera.", "{server} doesn't allow: {list}. They come back when you leave.");
 
         // ---- kosmetyki: nowe ----

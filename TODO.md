@@ -41,8 +41,19 @@ Pewność daje dopiero CI (build + test uruchomienia gry).
 ## Wyłączone funkcje na części wersji (do przeniesienia)
 - 1.21.2–1.21.10: kosmiczne niebo i kolor mgły (inne API nieba niż 1.21.11+, brak zrzutu klas).
 - 1.20.4: dodatki czatu (łączenie powtórzeń, kopiowanie, dłuższa historia, wyszukiwarka).
-- ≥ 1.21.2: motion blur (nowy post-processing), item physics (nowe modele przedmiotów), kolor mgły.
-- ≥ 1.21.9: block overlay (obrys/wypełnienie bloku), kopiowanie wiadomości z czatu.
-- 26.1: własna panorama menu (pokazuje zwykłą), fullbright przez lightmapę. (Kosmiczne niebo od 1.21.11: SkyRendererMixin + FogColorMixin – od 0.5.5.)
+- ≥ 1.21.2: motion blur (nowy post-processing – w menu „NIEDOSTĘPNY NA TEJ WERSJI”, Module.available()).
+- 1.21.2–1.21.8 (np. 1.21.4): item physics (od 1.21.9 działa przez ItemEntitySubmitMixin).
+- 26.1: własna panorama menu (pokazuje zwykłą).
 - 26.3: poza bloku mieczem z 1.8 i brak opadania ręki po ciosie (nie ma już renderItem/tick w rendererze ręki), motion blur (render() bez parametrów).
-- Test w CI sprawdza menu i ekrany moda, ale nie wchodzi do świata – rzeczy w grze trzeba sprawdzić ręcznie.
+- Test w CI sprawdza menu i ekrany moda, ale nie wchodzi do świata. Lokalnie (Windows, z GPU) jest test w świecie:
+  `GRUZ_MC=26.1 GRUZ_FT=1 ./gradlew :26.1:runClient` – status/FeatureTest.java wczytuje run/saves/GruzTest, sprawdza minimapę, block overlay,
+  item physics, freecam (log pozycji i obrotu kamery), kosmiczne niebo, fullbright w ciemnym pokoju, kopiowanie z czatu i robi screeny
+  run/screenshots/ft-*.png. Mody gracza można dorzucić do run/mods (z Fabric API).
+
+## Naprawione w 0.5.7 (test w świecie 26.1, także z Sodium/BadOptimizations/EntityCulling/ImmediatelyFast)
+- Minimapa od 1.21.6: enableScissor liczy się w układzie modułu HUD – wcześniej mapa była wycinana (widać było tylko strzałkę).
+- Freecam: widok bierze yHeadRot (LivingEntity.getViewYRot), a turn() zmienia yRot – obraz się nie obracał, ruch szedł „w bok”.
+- Block overlay od 1.21.9: BlockOutlineMixin (kolor/grubość renderHitOutline / submitHitOutline + wypełnienie QUADS).
+- Fullbright od 26.1: LightmapStateMixin na Lightmap.render (BadOptimizations pomija extract).
+- Item physics od 1.21.9: ItemEntitySubmitMixin. Kopiowanie wiadomości z czatu od 1.21.9: własne liczenie wiersza pod kursorem.
+- HUD Gruz znikał przy włączonych Hitboxach (od 1.21.9 showDebugScreen() = true przy każdym wpisie debug) – Compat.debugScreenOpen.

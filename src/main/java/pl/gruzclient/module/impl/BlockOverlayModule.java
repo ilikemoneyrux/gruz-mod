@@ -27,4 +27,48 @@ public class BlockOverlayModule extends Module {
         if (!pulse.value) return 1f;
         return 0.75f + 0.25f * (float) Math.sin(System.currentTimeMillis() / 380.0);
     }
+
+    // ---------------- od 1.21.9: gra sama rysuje grube linie, my podmieniamy kolor/grubość i dokładamy wypełnienie ----------------
+
+    /** Kolor obrysu ARGB zamiast domyślnego (czarny, 40%) */
+    public int outlineArgb(int vanilla) {
+        if (!isEnabled()) return vanilla;
+        int a = Math.round(Math.max(0f, Math.min(1f, outlineAlpha.value / 100f)) * 255f);
+        return (a << 24) | color.rgb();
+    }
+
+    /** Grubość linii: ustawienie 1 = jak w grze */
+    public float lineWidth(float vanilla) {
+        return isEnabled() ? vanilla * thickness.value : vanilla;
+    }
+
+    public boolean wantsFill() { return isEnabled() && fill.value; }
+
+    //#if MC >= 1.21.9
+
+    /** Półprzezroczyste ścianki bloku (QUADS, pozycja + kolor), współrzędne względem kamery */
+    public void fillShape(com.mojang.blaze3d.vertex.PoseStack.Pose p, com.mojang.blaze3d.vertex.VertexConsumer vc,
+                          net.minecraft.world.phys.shapes.VoxelShape shape, double ox, double oy, double oz) {
+        float[] c = rgba(fillAlpha.value / 100f * pulseFactor());
+        for (net.minecraft.world.phys.AABB b : shape.toAabbs()) {
+            float x1 = (float) (b.minX + ox - 0.002), y1 = (float) (b.minY + oy - 0.002), z1 = (float) (b.minZ + oz - 0.002);
+            float x2 = (float) (b.maxX + ox + 0.002), y2 = (float) (b.maxY + oy + 0.002), z2 = (float) (b.maxZ + oz + 0.002);
+            quad(p, vc, c, x1, y1, z1, x2, y1, z1, x2, y1, z2, x1, y1, z2); // dół
+            quad(p, vc, c, x1, y2, z1, x1, y2, z2, x2, y2, z2, x2, y2, z1); // góra
+            quad(p, vc, c, x1, y1, z1, x1, y2, z1, x2, y2, z1, x2, y1, z1); // północ
+            quad(p, vc, c, x1, y1, z2, x2, y1, z2, x2, y2, z2, x1, y2, z2); // południe
+            quad(p, vc, c, x1, y1, z1, x1, y1, z2, x1, y2, z2, x1, y2, z1); // zachód
+            quad(p, vc, c, x2, y1, z1, x2, y2, z1, x2, y2, z2, x2, y1, z2); // wschód
+        }
+    }
+
+    private static void quad(com.mojang.blaze3d.vertex.PoseStack.Pose p, com.mojang.blaze3d.vertex.VertexConsumer vc, float[] c,
+                             float ax, float ay, float az, float bx, float by, float bz,
+                             float cx, float cy, float cz, float dx, float dy, float dz) {
+        vc.addVertex(p, ax, ay, az).setColor(c[0], c[1], c[2], c[3]);
+        vc.addVertex(p, bx, by, bz).setColor(c[0], c[1], c[2], c[3]);
+        vc.addVertex(p, cx, cy, cz).setColor(c[0], c[1], c[2], c[3]);
+        vc.addVertex(p, dx, dy, dz).setColor(c[0], c[1], c[2], c[3]);
+    }
+    //#endif
 }

@@ -181,6 +181,16 @@ public final class Compat {
         //#endif
     }
 
+    /** Czy ekran F3 jest otwarty. Od 1.21.9 showDebugScreen() jest true też wtedy, gdy włączony jest
+     *  pojedynczy wpis debugowania (np. hitboxy z modułu Hitboxes) – wtedy HUD Gruz znikał. */
+    public static boolean debugScreenOpen(Minecraft mc) {
+        //#if MC >= 1.21.9
+        return mc.debugEntries.isOverlayVisible();
+        //#else
+        return mc.getDebugOverlay().showDebugScreen();
+        //#endif
+    }
+
     /** Wiadomość dla gracza: na czacie albo nad paskiem (overlay) */
     public static void chat(net.minecraft.world.entity.player.Player p, net.minecraft.network.chat.Component c, boolean overlay) {
         //#if MC >= 26.1

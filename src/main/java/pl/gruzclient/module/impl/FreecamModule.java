@@ -87,7 +87,15 @@ public class FreecamModule extends Module {
 
     /** Obrót myszą trafia do kamery zamiast do postaci (EntityMixin) */
     public void look(double dx, double dy) {
-        if (camera != null) camera.turn(dx, dy);
+        if (camera == null) return;
+        float before = camera.getYRot();
+        camera.turn(dx, dy);
+        // widok gry bierze obrót GŁOWY gracza (LivingEntity.getViewYRot), a turn() zmienia tylko yRot – bez tego
+        // obraz się nie obracał, a W/A/S/D leciało w kierunku yRot, czyli „w bok” względem tego, co widać
+        float d = camera.getYRot() - before;
+        camera.yHeadRot += d;
+        camera.yHeadRotO += d;
+        camera.yBodyRot = camera.yHeadRot;
     }
 
     private void move() {
@@ -116,6 +124,10 @@ public class FreecamModule extends Module {
         camera.zOld = camera.getZ();
         camera.yRotO = camera.getYRot();
         camera.xRotO = camera.getXRot();
+        camera.yHeadRot = camera.getYRot();
+        camera.yHeadRotO = camera.getYRot();
+        camera.yBodyRot = camera.getYRot();
+        camera.yBodyRotO = camera.getYRot();
         camera.setPosRaw(camera.getX() + v.x, camera.getY() + v.y, camera.getZ() + v.z);
     }
 }

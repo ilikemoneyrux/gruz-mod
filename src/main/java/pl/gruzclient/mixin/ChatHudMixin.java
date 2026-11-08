@@ -37,6 +37,12 @@ public abstract class ChatHudMixin implements GruzChat {
     @Shadow private double screenToChatX(double x) { throw new AssertionError(); }
     @Shadow private double screenToChatY(double y) { throw new AssertionError(); }
     @Shadow private int getMessageLineIndexAt(double chatLineX, double chatLineY) { throw new AssertionError(); }
+    //#else
+    // od 1.21.9 nie ma getMessageLineIndexAt – liczymy wiersz pod kursorem sami (jak gra rysuje czat: od dołu, 40 px nad krawędzią)
+    @Shadow private double getScale() { throw new AssertionError(); }
+    @Shadow private int getLineHeight() { throw new AssertionError(); }
+    @Shadow private int getWidth() { throw new AssertionError(); }
+    @Shadow public abstract int getLinesPerPage();
     //#endif
 
     @Unique private String gruz$lastPlain = null;
@@ -95,9 +101,15 @@ public abstract class ChatHudMixin implements GruzChat {
     @Override
     public String gruz$messageAt(double mouseX, double mouseY) {
         //#if MC >= 1.21.9
-        return null; // TODO: kopiowanie wiadomości – nowy układ czatu w 1.21.9+
+        double scale = this.getScale();
+        double cx = mouseX / scale - 4.0;
+        double cy = (net.minecraft.client.Minecraft.getInstance().getWindow().getGuiScaledHeight() - mouseY - 40.0) / (scale * this.getLineHeight());
+        if (cx < -4.0 || cx > Math.floor(this.getWidth() / scale)) return null;
+        if (cy < 0 || cy >= Math.min(this.getLinesPerPage(), this.trimmedMessages.size())) return null;
+        int idx = (int) Math.floor(cy + this.chatScrollbarPos);
         //#else
         int idx = this.getMessageLineIndexAt(this.screenToChatX(mouseX), this.screenToChatY(mouseY));
+        //#endif
         if (idx < 0 || idx >= this.trimmedMessages.size()) return null;
         // linie jednej wiadomości: od dolnej (endOfEntry) w górę do następnej endOfEntry
         int bottom = idx;
@@ -107,6 +119,5 @@ public abstract class ChatHudMixin implements GruzChat {
         StringBuilder sb = new StringBuilder();
         for (int i = top; i >= bottom; i--) sb.append(GruzChat.plain(this.trimmedMessages.get(i).content()));
         return sb.toString();
-        //#endif
     }
 }

@@ -21,6 +21,16 @@ public class MotionBlurModule extends Module {
 
     public MotionBlurModule() { super("motionblur", Category.VISUAL, false); }
 
+    /** Od 1.21.2 post-processing to FrameGraph – stary shader nie działa, więc w menu „niedostępny” */
+    @Override
+    public boolean available() {
+        //#if MC >= 1.21.2
+        return false;
+        //#else
+        return true;
+        //#endif
+    }
+
     /** Wywoływane w GameRenderer po narysowaniu świata */
     public void render(float tickDelta) {
         //#if MC < 1.21.2

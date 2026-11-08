@@ -88,7 +88,7 @@ public abstract class InGameHudMixin {
         if (!Modules.CROSSHAIR.isEnabled()) return;
         Minecraft mc = Minecraft.getInstance();
         ci.cancel();
-        if (mc.options.getCameraType().isFirstPerson() && !mc.getDebugOverlay().showDebugScreen()) {
+        if (mc.options.getCameraType().isFirstPerson() && !pl.gruzclient.compat.Compat.debugScreenOpen(mc)) {
             Modules.CROSSHAIR.draw(context);
         }
     }

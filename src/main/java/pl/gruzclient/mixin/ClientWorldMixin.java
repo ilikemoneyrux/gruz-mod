@@ -1,3 +1,4 @@
+//#only MC < 1.21.11
 package pl.gruzclient.mixin;
 
 import net.minecraft.client.multiplayer.ClientLevel;
@@ -9,7 +10,7 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 import pl.gruzclient.module.Modules;
 import pl.gruzclient.render.GruzDraw;
 
-/** Kosmiczne niebo: ciemnofioletowy kolor nieba i zawsze widoczne gwiazdy. */
+/** Kosmiczne niebo do 1.21.10: ciemnofioletowy kolor nieba i zawsze widoczne gwiazdy (od 1.21.11 – SkyRendererMixin). */
 @Mixin(ClientLevel.class)
 public abstract class ClientWorldMixin {
     @Inject(method = "getSkyColor", at = @At("RETURN"), cancellable = true, require = 0)

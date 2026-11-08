@@ -31,10 +31,14 @@ public abstract class Module {
 
     protected <T extends Setting> T add(T s) { settings.add(s); return s; }
 
-    public boolean isEnabled() { return enabled && !blocked; }
+    public boolean isEnabled() { return enabled && !blocked && available(); }
+    /** false = na tej wersji Minecrafta moduł nic nie robi (np. motion blur od 1.21.2) – w menu „niedostępny” */
+    public boolean available() { return true; }
     /** Co wybrał gracz (bez blokady serwera) */
     public boolean wantsEnabled() { return enabled; }
     public boolean isBlocked() { return blocked; }
+    /** Nie da się włączyć: blokada serwera albo brak wsparcia na tej wersji */
+    public boolean locked() { return blocked || !available(); }
 
     public void setEnabled(boolean v) {
         if (v == enabled) return;

@@ -92,7 +92,12 @@ public class MinimapModule extends HudModule {
         c.fill(-2, -2, s + 2, s + 2, argb(0.85f, SLAB));
         c.renderOutline(-2, -2, s + 4, s + 4, argb(0.9f, NEON));
         var m = pl.gruzclient.compat.Pose2D.of(c);
+        //#if MC >= 1.21.6
+        // od 1.21.6 scissor liczy się w bieżącym układzie (po przesunięciu i skali modułu HUD)
+        c.enableScissor(0, 0, s, s);
+        //#else
         c.enableScissor(Math.round(screenX()), Math.round(screenY()), Math.round(screenX() + s * scale), Math.round(screenY() + s * scale));
+        //#endif
         m.push();
         m.translate(s / 2f, s / 2f);
         if (rotate.value) m.rotateDeg(180f - mc.player.getYRot());

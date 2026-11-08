@@ -209,3 +209,15 @@ if (System.getenv('GRUZ_SMOKE')) {
         }
     }
 }
+
+// test funkcji w świecie (tylko lokalnie, świat run/saves/GruzTest): GRUZ_FT=1 ./gradlew :<mc>:runClient
+if (System.getenv('GRUZ_FT')) {
+    loom {
+        runs {
+            client {
+                vmArg '-Dgruz.featuretest=true'
+                programArgs '--username', 'GruzTest'
+            }
+        }
+    }
+}

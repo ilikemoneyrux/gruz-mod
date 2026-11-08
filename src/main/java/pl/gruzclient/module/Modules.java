@@ -118,7 +118,7 @@ public final class Modules {
         Minecraft mc = Minecraft.getInstance();
         pl.gruzclient.status.Benchmark.frame(c);
         if (mc.options.hideGui || mc.player == null) return;
-        if (mc.getDebugOverlay().showDebugScreen()) return;
+        if (pl.gruzclient.compat.Compat.debugScreenOpen(mc)) return;
         if (mc.screen instanceof pl.gruzclient.screen.HudEditorScreen) return; // edytor rysuje HUD sam, ponad rozmyciem
         int w = c.guiWidth(), h = c.guiHeight();
         for (HudModule m : hud()) if (m.isEnabled()) m.render(c, w, h, false);

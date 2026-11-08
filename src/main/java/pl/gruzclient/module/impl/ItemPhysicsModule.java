@@ -17,6 +17,16 @@ import pl.gruzclient.module.Module;
 public class ItemPhysicsModule extends Module {
     public ItemPhysicsModule() { super("itemphysics", Category.VISUAL, false); }
 
+    /** Do 1.21.1: ItemEntityRendererMixin, od 1.21.9: ItemEntitySubmitMixin. 1.21.2–1.21.8 (np. 1.21.4) – jeszcze nie */
+    @Override
+    public boolean available() {
+        //#if MC >= 1.21.2 && MC < 1.21.9
+        return false;
+        //#else
+        return true;
+        //#endif
+    }
+
     //#if MC < 1.21.2
     /** Rysuje przedmiot leżący na ziemi. Zwraca false, gdy ma zostać zwykłe renderowanie. */
     public boolean render(ItemEntity entity, float tickDelta, PoseStack m, MultiBufferSource buffers, int light, ItemRenderer itemRenderer) {
@@ -59,5 +69,5 @@ public class ItemPhysicsModule extends Module {
         return true;
     }
     //#endif
-    // TODO: od 1.21.2 przedmioty na ziemi rysuje nowy system modeli – item physics do przeniesienia
+    // 1.21.2–1.21.8: przedmioty na ziemi rysuje nowy system modeli bez submit – tu item physics jest niedostępne
 }
