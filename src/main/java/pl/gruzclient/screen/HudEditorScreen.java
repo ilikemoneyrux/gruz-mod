@@ -61,7 +61,7 @@ public class HudEditorScreen extends pl.gruzclient.compat.GruzScreen {
         HudEl(HudModule m) { this.m = m; }
         public String name() { return m.name(); }
         public int[] rect(int w, int h) {
-            return new int[]{Math.round(m.x * w), Math.round(m.y * h), Math.max(8, Math.round(m.lastW * m.scale)), Math.max(8, Math.round(m.lastH * m.scale))};
+            return new int[]{Math.round(m.x * w), m.screenY(h), Math.max(8, Math.round(m.lastW * m.scale)), Math.max(8, Math.round(m.lastH * m.scale))};
         }
         public void moveTo(float x, float y, int w, int h) { m.x = x / w; m.y = y / h; }
         public void scaleBy(float d) { m.scale = Math.max(0.5f, Math.min(2.5f, Math.round((m.scale + d) * 10f) / 10f)); }
@@ -225,6 +225,7 @@ public class HudEditorScreen extends pl.gruzclient.compat.GruzScreen {
             }
         }
 
+        Modules.layout(h); // te same automatyczne miejsca co w grze
         List<Element> els = elements();
         hovered = dragging != null ? dragging : at(els, mouseX, mouseY);
         for (Element e : els) {

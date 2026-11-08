@@ -5,6 +5,7 @@ out = []
 for f in sorted(os.listdir(rel)):
     if not (f.startswith('gruzclient-') and f.endswith('.jar')): continue
     mc = f[len('gruzclient-'):-4]
-    props = dict(l.split('=', 1) for l in open(f'versions/{mc}/gradle.properties').read().splitlines() if '=' in l and not l.startswith('#'))
+    d = f'versions/{mc}' if os.path.isdir(f'versions/{mc}') else f'legacy/{mc}'  # 1.8.9: osobny projekt Legacy Fabric
+    props = dict(l.split('=', 1) for l in open(f'{d}/gradle.properties').read().splitlines() if '=' in l and not l.startswith('#'))
     out.append({'mc': mc, 'range': props['mc_dep'], 'file': f, 'java': int(props['java_version'])})
 print(json.dumps({'mod': open('gradle.properties').read().split('mod_version=')[1].split()[0], 'builds': out}, indent=2))

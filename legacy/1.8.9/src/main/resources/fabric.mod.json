@@ -1,0 +1,19 @@
+{
+  "schemaVersion": 1,
+  "id": "gruzclient",
+  "version": "${version}",
+  "name": "Gruz Client",
+  "description": "Gruz Client for 1.8.9: HUD (FPS, CPS, keystrokes, armor, potions, coords), zoom, perspective, toggle sprint, fullbright.",
+  "authors": ["Gruz Client"],
+  "contact": { "homepage": "https://gruzclient.com" },
+  "license": "All-Rights-Reserved",
+  "environment": "client",
+  "entrypoints": {
+    "client": ["pl.gruzclient.legacy.GruzLegacy"]
+  },
+  "mixins": ["gruzclient.mixins.json"],
+  "depends": {
+    "fabricloader": ">=0.16.0",
+    "minecraft": "1.8.9"
+  }
+}

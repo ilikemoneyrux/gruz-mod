@@ -221,3 +221,15 @@ if (System.getenv('GRUZ_FT')) {
         }
     }
 }
+
+// screeny na karty wersji w launcherze (tylko lokalnie): GRUZ_CARDS=1 ./gradlew :26.3:runClient
+if (System.getenv('GRUZ_CARDS')) {
+    loom {
+        runs {
+            client {
+                vmArg '-Dgruz.cardshots=true'
+                programArgs '--username', 'GruzCard', '--width', '720', '--height', '960'
+            }
+        }
+    }
+}

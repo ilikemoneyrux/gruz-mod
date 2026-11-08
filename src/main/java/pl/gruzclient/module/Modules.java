@@ -114,6 +114,23 @@ public final class Modules {
     }
 
     /** Rysowanie elementów HUD w trakcie gry */
+    /**
+     * Domyślne miejsca to ułamki ekranu, więc przy dużej skali GUI moduły w jednej kolumnie nachodziły na siebie.
+     * Nieprzesunięte włączone moduły z tej samej strony (lewa / środek / prawa) układamy jeden pod drugim.
+     */
+    public static void layout(int screenH) {
+        List<HudModule> list = new java.util.ArrayList<>();
+        for (HudModule m : hud()) { m.pushY = 0; if (m.isEnabled() && m.atDefault()) list.add(m); }
+        list.sort(java.util.Comparator.comparingDouble(HudModule::defaultY));
+        int[] bottom = {Integer.MIN_VALUE, Integer.MIN_VALUE, Integer.MIN_VALUE};
+        for (HudModule m : list) {
+            int side = m.x < 0.33f ? 0 : m.x > 0.66f ? 2 : 1;
+            int top = Math.round(m.y * screenH);
+            if (top < bottom[side] + 2) m.pushY = bottom[side] + 2 - top;
+            bottom[side] = top + m.pushY + Math.round(m.lastH * m.scale);
+        }
+    }
+
     public static void renderHud(GuiGraphics c) {
         Minecraft mc = Minecraft.getInstance();
         pl.gruzclient.status.Benchmark.frame(c);
@@ -121,6 +138,7 @@ public final class Modules {
         if (pl.gruzclient.compat.Compat.debugScreenOpen(mc)) return;
         if (mc.screen instanceof pl.gruzclient.screen.HudEditorScreen) return; // edytor rysuje HUD sam, ponad rozmyciem
         int w = c.guiWidth(), h = c.guiHeight();
+        layout(h);
         for (HudModule m : hud()) if (m.isEnabled()) m.render(c, w, h, false);
         MINIMAP.renderCompass(c);
     }

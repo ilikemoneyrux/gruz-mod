@@ -125,6 +125,25 @@ public final class FeatureTest {
                 Modules.WORLD.cosmicSky.value = true;
                 p.setXRot(-30f);
             }
+            case 405 -> {
+                // freelook: kamera obrócona o 90° względem postaci (tryb przełącz – bez trzymania Alt)
+                Modules.FREELOOK.mode.index = 1;
+                try {
+                    var start = Modules.FREELOOK.getClass().getDeclaredMethod("start");
+                    start.setAccessible(true);
+                    start.invoke(Modules.FREELOOK);
+                } catch (Exception e) { log("freelook start failed " + e); }
+                Modules.FREELOOK.yaw = p.getYRot() + 90f;
+            }
+            case 412 -> {
+                log(String.format(java.util.Locale.ROOT, "freelook active=%s view=%.1f player=%.1f",
+                        Modules.FREELOOK.isActive(), mc.gameRenderer.getMainCamera().yRot(), p.getYRot()));
+                try {
+                    var stop = Modules.FREELOOK.getClass().getDeclaredMethod("stop");
+                    stop.setAccessible(true);
+                    stop.invoke(Modules.FREELOOK);
+                } catch (Exception e) { log("freelook stop failed " + e); }
+            }
             case 440 -> shot("03-cosmic");
             case 445 -> {
                 // ciemny pokój z kamienia 40 bloków wyżej (bez światła) – do porównania fullbright wył./wł.
