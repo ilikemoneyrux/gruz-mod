@@ -59,7 +59,8 @@ jobs:
           GRUZ_MC: ${{ matrix.mc }}
           GRUZ_SMOKE: '1'
         run: |
-          sudo apt-get update -qq && sudo apt-get install -y -qq xvfb libgl1-mesa-dri mesa-utils > /dev/null
+          sudo apt-get update -qq && sudo apt-get install -y -qq xvfb libgl1-mesa-dri mesa-utils x11-xserver-utils > /dev/null
+          # 1.8.9 (LWJGL 2) czyta tryby ekranu programem xrandr (x11-xserver-utils)
           set +e
           # 26.3+ (SDL3): bez GPU xvfb nie ma pasującego GLX visual – próbujemy EGL i programowego renderowania Mesy
           export SDL_VIDEO_FORCE_EGL=1 LIBGL_ALWAYS_SOFTWARE=1
@@ -71,7 +72,7 @@ jobs:
           L=out/${{ matrix.mc }}/smoke.log
           if grep -q GRUZ_SMOKE_OK $L; then echo OK > out/${{ matrix.mc }}/smoke
           # gra nie dostała okna OpenGL/Vulkan na serwerze CI (nie wina moda) i nie ma błędów miksów -> publikujemy jako NOGPU
-          elif grep -q "BackendCreationException" $L && ! grep -q -i -E "InvalidInjectionException|MixinApplyError|MixinTransformerError|Mixin apply.*failed|InvalidMixinException" $L; then echo NOGPU > out/${{ matrix.mc }}/smoke
+          elif grep -q -E "BackendCreationException|No display mode extension is available" $L && ! grep -q -i -E "InvalidInjectionException|MixinApplyError|MixinTransformerError|Mixin apply.*failed|InvalidMixinException" $L; then echo NOGPU > out/${{ matrix.mc }}/smoke
           else echo FAIL > out/${{ matrix.mc }}/smoke; fi
           grep -n -i -E "mixin|error|exception|GRUZ_SMOKE|Caused by" out/${{ matrix.mc }}/smoke.log | grep -v -i "warn.*sound" | head -300 > out/${{ matrix.mc }}/smoke-errors.txt
           cp versions/${{ matrix.mc }}/run/crash-reports/*.txt out/${{ matrix.mc }}/ 2>/dev/null
