@@ -17,6 +17,8 @@ import pl.gruzclient.network.GruzNetwork;
  *  .msg Nick tekst   – wiadomość do znajomego z Gruz
  *  .r tekst          – odpowiedź na ostatnią wiadomość
  *  .warp             – lider party ściąga wszystkich na swój serwer
+ *  .party [invite Nick | accept | leave] – party ze znajomymi bez wychodzenia z gry
+ *  .share            – link do ostatniego screena (gruzclient.com/s/…)
  */
 @Mixin(ClientPacketListener.class)
 public abstract class ClientPlayNetworkHandlerMixin {
@@ -36,6 +38,18 @@ public abstract class ClientPlayNetworkHandlerMixin {
                 else GruzNetwork.reply(text);
             }
             case "warp" -> GruzNetwork.partyWarp();
+            case "share", "screen" -> pl.gruzclient.network.Shots.share();
+            case "party", "p" -> {
+                String sub = parts.length > 1 ? parts[1].toLowerCase() : "";
+                switch (sub) {
+                    case "", "list" -> GruzNetwork.partyInfo();
+                    case "invite", "inv", "i" -> { if (parts.length < 3) help(); else GruzNetwork.partyInvite(parts[2].trim().split(" ")[0]); }
+                    case "accept", "a", "join" -> GruzNetwork.partyAccept();
+                    case "leave", "l" -> GruzNetwork.partyLeave();
+                    case "warp", "w" -> GruzNetwork.partyWarp();
+                    default -> GruzNetwork.partyInvite(parts[1]); // .party Nick
+                }
+            }
             case "gruz", "help" -> help();
             default -> { return; } // inne kropki (np. ".") idą normalnie na serwer
         }

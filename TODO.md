@@ -39,10 +39,10 @@ Pewność daje dopiero CI (build + test uruchomienia gry).
   skin przez `getSkinLocation`, debug przez `options.renderDebug`.
 
 ## Wyłączone funkcje na części wersji (do przeniesienia)
+- 1.21.2–1.21.10: kosmiczne niebo i kolor mgły (inne API nieba niż 1.21.11+, brak zrzutu klas).
 - 1.20.4: dodatki czatu (łączenie powtórzeń, kopiowanie, dłuższa historia, wyszukiwarka).
 - ≥ 1.21.2: motion blur (nowy post-processing), item physics (nowe modele przedmiotów), kolor mgły.
 - ≥ 1.21.9: block overlay (obrys/wypełnienie bloku), kopiowanie wiadomości z czatu.
-- 26.1: własna panorama menu (pokazuje zwykłą), fullbright przez lightmapę, kolor nieba.
+- 26.1: własna panorama menu (pokazuje zwykłą), fullbright przez lightmapę. (Kosmiczne niebo od 1.21.11: SkyRendererMixin + FogColorMixin – od 0.5.5.)
 - 26.3: poza bloku mieczem z 1.8 i brak opadania ręki po ciosie (nie ma już renderItem/tick w rendererze ręki), motion blur (render() bez parametrów).
-- 1.20.1: ukrywanie czerwonych liczb na tablicy wyników (NumberFormat jest od 1.20.3).
 - Test w CI sprawdza menu i ekrany moda, ale nie wchodzi do świata – rzeczy w grze trzeba sprawdzić ręcznie.

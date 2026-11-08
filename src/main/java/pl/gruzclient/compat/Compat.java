@@ -163,6 +163,24 @@ public final class Compat {
         return new net.minecraft.world.item.ItemStack(item);
     }
 
+    /** Tekst na czacie, który po kliknięciu wpisuje komendę do pola czatu (ClickEvent to rekordy od 1.21.5) */
+    public static net.minecraft.network.chat.MutableComponent suggest(net.minecraft.network.chat.MutableComponent c, String command) {
+        //#if MC >= 1.21.5
+        return c.withStyle(s -> s.withClickEvent(new net.minecraft.network.chat.ClickEvent.SuggestCommand(command)));
+        //#else
+        return c.withStyle(s -> s.withClickEvent(new net.minecraft.network.chat.ClickEvent(net.minecraft.network.chat.ClickEvent.Action.SUGGEST_COMMAND, command)));
+        //#endif
+    }
+
+    /** Link na czacie (kliknięcie pyta i otwiera przeglądarkę) */
+    public static net.minecraft.network.chat.MutableComponent openUrl(net.minecraft.network.chat.MutableComponent c, String url) {
+        //#if MC >= 1.21.5
+        return c.withStyle(s -> s.withClickEvent(new net.minecraft.network.chat.ClickEvent.OpenUrl(java.net.URI.create(url))));
+        //#else
+        return c.withStyle(s -> s.withClickEvent(new net.minecraft.network.chat.ClickEvent(net.minecraft.network.chat.ClickEvent.Action.OPEN_URL, url)));
+        //#endif
+    }
+
     /** Wiadomość dla gracza: na czacie albo nad paskiem (overlay) */
     public static void chat(net.minecraft.world.entity.player.Player p, net.minecraft.network.chat.Component c, boolean overlay) {
         //#if MC >= 26.1

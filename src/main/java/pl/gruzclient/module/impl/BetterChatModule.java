@@ -19,6 +19,11 @@ public class BetterChatModule extends Module {
     public final Setting.Bool timestamps = add(new Setting.Bool("time", "setting.timestamps", false));
     public final Setting.Bool longHistory = add(new Setting.Bool("history", "setting.longHistory", true));
     public final Setting.Bool copy = add(new Setting.Bool("copy", "setting.rightClickCopy", true));
+    /** Znajomi z Gruz: wejście do gry / na Twój serwer (działa też przy wyłączonym module) */
+    public final Setting.Bool friendAlerts = add(new Setting.Bool("friendAlerts", "setting.friendAlerts", true));
+    /** Screeny: przycisk „Udostępnij” po F2 / od razu wysyłaj każdy screen (link w schowku) */
+    public final Setting.Bool shareButton = add(new Setting.Bool("shareButton", "setting.shareButton", true));
+    public final Setting.Bool autoShare = add(new Setting.Bool("autoShare", "setting.autoShare", false));
 
     private static final DateTimeFormatter TIME = DateTimeFormatter.ofPattern("HH:mm", Locale.ROOT);
 

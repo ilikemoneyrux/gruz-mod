@@ -54,7 +54,15 @@ public final class GruzNetwork {
     private static final Set<UUID> looked = new HashSet<>();
     private static int ticks = 0;
     private static final Map<UUID, String> friendNames = new HashMap<>();
+    /** Ostatni znany status znajomego: "" = offline, inaczej launcher/menu/singleplayer/multiplayer + "|" + serwer */
+    private static final Map<UUID, String> friendState = new HashMap<>();
     private static UUID lastDmFrom;
+    /** Ostatnie zaproszenie do party (do .party accept) */
+    private static String inviteId;
+    private static String inviteFrom = "";
+    private static long inviteAt;
+    /** Twoje party z serwera (null = brak) */
+    private static JsonObject party;
 
     public static String serverUrl() { return System.getProperty("gruz.server", "").trim(); }
     public static boolean enabled() { return !serverUrl().isEmpty(); }
@@ -65,6 +73,7 @@ public final class GruzNetwork {
     /** Co tick klienta: łączenie z backoffem, status, pytania o kosmetyki widzianych graczy */
     public static void tick() {
         if (!enabled()) return;
+        Shots.tick();
         long now = System.currentTimeMillis();
         if (socket == null && !connecting && now >= nextAttempt) connect();
         if (!connected()) return;
@@ -94,10 +103,20 @@ public final class GruzNetwork {
         nextAttempt = System.currentTimeMillis() + 5000L * (1L << failures); // 10 s … 5 min
     }
 
-    private static void send(JsonObject o) {
+    /** Kolejka wysyłania: WebSocket w Javie pozwala na jedną wysyłkę naraz (duży screen nie może wywrócić gry) */
+    private static CompletableFuture<?> sendChain = CompletableFuture.completedFuture(null);
+
+    private static synchronized void send(JsonObject o) {
         WebSocket ws = socket;
-        if (ws != null) ws.sendText(GSON.toJson(o), true);
+        if (ws == null) return;
+        String text = GSON.toJson(o);
+        sendChain = sendChain.handle((r, e) -> null)
+                .thenCompose(x -> ws.sendText(text, true))
+                .exceptionally(e -> null);
     }
+
+    /** Wysyłka z innych klas (np. Shots – z wątku w tle) */
+    static void sendRaw(JsonObject o) { send(o); }
 
     private static JsonObject msg(String type) {
         JsonObject o = new JsonObject();
@@ -120,6 +139,18 @@ public final class GruzNetwork {
         send(o);
         if (!"multiplayer".equals(state)) Cosmetics.REMOTE.clear();
         looked.clear();
+        if (server != null) friendsHere(server);
+    }
+
+    /** Po wejściu na serwer: którzy znajomi z Gruz już tu grają */
+    private static void friendsHere(String server) {
+        if (!pl.gruzclient.module.Modules.BETTER_CHAT.friendAlerts.value) return;
+        java.util.List<String> here = new java.util.ArrayList<>();
+        for (Map.Entry<UUID, String> e : friendState.entrySet()) {
+            String s = e.getValue();
+            if (s.startsWith("multiplayer|") && sameServer(s.substring(s.indexOf('|') + 1), server)) here.add(friendNames.getOrDefault(e.getKey(), "?"));
+        }
+        if (!here.isEmpty()) chat(Component.literal(Lang.t("net.friendsHere").replace("{names}", String.join(", ", here))).withStyle(ChatFormatting.GRAY));
     }
 
     public static void publishCosmetics(CosmeticSet set) {
@@ -168,6 +199,114 @@ public final class GruzNetwork {
         sendDm(friendNames.getOrDefault(lastDmFrom, lastDmFrom.toString()), text);
     }
 
+    // ---------------- party z czatu (.party ...) ----------------
+
+    private static UUID friendByName(String name) {
+        for (Map.Entry<UUID, String> f : friendNames.entrySet()) if (f.getValue().equalsIgnoreCase(name)) return f.getKey();
+        return null;
+    }
+
+    /** .party invite Nick – zaprasza znajomego z Gruz do Twojego party */
+    public static void partyInvite(String name) {
+        if (!connected()) { chat(Component.literal(Lang.t("net.offline")).withStyle(ChatFormatting.RED)); return; }
+        UUID target = friendByName(name);
+        if (target == null) { chat(Component.literal(Lang.t("net.notFriend").replace("{name}", name)).withStyle(ChatFormatting.RED)); return; }
+        JsonObject o = msg("party.invite");
+        o.addProperty("uuid", target.toString());
+        send(o);
+        chat(Component.literal(Lang.t("net.partyInvited").replace("{name}", friendNames.get(target))).withStyle(ChatFormatting.GRAY));
+    }
+
+    /** .party accept – przyjmuje ostatnie zaproszenie (ważne 5 minut) */
+    public static void partyAccept() {
+        if (!connected()) { chat(Component.literal(Lang.t("net.offline")).withStyle(ChatFormatting.RED)); return; }
+        if (inviteId == null || System.currentTimeMillis() - inviteAt > 5 * 60_000L) {
+            chat(Component.literal(Lang.t("net.noInvite")).withStyle(ChatFormatting.GRAY));
+            return;
+        }
+        JsonObject o = msg("party.accept");
+        o.addProperty("id", inviteId);
+        send(o);
+        inviteId = null;
+    }
+
+    public static void partyLeave() {
+        if (!connected()) { chat(Component.literal(Lang.t("net.offline")).withStyle(ChatFormatting.RED)); return; }
+        if (party == null) { chat(Component.literal(Lang.t("net.noParty")).withStyle(ChatFormatting.GRAY)); return; }
+        send(msg("party.leave"));
+        chat(Component.literal(Lang.t("net.partyLeft")).withStyle(ChatFormatting.GRAY));
+    }
+
+    /** .party – kto jest w Twoim party i gdzie gra */
+    public static void partyInfo() {
+        if (party == null) { chat(Component.literal(Lang.t("net.noParty")).withStyle(ChatFormatting.GRAY)); return; }
+        String leader = str(party, "leader");
+        MutableComponent line = Component.literal(Lang.t("net.partyList")).withStyle(ChatFormatting.GRAY);
+        boolean first = true;
+        for (var el : party.getAsJsonArray("members")) {
+            JsonObject f = el.getAsJsonObject();
+            boolean on = f.has("online") && f.get("online").getAsBoolean();
+            line.append(Component.literal(first ? " " : ", ").withStyle(ChatFormatting.DARK_GRAY));
+            line.append(Component.literal((str(f, "uuid").equals(leader) ? "★" : "") + str(f, "name"))
+                    .withStyle(on ? ChatFormatting.WHITE : ChatFormatting.DARK_GRAY));
+            String srv = str(f, "server");
+            if (on && !srv.isEmpty()) line.append(Component.literal(" (" + srv + ")").withStyle(ChatFormatting.DARK_GRAY));
+            first = false;
+        }
+        chat(line);
+    }
+
+    /** Przycisk w wiadomości na czacie: kliknięcie wpisuje komendę do pola czatu */
+    private static MutableComponent button(String label, String command, ChatFormatting color) {
+        return Compat.suggest(Component.literal("[" + label + "]").withStyle(color, ChatFormatting.BOLD), command);
+    }
+
+    // ---------------- powiadomienia o znajomych ----------------
+
+    private static String stateKey(JsonObject f) {
+        if (!f.has("online") || !f.get("online").getAsBoolean()) return "";
+        return str(f, "state") + "|" + str(f, "server");
+    }
+
+    private static boolean inGame(String key) {
+        return key.startsWith("menu|") || key.startsWith("singleplayer|") || key.startsWith("multiplayer|");
+    }
+
+    /** Adres serwera bez portu i kropek na końcu, małymi literami (mc.hypixel.net:25565 -> mc.hypixel.net) */
+    private static String host(String s) {
+        String h = s == null ? "" : s.trim().toLowerCase(java.util.Locale.ROOT);
+        if (h.chars().filter(ch -> ch == ':').count() == 1) h = h.substring(0, h.indexOf(':'));
+        while (h.endsWith(".")) h = h.substring(0, h.length() - 1);
+        return h;
+    }
+
+    /** Ten sam serwer, także gdy jeden wszedł przez subdomenę (mc.hypixel.net i hypixel.net) */
+    private static boolean sameServer(String a, String b) {
+        a = host(a); b = host(b);
+        if (a.isEmpty() || b.isEmpty()) return false;
+        return a.equals(b) || a.endsWith("." + b) || b.endsWith("." + a);
+    }
+
+    /** Nowy status znajomego -> krótka wiadomość na czacie (wejście do gry, ten sam serwer co Ty) */
+    private static void friendChanged(String name, String before, String now) {
+        if (before == null || before.equals(now) || now.isEmpty()) return;
+        if (!pl.gruzclient.module.Modules.BETTER_CHAT.friendAlerts.value) return;
+        Minecraft mc = Minecraft.getInstance();
+        String server = now.substring(now.indexOf('|') + 1);
+        String mine = mc.getCurrentServer() != null && mc.level != null && !mc.isLocalServer() ? mc.getCurrentServer().ip : "";
+        String key;
+        if (now.startsWith("multiplayer|") && sameServer(server, mine)
+                && !(before.startsWith("multiplayer|") && sameServer(before.substring(before.indexOf('|') + 1), mine))) key = "net.friendHere";
+        else if (inGame(now) && !inGame(before)) key = "net.friendGame";
+        else if (before.isEmpty()) key = "net.friendOnline";
+        else return;
+        MutableComponent line = Component.literal(Lang.t(key).replace("{name}", name)).withStyle(ChatFormatting.GRAY);
+        if (!"net.friendHere".equals(key) && mc.level != null) {
+            line.append(Component.literal("  ")).append(button(Lang.t("net.btnInvite"), ".party invite " + name, ChatFormatting.LIGHT_PURPLE));
+        }
+        chat(line);
+    }
+
     public static void partyWarp() {
         if (!connected()) { chat(Component.literal(Lang.t("net.offline")).withStyle(ChatFormatting.RED)); return; }
         send(msg("party.warp"));
@@ -183,6 +322,17 @@ public final class GruzNetwork {
             looked.add(p.getUUID());
             ids.add(p.getUUID().toString());
         }
+        // gracze z listy Tab (także daleko od Ciebie) – żeby ikonka Gruz była przy wszystkich na serwerze
+        var conn = mc.getConnection();
+        if (conn != null) {
+            for (var info : conn.getOnlinePlayers()) {
+                if (ids.size() >= 100) break;
+                UUID id = Compat.profileId(info.getProfile());
+                if (id == null || id.equals(mc.getUser().getProfileId()) || looked.contains(id)) continue;
+                looked.add(id);
+                ids.add(id.toString());
+            }
+        }
         if (ids.isEmpty()) return;
         JsonObject o = msg("lookup");
         o.add("uuids", ids);
@@ -191,7 +341,7 @@ public final class GruzNetwork {
 
     // ---------------- odbieranie ----------------
 
-    private static void chat(Component t) {
+    static void chat(Component t) {
         Minecraft mc = Minecraft.getInstance();
         if (mc.player != null) Compat.chat(mc.player, prefix().append(t), false);
     }
@@ -226,6 +376,7 @@ public final class GruzNetwork {
                 authed = true;
                 failures = 0;
                 lastPresence = "";
+                party = m.has("party") && m.get("party").isJsonObject() ? m.getAsJsonObject("party") : null;
                 sendPresence(true);
                 publishCosmetics(pl.gruzclient.module.Modules.COSMETICS.current());
             }
@@ -250,24 +401,30 @@ public final class GruzNetwork {
                 }
             }
             case "serverRules" -> ServerRules.update(m.getAsJsonArray("rules"));
+            case "shot.done" -> Shots.onDone(str(m, "url"));
+            case "shot.error" -> Shots.onError(str(m, "code"));
             case "duo.invite" -> pl.gruzclient.cosmetics.Duo.onInvite(UUID.fromString(str(m, "from")), str(m, "name"), str(m, "emote"));
             case "duo.start" -> pl.gruzclient.cosmetics.Duo.onStart(UUID.fromString(str(m, "a")), UUID.fromString(str(m, "b")), str(m, "emote"));
             case "friends" -> {
                 friendNames.clear();
                 for (var el : m.getAsJsonArray("friends")) {
                     JsonObject f = el.getAsJsonObject();
-                    friendNames.put(UUID.fromString(f.get("uuid").getAsString()), f.get("name").getAsString());
+                    UUID id = UUID.fromString(f.get("uuid").getAsString());
+                    friendNames.put(id, f.get("name").getAsString());
+                    // pełna lista tylko zapamiętuje statusy – powiadamiamy dopiero o zmianach
+                    friendState.put(id, stateKey(f));
                 }
             }
             case "friend.status" -> {
                 JsonObject f = m.getAsJsonObject("friend");
                 String name = f.get("name").getAsString();
-                boolean wasKnown = friendNames.containsValue(name);
-                friendNames.put(UUID.fromString(f.get("uuid").getAsString()), name);
-                if (wasKnown && f.has("online") && f.get("online").getAsBoolean() && "launcher".equals(str(f, "state"))) {
-                    chat(Component.literal(Lang.t("net.friendOnline").replace("{name}", name)).withStyle(ChatFormatting.GRAY));
-                }
+                UUID id = UUID.fromString(f.get("uuid").getAsString());
+                friendNames.put(id, name);
+                String now = stateKey(f);
+                friendChanged(name, friendState.get(id), now);
+                friendState.put(id, now);
             }
+            case "party" -> party = m.has("party") && m.get("party").isJsonObject() ? m.getAsJsonObject("party") : null;
             case "dm" -> {
                 String from = m.get("from").getAsString();
                 boolean mine = mc.getUser().getProfileId() != null && from.equals(mc.getUser().getProfileId().toString());
@@ -280,10 +437,24 @@ public final class GruzNetwork {
             }
             case "notify" -> {
                 String kind = str(m, "kind"), name = str(m, "name");
-                if ("badge".equals(kind) && m.has("names")) name = m.getAsJsonObject("names").get(Lang.current()).getAsString();
+                if (m.has("names") && m.get("names").isJsonObject() && m.getAsJsonObject("names").has(Lang.current())) {
+                    name = m.getAsJsonObject("names").get(Lang.current()).getAsString();
+                }
+                if ("wishSale".equals(kind)) {
+                    chat(Component.literal(Lang.t("net.wishSale").replace("{name}", name).replace("{off}", str(m, "off")) + " ").withStyle(ChatFormatting.GOLD)
+                            .append(Compat.openUrl(Component.literal("gruzclient.com/cosmetics").withStyle(ChatFormatting.LIGHT_PURPLE, ChatFormatting.UNDERLINE),
+                                    "https://gruzclient.com/cosmetics#" + str(m, "cosmetic"))));
+                    return;
+                }
                 chat(Component.literal(Lang.t("net." + kind).replace("{name}", name)).withStyle(ChatFormatting.GRAY));
             }
-            case "party.invite" -> chat(Component.literal(Lang.t("net.partyInvite").replace("{name}", str(m, "from"))).withStyle(ChatFormatting.GRAY));
+            case "party.invite" -> {
+                inviteId = str(m, "id");
+                inviteFrom = str(m, "from");
+                inviteAt = System.currentTimeMillis();
+                chat(Component.literal(Lang.t("net.partyInvite").replace("{name}", inviteFrom) + "  ").withStyle(ChatFormatting.GRAY)
+                        .append(button(Lang.t("net.btnJoin"), ".party accept", ChatFormatting.GREEN)));
+            }
             case "party.warp" -> {
                 String address = str(m, "address");
                 chat(Component.literal(Lang.t("net.warping").replace("{name}", str(m, "from")).replace("{server}", address)).withStyle(ChatFormatting.GRAY));

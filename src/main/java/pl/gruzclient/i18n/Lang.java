@@ -119,7 +119,17 @@ public final class Lang {
         put("net.you", "Ty", "you");
         put("net.friendRequest", "{name} chce dodać Cię do znajomych (zaakceptuj w launcherze).", "{name} sent you a friend request (accept it in the launcher).");
         put("net.friendAccepted", "{name} przyjął Twoje zaproszenie.", "{name} accepted your friend request.");
-        put("net.partyInvite", "{name} zaprasza Cię do party (dołącz w launcherze).", "{name} invited you to a party (join in the launcher).");
+        put("net.partyInvite", "{name} zaprasza Cię do party.", "{name} invited you to a party.");
+        put("net.btnJoin", "Dołącz", "Join");
+        put("net.btnInvite", "Zaproś do party", "Invite to party");
+        put("net.friendGame", "{name} wszedł do gry.", "{name} started playing.");
+        put("net.friendHere", "{name} jest na tym samym serwerze co Ty!", "{name} is on the same server as you!");
+        put("net.partyInvited", "Zaproszenie do party wysłane do {name}.", "Party invite sent to {name}.");
+        put("net.noInvite", "Nie masz zaproszenia do party.", "You don't have a party invite.");
+        put("net.noParty", "Nie jesteś w party. Zaproś kogoś: .party invite Nick", "You're not in a party. Invite someone: .party invite Name");
+        put("net.partyLeft", "Opuściłeś party.", "You left the party.");
+        put("net.partyList", "Party:", "Party:");
+        put("net.friendsHere", "Na tym serwerze grają też Twoi znajomi: {names}", "Your friends are on this server too: {names}");
         put("net.warping", "{name} zabiera party na {server}…", "{name} is taking the party to {server}…");
         put("net.err.USER_NOT_FOUND", "Nie ma gracza {name} w Gruz Client.", "No Gruz Client player called {name}.");
         put("net.err.NOT_FRIENDS", "Możesz pisać tylko do znajomych.", "You can only message friends.");
@@ -129,7 +139,8 @@ public final class Lang {
         put("net.err.INVITE_EXPIRED", "Zaproszenie wygasło.", "The invite expired.");
         put("net.err.SELF", "Nie możesz dodać samego siebie.", "You can't add yourself.");
         put("net.err.ALREADY_FRIENDS", "Już jesteście znajomymi.", "You're already friends.");
-        put("net.help", "Komendy Gruz:|.msg Nick tekst – wiadomość do znajomego|.r tekst – odpowiedź|.warp – party na Twój serwer", "Gruz commands:|.msg Name text – message a friend|.r text – reply|.warp – bring your party to your server");
+        put("net.help", "Komendy Gruz:|.msg Nick tekst – wiadomość do znajomego|.r tekst – odpowiedź|.party invite Nick – zaproś do party|.party accept – dołącz do party|.party / .party leave – kto jest w party / wyjdź|.warp – party na Twój serwer|.share – link do ostatniego screena",
+                "Gruz commands:|.msg Name text – message a friend|.r text – reply|.party invite Name – invite to your party|.party accept – join a party|.party / .party leave – who's in your party / leave|.warp – bring your party to your server|.share – link to your last screenshot");
         put("mods.cat.cosmetics", "Kosmetyki", "Cosmetics");
         put("module.cosmetics", "Kosmetyki", "Cosmetics");
         put("module.cosmetics.desc", "Peleryna, aureola, ślad, pet i emotki", "Cape, halo, trail, pet and emotes");
@@ -289,6 +300,19 @@ public final class Lang {
         put("setting.timestamps", "Godziny wiadomości", "Timestamps");
         put("setting.longHistory", "Długa historia (1000)", "Long history (1000)");
         put("setting.rightClickCopy", "Kopiuj prawym przyciskiem", "Right-click to copy");
+        put("setting.friendAlerts", "Powiadomienia o znajomych", "Friend notifications");
+        put("setting.shareButton", "Przycisk „Udostępnij” po screenie", "“Share” button after a screenshot");
+        put("setting.autoShare", "Od razu wysyłaj każdy screen", "Share every screenshot automatically");
+        put("shot.ready", "Zrobiono screena.", "Screenshot taken.");
+        put("shot.btn", "Udostępnij link", "Share link");
+        put("shot.none", "Nie masz jeszcze żadnego screena (F2).", "You don't have any screenshots yet (F2).");
+        put("shot.sending", "Wysyłam screena…", "Uploading screenshot…");
+        put("shot.done", "Link w schowku (Ctrl+V):", "Link copied (Ctrl+V):");
+        put("shot.err.SHOT_TOO_BIG", "Screen jest za duży.", "The screenshot is too big.");
+        put("shot.err.SHOT_BAD", "Nie udało się przygotować screena.", "Couldn't prepare the screenshot.");
+        put("shot.err.SHOT_LIMIT", "Limit 15 screenów na dobę – spróbuj jutro.", "Limit of 15 screenshots a day – try again tomorrow.");
+        put("shot.err.SHOT_SAVE", "Serwer nie zapisał screena – spróbuj za chwilę.", "The server couldn't save it – try again in a moment.");
+        put("net.wishSale", "Promocja! {name} z Twojej listy życzeń jest teraz {off}% taniej:", "Sale! {name} from your wishlist is now {off}% off:");
         put("setting.menuBackground", "Tło menu", "Menu background");
         put("menu.crystals", "Kryształy", "Crystals");
         put("menu.panorama", "Panorama", "Panorama");
