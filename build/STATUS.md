@@ -1,11 +1,11 @@
-# Build 38 (361d9edf)
+# Build 39 (9b91878e)
 
 - 1.20.1: build OK (errors: 0), w grze: OK
 - 1.20.4: build OK (errors: 0), w grze: OK
 - 1.21.1: build OK (errors: 0), w grze: OK
 - 1.21.11: build OK (errors: 0), w grze: OK
 - 1.21.4: build OK (errors: 0), w grze: OK
-- 1.8.9: build OK (errors: 0), w grze: FAIL
+- 1.8.9: build OK (errors: 0), w grze: OK
 - 26.1: build OK (errors: 0), w grze: OK
 - 26.2: build OK (errors: 0), w grze: OK
 - 26.3: build OK (errors: 0), w grze: OK
