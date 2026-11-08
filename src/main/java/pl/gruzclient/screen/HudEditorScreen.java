@@ -304,8 +304,8 @@ public class HudEditorScreen extends pl.gruzclient.compat.GruzScreen {
         if (super.mouseClicked(mx, my, button)) return true;
         Element e = at(elements(), mx, my);
         if (e == null) return false;
-        if (button == 1) { this.minecraft.setScreen(new GruzModsScreen(this, e.settings())); return true; }
-        if (button == 0) {
+        if (button == com.mojang.blaze3d.platform.InputConstants.MOUSE_BUTTON_RIGHT) { this.minecraft.setScreen(new GruzModsScreen(this, e.settings())); return true; }
+        if (button == com.mojang.blaze3d.platform.InputConstants.MOUSE_BUTTON_LEFT) {
             int[] r = e.rect(this.width, this.height);
             dragging = e;
             offX = mx - r[0];

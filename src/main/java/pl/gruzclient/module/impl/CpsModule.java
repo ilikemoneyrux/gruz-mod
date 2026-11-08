@@ -19,8 +19,8 @@ public class CpsModule extends TextHudModule {
     /** Wywoływane przy każdym kliknięciu w grze (0 = lewy, 1 = prawy) */
     public static void click(int button) {
         long now = System.currentTimeMillis();
-        if (button == 0) LEFT.addLast(now);
-        else if (button == 1) RIGHT.addLast(now);
+        if (button == com.mojang.blaze3d.platform.InputConstants.MOUSE_BUTTON_LEFT) LEFT.addLast(now);
+        else if (button == com.mojang.blaze3d.platform.InputConstants.MOUSE_BUTTON_RIGHT) RIGHT.addLast(now);
     }
 
     private static int count(Deque<Long> q) {

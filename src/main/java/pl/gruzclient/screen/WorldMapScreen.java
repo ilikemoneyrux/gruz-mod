@@ -173,7 +173,7 @@ public class WorldMapScreen extends pl.gruzclient.compat.GruzScreen {
             int y = 54;
             for (Waypoints.Point p : List.copyOf(Waypoints.current())) {
                 if (my >= y - 2 && my < y + 20) {
-                    if (button == 0) {
+                    if (button == com.mojang.blaze3d.platform.InputConstants.MOUSE_BUTTON_LEFT) {
                         Waypoints.remove(p);
                     } else {
                         cx = p.x; cz = p.z; dirty = true;
@@ -184,13 +184,13 @@ public class WorldMapScreen extends pl.gruzclient.compat.GruzScreen {
             }
             return false;
         }
-        if (button == 1) {
+        if (button == com.mojang.blaze3d.platform.InputConstants.MOUSE_BUTTON_RIGHT) {
             int bx = (int) Math.floor(blockX(mx)), bz = (int) Math.floor(blockZ(my));
             int by = minecraft.level != null ? minecraft.level.getHeight(net.minecraft.world.level.levelgen.Heightmap.Types.WORLD_SURFACE, bx, bz) : 64;
             Waypoints.add(Lang.t("map.point") + " " + (Waypoints.current().size() + 1), bx, by, bz, false);
             return true;
         }
-        if (button == 0) { dragging = true; lastMx = mx; lastMy = my; }
+        if (button == com.mojang.blaze3d.platform.InputConstants.MOUSE_BUTTON_LEFT) { dragging = true; lastMx = mx; lastMy = my; }
         return true;
     }
 

@@ -129,7 +129,7 @@ public class CrosshairEditorScreen extends pl.gruzclient.compat.GruzScreen {
         int x = (int) ((mx - gx) / cell), y = (int) ((my - gy) / cell);
         if (mx >= gx && my >= gy && x < N && y < N) {
             // lewy: rysuje (albo ściera, gdy zaczynasz na zapalonym pikselu), prawy: ściera
-            painting = button == 0 ? !grid[y * N + x] : Boolean.FALSE;
+            painting = button == com.mojang.blaze3d.platform.InputConstants.MOUSE_BUTTON_LEFT ? !grid[y * N + x] : Boolean.FALSE;
             return paintAt(mx, my);
         }
         return false;

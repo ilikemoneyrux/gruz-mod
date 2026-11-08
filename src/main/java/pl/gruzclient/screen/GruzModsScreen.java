@@ -366,7 +366,7 @@ public class GruzModsScreen extends pl.gruzclient.compat.GruzScreen {
             if (!Ui.inside(mx, my, x, y, cardW, cardH)) continue;
             Module m = list.get(i);
             if (Ui.inside(mx, my, x + 6, y + cardH - 18, cardW - 12, 13)) { if (!m.locked()) { m.toggle(); Modules.save(); } return true; }
-            if (!m.settings().isEmpty() && (Ui.inside(mx, my, x + cardW - 20, y + 6, 14, 14) || button == 1)) { openSettings(m); return true; }
+            if (!m.settings().isEmpty() && (Ui.inside(mx, my, x + cardW - 20, y + 6, 14, 14) || button == com.mojang.blaze3d.platform.InputConstants.MOUSE_BUTTON_RIGHT)) { openSettings(m); return true; }
             if (!m.settings().isEmpty()) openSettings(m); else if (!m.locked()) { m.toggle(); Modules.save(); }
             return true;
         }
