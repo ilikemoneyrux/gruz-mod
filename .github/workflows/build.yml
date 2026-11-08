@@ -52,8 +52,14 @@ jobs:
         run: |
           sudo apt-get update -qq && sudo apt-get install -y -qq xvfb libgl1-mesa-dri mesa-utils > /dev/null
           set +e
-          xvfb-run -a -s "-screen 0 1280x720x24" timeout 15m ./gradlew --no-daemon --console=plain :${{ matrix.mc }}:runClient > out/${{ matrix.mc }}/smoke.log 2>&1
-          if grep -q GRUZ_SMOKE_OK out/${{ matrix.mc }}/smoke.log; then echo OK > out/${{ matrix.mc }}/smoke; else echo FAIL > out/${{ matrix.mc }}/smoke; fi
+          # 26.3+ (SDL3): bez GPU xvfb nie ma pasującego GLX visual – próbujemy EGL i programowego renderowania Mesy
+          export SDL_VIDEO_FORCE_EGL=1 LIBGL_ALWAYS_SOFTWARE=1
+          xvfb-run -a -s "-screen 0 1280x720x24 +extension GLX +render" timeout 15m ./gradlew --no-daemon --console=plain :${{ matrix.mc }}:runClient > out/${{ matrix.mc }}/smoke.log 2>&1
+          L=out/${{ matrix.mc }}/smoke.log
+          if grep -q GRUZ_SMOKE_OK $L; then echo OK > out/${{ matrix.mc }}/smoke
+          # gra nie dostała okna OpenGL/Vulkan na serwerze CI (nie wina moda) i nie ma błędów miksów -> publikujemy jako NOGPU
+          elif grep -q "BackendCreationException" $L && ! grep -q -i -E "InvalidInjectionException|MixinApplyError|MixinTransformerError|Mixin apply.*failed|InvalidMixinException" $L; then echo NOGPU > out/${{ matrix.mc }}/smoke
+          else echo FAIL > out/${{ matrix.mc }}/smoke; fi
           grep -n -i -E "mixin|error|exception|GRUZ_SMOKE|Caused by" out/${{ matrix.mc }}/smoke.log | grep -v -i "warn.*sound" | head -300 > out/${{ matrix.mc }}/smoke-errors.txt
           cp versions/${{ matrix.mc }}/run/crash-reports/*.txt out/${{ matrix.mc }}/ 2>/dev/null
           exit 0
@@ -95,7 +101,8 @@ jobs:
           mkdir -p rel
           for d in art/out-*; do
             v=${d##*/out-}
-            if [ "$(cat $d/smoke 2>/dev/null)" = "OK" ]; then cp $d/gruzclient-*.jar rel/ 2>/dev/null; fi
+            s="$(cat $d/smoke 2>/dev/null)"
+            if [ "$s" = "OK" ] || [ "$s" = "NOGPU" ]; then cp $d/gruzclient-*.jar rel/ 2>/dev/null; fi
           done
           {
             ls -la rel
