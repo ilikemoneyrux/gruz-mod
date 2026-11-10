@@ -176,6 +176,9 @@ tasks.named('processResources') {
     filesMatching('fabric.mod.json') {
         expand 'version': project.version, 'mc_dep': mcDep, 'java_version': javaVer
     }
+    // GRUZ_COUNT: miksy nieobowiązkowe – nietrafione wstrzyknięcie trafia do logu zamiast wyłączać grę (cała lista w jednym przebiegu)
+    inputs.property('count', System.getenv('GRUZ_COUNT') ?: '')
+    if (System.getenv('GRUZ_COUNT')) filesMatching('gruzclient.mixins.json') { filter { it.replace('"required": true', '"required": false') } }
 }
 tasks.matching { it.name == 'sourcesJar' }.configureEach { dependsOn preprocess }
 
@@ -229,6 +232,32 @@ if (System.getenv('GRUZ_CARDS')) {
             client {
                 vmArg '-Dgruz.cardshots=true'
                 programArgs '--username', 'GruzCard', '--width', '720', '--height', '960'
+            }
+        }
+    }
+}
+
+// kontrola miksów (tylko lokalnie): GRUZ_COUNT=1 razem z GRUZ_SMOKE/GRUZ_FT – wstrzyknięcie z require = 0, które nie trafiło
+// w żadne miejsce, normalnie znika po cichu; z tą opcją Mixin zgłasza je w logu (InvalidInjectionException)
+if (System.getenv('GRUZ_COUNT')) {
+    loom {
+        runs {
+            client {
+                vmArg '-Dmixin.debug.countInjections=true'
+            }
+        }
+    }
+}
+
+// screeny z gry na stronę (tylko lokalnie): GRUZ_PROMO=1 ./gradlew :26.3:runClient
+if (System.getenv('GRUZ_PROMO')) {
+    loom {
+        runs {
+            client {
+                vmArg '-Dgruz.promoshots=true'
+                vmArg '-Dgruz.unlocked=all'
+                vmArg '-Dgruz.cosmetics=cape=nebula;head=crown;wings=crystal;back=none;trail=stars;pet=crystal;name=none'
+                programArgs '--username', 'GruzPlayer', '--width', '1280', '--height', '720'
             }
         }
     }

@@ -41,6 +41,7 @@ public abstract class MinecraftClientMixin {
         //#endif
         //#if MC >= 26.3
         pl.gruzclient.status.CardShots.tick();
+        pl.gruzclient.status.PromoShots.tick();
         //#endif
     }
 

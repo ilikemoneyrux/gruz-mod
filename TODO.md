@@ -57,3 +57,16 @@ Pewność daje dopiero CI (build + test uruchomienia gry).
 - Fullbright od 26.1: LightmapStateMixin na Lightmap.render (BadOptimizations pomija extract).
 - Item physics od 1.21.9: ItemEntitySubmitMixin. Kopiowanie wiadomości z czatu od 1.21.9: własne liczenie wiersza pod kursorem.
 - HUD Gruz znikał przy włączonych Hitboxach (od 1.21.9 showDebugScreen() = true przy każdym wpisie debug) – Compat.debugScreenOpen.
+
+## 0.5.10 (10.11.2026)
+- Kontrola miksów: `GRUZ_COUNT=1` razem z `GRUZ_SMOKE=1`/`GRUZ_FT=1` (lokalnie) – Mixin zgłasza wstrzyknięcia z `require = 0`, które w nic nie trafiły
+  (`-Dmixin.debug.countInjections=true`, miksy na czas testu nieobowiązkowe). Test startu (SmokeTest) woła na końcu `MixinEnvironment.audit()`,
+  więc wczytuje też klasy ze świata gry (gracz, pakiety) – zepsuty miks wywala test w CI, a nie grę u gracza. Stan: 8 wersji, 0 nietrafionych.
+- Block overlay 1.21.2–1.21.8: kolor obrysu nie działał (obrys rysuje `ShapeRenderer.renderShape` z kolorem ARGB) – `WorldRendererMixin`.
+- Stare animacje: od 1.21.11 gra sama nie opuszcza ręki po ciosie (`getItemSwapScale`), przekierowanie zostaje tylko dla < 1.21.11.
+- HUD: moduł nie wychodzi poza ekran (`HudModule.screenX/screenY`), a kolumna, która nie mieści się na wysokość, zawija się do następnej
+  bliżej środka (`Modules.layout`, `pushX`) – przy dużej skali GUI minimapa, mikstury i zbroja nachodziły na siebie albo wypadały za krawędź.
+- Screeny: `.share` nie blokuje się po zerwaniu połączenia, folder screenshots czytany tylko po zmianie.
+- `status/PromoShots.java` (26.3, `GRUZ_PROMO=1`) – screeny z gry na stronę. W trybie dev czcionka menu (TTF) rysuje się jako kwadraty –
+  w grze z launchera jest dobra (sprawdzone zrzutem `-Dgruz.smokeshot=true`).
+- 26.3 potrafi paść przy starcie (0xC0000005) także bez żadnych modów (1 na 8 startów na czystym Fabricu) – to nie mod Gruz.

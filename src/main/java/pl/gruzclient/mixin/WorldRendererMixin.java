@@ -23,6 +23,17 @@ import pl.gruzclient.module.impl.BlockOverlayModule;
 /** Block Overlay: kolor obrysu i półprzezroczyste wypełnienie bloku, na który patrzysz. */
 @Mixin(LevelRenderer.class)
 public abstract class WorldRendererMixin {
+    //#if MC >= 1.21.2
+    // 1.21.2–1.21.8: obrys rysuje ShapeRenderer.renderShape z kolorem jako jedna liczba ARGB
+    @org.spongepowered.asm.mixin.injection.ModifyArg(method = "renderHitOutline", require = 0, index = 6, at = @At(value = "INVOKE",
+            target = "Lnet/minecraft/client/renderer/ShapeRenderer;renderShape(Lcom/mojang/blaze3d/vertex/PoseStack;Lcom/mojang/blaze3d/vertex/VertexConsumer;Lnet/minecraft/world/phys/shapes/VoxelShape;DDDI)V"))
+    private int gruz$outlineColor(int color) {
+        BlockOverlayModule m = Modules.BLOCK_OVERLAY;
+        if (!m.isEnabled()) return color;
+        float[] c = m.rgba(m.thick() ? 0f : m.outlineAlpha.value / 100f);
+        return ((int) (c[3] * 255f) << 24) | ((int) (c[0] * 255f) << 16) | ((int) (c[1] * 255f) << 8) | (int) (c[2] * 255f);
+    }
+    //#else
     @ModifyArgs(method = "renderHitOutline", require = 0, at = @At(value = "INVOKE",
             target = "Lnet/minecraft/client/renderer/LevelRenderer;renderShape(Lcom/mojang/blaze3d/vertex/PoseStack;Lcom/mojang/blaze3d/vertex/VertexConsumer;Lnet/minecraft/world/phys/shapes/VoxelShape;DDDFFFF)V"))
     private void gruz$outlineColor(Args args) {
@@ -34,6 +45,7 @@ public abstract class WorldRendererMixin {
         args.set(8, c[2]);
         args.set(9, c[3]);
     }
+    //#endif
 
     @Inject(method = "renderHitOutline", at = @At("TAIL"), require = 0)
     private void gruz$fill(PoseStack matrices, VertexConsumer vertexConsumer, Entity entity, double cameraX, double cameraY, double cameraZ,

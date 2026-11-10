@@ -120,14 +120,26 @@ public final class Modules {
      */
     public static void layout(int screenH) {
         List<HudModule> list = new java.util.ArrayList<>();
-        for (HudModule m : hud()) { m.pushY = 0; if (m.isEnabled() && m.atDefault()) list.add(m); }
+        for (HudModule m : hud()) { m.pushY = 0; m.pushX = 0; if (m.isEnabled() && m.atDefault()) list.add(m); }
         list.sort(java.util.Comparator.comparingDouble(HudModule::defaultY));
-        int[] bottom = {Integer.MIN_VALUE, Integer.MIN_VALUE, Integer.MIN_VALUE};
+        int[] bottom = {Integer.MIN_VALUE, Integer.MIN_VALUE, Integer.MIN_VALUE}, shift = {0, 0, 0}, colW = {0, 0, 0};
         for (HudModule m : list) {
             int side = m.x < 0.33f ? 0 : m.x > 0.66f ? 2 : 1;
-            int top = Math.round(m.y * screenH);
-            if (top < bottom[side] + 2) m.pushY = bottom[side] + 2 - top;
-            bottom[side] = top + m.pushY + Math.round(m.lastH * m.scale);
+            int top = Math.round(m.y * screenH), h = Math.round(m.lastH * m.scale);
+            int push = top < bottom[side] + 2 ? bottom[side] + 2 - top : 0;
+            // kolumna nie mieści się na wysokość (duża skala GUI: minimapa + mikstury + zbroja) – moduł zaczyna nową kolumnę bliżej środka
+            if (top + push + h > screenH) {
+                push = screenH - h - top; // dosunięty do dolnej krawędzi
+                if (side != 1 && bottom[side] != Integer.MIN_VALUE && top + push < bottom[side] + 2) {
+                    shift[side] += colW[side] + 2;
+                    colW[side] = 0;
+                    push = Math.min(push, screenH - 42 - h - top); // nowa kolumna jest bliżej środka – zostaje nad paskiem szybkiego wyboru i sercami
+                }
+            }
+            m.pushY = push;
+            m.pushX = side == 2 ? -shift[side] : shift[side];
+            bottom[side] = top + push + h;
+            colW[side] = Math.max(colW[side], Math.round(m.lastW * m.scale));
         }
     }
 

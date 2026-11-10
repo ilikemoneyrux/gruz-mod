@@ -60,9 +60,12 @@ public abstract class HeldItemRendererMixin {
     }
 
     /** Animacje 1.7: ręka nie opada po ciosie (ignorujemy cooldown ataku) */
+    // od 1.21.11 sama gra nie opuszcza ręki po ciosie (tick czyta getItemSwapScale – tylko zmiana przedmiotu)
+    //#if MC < 1.21.11
     @Redirect(method = "tick", require = 0, at = @At(value = "INVOKE",
             target = "Lnet/minecraft/client/player/LocalPlayer;getAttackStrengthScale(F)F"))
     private float gruz$noCooldownDip(LocalPlayer player, float baseTime) {
         return Modules.OLD_ANIM.noCooldown() ? 1.0f : player.getAttackStrengthScale(baseTime);
     }
+    //#endif
 }

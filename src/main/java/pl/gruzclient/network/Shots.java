@@ -35,7 +35,9 @@ public final class Shots {
     private static long lastSeen = System.currentTimeMillis();
     private static String lastName = "";
     private static int ticks;
-    private static boolean uploading;
+    /** Kiedy ruszyła wysyłka (0 = nic nie leci). Czas zamiast flagi: po zerwaniu połączenia odpowiedź nie przyjdzie, a .share ma dalej działać. */
+    private static long uploadingSince;
+    private static long dirSeen;
 
     private static File dir() { return new File(Minecraft.getInstance().gameDirectory, "screenshots"); }
 
@@ -53,9 +55,13 @@ public final class Shots {
         if (++ticks % 20 != 0) return;
         Minecraft mc = Minecraft.getInstance();
         if (mc.player == null) return;
+        // nowy plik zmienia datę folderu – listę plików (wolną przy tysiącach screenów) czytamy tylko wtedy
+        long dm = dir().lastModified();
+        if (dm == dirSeen) return;
+        dirSeen = dm;
         File f = newest();
         if (f == null || f.lastModified() <= lastSeen || f.getName().equals(lastName)) return;
-        if (System.currentTimeMillis() - f.lastModified() < 700) return; // gra jeszcze zapisuje plik
+        if (System.currentTimeMillis() - f.lastModified() < 700) { dirSeen = 0; return; } // gra jeszcze zapisuje plik
         lastSeen = f.lastModified();
         lastName = f.getName();
         if (!GruzNetwork.connected()) return;
@@ -68,12 +74,12 @@ public final class Shots {
     /** .share – wysyła ostatni screen */
     public static void share() {
         if (!GruzNetwork.connected()) { GruzNetwork.chat(Component.literal(Lang.t("net.offline")).withStyle(ChatFormatting.RED)); return; }
-        if (uploading) return;
+        if (System.currentTimeMillis() - uploadingSince < 30_000) return;
         File f = newest();
         if (f == null) { GruzNetwork.chat(Component.literal(Lang.t("shot.none")).withStyle(ChatFormatting.GRAY)); return; }
         Minecraft mc = Minecraft.getInstance();
         String server = mc.getCurrentServer() != null && !mc.isLocalServer() ? mc.getCurrentServer().ip : null;
-        uploading = true;
+        uploadingSince = System.currentTimeMillis();
         GruzNetwork.chat(Component.literal(Lang.t("shot.sending")).withStyle(ChatFormatting.GRAY));
         CompletableFuture.runAsync(() -> {
             try {
@@ -107,7 +113,7 @@ public final class Shots {
                 GruzNetwork.sendRaw(o);
             } catch (Exception e) {
                 GruzClient.LOG.warn("Gruz: nie udało się przygotować screena: {}", e.toString());
-                mc.execute(() -> { uploading = false; GruzNetwork.chat(Component.literal(Lang.t("shot.err.SHOT_BAD")).withStyle(ChatFormatting.RED)); });
+                mc.execute(() -> { uploadingSince = 0; GruzNetwork.chat(Component.literal(Lang.t("shot.err.SHOT_BAD")).withStyle(ChatFormatting.RED)); });
             }
         });
     }
@@ -129,7 +135,7 @@ public final class Shots {
 
     /** Odpowiedź serwera: link (do schowka + przycisk „Otwórz”) albo błąd */
     static void onDone(String url) {
-        uploading = false;
+        uploadingSince = 0;
         Minecraft mc = Minecraft.getInstance();
         mc.keyboardHandler.setClipboard(url);
         MutableComponent line = Component.literal(Lang.t("shot.done") + " ").withStyle(ChatFormatting.GRAY)
@@ -138,7 +144,7 @@ public final class Shots {
     }
 
     static void onError(String code) {
-        uploading = false;
+        uploadingSince = 0;
         GruzNetwork.chat(Component.literal(Lang.t("shot.err." + code)).withStyle(ChatFormatting.RED));
     }
 }

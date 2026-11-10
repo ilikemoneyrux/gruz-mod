@@ -101,3 +101,8 @@ if (System.getenv('GRUZ_FT')) {
 if (System.getenv('GRUZ_SMOKE')) {
 	loom { runs { client { vmArg '-Dgruz.smoketest=true'; programArgs '--username', 'GruzCI' } } }
 }
+
+// zdjęcie na kartę wersji w launcherze (tylko lokalnie): GRUZ_CARDS=<nasiono> ./gradlew runClient
+if (System.getenv('GRUZ_CARDS')) {
+	loom { runs { client { vmArg '-Dgruz.cardshot=true'; vmArg "-Dgruz.cardseed=${System.getenv('GRUZ_CARDS')}"; programArgs '--username', 'GruzCard', '--width', '960', '--height', '720' } } }
+}

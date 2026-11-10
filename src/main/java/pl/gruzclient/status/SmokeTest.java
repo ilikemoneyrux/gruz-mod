@@ -23,9 +23,19 @@ public final class SmokeTest {
         GruzClient.LOG.info("GRUZ_SMOKE step {} screen {}", step, mc.screen.getClass().getName());
         switch (step++) {
             case 0 -> mc.setScreen(new pl.gruzclient.screen.GruzModsScreen(mc.screen));
-            case 1 -> mc.setScreen(new pl.gruzclient.screen.HudEditorScreen(null));
+            case 1 -> {
+                //#if MC >= 26.3
+                // -Dgruz.smokeshot=true: zrzut menu modów (smoke-mods.png) – do sprawdzenia czcionki w grze uruchomionej z launchera
+                if (Boolean.getBoolean("gruz.smokeshot")) net.minecraft.client.Screenshot.grab(mc.gameDirectory, "smoke-mods.png", mc.gameRenderer.mainRenderTarget(), 1, c -> GruzClient.LOG.info("GRUZ_SMOKE shot"));
+                //#endif
+                mc.setScreen(new pl.gruzclient.screen.HudEditorScreen(null));
+            }
             case 2 -> mc.setScreen(new net.minecraft.client.gui.screens.TitleScreen());
             default -> {
+                // wczytuje wszystkie klasy, w które wpinają się miksy – także te ze świata gry, do których ten test nie dochodzi
+                // (gracz, pakiety, kamera…). Zepsuty miks wywala grę tutaj, zamiast u gracza po wejściu do świata.
+                org.spongepowered.asm.mixin.MixinEnvironment.getCurrentEnvironment().audit();
+                GruzClient.LOG.info("GRUZ_SMOKE_AUDIT done");
                 GruzClient.LOG.info("GRUZ_SMOKE_OK");
                 mc.stop();
             }

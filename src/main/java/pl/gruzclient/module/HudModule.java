@@ -17,6 +17,8 @@ public abstract class HudModule extends Module {
     public int lastW = 40, lastH = 12; // rozmiar z ostatniego rysowania (dla edytora)
     /** Przesunięcie w dół (px), gdy nieprzesunięty moduł nachodzi na wyższy w tej samej kolumnie (Modules.layout) */
     public int pushY;
+    /** Przesunięcie w bok (px): kolumna nie mieściła się na wysokość, więc moduł trafił do następnej, bliżej środka */
+    public int pushX;
 
     protected final Setting.Bool background;
     protected final Setting.Color color;
@@ -35,7 +37,7 @@ public abstract class HudModule extends Module {
     public void render(GuiGraphics c, int screenW, int screenH, boolean editing) {
         var m = pl.gruzclient.compat.Pose2D.of(c);
         m.push();
-        int px = Math.round(x * screenW), py = screenY(screenH);
+        int px = screenX(screenW), py = screenY(screenH);
         m.translate(px, py);
         m.scale(scale, scale);
         int[] size = draw(c, editing);
@@ -58,7 +60,11 @@ public abstract class HudModule extends Module {
     /** Gracz nie przesuwał modułu – może go ułożyć automat */
     public boolean atDefault() { return x == defX && y == defY; }
     public float defaultY() { return defY; }
-    public int screenY(int screenH) { return Math.round(y * screenH) + (atDefault() ? pushY : 0); }
+    /** Pozycja na ekranie; element nie wychodzi poza krawędź (mały ekran albo duża skala GUI – np. minimapa i mikstury po prawej) */
+    public int screenX(int screenW) { return Math.max(0, Math.min(Math.round(x * screenW) + (atDefault() ? pushX : 0), screenW - Math.round(lastW * scale))); }
+    public int screenY(int screenH) {
+        return Math.max(0, Math.min(Math.round(y * screenH) + (atDefault() ? pushY : 0), screenH - Math.round(lastH * scale)));
+    }
 
     @Override
     public void load(JsonObject o) {
