@@ -1,8 +1,8 @@
-# Build 40 (6df4cede)
+# Build 41 (dd72b97c)
 
 - 1.20.1: build OK (errors: 0), w grze: OK
 - 1.20.4: build OK (errors: 0), w grze: OK
-- 1.21.1: build OK (errors: 0), w grze: OK
+- 1.21.1: build FAIL (errors: 0), w grze: -
 - 1.21.11: build OK (errors: 0), w grze: OK
 - 1.21.4: build OK (errors: 0), w grze: OK
 - 1.8.9: build OK (errors: 0), w grze: OK
