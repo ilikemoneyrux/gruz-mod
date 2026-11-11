@@ -3,7 +3,7 @@
   "id": "gruzclient",
   "version": "${version}",
   "name": "Gruz Client",
-  "description": "Gruz Client for 1.8.9: HUD (FPS, CPS, keystrokes, armor, potions, coords), zoom, perspective, toggle sprint, fullbright.",
+  "description": "Gruz Client for 1.8.9: HUD (FPS, CPS, keystrokes, armor, potions, coords), zoom, perspective, toggle sprint, fullbright, Gruz capes and friends.",
   "authors": ["Gruz Client"],
   "contact": { "homepage": "https://gruzclient.com" },
   "license": "All-Rights-Reserved",

@@ -95,7 +95,29 @@ public final class FeatureTest {
             case 230:
                 shot("03-menu");
                 break;
-            case 260:
+            case 240: // sieć Gruz i peleryny (0.2.0): widok z tyłu, komendy na czacie
+                mc.setScreen(null);
+                mc.options.perspective = 1;
+                mc.player.sendChatMessage(".gruz");
+                break;
+            case 700:
+                mc.player.sendChatMessage(".friends");
+                break;
+            case 720:
+                mc.player.sendChatMessage(".r no hej");
+                break;
+            case 770:
+                mc.player.sendChatMessage(".party accept");
+                break;
+            case 800:
+                shot("04-cape-chat");
+                log("net connected=" + GruzNet.connected() + " friends=" + GruzNet.FRIENDS.size());
+                GruzNet.myCosmetics = "cape=aurora;color=b45cff";
+                break;
+            case 850:
+                shot("05-cape-anim");
+                break;
+            case 870:
                 log("DONE");
                 mc.scheduleStop();
                 break;

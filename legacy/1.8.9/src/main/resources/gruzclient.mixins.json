@@ -8,7 +8,9 @@
     "MixinHudRender",
     "MixinKeyPress",
     "MixinEntityLook",
-    "MixinCamera"
+    "MixinCamera",
+    "MixinPlayerCape",
+    "MixinChatSend"
   ],
   "injectors": {
     "defaultRequire": 1

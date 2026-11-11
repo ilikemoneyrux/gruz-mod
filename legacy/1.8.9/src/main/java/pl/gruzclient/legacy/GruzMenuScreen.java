@@ -5,9 +5,9 @@ import net.minecraft.client.gui.widget.ButtonWidget;
 
 /** Menu modułów (prawy Shift): przycisk na każdy moduł, kliknięcie włącza/wyłącza i zapisuje. */
 public class GruzMenuScreen extends Screen {
-    private static final String[] IDS = {"fps", "cps", "coords", "keystrokes", "armor", "potions", "toggleSprint", "fullbright", "zoom", "freelook"};
-    private static final String[] EN = {"FPS", "CPS", "Coordinates", "Keystrokes", "Armor HUD", "Potion HUD", "Toggle Sprint", "Fullbright", "Zoom (C)", "Perspective (Left Alt)"};
-    private static final String[] PL = {"FPS", "CPS", "Koordynaty", "Klawisze", "Zbroja", "Mikstury", "Toggle Sprint", "Pełna jasność", "Zoom (C)", "Perspektywa (lewy Alt)"};
+    private static final String[] IDS = {"fps", "cps", "coords", "keystrokes", "armor", "potions", "toggleSprint", "fullbright", "zoom", "freelook", "network", "capes", "friendAlerts"};
+    private static final String[] EN = {"FPS", "CPS", "Coordinates", "Keystrokes", "Armor HUD", "Potion HUD", "Toggle Sprint", "Fullbright", "Zoom (C)", "Perspective (Left Alt)", "Gruz network", "Gruz capes", "Friend alerts"};
+    private static final String[] PL = {"FPS", "CPS", "Koordynaty", "Klawisze", "Zbroja", "Mikstury", "Toggle Sprint", "Pełna jasność", "Zoom (C)", "Perspektywa (lewy Alt)", "Sieć Gruz", "Peleryny Gruz", "Powiadomienia o znajomych"};
 
     private static boolean get(int i) {
         try { return Mods.Config.class.getField(IDS[i]).getBoolean(Mods.cfg); } catch (Exception e) { return false; }

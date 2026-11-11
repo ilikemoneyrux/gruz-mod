@@ -92,9 +92,14 @@ jar {
 }
 
 
+// peleryny HD (te same obrazki co w modzie na nowe wersje) – bez kopii plików w repo
+processResources {
+	from('../../src/main/resources') { include 'assets/gruzclient/textures/cape/*.png' }
+}
+
 // test w świecie (tylko lokalnie): GRUZ_FT=1 ./gradlew runClient
 if (System.getenv('GRUZ_FT')) {
-	loom { runs { client { vmArg '-Dgruz.featuretest=true'; programArgs '--username', 'GruzTest' } } }
+	loom { runs { client { vmArg '-Dgruz.featuretest=true'; vmArg '-Dgruz.cosmetics=cape=nebula;color=b45cff'; if (System.getenv('GRUZ_SERVER')) vmArg "-Dgruz.server=${System.getenv('GRUZ_SERVER')}"; programArgs '--username', 'GruzTest' } } }
 }
 
 // test uruchomienia w CI: GRUZ_SMOKE=1 ./gradlew runClient

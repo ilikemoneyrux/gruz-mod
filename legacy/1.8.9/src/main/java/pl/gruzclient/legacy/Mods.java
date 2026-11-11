@@ -23,6 +23,8 @@ public final class Mods {
     public static final class Config {
         public boolean fps = true, cps = true, coords = false, keystrokes = true, armor = true, potions = true;
         public boolean toggleSprint = false, fullbright = false, zoom = true, freelook = true;
+        /** Sieć Gruz (od 0.2.0): połączenie z serwerem, peleryny, powiadomienia o znajomych */
+        public boolean network = true, capes = true, friendAlerts = true;
         public int zoomKey = Keyboard.KEY_C, freelookKey = Keyboard.KEY_LMENU, menuKey = Keyboard.KEY_RSHIFT;
         public float oldGamma = 1f;
     }
@@ -108,6 +110,8 @@ public final class Mods {
         MinecraftClient mc = MinecraftClient.getInstance();
         FeatureTest.tick();
         smoke(mc);
+        GruzNet.tick();
+        Capes.tick();
         boolean menu = down(cfg.menuKey);
         if (menu && !wasMenu) mc.setScreen(new GruzMenuScreen());
         wasMenu = menu;
