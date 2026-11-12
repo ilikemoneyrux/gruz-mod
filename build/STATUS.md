@@ -1,4 +1,4 @@
-# Build 42 (f23c5b51)
+# Build 43 (84f9ea17)
 
 - 1.20.1: build OK (errors: 0), w grze: OK
 - 1.20.4: build OK (errors: 0), w grze: OK
