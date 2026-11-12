@@ -8,6 +8,7 @@
     "MinecraftClientMixin",
     "GuiScreenMixin",
     "GameMenuScreenMixin",
+    "TitleScreenMixin",
     "InGameHudMixin",
     "GameRendererMixin",
     "LightmapTextureManagerMixin",

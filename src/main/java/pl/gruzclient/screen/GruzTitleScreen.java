@@ -104,6 +104,9 @@ public class GruzTitleScreen extends pl.gruzclient.compat.GruzScreen {
         add(new UiButton(cx - qw / 2, qy, qw, 22, Ui.Icon.POWER, Lang.t("menu.quitGame"),
                 b -> this.minecraft.stop()).kind(UiButton.Kind.DANGER).big());
 
+        // powrót do klasycznego menu Minecrafta (lewy dolny róg)
+        add(new UiButton(8, this.height - 38, 112, 18, Ui.Icon.LAYOUT, Lang.t("menu.classic"), b -> Modules.MENU.setClassic(true)));
+
         // pasek ikon (prawy górny róg)
         int s = 22, ix = this.width - 10 - s;
         add(new UiButton(ix, 10, s, s, Ui.Icon.GLOBE, null, b -> { Lang.cycle(); this.rebuildWidgets(); })

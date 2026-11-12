@@ -27,6 +27,7 @@ public class MenuModule extends Module {
     public final Setting.Choice background = add(new Setting.Choice("background", "setting.menuBackground", 0, "menu.vanilla", "menu.crystals", "menu.panorama"));
     public final Setting.Key key = add(new Setting.Key("key", "setting.panoramaKey", InputConstants.KEY_F7));
     public final Setting.Bool seasonal = add(new Setting.Bool("seasonal", "setting.seasonal", true));
+    public final Setting.Bool classic = add(new Setting.Bool("classic", "setting.classicMenu", false));
 
     public static final ResourceLocation PANORAMA = Compat.id(GruzClient.MOD_ID, "panorama/menu");
     private boolean wasDown;
@@ -40,6 +41,13 @@ public class MenuModule extends Module {
     public boolean hasPanorama() {
         for (int i = 0; i < 6; i++) if (!Files.exists(dir().resolve("panorama_" + i + ".png"))) return false;
         return true;
+    }
+
+    /** Przełącza menu główne: klasyczne Minecrafta albo Gruz (przyciski w obu menu) */
+    public void setClassic(boolean on) {
+        classic.value = on;
+        Modules.save();
+        mc.setScreen(new net.minecraft.client.gui.screens.TitleScreen()); // miksyn podmieni na menu Gruz, gdy classic = false
     }
 
     /** Czarne tło z kryształami (stary wygląd menu) */

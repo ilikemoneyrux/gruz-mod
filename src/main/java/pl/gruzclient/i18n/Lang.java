@@ -437,6 +437,9 @@ public final class Lang {
         put("menu.rejoin", "Wróć na {name}", "Rejoin {name}");
         put("menu.quitGame", "Wyjdź z gry", "Quit game");
         put("menu.vanilla", "Rozmyta panorama", "Blurred panorama");
+        put("menu.classic", "Klasyczne menu", "Classic menu");
+        put("menu.gruzMenu", "Menu Gruz", "Gruz menu");
+        put("setting.classicMenu", "Klasyczne menu Minecrafta", "Classic Minecraft menu");
         put("menu.tipTag", "Wskazówka", "Tip");
         put("menu.tip0.title", "Przesuń wszystko", "Move anything");
         put("menu.tip0", "Prawy Shift w grze otwiera centrum modów: przeciągnij HUD, tablicę wyników i pasek bossa.", "Right Shift in game opens the mod hub: drag the HUD, scoreboard and boss bar.");

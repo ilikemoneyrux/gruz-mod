@@ -15,7 +15,7 @@ public abstract class GuiScreenMixin {
     /** Za każdym razem, gdy gra chce pokazać menu główne, pokazujemy menu Gruz. */
     @ModifyVariable(method = "setScreen", at = @At("HEAD"), argsOnly = true)
     private Screen gruz$replaceTitleScreen(Screen screen) {
-        if (screen instanceof TitleScreen) return new GruzTitleScreen();
+        if (screen instanceof TitleScreen && !pl.gruzclient.module.Modules.MENU.classic.value) return new GruzTitleScreen();
         return screen;
     }
 }

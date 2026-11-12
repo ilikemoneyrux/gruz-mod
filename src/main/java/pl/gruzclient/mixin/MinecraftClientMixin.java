@@ -22,7 +22,7 @@ public abstract class MinecraftClientMixin {
     /** Za każdym razem, gdy gra chce pokazać menu główne, pokazujemy menu Gruz (od 26.2: GuiScreenMixin). */
     @ModifyVariable(method = "setScreen", at = @At("HEAD"), argsOnly = true)
     private Screen gruz$replaceTitleScreen(Screen screen) {
-        if (screen instanceof TitleScreen) return new GruzTitleScreen();
+        if (screen instanceof TitleScreen && !pl.gruzclient.module.Modules.MENU.classic.value) return new GruzTitleScreen();
         return screen;
     }
     //#endif
