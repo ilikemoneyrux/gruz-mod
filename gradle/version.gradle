@@ -256,7 +256,7 @@ if (System.getenv('GRUZ_PROMO')) {
             client {
                 vmArg '-Dgruz.promoshots=true'
                 vmArg '-Dgruz.unlocked=all'
-                vmArg '-Dgruz.cosmetics=cape=nebula;head=crown;wings=crystal;back=none;trail=stars;pet=crystal;name=none'
+                vmArg "-Dgruz.cosmetics=${System.getenv('GRUZ_COS') ?: 'cape=nebula;head=crown;wings=crystal;back=none;trail=stars;pet=crystal;name=none'}"
                 programArgs '--username', 'GruzPlayer', '--width', '1280', '--height', '720'
             }
         }
