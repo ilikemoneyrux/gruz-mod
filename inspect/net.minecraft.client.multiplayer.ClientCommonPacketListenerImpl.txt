@@ -1,0 +1,136 @@
+Compiled from "ClientCommonPacketListenerImpl.java"
+public abstract class net.minecraft.client.multiplayer.ClientCommonPacketListenerImpl implements net.minecraft.network.protocol.common.ClientCommonPacketListener {
+  private static final net.minecraft.network.chat.Component GENERIC_DISCONNECT_MESSAGE;
+    descriptor: Lnet/minecraft/network/chat/Component;
+  private static final org.slf4j.Logger LOGGER;
+    descriptor: Lorg/slf4j/Logger;
+  protected final net.minecraft.client.Minecraft minecraft;
+    descriptor: Lnet/minecraft/client/Minecraft;
+  protected final net.minecraft.network.Connection connection;
+    descriptor: Lnet/minecraft/network/Connection;
+  protected final net.minecraft.client.multiplayer.ServerData serverData;
+    descriptor: Lnet/minecraft/client/multiplayer/ServerData;
+  protected java.lang.String serverBrand;
+    descriptor: Ljava/lang/String;
+  protected final net.minecraft.client.telemetry.WorldSessionTelemetryManager telemetryManager;
+    descriptor: Lnet/minecraft/client/telemetry/WorldSessionTelemetryManager;
+  protected final net.minecraft.client.gui.screens.Screen postDisconnectScreen;
+    descriptor: Lnet/minecraft/client/gui/screens/Screen;
+  protected boolean isTransferring;
+    descriptor: Z
+  private final java.util.List<net.minecraft.client.multiplayer.ClientCommonPacketListenerImpl$DeferredPacket> deferredPackets;
+    descriptor: Ljava/util/List;
+  protected final java.util.Map<net.minecraft.resources.ResourceLocation, byte[]> serverCookies;
+    descriptor: Ljava/util/Map;
+  protected java.util.Map<java.lang.String, java.lang.String> customReportDetails;
+    descriptor: Ljava/util/Map;
+  protected net.minecraft.server.ServerLinks serverLinks;
+    descriptor: Lnet/minecraft/server/ServerLinks;
+  protected net.minecraft.client.multiplayer.ClientCommonPacketListenerImpl(net.minecraft.client.Minecraft, net.minecraft.network.Connection, net.minecraft.client.multiplayer.CommonListenerCookie);
+    descriptor: (Lnet/minecraft/client/Minecraft;Lnet/minecraft/network/Connection;Lnet/minecraft/client/multiplayer/CommonListenerCookie;)V
+
+  public void onPacketError(net.minecraft.network.protocol.Packet, java.lang.Exception);
+    descriptor: (Lnet/minecraft/network/protocol/Packet;Ljava/lang/Exception;)V
+
+  public net.minecraft.network.DisconnectionDetails createDisconnectionInfo(net.minecraft.network.chat.Component, java.lang.Throwable);
+    descriptor: (Lnet/minecraft/network/chat/Component;Ljava/lang/Throwable;)Lnet/minecraft/network/DisconnectionDetails;
+
+  private java.util.Optional<java.nio.file.Path> storeDisconnectionReport(net.minecraft.network.protocol.Packet, java.lang.Throwable);
+    descriptor: (Lnet/minecraft/network/protocol/Packet;Ljava/lang/Throwable;)Ljava/util/Optional;
+
+  public boolean shouldHandleMessage(net.minecraft.network.protocol.Packet<?>);
+    descriptor: (Lnet/minecraft/network/protocol/Packet;)Z
+
+  public void handleKeepAlive(net.minecraft.network.protocol.common.ClientboundKeepAlivePacket);
+    descriptor: (Lnet/minecraft/network/protocol/common/ClientboundKeepAlivePacket;)V
+
+  public void handlePing(net.minecraft.network.protocol.common.ClientboundPingPacket);
+    descriptor: (Lnet/minecraft/network/protocol/common/ClientboundPingPacket;)V
+
+  public void handleCustomPayload(net.minecraft.network.protocol.common.ClientboundCustomPayloadPacket);
+    descriptor: (Lnet/minecraft/network/protocol/common/ClientboundCustomPayloadPacket;)V
+
+  protected abstract void handleCustomPayload(net.minecraft.network.protocol.common.custom.CustomPacketPayload);
+    descriptor: (Lnet/minecraft/network/protocol/common/custom/CustomPacketPayload;)V
+
+  public void handleResourcePackPush(net.minecraft.network.protocol.common.ClientboundResourcePackPushPacket);
+    descriptor: (Lnet/minecraft/network/protocol/common/ClientboundResourcePackPushPacket;)V
+
+  public void handleResourcePackPop(net.minecraft.network.protocol.common.ClientboundResourcePackPopPacket);
+    descriptor: (Lnet/minecraft/network/protocol/common/ClientboundResourcePackPopPacket;)V
+
+  static net.minecraft.network.chat.Component preparePackPrompt(net.minecraft.network.chat.Component, net.minecraft.network.chat.Component);
+    descriptor: (Lnet/minecraft/network/chat/Component;Lnet/minecraft/network/chat/Component;)Lnet/minecraft/network/chat/Component;
+
+  private static java.net.URL parseResourcePackUrl(java.lang.String);
+    descriptor: (Ljava/lang/String;)Ljava/net/URL;
+
+  public void handleRequestCookie(net.minecraft.network.protocol.cookie.ClientboundCookieRequestPacket);
+    descriptor: (Lnet/minecraft/network/protocol/cookie/ClientboundCookieRequestPacket;)V
+
+  public void handleStoreCookie(net.minecraft.network.protocol.common.ClientboundStoreCookiePacket);
+    descriptor: (Lnet/minecraft/network/protocol/common/ClientboundStoreCookiePacket;)V
+
+  public void handleCustomReportDetails(net.minecraft.network.protocol.common.ClientboundCustomReportDetailsPacket);
+    descriptor: (Lnet/minecraft/network/protocol/common/ClientboundCustomReportDetailsPacket;)V
+
+  public void handleServerLinks(net.minecraft.network.protocol.common.ClientboundServerLinksPacket);
+    descriptor: (Lnet/minecraft/network/protocol/common/ClientboundServerLinksPacket;)V
+
+  public void handleTransfer(net.minecraft.network.protocol.common.ClientboundTransferPacket);
+    descriptor: (Lnet/minecraft/network/protocol/common/ClientboundTransferPacket;)V
+
+  public void handleDisconnect(net.minecraft.network.protocol.common.ClientboundDisconnectPacket);
+    descriptor: (Lnet/minecraft/network/protocol/common/ClientboundDisconnectPacket;)V
+
+  protected void sendDeferredPackets();
+    descriptor: ()V
+
+  public void send(net.minecraft.network.protocol.Packet<?>);
+    descriptor: (Lnet/minecraft/network/protocol/Packet;)V
+
+  public void onDisconnect(net.minecraft.network.DisconnectionDetails);
+    descriptor: (Lnet/minecraft/network/DisconnectionDetails;)V
+
+  public void fillListenerSpecificCrashDetails(net.minecraft.CrashReport, net.minecraft.CrashReportCategory);
+    descriptor: (Lnet/minecraft/CrashReport;Lnet/minecraft/CrashReportCategory;)V
+
+  protected net.minecraft.client.gui.screens.Screen createDisconnectScreen(net.minecraft.network.DisconnectionDetails);
+    descriptor: (Lnet/minecraft/network/DisconnectionDetails;)Lnet/minecraft/client/gui/screens/Screen;
+
+  public java.lang.String serverBrand();
+    descriptor: ()Ljava/lang/String;
+
+  private void sendWhen(net.minecraft.network.protocol.Packet<? extends net.minecraft.network.ServerboundPacketListener>, java.util.function.BooleanSupplier, java.time.Duration);
+    descriptor: (Lnet/minecraft/network/protocol/Packet;Ljava/util/function/BooleanSupplier;Ljava/time/Duration;)V
+
+  private net.minecraft.client.gui.screens.Screen addOrUpdatePackPrompt(java.util.UUID, java.net.URL, java.lang.String, boolean, net.minecraft.network.chat.Component);
+    descriptor: (Ljava/util/UUID;Ljava/net/URL;Ljava/lang/String;ZLnet/minecraft/network/chat/Component;)Lnet/minecraft/client/gui/screens/Screen;
+
+  private static net.minecraft.client.gui.screens.Screen method_52788();
+    descriptor: ()Lnet/minecraft/client/gui/screens/Screen;
+
+  private java.lang.String method_55610() throws java.lang.Exception;
+    descriptor: ()Ljava/lang/String;
+
+  private java.lang.String method_55611() throws java.lang.Exception;
+    descriptor: ()Ljava/lang/String;
+
+  private java.lang.String method_64894() throws java.lang.Exception;
+    descriptor: ()Ljava/lang/String;
+
+  private void method_55513();
+    descriptor: ()V
+
+  private void method_55511(java.util.UUID);
+    descriptor: (Ljava/util/UUID;)V
+
+  private static boolean method_52792();
+    descriptor: ()Z
+
+  private static java.util.List method_60880(net.minecraft.server.ServerLinks$Entry);
+    descriptor: (Lnet/minecraft/server/ServerLinks$Entry;)Ljava/util/List;
+
+  static {};
+    descriptor: ()V
+}

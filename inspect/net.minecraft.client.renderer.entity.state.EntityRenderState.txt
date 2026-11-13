@@ -1,0 +1,35 @@
+Compiled from "EntityRenderState.java"
+public class net.minecraft.client.renderer.entity.state.EntityRenderState {
+  public double x;
+    descriptor: D
+  public double y;
+    descriptor: D
+  public double z;
+    descriptor: D
+  public float ageInTicks;
+    descriptor: F
+  public float boundingBoxWidth;
+    descriptor: F
+  public float boundingBoxHeight;
+    descriptor: F
+  public float eyeHeight;
+    descriptor: F
+  public double distanceToCameraSq;
+    descriptor: D
+  public boolean isInvisible;
+    descriptor: Z
+  public boolean isDiscrete;
+    descriptor: Z
+  public boolean displayFireAnimation;
+    descriptor: Z
+  public net.minecraft.world.phys.Vec3 passengerOffset;
+    descriptor: Lnet/minecraft/world/phys/Vec3;
+  public net.minecraft.network.chat.Component nameTag;
+    descriptor: Lnet/minecraft/network/chat/Component;
+  public net.minecraft.world.phys.Vec3 nameTagAttachment;
+    descriptor: Lnet/minecraft/world/phys/Vec3;
+  public net.minecraft.client.renderer.entity.state.EntityRenderState$LeashState leashState;
+    descriptor: Lnet/minecraft/client/renderer/entity/state/EntityRenderState$LeashState;
+  public net.minecraft.client.renderer.entity.state.EntityRenderState();
+    descriptor: ()V
+}

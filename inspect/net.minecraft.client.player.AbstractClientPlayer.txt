@@ -1,0 +1,42 @@
+Compiled from "AbstractClientPlayer.java"
+public abstract class net.minecraft.client.player.AbstractClientPlayer extends net.minecraft.world.entity.player.Player {
+  private net.minecraft.client.multiplayer.PlayerInfo playerInfo;
+    descriptor: Lnet/minecraft/client/multiplayer/PlayerInfo;
+  protected net.minecraft.world.phys.Vec3 deltaMovementOnPreviousTick;
+    descriptor: Lnet/minecraft/world/phys/Vec3;
+  public float elytraRotX;
+    descriptor: F
+  public float elytraRotY;
+    descriptor: F
+  public float elytraRotZ;
+    descriptor: F
+  public final net.minecraft.client.multiplayer.ClientLevel clientLevel;
+    descriptor: Lnet/minecraft/client/multiplayer/ClientLevel;
+  public float walkDistO;
+    descriptor: F
+  public float walkDist;
+    descriptor: F
+  public net.minecraft.client.player.AbstractClientPlayer(net.minecraft.client.multiplayer.ClientLevel, com.mojang.authlib.GameProfile);
+    descriptor: (Lnet/minecraft/client/multiplayer/ClientLevel;Lcom/mojang/authlib/GameProfile;)V
+
+  public boolean isSpectator();
+    descriptor: ()Z
+
+  public boolean isCreative();
+    descriptor: ()Z
+
+  protected net.minecraft.client.multiplayer.PlayerInfo getPlayerInfo();
+    descriptor: ()Lnet/minecraft/client/multiplayer/PlayerInfo;
+
+  public void tick();
+    descriptor: ()V
+
+  public net.minecraft.world.phys.Vec3 getDeltaMovementLerped(float);
+    descriptor: (F)Lnet/minecraft/world/phys/Vec3;
+
+  public net.minecraft.client.resources.PlayerSkin getSkin();
+    descriptor: ()Lnet/minecraft/client/resources/PlayerSkin;
+
+  public float getFieldOfViewModifier(boolean, float);
+    descriptor: (ZF)F
+}
