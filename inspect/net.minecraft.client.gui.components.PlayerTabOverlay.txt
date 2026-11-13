@@ -1,0 +1,106 @@
+Compiled from "PlayerTabOverlay.java"
+public class net.minecraft.client.gui.components.PlayerTabOverlay {
+  private static final net.minecraft.resources.Identifier PING_UNKNOWN_SPRITE;
+    descriptor: Lnet/minecraft/resources/Identifier;
+  private static final net.minecraft.resources.Identifier PING_1_SPRITE;
+    descriptor: Lnet/minecraft/resources/Identifier;
+  private static final net.minecraft.resources.Identifier PING_2_SPRITE;
+    descriptor: Lnet/minecraft/resources/Identifier;
+  private static final net.minecraft.resources.Identifier PING_3_SPRITE;
+    descriptor: Lnet/minecraft/resources/Identifier;
+  private static final net.minecraft.resources.Identifier PING_4_SPRITE;
+    descriptor: Lnet/minecraft/resources/Identifier;
+  private static final net.minecraft.resources.Identifier PING_5_SPRITE;
+    descriptor: Lnet/minecraft/resources/Identifier;
+  private static final net.minecraft.resources.Identifier HEART_CONTAINER_BLINKING_SPRITE;
+    descriptor: Lnet/minecraft/resources/Identifier;
+  private static final net.minecraft.resources.Identifier HEART_CONTAINER_SPRITE;
+    descriptor: Lnet/minecraft/resources/Identifier;
+  private static final net.minecraft.resources.Identifier HEART_FULL_BLINKING_SPRITE;
+    descriptor: Lnet/minecraft/resources/Identifier;
+  private static final net.minecraft.resources.Identifier HEART_HALF_BLINKING_SPRITE;
+    descriptor: Lnet/minecraft/resources/Identifier;
+  private static final net.minecraft.resources.Identifier HEART_ABSORBING_FULL_BLINKING_SPRITE;
+    descriptor: Lnet/minecraft/resources/Identifier;
+  private static final net.minecraft.resources.Identifier HEART_FULL_SPRITE;
+    descriptor: Lnet/minecraft/resources/Identifier;
+  private static final net.minecraft.resources.Identifier HEART_ABSORBING_HALF_BLINKING_SPRITE;
+    descriptor: Lnet/minecraft/resources/Identifier;
+  private static final net.minecraft.resources.Identifier HEART_HALF_SPRITE;
+    descriptor: Lnet/minecraft/resources/Identifier;
+  private static final java.util.Comparator<net.minecraft.client.multiplayer.PlayerInfo> PLAYER_COMPARATOR;
+    descriptor: Ljava/util/Comparator;
+  public static final int MAX_ROWS_PER_COL;
+    descriptor: I
+  private final net.minecraft.client.Minecraft minecraft;
+    descriptor: Lnet/minecraft/client/Minecraft;
+  private final net.minecraft.client.gui.Hud hud;
+    descriptor: Lnet/minecraft/client/gui/Hud;
+  private net.minecraft.network.chat.Component footer;
+    descriptor: Lnet/minecraft/network/chat/Component;
+  private net.minecraft.network.chat.Component header;
+    descriptor: Lnet/minecraft/network/chat/Component;
+  private boolean visible;
+    descriptor: Z
+  private final java.util.Map<java.util.UUID, net.minecraft.client.gui.components.PlayerTabOverlay$HealthState> healthStates;
+    descriptor: Ljava/util/Map;
+  public net.minecraft.client.gui.components.PlayerTabOverlay(net.minecraft.client.Minecraft, net.minecraft.client.gui.Hud);
+    descriptor: (Lnet/minecraft/client/Minecraft;Lnet/minecraft/client/gui/Hud;)V
+
+  public net.minecraft.network.chat.Component getNameForDisplay(net.minecraft.client.multiplayer.PlayerInfo);
+    descriptor: (Lnet/minecraft/client/multiplayer/PlayerInfo;)Lnet/minecraft/network/chat/Component;
+
+  private net.minecraft.network.chat.Component decorateName(net.minecraft.client.multiplayer.PlayerInfo, net.minecraft.network.chat.MutableComponent);
+    descriptor: (Lnet/minecraft/client/multiplayer/PlayerInfo;Lnet/minecraft/network/chat/MutableComponent;)Lnet/minecraft/network/chat/Component;
+
+  public void setVisible(boolean);
+    descriptor: (Z)V
+
+  private java.util.List<net.minecraft.client.multiplayer.PlayerInfo> getPlayerInfos();
+    descriptor: ()Ljava/util/List;
+
+  public void extractRenderState(net.minecraft.client.gui.GuiGraphicsExtractor, int, net.minecraft.world.scores.Scoreboard, net.minecraft.world.scores.Objective);
+    descriptor: (Lnet/minecraft/client/gui/GuiGraphicsExtractor;ILnet/minecraft/world/scores/Scoreboard;Lnet/minecraft/world/scores/Objective;)V
+
+  protected void extractPingIcon(net.minecraft.client.gui.GuiGraphicsExtractor, int, int, int, net.minecraft.client.multiplayer.PlayerInfo);
+    descriptor: (Lnet/minecraft/client/gui/GuiGraphicsExtractor;IIILnet/minecraft/client/multiplayer/PlayerInfo;)V
+
+  private void extractTablistScore(net.minecraft.world.scores.Objective, int, net.minecraft.client.gui.components.PlayerTabOverlay$ScoreDisplayEntry, int, int, java.util.UUID, net.minecraft.client.gui.GuiGraphicsExtractor);
+    descriptor: (Lnet/minecraft/world/scores/Objective;ILnet/minecraft/client/gui/components/PlayerTabOverlay$ScoreDisplayEntry;IILjava/util/UUID;Lnet/minecraft/client/gui/GuiGraphicsExtractor;)V
+
+  private void extractTablistHearts(int, int, int, java.util.UUID, net.minecraft.client.gui.GuiGraphicsExtractor, int);
+    descriptor: (IIILjava/util/UUID;Lnet/minecraft/client/gui/GuiGraphicsExtractor;I)V
+
+  public void setFooter(net.minecraft.network.chat.Component);
+    descriptor: (Lnet/minecraft/network/chat/Component;)V
+
+  public void setHeader(net.minecraft.network.chat.Component);
+    descriptor: (Lnet/minecraft/network/chat/Component;)V
+
+  public void reset();
+    descriptor: ()V
+
+  private static net.minecraft.client.gui.components.PlayerTabOverlay$HealthState lambda$extractTablistHearts$0(int, java.util.UUID);
+    descriptor: (ILjava/util/UUID;)Lnet/minecraft/client/gui/components/PlayerTabOverlay$HealthState;
+
+  private static boolean lambda$extractRenderState$1(java.util.Set, java.util.UUID);
+    descriptor: (Ljava/util/Set;Ljava/util/UUID;)Z
+
+  private static java.util.UUID lambda$extractRenderState$0(net.minecraft.client.multiplayer.PlayerInfo);
+    descriptor: (Lnet/minecraft/client/multiplayer/PlayerInfo;)Ljava/util/UUID;
+
+  private static java.lang.String lambda$static$3(net.minecraft.client.multiplayer.PlayerInfo);
+    descriptor: (Lnet/minecraft/client/multiplayer/PlayerInfo;)Ljava/lang/String;
+
+  private static java.lang.String lambda$static$2(net.minecraft.client.multiplayer.PlayerInfo);
+    descriptor: (Lnet/minecraft/client/multiplayer/PlayerInfo;)Ljava/lang/String;
+
+  private static int lambda$static$1(net.minecraft.client.multiplayer.PlayerInfo);
+    descriptor: (Lnet/minecraft/client/multiplayer/PlayerInfo;)I
+
+  private static int lambda$static$0(net.minecraft.client.multiplayer.PlayerInfo);
+    descriptor: (Lnet/minecraft/client/multiplayer/PlayerInfo;)I
+
+  static {};
+    descriptor: ()V
+}

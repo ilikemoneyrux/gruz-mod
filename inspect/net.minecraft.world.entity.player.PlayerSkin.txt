@@ -1,0 +1,45 @@
+Compiled from "PlayerSkin.java"
+public final class net.minecraft.world.entity.player.PlayerSkin extends java.lang.Record {
+  private final net.minecraft.core.ClientAsset$Texture body;
+    descriptor: Lnet/minecraft/core/ClientAsset$Texture;
+  private final net.minecraft.core.ClientAsset$Texture cape;
+    descriptor: Lnet/minecraft/core/ClientAsset$Texture;
+  private final net.minecraft.core.ClientAsset$Texture elytra;
+    descriptor: Lnet/minecraft/core/ClientAsset$Texture;
+  private final net.minecraft.world.entity.player.PlayerModelType model;
+    descriptor: Lnet/minecraft/world/entity/player/PlayerModelType;
+  private final boolean secure;
+    descriptor: Z
+  public net.minecraft.world.entity.player.PlayerSkin(net.minecraft.core.ClientAsset$Texture, net.minecraft.core.ClientAsset$Texture, net.minecraft.core.ClientAsset$Texture, net.minecraft.world.entity.player.PlayerModelType, boolean);
+    descriptor: (Lnet/minecraft/core/ClientAsset$Texture;Lnet/minecraft/core/ClientAsset$Texture;Lnet/minecraft/core/ClientAsset$Texture;Lnet/minecraft/world/entity/player/PlayerModelType;Z)V
+
+  public static net.minecraft.world.entity.player.PlayerSkin insecure(net.minecraft.core.ClientAsset$Texture, net.minecraft.core.ClientAsset$Texture, net.minecraft.core.ClientAsset$Texture, net.minecraft.world.entity.player.PlayerModelType);
+    descriptor: (Lnet/minecraft/core/ClientAsset$Texture;Lnet/minecraft/core/ClientAsset$Texture;Lnet/minecraft/core/ClientAsset$Texture;Lnet/minecraft/world/entity/player/PlayerModelType;)Lnet/minecraft/world/entity/player/PlayerSkin;
+
+  public net.minecraft.world.entity.player.PlayerSkin with(net.minecraft.world.entity.player.PlayerSkin$Patch);
+    descriptor: (Lnet/minecraft/world/entity/player/PlayerSkin$Patch;)Lnet/minecraft/world/entity/player/PlayerSkin;
+
+  public final java.lang.String toString();
+    descriptor: ()Ljava/lang/String;
+
+  public final int hashCode();
+    descriptor: ()I
+
+  public final boolean equals(java.lang.Object);
+    descriptor: (Ljava/lang/Object;)Z
+
+  public net.minecraft.core.ClientAsset$Texture body();
+    descriptor: ()Lnet/minecraft/core/ClientAsset$Texture;
+
+  public net.minecraft.core.ClientAsset$Texture cape();
+    descriptor: ()Lnet/minecraft/core/ClientAsset$Texture;
+
+  public net.minecraft.core.ClientAsset$Texture elytra();
+    descriptor: ()Lnet/minecraft/core/ClientAsset$Texture;
+
+  public net.minecraft.world.entity.player.PlayerModelType model();
+    descriptor: ()Lnet/minecraft/world/entity/player/PlayerModelType;
+
+  public boolean secure();
+    descriptor: ()Z
+}
