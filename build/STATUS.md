@@ -1,4 +1,4 @@
-# Build 44 (757cc34e)
+# Build 45 (bf9adf9a)
 
 - 1.20.1: build OK (errors: 0), w grze: OK
 - 1.20.4: build OK (errors: 0), w grze: OK
