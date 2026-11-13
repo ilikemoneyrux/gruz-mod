@@ -1,0 +1,368 @@
+Compiled from "LevelRenderer.java"
+public class net.minecraft.client.renderer.LevelRenderer implements net.minecraft.server.packs.resources.ResourceManagerReloadListener,java.lang.AutoCloseable {
+  private static final net.minecraft.resources.Identifier TRANSPARENCY_POST_CHAIN_ID;
+    descriptor: Lnet/minecraft/resources/Identifier;
+  private static final net.minecraft.resources.Identifier ENTITY_OUTLINE_POST_CHAIN_ID;
+    descriptor: Lnet/minecraft/resources/Identifier;
+  public static final int SECTION_SIZE;
+    descriptor: I
+  public static final int HALF_SECTION_SIZE;
+    descriptor: I
+  public static final int NEARBY_SECTION_DISTANCE_IN_BLOCKS;
+    descriptor: I
+  private static final int MINIMUM_TRANSPARENT_SORT_COUNT;
+    descriptor: I
+  private static final float CHUNK_VISIBILITY_THRESHOLD;
+    descriptor: F
+  private final net.minecraft.client.Minecraft minecraft;
+    descriptor: Lnet/minecraft/client/Minecraft;
+  private final net.minecraft.client.renderer.entity.EntityRenderDispatcher entityRenderDispatcher;
+    descriptor: Lnet/minecraft/client/renderer/entity/EntityRenderDispatcher;
+  private final net.minecraft.client.renderer.blockentity.BlockEntityRenderDispatcher blockEntityRenderDispatcher;
+    descriptor: Lnet/minecraft/client/renderer/blockentity/BlockEntityRenderDispatcher;
+  private final net.minecraft.client.renderer.RenderBuffers renderBuffers;
+    descriptor: Lnet/minecraft/client/renderer/RenderBuffers;
+  private net.minecraft.client.renderer.SkyRenderer skyRenderer;
+    descriptor: Lnet/minecraft/client/renderer/SkyRenderer;
+  private final net.minecraft.client.renderer.CloudRenderer cloudRenderer;
+    descriptor: Lnet/minecraft/client/renderer/CloudRenderer;
+  private final net.minecraft.client.renderer.WorldBorderRenderer worldBorderRenderer;
+    descriptor: Lnet/minecraft/client/renderer/WorldBorderRenderer;
+  private final net.minecraft.client.renderer.WeatherEffectRenderer weatherEffectRenderer;
+    descriptor: Lnet/minecraft/client/renderer/WeatherEffectRenderer;
+  private final net.minecraft.client.renderer.state.ParticlesRenderState particlesRenderState;
+    descriptor: Lnet/minecraft/client/renderer/state/ParticlesRenderState;
+  public final net.minecraft.client.renderer.debug.DebugRenderer debugRenderer;
+    descriptor: Lnet/minecraft/client/renderer/debug/DebugRenderer;
+  public final net.minecraft.client.renderer.debug.GameTestBlockHighlightRenderer gameTestBlockHighlightRenderer;
+    descriptor: Lnet/minecraft/client/renderer/debug/GameTestBlockHighlightRenderer;
+  private net.minecraft.client.multiplayer.ClientLevel level;
+    descriptor: Lnet/minecraft/client/multiplayer/ClientLevel;
+  private final net.minecraft.client.renderer.SectionOcclusionGraph sectionOcclusionGraph;
+    descriptor: Lnet/minecraft/client/renderer/SectionOcclusionGraph;
+  private final it.unimi.dsi.fastutil.objects.ObjectArrayList<net.minecraft.client.renderer.chunk.SectionRenderDispatcher$RenderSection> visibleSections;
+    descriptor: Lit/unimi/dsi/fastutil/objects/ObjectArrayList;
+  private final it.unimi.dsi.fastutil.objects.ObjectArrayList<net.minecraft.client.renderer.chunk.SectionRenderDispatcher$RenderSection> nearbyVisibleSections;
+    descriptor: Lit/unimi/dsi/fastutil/objects/ObjectArrayList;
+  private net.minecraft.client.renderer.ViewArea viewArea;
+    descriptor: Lnet/minecraft/client/renderer/ViewArea;
+  private int ticks;
+    descriptor: I
+  private final it.unimi.dsi.fastutil.ints.Int2ObjectMap<net.minecraft.server.level.BlockDestructionProgress> destroyingBlocks;
+    descriptor: Lit/unimi/dsi/fastutil/ints/Int2ObjectMap;
+  private final it.unimi.dsi.fastutil.longs.Long2ObjectMap<java.util.SortedSet<net.minecraft.server.level.BlockDestructionProgress>> destructionProgress;
+    descriptor: Lit/unimi/dsi/fastutil/longs/Long2ObjectMap;
+  private com.mojang.blaze3d.pipeline.RenderTarget entityOutlineTarget;
+    descriptor: Lcom/mojang/blaze3d/pipeline/RenderTarget;
+  private final net.minecraft.client.renderer.LevelTargetBundle targets;
+    descriptor: Lnet/minecraft/client/renderer/LevelTargetBundle;
+  private int lastCameraSectionX;
+    descriptor: I
+  private int lastCameraSectionY;
+    descriptor: I
+  private int lastCameraSectionZ;
+    descriptor: I
+  private double prevCamX;
+    descriptor: D
+  private double prevCamY;
+    descriptor: D
+  private double prevCamZ;
+    descriptor: D
+  private double prevCamRotX;
+    descriptor: D
+  private double prevCamRotY;
+    descriptor: D
+  private net.minecraft.client.renderer.chunk.SectionRenderDispatcher sectionRenderDispatcher;
+    descriptor: Lnet/minecraft/client/renderer/chunk/SectionRenderDispatcher;
+  private int lastViewDistance;
+    descriptor: I
+  private boolean captureFrustum;
+    descriptor: Z
+  private net.minecraft.client.renderer.culling.Frustum capturedFrustum;
+    descriptor: Lnet/minecraft/client/renderer/culling/Frustum;
+  private net.minecraft.core.BlockPos lastTranslucentSortBlockPos;
+    descriptor: Lnet/minecraft/core/BlockPos;
+  private int translucencyResortIterationIndex;
+    descriptor: I
+  private final net.minecraft.client.renderer.state.LevelRenderState levelRenderState;
+    descriptor: Lnet/minecraft/client/renderer/state/LevelRenderState;
+  private final net.minecraft.client.renderer.SubmitNodeStorage submitNodeStorage;
+    descriptor: Lnet/minecraft/client/renderer/SubmitNodeStorage;
+  private final net.minecraft.client.renderer.feature.FeatureRenderDispatcher featureRenderDispatcher;
+    descriptor: Lnet/minecraft/client/renderer/feature/FeatureRenderDispatcher;
+  private com.mojang.blaze3d.textures.GpuSampler chunkLayerSampler;
+    descriptor: Lcom/mojang/blaze3d/textures/GpuSampler;
+  private final net.minecraft.gizmos.SimpleGizmoCollector collectedGizmos;
+    descriptor: Lnet/minecraft/gizmos/SimpleGizmoCollector;
+  private net.minecraft.client.renderer.LevelRenderer$FinalizedGizmos finalizedGizmos;
+    descriptor: Lnet/minecraft/client/renderer/LevelRenderer$FinalizedGizmos;
+  public net.minecraft.client.renderer.LevelRenderer(net.minecraft.client.Minecraft, net.minecraft.client.renderer.entity.EntityRenderDispatcher, net.minecraft.client.renderer.blockentity.BlockEntityRenderDispatcher, net.minecraft.client.renderer.RenderBuffers, net.minecraft.client.renderer.state.LevelRenderState, net.minecraft.client.renderer.feature.FeatureRenderDispatcher);
+    descriptor: (Lnet/minecraft/client/Minecraft;Lnet/minecraft/client/renderer/entity/EntityRenderDispatcher;Lnet/minecraft/client/renderer/blockentity/BlockEntityRenderDispatcher;Lnet/minecraft/client/renderer/RenderBuffers;Lnet/minecraft/client/renderer/state/LevelRenderState;Lnet/minecraft/client/renderer/feature/FeatureRenderDispatcher;)V
+
+  public void close();
+    descriptor: ()V
+
+  public void onResourceManagerReload(net.minecraft.server.packs.resources.ResourceManager);
+    descriptor: (Lnet/minecraft/server/packs/resources/ResourceManager;)V
+
+  public void initOutline();
+    descriptor: ()V
+
+  private net.minecraft.client.renderer.PostChain getTransparencyChain();
+    descriptor: ()Lnet/minecraft/client/renderer/PostChain;
+
+  public void doEntityOutline();
+    descriptor: ()V
+
+  protected boolean shouldShowEntityOutlines();
+    descriptor: ()Z
+
+  public void setLevel(net.minecraft.client.multiplayer.ClientLevel);
+    descriptor: (Lnet/minecraft/client/multiplayer/ClientLevel;)V
+
+  private void clearVisibleSections();
+    descriptor: ()V
+
+  public void allChanged();
+    descriptor: ()V
+
+  public void resize(int, int);
+    descriptor: (II)V
+
+  public java.lang.String getSectionStatistics();
+    descriptor: ()Ljava/lang/String;
+
+  public net.minecraft.client.renderer.chunk.SectionRenderDispatcher getSectionRenderDispatcher();
+    descriptor: ()Lnet/minecraft/client/renderer/chunk/SectionRenderDispatcher;
+
+  public double getTotalSections();
+    descriptor: ()D
+
+  public double getLastViewDistance();
+    descriptor: ()D
+
+  public int countRenderedSections();
+    descriptor: ()I
+
+  public void resetSampler();
+    descriptor: ()V
+
+  public java.lang.String getEntityStatistics();
+    descriptor: ()Ljava/lang/String;
+
+  private void cullTerrain(net.minecraft.client.Camera, net.minecraft.client.renderer.culling.Frustum, boolean);
+    descriptor: (Lnet/minecraft/client/Camera;Lnet/minecraft/client/renderer/culling/Frustum;Z)V
+
+  public static net.minecraft.client.renderer.culling.Frustum offsetFrustum(net.minecraft.client.renderer.culling.Frustum);
+    descriptor: (Lnet/minecraft/client/renderer/culling/Frustum;)Lnet/minecraft/client/renderer/culling/Frustum;
+
+  private void applyFrustum(net.minecraft.client.renderer.culling.Frustum);
+    descriptor: (Lnet/minecraft/client/renderer/culling/Frustum;)V
+
+  public void addRecentlyCompiledSection(net.minecraft.client.renderer.chunk.SectionRenderDispatcher$RenderSection);
+    descriptor: (Lnet/minecraft/client/renderer/chunk/SectionRenderDispatcher$RenderSection;)V
+
+  private net.minecraft.client.renderer.culling.Frustum prepareCullFrustum(org.joml.Matrix4f, org.joml.Matrix4f, net.minecraft.world.phys.Vec3);
+    descriptor: (Lorg/joml/Matrix4f;Lorg/joml/Matrix4f;Lnet/minecraft/world/phys/Vec3;)Lnet/minecraft/client/renderer/culling/Frustum;
+
+  public void renderLevel(com.mojang.blaze3d.resource.GraphicsResourceAllocator, net.minecraft.client.DeltaTracker, boolean, net.minecraft.client.Camera, org.joml.Matrix4f, org.joml.Matrix4f, org.joml.Matrix4f, com.mojang.blaze3d.buffers.GpuBufferSlice, org.joml.Vector4f, boolean);
+    descriptor: (Lcom/mojang/blaze3d/resource/GraphicsResourceAllocator;Lnet/minecraft/client/DeltaTracker;ZLnet/minecraft/client/Camera;Lorg/joml/Matrix4f;Lorg/joml/Matrix4f;Lorg/joml/Matrix4f;Lcom/mojang/blaze3d/buffers/GpuBufferSlice;Lorg/joml/Vector4f;Z)V
+
+  private void addMainPass(com.mojang.blaze3d.framegraph.FrameGraphBuilder, net.minecraft.client.renderer.culling.Frustum, org.joml.Matrix4f, com.mojang.blaze3d.buffers.GpuBufferSlice, boolean, net.minecraft.client.renderer.state.LevelRenderState, net.minecraft.client.DeltaTracker, net.minecraft.util.profiling.ProfilerFiller);
+    descriptor: (Lcom/mojang/blaze3d/framegraph/FrameGraphBuilder;Lnet/minecraft/client/renderer/culling/Frustum;Lorg/joml/Matrix4f;Lcom/mojang/blaze3d/buffers/GpuBufferSlice;ZLnet/minecraft/client/renderer/state/LevelRenderState;Lnet/minecraft/client/DeltaTracker;Lnet/minecraft/util/profiling/ProfilerFiller;)V
+
+  private void addParticlesPass(com.mojang.blaze3d.framegraph.FrameGraphBuilder, com.mojang.blaze3d.buffers.GpuBufferSlice);
+    descriptor: (Lcom/mojang/blaze3d/framegraph/FrameGraphBuilder;Lcom/mojang/blaze3d/buffers/GpuBufferSlice;)V
+
+  private void addCloudsPass(com.mojang.blaze3d.framegraph.FrameGraphBuilder, net.minecraft.client.CloudStatus, net.minecraft.world.phys.Vec3, long, float, int, float);
+    descriptor: (Lcom/mojang/blaze3d/framegraph/FrameGraphBuilder;Lnet/minecraft/client/CloudStatus;Lnet/minecraft/world/phys/Vec3;JFIF)V
+
+  private void addWeatherPass(com.mojang.blaze3d.framegraph.FrameGraphBuilder, com.mojang.blaze3d.buffers.GpuBufferSlice);
+    descriptor: (Lcom/mojang/blaze3d/framegraph/FrameGraphBuilder;Lcom/mojang/blaze3d/buffers/GpuBufferSlice;)V
+
+  private void addLateDebugPass(com.mojang.blaze3d.framegraph.FrameGraphBuilder, net.minecraft.client.renderer.state.CameraRenderState, com.mojang.blaze3d.buffers.GpuBufferSlice, org.joml.Matrix4f);
+    descriptor: (Lcom/mojang/blaze3d/framegraph/FrameGraphBuilder;Lnet/minecraft/client/renderer/state/CameraRenderState;Lcom/mojang/blaze3d/buffers/GpuBufferSlice;Lorg/joml/Matrix4f;)V
+
+  private void extractVisibleEntities(net.minecraft.client.Camera, net.minecraft.client.renderer.culling.Frustum, net.minecraft.client.DeltaTracker, net.minecraft.client.renderer.state.LevelRenderState);
+    descriptor: (Lnet/minecraft/client/Camera;Lnet/minecraft/client/renderer/culling/Frustum;Lnet/minecraft/client/DeltaTracker;Lnet/minecraft/client/renderer/state/LevelRenderState;)V
+
+  private void submitEntities(com.mojang.blaze3d.vertex.PoseStack, net.minecraft.client.renderer.state.LevelRenderState, net.minecraft.client.renderer.SubmitNodeCollector);
+    descriptor: (Lcom/mojang/blaze3d/vertex/PoseStack;Lnet/minecraft/client/renderer/state/LevelRenderState;Lnet/minecraft/client/renderer/SubmitNodeCollector;)V
+
+  private void extractVisibleBlockEntities(net.minecraft.client.Camera, float, net.minecraft.client.renderer.state.LevelRenderState);
+    descriptor: (Lnet/minecraft/client/Camera;FLnet/minecraft/client/renderer/state/LevelRenderState;)V
+
+  private void submitBlockEntities(com.mojang.blaze3d.vertex.PoseStack, net.minecraft.client.renderer.state.LevelRenderState, net.minecraft.client.renderer.SubmitNodeStorage);
+    descriptor: (Lcom/mojang/blaze3d/vertex/PoseStack;Lnet/minecraft/client/renderer/state/LevelRenderState;Lnet/minecraft/client/renderer/SubmitNodeStorage;)V
+
+  private void extractBlockDestroyAnimation(net.minecraft.client.Camera, net.minecraft.client.renderer.state.LevelRenderState);
+    descriptor: (Lnet/minecraft/client/Camera;Lnet/minecraft/client/renderer/state/LevelRenderState;)V
+
+  private void renderBlockDestroyAnimation(com.mojang.blaze3d.vertex.PoseStack, net.minecraft.client.renderer.MultiBufferSource$BufferSource, net.minecraft.client.renderer.state.LevelRenderState);
+    descriptor: (Lcom/mojang/blaze3d/vertex/PoseStack;Lnet/minecraft/client/renderer/MultiBufferSource$BufferSource;Lnet/minecraft/client/renderer/state/LevelRenderState;)V
+
+  private void extractBlockOutline(net.minecraft.client.Camera, net.minecraft.client.renderer.state.LevelRenderState);
+    descriptor: (Lnet/minecraft/client/Camera;Lnet/minecraft/client/renderer/state/LevelRenderState;)V
+
+  private void renderBlockOutline(net.minecraft.client.renderer.MultiBufferSource$BufferSource, com.mojang.blaze3d.vertex.PoseStack, boolean, net.minecraft.client.renderer.state.LevelRenderState);
+    descriptor: (Lnet/minecraft/client/renderer/MultiBufferSource$BufferSource;Lcom/mojang/blaze3d/vertex/PoseStack;ZLnet/minecraft/client/renderer/state/LevelRenderState;)V
+
+  private void checkPoseStack(com.mojang.blaze3d.vertex.PoseStack);
+    descriptor: (Lcom/mojang/blaze3d/vertex/PoseStack;)V
+
+  private net.minecraft.client.renderer.entity.state.EntityRenderState extractEntity(net.minecraft.world.entity.Entity, float);
+    descriptor: (Lnet/minecraft/world/entity/Entity;F)Lnet/minecraft/client/renderer/entity/state/EntityRenderState;
+
+  private void scheduleTranslucentSectionResort(net.minecraft.world.phys.Vec3);
+    descriptor: (Lnet/minecraft/world/phys/Vec3;)V
+
+  private void scheduleResort(net.minecraft.client.renderer.chunk.SectionRenderDispatcher$RenderSection, net.minecraft.client.renderer.chunk.TranslucencyPointOfView, net.minecraft.world.phys.Vec3, boolean, boolean);
+    descriptor: (Lnet/minecraft/client/renderer/chunk/SectionRenderDispatcher$RenderSection;Lnet/minecraft/client/renderer/chunk/TranslucencyPointOfView;Lnet/minecraft/world/phys/Vec3;ZZ)V
+
+  private net.minecraft.client.renderer.chunk.ChunkSectionsToRender prepareChunkRenders(org.joml.Matrix4fc, double, double, double);
+    descriptor: (Lorg/joml/Matrix4fc;DDD)Lnet/minecraft/client/renderer/chunk/ChunkSectionsToRender;
+
+  public void endFrame();
+    descriptor: ()V
+
+  public void captureFrustum();
+    descriptor: ()V
+
+  public void killFrustum();
+    descriptor: ()V
+
+  public void tick(net.minecraft.client.Camera);
+    descriptor: (Lnet/minecraft/client/Camera;)V
+
+  private void removeBlockBreakingProgress();
+    descriptor: ()V
+
+  private void removeProgress(net.minecraft.server.level.BlockDestructionProgress);
+    descriptor: (Lnet/minecraft/server/level/BlockDestructionProgress;)V
+
+  private void addSkyPass(com.mojang.blaze3d.framegraph.FrameGraphBuilder, net.minecraft.client.Camera, com.mojang.blaze3d.buffers.GpuBufferSlice);
+    descriptor: (Lcom/mojang/blaze3d/framegraph/FrameGraphBuilder;Lnet/minecraft/client/Camera;Lcom/mojang/blaze3d/buffers/GpuBufferSlice;)V
+
+  private boolean doesMobEffectBlockSky(net.minecraft.client.Camera);
+    descriptor: (Lnet/minecraft/client/Camera;)Z
+
+  private void compileSections(net.minecraft.client.Camera);
+    descriptor: (Lnet/minecraft/client/Camera;)V
+
+  private void renderHitOutline(com.mojang.blaze3d.vertex.PoseStack, com.mojang.blaze3d.vertex.VertexConsumer, double, double, double, net.minecraft.client.renderer.state.BlockOutlineRenderState, int, float);
+    descriptor: (Lcom/mojang/blaze3d/vertex/PoseStack;Lcom/mojang/blaze3d/vertex/VertexConsumer;DDDLnet/minecraft/client/renderer/state/BlockOutlineRenderState;IF)V
+
+  public void blockChanged(net.minecraft.world.level.BlockGetter, net.minecraft.core.BlockPos, net.minecraft.world.level.block.state.BlockState, net.minecraft.world.level.block.state.BlockState, int);
+    descriptor: (Lnet/minecraft/world/level/BlockGetter;Lnet/minecraft/core/BlockPos;Lnet/minecraft/world/level/block/state/BlockState;Lnet/minecraft/world/level/block/state/BlockState;I)V
+
+  private void setBlockDirty(net.minecraft.core.BlockPos, boolean);
+    descriptor: (Lnet/minecraft/core/BlockPos;Z)V
+
+  public void setBlocksDirty(int, int, int, int, int, int);
+    descriptor: (IIIIII)V
+
+  public void setBlockDirty(net.minecraft.core.BlockPos, net.minecraft.world.level.block.state.BlockState, net.minecraft.world.level.block.state.BlockState);
+    descriptor: (Lnet/minecraft/core/BlockPos;Lnet/minecraft/world/level/block/state/BlockState;Lnet/minecraft/world/level/block/state/BlockState;)V
+
+  public void setSectionDirtyWithNeighbors(int, int, int);
+    descriptor: (III)V
+
+  public void setSectionRangeDirty(int, int, int, int, int, int);
+    descriptor: (IIIIII)V
+
+  public void setSectionDirty(int, int, int);
+    descriptor: (III)V
+
+  private void setSectionDirty(int, int, int, boolean);
+    descriptor: (IIIZ)V
+
+  public void onSectionBecomingNonEmpty(long);
+    descriptor: (J)V
+
+  public void destroyBlockProgress(int, net.minecraft.core.BlockPos, int);
+    descriptor: (ILnet/minecraft/core/BlockPos;I)V
+
+  public boolean hasRenderedAllSections();
+    descriptor: ()Z
+
+  public void onChunkReadyToRender(net.minecraft.world.level.ChunkPos);
+    descriptor: (Lnet/minecraft/world/level/ChunkPos;)V
+
+  public void needsUpdate();
+    descriptor: ()V
+
+  public static int getLightColor(net.minecraft.world.level.BlockAndTintGetter, net.minecraft.core.BlockPos);
+    descriptor: (Lnet/minecraft/world/level/BlockAndTintGetter;Lnet/minecraft/core/BlockPos;)I
+
+  public static int getLightColor(net.minecraft.client.renderer.LevelRenderer$BrightnessGetter, net.minecraft.world.level.BlockAndTintGetter, net.minecraft.world.level.block.state.BlockState, net.minecraft.core.BlockPos);
+    descriptor: (Lnet/minecraft/client/renderer/LevelRenderer$BrightnessGetter;Lnet/minecraft/world/level/BlockAndTintGetter;Lnet/minecraft/world/level/block/state/BlockState;Lnet/minecraft/core/BlockPos;)I
+
+  public boolean isSectionCompiledAndVisible(net.minecraft.core.BlockPos);
+    descriptor: (Lnet/minecraft/core/BlockPos;)Z
+
+  public com.mojang.blaze3d.pipeline.RenderTarget entityOutlineTarget();
+    descriptor: ()Lcom/mojang/blaze3d/pipeline/RenderTarget;
+
+  public com.mojang.blaze3d.pipeline.RenderTarget getTranslucentTarget();
+    descriptor: ()Lcom/mojang/blaze3d/pipeline/RenderTarget;
+
+  public com.mojang.blaze3d.pipeline.RenderTarget getItemEntityTarget();
+    descriptor: ()Lcom/mojang/blaze3d/pipeline/RenderTarget;
+
+  public com.mojang.blaze3d.pipeline.RenderTarget getParticlesTarget();
+    descriptor: ()Lcom/mojang/blaze3d/pipeline/RenderTarget;
+
+  public com.mojang.blaze3d.pipeline.RenderTarget getWeatherTarget();
+    descriptor: ()Lcom/mojang/blaze3d/pipeline/RenderTarget;
+
+  public com.mojang.blaze3d.pipeline.RenderTarget getCloudsTarget();
+    descriptor: ()Lcom/mojang/blaze3d/pipeline/RenderTarget;
+
+  public it.unimi.dsi.fastutil.objects.ObjectArrayList<net.minecraft.client.renderer.chunk.SectionRenderDispatcher$RenderSection> getVisibleSections();
+    descriptor: ()Lit/unimi/dsi/fastutil/objects/ObjectArrayList;
+
+  public net.minecraft.client.renderer.SectionOcclusionGraph getSectionOcclusionGraph();
+    descriptor: ()Lnet/minecraft/client/renderer/SectionOcclusionGraph;
+
+  public net.minecraft.client.renderer.culling.Frustum getCapturedFrustum();
+    descriptor: ()Lnet/minecraft/client/renderer/culling/Frustum;
+
+  public net.minecraft.client.renderer.CloudRenderer getCloudRenderer();
+    descriptor: ()Lnet/minecraft/client/renderer/CloudRenderer;
+
+  public net.minecraft.gizmos.Gizmos$TemporaryCollection collectPerFrameGizmos();
+    descriptor: ()Lnet/minecraft/gizmos/Gizmos$TemporaryCollection;
+
+  private void finalizeGizmoCollection();
+    descriptor: ()V
+
+  private static java.util.SortedSet method_22988(long);
+    descriptor: (J)Ljava/util/SortedSet;
+
+  private static void method_62215(com.mojang.blaze3d.buffers.GpuBufferSlice, net.minecraft.client.renderer.state.SkyRenderState, net.minecraft.client.renderer.SkyRenderer);
+    descriptor: (Lcom/mojang/blaze3d/buffers/GpuBufferSlice;Lnet/minecraft/client/renderer/state/SkyRenderState;Lnet/minecraft/client/renderer/SkyRenderer;)V
+
+  private static void method_72156(int, com.mojang.blaze3d.buffers.GpuBufferSlice[], com.mojang.blaze3d.systems.RenderPass$UniformUploader);
+    descriptor: (I[Lcom/mojang/blaze3d/buffers/GpuBufferSlice;Lcom/mojang/blaze3d/systems/RenderPass$UniformUploader;)V
+
+  private void method_75413(com.mojang.blaze3d.buffers.GpuBufferSlice, com.mojang.blaze3d.resource.ResourceHandle, net.minecraft.client.renderer.state.CameraRenderState, org.joml.Matrix4f);
+    descriptor: (Lcom/mojang/blaze3d/buffers/GpuBufferSlice;Lcom/mojang/blaze3d/resource/ResourceHandle;Lnet/minecraft/client/renderer/state/CameraRenderState;Lorg/joml/Matrix4f;)V
+
+  private void method_62216(com.mojang.blaze3d.buffers.GpuBufferSlice, int, float);
+    descriptor: (Lcom/mojang/blaze3d/buffers/GpuBufferSlice;IF)V
+
+  private void method_62205(int, net.minecraft.client.CloudStatus, float, net.minecraft.world.phys.Vec3, long, float);
+    descriptor: (ILnet/minecraft/client/CloudStatus;FLnet/minecraft/world/phys/Vec3;JF)V
+
+  private void method_62213(com.mojang.blaze3d.buffers.GpuBufferSlice, com.mojang.blaze3d.resource.ResourceHandle, com.mojang.blaze3d.resource.ResourceHandle);
+    descriptor: (Lcom/mojang/blaze3d/buffers/GpuBufferSlice;Lcom/mojang/blaze3d/resource/ResourceHandle;Lcom/mojang/blaze3d/resource/ResourceHandle;)V
+
+  private void method_62214(com.mojang.blaze3d.buffers.GpuBufferSlice, net.minecraft.client.renderer.state.LevelRenderState, net.minecraft.util.profiling.ProfilerFiller, org.joml.Matrix4f, com.mojang.blaze3d.resource.ResourceHandle, com.mojang.blaze3d.resource.ResourceHandle, boolean, com.mojang.blaze3d.resource.ResourceHandle, com.mojang.blaze3d.resource.ResourceHandle);
+    descriptor: (Lcom/mojang/blaze3d/buffers/GpuBufferSlice;Lnet/minecraft/client/renderer/state/LevelRenderState;Lnet/minecraft/util/profiling/ProfilerFiller;Lorg/joml/Matrix4f;Lcom/mojang/blaze3d/resource/ResourceHandle;Lcom/mojang/blaze3d/resource/ResourceHandle;ZLcom/mojang/blaze3d/resource/ResourceHandle;Lcom/mojang/blaze3d/resource/ResourceHandle;)V
+
+  private void method_62218(org.joml.Vector4f);
+    descriptor: (Lorg/joml/Vector4f;)V
+
+  static {};
+    descriptor: ()V
+}

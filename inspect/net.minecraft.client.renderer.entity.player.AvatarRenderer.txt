@@ -1,0 +1,98 @@
+Compiled from "AvatarRenderer.java"
+public class net.minecraft.client.renderer.entity.player.AvatarRenderer<AvatarlikeEntity extends net.minecraft.world.entity.Avatar & net.minecraft.client.entity.ClientAvatarEntity> extends net.minecraft.client.renderer.entity.LivingEntityRenderer<AvatarlikeEntity, net.minecraft.client.renderer.entity.state.AvatarRenderState, net.minecraft.client.model.player.PlayerModel> {
+  public net.minecraft.client.renderer.entity.player.AvatarRenderer(net.minecraft.client.renderer.entity.EntityRendererProvider$Context, boolean);
+    descriptor: (Lnet/minecraft/client/renderer/entity/EntityRendererProvider$Context;Z)V
+
+  protected boolean shouldRenderLayers(net.minecraft.client.renderer.entity.state.AvatarRenderState);
+    descriptor: (Lnet/minecraft/client/renderer/entity/state/AvatarRenderState;)Z
+
+  public net.minecraft.world.phys.Vec3 getRenderOffset(net.minecraft.client.renderer.entity.state.AvatarRenderState);
+    descriptor: (Lnet/minecraft/client/renderer/entity/state/AvatarRenderState;)Lnet/minecraft/world/phys/Vec3;
+
+  private static net.minecraft.client.model.HumanoidModel$ArmPose getArmPose(net.minecraft.world.entity.Avatar, net.minecraft.world.entity.HumanoidArm);
+    descriptor: (Lnet/minecraft/world/entity/Avatar;Lnet/minecraft/world/entity/HumanoidArm;)Lnet/minecraft/client/model/HumanoidModel$ArmPose;
+
+  private static net.minecraft.client.model.HumanoidModel$ArmPose getArmPose(net.minecraft.world.entity.Avatar, net.minecraft.world.item.ItemStack, net.minecraft.world.InteractionHand);
+    descriptor: (Lnet/minecraft/world/entity/Avatar;Lnet/minecraft/world/item/ItemStack;Lnet/minecraft/world/InteractionHand;)Lnet/minecraft/client/model/HumanoidModel$ArmPose;
+
+  public net.minecraft.resources.Identifier getTextureLocation(net.minecraft.client.renderer.entity.state.AvatarRenderState);
+    descriptor: (Lnet/minecraft/client/renderer/entity/state/AvatarRenderState;)Lnet/minecraft/resources/Identifier;
+
+  protected void scale(net.minecraft.client.renderer.entity.state.AvatarRenderState, com.mojang.blaze3d.vertex.PoseStack);
+    descriptor: (Lnet/minecraft/client/renderer/entity/state/AvatarRenderState;Lcom/mojang/blaze3d/vertex/PoseStack;)V
+
+  protected void submitNameTag(net.minecraft.client.renderer.entity.state.AvatarRenderState, com.mojang.blaze3d.vertex.PoseStack, net.minecraft.client.renderer.SubmitNodeCollector, net.minecraft.client.renderer.state.CameraRenderState);
+    descriptor: (Lnet/minecraft/client/renderer/entity/state/AvatarRenderState;Lcom/mojang/blaze3d/vertex/PoseStack;Lnet/minecraft/client/renderer/SubmitNodeCollector;Lnet/minecraft/client/renderer/state/CameraRenderState;)V
+
+  public net.minecraft.client.renderer.entity.state.AvatarRenderState createRenderState();
+    descriptor: ()Lnet/minecraft/client/renderer/entity/state/AvatarRenderState;
+
+  public void extractRenderState(AvatarlikeEntity, net.minecraft.client.renderer.entity.state.AvatarRenderState, float);
+    descriptor: (Lnet/minecraft/world/entity/Avatar;Lnet/minecraft/client/renderer/entity/state/AvatarRenderState;F)V
+
+  protected boolean shouldShowName(AvatarlikeEntity, double);
+    descriptor: (Lnet/minecraft/world/entity/Avatar;D)Z
+
+  private void extractFlightData(AvatarlikeEntity, net.minecraft.client.renderer.entity.state.AvatarRenderState, float);
+    descriptor: (Lnet/minecraft/world/entity/Avatar;Lnet/minecraft/client/renderer/entity/state/AvatarRenderState;F)V
+
+  private void extractCapeState(AvatarlikeEntity, net.minecraft.client.renderer.entity.state.AvatarRenderState, float);
+    descriptor: (Lnet/minecraft/world/entity/Avatar;Lnet/minecraft/client/renderer/entity/state/AvatarRenderState;F)V
+
+  public void renderRightHand(com.mojang.blaze3d.vertex.PoseStack, net.minecraft.client.renderer.SubmitNodeCollector, int, net.minecraft.resources.Identifier, boolean);
+    descriptor: (Lcom/mojang/blaze3d/vertex/PoseStack;Lnet/minecraft/client/renderer/SubmitNodeCollector;ILnet/minecraft/resources/Identifier;Z)V
+
+  public void renderLeftHand(com.mojang.blaze3d.vertex.PoseStack, net.minecraft.client.renderer.SubmitNodeCollector, int, net.minecraft.resources.Identifier, boolean);
+    descriptor: (Lcom/mojang/blaze3d/vertex/PoseStack;Lnet/minecraft/client/renderer/SubmitNodeCollector;ILnet/minecraft/resources/Identifier;Z)V
+
+  private void renderHand(com.mojang.blaze3d.vertex.PoseStack, net.minecraft.client.renderer.SubmitNodeCollector, int, net.minecraft.resources.Identifier, net.minecraft.client.model.geom.ModelPart, boolean);
+    descriptor: (Lcom/mojang/blaze3d/vertex/PoseStack;Lnet/minecraft/client/renderer/SubmitNodeCollector;ILnet/minecraft/resources/Identifier;Lnet/minecraft/client/model/geom/ModelPart;Z)V
+
+  protected void setupRotations(net.minecraft.client.renderer.entity.state.AvatarRenderState, com.mojang.blaze3d.vertex.PoseStack, float, float);
+    descriptor: (Lnet/minecraft/client/renderer/entity/state/AvatarRenderState;Lcom/mojang/blaze3d/vertex/PoseStack;FF)V
+
+  public boolean isEntityUpsideDown(AvatarlikeEntity);
+    descriptor: (Lnet/minecraft/world/entity/Avatar;)Z
+
+  public static boolean isPlayerUpsideDown(net.minecraft.world.entity.player.Player);
+    descriptor: (Lnet/minecraft/world/entity/player/Player;)Z
+
+  public void extractRenderState(net.minecraft.world.entity.LivingEntity, net.minecraft.client.renderer.entity.state.LivingEntityRenderState, float);
+    descriptor: (Lnet/minecraft/world/entity/LivingEntity;Lnet/minecraft/client/renderer/entity/state/LivingEntityRenderState;F)V
+
+  public boolean isEntityUpsideDown(net.minecraft.world.entity.LivingEntity);
+    descriptor: (Lnet/minecraft/world/entity/LivingEntity;)Z
+
+  protected boolean shouldShowName(net.minecraft.world.entity.LivingEntity, double);
+    descriptor: (Lnet/minecraft/world/entity/LivingEntity;D)Z
+
+  protected void scale(net.minecraft.client.renderer.entity.state.LivingEntityRenderState, com.mojang.blaze3d.vertex.PoseStack);
+    descriptor: (Lnet/minecraft/client/renderer/entity/state/LivingEntityRenderState;Lcom/mojang/blaze3d/vertex/PoseStack;)V
+
+  protected void setupRotations(net.minecraft.client.renderer.entity.state.LivingEntityRenderState, com.mojang.blaze3d.vertex.PoseStack, float, float);
+    descriptor: (Lnet/minecraft/client/renderer/entity/state/LivingEntityRenderState;Lcom/mojang/blaze3d/vertex/PoseStack;FF)V
+
+  public net.minecraft.resources.Identifier getTextureLocation(net.minecraft.client.renderer.entity.state.LivingEntityRenderState);
+    descriptor: (Lnet/minecraft/client/renderer/entity/state/LivingEntityRenderState;)Lnet/minecraft/resources/Identifier;
+
+  protected boolean shouldRenderLayers(net.minecraft.client.renderer.entity.state.LivingEntityRenderState);
+    descriptor: (Lnet/minecraft/client/renderer/entity/state/LivingEntityRenderState;)Z
+
+  public void extractRenderState(net.minecraft.world.entity.Entity, net.minecraft.client.renderer.entity.state.EntityRenderState, float);
+    descriptor: (Lnet/minecraft/world/entity/Entity;Lnet/minecraft/client/renderer/entity/state/EntityRenderState;F)V
+
+  public net.minecraft.client.renderer.entity.state.EntityRenderState createRenderState();
+    descriptor: ()Lnet/minecraft/client/renderer/entity/state/EntityRenderState;
+
+  protected void submitNameTag(net.minecraft.client.renderer.entity.state.EntityRenderState, com.mojang.blaze3d.vertex.PoseStack, net.minecraft.client.renderer.SubmitNodeCollector, net.minecraft.client.renderer.state.CameraRenderState);
+    descriptor: (Lnet/minecraft/client/renderer/entity/state/EntityRenderState;Lcom/mojang/blaze3d/vertex/PoseStack;Lnet/minecraft/client/renderer/SubmitNodeCollector;Lnet/minecraft/client/renderer/state/CameraRenderState;)V
+
+  protected boolean shouldShowName(net.minecraft.world.entity.Entity, double);
+    descriptor: (Lnet/minecraft/world/entity/Entity;D)Z
+
+  public net.minecraft.world.phys.Vec3 getRenderOffset(net.minecraft.client.renderer.entity.state.EntityRenderState);
+    descriptor: (Lnet/minecraft/client/renderer/entity/state/EntityRenderState;)Lnet/minecraft/world/phys/Vec3;
+
+  private static net.minecraft.client.model.player.PlayerModel method_72996(boolean, net.minecraft.client.model.geom.ModelPart);
+    descriptor: (ZLnet/minecraft/client/model/geom/ModelPart;)Lnet/minecraft/client/model/player/PlayerModel;
+}

@@ -1,0 +1,42 @@
+Compiled from "ItemEntityRenderer.java"
+public class net.minecraft.client.renderer.entity.ItemEntityRenderer extends net.minecraft.client.renderer.entity.EntityRenderer<net.minecraft.world.entity.item.ItemEntity, net.minecraft.client.renderer.entity.state.ItemEntityRenderState> {
+  private static final float ITEM_MIN_HOVER_HEIGHT;
+    descriptor: F
+  private static final float ITEM_BUNDLE_OFFSET_SCALE;
+    descriptor: F
+  private static final float FLAT_ITEM_DEPTH_THRESHOLD;
+    descriptor: F
+  private final net.minecraft.client.renderer.item.ItemModelResolver itemModelResolver;
+    descriptor: Lnet/minecraft/client/renderer/item/ItemModelResolver;
+  private final net.minecraft.util.RandomSource random;
+    descriptor: Lnet/minecraft/util/RandomSource;
+  public net.minecraft.client.renderer.entity.ItemEntityRenderer(net.minecraft.client.renderer.entity.EntityRendererProvider$Context);
+    descriptor: (Lnet/minecraft/client/renderer/entity/EntityRendererProvider$Context;)V
+
+  public net.minecraft.client.renderer.entity.state.ItemEntityRenderState createRenderState();
+    descriptor: ()Lnet/minecraft/client/renderer/entity/state/ItemEntityRenderState;
+
+  public void extractRenderState(net.minecraft.world.entity.item.ItemEntity, net.minecraft.client.renderer.entity.state.ItemEntityRenderState, float);
+    descriptor: (Lnet/minecraft/world/entity/item/ItemEntity;Lnet/minecraft/client/renderer/entity/state/ItemEntityRenderState;F)V
+
+  public void submit(net.minecraft.client.renderer.entity.state.ItemEntityRenderState, com.mojang.blaze3d.vertex.PoseStack, net.minecraft.client.renderer.SubmitNodeCollector, net.minecraft.client.renderer.state.CameraRenderState);
+    descriptor: (Lnet/minecraft/client/renderer/entity/state/ItemEntityRenderState;Lcom/mojang/blaze3d/vertex/PoseStack;Lnet/minecraft/client/renderer/SubmitNodeCollector;Lnet/minecraft/client/renderer/state/CameraRenderState;)V
+
+  public static void submitMultipleFromCount(com.mojang.blaze3d.vertex.PoseStack, net.minecraft.client.renderer.SubmitNodeCollector, int, net.minecraft.client.renderer.entity.state.ItemClusterRenderState, net.minecraft.util.RandomSource);
+    descriptor: (Lcom/mojang/blaze3d/vertex/PoseStack;Lnet/minecraft/client/renderer/SubmitNodeCollector;ILnet/minecraft/client/renderer/entity/state/ItemClusterRenderState;Lnet/minecraft/util/RandomSource;)V
+
+  public static void submitMultipleFromCount(com.mojang.blaze3d.vertex.PoseStack, net.minecraft.client.renderer.SubmitNodeCollector, int, net.minecraft.client.renderer.entity.state.ItemClusterRenderState, net.minecraft.util.RandomSource, net.minecraft.world.phys.AABB);
+    descriptor: (Lcom/mojang/blaze3d/vertex/PoseStack;Lnet/minecraft/client/renderer/SubmitNodeCollector;ILnet/minecraft/client/renderer/entity/state/ItemClusterRenderState;Lnet/minecraft/util/RandomSource;Lnet/minecraft/world/phys/AABB;)V
+
+  public static void renderMultipleFromCount(com.mojang.blaze3d.vertex.PoseStack, net.minecraft.client.renderer.SubmitNodeCollector, int, net.minecraft.client.renderer.entity.state.ItemClusterRenderState, net.minecraft.util.RandomSource);
+    descriptor: (Lcom/mojang/blaze3d/vertex/PoseStack;Lnet/minecraft/client/renderer/SubmitNodeCollector;ILnet/minecraft/client/renderer/entity/state/ItemClusterRenderState;Lnet/minecraft/util/RandomSource;)V
+
+  public void extractRenderState(net.minecraft.world.entity.Entity, net.minecraft.client.renderer.entity.state.EntityRenderState, float);
+    descriptor: (Lnet/minecraft/world/entity/Entity;Lnet/minecraft/client/renderer/entity/state/EntityRenderState;F)V
+
+  public net.minecraft.client.renderer.entity.state.EntityRenderState createRenderState();
+    descriptor: ()Lnet/minecraft/client/renderer/entity/state/EntityRenderState;
+
+  public void submit(net.minecraft.client.renderer.entity.state.EntityRenderState, com.mojang.blaze3d.vertex.PoseStack, net.minecraft.client.renderer.SubmitNodeCollector, net.minecraft.client.renderer.state.CameraRenderState);
+    descriptor: (Lnet/minecraft/client/renderer/entity/state/EntityRenderState;Lcom/mojang/blaze3d/vertex/PoseStack;Lnet/minecraft/client/renderer/SubmitNodeCollector;Lnet/minecraft/client/renderer/state/CameraRenderState;)V
+}
