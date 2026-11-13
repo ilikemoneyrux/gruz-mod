@@ -183,15 +183,17 @@ public class CrosshairModule extends Module {
         int lo = -(t / 2), hi = lo + t;
         if (style.index == 0 || style.index == 2) {
             if (outline.value) {
-                c.fill(cx + lo - 1, cy - gp - s - 1, cx + hi + 1, cy - gp + 1, shadow);
-                c.fill(cx + lo - 1, cy + gp - 1, cx + hi + 1, cy + gp + s + 1, shadow);
-                c.fill(cx - gp - s - 1, cy + lo - 1, cx - gp + 1, cy + hi + 1, shadow);
-                c.fill(cx + gp - 1, cy + lo - 1, cx + gp + s + 1, cy + hi + 1, shadow);
+                c.fill(cx + lo - 1, cy + lo - gp - s - 1, cx + hi + 1, cy + lo - gp + 1, shadow);
+                c.fill(cx + lo - 1, cy + hi + gp - 1, cx + hi + 1, cy + hi + gp + s + 1, shadow);
+                c.fill(cx + lo - gp - s - 1, cy + lo - 1, cx + lo - gp + 1, cy + hi + 1, shadow);
+                c.fill(cx + hi + gp - 1, cy + lo - 1, cx + hi + gp + s + 1, cy + hi + 1, shadow);
             }
-            c.fill(cx + lo, cy - gp - s, cx + hi, cy - gp, col);
-            c.fill(cx + lo, cy + gp, cx + hi, cy + gp + s, col);
-            c.fill(cx - gp - s, cy + lo, cx - gp, cy + hi, col);
-            c.fill(cx + gp, cy + lo, cx + gp + s, cy + hi, col);
+            // ramiona liczone od krawędzi środkowego kwadratu [lo, hi) – tak samo daleko w każdą stronę
+            c.fill(cx + lo, cy + lo - gp - s, cx + hi, cy + lo - gp, col);
+            c.fill(cx + lo, cy + hi + gp, cx + hi, cy + hi + gp + s, col);
+            c.fill(cx + lo - gp - s, cy + lo, cx + lo - gp, cy + hi, col);
+            c.fill(cx + hi + gp, cy + lo, cx + hi + gp + s, cy + hi, col);
+            if (gp == 0 && style.index == 0) c.fill(cx + lo, cy + lo, cx + hi, cy + hi, col); // bez przerwy: pełny krzyż bez dziury w środku
         }
         if (style.index == 1 || style.index == 2) {
             if (outline.value) c.fill(cx + lo - 1, cy + lo - 1, cx + hi + 1, cy + hi + 1, shadow);
