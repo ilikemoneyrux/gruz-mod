@@ -342,9 +342,9 @@ public class GruzModsScreen extends pl.gruzclient.compat.GruzScreen {
                 Ui.round(c, ctrlX, cy - 1, ctrlW, 14, 3, argb(r, cap ? 0x2A1446 : 0x1C1626));
                 Ui.roundBorder(c, ctrlX, cy - 1, ctrlW, 14, 3, argb(r * (cap ? 1f : 0.15f), cap ? NEON : 0xFFFFFF));
                 Ui.drawCentered(c, Ui.fit(cap ? Lang.t("mods.pressKey") : k.display(), ctrlW - 8, true), ctrlX + ctrlW / 2, cy + 2, argb(r, cap ? NEON_HOT : 0xFFFFFF));
-            } else if (s instanceof Setting.Action) {
+            } else if (s instanceof Setting.Action act) {
                 Ui.hGradient(c, ctrlX, cy - 1, ctrlW, 14, NEON, NEON_DEEP, r, 3);
-                Ui.drawCentered(c, Ui.bold(Lang.t("mods.open")), ctrlX + ctrlW / 2, cy + 2, argb(r, 0xFFFFFF));
+                Ui.drawCentered(c, Ui.bold(Lang.t(act.buttonKey)), ctrlX + ctrlW / 2, cy + 2, argb(r, 0xFFFFFF));
             } else if (s instanceof Setting.Text tx) {
                 Ui.round(c, ctrlX, cy - 1, ctrlW, 14, 3, argb(r, 0x1C1626));
                 Ui.icon(c, Ui.Icon.PENCIL, ctrlX + ctrlW - 12, cy + 2, 8, argb(r, MUTE));

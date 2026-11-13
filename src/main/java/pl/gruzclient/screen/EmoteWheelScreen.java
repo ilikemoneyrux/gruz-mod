@@ -11,16 +11,43 @@ import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.client.gui.screens.Screen;
 import net.minecraft.network.chat.Component;
 
-/** Koło emotek: najedź na wycinek i puść klawisz (albo kliknij). */
+/** Koło emotek: najedź na wycinek i puść klawisz (albo kliknij). Prawy klik = ulubiona, po chwili najechania podgląd na postaci. */
 public class EmoteWheelScreen extends pl.gruzclient.compat.GruzScreen {
     private final CosmeticsModule module;
-    private final Emote[] emotes = Emote.values();
+    private Emote[] emotes;
+    private int previewed = -1;
+    private long hoverSince = 0;
+    private boolean chosen;
     private final long openedAt = System.currentTimeMillis();
     private int hovered = -1;
 
     public EmoteWheelScreen(CosmeticsModule module) {
         super(Component.literal("Emotki"));
         this.module = module;
+        order();
+    }
+
+    private java.util.List<String> favs() {
+        java.util.List<String> l = new java.util.ArrayList<>();
+        for (String s : module.favEmotes.value.split(",")) if (!s.isBlank()) l.add(s.trim());
+        return l;
+    }
+
+    /** Ulubione najpierw (w kolejności dodania), potem reszta */
+    private void order() {
+        java.util.List<String> f = favs();
+        java.util.List<Emote> l = new java.util.ArrayList<>();
+        for (String id : f) for (Emote e : Emote.values()) if (e.id.equals(id)) l.add(e);
+        for (Emote e : Emote.values()) if (!l.contains(e)) l.add(e);
+        emotes = l.toArray(new Emote[0]);
+    }
+
+    private void toggleFav(Emote e) {
+        java.util.List<String> f = favs();
+        if (!f.remove(e.id)) f.add(e.id);
+        module.favEmotes.value = String.join(",", f);
+        Modules.save();
+        order();
     }
 
     @Override
@@ -40,7 +67,14 @@ public class EmoteWheelScreen extends pl.gruzclient.compat.GruzScreen {
         double ang = Math.atan2(mouseY - cy, mouseX - cx);
         double dist = Math.hypot(mouseX - cx, mouseY - cy);
         int n = emotes.length;
-        hovered = dist > 18 ? (int) Math.floor(((ang + Math.PI / 2 + Math.PI * 2 + Math.PI / n) % (Math.PI * 2)) / (Math.PI * 2 / n)) : -1;
+        int hv = dist > 18 ? (int) Math.floor(((ang + Math.PI / 2 + Math.PI * 2 + Math.PI / n) % (Math.PI * 2)) / (Math.PI * 2 / n)) : -1;
+        if (hv != hovered) { hovered = hv; hoverSince = System.currentTimeMillis(); }
+        // podgląd: po 350 ms najechania emotka gra na Twojej postaci (tylko u Ciebie)
+        if (module.emotePreview.value && hovered >= 0 && hovered != previewed && System.currentTimeMillis() - hoverSince > 350 && !emotes[hovered].duo) {
+            previewed = hovered;
+            module.previewEmote(emotes[hovered]);
+        }
+        java.util.List<String> fav = favs();
 
         // kropki-segmenty ułożone w okrąg
         for (int i = 0; i < n; i++) {
@@ -50,7 +84,7 @@ public class EmoteWheelScreen extends pl.gruzclient.compat.GruzScreen {
             int w = emotes[i].duo ? 84 : 64, h = 22;
             c.fill(x - w / 2, y - h / 2, x + w / 2, y + h / 2, argb(r * (hov ? 0.95f : 0.75f), hov ? 0x22143A : SLAB));
             c.renderOutline(x - w / 2, y - h / 2, w, h, argb(r, hov ? NEON : SEAM));
-            String label = (emotes[i].duo ? "♥ " : "") + Lang.t("emote." + emotes[i].id);
+            String label = (fav.contains(emotes[i].id) ? "★ " : "") + (emotes[i].duo ? "♥ " : "") + Lang.t("emote." + emotes[i].id);
             if (textVisible(r)) c.drawString(this.font, label, x - this.font.width(label) / 2, y - 4, argb(r, hov ? NEON_HOT : TEXT), false);
         }
         // środek
@@ -68,12 +102,19 @@ public class EmoteWheelScreen extends pl.gruzclient.compat.GruzScreen {
     }
 
     private void choose() {
-        if (hovered >= 0 && hovered < emotes.length) module.playEmote(emotes[hovered]);
+        if (hovered >= 0 && hovered < emotes.length) { chosen = true; module.playEmote(emotes[hovered]); }
         this.onClose();
     }
 
     @Override
+    public void removed() {
+        if (!chosen && previewed >= 0) module.stopPreview(); // zamknięte bez wyboru: podgląd znika
+        super.removed();
+    }
+
+    @Override
     public boolean mouseClicked(double mouseX, double mouseY, int button) {
+        if (button == 1) { if (hovered >= 0) toggleFav(emotes[hovered]); return true; }
         choose();
         return true;
     }

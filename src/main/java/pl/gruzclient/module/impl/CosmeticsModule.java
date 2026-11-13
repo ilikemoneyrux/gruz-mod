@@ -47,6 +47,9 @@ public class CosmeticsModule extends Module {
     public final Setting.Bool showOthers = add(new Setting.Bool("others", "setting.showOthers", true));
     public final Setting.Key emoteKey = add(new Setting.Key("emoteKey", "setting.emoteKey", InputConstants.KEY_B));
     public final Setting.Bool emoteCamera = add(new Setting.Bool("emoteCam", "setting.emoteCamera", true));
+    /** Ulubione emotki (id po przecinku) – w kole są pierwsze, pod klawiszami 1–9; prawy klik w kole dodaje / usuwa */
+    public final Setting.Text favEmotes = add(new Setting.Text("favEmotes", "setting.favEmotes", ""));
+    public final Setting.Bool emotePreview = add(new Setting.Bool("emotePreview", "setting.emotePreview", true));
     /** Szafa w grze (WardrobeScreen) */
     public final Setting.Key wardrobeKey = add(new Setting.Key("wardrobeKey", "setting.wardrobeKey", InputConstants.KEY_O));
     /** Przyjęcie zaproszenia do emotki we dwoje */
@@ -122,6 +125,21 @@ public class CosmeticsModule extends Module {
         }
         GruzNetwork.publishEmote(e);
     }
+
+    /** Podgląd w kole emotek: animacja tylko u Ciebie (bez wysyłania innym), kamera z przodu */
+    public void previewEmote(Emote e) {
+        if (mc.player == null || e.duo) return;
+        Emote.Playing play = new Emote.Playing(e, System.currentTimeMillis());
+        Cosmetics.EMOTES.put(mc.player.getUUID(), play);
+        pl.gruzclient.cosmetics.EmoteAnim.start(mc.player.getUUID(), play);
+        if (beforeEmote == null) {
+            beforeEmote = mc.options.getCameraType();
+            mc.options.setCameraType(CameraType.THIRD_PERSON_FRONT);
+        }
+    }
+
+    /** Koło zamknięte bez wyboru – koniec podglądu */
+    public void stopPreview() { endEmote(); }
 
     /** Emotka we dwoje wystartowała (z serwera) – kamera z przodu jak przy zwykłej emotce */
     public void emoteStarted() {

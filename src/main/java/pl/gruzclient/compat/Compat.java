@@ -380,6 +380,18 @@ public final class Compat {
 
     // ---------------- obrazki (NativeImage: piksele jako ABGR jak w starszych wersjach) ----------------
 
+    /** Ostatnia klatka gry jako obraz (callback musi go zamknąć). Od 1.21.5 kopia z karty idzie asynchronicznie. */
+    public static void grabFrame(Minecraft mc, java.util.function.Consumer<NativeImage> cb) {
+        //#if MC >= 26.2
+        net.minecraft.client.Screenshot.takeScreenshot(mc.gameRenderer.mainRenderTarget(), cb);
+        //#elif MC >= 1.21.5
+        net.minecraft.client.Screenshot.takeScreenshot(mc.getMainRenderTarget(), cb);
+        //#else
+        cb.accept(net.minecraft.client.Screenshot.takeScreenshot(mc.getMainRenderTarget()));
+        //#endif
+    }
+
+
     public static void setPixelABGR(NativeImage img, int x, int y, int abgr) {
         //#if MC >= 1.21.2
         img.setPixel(x, y, abgrToArgb(abgr));

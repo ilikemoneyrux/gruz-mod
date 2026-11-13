@@ -34,8 +34,10 @@ public abstract class Setting {
     public static class Choice extends Setting {
         public final String[] keys;
         public int index;
+        /** Wywoływane po zmianie wyboru przez gracza (nie przy wczytaniu ustawień) */
+        public Runnable onChange;
         public Choice(String id, String labelKey, int def, String... keys) { super(id, labelKey); this.keys = keys; index = def; }
-        public void next(int dir) { index = Math.floorMod(index + dir, keys.length); }
+        public void next(int dir) { index = Math.floorMod(index + dir, keys.length); if (onChange != null) onChange.run(); }
         @Override public String display() { return Lang.t(keys[index]); }
         @Override public void load(JsonObject o) { if (o.has(id)) index = Math.floorMod(o.get(id).getAsInt(), keys.length); }
         @Override public void save(JsonObject o) { o.addProperty(id, index); }
@@ -85,7 +87,10 @@ public abstract class Setting {
     /** Przycisk w panelu ustawień (np. "Edytuj piksele") */
     public static class Action extends Setting {
         public final Runnable action;
+        public String buttonKey = "mods.open";
         public Action(String id, String labelKey, Runnable action) { super(id, labelKey); this.action = action; }
+        /** Napis na przycisku zamiast „Otwórz” */
+        public Action button(String key) { buttonKey = key; return this; }
         @Override public String display() { return "›"; }
         @Override public void load(JsonObject o) {}
         @Override public void save(JsonObject o) {}
