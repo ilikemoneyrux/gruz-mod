@@ -69,8 +69,10 @@ public class CrosshairModule extends Module {
 
     // ---------------- rysowanie ----------------
 
-    public void draw(GuiGraphics c) {
-        int cx = c.guiWidth() / 2, cy = c.guiHeight() / 2;
+    public void draw(GuiGraphics c) { draw(c, c.guiWidth() / 2, c.guiHeight() / 2); }
+
+    /** Celownik ze środkiem w (cx, cy) – ten sam kod rysuje podgląd w ustawieniach */
+    public void draw(GuiGraphics c, int cx, int cy) {
         int col = 0xFF000000 | color.rgb();
         int shadow = 0x90000000;
         if (style.index == 3) {

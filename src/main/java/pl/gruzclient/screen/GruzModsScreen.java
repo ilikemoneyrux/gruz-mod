@@ -264,7 +264,41 @@ public class GruzModsScreen extends pl.gruzclient.compat.GruzScreen {
     }
 
     // ---------------- ustawienia modułu ----------------
-    private int rowsTop() { return contentY + 42; }
+    private static final int PREVIEW_H = 56;
+    private static boolean hasPreview(Module m) { return m == Modules.CROSSHAIR || m == Modules.BLOCK_OVERLAY || m == Modules.HIT_COLOR; }
+    private int rowsTop() { return contentY + 42 + (settingsOf != null && hasPreview(settingsOf) ? PREVIEW_H + 6 : 0); }
+
+    /** Podgląd na żywo nad ustawieniami (rysowany z tych samych wartości co w grze, także gdy moduł jest wyłączony) */
+    private void drawPreview(GuiGraphics c, Module m, int x, int y, float r) {
+        int w = contentW, h = PREVIEW_H, mx = x + w / 2, my = y + h / 2;
+        // jasna i ciemna połowa (niebo / kamień), żeby było widać kolor na obu tłach
+        c.fill(x, y, mx, y + h, argb(r, 0x8FB4E8));
+        c.fill(mx, y, x + w, y + h, argb(r, 0x3A3A40));
+        Ui.roundBorder(c, x, y, w, h, 4, argb(r * 0.15f, 0xFFFFFF));
+        if (m == Modules.CROSSHAIR) {
+            for (int i = 0; i < 2; i++) { // po jednym celowniku na każdym tle, 2x większy niż w grze
+                pl.gruzclient.compat.Pose2D p = pl.gruzclient.compat.Pose2D.of(c);
+                p.push(); p.translate(x + w / 4f + i * w / 2f, my); p.scale(2f, 2f);
+                Modules.CROSSHAIR.draw(c, 0, 0);
+                p.pop();
+            }
+        } else if (m == Modules.BLOCK_OVERLAY) {
+            int s = 36, bx = mx - s / 2, by = my - s / 2, rgb = Modules.BLOCK_OVERLAY.color.rgb();
+            c.fill(bx, by, bx + s, by + s, argb(r, 0x7D7D7D)); // ściana bloku
+            if (Modules.BLOCK_OVERLAY.fill.value) c.fill(bx, by, bx + s, by + s, argb(r * Modules.BLOCK_OVERLAY.fillAlpha.value / 100f * Modules.BLOCK_OVERLAY.pulseFactor(), rgb));
+            int t = Math.round(Modules.BLOCK_OVERLAY.thickness.value), col = argb(r * Modules.BLOCK_OVERLAY.outlineAlpha.value / 100f, rgb);
+            c.fill(bx, by, bx + s, by + t, col);
+            c.fill(bx, by + s - t, bx + s, by + s, col);
+            c.fill(bx, by + t, bx + t, by + s - t, col);
+            c.fill(bx + s - t, by + t, bx + s, by + s - t, col);
+        } else {
+            // Twoja głowa: zwykła i w chwili trafienia
+            int s = 36, hy = my - s / 2;
+            pl.gruzclient.compat.Compat.ownFace(c, this.minecraft, mx - s - 8, hy, s, r);
+            pl.gruzclient.compat.Compat.ownFace(c, this.minecraft, mx + 8, hy, s, r);
+            c.fill(mx + 8, hy, mx + 8 + s, hy + s, argb(r * Modules.HIT_COLOR.opacity.value / 100f, Modules.HIT_COLOR.color.rgb()));
+        }
+    }
 
     private void drawSettings(GuiGraphics c, int mouseX, int mouseY, float r) {
         Module m = settingsOf;
@@ -278,6 +312,8 @@ public class GruzModsScreen extends pl.gruzclient.compat.GruzScreen {
         drawSwitch(c, x + contentW - 26, y + 3, m.isEnabled(), r, Ui.inside(mouseX, mouseY, x + contentW - 26, y + 3, 22, 11));
         List<FormattedCharSequence> desc = Ui.tr().split(Ui.text(m.description()), contentW - 10);
         if (!desc.isEmpty()) c.drawString(Ui.tr(), desc.get(0), x, y + 22, argb(r * 0.85f, MUTE), false);
+
+        if (hasPreview(m)) drawPreview(c, m, x, y + 36, r);
 
         List<Setting> list = m.settings();
         int rowY = rowsTop() - Math.round(scroll);
