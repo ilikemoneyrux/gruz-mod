@@ -1,0 +1,67 @@
+To honour the JVM settings for this build a single-use Daemon process will be forked. For more on this, please refer to https://docs.gradle.org/9.8.0/userguide/gradle_daemon.html#sec:disabling_the_daemon in the Gradle documentation.
+Daemon will be stopped at the end of the build 
+
+> Configure project :
+Fabric Loom: 1.16.3
+Legacy Looming: 1.16.1
+
+> Task :compileJava UP-TO-DATE
+> Task :processResources UP-TO-DATE
+> Task :classes UP-TO-DATE
+> Task :generateLog4jConfig
+> Task :generateRemapClasspath
+> Task :generateDLIConfig
+> Task :configureLaunch
+> Task :downloadAssets
+> Task :extractNatives
+> Task :configureClientLaunch
+
+> Task :runClient
+2026-11-13 23:48:08,361 ERROR Error processing element Queue: CLASS_NOT_FOUND
+2026-11-13 23:48:08,371 ERROR PatternLayout contains an invalid element or attribute "LoggerNamePatternSelector"
+2026-11-13 23:48:08,376 ERROR PatternLayout contains an invalid element or attribute "LoggerNamePatternSelector"
+2026-11-13 23:48:08,391 ERROR Invalid level ${sys:fabric.log.debug.level:-debug} on Appender reference DebugFile
+2026-11-13 23:48:08,392 ERROR Invalid level ${sys:fabric.log.level:-info} on Appender reference SysOut
+2026-11-13 23:48:08,392 ERROR Invalid level ${sys:fabric.log.level:-info} on Appender reference LatestFile
+2026-11-13 23:48:08,392 ERROR Invalid level ${sys:fabric.log.level:-info} on Appender reference ServerGuiConsole
+2026-11-13 23:48:08,395 ERROR Unable to locate appender ServerGuiConsole for logger 
+WARNING: A restricted method in java.lang.System has been called
+WARNING: java.lang.System::loadLibrary has been called by org.lwjgl.LinuxSysImplementation$1 in an unnamed module (file:/home/runner/.gradle/caches/modules-2/files-2.1/org.lwjgl.lwjgl/lwjgl/2.9.4+legacyfabric.15/4aa4a428a0af94c82d4cb700708733a9d448c8d7/lwjgl-2.9.4+legacyfabric.15.jar)
+WARNING: Use --enable-native-access=ALL-UNNAMED to avoid a warning for callers in this module
+WARNING: Restricted methods will be blocked in a future release unless native access is enabled
+
+[LWJGL] Detected environment: Os:linux Arch: amd64 Java: 25.0.5
+Completely ignored arguments: [--versionType, Fabric]
+If on Windows, make sure to provide all of the necessary dll's as specified in the twitchsdk README. Also, make sure to set the PATH environment variable to point to the directory containing the dll's.
+Couldn't initialize twitch stream
+ALSA lib confmisc.c:855:(parse_card) [error.core] cannot find card '0'
+ALSA lib conf.c:5211:(_snd_config_evaluate) [error.core] function snd_func_card_inum returned error: No such file or directory
+ALSA lib confmisc.c:422:(snd_func_concat) [error.core] error evaluating strings
+ALSA lib conf.c:5211:(_snd_config_evaluate) [error.core] function snd_func_concat returned error: No such file or directory
+ALSA lib confmisc.c:1342:(snd_func_refer) [error.core] error evaluating name
+ALSA lib conf.c:5211:(_snd_config_evaluate) [error.core] function snd_func_refer returned error: No such file or directory
+ALSA lib conf.c:5734:(snd_config_expand) [error.core] Evaluate error: No such file or directory
+ALSA lib pcm.c:2722:(snd_pcm_open_noupdate) [error.pcm] Unknown PCM default
+ALSA lib confmisc.c:855:(parse_card) [error.core] cannot find card '0'
+ALSA lib conf.c:5211:(_snd_config_evaluate) [error.core] function snd_func_card_inum returned error: No such file or directory
+Error in class 'LibraryLWJGLOpenAL'
+Unable to initialize OpenAL.  Probable cause: OpenAL not supported.
+ALSA lib confmisc.c:422:(snd_func_concat) [error.core] error evaluating strings
+ALSA lib conf.c:5211:(_snd_config_evaluate) [error.core] function snd_func_concat returned error: No such file or directory
+ALSA lib confmisc.c:1342:(snd_func_refer) [error.core] error evaluating name
+ALSA lib conf.c:5211:(_snd_config_evaluate) [error.core] function snd_func_refer returned error: No such file or directory
+ALSA lib conf.c:5734:(snd_config_expand) [error.core] Evaluate error: No such file or directory
+ALSA lib pcm.c:2722:(snd_pcm_open_noupdate) [error.pcm] Unknown PCM default
+GRUZ_SMOKE_OK
+
+[Incubating] Problems report is available at: file:///home/runner/work/gruz-mod/gruz-mod/legacy/1.8.9/build/reports/problems/problems-report.html
+
+Deprecated Gradle features were used in this build, making it incompatible with Gradle 10.
+
+You can use '--warning-mode all' to show the individual deprecation warnings and determine if they come from your own scripts or plugins.
+
+For more on this, please refer to https://docs.gradle.org/9.8.0/userguide/command_line_interface.html#sec:command_line_warnings in the Gradle documentation.
+
+BUILD SUCCESSFUL in 20s
+8 actionable tasks: 6 executed, 2 up-to-date
+Consider enabling configuration cache to speed up this build: https://docs.gradle.org/9.8.0/userguide/configuration_cache_enabling.html

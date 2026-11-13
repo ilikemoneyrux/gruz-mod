@@ -1,0 +1,26 @@
+20:2026-11-13 23:48:08,361 ERROR Error processing element Queue: CLASS_NOT_FOUND
+21:2026-11-13 23:48:08,371 ERROR PatternLayout contains an invalid element or attribute "LoggerNamePatternSelector"
+22:2026-11-13 23:48:08,376 ERROR PatternLayout contains an invalid element or attribute "LoggerNamePatternSelector"
+23:2026-11-13 23:48:08,391 ERROR Invalid level ${sys:fabric.log.debug.level:-debug} on Appender reference DebugFile
+24:2026-11-13 23:48:08,392 ERROR Invalid level ${sys:fabric.log.level:-info} on Appender reference SysOut
+25:2026-11-13 23:48:08,392 ERROR Invalid level ${sys:fabric.log.level:-info} on Appender reference LatestFile
+26:2026-11-13 23:48:08,392 ERROR Invalid level ${sys:fabric.log.level:-info} on Appender reference ServerGuiConsole
+27:2026-11-13 23:48:08,395 ERROR Unable to locate appender ServerGuiConsole for logger 
+37:ALSA lib confmisc.c:855:(parse_card) [error.core] cannot find card '0'
+38:ALSA lib conf.c:5211:(_snd_config_evaluate) [error.core] function snd_func_card_inum returned error: No such file or directory
+39:ALSA lib confmisc.c:422:(snd_func_concat) [error.core] error evaluating strings
+40:ALSA lib conf.c:5211:(_snd_config_evaluate) [error.core] function snd_func_concat returned error: No such file or directory
+41:ALSA lib confmisc.c:1342:(snd_func_refer) [error.core] error evaluating name
+42:ALSA lib conf.c:5211:(_snd_config_evaluate) [error.core] function snd_func_refer returned error: No such file or directory
+43:ALSA lib conf.c:5734:(snd_config_expand) [error.core] Evaluate error: No such file or directory
+44:ALSA lib pcm.c:2722:(snd_pcm_open_noupdate) [error.pcm] Unknown PCM default
+45:ALSA lib confmisc.c:855:(parse_card) [error.core] cannot find card '0'
+46:ALSA lib conf.c:5211:(_snd_config_evaluate) [error.core] function snd_func_card_inum returned error: No such file or directory
+47:Error in class 'LibraryLWJGLOpenAL'
+49:ALSA lib confmisc.c:422:(snd_func_concat) [error.core] error evaluating strings
+50:ALSA lib conf.c:5211:(_snd_config_evaluate) [error.core] function snd_func_concat returned error: No such file or directory
+51:ALSA lib confmisc.c:1342:(snd_func_refer) [error.core] error evaluating name
+52:ALSA lib conf.c:5211:(_snd_config_evaluate) [error.core] function snd_func_refer returned error: No such file or directory
+53:ALSA lib conf.c:5734:(snd_config_expand) [error.core] Evaluate error: No such file or directory
+54:ALSA lib pcm.c:2722:(snd_pcm_open_noupdate) [error.pcm] Unknown PCM default
+55:GRUZ_SMOKE_OK
