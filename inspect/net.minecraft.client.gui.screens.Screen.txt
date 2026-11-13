@@ -1,0 +1,265 @@
+Compiled from "Screen.java"
+public abstract class net.minecraft.client.gui.screens.Screen extends net.minecraft.client.gui.components.events.AbstractContainerEventHandler implements net.minecraft.client.gui.components.Renderable {
+  private static final org.slf4j.Logger LOGGER;
+    descriptor: Lorg/slf4j/Logger;
+  private static final java.util.Set<java.lang.String> ALLOWED_PROTOCOLS;
+    descriptor: Ljava/util/Set;
+  private static final net.minecraft.network.chat.Component USAGE_NARRATION;
+    descriptor: Lnet/minecraft/network/chat/Component;
+  public static final net.minecraft.resources.ResourceLocation BACKGROUND_LOCATION;
+    descriptor: Lnet/minecraft/resources/ResourceLocation;
+  protected final net.minecraft.network.chat.Component title;
+    descriptor: Lnet/minecraft/network/chat/Component;
+  private final java.util.List<net.minecraft.client.gui.components.events.GuiEventListener> children;
+    descriptor: Ljava/util/List;
+  private final java.util.List<net.minecraft.client.gui.narration.NarratableEntry> narratables;
+    descriptor: Ljava/util/List;
+  protected net.minecraft.client.Minecraft minecraft;
+    descriptor: Lnet/minecraft/client/Minecraft;
+  private boolean initialized;
+    descriptor: Z
+  public int width;
+    descriptor: I
+  public int height;
+    descriptor: I
+  private final java.util.List<net.minecraft.client.gui.components.Renderable> renderables;
+    descriptor: Ljava/util/List;
+  protected net.minecraft.client.gui.Font font;
+    descriptor: Lnet/minecraft/client/gui/Font;
+  private java.net.URI clickedLink;
+    descriptor: Ljava/net/URI;
+  private static final long NARRATE_SUPPRESS_AFTER_INIT_TIME;
+    descriptor: J
+  private static final long NARRATE_DELAY_NARRATOR_ENABLED;
+    descriptor: J
+  private static final long NARRATE_DELAY_MOUSE_MOVE;
+    descriptor: J
+  private static final long NARRATE_DELAY_MOUSE_ACTION;
+    descriptor: J
+  private static final long NARRATE_DELAY_KEYBOARD_ACTION;
+    descriptor: J
+  private final net.minecraft.client.gui.narration.ScreenNarrationCollector narrationState;
+    descriptor: Lnet/minecraft/client/gui/narration/ScreenNarrationCollector;
+  private long narrationSuppressTime;
+    descriptor: J
+  private long nextNarrationTime;
+    descriptor: J
+  private net.minecraft.client.gui.narration.NarratableEntry lastNarratable;
+    descriptor: Lnet/minecraft/client/gui/narration/NarratableEntry;
+  private net.minecraft.client.gui.screens.Screen$DeferredTooltipRendering deferredTooltipRendering;
+    descriptor: Lnet/minecraft/client/gui/screens/Screen$DeferredTooltipRendering;
+  protected final java.util.concurrent.Executor screenExecutor;
+    descriptor: Ljava/util/concurrent/Executor;
+  protected net.minecraft.client.gui.screens.Screen(net.minecraft.network.chat.Component);
+    descriptor: (Lnet/minecraft/network/chat/Component;)V
+
+  public net.minecraft.network.chat.Component getTitle();
+    descriptor: ()Lnet/minecraft/network/chat/Component;
+
+  public net.minecraft.network.chat.Component getNarrationMessage();
+    descriptor: ()Lnet/minecraft/network/chat/Component;
+
+  public final void renderWithTooltip(net.minecraft.client.gui.GuiGraphics, int, int, float);
+    descriptor: (Lnet/minecraft/client/gui/GuiGraphics;IIF)V
+
+  public void render(net.minecraft.client.gui.GuiGraphics, int, int, float);
+    descriptor: (Lnet/minecraft/client/gui/GuiGraphics;IIF)V
+
+  public boolean keyPressed(int, int, int);
+    descriptor: (III)Z
+
+  private net.minecraft.client.gui.navigation.FocusNavigationEvent$TabNavigation createTabEvent();
+    descriptor: ()Lnet/minecraft/client/gui/navigation/FocusNavigationEvent$TabNavigation;
+
+  private net.minecraft.client.gui.navigation.FocusNavigationEvent$ArrowNavigation createArrowEvent(net.minecraft.client.gui.navigation.ScreenDirection);
+    descriptor: (Lnet/minecraft/client/gui/navigation/ScreenDirection;)Lnet/minecraft/client/gui/navigation/FocusNavigationEvent$ArrowNavigation;
+
+  protected void setInitialFocus(net.minecraft.client.gui.components.events.GuiEventListener);
+    descriptor: (Lnet/minecraft/client/gui/components/events/GuiEventListener;)V
+
+  private void clearFocus();
+    descriptor: ()V
+
+  protected void changeFocus(net.minecraft.client.gui.ComponentPath);
+    descriptor: (Lnet/minecraft/client/gui/ComponentPath;)V
+
+  public boolean shouldCloseOnEsc();
+    descriptor: ()Z
+
+  public void onClose();
+    descriptor: ()V
+
+  protected <T extends net.minecraft.client.gui.components.events.GuiEventListener & net.minecraft.client.gui.components.Renderable & net.minecraft.client.gui.narration.NarratableEntry> T addRenderableWidget(T);
+    descriptor: (Lnet/minecraft/client/gui/components/events/GuiEventListener;)Lnet/minecraft/client/gui/components/events/GuiEventListener;
+
+  protected <T extends net.minecraft.client.gui.components.Renderable> T addRenderableOnly(T);
+    descriptor: (Lnet/minecraft/client/gui/components/Renderable;)Lnet/minecraft/client/gui/components/Renderable;
+
+  protected <T extends net.minecraft.client.gui.components.events.GuiEventListener & net.minecraft.client.gui.narration.NarratableEntry> T addWidget(T);
+    descriptor: (Lnet/minecraft/client/gui/components/events/GuiEventListener;)Lnet/minecraft/client/gui/components/events/GuiEventListener;
+
+  protected void removeWidget(net.minecraft.client.gui.components.events.GuiEventListener);
+    descriptor: (Lnet/minecraft/client/gui/components/events/GuiEventListener;)V
+
+  protected void clearWidgets();
+    descriptor: ()V
+
+  public static java.util.List<net.minecraft.network.chat.Component> getTooltipFromItem(net.minecraft.client.Minecraft, net.minecraft.world.item.ItemStack);
+    descriptor: (Lnet/minecraft/client/Minecraft;Lnet/minecraft/world/item/ItemStack;)Ljava/util/List;
+
+  protected void insertText(java.lang.String, boolean);
+    descriptor: (Ljava/lang/String;Z)V
+
+  public boolean handleComponentClicked(net.minecraft.network.chat.Style);
+    descriptor: (Lnet/minecraft/network/chat/Style;)Z
+
+  public final void init(net.minecraft.client.Minecraft, int, int);
+    descriptor: (Lnet/minecraft/client/Minecraft;II)V
+
+  protected void rebuildWidgets();
+    descriptor: ()V
+
+  public java.util.List<? extends net.minecraft.client.gui.components.events.GuiEventListener> children();
+    descriptor: ()Ljava/util/List;
+
+  protected void init();
+    descriptor: ()V
+
+  public void tick();
+    descriptor: ()V
+
+  public void removed();
+    descriptor: ()V
+
+  public void added();
+    descriptor: ()V
+
+  public void renderBackground(net.minecraft.client.gui.GuiGraphics);
+    descriptor: (Lnet/minecraft/client/gui/GuiGraphics;)V
+
+  public void renderDirtBackground(net.minecraft.client.gui.GuiGraphics);
+    descriptor: (Lnet/minecraft/client/gui/GuiGraphics;)V
+
+  public boolean isPauseScreen();
+    descriptor: ()Z
+
+  private void confirmLink(boolean);
+    descriptor: (Z)V
+
+  private void openLink(java.net.URI);
+    descriptor: (Ljava/net/URI;)V
+
+  public static boolean hasControlDown();
+    descriptor: ()Z
+
+  public static boolean hasShiftDown();
+    descriptor: ()Z
+
+  public static boolean hasAltDown();
+    descriptor: ()Z
+
+  public static boolean isCut(int);
+    descriptor: (I)Z
+
+  public static boolean isPaste(int);
+    descriptor: (I)Z
+
+  public static boolean isCopy(int);
+    descriptor: (I)Z
+
+  public static boolean isSelectAll(int);
+    descriptor: (I)Z
+
+  protected void repositionElements();
+    descriptor: ()V
+
+  public void resize(net.minecraft.client.Minecraft, int, int);
+    descriptor: (Lnet/minecraft/client/Minecraft;II)V
+
+  public static void wrapScreenError(java.lang.Runnable, java.lang.String, java.lang.String);
+    descriptor: (Ljava/lang/Runnable;Ljava/lang/String;Ljava/lang/String;)V
+
+  protected boolean isValidCharacterForName(java.lang.String, char, int);
+    descriptor: (Ljava/lang/String;CI)Z
+
+  public boolean isMouseOver(double, double);
+    descriptor: (DD)Z
+
+  public void onFilesDrop(java.util.List<java.nio.file.Path>);
+    descriptor: (Ljava/util/List;)V
+
+  private void scheduleNarration(long, boolean);
+    descriptor: (JZ)V
+
+  private void suppressNarration(long);
+    descriptor: (J)V
+
+  public void afterMouseMove();
+    descriptor: ()V
+
+  public void afterMouseAction();
+    descriptor: ()V
+
+  public void afterKeyboardAction();
+    descriptor: ()V
+
+  private boolean shouldRunNarration();
+    descriptor: ()Z
+
+  public void handleDelayedNarration();
+    descriptor: ()V
+
+  public void triggerImmediateNarration(boolean);
+    descriptor: (Z)V
+
+  private void runNarration(boolean);
+    descriptor: (Z)V
+
+  protected boolean shouldNarrateNavigation();
+    descriptor: ()Z
+
+  protected void updateNarrationState(net.minecraft.client.gui.narration.NarrationElementOutput);
+    descriptor: (Lnet/minecraft/client/gui/narration/NarrationElementOutput;)V
+
+  protected void updateNarratedWidget(net.minecraft.client.gui.narration.NarrationElementOutput);
+    descriptor: (Lnet/minecraft/client/gui/narration/NarrationElementOutput;)V
+
+  public static net.minecraft.client.gui.screens.Screen$NarratableSearchResult findNarratableWidget(java.util.List<? extends net.minecraft.client.gui.narration.NarratableEntry>, net.minecraft.client.gui.narration.NarratableEntry);
+    descriptor: (Ljava/util/List;Lnet/minecraft/client/gui/narration/NarratableEntry;)Lnet/minecraft/client/gui/screens/Screen$NarratableSearchResult;
+
+  public void narrationEnabled();
+    descriptor: ()V
+
+  public void setTooltipForNextRenderPass(java.util.List<net.minecraft.util.FormattedCharSequence>);
+    descriptor: (Ljava/util/List;)V
+
+  public void setTooltipForNextRenderPass(java.util.List<net.minecraft.util.FormattedCharSequence>, net.minecraft.client.gui.screens.inventory.tooltip.ClientTooltipPositioner, boolean);
+    descriptor: (Ljava/util/List;Lnet/minecraft/client/gui/screens/inventory/tooltip/ClientTooltipPositioner;Z)V
+
+  protected void setTooltipForNextRenderPass(net.minecraft.network.chat.Component);
+    descriptor: (Lnet/minecraft/network/chat/Component;)V
+
+  public void setTooltipForNextRenderPass(net.minecraft.client.gui.components.Tooltip, net.minecraft.client.gui.screens.inventory.tooltip.ClientTooltipPositioner, boolean);
+    descriptor: (Lnet/minecraft/client/gui/components/Tooltip;Lnet/minecraft/client/gui/screens/inventory/tooltip/ClientTooltipPositioner;Z)V
+
+  protected static void hideWidgets(net.minecraft.client.gui.components.AbstractWidget...);
+    descriptor: ([Lnet/minecraft/client/gui/components/AbstractWidget;)V
+
+  public net.minecraft.client.gui.navigation.ScreenRectangle getRectangle();
+    descriptor: ()Lnet/minecraft/client/gui/navigation/ScreenRectangle;
+
+  public net.minecraft.sounds.Music getBackgroundMusic();
+    descriptor: ()Lnet/minecraft/sounds/Music;
+
+  private static java.lang.String method_25413(java.lang.String) throws java.lang.Exception;
+    descriptor: (Ljava/lang/String;)Ljava/lang/String;
+
+  private void method_52221(java.lang.Runnable);
+    descriptor: (Ljava/lang/Runnable;)V
+
+  private void method_52222(java.lang.Runnable);
+    descriptor: (Ljava/lang/Runnable;)V
+
+  static {};
+    descriptor: ()V
+}
