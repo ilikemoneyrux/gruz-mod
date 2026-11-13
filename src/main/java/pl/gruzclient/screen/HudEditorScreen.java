@@ -134,6 +134,7 @@ public class HudEditorScreen extends pl.gruzclient.compat.GruzScreen {
         Object[][] row = {
                 {Ui.Icon.SHIRT, "hud.act.cosmetics"}, {Ui.Icon.SMILE, "hud.act.emotes"}, {Ui.Icon.LAYOUT, "hud.act.preset"},
                 {Ui.Icon.MAGNET, "hud.act.snap"}, {Ui.Icon.MOVE, "hud.act.reset"},
+                {Ui.Icon.PLUS, "hud.act.copy"}, {Ui.Icon.PENCIL, "hud.act.paste"},
         };
         int s = 22, gap = 6, total = row.length * s + (row.length - 1) * gap;
         for (int i = 0; i < row.length; i++) {
@@ -154,6 +155,8 @@ public class HudEditorScreen extends pl.gruzclient.compat.GruzScreen {
                 HudPresets.apply(name);
                 say(Lang.t("hud.presetApplied").replace("{name}", Lang.t("hud.preset." + name)));
             }
+            case "hud.act.copy" -> { this.minecraft.keyboardHandler.setClipboard(HudPresets.encode()); say(Lang.t("hud.codeCopied")); }
+            case "hud.act.paste" -> say(Lang.t(HudPresets.decode(String.valueOf(this.minecraft.keyboardHandler.getClipboard()).trim()) ? "hud.codeLoaded" : "hud.codeBad"));
             case "hud.act.snap" -> { snapOn = !snapOn; say(Lang.t(snapOn ? "hud.snapOn" : "hud.snapOff")); }
             case "hud.act.reset" -> {
                 for (HudModule m : Modules.hud()) m.resetPosition();

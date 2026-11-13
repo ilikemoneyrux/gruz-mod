@@ -463,6 +463,13 @@ public final class Lang {
         put("hud.act.preset", "Następny gotowy układ HUD", "Next HUD preset");
         put("hud.act.snap", "Przyciąganie do krawędzi", "Snap to edges");
         put("hud.act.reset", "Przywróć domyślne pozycje", "Reset positions");
+        put("hud.act.copy", "Kopiuj kod układu HUD", "Copy HUD layout code");
+        put("hud.act.paste", "Wczytaj układ z kodu w schowku", "Load layout from the code in your clipboard");
+        put("hud.codeCopied", "Kod układu skopiowany – wyślij go znajomemu", "Layout code copied – send it to a friend");
+        put("hud.codeLoaded", "Układ wczytany z kodu", "Layout loaded from the code");
+        put("hud.codeBad", "W schowku nie ma kodu układu HUD", "No HUD layout code in the clipboard");
+        put("hud.preset.clean", "Czysty", "Clean");
+        put("hud.preset.streamer", "Streamer", "Streamer");
         put("hud.presetApplied", "Układ: {name}", "Layout: {name}");
         put("hud.snapOn", "Przyciąganie włączone", "Snapping on");
         put("hud.snapOff", "Przyciąganie wyłączone (albo trzymaj Alt)", "Snapping off (or hold Alt)");

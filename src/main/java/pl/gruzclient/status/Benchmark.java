@@ -79,6 +79,9 @@ public final class Benchmark {
         JsonObject o = new JsonObject();
         o.addProperty("avg", Math.round(avg));
         o.addProperty("low1", Math.round(low1));
+        o.addProperty("ft", Math.round(total / count * 10) / 10.0); // średni czas klatki w ms
+        Runtime rt = Runtime.getRuntime();
+        o.addProperty("mem", (rt.totalMemory() - rt.freeMemory()) / (1024 * 1024)); // pamięć zajęta przez grę (MB) na koniec testu
         o.addProperty("frames", count);
         o.addProperty("at", System.currentTimeMillis());
         o.addProperty("render", mc.options.renderDistance().get());
