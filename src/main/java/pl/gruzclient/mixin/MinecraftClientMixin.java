@@ -45,6 +45,12 @@ public abstract class MinecraftClientMixin {
         //#endif
     }
 
+    /** Początek klatki: Instant Replay robi tu zrzut (w buforze jest jeszcze cała poprzednia klatka z HUD) */
+    @Inject(method = "runTick", at = @At("HEAD"), require = 0)
+    private void gruz$frame(CallbackInfo ci) {
+        Modules.CLIP.frame();
+    }
+
     /** Nowy świat / serwer – czyścimy cel i combo */
     @Inject(method = "setLevel", at = @At("HEAD"), require = 0)
     private void gruz$joinWorld(CallbackInfo ci) {

@@ -22,28 +22,33 @@ import java.io.InputStream;
 import java.nio.file.Path;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
-import java.util.ArrayDeque;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.TreeMap;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import java.util.concurrent.atomic.AtomicInteger;
 import java.util.function.Consumer;
 
 /**
- * Wbudowany Instant Replay: co tick (20 klatek na sekundę) ostatnia klatka gry trafia do bufora jako JPEG 720p
- * ze znakiem wodnym „Recorded with Gruz Client”. Klawisz zapisuje ostatnie 15/30/60 s jako AVI w gruz-clips/.
- * Kodowanie idzie w osobnym wątku; w wątku gry zostaje tylko zrzut ekranu i zmniejszenie obrazu.
+ * Wbudowany Instant Replay: na początku każdej klatki (Minecraft.runTick) ostatnia gotowa klatka gry trafia do bufora jako JPEG 720p
+ * ze znakiem wodnym „Recorded with Gruz Client”, w tempie 20/30/60 kl./s. Klawisz zapisuje ostatnie 15/30/60 s jako AVI w gruz-clips/.
+ * W wątku gry zostaje tylko zrzut ekranu i zmniejszenie obrazu; kodowanie JPEG idzie w 3 wątkach w tle.
  */
 public final class Replay {
     private Replay() {}
 
-    public static final int FPS = 20;
     private static final int TARGET_H = 720;
-    private static final ArrayDeque<byte[]> frames = new ArrayDeque<>();
+    /** Bufor nie urośnie ponad ok. 350 MB (przy 60 kl./s to ok. 35–40 s 720p) – potem wypadają najstarsze klatki */
+    private static final long MAX_BYTES = 350L << 20;
+    private record Frame(long t, byte[] jpg) {}
+    /** klucz = numer klatki: wątki kodujące kończą w różnej kolejności, a w buforze ma być kolejność nagrania */
+    private static final TreeMap<Long, Frame> frames = new TreeMap<>();
+    private static long bytes;
     private static int width, height; // rozmiar klatek w buforze; zmiana okna czyści bufor
+    private static long seq, nextAt;
     private static final AtomicInteger pending = new AtomicInteger();
-    private static final ExecutorService ENC = Executors.newSingleThreadExecutor(r -> {
+    private static final ExecutorService ENC = Executors.newFixedThreadPool(3, r -> {
         Thread t = new Thread(r, "Gruz Replay");
         t.setDaemon(true);
         t.setPriority(Thread.MIN_PRIORITY);
@@ -52,17 +57,22 @@ public final class Replay {
     private static BufferedImage logo;
     private static boolean logoTried;
 
-    /** Co tick, gdy bufor jest włączony (wątek gry, poza rysowaniem klatki) */
-    public static void tick(Minecraft mc, int seconds) {
-        // słaby procesor: gubimy klatkę zamiast zapychać pamięć kolejką
-        if (mc.level == null || pending.get() > 6) return;
+    /** Początek każdej klatki gry (wątek gry, przed rysowaniem – w buforze jest jeszcze cała poprzednia klatka z HUD) */
+    public static void frame(Minecraft mc, int fps, int seconds) {
+        long now = System.nanoTime(), step = 1_000_000_000L / fps;
+        if (now < nextAt) return;
+        nextAt = now - nextAt > step * 4 ? now + step : nextAt + step; // równe odstępy; po przerwie (menu, lag) od nowa
+        // słaby procesor: gubimy klatkę zamiast zapychać pamięć kolejką (przy zapisie luki wypełnia poprzednia klatka)
+        if (mc.level == null || pending.get() > 8) return;
+        long id = seq++;
+        float quality = fps >= 60 ? 0.72f : 0.82f;
         pending.incrementAndGet();
         try {
             Compat.grabFrame(mc, img -> {
                 try {
                     BufferedImage bi = scaled(img);
                     ENC.execute(() -> {
-                        try { add(encode(bi), bi.getWidth(), bi.getHeight(), seconds); }
+                        try { add(id, now, encode(bi, quality), bi.getWidth(), bi.getHeight(), seconds); }
                         catch (Exception e) { GruzClient.LOG.debug("Replay: klatka pominięta", e); }
                         finally { pending.decrementAndGet(); }
                     });
@@ -77,23 +87,37 @@ public final class Replay {
         }
     }
 
-    public static void clear() { synchronized (frames) { frames.clear(); } }
+    public static void clear() { synchronized (frames) { frames.clear(); bytes = 0; } }
 
-    /** Zapisuje bufor do pliku; done dostaje nazwę pliku albo null (pusty bufor / błąd) */
-    public static void save(Minecraft mc, Consumer<String> done) {
-        List<byte[]> copy;
+    /** Zapisuje bufor do pliku w stałym tempie fps; done dostaje nazwę pliku albo null (pusty bufor / błąd) */
+    public static void save(Minecraft mc, int fps, Consumer<String> done) {
+        List<Frame> copy;
         int w, h;
-        synchronized (frames) { copy = new ArrayList<>(frames); w = width; h = height; }
-        if (copy.size() < FPS) { done.accept(null); return; } // mniej niż sekunda nagrania
+        synchronized (frames) { copy = new ArrayList<>(frames.values()); w = width; h = height; }
+        if (copy.size() < 2 || copy.get(copy.size() - 1).t() - copy.get(0).t() < 1_000_000_000L) { done.accept(null); return; } // < 1 s
         String name = "clip-" + LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyy-MM-dd_HH-mm-ss")) + ".avi";
         Path file = mc.gameDirectory.toPath().resolve("gruz-clips").resolve(name);
         ENC.execute(() -> {
             String result = null;
-            try { Avi.write(file, copy, w, h, FPS); result = name; }
+            try { Avi.write(file, resample(copy, fps), w, h, fps); result = name; }
             catch (Exception e) { GruzClient.LOG.warn("Replay: nie udało się zapisać klipu", e); }
             String r = result;
             mc.execute(() -> done.accept(r));
         });
+    }
+
+    /** Klatki w równych odstępach 1/fps według czasu nagrania: przy niższym FPS gry klatka się powtarza, film nie przyspiesza */
+    static List<byte[]> resample(List<Frame> in, int fps) {
+        long t0 = in.get(0).t(), step = 1_000_000_000L / fps;
+        int n = (int) ((in.get(in.size() - 1).t() - t0) / step) + 1;
+        List<byte[]> out = new ArrayList<>(n);
+        int i = 0;
+        for (int k = 0; k < n; k++) {
+            long at = t0 + k * step;
+            while (i + 1 < in.size() && in.get(i + 1).t() <= at) i++;
+            out.add(in.get(i).jpg());
+        }
+        return out;
     }
 
     /** Zmniejszenie do 720p (najbliższy piksel) – w wątku gry, bo obraz z gry trzeba od razu zwolnić */
@@ -113,7 +137,7 @@ public final class Replay {
         return bi;
     }
 
-    private static byte[] encode(BufferedImage bi) throws Exception {
+    private static byte[] encode(BufferedImage bi, float quality) throws Exception {
         watermark(bi);
         ByteArrayOutputStream out = new ByteArrayOutputStream(96 * 1024);
         ImageWriter wr = ImageIO.getImageWritersByFormatName("jpg").next();
@@ -121,7 +145,7 @@ public final class Replay {
             wr.setOutput(ios);
             ImageWriteParam p = wr.getDefaultWriteParam();
             p.setCompressionMode(ImageWriteParam.MODE_EXPLICIT);
-            p.setCompressionQuality(0.82f);
+            p.setCompressionQuality(quality);
             wr.write(null, new IIOImage(bi, null, null), p);
         } finally {
             wr.dispose();
@@ -129,11 +153,15 @@ public final class Replay {
         return out.toByteArray();
     }
 
-    private static void add(byte[] jpg, int w, int h, int seconds) {
+    private static void add(long id, long t, byte[] jpg, int w, int h, int seconds) {
         synchronized (frames) {
-            if (w != width || h != height) { frames.clear(); width = w; height = h; }
-            frames.add(jpg);
-            while (frames.size() > seconds * FPS) frames.poll();
+            if (w != width || h != height) { frames.clear(); bytes = 0; width = w; height = h; }
+            frames.put(id, new Frame(t, jpg));
+            bytes += jpg.length;
+            long keep = seconds * 1_000_000_000L;
+            while (frames.size() > 1 && (frames.lastEntry().getValue().t() - frames.firstEntry().getValue().t() > keep || bytes > MAX_BYTES)) {
+                bytes -= frames.pollFirstEntry().getValue().jpg().length;
+            }
         }
     }
 

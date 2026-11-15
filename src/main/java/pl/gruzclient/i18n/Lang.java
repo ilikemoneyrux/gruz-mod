@@ -471,6 +471,10 @@ public final class Lang {
         put("clip.len.15", "15 s", "15 s");
         put("clip.len.30", "30 s", "30 s");
         put("clip.len.60", "60 s", "60 s");
+        put("setting.clipFps", "Klatki na sekundę (więcej = płynniej, ale więcej FPS w dół)", "Frames per second (more = smoother, costs more FPS)");
+        put("clip.fps.20", "20", "20");
+        put("clip.fps.30", "30", "30");
+        put("clip.fps.60", "60", "60");
         put("setting.clipFolder", "Zapisane klipy", "Saved clips");
         put("clip.openFolder", "Otwórz folder", "Open folder");
         put("clip.savedGruz", "Klip zapisany: {name}. MP4 i wersję 9:16 zrobisz w launcherze (Galeria).", "Clip saved: {name}. Make an MP4 or a 9:16 version in the launcher (Gallery).");
