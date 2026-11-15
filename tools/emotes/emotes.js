@@ -186,7 +186,9 @@
       const move = { tick, easing: 'linear' };
       for (const [part, axes] of Object.entries(p)) {
         const o = {};
-        for (const [k, v] of Object.entries(axes)) o[k] = r1(v);
+        // Player Animation Library przelicza stopnie (degrees: true) tylko dla pitch/yaw/roll – bend czyta zawsze w radianach.
+        // Stopnie w bend dawały dziesiątki obrotów łokci i tułowia (latające ręce, przewracająca się głowa).
+        for (const [k, v] of Object.entries(axes)) o[k] = k === 'bend' ? Math.round(v * Math.PI / 180 * 1000) / 1000 : r1(v);
         move[part] = o;
       }
       moves.push(move);
