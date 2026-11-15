@@ -49,7 +49,9 @@ public class CosmeticsModule extends Module {
     public final Setting.Bool emoteCamera = add(new Setting.Bool("emoteCam", "setting.emoteCamera", true));
     /** Ulubione emotki (id po przecinku) – w kole są pierwsze, pod klawiszami 1–9; prawy klik w kole dodaje / usuwa */
     public final Setting.Text favEmotes = add(new Setting.Text("favEmotes", "setting.favEmotes", ""));
-    public final Setting.Bool emotePreview = add(new Setting.Bool("emotePreview", "setting.emotePreview", true));
+    // domyślnie wyłączony: przy przesuwaniu myszy po kole odpalał kolejne emotki i przełączał kamerę (0.5.16–0.5.18);
+    // nowe id, bo stare "true" jest już zapisane w configu graczy
+    public final Setting.Bool emotePreview = add(new Setting.Bool("emotePreview2", "setting.emotePreview", false));
     /** Szafa w grze (WardrobeScreen) */
     public final Setting.Key wardrobeKey = add(new Setting.Key("wardrobeKey", "setting.wardrobeKey", InputConstants.KEY_O));
     /** Przyjęcie zaproszenia do emotki we dwoje */

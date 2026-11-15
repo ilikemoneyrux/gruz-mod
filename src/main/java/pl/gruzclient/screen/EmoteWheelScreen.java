@@ -70,7 +70,7 @@ public class EmoteWheelScreen extends pl.gruzclient.compat.GruzScreen {
         int hv = dist > 18 ? (int) Math.floor(((ang + Math.PI / 2 + Math.PI * 2 + Math.PI / n) % (Math.PI * 2)) / (Math.PI * 2 / n)) : -1;
         if (hv != hovered) { hovered = hv; hoverSince = System.currentTimeMillis(); }
         // podgląd: po 350 ms najechania emotka gra na Twojej postaci (tylko u Ciebie)
-        if (module.emotePreview.value && hovered >= 0 && hovered != previewed && System.currentTimeMillis() - hoverSince > 350 && !emotes[hovered].duo) {
+        if (module.emotePreview.value && hovered >= 0 && hovered != previewed && System.currentTimeMillis() - hoverSince > 700 && !emotes[hovered].duo) {
             previewed = hovered;
             module.previewEmote(emotes[hovered]);
         }
