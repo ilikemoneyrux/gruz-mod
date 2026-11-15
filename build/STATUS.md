@@ -1,4 +1,4 @@
-# Build 48 (66c8db1b)
+# Build 49 (c60c8484)
 
 - 1.20.1: build OK (errors: 0), w grze: OK
 - 1.20.4: build OK (errors: 0), w grze: OK
