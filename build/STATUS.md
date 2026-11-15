@@ -1,4 +1,4 @@
-# Build 50 (17c30f95)
+# Build 51 (24164885)
 
 - 1.20.1: build OK (errors: 0), w grze: OK
 - 1.20.4: build OK (errors: 0), w grze: OK
