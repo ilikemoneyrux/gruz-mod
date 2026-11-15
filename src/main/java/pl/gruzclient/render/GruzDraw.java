@@ -57,6 +57,12 @@ public final class GruzDraw {
     /** Rysuje kwadratową teksturę w pozycji float z przezroczystością; additive = świecenie */
     public static void sprite(GuiGraphics c, ResourceLocation id, int texSize, float x, float y, float w, float h,
                               float alpha, boolean additive, float rotation) {
+        sprite(c, id, texSize, x, y, w, h, alpha, additive, rotation, 0xFFFFFF);
+    }
+
+    /** To samo w kolorze rgb (biała tekstura przyjmuje kolor) */
+    public static void sprite(GuiGraphics c, ResourceLocation id, int texSize, float x, float y, float w, float h,
+                              float alpha, boolean additive, float rotation, int rgb) {
         if (alpha <= 0.003f) return;
         tex(id);
         Compat.blend(additive);
@@ -66,7 +72,7 @@ public final class GruzDraw {
         if (rotation != 0) m.rotate(rotation);
         m.scale(w / texSize, h / texSize);
         m.translate(-texSize / 2f, -texSize / 2f);
-        Compat.blitWhole(c, id, 0, 0, texSize, texSize, (Math.round(Math.min(1f, alpha) * 255f) << 24) | 0xFFFFFF);
+        Compat.blitWhole(c, id, 0, 0, texSize, texSize, (Math.round(Math.min(1f, alpha) * 255f) << 24) | (rgb & 0xFFFFFF));
         m.pop();
         Compat.blend(false);
     }

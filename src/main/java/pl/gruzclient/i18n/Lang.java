@@ -205,7 +205,9 @@ public final class Lang {
         put("emote.facepalm", "Facepalm", "Facepalm");
         put("emote.bow", "Ukłon", "Bow");
         put("emote.point", "Wskaż", "Point");
-        put("emote.hint", "Najedź i puść klawisz · cyfry 1–9 · prawy klik = ★ ulubiona · ♥ = we dwoje", "Hover and release · keys 1–9 · right-click = ★ favourite · ♥ = duo");
+        put("emote.hint", "Najedź i puść klawisz · cyfry 1–8 · kółko = strona · prawy klik = ★ ulubiona · ♥ = we dwoje · Esc zamyka", "Hover and release · keys 1–8 · scroll = page · right-click = ★ favourite · ♥ = duo · Esc closes");
+        put("emote.page", "Strona", "Page");
+        put("emote.settings", "Ustawienia emotek", "Emote settings");
         put("mods.cat.pvp", "PvP", "PvP");
         put("mods.open", "Otwórz", "Open");
         put("common.cancel", "Anuluj", "Cancel");
