@@ -400,6 +400,15 @@ public final class Compat {
         //#endif
     }
 
+    /** Cały obraz naraz jako ABGR, wiersz po wierszu od góry (jedno kopiowanie pamięci zamiast getPixel na każdy piksel) */
+    public static int[] pixelsABGR(NativeImage img) {
+        //#if MC >= 1.21.2
+        return img.getPixelsABGR();
+        //#else
+        return img.getPixelsRGBA();
+        //#endif
+    }
+
     public static int getPixelABGR(NativeImage img, int x, int y) {
         //#if MC >= 1.21.2
         return abgrToArgb(img.getPixel(x, y));

@@ -1,6 +1,5 @@
 package pl.gruzclient.replay;
 
-import com.mojang.blaze3d.platform.NativeImage;
 import net.minecraft.client.Minecraft;
 import pl.gruzclient.GruzClient;
 import pl.gruzclient.compat.Compat;
@@ -33,7 +32,7 @@ import java.util.function.Consumer;
 /**
  * Wbudowany Instant Replay: na początku każdej klatki (Minecraft.runTick) ostatnia gotowa klatka gry trafia do bufora jako JPEG 720p
  * ze znakiem wodnym „Recorded with Gruz Client”, w tempie 20/30/60 kl./s. Klawisz zapisuje ostatnie 15/30/60 s jako AVI w gruz-clips/.
- * W wątku gry zostaje tylko zrzut ekranu i zmniejszenie obrazu; kodowanie JPEG idzie w 3 wątkach w tle.
+ * W wątku gry zostaje tylko zrzut ekranu i skopiowanie pikseli; zmniejszanie (wygładzone) i JPEG idą w 3 wątkach w tle.
  */
 public final class Replay {
     private Replay() {}
@@ -65,14 +64,15 @@ public final class Replay {
         // słaby procesor: gubimy klatkę zamiast zapychać pamięć kolejką (przy zapisie luki wypełnia poprzednia klatka)
         if (mc.level == null || pending.get() > 8) return;
         long id = seq++;
-        float quality = fps >= 60 ? 0.72f : 0.82f;
+        float quality = fps >= 60 ? 0.86f : 0.9f;
         pending.incrementAndGet();
         try {
             Compat.grabFrame(mc, img -> {
                 try {
-                    BufferedImage bi = scaled(img);
+                    int w0 = img.getWidth(), h0 = img.getHeight();
+                    int[] px = Compat.pixelsABGR(img); // obraz z gry trzeba od razu zwolnić, więc w wątku gry tylko kopia
                     ENC.execute(() -> {
-                        try { add(id, now, encode(bi, quality), bi.getWidth(), bi.getHeight(), seconds); }
+                        try { BufferedImage bi = scaled(px, w0, h0); add(id, now, encode(bi, quality), bi.getWidth(), bi.getHeight(), seconds); }
                         catch (Exception e) { GruzClient.LOG.debug("Replay: klatka pominięta", e); }
                         finally { pending.decrementAndGet(); }
                     });
@@ -120,21 +120,32 @@ public final class Replay {
         return out;
     }
 
-    /** Zmniejszenie do 720p (najbliższy piksel) – w wątku gry, bo obraz z gry trzeba od razu zwolnić */
-    private static BufferedImage scaled(NativeImage img) {
-        int w0 = img.getWidth(), h0 = img.getHeight();
+    /**
+     * Zmniejszenie do 720p z wygładzaniem (w wątku w tle). „Najbliższy piksel” przy nieparzystej skali dublował co któryś piksel
+     * i poszarpywał krawędzie; teraz najpierw połówki (średnia 2×2), potem dwuliniowo do końca. Szerokość podzielna przez 16
+     * – odtwarzacz Windows pokazuje inaczej zielony pasek.
+     */
+    private static BufferedImage scaled(int[] abgr, int w0, int h0) {
+        BufferedImage src = new BufferedImage(w0, h0, BufferedImage.TYPE_INT_RGB);
+        int[] px = ((DataBufferInt) src.getRaster().getDataBuffer()).getData();
+        for (int i = 0; i < px.length; i++) { int c = abgr[i]; px[i] = (c & 0xFF) << 16 | (c & 0xFF00) | ((c >> 16) & 0xFF); }
         float step = Math.max(1f, h0 / (float) TARGET_H);
-        int h = Math.round(h0 / step) & ~1, w = Math.round(w0 / step) & ~1;
-        BufferedImage bi = new BufferedImage(w, h, BufferedImage.TYPE_INT_RGB);
-        int[] px = ((DataBufferInt) bi.getRaster().getDataBuffer()).getData();
-        for (int y = 0; y < h; y++) {
-            int sy = Math.min(h0 - 1, (int) (y * step));
-            for (int x = 0; x < w; x++) {
-                int c = Compat.getPixelABGR(img, Math.min(w0 - 1, (int) (x * step)), sy);
-                px[y * w + x] = (c & 0xFF) << 16 | (c & 0xFF00) | ((c >> 16) & 0xFF);
-            }
+        int h = Math.round(h0 / step) & ~1, w = Math.max(16, Math.round(w0 / step) & ~15);
+        while (src.getHeight() >= h * 2) src = resize(src, src.getWidth() / 2, src.getHeight() / 2);
+        return src.getWidth() == w && src.getHeight() == h ? src : resize(src, w, h);
+    }
+
+    private static BufferedImage resize(BufferedImage src, int w, int h) {
+        BufferedImage out = new BufferedImage(w, h, BufferedImage.TYPE_INT_RGB);
+        Graphics2D g = out.createGraphics();
+        try {
+            g.setRenderingHint(RenderingHints.KEY_INTERPOLATION, RenderingHints.VALUE_INTERPOLATION_BILINEAR);
+            g.setRenderingHint(RenderingHints.KEY_RENDERING, RenderingHints.VALUE_RENDER_QUALITY);
+            g.drawImage(src, 0, 0, w, h, null);
+        } finally {
+            g.dispose();
         }
-        return bi;
+        return out;
     }
 
     private static byte[] encode(BufferedImage bi, float quality) throws Exception {
