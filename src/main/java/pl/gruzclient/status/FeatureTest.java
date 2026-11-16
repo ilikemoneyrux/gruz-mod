@@ -178,7 +178,14 @@ public final class FeatureTest {
             case 510 -> { shot("04-all"); log("fullbright=" + Modules.FULLBRIGHT.isEnabled() + ""); }
             case 530 -> mc.setScreen(new pl.gruzclient.screen.GruzModsScreen(null));
             case 570 -> shot("05-mods");
-            case 590 -> { log("DONE"); mc.stop(); }
+            // podglądy w ustawieniach modułów (celownik w nowym stylu „okrąg”, block overlay, hit color)
+            case 580 -> { Modules.CROSSHAIR.style.index = 6; Modules.CROSSHAIR.dotSize.set(2); mc.setScreen(new pl.gruzclient.screen.GruzModsScreen(null, Modules.CROSSHAIR)); }
+            case 600 -> shot("06-preview-crosshair");
+            case 605 -> mc.setScreen(new pl.gruzclient.screen.GruzModsScreen(null, Modules.BLOCK_OVERLAY));
+            case 625 -> shot("07-preview-overlay");
+            case 630 -> mc.setScreen(new pl.gruzclient.screen.GruzModsScreen(null, Modules.HIT_COLOR));
+            case 650 -> shot("08-preview-hitcolor");
+            case 660 -> { log("DONE"); mc.stop(); }
             default -> { }
         }
         if (t > 300 && t < 320) p.turn(8.0, 0.0); // „ruch myszy” w prawo

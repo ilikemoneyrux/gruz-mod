@@ -264,40 +264,87 @@ public class GruzModsScreen extends pl.gruzclient.compat.GruzScreen {
     }
 
     // ---------------- ustawienia modułu ----------------
-    private static final int PREVIEW_H = 56;
+    private static final int PREVIEW_H = 84;
     private static boolean hasPreview(Module m) { return m == Modules.CROSSHAIR || m == Modules.BLOCK_OVERLAY || m == Modules.HIT_COLOR; }
     private int rowsTop() { return contentY + 42 + (settingsOf != null && hasPreview(settingsOf) ? PREVIEW_H + 6 : 0); }
+
+    /** Prawdziwy zrzut ekranu z gry (dzień, równina) – tło podglądu celownika i Hit Color */
+    private static final net.minecraft.resources.ResourceLocation WORLD = pl.gruzclient.compat.Compat.id(pl.gruzclient.GruzClient.MOD_ID, "textures/gui/preview_world.png");
+    private static final int WORLD_W = 640, WORLD_H = 266;
+    /** Ściana z tekstur bloków samej gry (z aktualnej paczki zasobów) */
+    private static final String[] WALL = {"stone", "andesite", "stone", "cobblestone", "stone", "iron_ore", "stone", "coal_ore", "stone", "diamond_ore", "andesite"};
+
+    /** Zrzut gry przycięty do proporcji podglądu (środek kadru = horyzont) */
+    private static void worldBackground(GuiGraphics c, int x, int y, int w, int h, float r) {
+        pl.gruzclient.render.GruzDraw.tex(WORLD);
+        float rw = WORLD_W, rh = WORLD_W * h / (float) w;
+        if (rh > WORLD_H) { rh = WORLD_H; rw = WORLD_H * w / (float) h; }
+        pl.gruzclient.compat.Compat.blit(c, WORLD, x, y, w, h, (WORLD_W - rw) / 2f, (WORLD_H - rh) / 2f,
+                Math.round(rw), Math.round(rh), WORLD_W, WORLD_H, argb(r, 0xFFFFFF));
+    }
 
     /** Podgląd na żywo nad ustawieniami (rysowany z tych samych wartości co w grze, także gdy moduł jest wyłączony) */
     private void drawPreview(GuiGraphics c, Module m, int x, int y, float r) {
         int w = contentW, h = PREVIEW_H, mx = x + w / 2, my = y + h / 2;
-        // jasna i ciemna połowa (niebo / kamień), żeby było widać kolor na obu tłach
-        c.fill(x, y, mx, y + h, argb(r, 0x8FB4E8));
-        c.fill(mx, y, x + w, y + h, argb(r, 0x3A3A40));
-        Ui.roundBorder(c, x, y, w, h, 4, argb(r * 0.15f, 0xFFFFFF));
-        if (m == Modules.CROSSHAIR) {
-            for (int i = 0; i < 2; i++) { // po jednym celowniku na każdym tle, 2x większy niż w grze
-                pl.gruzclient.compat.Pose2D p = pl.gruzclient.compat.Pose2D.of(c);
-                p.push(); p.translate(x + w / 4f + i * w / 2f, my); p.scale(2f, 2f);
-                Modules.CROSSHAIR.draw(c, 0, 0);
-                p.pop();
+        long now = System.currentTimeMillis();
+        c.enableScissor(x, y, x + w, y + h);
+        if (m == Modules.BLOCK_OVERLAY) {
+            // ściana bloków widziana na wprost; celownik wędruje, a obrys przeskakuje na blok pod nim – tak jak w grze
+            int b = 32, ox = mx - b / 2, oy = my - b / 2;
+            for (int row = -2; row <= 2; row++) for (int col = -(w / b / 2) - 1; col <= w / b / 2 + 1; col++) {
+                String name = WALL[Math.floorMod(col * 5 + row * 3, WALL.length)];
+                pl.gruzclient.compat.Compat.blit(c, pl.gruzclient.compat.Compat.id("minecraft", "textures/block/" + name + ".png"),
+                        ox + col * b, oy + row * b, b, b, 0f, 0f, 16, 16, 16, 16, argb(r, 0xD6D6D6)); // 0.84 = cień ściany jak w grze
             }
-        } else if (m == Modules.BLOCK_OVERLAY) {
-            int s = 36, bx = mx - s / 2, by = my - s / 2, rgb = Modules.BLOCK_OVERLAY.color.rgb();
-            c.fill(bx, by, bx + s, by + s, argb(r, 0x7D7D7D)); // ściana bloku
-            if (Modules.BLOCK_OVERLAY.fill.value) c.fill(bx, by, bx + s, by + s, argb(r * Modules.BLOCK_OVERLAY.fillAlpha.value / 100f * Modules.BLOCK_OVERLAY.pulseFactor(), rgb));
-            int t = Math.round(Modules.BLOCK_OVERLAY.thickness.value), col = argb(r * Modules.BLOCK_OVERLAY.outlineAlpha.value / 100f, rgb);
-            c.fill(bx, by, bx + s, by + t, col);
-            c.fill(bx, by + s - t, bx + s, by + s, col);
-            c.fill(bx, by + t, bx + t, by + s - t, col);
-            c.fill(bx + s - t, by + t, bx + s, by + s - t, col);
+            float ax = mx + (float) Math.sin(now / 1100.0) * b * 1.7f, ay = my + (float) Math.sin(now / 1700.0) * b * 0.55f;
+            int bx = ox + Math.floorDiv(Math.round(ax) - ox, b) * b, by = oy + Math.floorDiv(Math.round(ay) - oy, b) * b;
+            var bo = Modules.BLOCK_OVERLAY;
+            int rgb = bo.color.rgb();
+            if (bo.fill.value) c.fill(bx, by, bx + b, by + b, argb(r * bo.fillAlpha.value / 100f * bo.pulseFactor(), rgb));
+            int t = Math.round(bo.thickness.value), lo = -(t / 2), hi = lo + t, col = argb(r * bo.outlineAlpha.value / 100f, rgb);
+            // linia na krawędzi bloku (po obu stronach krawędzi, jak obrys w świecie)
+            c.fill(bx + lo, by + lo, bx + b + hi, by + hi, col);
+            c.fill(bx + lo, by + b + lo, bx + b + hi, by + b + hi, col);
+            c.fill(bx + lo, by + hi, bx + hi, by + b + lo, col);
+            c.fill(bx + b + lo, by + hi, bx + b + hi, by + b + lo, col);
+            c.fillGradient(x, y, x + w, y + 16, argb(r * 0.45f, 0), 0); // lekka winieta – głębia zamiast płaskiej ściany
+            c.fillGradient(x, y + h - 16, x + w, y + h, 0, argb(r * 0.45f, 0));
+            crosshairAt(c, Math.round(ax), Math.round(ay), Long.MAX_VALUE);
         } else {
-            // Twoja głowa: zwykła i w chwili trafienia
-            int s = 36, hy = my - s / 2;
-            pl.gruzclient.compat.Compat.ownFace(c, this.minecraft, mx - s - 8, hy, s, r);
-            pl.gruzclient.compat.Compat.ownFace(c, this.minecraft, mx + 8, hy, s, r);
-            c.fill(mx + 8, hy, mx + 8 + s, hy + s, argb(r * Modules.HIT_COLOR.opacity.value / 100f, Modules.HIT_COLOR.color.rgb()));
+            worldBackground(c, x, y, w, h, r);
+            if (m == Modules.CROSSHAIR) {
+                var xh = Modules.CROSSHAIR;
+                // udawane trafienie co 1,6 s, żeby było widać kolor i puls przy trafieniu
+                long since = xh.hitColorOn.value || xh.pulse.value ? now % 1600 : Long.MAX_VALUE;
+                pl.gruzclient.compat.Pose2D p = pl.gruzclient.compat.Pose2D.of(c);
+                p.push(); p.translate(mx, my); p.scale(2f, 2f); // 2x większy niż w grze
+                xh.draw(c, 0, 0, since);
+                p.pop();
+                // obok w prawdziwym rozmiarze
+                xh.draw(c, x + w - 34, y + h - 22, since);
+                Ui.draw(c, Ui.text("1:1"), x + w - 42, y + h - 11, argb(r * 0.8f, 0xFFFFFF));
+            } else {
+                // Twoja głowa: zwykła i w chwili trafienia
+                int s = 40, hy = my - s / 2;
+                pl.gruzclient.compat.Compat.ownFace(c, this.minecraft, mx - s - 8, hy, s, r);
+                pl.gruzclient.compat.Compat.ownFace(c, this.minecraft, mx + 8, hy, s, r);
+                c.fill(mx + 8, hy, mx + 8 + s, hy + s, argb(r * Modules.HIT_COLOR.opacity.value / 100f, Modules.HIT_COLOR.color.rgb()));
+            }
         }
+        c.disableScissor();
+        // podpis w rogu, żeby było jasne, że to podgląd
+        Component tag = Ui.text(Lang.t("preview.live"));
+        Ui.round(c, x + 5, y + 5, Ui.width(tag) + 10, 13, 3, argb(r * 0.7f, 0x0E0A14));
+        Ui.draw(c, tag, x + 10, y + 8, argb(r, NEON_HOT));
+        Ui.roundBorder(c, x, y, w, h, 4, argb(r * 0.25f, 0xFFFFFF));
+    }
+
+    /** Celownik w podglądzie: Gruz, gdy moduł celownika jest włączony, inaczej zwykły biały krzyżyk */
+    private static void crosshairAt(GuiGraphics c, int cx, int cy, long since) {
+        if (Modules.CROSSHAIR.isEnabled()) { Modules.CROSSHAIR.draw(c, cx, cy, since); return; }
+        c.fill(cx - 4, cy, cx + 5, cy + 1, 0xFFFFFFFF);
+        c.fill(cx, cy - 4, cx + 1, cy, 0xFFFFFFFF);
+        c.fill(cx, cy + 1, cx + 1, cy + 5, 0xFFFFFFFF);
     }
 
     private void drawSettings(GuiGraphics c, int mouseX, int mouseY, float r) {

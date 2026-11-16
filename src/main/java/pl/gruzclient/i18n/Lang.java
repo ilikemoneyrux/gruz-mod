@@ -323,6 +323,13 @@ public final class Lang {
         put("menu.panoramaFailed", "Nie udało się zrobić panoramy.", "Couldn't take the panorama.");
         put("setting.style.pixel", "Piksele", "Pixels");
         put("setting.crosshairOutline", "Obwódka", "Outline");
+        put("setting.crosshairOutlineWidth", "Grubość obwódki", "Outline thickness");
+        put("setting.crosshairDotSize", "Rozmiar kropki", "Dot size");
+        put("setting.style.t", "Litera T", "T shape");
+        put("setting.style.x", "Krzyżyk ukośny (X)", "Diagonal (X)");
+        put("setting.style.circle", "Okrąg", "Circle");
+        put("setting.style.square", "Kwadrat", "Square");
+        put("preview.live", "Podgląd na żywo", "Live preview");
         put("setting.pixelCode", "Kod celownika", "Crosshair code");
         put("setting.editPixels", "Edytuj piksele", "Edit pixels");
         put("cross.title", "Edytor celownika", "Crosshair editor");
