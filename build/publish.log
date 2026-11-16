@@ -1,17 +1,17 @@
 total 16564
-drwxr-xr-x  2 runner runner    4096 Nov 15 20:26 .
-drwxr-xr-x 14 runner runner    4096 Nov 15 20:26 ..
--rw-r--r--  1 runner runner 1949792 Nov 15 20:26 gruzclient-1.20.1.jar
--rw-r--r--  1 runner runner 1949384 Nov 15 20:26 gruzclient-1.20.4.jar
--rw-r--r--  1 runner runner 1955446 Nov 15 20:26 gruzclient-1.21.1.jar
--rw-r--r--  1 runner runner 1955658 Nov 15 20:26 gruzclient-1.21.11.jar
--rw-r--r--  1 runner runner 1948620 Nov 15 20:26 gruzclient-1.21.4.jar
--rw-r--r--  1 runner runner 1280686 Nov 15 20:26 gruzclient-1.8.9.jar
--rw-r--r--  1 runner runner 1966217 Nov 15 20:26 gruzclient-26.1.jar
--rw-r--r--  1 runner runner 1960420 Nov 15 20:26 gruzclient-26.2.jar
--rw-r--r--  1 runner runner 1969362 Nov 15 20:26 gruzclient-26.3.jar
+drwxr-xr-x  2 runner runner    4096 Nov 16 15:36 .
+drwxr-xr-x 14 runner runner    4096 Nov 16 15:36 ..
+-rw-r--r--  1 runner runner 1950081 Nov 16 15:36 gruzclient-1.20.1.jar
+-rw-r--r--  1 runner runner 1949669 Nov 16 15:36 gruzclient-1.20.4.jar
+-rw-r--r--  1 runner runner 1955732 Nov 16 15:36 gruzclient-1.21.1.jar
+-rw-r--r--  1 runner runner 1955950 Nov 16 15:36 gruzclient-1.21.11.jar
+-rw-r--r--  1 runner runner 1948905 Nov 16 15:36 gruzclient-1.21.4.jar
+-rw-r--r--  1 runner runner 1280686 Nov 16 15:36 gruzclient-1.8.9.jar
+-rw-r--r--  1 runner runner 1966512 Nov 16 15:36 gruzclient-26.1.jar
+-rw-r--r--  1 runner runner 1960707 Nov 16 15:36 gruzclient-26.2.jar
+-rw-r--r--  1 runner runner 1969650 Nov 16 15:36 gruzclient-26.3.jar
 {
-  "mod": "0.5.21",
+  "mod": "0.5.22",
   "builds": [
     {
       "mc": "1.20.1",
