@@ -1,0 +1,62 @@
+Compiled from "LightTexture.java"
+public class net.minecraft.client.renderer.LightTexture implements java.lang.AutoCloseable {
+  public static final int FULL_BRIGHT;
+    descriptor: I
+  public static final int FULL_SKY;
+    descriptor: I
+  public static final int FULL_BLOCK;
+    descriptor: I
+  private static final int TEXTURE_SIZE;
+    descriptor: I
+  private final com.mojang.blaze3d.pipeline.TextureTarget target;
+    descriptor: Lcom/mojang/blaze3d/pipeline/TextureTarget;
+  private boolean updateLightTexture;
+    descriptor: Z
+  private float blockLightRedFlicker;
+    descriptor: F
+  private final net.minecraft.client.renderer.GameRenderer renderer;
+    descriptor: Lnet/minecraft/client/renderer/GameRenderer;
+  private final net.minecraft.client.Minecraft minecraft;
+    descriptor: Lnet/minecraft/client/Minecraft;
+  public net.minecraft.client.renderer.LightTexture(net.minecraft.client.renderer.GameRenderer, net.minecraft.client.Minecraft);
+    descriptor: (Lnet/minecraft/client/renderer/GameRenderer;Lnet/minecraft/client/Minecraft;)V
+
+  public void close();
+    descriptor: ()V
+
+  public void tick();
+    descriptor: ()V
+
+  public void turnOffLightLayer();
+    descriptor: ()V
+
+  public void turnOnLightLayer();
+    descriptor: ()V
+
+  private float getDarknessGamma(float);
+    descriptor: (F)F
+
+  private float calculateDarknessScale(net.minecraft.world.entity.LivingEntity, float, float);
+    descriptor: (Lnet/minecraft/world/entity/LivingEntity;FF)F
+
+  public void updateLightTexture(float);
+    descriptor: (F)V
+
+  public static float getBrightness(net.minecraft.world.level.dimension.DimensionType, int);
+    descriptor: (Lnet/minecraft/world/level/dimension/DimensionType;I)F
+
+  public static float getBrightness(float, int);
+    descriptor: (FI)F
+
+  public static int pack(int, int);
+    descriptor: (II)I
+
+  public static int block(int);
+    descriptor: (I)I
+
+  public static int sky(int);
+    descriptor: (I)I
+
+  public static int lightCoordsWithEmission(int, int);
+    descriptor: (II)I
+}

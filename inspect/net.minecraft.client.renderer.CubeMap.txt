@@ -1,0 +1,18 @@
+Compiled from "CubeMap.java"
+public class net.minecraft.client.renderer.CubeMap {
+  private static final int SIDES;
+    descriptor: I
+  private final java.util.List<net.minecraft.resources.ResourceLocation> sides;
+    descriptor: Ljava/util/List;
+  public net.minecraft.client.renderer.CubeMap(net.minecraft.resources.ResourceLocation);
+    descriptor: (Lnet/minecraft/resources/ResourceLocation;)V
+
+  public void render(net.minecraft.client.Minecraft, float, float, float);
+    descriptor: (Lnet/minecraft/client/Minecraft;FFF)V
+
+  public void registerTextures(net.minecraft.client.renderer.texture.TextureManager);
+    descriptor: (Lnet/minecraft/client/renderer/texture/TextureManager;)V
+
+  private static net.minecraft.resources.ResourceLocation method_65814(net.minecraft.resources.ResourceLocation, int);
+    descriptor: (Lnet/minecraft/resources/ResourceLocation;I)Lnet/minecraft/resources/ResourceLocation;
+}

@@ -1,0 +1,415 @@
+Compiled from "Gui.java"
+public class net.minecraft.client.gui.Gui {
+  private static final net.minecraft.resources.ResourceLocation CROSSHAIR_SPRITE;
+    descriptor: Lnet/minecraft/resources/ResourceLocation;
+  private static final net.minecraft.resources.ResourceLocation CROSSHAIR_ATTACK_INDICATOR_FULL_SPRITE;
+    descriptor: Lnet/minecraft/resources/ResourceLocation;
+  private static final net.minecraft.resources.ResourceLocation CROSSHAIR_ATTACK_INDICATOR_BACKGROUND_SPRITE;
+    descriptor: Lnet/minecraft/resources/ResourceLocation;
+  private static final net.minecraft.resources.ResourceLocation CROSSHAIR_ATTACK_INDICATOR_PROGRESS_SPRITE;
+    descriptor: Lnet/minecraft/resources/ResourceLocation;
+  private static final net.minecraft.resources.ResourceLocation EFFECT_BACKGROUND_AMBIENT_SPRITE;
+    descriptor: Lnet/minecraft/resources/ResourceLocation;
+  private static final net.minecraft.resources.ResourceLocation EFFECT_BACKGROUND_SPRITE;
+    descriptor: Lnet/minecraft/resources/ResourceLocation;
+  private static final net.minecraft.resources.ResourceLocation HOTBAR_SPRITE;
+    descriptor: Lnet/minecraft/resources/ResourceLocation;
+  private static final net.minecraft.resources.ResourceLocation HOTBAR_SELECTION_SPRITE;
+    descriptor: Lnet/minecraft/resources/ResourceLocation;
+  private static final net.minecraft.resources.ResourceLocation HOTBAR_OFFHAND_LEFT_SPRITE;
+    descriptor: Lnet/minecraft/resources/ResourceLocation;
+  private static final net.minecraft.resources.ResourceLocation HOTBAR_OFFHAND_RIGHT_SPRITE;
+    descriptor: Lnet/minecraft/resources/ResourceLocation;
+  private static final net.minecraft.resources.ResourceLocation HOTBAR_ATTACK_INDICATOR_BACKGROUND_SPRITE;
+    descriptor: Lnet/minecraft/resources/ResourceLocation;
+  private static final net.minecraft.resources.ResourceLocation HOTBAR_ATTACK_INDICATOR_PROGRESS_SPRITE;
+    descriptor: Lnet/minecraft/resources/ResourceLocation;
+  private static final net.minecraft.resources.ResourceLocation JUMP_BAR_BACKGROUND_SPRITE;
+    descriptor: Lnet/minecraft/resources/ResourceLocation;
+  private static final net.minecraft.resources.ResourceLocation JUMP_BAR_COOLDOWN_SPRITE;
+    descriptor: Lnet/minecraft/resources/ResourceLocation;
+  private static final net.minecraft.resources.ResourceLocation JUMP_BAR_PROGRESS_SPRITE;
+    descriptor: Lnet/minecraft/resources/ResourceLocation;
+  private static final net.minecraft.resources.ResourceLocation EXPERIENCE_BAR_BACKGROUND_SPRITE;
+    descriptor: Lnet/minecraft/resources/ResourceLocation;
+  private static final net.minecraft.resources.ResourceLocation EXPERIENCE_BAR_PROGRESS_SPRITE;
+    descriptor: Lnet/minecraft/resources/ResourceLocation;
+  private static final net.minecraft.resources.ResourceLocation ARMOR_EMPTY_SPRITE;
+    descriptor: Lnet/minecraft/resources/ResourceLocation;
+  private static final net.minecraft.resources.ResourceLocation ARMOR_HALF_SPRITE;
+    descriptor: Lnet/minecraft/resources/ResourceLocation;
+  private static final net.minecraft.resources.ResourceLocation ARMOR_FULL_SPRITE;
+    descriptor: Lnet/minecraft/resources/ResourceLocation;
+  private static final net.minecraft.resources.ResourceLocation FOOD_EMPTY_HUNGER_SPRITE;
+    descriptor: Lnet/minecraft/resources/ResourceLocation;
+  private static final net.minecraft.resources.ResourceLocation FOOD_HALF_HUNGER_SPRITE;
+    descriptor: Lnet/minecraft/resources/ResourceLocation;
+  private static final net.minecraft.resources.ResourceLocation FOOD_FULL_HUNGER_SPRITE;
+    descriptor: Lnet/minecraft/resources/ResourceLocation;
+  private static final net.minecraft.resources.ResourceLocation FOOD_EMPTY_SPRITE;
+    descriptor: Lnet/minecraft/resources/ResourceLocation;
+  private static final net.minecraft.resources.ResourceLocation FOOD_HALF_SPRITE;
+    descriptor: Lnet/minecraft/resources/ResourceLocation;
+  private static final net.minecraft.resources.ResourceLocation FOOD_FULL_SPRITE;
+    descriptor: Lnet/minecraft/resources/ResourceLocation;
+  private static final net.minecraft.resources.ResourceLocation AIR_SPRITE;
+    descriptor: Lnet/minecraft/resources/ResourceLocation;
+  private static final net.minecraft.resources.ResourceLocation AIR_POPPING_SPRITE;
+    descriptor: Lnet/minecraft/resources/ResourceLocation;
+  private static final net.minecraft.resources.ResourceLocation AIR_EMPTY_SPRITE;
+    descriptor: Lnet/minecraft/resources/ResourceLocation;
+  private static final net.minecraft.resources.ResourceLocation HEART_VEHICLE_CONTAINER_SPRITE;
+    descriptor: Lnet/minecraft/resources/ResourceLocation;
+  private static final net.minecraft.resources.ResourceLocation HEART_VEHICLE_FULL_SPRITE;
+    descriptor: Lnet/minecraft/resources/ResourceLocation;
+  private static final net.minecraft.resources.ResourceLocation HEART_VEHICLE_HALF_SPRITE;
+    descriptor: Lnet/minecraft/resources/ResourceLocation;
+  private static final net.minecraft.resources.ResourceLocation VIGNETTE_LOCATION;
+    descriptor: Lnet/minecraft/resources/ResourceLocation;
+  public static final net.minecraft.resources.ResourceLocation NAUSEA_LOCATION;
+    descriptor: Lnet/minecraft/resources/ResourceLocation;
+  private static final net.minecraft.resources.ResourceLocation SPYGLASS_SCOPE_LOCATION;
+    descriptor: Lnet/minecraft/resources/ResourceLocation;
+  private static final net.minecraft.resources.ResourceLocation POWDER_SNOW_OUTLINE_LOCATION;
+    descriptor: Lnet/minecraft/resources/ResourceLocation;
+  private static final java.util.Comparator<net.minecraft.world.scores.PlayerScoreEntry> SCORE_DISPLAY_ORDER;
+    descriptor: Ljava/util/Comparator;
+  private static final net.minecraft.network.chat.Component DEMO_EXPIRED_TEXT;
+    descriptor: Lnet/minecraft/network/chat/Component;
+  private static final net.minecraft.network.chat.Component SAVING_TEXT;
+    descriptor: Lnet/minecraft/network/chat/Component;
+  private static final float MIN_CROSSHAIR_ATTACK_SPEED;
+    descriptor: F
+  private static final int NUM_HEARTS_PER_ROW;
+    descriptor: I
+  private static final int LINE_HEIGHT;
+    descriptor: I
+  private static final java.lang.String SPACER;
+    descriptor: Ljava/lang/String;
+  private static final float PORTAL_OVERLAY_ALPHA_MIN;
+    descriptor: F
+  private static final int HEART_SIZE;
+    descriptor: I
+  private static final int HEART_SEPARATION;
+    descriptor: I
+  private static final int NUM_AIR_BUBBLES;
+    descriptor: I
+  private static final int AIR_BUBBLE_SIZE;
+    descriptor: I
+  private static final int AIR_BUBBLE_SEPERATION;
+    descriptor: I
+  private static final int AIR_BUBBLE_POPPING_DURATION;
+    descriptor: I
+  private static final int EMPTY_AIR_BUBBLE_DELAY_DURATION;
+    descriptor: I
+  private static final float AIR_BUBBLE_POP_SOUND_VOLUME_BASE;
+    descriptor: F
+  private static final float AIR_BUBBLE_POP_SOUND_VOLUME_INCREMENT;
+    descriptor: F
+  private static final float AIR_BUBBLE_POP_SOUND_PITCH_BASE;
+    descriptor: F
+  private static final float AIR_BUBBLE_POP_SOUND_PITCH_INCREMENT;
+    descriptor: F
+  private static final int NUM_AIR_BUBBLE_POPPED_BEFORE_SOUND_VOLUME_INCREASE;
+    descriptor: I
+  private static final int NUM_AIR_BUBBLE_POPPED_BEFORE_SOUND_PITCH_INCREASE;
+    descriptor: I
+  private static final float AUTOSAVE_FADE_SPEED_FACTOR;
+    descriptor: F
+  private static final int SAVING_INDICATOR_WIDTH_PADDING_RIGHT;
+    descriptor: I
+  private static final int SAVING_INDICATOR_HEIGHT_PADDING_BOTTOM;
+    descriptor: I
+  private final net.minecraft.util.RandomSource random;
+    descriptor: Lnet/minecraft/util/RandomSource;
+  private final net.minecraft.client.Minecraft minecraft;
+    descriptor: Lnet/minecraft/client/Minecraft;
+  private final net.minecraft.client.gui.components.ChatComponent chat;
+    descriptor: Lnet/minecraft/client/gui/components/ChatComponent;
+  private int tickCount;
+    descriptor: I
+  private net.minecraft.network.chat.Component overlayMessageString;
+    descriptor: Lnet/minecraft/network/chat/Component;
+  private int overlayMessageTime;
+    descriptor: I
+  private boolean animateOverlayMessageColor;
+    descriptor: Z
+  private boolean chatDisabledByPlayerShown;
+    descriptor: Z
+  public float vignetteBrightness;
+    descriptor: F
+  private int toolHighlightTimer;
+    descriptor: I
+  private net.minecraft.world.item.ItemStack lastToolHighlight;
+    descriptor: Lnet/minecraft/world/item/ItemStack;
+  private final net.minecraft.client.gui.components.DebugScreenOverlay debugOverlay;
+    descriptor: Lnet/minecraft/client/gui/components/DebugScreenOverlay;
+  private final net.minecraft.client.gui.components.SubtitleOverlay subtitleOverlay;
+    descriptor: Lnet/minecraft/client/gui/components/SubtitleOverlay;
+  private final net.minecraft.client.gui.components.spectator.SpectatorGui spectatorGui;
+    descriptor: Lnet/minecraft/client/gui/components/spectator/SpectatorGui;
+  private final net.minecraft.client.gui.components.PlayerTabOverlay tabList;
+    descriptor: Lnet/minecraft/client/gui/components/PlayerTabOverlay;
+  private final net.minecraft.client.gui.components.BossHealthOverlay bossOverlay;
+    descriptor: Lnet/minecraft/client/gui/components/BossHealthOverlay;
+  private int titleTime;
+    descriptor: I
+  private net.minecraft.network.chat.Component title;
+    descriptor: Lnet/minecraft/network/chat/Component;
+  private net.minecraft.network.chat.Component subtitle;
+    descriptor: Lnet/minecraft/network/chat/Component;
+  private int titleFadeInTime;
+    descriptor: I
+  private int titleStayTime;
+    descriptor: I
+  private int titleFadeOutTime;
+    descriptor: I
+  private int lastHealth;
+    descriptor: I
+  private int displayHealth;
+    descriptor: I
+  private long lastHealthTime;
+    descriptor: J
+  private long healthBlinkTime;
+    descriptor: J
+  private int lastBubblePopSoundPlayed;
+    descriptor: I
+  private float autosaveIndicatorValue;
+    descriptor: F
+  private float lastAutosaveIndicatorValue;
+    descriptor: F
+  private final net.minecraft.client.gui.LayeredDraw layers;
+    descriptor: Lnet/minecraft/client/gui/LayeredDraw;
+  private float scopeScale;
+    descriptor: F
+  public net.minecraft.client.gui.Gui(net.minecraft.client.Minecraft);
+    descriptor: (Lnet/minecraft/client/Minecraft;)V
+
+  public void resetTitleTimes();
+    descriptor: ()V
+
+  public void render(net.minecraft.client.gui.GuiGraphics, net.minecraft.client.DeltaTracker);
+    descriptor: (Lnet/minecraft/client/gui/GuiGraphics;Lnet/minecraft/client/DeltaTracker;)V
+
+  private void renderCameraOverlays(net.minecraft.client.gui.GuiGraphics, net.minecraft.client.DeltaTracker);
+    descriptor: (Lnet/minecraft/client/gui/GuiGraphics;Lnet/minecraft/client/DeltaTracker;)V
+
+  private void renderSleepOverlay(net.minecraft.client.gui.GuiGraphics, net.minecraft.client.DeltaTracker);
+    descriptor: (Lnet/minecraft/client/gui/GuiGraphics;Lnet/minecraft/client/DeltaTracker;)V
+
+  private void renderOverlayMessage(net.minecraft.client.gui.GuiGraphics, net.minecraft.client.DeltaTracker);
+    descriptor: (Lnet/minecraft/client/gui/GuiGraphics;Lnet/minecraft/client/DeltaTracker;)V
+
+  private void renderTitle(net.minecraft.client.gui.GuiGraphics, net.minecraft.client.DeltaTracker);
+    descriptor: (Lnet/minecraft/client/gui/GuiGraphics;Lnet/minecraft/client/DeltaTracker;)V
+
+  private void renderChat(net.minecraft.client.gui.GuiGraphics, net.minecraft.client.DeltaTracker);
+    descriptor: (Lnet/minecraft/client/gui/GuiGraphics;Lnet/minecraft/client/DeltaTracker;)V
+
+  private void renderScoreboardSidebar(net.minecraft.client.gui.GuiGraphics, net.minecraft.client.DeltaTracker);
+    descriptor: (Lnet/minecraft/client/gui/GuiGraphics;Lnet/minecraft/client/DeltaTracker;)V
+
+  private void renderTabList(net.minecraft.client.gui.GuiGraphics, net.minecraft.client.DeltaTracker);
+    descriptor: (Lnet/minecraft/client/gui/GuiGraphics;Lnet/minecraft/client/DeltaTracker;)V
+
+  private void renderCrosshair(net.minecraft.client.gui.GuiGraphics, net.minecraft.client.DeltaTracker);
+    descriptor: (Lnet/minecraft/client/gui/GuiGraphics;Lnet/minecraft/client/DeltaTracker;)V
+
+  private boolean canRenderCrosshairForSpectator(net.minecraft.world.phys.HitResult);
+    descriptor: (Lnet/minecraft/world/phys/HitResult;)Z
+
+  private void renderEffects(net.minecraft.client.gui.GuiGraphics, net.minecraft.client.DeltaTracker);
+    descriptor: (Lnet/minecraft/client/gui/GuiGraphics;Lnet/minecraft/client/DeltaTracker;)V
+
+  private void renderHotbarAndDecorations(net.minecraft.client.gui.GuiGraphics, net.minecraft.client.DeltaTracker);
+    descriptor: (Lnet/minecraft/client/gui/GuiGraphics;Lnet/minecraft/client/DeltaTracker;)V
+
+  private void renderItemHotbar(net.minecraft.client.gui.GuiGraphics, net.minecraft.client.DeltaTracker);
+    descriptor: (Lnet/minecraft/client/gui/GuiGraphics;Lnet/minecraft/client/DeltaTracker;)V
+
+  private void renderJumpMeter(net.minecraft.world.entity.PlayerRideableJumping, net.minecraft.client.gui.GuiGraphics, int);
+    descriptor: (Lnet/minecraft/world/entity/PlayerRideableJumping;Lnet/minecraft/client/gui/GuiGraphics;I)V
+
+  private void renderExperienceBar(net.minecraft.client.gui.GuiGraphics, int);
+    descriptor: (Lnet/minecraft/client/gui/GuiGraphics;I)V
+
+  private void renderExperienceLevel(net.minecraft.client.gui.GuiGraphics, net.minecraft.client.DeltaTracker);
+    descriptor: (Lnet/minecraft/client/gui/GuiGraphics;Lnet/minecraft/client/DeltaTracker;)V
+
+  private boolean isExperienceBarVisible();
+    descriptor: ()Z
+
+  private void renderSelectedItemName(net.minecraft.client.gui.GuiGraphics);
+    descriptor: (Lnet/minecraft/client/gui/GuiGraphics;)V
+
+  private void renderDemoOverlay(net.minecraft.client.gui.GuiGraphics, net.minecraft.client.DeltaTracker);
+    descriptor: (Lnet/minecraft/client/gui/GuiGraphics;Lnet/minecraft/client/DeltaTracker;)V
+
+  private void displayScoreboardSidebar(net.minecraft.client.gui.GuiGraphics, net.minecraft.world.scores.Objective);
+    descriptor: (Lnet/minecraft/client/gui/GuiGraphics;Lnet/minecraft/world/scores/Objective;)V
+
+  private net.minecraft.world.entity.player.Player getCameraPlayer();
+    descriptor: ()Lnet/minecraft/world/entity/player/Player;
+
+  private net.minecraft.world.entity.LivingEntity getPlayerVehicleWithHealth();
+    descriptor: ()Lnet/minecraft/world/entity/LivingEntity;
+
+  private int getVehicleMaxHearts(net.minecraft.world.entity.LivingEntity);
+    descriptor: (Lnet/minecraft/world/entity/LivingEntity;)I
+
+  private int getVisibleVehicleHeartRows(int);
+    descriptor: (I)I
+
+  private void renderPlayerHealth(net.minecraft.client.gui.GuiGraphics);
+    descriptor: (Lnet/minecraft/client/gui/GuiGraphics;)V
+
+  private static void renderArmor(net.minecraft.client.gui.GuiGraphics, net.minecraft.world.entity.player.Player, int, int, int, int);
+    descriptor: (Lnet/minecraft/client/gui/GuiGraphics;Lnet/minecraft/world/entity/player/Player;IIII)V
+
+  private void renderHearts(net.minecraft.client.gui.GuiGraphics, net.minecraft.world.entity.player.Player, int, int, int, int, float, int, int, int, boolean);
+    descriptor: (Lnet/minecraft/client/gui/GuiGraphics;Lnet/minecraft/world/entity/player/Player;IIIIFIIIZ)V
+
+  private void renderHeart(net.minecraft.client.gui.GuiGraphics, net.minecraft.client.gui.Gui$HeartType, int, int, boolean, boolean, boolean);
+    descriptor: (Lnet/minecraft/client/gui/GuiGraphics;Lnet/minecraft/client/gui/Gui$HeartType;IIZZZ)V
+
+  private void renderAirBubbles(net.minecraft.client.gui.GuiGraphics, net.minecraft.world.entity.player.Player, int, int, int);
+    descriptor: (Lnet/minecraft/client/gui/GuiGraphics;Lnet/minecraft/world/entity/player/Player;III)V
+
+  private int getAirBubbleYLine(int, int);
+    descriptor: (II)I
+
+  private static int getCurrentAirSupplyBubble(int, int, int);
+    descriptor: (III)I
+
+  private static int getEmptyBubbleDelayDuration(int, boolean);
+    descriptor: (IZ)I
+
+  private void playAirBubblePoppedSound(int, net.minecraft.world.entity.player.Player, int);
+    descriptor: (ILnet/minecraft/world/entity/player/Player;I)V
+
+  private void renderFood(net.minecraft.client.gui.GuiGraphics, net.minecraft.world.entity.player.Player, int, int);
+    descriptor: (Lnet/minecraft/client/gui/GuiGraphics;Lnet/minecraft/world/entity/player/Player;II)V
+
+  private void renderVehicleHealth(net.minecraft.client.gui.GuiGraphics);
+    descriptor: (Lnet/minecraft/client/gui/GuiGraphics;)V
+
+  private void renderTextureOverlay(net.minecraft.client.gui.GuiGraphics, net.minecraft.resources.ResourceLocation, float);
+    descriptor: (Lnet/minecraft/client/gui/GuiGraphics;Lnet/minecraft/resources/ResourceLocation;F)V
+
+  private void renderSpyglassOverlay(net.minecraft.client.gui.GuiGraphics, float);
+    descriptor: (Lnet/minecraft/client/gui/GuiGraphics;F)V
+
+  private void updateVignetteBrightness(net.minecraft.world.entity.Entity);
+    descriptor: (Lnet/minecraft/world/entity/Entity;)V
+
+  private void renderVignette(net.minecraft.client.gui.GuiGraphics, net.minecraft.world.entity.Entity);
+    descriptor: (Lnet/minecraft/client/gui/GuiGraphics;Lnet/minecraft/world/entity/Entity;)V
+
+  private void renderPortalOverlay(net.minecraft.client.gui.GuiGraphics, float);
+    descriptor: (Lnet/minecraft/client/gui/GuiGraphics;F)V
+
+  private void renderConfusionOverlay(net.minecraft.client.gui.GuiGraphics, float);
+    descriptor: (Lnet/minecraft/client/gui/GuiGraphics;F)V
+
+  private void renderSlot(net.minecraft.client.gui.GuiGraphics, int, int, net.minecraft.client.DeltaTracker, net.minecraft.world.entity.player.Player, net.minecraft.world.item.ItemStack, int);
+    descriptor: (Lnet/minecraft/client/gui/GuiGraphics;IILnet/minecraft/client/DeltaTracker;Lnet/minecraft/world/entity/player/Player;Lnet/minecraft/world/item/ItemStack;I)V
+
+  public void tick(boolean);
+    descriptor: (Z)V
+
+  private void tick();
+    descriptor: ()V
+
+  private void tickAutosaveIndicator();
+    descriptor: ()V
+
+  public void setNowPlaying(net.minecraft.network.chat.Component);
+    descriptor: (Lnet/minecraft/network/chat/Component;)V
+
+  public void setOverlayMessage(net.minecraft.network.chat.Component, boolean);
+    descriptor: (Lnet/minecraft/network/chat/Component;Z)V
+
+  public void setChatDisabledByPlayerShown(boolean);
+    descriptor: (Z)V
+
+  public boolean isShowingChatDisabledByPlayer();
+    descriptor: ()Z
+
+  public void setTimes(int, int, int);
+    descriptor: (III)V
+
+  public void setSubtitle(net.minecraft.network.chat.Component);
+    descriptor: (Lnet/minecraft/network/chat/Component;)V
+
+  public void setTitle(net.minecraft.network.chat.Component);
+    descriptor: (Lnet/minecraft/network/chat/Component;)V
+
+  public void clearTitles();
+    descriptor: ()V
+
+  public net.minecraft.client.gui.components.ChatComponent getChat();
+    descriptor: ()Lnet/minecraft/client/gui/components/ChatComponent;
+
+  public int getGuiTicks();
+    descriptor: ()I
+
+  public net.minecraft.client.gui.Font getFont();
+    descriptor: ()Lnet/minecraft/client/gui/Font;
+
+  public net.minecraft.client.gui.components.spectator.SpectatorGui getSpectatorGui();
+    descriptor: ()Lnet/minecraft/client/gui/components/spectator/SpectatorGui;
+
+  public net.minecraft.client.gui.components.PlayerTabOverlay getTabList();
+    descriptor: ()Lnet/minecraft/client/gui/components/PlayerTabOverlay;
+
+  public void onDisconnected();
+    descriptor: ()V
+
+  public net.minecraft.client.gui.components.BossHealthOverlay getBossOverlay();
+    descriptor: ()Lnet/minecraft/client/gui/components/BossHealthOverlay;
+
+  public net.minecraft.client.gui.components.DebugScreenOverlay getDebugOverlay();
+    descriptor: ()Lnet/minecraft/client/gui/components/DebugScreenOverlay;
+
+  public void clearCache();
+    descriptor: ()V
+
+  public void renderSavingIndicator(net.minecraft.client.gui.GuiGraphics, net.minecraft.client.DeltaTracker);
+    descriptor: (Lnet/minecraft/client/gui/GuiGraphics;Lnet/minecraft/client/DeltaTracker;)V
+
+  private static net.minecraft.client.renderer.RenderType method_61979(net.minecraft.resources.ResourceLocation);
+    descriptor: (Lnet/minecraft/resources/ResourceLocation;)Lnet/minecraft/client/renderer/RenderType;
+
+  private static net.minecraft.client.gui.Gui$1DisplayEntry[] method_55441(int);
+    descriptor: (I)[Lnet/minecraft/client/gui/Gui$1DisplayEntry;
+
+  private net.minecraft.client.gui.Gui$1DisplayEntry method_55439(net.minecraft.world.scores.Scoreboard, net.minecraft.network.chat.numbers.NumberFormat, net.minecraft.world.scores.PlayerScoreEntry);
+    descriptor: (Lnet/minecraft/world/scores/Scoreboard;Lnet/minecraft/network/chat/numbers/NumberFormat;Lnet/minecraft/world/scores/PlayerScoreEntry;)Lnet/minecraft/client/gui/Gui$1DisplayEntry;
+
+  private static boolean method_1751(net.minecraft.world.scores.PlayerScoreEntry);
+    descriptor: (Lnet/minecraft/world/scores/PlayerScoreEntry;)Z
+
+  private static void method_18620(float, net.minecraft.client.gui.GuiGraphics, net.minecraft.client.renderer.texture.TextureAtlasSprite, int, int);
+    descriptor: (FLnet/minecraft/client/gui/GuiGraphics;Lnet/minecraft/client/renderer/texture/TextureAtlasSprite;II)V
+
+  private static java.lang.String method_65023(java.lang.String);
+    descriptor: (Ljava/lang/String;)Ljava/lang/String;
+
+  private static boolean method_55796(net.minecraft.client.Minecraft);
+    descriptor: (Lnet/minecraft/client/Minecraft;)Z
+
+  private static boolean method_55797(net.minecraft.client.Minecraft);
+    descriptor: (Lnet/minecraft/client/Minecraft;)Z
+
+  private void method_55806(net.minecraft.client.gui.GuiGraphics, net.minecraft.client.DeltaTracker);
+    descriptor: (Lnet/minecraft/client/gui/GuiGraphics;Lnet/minecraft/client/DeltaTracker;)V
+
+  private void method_55807(net.minecraft.client.gui.GuiGraphics, net.minecraft.client.DeltaTracker);
+    descriptor: (Lnet/minecraft/client/gui/GuiGraphics;Lnet/minecraft/client/DeltaTracker;)V
+
+  private void method_55808(net.minecraft.client.gui.GuiGraphics, net.minecraft.client.DeltaTracker);
+    descriptor: (Lnet/minecraft/client/gui/GuiGraphics;Lnet/minecraft/client/DeltaTracker;)V
+
+  static {};
+    descriptor: ()V
+}

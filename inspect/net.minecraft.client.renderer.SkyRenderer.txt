@@ -1,0 +1,66 @@
+Compiled from "SkyRenderer.java"
+public class net.minecraft.client.renderer.SkyRenderer implements java.lang.AutoCloseable {
+  private static final net.minecraft.resources.ResourceLocation SUN_LOCATION;
+    descriptor: Lnet/minecraft/resources/ResourceLocation;
+  private static final net.minecraft.resources.ResourceLocation MOON_LOCATION;
+    descriptor: Lnet/minecraft/resources/ResourceLocation;
+  public static final net.minecraft.resources.ResourceLocation END_SKY_LOCATION;
+    descriptor: Lnet/minecraft/resources/ResourceLocation;
+  private static final float SKY_DISC_RADIUS;
+    descriptor: F
+  private final com.mojang.blaze3d.vertex.VertexBuffer starBuffer;
+    descriptor: Lcom/mojang/blaze3d/vertex/VertexBuffer;
+  private final com.mojang.blaze3d.vertex.VertexBuffer topSkyBuffer;
+    descriptor: Lcom/mojang/blaze3d/vertex/VertexBuffer;
+  private final com.mojang.blaze3d.vertex.VertexBuffer bottomSkyBuffer;
+    descriptor: Lcom/mojang/blaze3d/vertex/VertexBuffer;
+  private final com.mojang.blaze3d.vertex.VertexBuffer endSkyBuffer;
+    descriptor: Lcom/mojang/blaze3d/vertex/VertexBuffer;
+  public net.minecraft.client.renderer.SkyRenderer();
+    descriptor: ()V
+
+  private void buildStars(com.mojang.blaze3d.vertex.VertexConsumer);
+    descriptor: (Lcom/mojang/blaze3d/vertex/VertexConsumer;)V
+
+  private void buildSkyDisc(com.mojang.blaze3d.vertex.VertexConsumer, float);
+    descriptor: (Lcom/mojang/blaze3d/vertex/VertexConsumer;F)V
+
+  public void renderSkyDisc(float, float, float);
+    descriptor: (FFF)V
+
+  public void renderDarkDisc(com.mojang.blaze3d.vertex.PoseStack);
+    descriptor: (Lcom/mojang/blaze3d/vertex/PoseStack;)V
+
+  public void renderSunMoonAndStars(com.mojang.blaze3d.vertex.PoseStack, net.minecraft.client.renderer.MultiBufferSource$BufferSource, float, int, float, float, net.minecraft.client.renderer.FogParameters);
+    descriptor: (Lcom/mojang/blaze3d/vertex/PoseStack;Lnet/minecraft/client/renderer/MultiBufferSource$BufferSource;FIFFLnet/minecraft/client/renderer/FogParameters;)V
+
+  private void renderSun(float, net.minecraft.client.renderer.MultiBufferSource, com.mojang.blaze3d.vertex.PoseStack);
+    descriptor: (FLnet/minecraft/client/renderer/MultiBufferSource;Lcom/mojang/blaze3d/vertex/PoseStack;)V
+
+  private void renderMoon(int, float, net.minecraft.client.renderer.MultiBufferSource, com.mojang.blaze3d.vertex.PoseStack);
+    descriptor: (IFLnet/minecraft/client/renderer/MultiBufferSource;Lcom/mojang/blaze3d/vertex/PoseStack;)V
+
+  private void renderStars(net.minecraft.client.renderer.FogParameters, float, com.mojang.blaze3d.vertex.PoseStack);
+    descriptor: (Lnet/minecraft/client/renderer/FogParameters;FLcom/mojang/blaze3d/vertex/PoseStack;)V
+
+  public void renderSunriseAndSunset(com.mojang.blaze3d.vertex.PoseStack, net.minecraft.client.renderer.MultiBufferSource$BufferSource, float, int);
+    descriptor: (Lcom/mojang/blaze3d/vertex/PoseStack;Lnet/minecraft/client/renderer/MultiBufferSource$BufferSource;FI)V
+
+  private void buildEndSky(com.mojang.blaze3d.vertex.VertexConsumer);
+    descriptor: (Lcom/mojang/blaze3d/vertex/VertexConsumer;)V
+
+  public void renderEndSky();
+    descriptor: ()V
+
+  public void close();
+    descriptor: ()V
+
+  private void method_65235(com.mojang.blaze3d.vertex.VertexConsumer);
+    descriptor: (Lcom/mojang/blaze3d/vertex/VertexConsumer;)V
+
+  private void method_65236(com.mojang.blaze3d.vertex.VertexConsumer);
+    descriptor: (Lcom/mojang/blaze3d/vertex/VertexConsumer;)V
+
+  static {};
+    descriptor: ()V
+}

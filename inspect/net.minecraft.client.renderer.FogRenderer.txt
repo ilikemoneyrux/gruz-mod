@@ -1,0 +1,40 @@
+Compiled from "FogRenderer.java"
+public class net.minecraft.client.renderer.FogRenderer {
+  private static final int WATER_FOG_DISTANCE;
+    descriptor: I
+  private static final java.util.List<net.minecraft.client.renderer.FogRenderer$MobEffectFogFunction> MOB_EFFECT_FOG;
+    descriptor: Ljava/util/List;
+  public static final float BIOME_FOG_TRANSITION_TIME;
+    descriptor: F
+  private static int targetBiomeFog;
+    descriptor: I
+  private static int previousBiomeFog;
+    descriptor: I
+  private static long biomeChangedTime;
+    descriptor: J
+  private static boolean fogEnabled;
+    descriptor: Z
+  public net.minecraft.client.renderer.FogRenderer();
+    descriptor: ()V
+
+  public static org.joml.Vector4f computeFogColor(net.minecraft.client.Camera, float, net.minecraft.client.multiplayer.ClientLevel, int, float);
+    descriptor: (Lnet/minecraft/client/Camera;FLnet/minecraft/client/multiplayer/ClientLevel;IF)Lorg/joml/Vector4f;
+
+  public static boolean toggleFog();
+    descriptor: ()Z
+
+  private static net.minecraft.client.renderer.FogRenderer$MobEffectFogFunction getPriorityFogFunction(net.minecraft.world.entity.Entity, float);
+    descriptor: (Lnet/minecraft/world/entity/Entity;F)Lnet/minecraft/client/renderer/FogRenderer$MobEffectFogFunction;
+
+  public static net.minecraft.client.renderer.FogParameters setupFog(net.minecraft.client.Camera, net.minecraft.client.renderer.FogRenderer$FogMode, org.joml.Vector4f, float, boolean, float);
+    descriptor: (Lnet/minecraft/client/Camera;Lnet/minecraft/client/renderer/FogRenderer$FogMode;Lorg/joml/Vector4f;FZF)Lnet/minecraft/client/renderer/FogParameters;
+
+  private static boolean method_42589(net.minecraft.world.entity.LivingEntity, float, net.minecraft.client.renderer.FogRenderer$MobEffectFogFunction);
+    descriptor: (Lnet/minecraft/world/entity/LivingEntity;FLnet/minecraft/client/renderer/FogRenderer$MobEffectFogFunction;)Z
+
+  private static net.minecraft.world.phys.Vec3 method_62186(net.minecraft.client.multiplayer.ClientLevel, net.minecraft.world.level.biome.BiomeManager, float, int, int, int);
+    descriptor: (Lnet/minecraft/client/multiplayer/ClientLevel;Lnet/minecraft/world/level/biome/BiomeManager;FIII)Lnet/minecraft/world/phys/Vec3;
+
+  static {};
+    descriptor: ()V
+}
