@@ -1,0 +1,23 @@
+Compiled from "EntityModel.java"
+public abstract class net.minecraft.client.model.EntityModel<T extends net.minecraft.world.entity.Entity> extends net.minecraft.client.model.Model {
+  public float attackTime;
+    descriptor: F
+  public boolean riding;
+    descriptor: Z
+  public boolean young;
+    descriptor: Z
+  protected net.minecraft.client.model.EntityModel();
+    descriptor: ()V
+
+  protected net.minecraft.client.model.EntityModel(java.util.function.Function<net.minecraft.resources.ResourceLocation, net.minecraft.client.renderer.RenderType>);
+    descriptor: (Ljava/util/function/Function;)V
+
+  public abstract void setupAnim(T, float, float, float, float, float);
+    descriptor: (Lnet/minecraft/world/entity/Entity;FFFFF)V
+
+  public void prepareMobModel(T, float, float, float);
+    descriptor: (Lnet/minecraft/world/entity/Entity;FFF)V
+
+  public void copyPropertiesTo(net.minecraft.client.model.EntityModel<T>);
+    descriptor: (Lnet/minecraft/client/model/EntityModel;)V
+}
