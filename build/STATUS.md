@@ -1,4 +1,4 @@
-# Build 54 (c7dac5ff)
+# Build 55 (c4460c40)
 
 - 1.20.1: build OK (errors: 0), w grze: OK
 - 1.20.4: build OK (errors: 0), w grze: OK
