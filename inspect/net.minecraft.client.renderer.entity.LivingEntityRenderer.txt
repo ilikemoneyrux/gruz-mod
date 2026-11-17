@@ -1,0 +1,70 @@
+Compiled from "LivingEntityRenderer.java"
+public abstract class net.minecraft.client.renderer.entity.LivingEntityRenderer<T extends net.minecraft.world.entity.LivingEntity, M extends net.minecraft.client.model.EntityModel<T>> extends net.minecraft.client.renderer.entity.EntityRenderer<T> implements net.minecraft.client.renderer.entity.RenderLayerParent<T, M> {
+  private static final org.slf4j.Logger LOGGER;
+    descriptor: Lorg/slf4j/Logger;
+  private static final float EYE_BED_OFFSET;
+    descriptor: F
+  protected M model;
+    descriptor: Lnet/minecraft/client/model/EntityModel;
+  protected final java.util.List<net.minecraft.client.renderer.entity.layers.RenderLayer<T, M>> layers;
+    descriptor: Ljava/util/List;
+  public net.minecraft.client.renderer.entity.LivingEntityRenderer(net.minecraft.client.renderer.entity.EntityRendererProvider$Context, M, float);
+    descriptor: (Lnet/minecraft/client/renderer/entity/EntityRendererProvider$Context;Lnet/minecraft/client/model/EntityModel;F)V
+
+  protected final boolean addLayer(net.minecraft.client.renderer.entity.layers.RenderLayer<T, M>);
+    descriptor: (Lnet/minecraft/client/renderer/entity/layers/RenderLayer;)Z
+
+  public M getModel();
+    descriptor: ()Lnet/minecraft/client/model/EntityModel;
+
+  public void render(T, float, float, com.mojang.blaze3d.vertex.PoseStack, net.minecraft.client.renderer.MultiBufferSource, int);
+    descriptor: (Lnet/minecraft/world/entity/LivingEntity;FFLcom/mojang/blaze3d/vertex/PoseStack;Lnet/minecraft/client/renderer/MultiBufferSource;I)V
+
+  protected net.minecraft.client.renderer.RenderType getRenderType(T, boolean, boolean, boolean);
+    descriptor: (Lnet/minecraft/world/entity/LivingEntity;ZZZ)Lnet/minecraft/client/renderer/RenderType;
+
+  public static int getOverlayCoords(net.minecraft.world.entity.LivingEntity, float);
+    descriptor: (Lnet/minecraft/world/entity/LivingEntity;F)I
+
+  protected boolean isBodyVisible(T);
+    descriptor: (Lnet/minecraft/world/entity/LivingEntity;)Z
+
+  private static float sleepDirectionToRotation(net.minecraft.core.Direction);
+    descriptor: (Lnet/minecraft/core/Direction;)F
+
+  protected boolean isShaking(T);
+    descriptor: (Lnet/minecraft/world/entity/LivingEntity;)Z
+
+  protected void setupRotations(T, com.mojang.blaze3d.vertex.PoseStack, float, float, float);
+    descriptor: (Lnet/minecraft/world/entity/LivingEntity;Lcom/mojang/blaze3d/vertex/PoseStack;FFF)V
+
+  protected float getAttackAnim(T, float);
+    descriptor: (Lnet/minecraft/world/entity/LivingEntity;F)F
+
+  protected float getBob(T, float);
+    descriptor: (Lnet/minecraft/world/entity/LivingEntity;F)F
+
+  protected float getFlipDegrees(T);
+    descriptor: (Lnet/minecraft/world/entity/LivingEntity;)F
+
+  protected float getWhiteOverlayProgress(T, float);
+    descriptor: (Lnet/minecraft/world/entity/LivingEntity;F)F
+
+  protected void scale(T, com.mojang.blaze3d.vertex.PoseStack, float);
+    descriptor: (Lnet/minecraft/world/entity/LivingEntity;Lcom/mojang/blaze3d/vertex/PoseStack;F)V
+
+  protected boolean shouldShowName(T);
+    descriptor: (Lnet/minecraft/world/entity/LivingEntity;)Z
+
+  public static boolean isEntityUpsideDown(net.minecraft.world.entity.LivingEntity);
+    descriptor: (Lnet/minecraft/world/entity/LivingEntity;)Z
+
+  protected boolean shouldShowName(net.minecraft.world.entity.Entity);
+    descriptor: (Lnet/minecraft/world/entity/Entity;)Z
+
+  public void render(net.minecraft.world.entity.Entity, float, float, com.mojang.blaze3d.vertex.PoseStack, net.minecraft.client.renderer.MultiBufferSource, int);
+    descriptor: (Lnet/minecraft/world/entity/Entity;FFLcom/mojang/blaze3d/vertex/PoseStack;Lnet/minecraft/client/renderer/MultiBufferSource;I)V
+
+  static {};
+    descriptor: ()V
+}

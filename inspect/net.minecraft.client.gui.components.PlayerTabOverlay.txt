@@ -1,0 +1,93 @@
+Compiled from "PlayerTabOverlay.java"
+public class net.minecraft.client.gui.components.PlayerTabOverlay {
+  private static final java.util.Comparator<net.minecraft.client.multiplayer.PlayerInfo> PLAYER_COMPARATOR;
+    descriptor: Ljava/util/Comparator;
+  private static final net.minecraft.resources.ResourceLocation GUI_ICONS_LOCATION;
+    descriptor: Lnet/minecraft/resources/ResourceLocation;
+  public static final int MAX_ROWS_PER_COL;
+    descriptor: I
+  public static final int HEART_EMPTY_CONTAINER;
+    descriptor: I
+  public static final int HEART_EMPTY_CONTAINER_BLINKING;
+    descriptor: I
+  public static final int HEART_FULL;
+    descriptor: I
+  public static final int HEART_HALF_FULL;
+    descriptor: I
+  public static final int HEART_GOLDEN_FULL;
+    descriptor: I
+  public static final int HEART_GOLDEN_HALF_FULL;
+    descriptor: I
+  public static final int HEART_GHOST_FULL;
+    descriptor: I
+  public static final int HEART_GHOST_HALF_FULL;
+    descriptor: I
+  private final net.minecraft.client.Minecraft minecraft;
+    descriptor: Lnet/minecraft/client/Minecraft;
+  private final net.minecraft.client.gui.Gui gui;
+    descriptor: Lnet/minecraft/client/gui/Gui;
+  private net.minecraft.network.chat.Component footer;
+    descriptor: Lnet/minecraft/network/chat/Component;
+  private net.minecraft.network.chat.Component header;
+    descriptor: Lnet/minecraft/network/chat/Component;
+  private boolean visible;
+    descriptor: Z
+  private final java.util.Map<java.util.UUID, net.minecraft.client.gui.components.PlayerTabOverlay$HealthState> healthStates;
+    descriptor: Ljava/util/Map;
+  public net.minecraft.client.gui.components.PlayerTabOverlay(net.minecraft.client.Minecraft, net.minecraft.client.gui.Gui);
+    descriptor: (Lnet/minecraft/client/Minecraft;Lnet/minecraft/client/gui/Gui;)V
+
+  public net.minecraft.network.chat.Component getNameForDisplay(net.minecraft.client.multiplayer.PlayerInfo);
+    descriptor: (Lnet/minecraft/client/multiplayer/PlayerInfo;)Lnet/minecraft/network/chat/Component;
+
+  private net.minecraft.network.chat.Component decorateName(net.minecraft.client.multiplayer.PlayerInfo, net.minecraft.network.chat.MutableComponent);
+    descriptor: (Lnet/minecraft/client/multiplayer/PlayerInfo;Lnet/minecraft/network/chat/MutableComponent;)Lnet/minecraft/network/chat/Component;
+
+  public void setVisible(boolean);
+    descriptor: (Z)V
+
+  private java.util.List<net.minecraft.client.multiplayer.PlayerInfo> getPlayerInfos();
+    descriptor: ()Ljava/util/List;
+
+  public void render(net.minecraft.client.gui.GuiGraphics, int, net.minecraft.world.scores.Scoreboard, net.minecraft.world.scores.Objective);
+    descriptor: (Lnet/minecraft/client/gui/GuiGraphics;ILnet/minecraft/world/scores/Scoreboard;Lnet/minecraft/world/scores/Objective;)V
+
+  protected void renderPingIcon(net.minecraft.client.gui.GuiGraphics, int, int, int, net.minecraft.client.multiplayer.PlayerInfo);
+    descriptor: (Lnet/minecraft/client/gui/GuiGraphics;IIILnet/minecraft/client/multiplayer/PlayerInfo;)V
+
+  private void renderTablistScore(net.minecraft.world.scores.Objective, int, java.lang.String, int, int, java.util.UUID, net.minecraft.client.gui.GuiGraphics);
+    descriptor: (Lnet/minecraft/world/scores/Objective;ILjava/lang/String;IILjava/util/UUID;Lnet/minecraft/client/gui/GuiGraphics;)V
+
+  private void renderTablistHearts(int, int, int, java.util.UUID, net.minecraft.client.gui.GuiGraphics, int);
+    descriptor: (IIILjava/util/UUID;Lnet/minecraft/client/gui/GuiGraphics;I)V
+
+  public void setFooter(net.minecraft.network.chat.Component);
+    descriptor: (Lnet/minecraft/network/chat/Component;)V
+
+  public void setHeader(net.minecraft.network.chat.Component);
+    descriptor: (Lnet/minecraft/network/chat/Component;)V
+
+  public void reset();
+    descriptor: ()V
+
+  private static net.minecraft.client.gui.components.PlayerTabOverlay$HealthState method_45591(int, java.util.UUID);
+    descriptor: (ILjava/util/UUID;)Lnet/minecraft/client/gui/components/PlayerTabOverlay$HealthState;
+
+  private static boolean method_45593(java.util.Set, java.util.UUID);
+    descriptor: (Ljava/util/Set;Ljava/util/UUID;)Z
+
+  private static java.util.UUID method_45594(net.minecraft.client.multiplayer.PlayerInfo);
+    descriptor: (Lnet/minecraft/client/multiplayer/PlayerInfo;)Ljava/util/UUID;
+
+  private static java.lang.String method_46511(net.minecraft.client.multiplayer.PlayerInfo);
+    descriptor: (Lnet/minecraft/client/multiplayer/PlayerInfo;)Ljava/lang/String;
+
+  private static java.lang.String method_45595(net.minecraft.client.multiplayer.PlayerInfo);
+    descriptor: (Lnet/minecraft/client/multiplayer/PlayerInfo;)Ljava/lang/String;
+
+  private static int method_45592(net.minecraft.client.multiplayer.PlayerInfo);
+    descriptor: (Lnet/minecraft/client/multiplayer/PlayerInfo;)I
+
+  static {};
+    descriptor: ()V
+}

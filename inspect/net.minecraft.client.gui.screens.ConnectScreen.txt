@@ -1,0 +1,56 @@
+Compiled from "ConnectScreen.java"
+public class net.minecraft.client.gui.screens.ConnectScreen extends net.minecraft.client.gui.screens.Screen {
+  private static final java.util.concurrent.atomic.AtomicInteger UNIQUE_THREAD_ID;
+    descriptor: Ljava/util/concurrent/atomic/AtomicInteger;
+  static final org.slf4j.Logger LOGGER;
+    descriptor: Lorg/slf4j/Logger;
+  private static final long NARRATION_DELAY_MS;
+    descriptor: J
+  static final net.minecraft.network.chat.Component ABORT_CONNECTION;
+    descriptor: Lnet/minecraft/network/chat/Component;
+  public static final net.minecraft.network.chat.Component UNKNOWN_HOST_MESSAGE;
+    descriptor: Lnet/minecraft/network/chat/Component;
+  volatile net.minecraft.network.Connection connection;
+    descriptor: Lnet/minecraft/network/Connection;
+  io.netty.channel.ChannelFuture channelFuture;
+    descriptor: Lio/netty/channel/ChannelFuture;
+  volatile boolean aborted;
+    descriptor: Z
+  final net.minecraft.client.gui.screens.Screen parent;
+    descriptor: Lnet/minecraft/client/gui/screens/Screen;
+  private net.minecraft.network.chat.Component status;
+    descriptor: Lnet/minecraft/network/chat/Component;
+  private long lastNarration;
+    descriptor: J
+  final net.minecraft.network.chat.Component connectFailedTitle;
+    descriptor: Lnet/minecraft/network/chat/Component;
+  private net.minecraft.client.gui.screens.ConnectScreen(net.minecraft.client.gui.screens.Screen, net.minecraft.network.chat.Component);
+    descriptor: (Lnet/minecraft/client/gui/screens/Screen;Lnet/minecraft/network/chat/Component;)V
+
+  public static void startConnecting(net.minecraft.client.gui.screens.Screen, net.minecraft.client.Minecraft, net.minecraft.client.multiplayer.resolver.ServerAddress, net.minecraft.client.multiplayer.ServerData, boolean);
+    descriptor: (Lnet/minecraft/client/gui/screens/Screen;Lnet/minecraft/client/Minecraft;Lnet/minecraft/client/multiplayer/resolver/ServerAddress;Lnet/minecraft/client/multiplayer/ServerData;Z)V
+
+  private void connect(net.minecraft.client.Minecraft, net.minecraft.client.multiplayer.resolver.ServerAddress, net.minecraft.client.multiplayer.ServerData);
+    descriptor: (Lnet/minecraft/client/Minecraft;Lnet/minecraft/client/multiplayer/resolver/ServerAddress;Lnet/minecraft/client/multiplayer/ServerData;)V
+
+  private void updateStatus(net.minecraft.network.chat.Component);
+    descriptor: (Lnet/minecraft/network/chat/Component;)V
+
+  public void tick();
+    descriptor: ()V
+
+  public boolean shouldCloseOnEsc();
+    descriptor: ()Z
+
+  protected void init();
+    descriptor: ()V
+
+  public void render(net.minecraft.client.gui.GuiGraphics, int, int, float);
+    descriptor: (Lnet/minecraft/client/gui/GuiGraphics;IIF)V
+
+  private void method_19800(net.minecraft.client.gui.components.Button);
+    descriptor: (Lnet/minecraft/client/gui/components/Button;)V
+
+  static {};
+    descriptor: ()V
+}

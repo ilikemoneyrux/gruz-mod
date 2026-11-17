@@ -1,0 +1,735 @@
+Compiled from "RenderSystem.java"
+public class com.mojang.blaze3d.systems.RenderSystem {
+  static final org.slf4j.Logger LOGGER;
+    descriptor: Lorg/slf4j/Logger;
+  private static final java.util.concurrent.ConcurrentLinkedQueue<com.mojang.blaze3d.pipeline.RenderCall> recordingQueue;
+    descriptor: Ljava/util/concurrent/ConcurrentLinkedQueue;
+  private static final com.mojang.blaze3d.vertex.Tesselator RENDER_THREAD_TESSELATOR;
+    descriptor: Lcom/mojang/blaze3d/vertex/Tesselator;
+  private static final int MINIMUM_ATLAS_TEXTURE_SIZE;
+    descriptor: I
+  private static boolean isReplayingQueue;
+    descriptor: Z
+  private static java.lang.Thread gameThread;
+    descriptor: Ljava/lang/Thread;
+  private static java.lang.Thread renderThread;
+    descriptor: Ljava/lang/Thread;
+  private static int MAX_SUPPORTED_TEXTURE_SIZE;
+    descriptor: I
+  private static boolean isInInit;
+    descriptor: Z
+  private static double lastDrawTime;
+    descriptor: D
+  private static final com.mojang.blaze3d.systems.RenderSystem$AutoStorageIndexBuffer sharedSequential;
+    descriptor: Lcom/mojang/blaze3d/systems/RenderSystem$AutoStorageIndexBuffer;
+  private static final com.mojang.blaze3d.systems.RenderSystem$AutoStorageIndexBuffer sharedSequentialQuad;
+    descriptor: Lcom/mojang/blaze3d/systems/RenderSystem$AutoStorageIndexBuffer;
+  private static final com.mojang.blaze3d.systems.RenderSystem$AutoStorageIndexBuffer sharedSequentialLines;
+    descriptor: Lcom/mojang/blaze3d/systems/RenderSystem$AutoStorageIndexBuffer;
+  private static org.joml.Matrix3f inverseViewRotationMatrix;
+    descriptor: Lorg/joml/Matrix3f;
+  private static org.joml.Matrix4f projectionMatrix;
+    descriptor: Lorg/joml/Matrix4f;
+  private static org.joml.Matrix4f savedProjectionMatrix;
+    descriptor: Lorg/joml/Matrix4f;
+  private static com.mojang.blaze3d.vertex.VertexSorting vertexSorting;
+    descriptor: Lcom/mojang/blaze3d/vertex/VertexSorting;
+  private static com.mojang.blaze3d.vertex.VertexSorting savedVertexSorting;
+    descriptor: Lcom/mojang/blaze3d/vertex/VertexSorting;
+  private static final com.mojang.blaze3d.vertex.PoseStack modelViewStack;
+    descriptor: Lcom/mojang/blaze3d/vertex/PoseStack;
+  private static org.joml.Matrix4f modelViewMatrix;
+    descriptor: Lorg/joml/Matrix4f;
+  private static org.joml.Matrix4f textureMatrix;
+    descriptor: Lorg/joml/Matrix4f;
+  private static final int[] shaderTextures;
+    descriptor: [I
+  private static final float[] shaderColor;
+    descriptor: [F
+  private static float shaderGlintAlpha;
+    descriptor: F
+  private static float shaderFogStart;
+    descriptor: F
+  private static float shaderFogEnd;
+    descriptor: F
+  private static final float[] shaderFogColor;
+    descriptor: [F
+  private static com.mojang.blaze3d.shaders.FogShape shaderFogShape;
+    descriptor: Lcom/mojang/blaze3d/shaders/FogShape;
+  private static final org.joml.Vector3f[] shaderLightDirections;
+    descriptor: [Lorg/joml/Vector3f;
+  private static float shaderGameTime;
+    descriptor: F
+  private static float shaderLineWidth;
+    descriptor: F
+  private static java.lang.String apiDescription;
+    descriptor: Ljava/lang/String;
+  private static net.minecraft.client.renderer.ShaderInstance shader;
+    descriptor: Lnet/minecraft/client/renderer/ShaderInstance;
+  private static final java.util.concurrent.atomic.AtomicLong pollEventsWaitStart;
+    descriptor: Ljava/util/concurrent/atomic/AtomicLong;
+  private static final java.util.concurrent.atomic.AtomicBoolean pollingEvents;
+    descriptor: Ljava/util/concurrent/atomic/AtomicBoolean;
+  public com.mojang.blaze3d.systems.RenderSystem();
+    descriptor: ()V
+
+  public static void initRenderThread();
+    descriptor: ()V
+
+  public static boolean isOnRenderThread();
+    descriptor: ()Z
+
+  public static boolean isOnRenderThreadOrInit();
+    descriptor: ()Z
+
+  public static void initGameThread(boolean);
+    descriptor: (Z)V
+
+  public static boolean isOnGameThread();
+    descriptor: ()Z
+
+  public static void assertInInitPhase();
+    descriptor: ()V
+
+  public static void assertOnGameThreadOrInit();
+    descriptor: ()V
+
+  public static void assertOnRenderThreadOrInit();
+    descriptor: ()V
+
+  public static void assertOnRenderThread();
+    descriptor: ()V
+
+  public static void assertOnGameThread();
+    descriptor: ()V
+
+  private static java.lang.IllegalStateException constructThreadException();
+    descriptor: ()Ljava/lang/IllegalStateException;
+
+  public static boolean isInInitPhase();
+    descriptor: ()Z
+
+  public static void recordRenderCall(com.mojang.blaze3d.pipeline.RenderCall);
+    descriptor: (Lcom/mojang/blaze3d/pipeline/RenderCall;)V
+
+  private static void pollEvents();
+    descriptor: ()V
+
+  public static boolean isFrozenAtPollEvents();
+    descriptor: ()Z
+
+  public static void flipFrame(long);
+    descriptor: (J)V
+
+  public static void replayQueue();
+    descriptor: ()V
+
+  public static void limitDisplayFPS(int);
+    descriptor: (I)V
+
+  public static void disableDepthTest();
+    descriptor: ()V
+
+  public static void enableDepthTest();
+    descriptor: ()V
+
+  public static void enableScissor(int, int, int, int);
+    descriptor: (IIII)V
+
+  public static void disableScissor();
+    descriptor: ()V
+
+  public static void depthFunc(int);
+    descriptor: (I)V
+
+  public static void depthMask(boolean);
+    descriptor: (Z)V
+
+  public static void enableBlend();
+    descriptor: ()V
+
+  public static void disableBlend();
+    descriptor: ()V
+
+  public static void blendFunc(com.mojang.blaze3d.platform.GlStateManager$SourceFactor, com.mojang.blaze3d.platform.GlStateManager$DestFactor);
+    descriptor: (Lcom/mojang/blaze3d/platform/GlStateManager$SourceFactor;Lcom/mojang/blaze3d/platform/GlStateManager$DestFactor;)V
+
+  public static void blendFunc(int, int);
+    descriptor: (II)V
+
+  public static void blendFuncSeparate(com.mojang.blaze3d.platform.GlStateManager$SourceFactor, com.mojang.blaze3d.platform.GlStateManager$DestFactor, com.mojang.blaze3d.platform.GlStateManager$SourceFactor, com.mojang.blaze3d.platform.GlStateManager$DestFactor);
+    descriptor: (Lcom/mojang/blaze3d/platform/GlStateManager$SourceFactor;Lcom/mojang/blaze3d/platform/GlStateManager$DestFactor;Lcom/mojang/blaze3d/platform/GlStateManager$SourceFactor;Lcom/mojang/blaze3d/platform/GlStateManager$DestFactor;)V
+
+  public static void blendFuncSeparate(int, int, int, int);
+    descriptor: (IIII)V
+
+  public static void blendEquation(int);
+    descriptor: (I)V
+
+  public static void enableCull();
+    descriptor: ()V
+
+  public static void disableCull();
+    descriptor: ()V
+
+  public static void polygonMode(int, int);
+    descriptor: (II)V
+
+  public static void enablePolygonOffset();
+    descriptor: ()V
+
+  public static void disablePolygonOffset();
+    descriptor: ()V
+
+  public static void polygonOffset(float, float);
+    descriptor: (FF)V
+
+  public static void enableColorLogicOp();
+    descriptor: ()V
+
+  public static void disableColorLogicOp();
+    descriptor: ()V
+
+  public static void logicOp(com.mojang.blaze3d.platform.GlStateManager$LogicOp);
+    descriptor: (Lcom/mojang/blaze3d/platform/GlStateManager$LogicOp;)V
+
+  public static void activeTexture(int);
+    descriptor: (I)V
+
+  public static void texParameter(int, int, int);
+    descriptor: (III)V
+
+  public static void deleteTexture(int);
+    descriptor: (I)V
+
+  public static void bindTextureForSetup(int);
+    descriptor: (I)V
+
+  public static void bindTexture(int);
+    descriptor: (I)V
+
+  public static void viewport(int, int, int, int);
+    descriptor: (IIII)V
+
+  public static void colorMask(boolean, boolean, boolean, boolean);
+    descriptor: (ZZZZ)V
+
+  public static void stencilFunc(int, int, int);
+    descriptor: (III)V
+
+  public static void stencilMask(int);
+    descriptor: (I)V
+
+  public static void stencilOp(int, int, int);
+    descriptor: (III)V
+
+  public static void clearDepth(double);
+    descriptor: (D)V
+
+  public static void clearColor(float, float, float, float);
+    descriptor: (FFFF)V
+
+  public static void clearStencil(int);
+    descriptor: (I)V
+
+  public static void clear(int, boolean);
+    descriptor: (IZ)V
+
+  public static void setShaderFogStart(float);
+    descriptor: (F)V
+
+  private static void _setShaderFogStart(float);
+    descriptor: (F)V
+
+  public static float getShaderFogStart();
+    descriptor: ()F
+
+  public static void setShaderGlintAlpha(double);
+    descriptor: (D)V
+
+  public static void setShaderGlintAlpha(float);
+    descriptor: (F)V
+
+  private static void _setShaderGlintAlpha(float);
+    descriptor: (F)V
+
+  public static float getShaderGlintAlpha();
+    descriptor: ()F
+
+  public static void setShaderFogEnd(float);
+    descriptor: (F)V
+
+  private static void _setShaderFogEnd(float);
+    descriptor: (F)V
+
+  public static float getShaderFogEnd();
+    descriptor: ()F
+
+  public static void setShaderFogColor(float, float, float, float);
+    descriptor: (FFFF)V
+
+  public static void setShaderFogColor(float, float, float);
+    descriptor: (FFF)V
+
+  private static void _setShaderFogColor(float, float, float, float);
+    descriptor: (FFFF)V
+
+  public static float[] getShaderFogColor();
+    descriptor: ()[F
+
+  public static void setShaderFogShape(com.mojang.blaze3d.shaders.FogShape);
+    descriptor: (Lcom/mojang/blaze3d/shaders/FogShape;)V
+
+  private static void _setShaderFogShape(com.mojang.blaze3d.shaders.FogShape);
+    descriptor: (Lcom/mojang/blaze3d/shaders/FogShape;)V
+
+  public static com.mojang.blaze3d.shaders.FogShape getShaderFogShape();
+    descriptor: ()Lcom/mojang/blaze3d/shaders/FogShape;
+
+  public static void setShaderLights(org.joml.Vector3f, org.joml.Vector3f);
+    descriptor: (Lorg/joml/Vector3f;Lorg/joml/Vector3f;)V
+
+  public static void _setShaderLights(org.joml.Vector3f, org.joml.Vector3f);
+    descriptor: (Lorg/joml/Vector3f;Lorg/joml/Vector3f;)V
+
+  public static void setupShaderLights(net.minecraft.client.renderer.ShaderInstance);
+    descriptor: (Lnet/minecraft/client/renderer/ShaderInstance;)V
+
+  public static void setShaderColor(float, float, float, float);
+    descriptor: (FFFF)V
+
+  private static void _setShaderColor(float, float, float, float);
+    descriptor: (FFFF)V
+
+  public static float[] getShaderColor();
+    descriptor: ()[F
+
+  public static void drawElements(int, int, int);
+    descriptor: (III)V
+
+  public static void lineWidth(float);
+    descriptor: (F)V
+
+  public static float getShaderLineWidth();
+    descriptor: ()F
+
+  public static void pixelStore(int, int);
+    descriptor: (II)V
+
+  public static void readPixels(int, int, int, int, int, int, java.nio.ByteBuffer);
+    descriptor: (IIIIIILjava/nio/ByteBuffer;)V
+
+  public static void getString(int, java.util.function.Consumer<java.lang.String>);
+    descriptor: (ILjava/util/function/Consumer;)V
+
+  public static java.lang.String getBackendDescription();
+    descriptor: ()Ljava/lang/String;
+
+  public static java.lang.String getApiDescription();
+    descriptor: ()Ljava/lang/String;
+
+  public static net.minecraft.util.TimeSource$NanoTimeSource initBackendSystem();
+    descriptor: ()Lnet/minecraft/util/TimeSource$NanoTimeSource;
+
+  public static void initRenderer(int, boolean);
+    descriptor: (IZ)V
+
+  public static void setErrorCallback(org.lwjgl.glfw.GLFWErrorCallbackI);
+    descriptor: (Lorg/lwjgl/glfw/GLFWErrorCallbackI;)V
+
+  public static void renderCrosshair(int);
+    descriptor: (I)V
+
+  public static java.lang.String getCapsString();
+    descriptor: ()Ljava/lang/String;
+
+  public static void setupDefaultState(int, int, int, int);
+    descriptor: (IIII)V
+
+  public static int maxSupportedTextureSize();
+    descriptor: ()I
+
+  public static void glBindBuffer(int, java.util.function.IntSupplier);
+    descriptor: (ILjava/util/function/IntSupplier;)V
+
+  public static void glBindVertexArray(java.util.function.Supplier<java.lang.Integer>);
+    descriptor: (Ljava/util/function/Supplier;)V
+
+  public static void glBufferData(int, java.nio.ByteBuffer, int);
+    descriptor: (ILjava/nio/ByteBuffer;I)V
+
+  public static void glDeleteBuffers(int);
+    descriptor: (I)V
+
+  public static void glDeleteVertexArrays(int);
+    descriptor: (I)V
+
+  public static void glUniform1i(int, int);
+    descriptor: (II)V
+
+  public static void glUniform1(int, java.nio.IntBuffer);
+    descriptor: (ILjava/nio/IntBuffer;)V
+
+  public static void glUniform2(int, java.nio.IntBuffer);
+    descriptor: (ILjava/nio/IntBuffer;)V
+
+  public static void glUniform3(int, java.nio.IntBuffer);
+    descriptor: (ILjava/nio/IntBuffer;)V
+
+  public static void glUniform4(int, java.nio.IntBuffer);
+    descriptor: (ILjava/nio/IntBuffer;)V
+
+  public static void glUniform1(int, java.nio.FloatBuffer);
+    descriptor: (ILjava/nio/FloatBuffer;)V
+
+  public static void glUniform2(int, java.nio.FloatBuffer);
+    descriptor: (ILjava/nio/FloatBuffer;)V
+
+  public static void glUniform3(int, java.nio.FloatBuffer);
+    descriptor: (ILjava/nio/FloatBuffer;)V
+
+  public static void glUniform4(int, java.nio.FloatBuffer);
+    descriptor: (ILjava/nio/FloatBuffer;)V
+
+  public static void glUniformMatrix2(int, boolean, java.nio.FloatBuffer);
+    descriptor: (IZLjava/nio/FloatBuffer;)V
+
+  public static void glUniformMatrix3(int, boolean, java.nio.FloatBuffer);
+    descriptor: (IZLjava/nio/FloatBuffer;)V
+
+  public static void glUniformMatrix4(int, boolean, java.nio.FloatBuffer);
+    descriptor: (IZLjava/nio/FloatBuffer;)V
+
+  public static void setupOverlayColor(java.util.function.IntSupplier, int);
+    descriptor: (Ljava/util/function/IntSupplier;I)V
+
+  public static void teardownOverlayColor();
+    descriptor: ()V
+
+  public static void setupLevelDiffuseLighting(org.joml.Vector3f, org.joml.Vector3f, org.joml.Matrix4f);
+    descriptor: (Lorg/joml/Vector3f;Lorg/joml/Vector3f;Lorg/joml/Matrix4f;)V
+
+  public static void setupGuiFlatDiffuseLighting(org.joml.Vector3f, org.joml.Vector3f);
+    descriptor: (Lorg/joml/Vector3f;Lorg/joml/Vector3f;)V
+
+  public static void setupGui3DDiffuseLighting(org.joml.Vector3f, org.joml.Vector3f);
+    descriptor: (Lorg/joml/Vector3f;Lorg/joml/Vector3f;)V
+
+  public static void beginInitialization();
+    descriptor: ()V
+
+  public static void finishInitialization();
+    descriptor: ()V
+
+  public static void glGenBuffers(java.util.function.Consumer<java.lang.Integer>);
+    descriptor: (Ljava/util/function/Consumer;)V
+
+  public static void glGenVertexArrays(java.util.function.Consumer<java.lang.Integer>);
+    descriptor: (Ljava/util/function/Consumer;)V
+
+  public static com.mojang.blaze3d.vertex.Tesselator renderThreadTesselator();
+    descriptor: ()Lcom/mojang/blaze3d/vertex/Tesselator;
+
+  public static void defaultBlendFunc();
+    descriptor: ()V
+
+  public static void runAsFancy(java.lang.Runnable);
+    descriptor: (Ljava/lang/Runnable;)V
+
+  public static void setShader(java.util.function.Supplier<net.minecraft.client.renderer.ShaderInstance>);
+    descriptor: (Ljava/util/function/Supplier;)V
+
+  public static net.minecraft.client.renderer.ShaderInstance getShader();
+    descriptor: ()Lnet/minecraft/client/renderer/ShaderInstance;
+
+  public static void setShaderTexture(int, net.minecraft.resources.ResourceLocation);
+    descriptor: (ILnet/minecraft/resources/ResourceLocation;)V
+
+  public static void _setShaderTexture(int, net.minecraft.resources.ResourceLocation);
+    descriptor: (ILnet/minecraft/resources/ResourceLocation;)V
+
+  public static void setShaderTexture(int, int);
+    descriptor: (II)V
+
+  public static void _setShaderTexture(int, int);
+    descriptor: (II)V
+
+  public static int getShaderTexture(int);
+    descriptor: (I)I
+
+  public static void setProjectionMatrix(org.joml.Matrix4f, com.mojang.blaze3d.vertex.VertexSorting);
+    descriptor: (Lorg/joml/Matrix4f;Lcom/mojang/blaze3d/vertex/VertexSorting;)V
+
+  public static void setInverseViewRotationMatrix(org.joml.Matrix3f);
+    descriptor: (Lorg/joml/Matrix3f;)V
+
+  public static void setTextureMatrix(org.joml.Matrix4f);
+    descriptor: (Lorg/joml/Matrix4f;)V
+
+  public static void resetTextureMatrix();
+    descriptor: ()V
+
+  public static void applyModelViewMatrix();
+    descriptor: ()V
+
+  public static void backupProjectionMatrix();
+    descriptor: ()V
+
+  private static void _backupProjectionMatrix();
+    descriptor: ()V
+
+  public static void restoreProjectionMatrix();
+    descriptor: ()V
+
+  private static void _restoreProjectionMatrix();
+    descriptor: ()V
+
+  public static org.joml.Matrix4f getProjectionMatrix();
+    descriptor: ()Lorg/joml/Matrix4f;
+
+  public static org.joml.Matrix3f getInverseViewRotationMatrix();
+    descriptor: ()Lorg/joml/Matrix3f;
+
+  public static org.joml.Matrix4f getModelViewMatrix();
+    descriptor: ()Lorg/joml/Matrix4f;
+
+  public static com.mojang.blaze3d.vertex.PoseStack getModelViewStack();
+    descriptor: ()Lcom/mojang/blaze3d/vertex/PoseStack;
+
+  public static org.joml.Matrix4f getTextureMatrix();
+    descriptor: ()Lorg/joml/Matrix4f;
+
+  public static com.mojang.blaze3d.systems.RenderSystem$AutoStorageIndexBuffer getSequentialBuffer(com.mojang.blaze3d.vertex.VertexFormat$Mode);
+    descriptor: (Lcom/mojang/blaze3d/vertex/VertexFormat$Mode;)Lcom/mojang/blaze3d/systems/RenderSystem$AutoStorageIndexBuffer;
+
+  public static void setShaderGameTime(long, float);
+    descriptor: (JF)V
+
+  public static float getShaderGameTime();
+    descriptor: ()F
+
+  public static com.mojang.blaze3d.vertex.VertexSorting getVertexSorting();
+    descriptor: ()Lcom/mojang/blaze3d/vertex/VertexSorting;
+
+  private static void lambda$setShaderGameTime$72(float);
+    descriptor: (F)V
+
+  private static void lambda$restoreProjectionMatrix$71();
+    descriptor: ()V
+
+  private static void lambda$backupProjectionMatrix$70();
+    descriptor: ()V
+
+  private static void lambda$applyModelViewMatrix$69(org.joml.Matrix4f);
+    descriptor: (Lorg/joml/Matrix4f;)V
+
+  private static void lambda$resetTextureMatrix$68();
+    descriptor: ()V
+
+  private static void lambda$setTextureMatrix$67(org.joml.Matrix4f);
+    descriptor: (Lorg/joml/Matrix4f;)V
+
+  private static void lambda$setInverseViewRotationMatrix$66(org.joml.Matrix3f);
+    descriptor: (Lorg/joml/Matrix3f;)V
+
+  private static void lambda$setProjectionMatrix$65(org.joml.Matrix4f, com.mojang.blaze3d.vertex.VertexSorting);
+    descriptor: (Lorg/joml/Matrix4f;Lcom/mojang/blaze3d/vertex/VertexSorting;)V
+
+  private static void lambda$setShaderTexture$64(int, int);
+    descriptor: (II)V
+
+  private static void lambda$setShaderTexture$63(int, net.minecraft.resources.ResourceLocation);
+    descriptor: (ILnet/minecraft/resources/ResourceLocation;)V
+
+  private static void lambda$setShader$62(java.util.function.Supplier);
+    descriptor: (Ljava/util/function/Supplier;)V
+
+  private static void lambda$glGenVertexArrays$61(java.util.function.Consumer);
+    descriptor: (Ljava/util/function/Consumer;)V
+
+  private static void lambda$glGenBuffers$60(java.util.function.Consumer);
+    descriptor: (Ljava/util/function/Consumer;)V
+
+  private static void lambda$setupGui3DDiffuseLighting$59(org.joml.Vector3f, org.joml.Vector3f);
+    descriptor: (Lorg/joml/Vector3f;Lorg/joml/Vector3f;)V
+
+  private static void lambda$setupGuiFlatDiffuseLighting$58(org.joml.Vector3f, org.joml.Vector3f);
+    descriptor: (Lorg/joml/Vector3f;Lorg/joml/Vector3f;)V
+
+  private static void lambda$setupLevelDiffuseLighting$57(org.joml.Vector3f, org.joml.Vector3f, org.joml.Matrix4f);
+    descriptor: (Lorg/joml/Vector3f;Lorg/joml/Vector3f;Lorg/joml/Matrix4f;)V
+
+  private static void lambda$teardownOverlayColor$56();
+    descriptor: ()V
+
+  private static void lambda$setupOverlayColor$55(java.util.function.IntSupplier);
+    descriptor: (Ljava/util/function/IntSupplier;)V
+
+  private static void lambda$glUniformMatrix4$54(int, boolean, java.nio.FloatBuffer);
+    descriptor: (IZLjava/nio/FloatBuffer;)V
+
+  private static void lambda$glUniformMatrix3$53(int, boolean, java.nio.FloatBuffer);
+    descriptor: (IZLjava/nio/FloatBuffer;)V
+
+  private static void lambda$glUniformMatrix2$52(int, boolean, java.nio.FloatBuffer);
+    descriptor: (IZLjava/nio/FloatBuffer;)V
+
+  private static void lambda$glUniform4$51(int, java.nio.FloatBuffer);
+    descriptor: (ILjava/nio/FloatBuffer;)V
+
+  private static void lambda$glUniform3$50(int, java.nio.FloatBuffer);
+    descriptor: (ILjava/nio/FloatBuffer;)V
+
+  private static void lambda$glUniform2$49(int, java.nio.FloatBuffer);
+    descriptor: (ILjava/nio/FloatBuffer;)V
+
+  private static void lambda$glUniform1$48(int, java.nio.FloatBuffer);
+    descriptor: (ILjava/nio/FloatBuffer;)V
+
+  private static void lambda$glUniform4$47(int, java.nio.IntBuffer);
+    descriptor: (ILjava/nio/IntBuffer;)V
+
+  private static void lambda$glUniform3$46(int, java.nio.IntBuffer);
+    descriptor: (ILjava/nio/IntBuffer;)V
+
+  private static void lambda$glUniform2$45(int, java.nio.IntBuffer);
+    descriptor: (ILjava/nio/IntBuffer;)V
+
+  private static void lambda$glUniform1$44(int, java.nio.IntBuffer);
+    descriptor: (ILjava/nio/IntBuffer;)V
+
+  private static void lambda$glUniform1i$43(int, int);
+    descriptor: (II)V
+
+  private static void lambda$glDeleteVertexArrays$42(int);
+    descriptor: (I)V
+
+  private static void lambda$glDeleteBuffers$41(int);
+    descriptor: (I)V
+
+  private static void lambda$glBindVertexArray$40(java.util.function.Supplier);
+    descriptor: (Ljava/util/function/Supplier;)V
+
+  private static void lambda$glBindBuffer$39(int, java.util.function.IntSupplier);
+    descriptor: (ILjava/util/function/IntSupplier;)V
+
+  private static void lambda$renderCrosshair$38(int);
+    descriptor: (I)V
+
+  private static void lambda$getString$37(int, java.util.function.Consumer);
+    descriptor: (ILjava/util/function/Consumer;)V
+
+  private static void lambda$readPixels$36(int, int, int, int, int, int, java.nio.ByteBuffer);
+    descriptor: (IIIIIILjava/nio/ByteBuffer;)V
+
+  private static void lambda$pixelStore$35(int, int);
+    descriptor: (II)V
+
+  private static void lambda$lineWidth$34(float);
+    descriptor: (F)V
+
+  private static void lambda$drawElements$33(int, int, int);
+    descriptor: (III)V
+
+  private static void lambda$setShaderColor$32(float, float, float, float);
+    descriptor: (FFFF)V
+
+  private static void lambda$setShaderLights$31(org.joml.Vector3f, org.joml.Vector3f);
+    descriptor: (Lorg/joml/Vector3f;Lorg/joml/Vector3f;)V
+
+  private static void lambda$setShaderFogShape$30(com.mojang.blaze3d.shaders.FogShape);
+    descriptor: (Lcom/mojang/blaze3d/shaders/FogShape;)V
+
+  private static void lambda$setShaderFogColor$29(float, float, float, float);
+    descriptor: (FFFF)V
+
+  private static void lambda$setShaderFogEnd$28(float);
+    descriptor: (F)V
+
+  private static void lambda$setShaderGlintAlpha$27(float);
+    descriptor: (F)V
+
+  private static void lambda$setShaderFogStart$26(float);
+    descriptor: (F)V
+
+  private static void lambda$clear$25(int, boolean);
+    descriptor: (IZ)V
+
+  private static void lambda$clearStencil$24(int);
+    descriptor: (I)V
+
+  private static void lambda$clearColor$23(float, float, float, float);
+    descriptor: (FFFF)V
+
+  private static void lambda$clearDepth$22(double);
+    descriptor: (D)V
+
+  private static void lambda$stencilOp$21(int, int, int);
+    descriptor: (III)V
+
+  private static void lambda$stencilMask$20(int);
+    descriptor: (I)V
+
+  private static void lambda$stencilFunc$19(int, int, int);
+    descriptor: (III)V
+
+  private static void lambda$colorMask$18(boolean, boolean, boolean, boolean);
+    descriptor: (ZZZZ)V
+
+  private static void lambda$viewport$17(int, int, int, int);
+    descriptor: (IIII)V
+
+  private static void lambda$bindTexture$16(int);
+    descriptor: (I)V
+
+  private static void lambda$deleteTexture$15(int);
+    descriptor: (I)V
+
+  private static void lambda$texParameter$14(int, int, int);
+    descriptor: (III)V
+
+  private static void lambda$activeTexture$13(int);
+    descriptor: (I)V
+
+  private static void lambda$logicOp$12(com.mojang.blaze3d.platform.GlStateManager$LogicOp);
+    descriptor: (Lcom/mojang/blaze3d/platform/GlStateManager$LogicOp;)V
+
+  private static void lambda$polygonOffset$11(float, float);
+    descriptor: (FF)V
+
+  private static void lambda$polygonMode$10(int, int);
+    descriptor: (II)V
+
+  private static void lambda$blendEquation$9(int);
+    descriptor: (I)V
+
+  private static void lambda$blendFuncSeparate$8(int, int, int, int);
+    descriptor: (IIII)V
+
+  private static void lambda$blendFuncSeparate$7(com.mojang.blaze3d.platform.GlStateManager$SourceFactor, com.mojang.blaze3d.platform.GlStateManager$DestFactor, com.mojang.blaze3d.platform.GlStateManager$SourceFactor, com.mojang.blaze3d.platform.GlStateManager$DestFactor);
+    descriptor: (Lcom/mojang/blaze3d/platform/GlStateManager$SourceFactor;Lcom/mojang/blaze3d/platform/GlStateManager$DestFactor;Lcom/mojang/blaze3d/platform/GlStateManager$SourceFactor;Lcom/mojang/blaze3d/platform/GlStateManager$DestFactor;)V
+
+  private static void lambda$blendFunc$6(int, int);
+    descriptor: (II)V
+
+  private static void lambda$blendFunc$5(com.mojang.blaze3d.platform.GlStateManager$SourceFactor, com.mojang.blaze3d.platform.GlStateManager$DestFactor);
+    descriptor: (Lcom/mojang/blaze3d/platform/GlStateManager$SourceFactor;Lcom/mojang/blaze3d/platform/GlStateManager$DestFactor;)V
+
+  private static void lambda$depthMask$4(boolean);
+    descriptor: (Z)V
+
+  private static void lambda$depthFunc$3(int);
+    descriptor: (I)V
+
+  private static void lambda$enableScissor$2(int, int, int, int);
+    descriptor: (IIII)V
+
+  private static void lambda$static$1(it.unimi.dsi.fastutil.ints.IntConsumer, int);
+    descriptor: (Lit/unimi/dsi/fastutil/ints/IntConsumer;I)V
+
+  private static void lambda$static$0(it.unimi.dsi.fastutil.ints.IntConsumer, int);
+    descriptor: (Lit/unimi/dsi/fastutil/ints/IntConsumer;I)V
+
+  static {};
+    descriptor: ()V
+}
