@@ -1,0 +1,128 @@
+Compiled from "TitleScreen.java"
+public class net.minecraft.client.gui.screens.TitleScreen extends net.minecraft.client.gui.screens.Screen {
+  private static final org.slf4j.Logger LOGGER;
+    descriptor: Lorg/slf4j/Logger;
+  private static final net.minecraft.network.chat.Component TITLE;
+    descriptor: Lnet/minecraft/network/chat/Component;
+  private static final net.minecraft.network.chat.Component COPYRIGHT_TEXT;
+    descriptor: Lnet/minecraft/network/chat/Component;
+  private static final java.lang.String DEMO_LEVEL_ID;
+    descriptor: Ljava/lang/String;
+  private net.minecraft.client.gui.components.SplashRenderer splash;
+    descriptor: Lnet/minecraft/client/gui/components/SplashRenderer;
+  private com.mojang.realmsclient.gui.screens.RealmsNotificationsScreen realmsNotificationsScreen;
+    descriptor: Lcom/mojang/realmsclient/gui/screens/RealmsNotificationsScreen;
+  private boolean fading;
+    descriptor: Z
+  private long fadeInStart;
+    descriptor: J
+  private final net.minecraft.client.gui.components.LogoRenderer logoRenderer;
+    descriptor: Lnet/minecraft/client/gui/components/LogoRenderer;
+  public net.minecraft.client.gui.screens.TitleScreen();
+    descriptor: ()V
+
+  public net.minecraft.client.gui.screens.TitleScreen(boolean);
+    descriptor: (Z)V
+
+  public net.minecraft.client.gui.screens.TitleScreen(boolean, net.minecraft.client.gui.components.LogoRenderer);
+    descriptor: (ZLnet/minecraft/client/gui/components/LogoRenderer;)V
+
+  private boolean realmsNotificationsEnabled();
+    descriptor: ()Z
+
+  public void tick();
+    descriptor: ()V
+
+  public static void registerTextures(net.minecraft.client.renderer.texture.TextureManager);
+    descriptor: (Lnet/minecraft/client/renderer/texture/TextureManager;)V
+
+  public boolean isPauseScreen();
+    descriptor: ()Z
+
+  public boolean shouldCloseOnEsc();
+    descriptor: ()Z
+
+  protected void init();
+    descriptor: ()V
+
+  private int createTestWorldButton(int, int);
+    descriptor: (II)I
+
+  private int createNormalMenuOptions(int, int);
+    descriptor: (II)I
+
+  private net.minecraft.network.chat.Component getMultiplayerDisabledReason();
+    descriptor: ()Lnet/minecraft/network/chat/Component;
+
+  private int createDemoMenuOptions(int, int);
+    descriptor: (II)I
+
+  private boolean checkDemoWorldPresence();
+    descriptor: ()Z
+
+  public void extractRenderState(net.minecraft.client.gui.GuiGraphicsExtractor, int, int, float);
+    descriptor: (Lnet/minecraft/client/gui/GuiGraphicsExtractor;IIF)V
+
+  public void extractBackground(net.minecraft.client.gui.GuiGraphicsExtractor, int, int, float);
+    descriptor: (Lnet/minecraft/client/gui/GuiGraphicsExtractor;IIF)V
+
+  public boolean mouseClicked(net.minecraft.client.input.MouseButtonEvent, boolean);
+    descriptor: (Lnet/minecraft/client/input/MouseButtonEvent;Z)Z
+
+  public void removed();
+    descriptor: ()V
+
+  public void added();
+    descriptor: ()V
+
+  private void confirmDemo(boolean);
+    descriptor: (Z)V
+
+  public boolean canInterruptWithAnotherScreen();
+    descriptor: ()Z
+
+  private void lambda$createDemoMenuOptions$2(net.minecraft.client.gui.components.Button);
+    descriptor: (Lnet/minecraft/client/gui/components/Button;)V
+
+  private void lambda$createDemoMenuOptions$0(boolean, net.minecraft.client.gui.components.Button);
+    descriptor: (ZLnet/minecraft/client/gui/components/Button;)V
+
+  private void lambda$createDemoMenuOptions$1();
+    descriptor: ()V
+
+  private void lambda$createNormalMenuOptions$2(net.minecraft.client.gui.components.Button);
+    descriptor: (Lnet/minecraft/client/gui/components/Button;)V
+
+  private void lambda$createNormalMenuOptions$1(net.minecraft.client.gui.components.Button);
+    descriptor: (Lnet/minecraft/client/gui/components/Button;)V
+
+  private void lambda$createNormalMenuOptions$0(net.minecraft.client.gui.components.Button);
+    descriptor: (Lnet/minecraft/client/gui/components/Button;)V
+
+  private void lambda$createTestWorldButton$0(net.minecraft.client.gui.components.Button);
+    descriptor: (Lnet/minecraft/client/gui/components/Button;)V
+
+  private void lambda$createTestWorldButton$1();
+    descriptor: ()V
+
+  private void lambda$init$4(net.minecraft.client.gui.components.Button);
+    descriptor: (Lnet/minecraft/client/gui/components/Button;)V
+
+  private void lambda$init$3(net.minecraft.client.gui.components.Button);
+    descriptor: (Lnet/minecraft/client/gui/components/Button;)V
+
+  private void lambda$init$2(net.minecraft.client.gui.components.Button);
+    descriptor: (Lnet/minecraft/client/gui/components/Button;)V
+
+  private void lambda$init$1(net.minecraft.client.gui.components.Button);
+    descriptor: (Lnet/minecraft/client/gui/components/Button;)V
+
+  private void lambda$init$0(net.minecraft.client.gui.components.Button);
+    descriptor: (Lnet/minecraft/client/gui/components/Button;)V
+
+  private static net.minecraft.client.gui.components.LogoRenderer lambda$new$0();
+    descriptor: ()Lnet/minecraft/client/gui/components/LogoRenderer;
+
+  static {};
+    descriptor: ()V
+}
