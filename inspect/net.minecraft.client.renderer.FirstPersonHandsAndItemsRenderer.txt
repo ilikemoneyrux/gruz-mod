@@ -1,0 +1,199 @@
+Compiled from "FirstPersonHandsAndItemsRenderer.java"
+public class net.minecraft.client.renderer.FirstPersonHandsAndItemsRenderer {
+  private static final net.minecraft.client.renderer.rendertype.RenderType MAP_BACKGROUND;
+    descriptor: Lnet/minecraft/client/renderer/rendertype/RenderType;
+  private static final net.minecraft.client.renderer.rendertype.RenderType MAP_BACKGROUND_CHECKERBOARD;
+    descriptor: Lnet/minecraft/client/renderer/rendertype/RenderType;
+  private static final float ITEM_SWING_X_POS_SCALE;
+    descriptor: F
+  private static final float ITEM_SWING_Y_POS_SCALE;
+    descriptor: F
+  private static final float ITEM_SWING_Z_POS_SCALE;
+    descriptor: F
+  private static final float ITEM_HEIGHT_SCALE;
+    descriptor: F
+  private static final float ITEM_POS_X;
+    descriptor: F
+  private static final float ITEM_POS_Y;
+    descriptor: F
+  private static final float ITEM_POS_Z;
+    descriptor: F
+  private static final float ITEM_PRESWING_ROT_Y;
+    descriptor: F
+  private static final float ITEM_SWING_X_ROT_AMOUNT;
+    descriptor: F
+  private static final float ITEM_SWING_Y_ROT_AMOUNT;
+    descriptor: F
+  private static final float ITEM_SWING_Z_ROT_AMOUNT;
+    descriptor: F
+  private static final float EAT_JIGGLE_X_ROT_AMOUNT;
+    descriptor: F
+  private static final float EAT_JIGGLE_Y_ROT_AMOUNT;
+    descriptor: F
+  private static final float EAT_JIGGLE_Z_ROT_AMOUNT;
+    descriptor: F
+  private static final float EAT_JIGGLE_X_POS_SCALE;
+    descriptor: F
+  private static final float EAT_JIGGLE_Y_POS_SCALE;
+    descriptor: F
+  private static final float EAT_JIGGLE_Z_POS_SCALE;
+    descriptor: F
+  private static final double EAT_JIGGLE_EXPONENT;
+    descriptor: D
+  private static final float EAT_EXTRA_JIGGLE_CUTOFF;
+    descriptor: F
+  private static final float EAT_EXTRA_JIGGLE_SCALE;
+    descriptor: F
+  private static final float ARM_SWING_X_POS_SCALE;
+    descriptor: F
+  private static final float ARM_SWING_Y_POS_SCALE;
+    descriptor: F
+  private static final float ARM_SWING_Z_POS_SCALE;
+    descriptor: F
+  private static final float ARM_SWING_Y_ROT_AMOUNT;
+    descriptor: F
+  private static final float ARM_SWING_Z_ROT_AMOUNT;
+    descriptor: F
+  private static final float ARM_HEIGHT_SCALE;
+    descriptor: F
+  private static final float ARM_POS_SCALE;
+    descriptor: F
+  private static final float ARM_POS_X;
+    descriptor: F
+  private static final float ARM_POS_Y;
+    descriptor: F
+  private static final float ARM_POS_Z;
+    descriptor: F
+  private static final float ARM_PRESWING_ROT_Y;
+    descriptor: F
+  private static final float ARM_PREROTATION_X_OFFSET;
+    descriptor: F
+  private static final float ARM_PREROTATION_Y_OFFSET;
+    descriptor: F
+  private static final float ARM_PREROTATION_Z_OFFSET;
+    descriptor: F
+  private static final float ARM_POSTROTATION_X_OFFSET;
+    descriptor: F
+  private static final int ARM_ROT_X;
+    descriptor: I
+  private static final int ARM_ROT_Y;
+    descriptor: I
+  private static final int ARM_ROT_Z;
+    descriptor: I
+  private static final float MAP_SWING_X_POS_SCALE;
+    descriptor: F
+  private static final float MAP_SWING_Z_POS_SCALE;
+    descriptor: F
+  private static final float MAP_HANDS_POS_X;
+    descriptor: F
+  private static final float MAP_HANDS_POS_Y;
+    descriptor: F
+  private static final float MAP_HANDS_POS_Z;
+    descriptor: F
+  private static final float MAP_HANDS_HEIGHT_SCALE;
+    descriptor: F
+  private static final float MAP_HANDS_TILT_SCALE;
+    descriptor: F
+  private static final float MAP_PLAYER_PITCH_SCALE;
+    descriptor: F
+  private static final float MAP_HANDS_Z_ROT_AMOUNT;
+    descriptor: F
+  private static final float MAPHAND_X_ROT_AMOUNT;
+    descriptor: F
+  private static final float MAPHAND_Y_ROT_AMOUNT;
+    descriptor: F
+  private static final float MAPHAND_Z_ROT_AMOUNT;
+    descriptor: F
+  private static final float MAP_HAND_X_POS;
+    descriptor: F
+  private static final float MAP_HAND_Y_POS;
+    descriptor: F
+  private static final float MAP_HAND_Z_POS;
+    descriptor: F
+  private static final float MAP_SWING_X_ROT_AMOUNT;
+    descriptor: F
+  private static final float MAP_PRE_ROT_SCALE;
+    descriptor: F
+  private static final float MAP_GLOBAL_X_POS;
+    descriptor: F
+  private static final float MAP_GLOBAL_Y_POS;
+    descriptor: F
+  private static final float MAP_GLOBAL_Z_POS;
+    descriptor: F
+  private static final float MAP_FINAL_SCALE;
+    descriptor: F
+  private static final int MAP_BORDER;
+    descriptor: I
+  private static final int MAP_HEIGHT;
+    descriptor: I
+  private static final int MAP_WIDTH;
+    descriptor: I
+  private static final float BOW_CHARGE_X_POS_SCALE;
+    descriptor: F
+  private static final float BOW_CHARGE_Y_POS_SCALE;
+    descriptor: F
+  private static final float BOW_CHARGE_Z_POS_SCALE;
+    descriptor: F
+  private static final float BOW_CHARGE_SHAKE_X_SCALE;
+    descriptor: F
+  private static final float BOW_CHARGE_SHAKE_Y_SCALE;
+    descriptor: F
+  private static final float BOW_CHARGE_SHAKE_Z_SCALE;
+    descriptor: F
+  private static final float BOW_CHARGE_Z_SCALE;
+    descriptor: F
+  private static final float BOW_MIN_SHAKE_CHARGE;
+    descriptor: F
+  private final net.minecraft.client.Minecraft minecraft;
+    descriptor: Lnet/minecraft/client/Minecraft;
+  public net.minecraft.client.renderer.FirstPersonHandsAndItemsRenderer(net.minecraft.client.Minecraft);
+    descriptor: (Lnet/minecraft/client/Minecraft;)V
+
+  private float calculateMapTilt(float);
+    descriptor: (F)F
+
+  private void renderPlayerHand(com.mojang.blaze3d.vertex.PoseStack, net.minecraft.client.renderer.SubmitNodeCollector, int, net.minecraft.world.entity.HumanoidArm, net.minecraft.client.renderer.state.level.PlayerRenderState);
+    descriptor: (Lcom/mojang/blaze3d/vertex/PoseStack;Lnet/minecraft/client/renderer/SubmitNodeCollector;ILnet/minecraft/world/entity/HumanoidArm;Lnet/minecraft/client/renderer/state/level/PlayerRenderState;)V
+
+  private void renderMapHand(com.mojang.blaze3d.vertex.PoseStack, net.minecraft.client.renderer.SubmitNodeCollector, int, net.minecraft.world.entity.HumanoidArm, net.minecraft.client.renderer.state.level.PlayerRenderState);
+    descriptor: (Lcom/mojang/blaze3d/vertex/PoseStack;Lnet/minecraft/client/renderer/SubmitNodeCollector;ILnet/minecraft/world/entity/HumanoidArm;Lnet/minecraft/client/renderer/state/level/PlayerRenderState;)V
+
+  private void renderOneHandedMap(com.mojang.blaze3d.vertex.PoseStack, net.minecraft.client.renderer.SubmitNodeCollector, int, float, net.minecraft.world.entity.HumanoidArm, float, net.minecraft.world.item.ItemStack, net.minecraft.client.renderer.state.level.PlayerRenderState, net.minecraft.client.renderer.state.level.FirstPersonHandsAndItemsRenderState);
+    descriptor: (Lcom/mojang/blaze3d/vertex/PoseStack;Lnet/minecraft/client/renderer/SubmitNodeCollector;IFLnet/minecraft/world/entity/HumanoidArm;FLnet/minecraft/world/item/ItemStack;Lnet/minecraft/client/renderer/state/level/PlayerRenderState;Lnet/minecraft/client/renderer/state/level/FirstPersonHandsAndItemsRenderState;)V
+
+  private void renderTwoHandedMap(com.mojang.blaze3d.vertex.PoseStack, net.minecraft.client.renderer.SubmitNodeCollector, int, float, float, float, net.minecraft.client.renderer.state.level.PlayerRenderState, net.minecraft.client.renderer.state.level.FirstPersonHandsAndItemsRenderState);
+    descriptor: (Lcom/mojang/blaze3d/vertex/PoseStack;Lnet/minecraft/client/renderer/SubmitNodeCollector;IFFFLnet/minecraft/client/renderer/state/level/PlayerRenderState;Lnet/minecraft/client/renderer/state/level/FirstPersonHandsAndItemsRenderState;)V
+
+  private void renderMap(com.mojang.blaze3d.vertex.PoseStack, net.minecraft.client.renderer.SubmitNodeCollector, int, net.minecraft.world.item.ItemStack, boolean, net.minecraft.client.renderer.state.level.FirstPersonHandsAndItemsRenderState);
+    descriptor: (Lcom/mojang/blaze3d/vertex/PoseStack;Lnet/minecraft/client/renderer/SubmitNodeCollector;ILnet/minecraft/world/item/ItemStack;ZLnet/minecraft/client/renderer/state/level/FirstPersonHandsAndItemsRenderState;)V
+
+  private void renderPlayerArm(com.mojang.blaze3d.vertex.PoseStack, net.minecraft.client.renderer.SubmitNodeCollector, int, float, float, net.minecraft.world.entity.HumanoidArm, net.minecraft.client.renderer.state.level.PlayerRenderState);
+    descriptor: (Lcom/mojang/blaze3d/vertex/PoseStack;Lnet/minecraft/client/renderer/SubmitNodeCollector;IFFLnet/minecraft/world/entity/HumanoidArm;Lnet/minecraft/client/renderer/state/level/PlayerRenderState;)V
+
+  private void applyEatTransform(com.mojang.blaze3d.vertex.PoseStack, float, net.minecraft.world.entity.HumanoidArm, float, int);
+    descriptor: (Lcom/mojang/blaze3d/vertex/PoseStack;FLnet/minecraft/world/entity/HumanoidArm;FI)V
+
+  private void applyBrushTransform(com.mojang.blaze3d.vertex.PoseStack, float, net.minecraft.world.entity.HumanoidArm, float);
+    descriptor: (Lcom/mojang/blaze3d/vertex/PoseStack;FLnet/minecraft/world/entity/HumanoidArm;F)V
+
+  private void applyItemArmAttackTransform(com.mojang.blaze3d.vertex.PoseStack, net.minecraft.world.entity.HumanoidArm, float);
+    descriptor: (Lcom/mojang/blaze3d/vertex/PoseStack;Lnet/minecraft/world/entity/HumanoidArm;F)V
+
+  private void applyItemArmTransform(com.mojang.blaze3d.vertex.PoseStack, net.minecraft.world.entity.HumanoidArm, float);
+    descriptor: (Lcom/mojang/blaze3d/vertex/PoseStack;Lnet/minecraft/world/entity/HumanoidArm;F)V
+
+  public void submitHandsWithItems(float, com.mojang.blaze3d.vertex.PoseStack, net.minecraft.client.renderer.SubmitNodeCollector, net.minecraft.client.renderer.state.level.PlayerRenderState, net.minecraft.client.renderer.state.level.FirstPersonHandsAndItemsRenderState);
+    descriptor: (FLcom/mojang/blaze3d/vertex/PoseStack;Lnet/minecraft/client/renderer/SubmitNodeCollector;Lnet/minecraft/client/renderer/state/level/PlayerRenderState;Lnet/minecraft/client/renderer/state/level/FirstPersonHandsAndItemsRenderState;)V
+
+  private void submitArmWithItem(net.minecraft.client.renderer.state.level.PlayerRenderState, net.minecraft.client.renderer.state.level.FirstPersonHandsAndItemsRenderState, float, float, net.minecraft.world.InteractionHand, float, net.minecraft.world.item.ItemStack, float, com.mojang.blaze3d.vertex.PoseStack, net.minecraft.client.renderer.SubmitNodeCollector, int);
+    descriptor: (Lnet/minecraft/client/renderer/state/level/PlayerRenderState;Lnet/minecraft/client/renderer/state/level/FirstPersonHandsAndItemsRenderState;FFLnet/minecraft/world/InteractionHand;FLnet/minecraft/world/item/ItemStack;FLcom/mojang/blaze3d/vertex/PoseStack;Lnet/minecraft/client/renderer/SubmitNodeCollector;I)V
+
+  private void swingArm(float, com.mojang.blaze3d.vertex.PoseStack, int, net.minecraft.world.entity.HumanoidArm);
+    descriptor: (FLcom/mojang/blaze3d/vertex/PoseStack;ILnet/minecraft/world/entity/HumanoidArm;)V
+
+  private static void lambda$renderMap$0(int, com.mojang.blaze3d.vertex.PoseStack$Pose, com.mojang.blaze3d.vertex.VertexConsumer);
+    descriptor: (ILcom/mojang/blaze3d/vertex/PoseStack$Pose;Lcom/mojang/blaze3d/vertex/VertexConsumer;)V
+
+  static {};
+    descriptor: ()V
+}

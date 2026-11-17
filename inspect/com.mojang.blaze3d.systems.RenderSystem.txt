@@ -1,0 +1,200 @@
+Compiled from "RenderSystem.java"
+public class com.mojang.blaze3d.systems.RenderSystem {
+  private static final org.slf4j.Logger LOGGER;
+    descriptor: Lorg/slf4j/Logger;
+  public static final double DEFAULT_DEPTH_CLEAR_VALUE;
+    descriptor: D
+  public static final int MINIMUM_ATLAS_TEXTURE_SIZE;
+    descriptor: I
+  public static final int PROJECTION_MATRIX_UBO_SIZE;
+    descriptor: I
+  private static java.lang.Thread renderThread;
+    descriptor: Ljava/lang/Thread;
+  private static com.mojang.renderpearl.api.device.GpuDevice DEVICE;
+    descriptor: Lcom/mojang/renderpearl/api/device/GpuDevice;
+  private static com.mojang.renderpearl.api.device.GpuBackend BACKEND;
+    descriptor: Lcom/mojang/renderpearl/api/device/GpuBackend;
+  private static final com.mojang.blaze3d.systems.RenderSystem$AutoStorageIndexBuffer sharedSequential;
+    descriptor: Lcom/mojang/blaze3d/systems/RenderSystem$AutoStorageIndexBuffer;
+  private static final com.mojang.blaze3d.systems.RenderSystem$AutoStorageIndexBuffer sharedSequentialQuad;
+    descriptor: Lcom/mojang/blaze3d/systems/RenderSystem$AutoStorageIndexBuffer;
+  private static final com.mojang.blaze3d.systems.RenderSystem$AutoStorageIndexBuffer sharedSequentialLines;
+    descriptor: Lcom/mojang/blaze3d/systems/RenderSystem$AutoStorageIndexBuffer;
+  private static com.mojang.blaze3d.ProjectionType projectionType;
+    descriptor: Lcom/mojang/blaze3d/ProjectionType;
+  private static com.mojang.blaze3d.ProjectionType savedProjectionType;
+    descriptor: Lcom/mojang/blaze3d/ProjectionType;
+  private static final org.joml.Matrix4fStack modelViewStack;
+    descriptor: Lorg/joml/Matrix4fStack;
+  private static com.mojang.renderpearl.api.buffers.GpuBufferSlice shaderFog;
+    descriptor: Lcom/mojang/renderpearl/api/buffers/GpuBufferSlice;
+  private static com.mojang.renderpearl.api.buffers.GpuBufferSlice shaderLightDirections;
+    descriptor: Lcom/mojang/renderpearl/api/buffers/GpuBufferSlice;
+  private static com.mojang.renderpearl.api.buffers.GpuBufferSlice projectionMatrixBuffer;
+    descriptor: Lcom/mojang/renderpearl/api/buffers/GpuBufferSlice;
+  private static com.mojang.renderpearl.api.buffers.GpuBufferSlice savedProjectionMatrixBuffer;
+    descriptor: Lcom/mojang/renderpearl/api/buffers/GpuBufferSlice;
+  private static final java.util.concurrent.atomic.AtomicLong pollEventsWaitStart;
+    descriptor: Ljava/util/concurrent/atomic/AtomicLong;
+  private static final java.util.concurrent.atomic.AtomicBoolean pollingEvents;
+    descriptor: Ljava/util/concurrent/atomic/AtomicBoolean;
+  private static final net.minecraft.util.ArrayListDeque<com.mojang.blaze3d.systems.RenderSystem$GpuAsyncTask> PENDING_FENCES;
+    descriptor: Lnet/minecraft/util/ArrayListDeque;
+  public static boolean isRenderingLevel;
+    descriptor: Z
+  private static com.mojang.renderpearl.api.buffers.GpuBuffer globalSettingsUniform;
+    descriptor: Lcom/mojang/renderpearl/api/buffers/GpuBuffer;
+  private static net.minecraft.client.renderer.DynamicGpuData dynamicGpuData;
+    descriptor: Lnet/minecraft/client/renderer/DynamicGpuData;
+  private static final com.mojang.blaze3d.systems.ScissorState scissorStateForRenderTypeDraws;
+    descriptor: Lcom/mojang/blaze3d/systems/ScissorState;
+  private static final com.mojang.blaze3d.systems.SamplerCache samplerCache;
+    descriptor: Lcom/mojang/blaze3d/systems/SamplerCache;
+  private static com.mojang.blaze3d.pipeline.PipelineCache fallbackPipelineCache;
+    descriptor: Lcom/mojang/blaze3d/pipeline/PipelineCache;
+  private static com.mojang.blaze3d.pipeline.PipelineCache currentPipelineCache;
+    descriptor: Lcom/mojang/blaze3d/pipeline/PipelineCache;
+  public com.mojang.blaze3d.systems.RenderSystem();
+    descriptor: ()V
+
+  public static com.mojang.blaze3d.systems.SamplerCache getSamplerCache();
+    descriptor: ()Lcom/mojang/blaze3d/systems/SamplerCache;
+
+  public static void setFallbackPipelineCache(com.mojang.blaze3d.pipeline.PipelineCache);
+    descriptor: (Lcom/mojang/blaze3d/pipeline/PipelineCache;)V
+
+  public static com.mojang.blaze3d.pipeline.PipelineCache setCurrentPipelineCache(com.mojang.blaze3d.pipeline.PipelineCache);
+    descriptor: (Lcom/mojang/blaze3d/pipeline/PipelineCache;)Lcom/mojang/blaze3d/pipeline/PipelineCache;
+
+  public static com.mojang.renderpearl.api.pipeline.CompiledRenderPipeline getCompiledPipelineNullable(com.mojang.renderpearl.api.pipeline.RenderPipeline);
+    descriptor: (Lcom/mojang/renderpearl/api/pipeline/RenderPipeline;)Lcom/mojang/renderpearl/api/pipeline/CompiledRenderPipeline;
+
+  public static com.mojang.renderpearl.api.pipeline.CompiledRenderPipeline getCompiledPipeline(com.mojang.renderpearl.api.pipeline.RenderPipeline);
+    descriptor: (Lcom/mojang/renderpearl/api/pipeline/RenderPipeline;)Lcom/mojang/renderpearl/api/pipeline/CompiledRenderPipeline;
+
+  public static void initRenderThread();
+    descriptor: ()V
+
+  public static boolean isOnRenderThread();
+    descriptor: ()Z
+
+  public static void assertOnRenderThread();
+    descriptor: ()V
+
+  private static java.lang.IllegalStateException constructThreadException();
+    descriptor: ()Ljava/lang/IllegalStateException;
+
+  public static void pollEvents(com.mojang.blaze3d.platform.SDLEventHandler);
+    descriptor: (Lcom/mojang/blaze3d/platform/SDLEventHandler;)V
+
+  public static boolean isFrozenAtPollEvents();
+    descriptor: ()Z
+
+  public static void pumpEvents(com.mojang.blaze3d.platform.SDLEventHandler);
+    descriptor: (Lcom/mojang/blaze3d/platform/SDLEventHandler;)V
+
+  public static void setShaderFog(com.mojang.renderpearl.api.buffers.GpuBufferSlice);
+    descriptor: (Lcom/mojang/renderpearl/api/buffers/GpuBufferSlice;)V
+
+  public static com.mojang.renderpearl.api.buffers.GpuBufferSlice getShaderFog();
+    descriptor: ()Lcom/mojang/renderpearl/api/buffers/GpuBufferSlice;
+
+  public static void setShaderLights(com.mojang.renderpearl.api.buffers.GpuBufferSlice);
+    descriptor: (Lcom/mojang/renderpearl/api/buffers/GpuBufferSlice;)V
+
+  public static com.mojang.renderpearl.api.buffers.GpuBufferSlice getShaderLights();
+    descriptor: ()Lcom/mojang/renderpearl/api/buffers/GpuBufferSlice;
+
+  public static void enableScissorForRenderTypeDraws(int, int, int, int);
+    descriptor: (IIII)V
+
+  public static void disableScissorForRenderTypeDraws();
+    descriptor: ()V
+
+  public static com.mojang.blaze3d.systems.ScissorState getScissorStateForRenderTypeDraws();
+    descriptor: ()Lcom/mojang/blaze3d/systems/ScissorState;
+
+  public static java.lang.String getBackendDescription();
+    descriptor: ()Ljava/lang/String;
+
+  public static net.minecraft.util.TimeSource$NanoTimeSource initBackendSystem();
+    descriptor: ()Lnet/minecraft/util/TimeSource$NanoTimeSource;
+
+  public static void initRenderer(com.mojang.renderpearl.api.device.GpuDevice);
+    descriptor: (Lcom/mojang/renderpearl/api/device/GpuDevice;)V
+
+  public static void shutdownRenderer();
+    descriptor: ()V
+
+  public static void trackBackendLibraryForShutdown(com.mojang.renderpearl.api.device.GpuBackend);
+    descriptor: (Lcom/mojang/renderpearl/api/device/GpuBackend;)V
+
+  public static void unloadTrackedBackendLibrary();
+    descriptor: ()V
+
+  public static void setupDefaultState();
+    descriptor: ()V
+
+  public static void setProjectionMatrix(com.mojang.renderpearl.api.buffers.GpuBufferSlice, com.mojang.blaze3d.ProjectionType);
+    descriptor: (Lcom/mojang/renderpearl/api/buffers/GpuBufferSlice;Lcom/mojang/blaze3d/ProjectionType;)V
+
+  public static void backupProjectionMatrix();
+    descriptor: ()V
+
+  public static void restoreProjectionMatrix();
+    descriptor: ()V
+
+  public static com.mojang.renderpearl.api.buffers.GpuBufferSlice getProjectionMatrixBuffer();
+    descriptor: ()Lcom/mojang/renderpearl/api/buffers/GpuBufferSlice;
+
+  public static org.joml.Matrix4f getModelViewMatrixCopy();
+    descriptor: ()Lorg/joml/Matrix4f;
+
+  public static org.joml.Matrix4fStack getModelViewStack();
+    descriptor: ()Lorg/joml/Matrix4fStack;
+
+  public static com.mojang.blaze3d.systems.RenderSystem$AutoStorageIndexBuffer getSequentialBuffer(com.mojang.renderpearl.api.pipeline.PrimitiveTopology);
+    descriptor: (Lcom/mojang/renderpearl/api/pipeline/PrimitiveTopology;)Lcom/mojang/blaze3d/systems/RenderSystem$AutoStorageIndexBuffer;
+
+  public static void setGlobalSettingsUniform(com.mojang.renderpearl.api.buffers.GpuBuffer);
+    descriptor: (Lcom/mojang/renderpearl/api/buffers/GpuBuffer;)V
+
+  public static com.mojang.renderpearl.api.buffers.GpuBuffer getGlobalSettingsUniform();
+    descriptor: ()Lcom/mojang/renderpearl/api/buffers/GpuBuffer;
+
+  public static com.mojang.blaze3d.ProjectionType getProjectionType();
+    descriptor: ()Lcom/mojang/blaze3d/ProjectionType;
+
+  public static void queueFencedTask(java.lang.Runnable);
+    descriptor: (Ljava/lang/Runnable;)V
+
+  public static void executePendingTasks();
+    descriptor: ()V
+
+  public static com.mojang.renderpearl.api.device.GpuDevice getDevice();
+    descriptor: ()Lcom/mojang/renderpearl/api/device/GpuDevice;
+
+  public static com.mojang.renderpearl.api.device.GpuDevice tryGetDevice();
+    descriptor: ()Lcom/mojang/renderpearl/api/device/GpuDevice;
+
+  public static boolean isWireframeAvailable();
+    descriptor: ()Z
+
+  public static net.minecraft.client.renderer.DynamicGpuData getDynamicUniforms();
+    descriptor: ()Lnet/minecraft/client/renderer/DynamicGpuData;
+
+  public static void bindDefaultUniforms(com.mojang.renderpearl.api.commands.RenderPass);
+    descriptor: (Lcom/mojang/renderpearl/api/commands/RenderPass;)V
+
+  public static void resizeAllAutoStorageIndexBuffers();
+    descriptor: ()V
+
+  private static void lambda$static$1(it.unimi.dsi.fastutil.ints.IntConsumer, int);
+    descriptor: (Lit/unimi/dsi/fastutil/ints/IntConsumer;I)V
+
+  private static void lambda$static$0(it.unimi.dsi.fastutil.ints.IntConsumer, int);
+    descriptor: (Lit/unimi/dsi/fastutil/ints/IntConsumer;I)V
+
+  static {};
+    descriptor: ()V
+}

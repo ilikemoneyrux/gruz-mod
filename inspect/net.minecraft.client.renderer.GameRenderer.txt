@@ -1,0 +1,253 @@
+Compiled from "GameRenderer.java"
+public class net.minecraft.client.renderer.GameRenderer implements java.lang.AutoCloseable,net.minecraft.world.waypoints.TrackedWaypoint$Projector,net.minecraft.server.packs.resources.ResourceManagerReloadListener {
+  private static final net.minecraft.resources.Identifier BLUR_POST_CHAIN_ID;
+    descriptor: Lnet/minecraft/resources/Identifier;
+  public static net.minecraft.resources.Identifier END_OF_FRAME_POST_EFFECT;
+    descriptor: Lnet/minecraft/resources/Identifier;
+  public static final int MAX_BLUR_RADIUS;
+    descriptor: I
+  private static final org.slf4j.Logger LOGGER;
+    descriptor: Lorg/slf4j/Logger;
+  private final net.minecraft.client.Minecraft minecraft;
+    descriptor: Lnet/minecraft/client/Minecraft;
+  private final net.minecraft.client.renderer.state.GameRenderState gameRenderState;
+    descriptor: Lnet/minecraft/client/renderer/state/GameRenderState;
+  public final net.minecraft.client.renderer.FirstPersonHandsAndItemsRenderer firstPersonHandsAndItemsRenderer;
+    descriptor: Lnet/minecraft/client/renderer/FirstPersonHandsAndItemsRenderer;
+  private final net.minecraft.client.renderer.ScreenEffectRenderer screenEffectRenderer;
+    descriptor: Lnet/minecraft/client/renderer/ScreenEffectRenderer;
+  private final net.minecraft.client.renderer.DebugCrosshairRenderer debugCrosshairRenderer;
+    descriptor: Lnet/minecraft/client/renderer/DebugCrosshairRenderer;
+  private final net.minecraft.client.renderer.RenderBuffers renderBuffers;
+    descriptor: Lnet/minecraft/client/renderer/RenderBuffers;
+  private final com.mojang.blaze3d.pipeline.RenderTarget mainRenderTarget;
+    descriptor: Lcom/mojang/blaze3d/pipeline/RenderTarget;
+  private final com.mojang.blaze3d.pipeline.RenderTarget hud3DTarget;
+    descriptor: Lcom/mojang/blaze3d/pipeline/RenderTarget;
+  private float bossOverlayWorldDarkening;
+    descriptor: F
+  private float bossOverlayWorldDarkeningO;
+    descriptor: F
+  private boolean renderBlockOutline;
+    descriptor: Z
+  private long lastScreenshotAttempt;
+    descriptor: J
+  private boolean hasWorldScreenshot;
+    descriptor: Z
+  private final net.minecraft.client.renderer.Lightmap lightmap;
+    descriptor: Lnet/minecraft/client/renderer/Lightmap;
+  private final net.minecraft.client.renderer.LightmapRenderStateExtractor lightmapRenderStateExtractor;
+    descriptor: Lnet/minecraft/client/renderer/LightmapRenderStateExtractor;
+  private final net.minecraft.client.renderer.UiLightmap uiLightmap;
+    descriptor: Lnet/minecraft/client/renderer/UiLightmap;
+  private boolean useUiLightmap;
+    descriptor: Z
+  private final net.minecraft.client.renderer.texture.OverlayTexture overlayTexture;
+    descriptor: Lnet/minecraft/client/renderer/texture/OverlayTexture;
+  protected final net.minecraft.client.renderer.Panorama panorama;
+    descriptor: Lnet/minecraft/client/renderer/Panorama;
+  private final com.mojang.blaze3d.resource.CrossFrameResourcePool resourcePool;
+    descriptor: Lcom/mojang/blaze3d/resource/CrossFrameResourcePool;
+  private final net.minecraft.client.renderer.fog.FogRenderer fogRenderer;
+    descriptor: Lnet/minecraft/client/renderer/fog/FogRenderer;
+  private final net.minecraft.client.gui.render.GuiRenderer guiRenderer;
+    descriptor: Lnet/minecraft/client/gui/render/GuiRenderer;
+  private final net.minecraft.client.renderer.feature.FeatureRenderDispatcher featureRenderDispatcher;
+    descriptor: Lnet/minecraft/client/renderer/feature/FeatureRenderDispatcher;
+  private final net.minecraft.client.renderer.SubmitNodeStorage handAndScreenSubmitNodeStorage;
+    descriptor: Lnet/minecraft/client/renderer/SubmitNodeStorage;
+  private net.minecraft.resources.Identifier spectatedEntityPostEffect;
+    descriptor: Lnet/minecraft/resources/Identifier;
+  private boolean spectatedEntityEffectActive;
+    descriptor: Z
+  private final net.minecraft.client.Camera mainCamera;
+    descriptor: Lnet/minecraft/client/Camera;
+  private final net.minecraft.client.renderer.Projection hudProjection;
+    descriptor: Lnet/minecraft/client/renderer/Projection;
+  private final com.mojang.blaze3d.platform.Lighting lighting;
+    descriptor: Lcom/mojang/blaze3d/platform/Lighting;
+  private final net.minecraft.client.renderer.GlobalSettingsUniform globalSettingsUniform;
+    descriptor: Lnet/minecraft/client/renderer/GlobalSettingsUniform;
+  private final net.minecraft.client.renderer.ProjectionMatrixBuffer levelProjectionMatrixBuffer;
+    descriptor: Lnet/minecraft/client/renderer/ProjectionMatrixBuffer;
+  private final net.minecraft.client.renderer.ProjectionMatrixBuffer hud3dProjectionMatrixBuffer;
+    descriptor: Lnet/minecraft/client/renderer/ProjectionMatrixBuffer;
+  private final java.util.List<net.minecraft.resources.Identifier> requestedPostEffects;
+    descriptor: Ljava/util/List;
+  private final java.util.List<net.minecraft.client.renderer.PostChain> appliedPostEffects;
+    descriptor: Ljava/util/List;
+  private final java.util.List<net.minecraft.resources.Identifier> failedPostEffects;
+    descriptor: Ljava/util/List;
+  private volatile boolean shouldResetFailedPostEffects;
+    descriptor: Z
+  public net.minecraft.client.renderer.GameRenderer(net.minecraft.client.Minecraft, net.minecraft.client.renderer.FirstPersonHandsAndItemsRenderer, net.minecraft.client.resources.model.ModelManager, net.minecraft.client.renderer.item.ItemModelResolver);
+    descriptor: (Lnet/minecraft/client/Minecraft;Lnet/minecraft/client/renderer/FirstPersonHandsAndItemsRenderer;Lnet/minecraft/client/resources/model/ModelManager;Lnet/minecraft/client/renderer/item/ItemModelResolver;)V
+
+  public void close();
+    descriptor: ()V
+
+  public net.minecraft.client.renderer.RenderBuffers renderBuffers();
+    descriptor: ()Lnet/minecraft/client/renderer/RenderBuffers;
+
+  public net.minecraft.client.renderer.feature.FeatureRenderDispatcher featureRenderDispatcher();
+    descriptor: ()Lnet/minecraft/client/renderer/feature/FeatureRenderDispatcher;
+
+  public net.minecraft.client.renderer.state.GameRenderState gameRenderState();
+    descriptor: ()Lnet/minecraft/client/renderer/state/GameRenderState;
+
+  public void setRenderBlockOutline(boolean);
+    descriptor: (Z)V
+
+  public void clearSpectatedEntityPostEffect();
+    descriptor: ()V
+
+  public void toggleSpectatorPostEffect();
+    descriptor: ()V
+
+  public void checkEntityPostEffect(net.minecraft.world.entity.Entity);
+    descriptor: (Lnet/minecraft/world/entity/Entity;)V
+
+  private void setSpectatedEntityPostEffect(net.minecraft.resources.Identifier);
+    descriptor: (Lnet/minecraft/resources/Identifier;)V
+
+  public void processBlurEffect();
+    descriptor: ()V
+
+  public static void preloadUiShader(net.minecraft.server.packs.resources.ResourceManager);
+    descriptor: (Lnet/minecraft/server/packs/resources/ResourceManager;)V
+
+  public void tick();
+    descriptor: ()V
+
+  public net.minecraft.resources.Identifier spectatedEntityPostEffect();
+    descriptor: ()Lnet/minecraft/resources/Identifier;
+
+  public java.util.List<net.minecraft.resources.Identifier> getRequestedPostEffects();
+    descriptor: ()Ljava/util/List;
+
+  public java.util.List<net.minecraft.resources.Identifier> getAppliedPostEffects();
+    descriptor: ()Ljava/util/List;
+
+  public void onResourceManagerReload(net.minecraft.server.packs.resources.ResourceManager);
+    descriptor: (Lnet/minecraft/server/packs/resources/ResourceManager;)V
+
+  public void resize(int, int);
+    descriptor: (II)V
+
+  private void bobHurt(net.minecraft.client.renderer.state.level.CameraRenderState, com.mojang.blaze3d.vertex.PoseStack);
+    descriptor: (Lnet/minecraft/client/renderer/state/level/CameraRenderState;Lcom/mojang/blaze3d/vertex/PoseStack;)V
+
+  private void bobView(net.minecraft.client.renderer.state.level.CameraRenderState, com.mojang.blaze3d.vertex.PoseStack);
+    descriptor: (Lnet/minecraft/client/renderer/state/level/CameraRenderState;Lcom/mojang/blaze3d/vertex/PoseStack;)V
+
+  private void renderItemInHand(net.minecraft.client.renderer.state.level.CameraRenderState, net.minecraft.client.renderer.state.level.PlayerRenderState, com.mojang.renderpearl.api.textures.GpuTextureView);
+    descriptor: (Lnet/minecraft/client/renderer/state/level/CameraRenderState;Lnet/minecraft/client/renderer/state/level/PlayerRenderState;Lcom/mojang/renderpearl/api/textures/GpuTextureView;)V
+
+  public static float nightVisionScale(net.minecraft.world.entity.LivingEntity, float);
+    descriptor: (Lnet/minecraft/world/entity/LivingEntity;F)F
+
+  public void update(net.minecraft.client.DeltaTracker);
+    descriptor: (Lnet/minecraft/client/DeltaTracker;)V
+
+  public void extract(net.minecraft.client.DeltaTracker, boolean);
+    descriptor: (Lnet/minecraft/client/DeltaTracker;Z)V
+
+  public void render();
+    descriptor: ()V
+
+  private void preparePostEffects(java.util.List<net.minecraft.resources.Identifier>);
+    descriptor: (Ljava/util/List;)V
+
+  private void applyPostEffects();
+    descriptor: ()V
+
+  private void tryTakeScreenshotIfNeeded();
+    descriptor: ()V
+
+  private void takeAutoScreenshot(java.nio.file.Path);
+    descriptor: (Ljava/nio/file/Path;)V
+
+  private boolean shouldRenderBlockOutline();
+    descriptor: ()Z
+
+  public void renderLevel();
+    descriptor: ()V
+
+  private void render3dHud(net.minecraft.client.renderer.state.level.CameraRenderState, net.minecraft.client.renderer.state.level.PlayerRenderState, net.minecraft.client.renderer.state.OptionsRenderState, boolean);
+    descriptor: (Lnet/minecraft/client/renderer/state/level/CameraRenderState;Lnet/minecraft/client/renderer/state/level/PlayerRenderState;Lnet/minecraft/client/renderer/state/OptionsRenderState;Z)V
+
+  private void integrate3DHudDepth();
+    descriptor: ()V
+
+  private void extractWindow();
+    descriptor: ()V
+
+  private void extractOptions();
+    descriptor: ()V
+
+  private void extractCamera(net.minecraft.client.DeltaTracker, float);
+    descriptor: (Lnet/minecraft/client/DeltaTracker;F)V
+
+  public void resetData();
+    descriptor: ()V
+
+  public float bossOverlayWorldDarkening(float);
+    descriptor: (F)F
+
+  public net.minecraft.client.Camera mainCamera();
+    descriptor: ()Lnet/minecraft/client/Camera;
+
+  public com.mojang.renderpearl.api.textures.GpuTextureView lightmap();
+    descriptor: ()Lcom/mojang/renderpearl/api/textures/GpuTextureView;
+
+  public com.mojang.renderpearl.api.textures.GpuTextureView levelLightmap();
+    descriptor: ()Lcom/mojang/renderpearl/api/textures/GpuTextureView;
+
+  public net.minecraft.client.renderer.texture.OverlayTexture overlayTexture();
+    descriptor: ()Lnet/minecraft/client/renderer/texture/OverlayTexture;
+
+  public com.mojang.blaze3d.pipeline.RenderTarget mainRenderTarget();
+    descriptor: ()Lcom/mojang/blaze3d/pipeline/RenderTarget;
+
+  public net.minecraft.world.phys.Vec3 projectPointToScreen(net.minecraft.world.phys.Vec3);
+    descriptor: (Lnet/minecraft/world/phys/Vec3;)Lnet/minecraft/world/phys/Vec3;
+
+  public double projectHorizonToScreen();
+    descriptor: ()D
+
+  public com.mojang.blaze3d.platform.Lighting lighting();
+    descriptor: ()Lcom/mojang/blaze3d/platform/Lighting;
+
+  public void setLevel(net.minecraft.client.multiplayer.ClientLevel);
+    descriptor: (Lnet/minecraft/client/multiplayer/ClientLevel;)V
+
+  public net.minecraft.client.renderer.Panorama panorama();
+    descriptor: ()Lnet/minecraft/client/renderer/Panorama;
+
+  public void registerPanoramaTextures(net.minecraft.client.renderer.texture.TextureManager);
+    descriptor: (Lnet/minecraft/client/renderer/texture/TextureManager;)V
+
+  public boolean useImprovedTransparency();
+    descriptor: ()Z
+
+  private static java.lang.String lambda$integrate3DHudDepth$0();
+    descriptor: ()Ljava/lang/String;
+
+  private static java.lang.String lambda$render3dHud$0();
+    descriptor: ()Ljava/lang/String;
+
+  private static void lambda$takeAutoScreenshot$0(java.nio.file.Path, com.mojang.blaze3d.platform.NativeImage);
+    descriptor: (Ljava/nio/file/Path;Lcom/mojang/blaze3d/platform/NativeImage;)V
+
+  private static void lambda$takeAutoScreenshot$1(com.mojang.blaze3d.platform.NativeImage, java.nio.file.Path);
+    descriptor: (Lcom/mojang/blaze3d/platform/NativeImage;Ljava/nio/file/Path;)V
+
+  private void lambda$tryTakeScreenshotIfNeeded$0(java.nio.file.Path);
+    descriptor: (Ljava/nio/file/Path;)V
+
+  private static java.lang.String lambda$renderItemInHand$0();
+    descriptor: ()Ljava/lang/String;
+
+  static {};
+    descriptor: ()V
+}
