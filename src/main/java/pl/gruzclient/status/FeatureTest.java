@@ -225,7 +225,25 @@ public final class FeatureTest {
             case 745 -> shot("11-cos-front");
             case 750 -> { p.setYRot(270f); }
             case 775 -> shot("12-cos-side");
-            case 785 -> { log("DONE"); mc.stop(); }
+            // Armor HUD znika bez zbroi i przedmiotu w ręce; Target HUD tylko przy celowaniu w zasięgu (i 1 s po ciosie)
+            case 785 -> {
+                mc.options.hideGui = false;
+                mc.options.setCameraType(net.minecraft.client.CameraType.FIRST_PERSON);
+                for (Module m : new Module[]{Modules.ARMOR, Modules.TARGET_HUD, Modules.FPS}) m.setEnabled(true);
+                p.setXRot(0f); p.setYRot(0f);
+                var srv = mc.getSingleplayerServer();
+                if (srv != null) srv.execute(() -> {
+                    var sp = srv.getPlayerList().getPlayer(p.getUUID());
+                    if (sp == null) return;
+                    srv.getCommands().performPrefixedCommand(srv.createCommandSourceStack(), "clear " + p.getScoreboardName());
+                    srv.getCommands().performPrefixedCommand(srv.createCommandSourceStack(), String.format(java.util.Locale.ROOT,
+                            "summon armor_stand %.2f %.2f %.2f {NoGravity:1b}", sp.getX(), sp.getY(), sp.getZ() + 2.0));
+                });
+            }
+            case 810 -> { log("armor empty=" + Modules.ARMOR.lastW + "x" + Modules.ARMOR.lastH + " target=" + mc.crosshairPickEntity); shot("13-hud-aim"); }
+            case 815 -> p.setYRot(120f);
+            case 840 -> { log("away target=" + mc.crosshairPickEntity + " targetW=" + Modules.TARGET_HUD.lastW); shot("14-hud-away"); }
+            case 850 -> { log("DONE"); mc.stop(); }
             default -> { }
         }
         if (t > 300 && t < 320) p.turn(8.0, 0.0); // „ruch myszy” w prawo

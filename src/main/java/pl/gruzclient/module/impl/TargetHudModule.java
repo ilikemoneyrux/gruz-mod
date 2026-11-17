@@ -12,7 +12,7 @@ import net.minecraft.client.multiplayer.PlayerInfo;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
 
-/** Karta przeciwnika: głowa, nick, życie (płynny pasek), zbroja i odległość. */
+/** Karta przeciwnika: głowa, nick, życie (płynny pasek), zbroja i odległość. Widać ją tylko przy celowaniu w zasięgu i 1 s po ciosie. */
 public class TargetHudModule extends HudModule {
     private float shownHealth = -1f;
     private float fade = 0f;
@@ -27,7 +27,9 @@ public class TargetHudModule extends HudModule {
         long now = System.currentTimeMillis();
         float dt = last == 0 ? 0.016f : Math.min(0.05f, (now - last) / 1000f);
         last = now;
-        LivingEntity t = Combat.target;
+        // tylko gdy celujesz w kogoś w zasięgu ataku (gra sama ustawia crosshairPickEntity w zasięgu) albo przez 1 s po uderzeniu
+        LivingEntity t = mc.crosshairPickEntity instanceof LivingEntity l && l.isAlive() ? l
+                : Combat.target != null && now - Combat.lastHitAt < 1000 ? Combat.target : null;
         if (t != null) lastTarget = t;
         fade = damp(fade, t != null || editing ? 1f : 0f, 10f, dt);
         int w = 150, h = 40;

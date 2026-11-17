@@ -12,7 +12,7 @@ import net.minecraft.world.item.Items;
 
 import static pl.gruzclient.render.GruzDraw.*;
 
-/** Zbroja (od hełmu do butów) + przedmiot w ręce, z wytrzymałością. */
+/** Zbroja (od hełmu do butów) + przedmiot w ręce, z wytrzymałością. Bez niczego – ukryte. */
 public class ArmorHudModule extends HudModule {
     public final Setting.Bool durability = add(new Setting.Bool("durability", "setting.durability", true));
 
@@ -31,6 +31,8 @@ public class ArmorHudModule extends HudModule {
             items.add(Compat.stack(Items.DIAMOND_LEGGINGS));
             items.add(Compat.stack(Items.DIAMOND_BOOTS));
         }
+        // pusty kwadrat bez zbroi i przedmiotu w ręce źle wygląda – wtedy nic nie rysujemy (rozmiar 0 = nie zajmuje miejsca)
+        if (items.isEmpty()) return new int[]{0, 0};
         var tr = mc.font;
         int w = 0;
         for (ItemStack s : items) w = Math.max(w, 20 + (durability.value ? tr.width(label(s)) + 4 : 0));
