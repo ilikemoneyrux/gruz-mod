@@ -1,0 +1,48 @@
+Compiled from "FogRenderer.java"
+public class net.minecraft.client.renderer.fog.FogRenderer implements java.lang.AutoCloseable {
+  public static final int FOG_UBO_SIZE;
+    descriptor: I
+  private static final java.util.List<net.minecraft.client.renderer.fog.environment.FogEnvironment> FOG_ENVIRONMENTS;
+    descriptor: Ljava/util/List;
+  private static boolean fogEnabled;
+    descriptor: Z
+  private final com.mojang.blaze3d.buffers.GpuBuffer emptyBuffer;
+    descriptor: Lcom/mojang/blaze3d/buffers/GpuBuffer;
+  private final net.minecraft.client.renderer.MappableRingBuffer regularBuffer;
+    descriptor: Lnet/minecraft/client/renderer/MappableRingBuffer;
+  public net.minecraft.client.renderer.fog.FogRenderer();
+    descriptor: ()V
+
+  public void close();
+    descriptor: ()V
+
+  public void endFrame();
+    descriptor: ()V
+
+  public com.mojang.blaze3d.buffers.GpuBufferSlice getBuffer(net.minecraft.client.renderer.fog.FogRenderer$FogMode);
+    descriptor: (Lnet/minecraft/client/renderer/fog/FogRenderer$FogMode;)Lcom/mojang/blaze3d/buffers/GpuBufferSlice;
+
+  private org.joml.Vector4f computeFogColor(net.minecraft.client.Camera, float, net.minecraft.client.multiplayer.ClientLevel, int, float);
+    descriptor: (Lnet/minecraft/client/Camera;FLnet/minecraft/client/multiplayer/ClientLevel;IF)Lorg/joml/Vector4f;
+
+  public static boolean toggleFog();
+    descriptor: ()Z
+
+  public org.joml.Vector4f setupFog(net.minecraft.client.Camera, int, net.minecraft.client.DeltaTracker, float, net.minecraft.client.multiplayer.ClientLevel);
+    descriptor: (Lnet/minecraft/client/Camera;ILnet/minecraft/client/DeltaTracker;FLnet/minecraft/client/multiplayer/ClientLevel;)Lorg/joml/Vector4f;
+
+  private net.minecraft.world.level.material.FogType getFogType(net.minecraft.client.Camera);
+    descriptor: (Lnet/minecraft/client/Camera;)Lnet/minecraft/world/level/material/FogType;
+
+  private void updateBuffer(java.nio.ByteBuffer, int, org.joml.Vector4f, float, float, float, float, float, float);
+    descriptor: (Ljava/nio/ByteBuffer;ILorg/joml/Vector4f;FFFFFF)V
+
+  private static java.lang.String method_71111();
+    descriptor: ()Ljava/lang/String;
+
+  private static java.lang.String method_71308();
+    descriptor: ()Ljava/lang/String;
+
+  static {};
+    descriptor: ()V
+}

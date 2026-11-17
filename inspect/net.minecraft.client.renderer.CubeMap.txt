@@ -1,0 +1,31 @@
+Compiled from "CubeMap.java"
+public class net.minecraft.client.renderer.CubeMap implements java.lang.AutoCloseable {
+  private static final int SIDES;
+    descriptor: I
+  private final com.mojang.blaze3d.buffers.GpuBuffer vertexBuffer;
+    descriptor: Lcom/mojang/blaze3d/buffers/GpuBuffer;
+  private final net.minecraft.client.renderer.CachedPerspectiveProjectionMatrixBuffer projectionMatrixUbo;
+    descriptor: Lnet/minecraft/client/renderer/CachedPerspectiveProjectionMatrixBuffer;
+  private final net.minecraft.resources.Identifier location;
+    descriptor: Lnet/minecraft/resources/Identifier;
+  public net.minecraft.client.renderer.CubeMap(net.minecraft.resources.Identifier);
+    descriptor: (Lnet/minecraft/resources/Identifier;)V
+
+  public void render(net.minecraft.client.Minecraft, float, float);
+    descriptor: (Lnet/minecraft/client/Minecraft;FF)V
+
+  private static com.mojang.blaze3d.buffers.GpuBuffer initializeVertices();
+    descriptor: ()Lcom/mojang/blaze3d/buffers/GpuBuffer;
+
+  public void registerTextures(net.minecraft.client.renderer.texture.TextureManager);
+    descriptor: (Lnet/minecraft/client/renderer/texture/TextureManager;)V
+
+  public void close();
+    descriptor: ()V
+
+  private static java.lang.String method_68477();
+    descriptor: ()Ljava/lang/String;
+
+  private static java.lang.String method_71305();
+    descriptor: ()Ljava/lang/String;
+}

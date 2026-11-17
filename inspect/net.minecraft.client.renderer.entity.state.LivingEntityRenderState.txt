@@ -1,0 +1,52 @@
+Compiled from "LivingEntityRenderState.java"
+public class net.minecraft.client.renderer.entity.state.LivingEntityRenderState extends net.minecraft.client.renderer.entity.state.EntityRenderState {
+  public float bodyRot;
+    descriptor: F
+  public float yRot;
+    descriptor: F
+  public float xRot;
+    descriptor: F
+  public float deathTime;
+    descriptor: F
+  public float walkAnimationPos;
+    descriptor: F
+  public float walkAnimationSpeed;
+    descriptor: F
+  public float scale;
+    descriptor: F
+  public float ageScale;
+    descriptor: F
+  public float ticksSinceKineticHitFeedback;
+    descriptor: F
+  public boolean isUpsideDown;
+    descriptor: Z
+  public boolean isFullyFrozen;
+    descriptor: Z
+  public boolean isBaby;
+    descriptor: Z
+  public boolean isInWater;
+    descriptor: Z
+  public boolean isAutoSpinAttack;
+    descriptor: Z
+  public boolean hasRedOverlay;
+    descriptor: Z
+  public boolean isInvisibleToPlayer;
+    descriptor: Z
+  public net.minecraft.core.Direction bedOrientation;
+    descriptor: Lnet/minecraft/core/Direction;
+  public net.minecraft.world.entity.Pose pose;
+    descriptor: Lnet/minecraft/world/entity/Pose;
+  public final net.minecraft.client.renderer.item.ItemStackRenderState headItem;
+    descriptor: Lnet/minecraft/client/renderer/item/ItemStackRenderState;
+  public float wornHeadAnimationPos;
+    descriptor: F
+  public net.minecraft.world.level.block.SkullBlock$Type wornHeadType;
+    descriptor: Lnet/minecraft/world/level/block/SkullBlock$Type;
+  public net.minecraft.world.item.component.ResolvableProfile wornHeadProfile;
+    descriptor: Lnet/minecraft/world/item/component/ResolvableProfile;
+  public net.minecraft.client.renderer.entity.state.LivingEntityRenderState();
+    descriptor: ()V
+
+  public boolean hasPose(net.minecraft.world.entity.Pose);
+    descriptor: (Lnet/minecraft/world/entity/Pose;)Z
+}

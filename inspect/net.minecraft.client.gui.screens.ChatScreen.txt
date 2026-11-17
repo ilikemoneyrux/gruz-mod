@@ -1,0 +1,92 @@
+Compiled from "ChatScreen.java"
+public class net.minecraft.client.gui.screens.ChatScreen extends net.minecraft.client.gui.screens.Screen {
+  public static final double MOUSE_SCROLL_SPEED;
+    descriptor: D
+  private static final net.minecraft.network.chat.Component USAGE_TEXT;
+    descriptor: Lnet/minecraft/network/chat/Component;
+  private java.lang.String historyBuffer;
+    descriptor: Ljava/lang/String;
+  private int historyPos;
+    descriptor: I
+  protected net.minecraft.client.gui.components.EditBox input;
+    descriptor: Lnet/minecraft/client/gui/components/EditBox;
+  protected java.lang.String initial;
+    descriptor: Ljava/lang/String;
+  protected boolean isDraft;
+    descriptor: Z
+  protected net.minecraft.client.gui.screens.ChatScreen$ExitReason exitReason;
+    descriptor: Lnet/minecraft/client/gui/screens/ChatScreen$ExitReason;
+  net.minecraft.client.gui.components.CommandSuggestions commandSuggestions;
+    descriptor: Lnet/minecraft/client/gui/components/CommandSuggestions;
+  public net.minecraft.client.gui.screens.ChatScreen(java.lang.String, boolean);
+    descriptor: (Ljava/lang/String;Z)V
+
+  protected void init();
+    descriptor: ()V
+
+  protected void setInitialFocus();
+    descriptor: ()V
+
+  public void resize(int, int);
+    descriptor: (II)V
+
+  public void onClose();
+    descriptor: ()V
+
+  public void removed();
+    descriptor: ()V
+
+  protected boolean shouldDiscardDraft();
+    descriptor: ()Z
+
+  private void onEdited(java.lang.String);
+    descriptor: (Ljava/lang/String;)V
+
+  public boolean keyPressed(net.minecraft.client.input.KeyEvent);
+    descriptor: (Lnet/minecraft/client/input/KeyEvent;)Z
+
+  public boolean mouseScrolled(double, double, double, double);
+    descriptor: (DDDD)Z
+
+  public boolean mouseClicked(net.minecraft.client.input.MouseButtonEvent, boolean);
+    descriptor: (Lnet/minecraft/client/input/MouseButtonEvent;Z)Z
+
+  private boolean insertionClickMode();
+    descriptor: ()Z
+
+  private boolean handleComponentClicked(net.minecraft.network.chat.Style, boolean);
+    descriptor: (Lnet/minecraft/network/chat/Style;Z)Z
+
+  public void insertText(java.lang.String, boolean);
+    descriptor: (Ljava/lang/String;Z)V
+
+  public void moveInHistory(int);
+    descriptor: (I)V
+
+  private net.minecraft.util.FormattedCharSequence formatChat(java.lang.String, int);
+    descriptor: (Ljava/lang/String;I)Lnet/minecraft/util/FormattedCharSequence;
+
+  public void render(net.minecraft.client.gui.GuiGraphics, int, int, float);
+    descriptor: (Lnet/minecraft/client/gui/GuiGraphics;IIF)V
+
+  public void renderBackground(net.minecraft.client.gui.GuiGraphics, int, int, float);
+    descriptor: (Lnet/minecraft/client/gui/GuiGraphics;IIF)V
+
+  public boolean isPauseScreen();
+    descriptor: ()Z
+
+  public boolean isAllowedInPortal();
+    descriptor: ()Z
+
+  protected void updateNarrationState(net.minecraft.client.gui.narration.NarrationElementOutput);
+    descriptor: (Lnet/minecraft/client/gui/narration/NarrationElementOutput;)V
+
+  public void handleChatInput(java.lang.String, boolean);
+    descriptor: (Ljava/lang/String;Z)V
+
+  public java.lang.String normalizeChatMessage(java.lang.String);
+    descriptor: (Ljava/lang/String;)Ljava/lang/String;
+
+  static {};
+    descriptor: ()V
+}

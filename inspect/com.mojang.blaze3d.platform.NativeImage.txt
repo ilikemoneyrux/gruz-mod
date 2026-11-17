@@ -1,0 +1,131 @@
+Compiled from "NativeImage.java"
+public final class com.mojang.blaze3d.platform.NativeImage implements java.lang.AutoCloseable {
+  private static final org.slf4j.Logger LOGGER;
+    descriptor: Lorg/slf4j/Logger;
+  private static final com.mojang.jtracy.MemoryPool MEMORY_POOL;
+    descriptor: Lcom/mojang/jtracy/MemoryPool;
+  private static final java.util.Set<java.nio.file.StandardOpenOption> OPEN_OPTIONS;
+    descriptor: Ljava/util/Set;
+  private final com.mojang.blaze3d.platform.NativeImage$Format format;
+    descriptor: Lcom/mojang/blaze3d/platform/NativeImage$Format;
+  private final int width;
+    descriptor: I
+  private final int height;
+    descriptor: I
+  private final boolean useStbFree;
+    descriptor: Z
+  private long pixels;
+    descriptor: J
+  private final long size;
+    descriptor: J
+  public com.mojang.blaze3d.platform.NativeImage(int, int, boolean);
+    descriptor: (IIZ)V
+
+  public com.mojang.blaze3d.platform.NativeImage(com.mojang.blaze3d.platform.NativeImage$Format, int, int, boolean);
+    descriptor: (Lcom/mojang/blaze3d/platform/NativeImage$Format;IIZ)V
+
+  public com.mojang.blaze3d.platform.NativeImage(com.mojang.blaze3d.platform.NativeImage$Format, int, int, boolean, long);
+    descriptor: (Lcom/mojang/blaze3d/platform/NativeImage$Format;IIZJ)V
+
+  public java.lang.String toString();
+    descriptor: ()Ljava/lang/String;
+
+  private boolean isOutsideBounds(int, int);
+    descriptor: (II)Z
+
+  public static com.mojang.blaze3d.platform.NativeImage read(java.io.InputStream) throws java.io.IOException;
+    descriptor: (Ljava/io/InputStream;)Lcom/mojang/blaze3d/platform/NativeImage;
+
+  public static com.mojang.blaze3d.platform.NativeImage read(com.mojang.blaze3d.platform.NativeImage$Format, java.io.InputStream) throws java.io.IOException;
+    descriptor: (Lcom/mojang/blaze3d/platform/NativeImage$Format;Ljava/io/InputStream;)Lcom/mojang/blaze3d/platform/NativeImage;
+
+  public static com.mojang.blaze3d.platform.NativeImage read(java.nio.ByteBuffer) throws java.io.IOException;
+    descriptor: (Ljava/nio/ByteBuffer;)Lcom/mojang/blaze3d/platform/NativeImage;
+
+  public static com.mojang.blaze3d.platform.NativeImage read(byte[]) throws java.io.IOException;
+    descriptor: ([B)Lcom/mojang/blaze3d/platform/NativeImage;
+
+  private static com.mojang.blaze3d.platform.NativeImage putAndRead(java.nio.ByteBuffer, byte[]) throws java.io.IOException;
+    descriptor: (Ljava/nio/ByteBuffer;[B)Lcom/mojang/blaze3d/platform/NativeImage;
+
+  public static com.mojang.blaze3d.platform.NativeImage read(com.mojang.blaze3d.platform.NativeImage$Format, java.nio.ByteBuffer) throws java.io.IOException;
+    descriptor: (Lcom/mojang/blaze3d/platform/NativeImage$Format;Ljava/nio/ByteBuffer;)Lcom/mojang/blaze3d/platform/NativeImage;
+
+  private void checkAllocated();
+    descriptor: ()V
+
+  public void close();
+    descriptor: ()V
+
+  public int getWidth();
+    descriptor: ()I
+
+  public int getHeight();
+    descriptor: ()I
+
+  public com.mojang.blaze3d.platform.NativeImage$Format format();
+    descriptor: ()Lcom/mojang/blaze3d/platform/NativeImage$Format;
+
+  private int getPixelABGR(int, int);
+    descriptor: (II)I
+
+  public int getPixel(int, int);
+    descriptor: (II)I
+
+  public void setPixelABGR(int, int, int);
+    descriptor: (III)V
+
+  public void setPixel(int, int, int);
+    descriptor: (III)V
+
+  public com.mojang.blaze3d.platform.NativeImage mappedCopy(java.util.function.IntUnaryOperator);
+    descriptor: (Ljava/util/function/IntUnaryOperator;)Lcom/mojang/blaze3d/platform/NativeImage;
+
+  public int[] getPixelsABGR();
+    descriptor: ()[I
+
+  public int[] getPixels();
+    descriptor: ()[I
+
+  public byte getLuminanceOrAlpha(int, int);
+    descriptor: (II)B
+
+  public int[] makePixelArray();
+    descriptor: ()[I
+
+  public void writeToFile(java.io.File) throws java.io.IOException;
+    descriptor: (Ljava/io/File;)V
+
+  public boolean copyFromFont(org.lwjgl.util.freetype.FT_Face, int);
+    descriptor: (Lorg/lwjgl/util/freetype/FT_Face;I)Z
+
+  public void writeToFile(java.nio.file.Path) throws java.io.IOException;
+    descriptor: (Ljava/nio/file/Path;)V
+
+  private boolean writeToChannel(java.nio.channels.WritableByteChannel) throws java.io.IOException;
+    descriptor: (Ljava/nio/channels/WritableByteChannel;)Z
+
+  public void copyFrom(com.mojang.blaze3d.platform.NativeImage);
+    descriptor: (Lcom/mojang/blaze3d/platform/NativeImage;)V
+
+  public void fillRect(int, int, int, int, int);
+    descriptor: (IIIII)V
+
+  public void copyRect(int, int, int, int, int, int, boolean, boolean);
+    descriptor: (IIIIIIZZ)V
+
+  public void copyRect(com.mojang.blaze3d.platform.NativeImage, int, int, int, int, int, int, boolean, boolean);
+    descriptor: (Lcom/mojang/blaze3d/platform/NativeImage;IIIIIIZZ)V
+
+  public void resizeSubRectTo(int, int, int, int, com.mojang.blaze3d.platform.NativeImage);
+    descriptor: (IIIILcom/mojang/blaze3d/platform/NativeImage;)V
+
+  public void untrack();
+    descriptor: ()V
+
+  public long getPointer();
+    descriptor: ()J
+
+  static {};
+    descriptor: ()V
+}

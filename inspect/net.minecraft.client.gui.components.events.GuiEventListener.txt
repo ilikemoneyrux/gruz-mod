@@ -1,0 +1,50 @@
+Compiled from "GuiEventListener.java"
+public interface net.minecraft.client.gui.components.events.GuiEventListener extends net.minecraft.client.gui.components.TabOrderedElement {
+  public default void mouseMoved(double, double);
+    descriptor: (DD)V
+
+  public default boolean mouseClicked(net.minecraft.client.input.MouseButtonEvent, boolean);
+    descriptor: (Lnet/minecraft/client/input/MouseButtonEvent;Z)Z
+
+  public default boolean mouseReleased(net.minecraft.client.input.MouseButtonEvent);
+    descriptor: (Lnet/minecraft/client/input/MouseButtonEvent;)Z
+
+  public default boolean mouseDragged(net.minecraft.client.input.MouseButtonEvent, double, double);
+    descriptor: (Lnet/minecraft/client/input/MouseButtonEvent;DD)Z
+
+  public default boolean mouseScrolled(double, double, double, double);
+    descriptor: (DDDD)Z
+
+  public default boolean keyPressed(net.minecraft.client.input.KeyEvent);
+    descriptor: (Lnet/minecraft/client/input/KeyEvent;)Z
+
+  public default boolean keyReleased(net.minecraft.client.input.KeyEvent);
+    descriptor: (Lnet/minecraft/client/input/KeyEvent;)Z
+
+  public default boolean charTyped(net.minecraft.client.input.CharacterEvent);
+    descriptor: (Lnet/minecraft/client/input/CharacterEvent;)Z
+
+  public default net.minecraft.client.gui.ComponentPath nextFocusPath(net.minecraft.client.gui.navigation.FocusNavigationEvent);
+    descriptor: (Lnet/minecraft/client/gui/navigation/FocusNavigationEvent;)Lnet/minecraft/client/gui/ComponentPath;
+
+  public default boolean isMouseOver(double, double);
+    descriptor: (DD)Z
+
+  public abstract void setFocused(boolean);
+    descriptor: (Z)V
+
+  public abstract boolean isFocused();
+    descriptor: ()Z
+
+  public default boolean shouldTakeFocusAfterInteraction();
+    descriptor: ()Z
+
+  public default net.minecraft.client.gui.ComponentPath getCurrentFocusPath();
+    descriptor: ()Lnet/minecraft/client/gui/ComponentPath;
+
+  public default net.minecraft.client.gui.navigation.ScreenRectangle getRectangle();
+    descriptor: ()Lnet/minecraft/client/gui/navigation/ScreenRectangle;
+
+  public default net.minecraft.client.gui.navigation.ScreenRectangle getBorderForArrowNavigation(net.minecraft.client.gui.navigation.ScreenDirection);
+    descriptor: (Lnet/minecraft/client/gui/navigation/ScreenDirection;)Lnet/minecraft/client/gui/navigation/ScreenRectangle;
+}

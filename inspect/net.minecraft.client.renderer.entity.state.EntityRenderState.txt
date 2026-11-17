@@ -1,0 +1,53 @@
+Compiled from "EntityRenderState.java"
+public class net.minecraft.client.renderer.entity.state.EntityRenderState {
+  public static final int NO_OUTLINE;
+    descriptor: I
+  public net.minecraft.world.entity.EntityType<?> entityType;
+    descriptor: Lnet/minecraft/world/entity/EntityType;
+  public double x;
+    descriptor: D
+  public double y;
+    descriptor: D
+  public double z;
+    descriptor: D
+  public float ageInTicks;
+    descriptor: F
+  public float boundingBoxWidth;
+    descriptor: F
+  public float boundingBoxHeight;
+    descriptor: F
+  public float eyeHeight;
+    descriptor: F
+  public double distanceToCameraSq;
+    descriptor: D
+  public boolean isInvisible;
+    descriptor: Z
+  public boolean isDiscrete;
+    descriptor: Z
+  public boolean displayFireAnimation;
+    descriptor: Z
+  public int lightCoords;
+    descriptor: I
+  public int outlineColor;
+    descriptor: I
+  public net.minecraft.world.phys.Vec3 passengerOffset;
+    descriptor: Lnet/minecraft/world/phys/Vec3;
+  public net.minecraft.network.chat.Component nameTag;
+    descriptor: Lnet/minecraft/network/chat/Component;
+  public net.minecraft.world.phys.Vec3 nameTagAttachment;
+    descriptor: Lnet/minecraft/world/phys/Vec3;
+  public java.util.List<net.minecraft.client.renderer.entity.state.EntityRenderState$LeashState> leashStates;
+    descriptor: Ljava/util/List;
+  public float shadowRadius;
+    descriptor: F
+  public final java.util.List<net.minecraft.client.renderer.entity.state.EntityRenderState$ShadowPiece> shadowPieces;
+    descriptor: Ljava/util/List;
+  public net.minecraft.client.renderer.entity.state.EntityRenderState();
+    descriptor: ()V
+
+  public boolean appearsGlowing();
+    descriptor: ()Z
+
+  public void fillCrashReportCategory(net.minecraft.CrashReportCategory);
+    descriptor: (Lnet/minecraft/CrashReportCategory;)V
+}

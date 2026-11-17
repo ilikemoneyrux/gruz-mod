@@ -1,0 +1,120 @@
+Compiled from "Camera.java"
+public class net.minecraft.client.Camera implements net.minecraft.world.waypoints.TrackedWaypoint$Camera {
+  private static final float DEFAULT_CAMERA_DISTANCE;
+    descriptor: F
+  private static final org.joml.Vector3f FORWARDS;
+    descriptor: Lorg/joml/Vector3f;
+  private static final org.joml.Vector3f UP;
+    descriptor: Lorg/joml/Vector3f;
+  private static final org.joml.Vector3f LEFT;
+    descriptor: Lorg/joml/Vector3f;
+  private boolean initialized;
+    descriptor: Z
+  private net.minecraft.world.level.Level level;
+    descriptor: Lnet/minecraft/world/level/Level;
+  private net.minecraft.world.entity.Entity entity;
+    descriptor: Lnet/minecraft/world/entity/Entity;
+  private net.minecraft.world.phys.Vec3 position;
+    descriptor: Lnet/minecraft/world/phys/Vec3;
+  private final net.minecraft.core.BlockPos$MutableBlockPos blockPosition;
+    descriptor: Lnet/minecraft/core/BlockPos$MutableBlockPos;
+  private final org.joml.Vector3f forwards;
+    descriptor: Lorg/joml/Vector3f;
+  private final org.joml.Vector3f up;
+    descriptor: Lorg/joml/Vector3f;
+  private final org.joml.Vector3f left;
+    descriptor: Lorg/joml/Vector3f;
+  private float xRot;
+    descriptor: F
+  private float yRot;
+    descriptor: F
+  private final org.joml.Quaternionf rotation;
+    descriptor: Lorg/joml/Quaternionf;
+  private boolean detached;
+    descriptor: Z
+  private float eyeHeight;
+    descriptor: F
+  private float eyeHeightOld;
+    descriptor: F
+  private float partialTickTime;
+    descriptor: F
+  private final net.minecraft.world.attribute.EnvironmentAttributeProbe attributeProbe;
+    descriptor: Lnet/minecraft/world/attribute/EnvironmentAttributeProbe;
+  public net.minecraft.client.Camera();
+    descriptor: ()V
+
+  public void setup(net.minecraft.world.level.Level, net.minecraft.world.entity.Entity, boolean, boolean, float);
+    descriptor: (Lnet/minecraft/world/level/Level;Lnet/minecraft/world/entity/Entity;ZZF)V
+
+  public void tick();
+    descriptor: ()V
+
+  private float getMaxZoom(float);
+    descriptor: (F)F
+
+  protected void move(float, float, float);
+    descriptor: (FFF)V
+
+  protected void setRotation(float, float);
+    descriptor: (FF)V
+
+  protected void setPosition(double, double, double);
+    descriptor: (DDD)V
+
+  protected void setPosition(net.minecraft.world.phys.Vec3);
+    descriptor: (Lnet/minecraft/world/phys/Vec3;)V
+
+  public net.minecraft.world.phys.Vec3 position();
+    descriptor: ()Lnet/minecraft/world/phys/Vec3;
+
+  public net.minecraft.core.BlockPos blockPosition();
+    descriptor: ()Lnet/minecraft/core/BlockPos;
+
+  public float xRot();
+    descriptor: ()F
+
+  public float yRot();
+    descriptor: ()F
+
+  public float yaw();
+    descriptor: ()F
+
+  public org.joml.Quaternionf rotation();
+    descriptor: ()Lorg/joml/Quaternionf;
+
+  public net.minecraft.world.entity.Entity entity();
+    descriptor: ()Lnet/minecraft/world/entity/Entity;
+
+  public boolean isInitialized();
+    descriptor: ()Z
+
+  public boolean isDetached();
+    descriptor: ()Z
+
+  public net.minecraft.world.attribute.EnvironmentAttributeProbe attributeProbe();
+    descriptor: ()Lnet/minecraft/world/attribute/EnvironmentAttributeProbe;
+
+  public net.minecraft.client.Camera$NearPlane getNearPlane();
+    descriptor: ()Lnet/minecraft/client/Camera$NearPlane;
+
+  public net.minecraft.world.level.material.FogType getFluidInCamera();
+    descriptor: ()Lnet/minecraft/world/level/material/FogType;
+
+  public org.joml.Vector3fc forwardVector();
+    descriptor: ()Lorg/joml/Vector3fc;
+
+  public org.joml.Vector3fc upVector();
+    descriptor: ()Lorg/joml/Vector3fc;
+
+  public org.joml.Vector3fc leftVector();
+    descriptor: ()Lorg/joml/Vector3fc;
+
+  public void reset();
+    descriptor: ()V
+
+  public float getPartialTickTime();
+    descriptor: ()F
+
+  static {};
+    descriptor: ()V
+}

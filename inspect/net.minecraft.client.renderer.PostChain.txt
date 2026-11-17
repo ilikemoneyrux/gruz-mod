@@ -1,0 +1,44 @@
+Compiled from "PostChain.java"
+public class net.minecraft.client.renderer.PostChain implements java.lang.AutoCloseable {
+  public static final net.minecraft.resources.Identifier MAIN_TARGET_ID;
+    descriptor: Lnet/minecraft/resources/Identifier;
+  private final java.util.List<net.minecraft.client.renderer.PostPass> passes;
+    descriptor: Ljava/util/List;
+  private final java.util.Map<net.minecraft.resources.Identifier, net.minecraft.client.renderer.PostChainConfig$InternalTarget> internalTargets;
+    descriptor: Ljava/util/Map;
+  private final java.util.Set<net.minecraft.resources.Identifier> externalTargets;
+    descriptor: Ljava/util/Set;
+  private final java.util.Map<net.minecraft.resources.Identifier, com.mojang.blaze3d.pipeline.RenderTarget> persistentTargets;
+    descriptor: Ljava/util/Map;
+  private final net.minecraft.client.renderer.CachedOrthoProjectionMatrixBuffer projectionMatrixBuffer;
+    descriptor: Lnet/minecraft/client/renderer/CachedOrthoProjectionMatrixBuffer;
+  private net.minecraft.client.renderer.PostChain(java.util.List<net.minecraft.client.renderer.PostPass>, java.util.Map<net.minecraft.resources.Identifier, net.minecraft.client.renderer.PostChainConfig$InternalTarget>, java.util.Set<net.minecraft.resources.Identifier>, net.minecraft.client.renderer.CachedOrthoProjectionMatrixBuffer);
+    descriptor: (Ljava/util/List;Ljava/util/Map;Ljava/util/Set;Lnet/minecraft/client/renderer/CachedOrthoProjectionMatrixBuffer;)V
+
+  public static net.minecraft.client.renderer.PostChain load(net.minecraft.client.renderer.PostChainConfig, net.minecraft.client.renderer.texture.TextureManager, java.util.Set<net.minecraft.resources.Identifier>, net.minecraft.resources.Identifier, net.minecraft.client.renderer.CachedOrthoProjectionMatrixBuffer) throws net.minecraft.client.renderer.ShaderManager$CompilationException;
+    descriptor: (Lnet/minecraft/client/renderer/PostChainConfig;Lnet/minecraft/client/renderer/texture/TextureManager;Ljava/util/Set;Lnet/minecraft/resources/Identifier;Lnet/minecraft/client/renderer/CachedOrthoProjectionMatrixBuffer;)Lnet/minecraft/client/renderer/PostChain;
+
+  private static net.minecraft.client.renderer.PostPass createPass(net.minecraft.client.renderer.texture.TextureManager, net.minecraft.client.renderer.PostChainConfig$Pass, net.minecraft.resources.Identifier) throws net.minecraft.client.renderer.ShaderManager$CompilationException;
+    descriptor: (Lnet/minecraft/client/renderer/texture/TextureManager;Lnet/minecraft/client/renderer/PostChainConfig$Pass;Lnet/minecraft/resources/Identifier;)Lnet/minecraft/client/renderer/PostPass;
+
+  public void addToFrame(com.mojang.blaze3d.framegraph.FrameGraphBuilder, int, int, net.minecraft.client.renderer.PostChain$TargetBundle);
+    descriptor: (Lcom/mojang/blaze3d/framegraph/FrameGraphBuilder;IILnet/minecraft/client/renderer/PostChain$TargetBundle;)V
+
+  public void process(com.mojang.blaze3d.pipeline.RenderTarget, com.mojang.blaze3d.resource.GraphicsResourceAllocator);
+    descriptor: (Lcom/mojang/blaze3d/pipeline/RenderTarget;Lcom/mojang/blaze3d/resource/GraphicsResourceAllocator;)V
+
+  private com.mojang.blaze3d.pipeline.RenderTarget getOrCreatePersistentTarget(net.minecraft.resources.Identifier, com.mojang.blaze3d.resource.RenderTargetDescriptor);
+    descriptor: (Lnet/minecraft/resources/Identifier;Lcom/mojang/blaze3d/resource/RenderTargetDescriptor;)Lcom/mojang/blaze3d/pipeline/RenderTarget;
+
+  public void close();
+    descriptor: ()V
+
+  private static java.lang.String method_62239(java.lang.String);
+    descriptor: (Ljava/lang/String;)Ljava/lang/String;
+
+  private static boolean method_62238(net.minecraft.client.renderer.PostChainConfig, net.minecraft.resources.Identifier);
+    descriptor: (Lnet/minecraft/client/renderer/PostChainConfig;Lnet/minecraft/resources/Identifier;)Z
+
+  static {};
+    descriptor: ()V
+}
