@@ -1,0 +1,445 @@
+Compiled from "RenderType.java"
+public abstract class net.minecraft.client.renderer.RenderType extends net.minecraft.client.renderer.RenderStateShard {
+  private static final int MEGABYTE;
+    descriptor: I
+  public static final int BIG_BUFFER_SIZE;
+    descriptor: I
+  public static final int SMALL_BUFFER_SIZE;
+    descriptor: I
+  public static final int TRANSIENT_BUFFER_SIZE;
+    descriptor: I
+  private static final net.minecraft.client.renderer.RenderType SOLID;
+    descriptor: Lnet/minecraft/client/renderer/RenderType;
+  private static final net.minecraft.client.renderer.RenderType CUTOUT_MIPPED;
+    descriptor: Lnet/minecraft/client/renderer/RenderType;
+  private static final net.minecraft.client.renderer.RenderType CUTOUT;
+    descriptor: Lnet/minecraft/client/renderer/RenderType;
+  private static final net.minecraft.client.renderer.RenderType TRANSLUCENT;
+    descriptor: Lnet/minecraft/client/renderer/RenderType;
+  private static final net.minecraft.client.renderer.RenderType TRANSLUCENT_MOVING_BLOCK;
+    descriptor: Lnet/minecraft/client/renderer/RenderType;
+  private static final java.util.function.Function<net.minecraft.resources.ResourceLocation, net.minecraft.client.renderer.RenderType> ARMOR_CUTOUT_NO_CULL;
+    descriptor: Ljava/util/function/Function;
+  private static final java.util.function.Function<net.minecraft.resources.ResourceLocation, net.minecraft.client.renderer.RenderType> ENTITY_SOLID;
+    descriptor: Ljava/util/function/Function;
+  private static final java.util.function.Function<net.minecraft.resources.ResourceLocation, net.minecraft.client.renderer.RenderType> ENTITY_CUTOUT;
+    descriptor: Ljava/util/function/Function;
+  private static final java.util.function.BiFunction<net.minecraft.resources.ResourceLocation, java.lang.Boolean, net.minecraft.client.renderer.RenderType> ENTITY_CUTOUT_NO_CULL;
+    descriptor: Ljava/util/function/BiFunction;
+  private static final java.util.function.BiFunction<net.minecraft.resources.ResourceLocation, java.lang.Boolean, net.minecraft.client.renderer.RenderType> ENTITY_CUTOUT_NO_CULL_Z_OFFSET;
+    descriptor: Ljava/util/function/BiFunction;
+  private static final java.util.function.Function<net.minecraft.resources.ResourceLocation, net.minecraft.client.renderer.RenderType> ITEM_ENTITY_TRANSLUCENT_CULL;
+    descriptor: Ljava/util/function/Function;
+  private static final java.util.function.Function<net.minecraft.resources.ResourceLocation, net.minecraft.client.renderer.RenderType> ENTITY_TRANSLUCENT_CULL;
+    descriptor: Ljava/util/function/Function;
+  private static final java.util.function.BiFunction<net.minecraft.resources.ResourceLocation, java.lang.Boolean, net.minecraft.client.renderer.RenderType> ENTITY_TRANSLUCENT;
+    descriptor: Ljava/util/function/BiFunction;
+  private static final java.util.function.BiFunction<net.minecraft.resources.ResourceLocation, java.lang.Boolean, net.minecraft.client.renderer.RenderType> ENTITY_TRANSLUCENT_EMISSIVE;
+    descriptor: Ljava/util/function/BiFunction;
+  private static final java.util.function.Function<net.minecraft.resources.ResourceLocation, net.minecraft.client.renderer.RenderType> ENTITY_SMOOTH_CUTOUT;
+    descriptor: Ljava/util/function/Function;
+  private static final java.util.function.BiFunction<net.minecraft.resources.ResourceLocation, java.lang.Boolean, net.minecraft.client.renderer.RenderType> BEACON_BEAM;
+    descriptor: Ljava/util/function/BiFunction;
+  private static final java.util.function.Function<net.minecraft.resources.ResourceLocation, net.minecraft.client.renderer.RenderType> ENTITY_DECAL;
+    descriptor: Ljava/util/function/Function;
+  private static final java.util.function.Function<net.minecraft.resources.ResourceLocation, net.minecraft.client.renderer.RenderType> ENTITY_NO_OUTLINE;
+    descriptor: Ljava/util/function/Function;
+  private static final java.util.function.Function<net.minecraft.resources.ResourceLocation, net.minecraft.client.renderer.RenderType> ENTITY_SHADOW;
+    descriptor: Ljava/util/function/Function;
+  private static final java.util.function.Function<net.minecraft.resources.ResourceLocation, net.minecraft.client.renderer.RenderType> DRAGON_EXPLOSION_ALPHA;
+    descriptor: Ljava/util/function/Function;
+  private static final java.util.function.BiFunction<net.minecraft.resources.ResourceLocation, net.minecraft.client.renderer.RenderStateShard$TransparencyStateShard, net.minecraft.client.renderer.RenderType> EYES;
+    descriptor: Ljava/util/function/BiFunction;
+  private static final net.minecraft.client.renderer.RenderType LEASH;
+    descriptor: Lnet/minecraft/client/renderer/RenderType;
+  private static final net.minecraft.client.renderer.RenderType WATER_MASK;
+    descriptor: Lnet/minecraft/client/renderer/RenderType;
+  private static final net.minecraft.client.renderer.RenderType ARMOR_GLINT;
+    descriptor: Lnet/minecraft/client/renderer/RenderType;
+  private static final net.minecraft.client.renderer.RenderType ARMOR_ENTITY_GLINT;
+    descriptor: Lnet/minecraft/client/renderer/RenderType;
+  private static final net.minecraft.client.renderer.RenderType GLINT_TRANSLUCENT;
+    descriptor: Lnet/minecraft/client/renderer/RenderType;
+  private static final net.minecraft.client.renderer.RenderType GLINT;
+    descriptor: Lnet/minecraft/client/renderer/RenderType;
+  private static final net.minecraft.client.renderer.RenderType GLINT_DIRECT;
+    descriptor: Lnet/minecraft/client/renderer/RenderType;
+  private static final net.minecraft.client.renderer.RenderType ENTITY_GLINT;
+    descriptor: Lnet/minecraft/client/renderer/RenderType;
+  private static final net.minecraft.client.renderer.RenderType ENTITY_GLINT_DIRECT;
+    descriptor: Lnet/minecraft/client/renderer/RenderType;
+  private static final java.util.function.Function<net.minecraft.resources.ResourceLocation, net.minecraft.client.renderer.RenderType> CRUMBLING;
+    descriptor: Ljava/util/function/Function;
+  private static final java.util.function.Function<net.minecraft.resources.ResourceLocation, net.minecraft.client.renderer.RenderType> TEXT;
+    descriptor: Ljava/util/function/Function;
+  private static final net.minecraft.client.renderer.RenderType TEXT_BACKGROUND;
+    descriptor: Lnet/minecraft/client/renderer/RenderType;
+  private static final java.util.function.Function<net.minecraft.resources.ResourceLocation, net.minecraft.client.renderer.RenderType> TEXT_INTENSITY;
+    descriptor: Ljava/util/function/Function;
+  private static final java.util.function.Function<net.minecraft.resources.ResourceLocation, net.minecraft.client.renderer.RenderType> TEXT_POLYGON_OFFSET;
+    descriptor: Ljava/util/function/Function;
+  private static final java.util.function.Function<net.minecraft.resources.ResourceLocation, net.minecraft.client.renderer.RenderType> TEXT_INTENSITY_POLYGON_OFFSET;
+    descriptor: Ljava/util/function/Function;
+  private static final java.util.function.Function<net.minecraft.resources.ResourceLocation, net.minecraft.client.renderer.RenderType> TEXT_SEE_THROUGH;
+    descriptor: Ljava/util/function/Function;
+  private static final net.minecraft.client.renderer.RenderType TEXT_BACKGROUND_SEE_THROUGH;
+    descriptor: Lnet/minecraft/client/renderer/RenderType;
+  private static final java.util.function.Function<net.minecraft.resources.ResourceLocation, net.minecraft.client.renderer.RenderType> TEXT_INTENSITY_SEE_THROUGH;
+    descriptor: Ljava/util/function/Function;
+  private static final net.minecraft.client.renderer.RenderType LIGHTNING;
+    descriptor: Lnet/minecraft/client/renderer/RenderType;
+  private static final net.minecraft.client.renderer.RenderType TRIPWIRE;
+    descriptor: Lnet/minecraft/client/renderer/RenderType;
+  private static final net.minecraft.client.renderer.RenderType END_PORTAL;
+    descriptor: Lnet/minecraft/client/renderer/RenderType;
+  private static final net.minecraft.client.renderer.RenderType END_GATEWAY;
+    descriptor: Lnet/minecraft/client/renderer/RenderType;
+  public static final net.minecraft.client.renderer.RenderType$CompositeRenderType LINES;
+    descriptor: Lnet/minecraft/client/renderer/RenderType$CompositeRenderType;
+  public static final net.minecraft.client.renderer.RenderType$CompositeRenderType LINE_STRIP;
+    descriptor: Lnet/minecraft/client/renderer/RenderType$CompositeRenderType;
+  private static final java.util.function.Function<java.lang.Double, net.minecraft.client.renderer.RenderType$CompositeRenderType> DEBUG_LINE_STRIP;
+    descriptor: Ljava/util/function/Function;
+  private static final net.minecraft.client.renderer.RenderType$CompositeRenderType DEBUG_FILLED_BOX;
+    descriptor: Lnet/minecraft/client/renderer/RenderType$CompositeRenderType;
+  private static final net.minecraft.client.renderer.RenderType$CompositeRenderType DEBUG_QUADS;
+    descriptor: Lnet/minecraft/client/renderer/RenderType$CompositeRenderType;
+  private static final net.minecraft.client.renderer.RenderType$CompositeRenderType DEBUG_SECTION_QUADS;
+    descriptor: Lnet/minecraft/client/renderer/RenderType$CompositeRenderType;
+  private static final net.minecraft.client.renderer.RenderType$CompositeRenderType GUI;
+    descriptor: Lnet/minecraft/client/renderer/RenderType$CompositeRenderType;
+  private static final net.minecraft.client.renderer.RenderType$CompositeRenderType GUI_OVERLAY;
+    descriptor: Lnet/minecraft/client/renderer/RenderType$CompositeRenderType;
+  private static final net.minecraft.client.renderer.RenderType$CompositeRenderType GUI_TEXT_HIGHLIGHT;
+    descriptor: Lnet/minecraft/client/renderer/RenderType$CompositeRenderType;
+  private static final net.minecraft.client.renderer.RenderType$CompositeRenderType GUI_GHOST_RECIPE_OVERLAY;
+    descriptor: Lnet/minecraft/client/renderer/RenderType$CompositeRenderType;
+  private static final com.google.common.collect.ImmutableList<net.minecraft.client.renderer.RenderType> CHUNK_BUFFER_LAYERS;
+    descriptor: Lcom/google/common/collect/ImmutableList;
+  private final com.mojang.blaze3d.vertex.VertexFormat format;
+    descriptor: Lcom/mojang/blaze3d/vertex/VertexFormat;
+  private final com.mojang.blaze3d.vertex.VertexFormat$Mode mode;
+    descriptor: Lcom/mojang/blaze3d/vertex/VertexFormat$Mode;
+  private final int bufferSize;
+    descriptor: I
+  private final boolean affectsCrumbling;
+    descriptor: Z
+  private final boolean sortOnUpload;
+    descriptor: Z
+  private final java.util.Optional<net.minecraft.client.renderer.RenderType> asOptional;
+    descriptor: Ljava/util/Optional;
+  public static net.minecraft.client.renderer.RenderType solid();
+    descriptor: ()Lnet/minecraft/client/renderer/RenderType;
+
+  public static net.minecraft.client.renderer.RenderType cutoutMipped();
+    descriptor: ()Lnet/minecraft/client/renderer/RenderType;
+
+  public static net.minecraft.client.renderer.RenderType cutout();
+    descriptor: ()Lnet/minecraft/client/renderer/RenderType;
+
+  private static net.minecraft.client.renderer.RenderType$CompositeState translucentState(net.minecraft.client.renderer.RenderStateShard$ShaderStateShard);
+    descriptor: (Lnet/minecraft/client/renderer/RenderStateShard$ShaderStateShard;)Lnet/minecraft/client/renderer/RenderType$CompositeState;
+
+  public static net.minecraft.client.renderer.RenderType translucent();
+    descriptor: ()Lnet/minecraft/client/renderer/RenderType;
+
+  private static net.minecraft.client.renderer.RenderType$CompositeState translucentMovingBlockState();
+    descriptor: ()Lnet/minecraft/client/renderer/RenderType$CompositeState;
+
+  public static net.minecraft.client.renderer.RenderType translucentMovingBlock();
+    descriptor: ()Lnet/minecraft/client/renderer/RenderType;
+
+  private static net.minecraft.client.renderer.RenderType$CompositeRenderType createArmorCutoutNoCull(java.lang.String, net.minecraft.resources.ResourceLocation, boolean);
+    descriptor: (Ljava/lang/String;Lnet/minecraft/resources/ResourceLocation;Z)Lnet/minecraft/client/renderer/RenderType$CompositeRenderType;
+
+  public static net.minecraft.client.renderer.RenderType armorCutoutNoCull(net.minecraft.resources.ResourceLocation);
+    descriptor: (Lnet/minecraft/resources/ResourceLocation;)Lnet/minecraft/client/renderer/RenderType;
+
+  public static net.minecraft.client.renderer.RenderType createArmorDecalCutoutNoCull(net.minecraft.resources.ResourceLocation);
+    descriptor: (Lnet/minecraft/resources/ResourceLocation;)Lnet/minecraft/client/renderer/RenderType;
+
+  public static net.minecraft.client.renderer.RenderType entitySolid(net.minecraft.resources.ResourceLocation);
+    descriptor: (Lnet/minecraft/resources/ResourceLocation;)Lnet/minecraft/client/renderer/RenderType;
+
+  public static net.minecraft.client.renderer.RenderType entityCutout(net.minecraft.resources.ResourceLocation);
+    descriptor: (Lnet/minecraft/resources/ResourceLocation;)Lnet/minecraft/client/renderer/RenderType;
+
+  public static net.minecraft.client.renderer.RenderType entityCutoutNoCull(net.minecraft.resources.ResourceLocation, boolean);
+    descriptor: (Lnet/minecraft/resources/ResourceLocation;Z)Lnet/minecraft/client/renderer/RenderType;
+
+  public static net.minecraft.client.renderer.RenderType entityCutoutNoCull(net.minecraft.resources.ResourceLocation);
+    descriptor: (Lnet/minecraft/resources/ResourceLocation;)Lnet/minecraft/client/renderer/RenderType;
+
+  public static net.minecraft.client.renderer.RenderType entityCutoutNoCullZOffset(net.minecraft.resources.ResourceLocation, boolean);
+    descriptor: (Lnet/minecraft/resources/ResourceLocation;Z)Lnet/minecraft/client/renderer/RenderType;
+
+  public static net.minecraft.client.renderer.RenderType entityCutoutNoCullZOffset(net.minecraft.resources.ResourceLocation);
+    descriptor: (Lnet/minecraft/resources/ResourceLocation;)Lnet/minecraft/client/renderer/RenderType;
+
+  public static net.minecraft.client.renderer.RenderType itemEntityTranslucentCull(net.minecraft.resources.ResourceLocation);
+    descriptor: (Lnet/minecraft/resources/ResourceLocation;)Lnet/minecraft/client/renderer/RenderType;
+
+  public static net.minecraft.client.renderer.RenderType entityTranslucentCull(net.minecraft.resources.ResourceLocation);
+    descriptor: (Lnet/minecraft/resources/ResourceLocation;)Lnet/minecraft/client/renderer/RenderType;
+
+  public static net.minecraft.client.renderer.RenderType entityTranslucent(net.minecraft.resources.ResourceLocation, boolean);
+    descriptor: (Lnet/minecraft/resources/ResourceLocation;Z)Lnet/minecraft/client/renderer/RenderType;
+
+  public static net.minecraft.client.renderer.RenderType entityTranslucent(net.minecraft.resources.ResourceLocation);
+    descriptor: (Lnet/minecraft/resources/ResourceLocation;)Lnet/minecraft/client/renderer/RenderType;
+
+  public static net.minecraft.client.renderer.RenderType entityTranslucentEmissive(net.minecraft.resources.ResourceLocation, boolean);
+    descriptor: (Lnet/minecraft/resources/ResourceLocation;Z)Lnet/minecraft/client/renderer/RenderType;
+
+  public static net.minecraft.client.renderer.RenderType entityTranslucentEmissive(net.minecraft.resources.ResourceLocation);
+    descriptor: (Lnet/minecraft/resources/ResourceLocation;)Lnet/minecraft/client/renderer/RenderType;
+
+  public static net.minecraft.client.renderer.RenderType entitySmoothCutout(net.minecraft.resources.ResourceLocation);
+    descriptor: (Lnet/minecraft/resources/ResourceLocation;)Lnet/minecraft/client/renderer/RenderType;
+
+  public static net.minecraft.client.renderer.RenderType beaconBeam(net.minecraft.resources.ResourceLocation, boolean);
+    descriptor: (Lnet/minecraft/resources/ResourceLocation;Z)Lnet/minecraft/client/renderer/RenderType;
+
+  public static net.minecraft.client.renderer.RenderType entityDecal(net.minecraft.resources.ResourceLocation);
+    descriptor: (Lnet/minecraft/resources/ResourceLocation;)Lnet/minecraft/client/renderer/RenderType;
+
+  public static net.minecraft.client.renderer.RenderType entityNoOutline(net.minecraft.resources.ResourceLocation);
+    descriptor: (Lnet/minecraft/resources/ResourceLocation;)Lnet/minecraft/client/renderer/RenderType;
+
+  public static net.minecraft.client.renderer.RenderType entityShadow(net.minecraft.resources.ResourceLocation);
+    descriptor: (Lnet/minecraft/resources/ResourceLocation;)Lnet/minecraft/client/renderer/RenderType;
+
+  public static net.minecraft.client.renderer.RenderType dragonExplosionAlpha(net.minecraft.resources.ResourceLocation);
+    descriptor: (Lnet/minecraft/resources/ResourceLocation;)Lnet/minecraft/client/renderer/RenderType;
+
+  public static net.minecraft.client.renderer.RenderType eyes(net.minecraft.resources.ResourceLocation);
+    descriptor: (Lnet/minecraft/resources/ResourceLocation;)Lnet/minecraft/client/renderer/RenderType;
+
+  public static net.minecraft.client.renderer.RenderType breezeEyes(net.minecraft.resources.ResourceLocation);
+    descriptor: (Lnet/minecraft/resources/ResourceLocation;)Lnet/minecraft/client/renderer/RenderType;
+
+  public static net.minecraft.client.renderer.RenderType breezeWind(net.minecraft.resources.ResourceLocation, float, float);
+    descriptor: (Lnet/minecraft/resources/ResourceLocation;FF)Lnet/minecraft/client/renderer/RenderType;
+
+  public static net.minecraft.client.renderer.RenderType energySwirl(net.minecraft.resources.ResourceLocation, float, float);
+    descriptor: (Lnet/minecraft/resources/ResourceLocation;FF)Lnet/minecraft/client/renderer/RenderType;
+
+  public static net.minecraft.client.renderer.RenderType leash();
+    descriptor: ()Lnet/minecraft/client/renderer/RenderType;
+
+  public static net.minecraft.client.renderer.RenderType waterMask();
+    descriptor: ()Lnet/minecraft/client/renderer/RenderType;
+
+  public static net.minecraft.client.renderer.RenderType outline(net.minecraft.resources.ResourceLocation);
+    descriptor: (Lnet/minecraft/resources/ResourceLocation;)Lnet/minecraft/client/renderer/RenderType;
+
+  public static net.minecraft.client.renderer.RenderType armorGlint();
+    descriptor: ()Lnet/minecraft/client/renderer/RenderType;
+
+  public static net.minecraft.client.renderer.RenderType armorEntityGlint();
+    descriptor: ()Lnet/minecraft/client/renderer/RenderType;
+
+  public static net.minecraft.client.renderer.RenderType glintTranslucent();
+    descriptor: ()Lnet/minecraft/client/renderer/RenderType;
+
+  public static net.minecraft.client.renderer.RenderType glint();
+    descriptor: ()Lnet/minecraft/client/renderer/RenderType;
+
+  public static net.minecraft.client.renderer.RenderType glintDirect();
+    descriptor: ()Lnet/minecraft/client/renderer/RenderType;
+
+  public static net.minecraft.client.renderer.RenderType entityGlint();
+    descriptor: ()Lnet/minecraft/client/renderer/RenderType;
+
+  public static net.minecraft.client.renderer.RenderType entityGlintDirect();
+    descriptor: ()Lnet/minecraft/client/renderer/RenderType;
+
+  public static net.minecraft.client.renderer.RenderType crumbling(net.minecraft.resources.ResourceLocation);
+    descriptor: (Lnet/minecraft/resources/ResourceLocation;)Lnet/minecraft/client/renderer/RenderType;
+
+  public static net.minecraft.client.renderer.RenderType text(net.minecraft.resources.ResourceLocation);
+    descriptor: (Lnet/minecraft/resources/ResourceLocation;)Lnet/minecraft/client/renderer/RenderType;
+
+  public static net.minecraft.client.renderer.RenderType textBackground();
+    descriptor: ()Lnet/minecraft/client/renderer/RenderType;
+
+  public static net.minecraft.client.renderer.RenderType textIntensity(net.minecraft.resources.ResourceLocation);
+    descriptor: (Lnet/minecraft/resources/ResourceLocation;)Lnet/minecraft/client/renderer/RenderType;
+
+  public static net.minecraft.client.renderer.RenderType textPolygonOffset(net.minecraft.resources.ResourceLocation);
+    descriptor: (Lnet/minecraft/resources/ResourceLocation;)Lnet/minecraft/client/renderer/RenderType;
+
+  public static net.minecraft.client.renderer.RenderType textIntensityPolygonOffset(net.minecraft.resources.ResourceLocation);
+    descriptor: (Lnet/minecraft/resources/ResourceLocation;)Lnet/minecraft/client/renderer/RenderType;
+
+  public static net.minecraft.client.renderer.RenderType textSeeThrough(net.minecraft.resources.ResourceLocation);
+    descriptor: (Lnet/minecraft/resources/ResourceLocation;)Lnet/minecraft/client/renderer/RenderType;
+
+  public static net.minecraft.client.renderer.RenderType textBackgroundSeeThrough();
+    descriptor: ()Lnet/minecraft/client/renderer/RenderType;
+
+  public static net.minecraft.client.renderer.RenderType textIntensitySeeThrough(net.minecraft.resources.ResourceLocation);
+    descriptor: (Lnet/minecraft/resources/ResourceLocation;)Lnet/minecraft/client/renderer/RenderType;
+
+  public static net.minecraft.client.renderer.RenderType lightning();
+    descriptor: ()Lnet/minecraft/client/renderer/RenderType;
+
+  private static net.minecraft.client.renderer.RenderType$CompositeState tripwireState();
+    descriptor: ()Lnet/minecraft/client/renderer/RenderType$CompositeState;
+
+  public static net.minecraft.client.renderer.RenderType tripwire();
+    descriptor: ()Lnet/minecraft/client/renderer/RenderType;
+
+  public static net.minecraft.client.renderer.RenderType endPortal();
+    descriptor: ()Lnet/minecraft/client/renderer/RenderType;
+
+  public static net.minecraft.client.renderer.RenderType endGateway();
+    descriptor: ()Lnet/minecraft/client/renderer/RenderType;
+
+  public static net.minecraft.client.renderer.RenderType lines();
+    descriptor: ()Lnet/minecraft/client/renderer/RenderType;
+
+  public static net.minecraft.client.renderer.RenderType lineStrip();
+    descriptor: ()Lnet/minecraft/client/renderer/RenderType;
+
+  public static net.minecraft.client.renderer.RenderType debugLineStrip(double);
+    descriptor: (D)Lnet/minecraft/client/renderer/RenderType;
+
+  public static net.minecraft.client.renderer.RenderType debugFilledBox();
+    descriptor: ()Lnet/minecraft/client/renderer/RenderType;
+
+  public static net.minecraft.client.renderer.RenderType debugQuads();
+    descriptor: ()Lnet/minecraft/client/renderer/RenderType;
+
+  public static net.minecraft.client.renderer.RenderType debugSectionQuads();
+    descriptor: ()Lnet/minecraft/client/renderer/RenderType;
+
+  public static net.minecraft.client.renderer.RenderType gui();
+    descriptor: ()Lnet/minecraft/client/renderer/RenderType;
+
+  public static net.minecraft.client.renderer.RenderType guiOverlay();
+    descriptor: ()Lnet/minecraft/client/renderer/RenderType;
+
+  public static net.minecraft.client.renderer.RenderType guiTextHighlight();
+    descriptor: ()Lnet/minecraft/client/renderer/RenderType;
+
+  public static net.minecraft.client.renderer.RenderType guiGhostRecipeOverlay();
+    descriptor: ()Lnet/minecraft/client/renderer/RenderType;
+
+  public net.minecraft.client.renderer.RenderType(java.lang.String, com.mojang.blaze3d.vertex.VertexFormat, com.mojang.blaze3d.vertex.VertexFormat$Mode, int, boolean, boolean, java.lang.Runnable, java.lang.Runnable);
+    descriptor: (Ljava/lang/String;Lcom/mojang/blaze3d/vertex/VertexFormat;Lcom/mojang/blaze3d/vertex/VertexFormat$Mode;IZZLjava/lang/Runnable;Ljava/lang/Runnable;)V
+
+  static net.minecraft.client.renderer.RenderType$CompositeRenderType create(java.lang.String, com.mojang.blaze3d.vertex.VertexFormat, com.mojang.blaze3d.vertex.VertexFormat$Mode, int, net.minecraft.client.renderer.RenderType$CompositeState);
+    descriptor: (Ljava/lang/String;Lcom/mojang/blaze3d/vertex/VertexFormat;Lcom/mojang/blaze3d/vertex/VertexFormat$Mode;ILnet/minecraft/client/renderer/RenderType$CompositeState;)Lnet/minecraft/client/renderer/RenderType$CompositeRenderType;
+
+  private static net.minecraft.client.renderer.RenderType$CompositeRenderType create(java.lang.String, com.mojang.blaze3d.vertex.VertexFormat, com.mojang.blaze3d.vertex.VertexFormat$Mode, int, boolean, boolean, net.minecraft.client.renderer.RenderType$CompositeState);
+    descriptor: (Ljava/lang/String;Lcom/mojang/blaze3d/vertex/VertexFormat;Lcom/mojang/blaze3d/vertex/VertexFormat$Mode;IZZLnet/minecraft/client/renderer/RenderType$CompositeState;)Lnet/minecraft/client/renderer/RenderType$CompositeRenderType;
+
+  public void end(com.mojang.blaze3d.vertex.BufferBuilder, com.mojang.blaze3d.vertex.VertexSorting);
+    descriptor: (Lcom/mojang/blaze3d/vertex/BufferBuilder;Lcom/mojang/blaze3d/vertex/VertexSorting;)V
+
+  public java.lang.String toString();
+    descriptor: ()Ljava/lang/String;
+
+  public static java.util.List<net.minecraft.client.renderer.RenderType> chunkBufferLayers();
+    descriptor: ()Ljava/util/List;
+
+  public int bufferSize();
+    descriptor: ()I
+
+  public com.mojang.blaze3d.vertex.VertexFormat format();
+    descriptor: ()Lcom/mojang/blaze3d/vertex/VertexFormat;
+
+  public com.mojang.blaze3d.vertex.VertexFormat$Mode mode();
+    descriptor: ()Lcom/mojang/blaze3d/vertex/VertexFormat$Mode;
+
+  public java.util.Optional<net.minecraft.client.renderer.RenderType> outline();
+    descriptor: ()Ljava/util/Optional;
+
+  public boolean isOutline();
+    descriptor: ()Z
+
+  public boolean affectsCrumbling();
+    descriptor: ()Z
+
+  public boolean canConsolidateConsecutiveGeometry();
+    descriptor: ()Z
+
+  public java.util.Optional<net.minecraft.client.renderer.RenderType> asOptional();
+    descriptor: ()Ljava/util/Optional;
+
+  private static net.minecraft.client.renderer.RenderType$CompositeRenderType method_49044(java.lang.Double);
+    descriptor: (Ljava/lang/Double;)Lnet/minecraft/client/renderer/RenderType$CompositeRenderType;
+
+  private static net.minecraft.client.renderer.RenderType method_37347(net.minecraft.resources.ResourceLocation);
+    descriptor: (Lnet/minecraft/resources/ResourceLocation;)Lnet/minecraft/client/renderer/RenderType;
+
+  private static net.minecraft.client.renderer.RenderType method_37348(net.minecraft.resources.ResourceLocation);
+    descriptor: (Lnet/minecraft/resources/ResourceLocation;)Lnet/minecraft/client/renderer/RenderType;
+
+  private static net.minecraft.client.renderer.RenderType method_36436(net.minecraft.resources.ResourceLocation);
+    descriptor: (Lnet/minecraft/resources/ResourceLocation;)Lnet/minecraft/client/renderer/RenderType;
+
+  private static net.minecraft.client.renderer.RenderType method_36437(net.minecraft.resources.ResourceLocation);
+    descriptor: (Lnet/minecraft/resources/ResourceLocation;)Lnet/minecraft/client/renderer/RenderType;
+
+  private static net.minecraft.client.renderer.RenderType method_34833(net.minecraft.resources.ResourceLocation);
+    descriptor: (Lnet/minecraft/resources/ResourceLocation;)Lnet/minecraft/client/renderer/RenderType;
+
+  private static net.minecraft.client.renderer.RenderType method_34834(net.minecraft.resources.ResourceLocation);
+    descriptor: (Lnet/minecraft/resources/ResourceLocation;)Lnet/minecraft/client/renderer/RenderType;
+
+  private static net.minecraft.client.renderer.RenderType method_34835(net.minecraft.resources.ResourceLocation);
+    descriptor: (Lnet/minecraft/resources/ResourceLocation;)Lnet/minecraft/client/renderer/RenderType;
+
+  private static net.minecraft.client.renderer.RenderType method_34836(net.minecraft.resources.ResourceLocation, net.minecraft.client.renderer.RenderStateShard$TransparencyStateShard);
+    descriptor: (Lnet/minecraft/resources/ResourceLocation;Lnet/minecraft/client/renderer/RenderStateShard$TransparencyStateShard;)Lnet/minecraft/client/renderer/RenderType;
+
+  private static net.minecraft.client.renderer.RenderType method_34837(net.minecraft.resources.ResourceLocation);
+    descriptor: (Lnet/minecraft/resources/ResourceLocation;)Lnet/minecraft/client/renderer/RenderType;
+
+  private static net.minecraft.client.renderer.RenderType method_34838(net.minecraft.resources.ResourceLocation);
+    descriptor: (Lnet/minecraft/resources/ResourceLocation;)Lnet/minecraft/client/renderer/RenderType;
+
+  private static net.minecraft.client.renderer.RenderType method_34839(net.minecraft.resources.ResourceLocation);
+    descriptor: (Lnet/minecraft/resources/ResourceLocation;)Lnet/minecraft/client/renderer/RenderType;
+
+  private static net.minecraft.client.renderer.RenderType method_34840(net.minecraft.resources.ResourceLocation);
+    descriptor: (Lnet/minecraft/resources/ResourceLocation;)Lnet/minecraft/client/renderer/RenderType;
+
+  private static net.minecraft.client.renderer.RenderType method_34829(net.minecraft.resources.ResourceLocation, java.lang.Boolean);
+    descriptor: (Lnet/minecraft/resources/ResourceLocation;Ljava/lang/Boolean;)Lnet/minecraft/client/renderer/RenderType;
+
+  private static net.minecraft.client.renderer.RenderType method_34822(net.minecraft.resources.ResourceLocation);
+    descriptor: (Lnet/minecraft/resources/ResourceLocation;)Lnet/minecraft/client/renderer/RenderType;
+
+  private static net.minecraft.client.renderer.RenderType method_42598(net.minecraft.resources.ResourceLocation, java.lang.Boolean);
+    descriptor: (Lnet/minecraft/resources/ResourceLocation;Ljava/lang/Boolean;)Lnet/minecraft/client/renderer/RenderType;
+
+  private static net.minecraft.client.renderer.RenderType method_34830(net.minecraft.resources.ResourceLocation, java.lang.Boolean);
+    descriptor: (Lnet/minecraft/resources/ResourceLocation;Ljava/lang/Boolean;)Lnet/minecraft/client/renderer/RenderType;
+
+  private static net.minecraft.client.renderer.RenderType method_34823(net.minecraft.resources.ResourceLocation);
+    descriptor: (Lnet/minecraft/resources/ResourceLocation;)Lnet/minecraft/client/renderer/RenderType;
+
+  private static net.minecraft.client.renderer.RenderType method_34824(net.minecraft.resources.ResourceLocation);
+    descriptor: (Lnet/minecraft/resources/ResourceLocation;)Lnet/minecraft/client/renderer/RenderType;
+
+  private static net.minecraft.client.renderer.RenderType method_34831(net.minecraft.resources.ResourceLocation, java.lang.Boolean);
+    descriptor: (Lnet/minecraft/resources/ResourceLocation;Ljava/lang/Boolean;)Lnet/minecraft/client/renderer/RenderType;
+
+  private static net.minecraft.client.renderer.RenderType method_34832(net.minecraft.resources.ResourceLocation, java.lang.Boolean);
+    descriptor: (Lnet/minecraft/resources/ResourceLocation;Ljava/lang/Boolean;)Lnet/minecraft/client/renderer/RenderType;
+
+  private static net.minecraft.client.renderer.RenderType method_34825(net.minecraft.resources.ResourceLocation);
+    descriptor: (Lnet/minecraft/resources/ResourceLocation;)Lnet/minecraft/client/renderer/RenderType;
+
+  private static net.minecraft.client.renderer.RenderType method_34826(net.minecraft.resources.ResourceLocation);
+    descriptor: (Lnet/minecraft/resources/ResourceLocation;)Lnet/minecraft/client/renderer/RenderType;
+
+  private static net.minecraft.client.renderer.RenderType method_34827(net.minecraft.resources.ResourceLocation);
+    descriptor: (Lnet/minecraft/resources/ResourceLocation;)Lnet/minecraft/client/renderer/RenderType;
+
+  static {};
+    descriptor: ()V
+}

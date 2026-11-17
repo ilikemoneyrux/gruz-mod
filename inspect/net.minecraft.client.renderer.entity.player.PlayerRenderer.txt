@@ -1,0 +1,59 @@
+Compiled from "PlayerRenderer.java"
+public class net.minecraft.client.renderer.entity.player.PlayerRenderer extends net.minecraft.client.renderer.entity.LivingEntityRenderer<net.minecraft.client.player.AbstractClientPlayer, net.minecraft.client.model.PlayerModel<net.minecraft.client.player.AbstractClientPlayer>> {
+  public net.minecraft.client.renderer.entity.player.PlayerRenderer(net.minecraft.client.renderer.entity.EntityRendererProvider$Context, boolean);
+    descriptor: (Lnet/minecraft/client/renderer/entity/EntityRendererProvider$Context;Z)V
+
+  public void render(net.minecraft.client.player.AbstractClientPlayer, float, float, com.mojang.blaze3d.vertex.PoseStack, net.minecraft.client.renderer.MultiBufferSource, int);
+    descriptor: (Lnet/minecraft/client/player/AbstractClientPlayer;FFLcom/mojang/blaze3d/vertex/PoseStack;Lnet/minecraft/client/renderer/MultiBufferSource;I)V
+
+  public net.minecraft.world.phys.Vec3 getRenderOffset(net.minecraft.client.player.AbstractClientPlayer, float);
+    descriptor: (Lnet/minecraft/client/player/AbstractClientPlayer;F)Lnet/minecraft/world/phys/Vec3;
+
+  private void setModelProperties(net.minecraft.client.player.AbstractClientPlayer);
+    descriptor: (Lnet/minecraft/client/player/AbstractClientPlayer;)V
+
+  private static net.minecraft.client.model.HumanoidModel$ArmPose getArmPose(net.minecraft.client.player.AbstractClientPlayer, net.minecraft.world.InteractionHand);
+    descriptor: (Lnet/minecraft/client/player/AbstractClientPlayer;Lnet/minecraft/world/InteractionHand;)Lnet/minecraft/client/model/HumanoidModel$ArmPose;
+
+  public net.minecraft.resources.ResourceLocation getTextureLocation(net.minecraft.client.player.AbstractClientPlayer);
+    descriptor: (Lnet/minecraft/client/player/AbstractClientPlayer;)Lnet/minecraft/resources/ResourceLocation;
+
+  protected void scale(net.minecraft.client.player.AbstractClientPlayer, com.mojang.blaze3d.vertex.PoseStack, float);
+    descriptor: (Lnet/minecraft/client/player/AbstractClientPlayer;Lcom/mojang/blaze3d/vertex/PoseStack;F)V
+
+  protected void renderNameTag(net.minecraft.client.player.AbstractClientPlayer, net.minecraft.network.chat.Component, com.mojang.blaze3d.vertex.PoseStack, net.minecraft.client.renderer.MultiBufferSource, int);
+    descriptor: (Lnet/minecraft/client/player/AbstractClientPlayer;Lnet/minecraft/network/chat/Component;Lcom/mojang/blaze3d/vertex/PoseStack;Lnet/minecraft/client/renderer/MultiBufferSource;I)V
+
+  public void renderRightHand(com.mojang.blaze3d.vertex.PoseStack, net.minecraft.client.renderer.MultiBufferSource, int, net.minecraft.client.player.AbstractClientPlayer);
+    descriptor: (Lcom/mojang/blaze3d/vertex/PoseStack;Lnet/minecraft/client/renderer/MultiBufferSource;ILnet/minecraft/client/player/AbstractClientPlayer;)V
+
+  public void renderLeftHand(com.mojang.blaze3d.vertex.PoseStack, net.minecraft.client.renderer.MultiBufferSource, int, net.minecraft.client.player.AbstractClientPlayer);
+    descriptor: (Lcom/mojang/blaze3d/vertex/PoseStack;Lnet/minecraft/client/renderer/MultiBufferSource;ILnet/minecraft/client/player/AbstractClientPlayer;)V
+
+  private void renderHand(com.mojang.blaze3d.vertex.PoseStack, net.minecraft.client.renderer.MultiBufferSource, int, net.minecraft.client.player.AbstractClientPlayer, net.minecraft.client.model.geom.ModelPart, net.minecraft.client.model.geom.ModelPart);
+    descriptor: (Lcom/mojang/blaze3d/vertex/PoseStack;Lnet/minecraft/client/renderer/MultiBufferSource;ILnet/minecraft/client/player/AbstractClientPlayer;Lnet/minecraft/client/model/geom/ModelPart;Lnet/minecraft/client/model/geom/ModelPart;)V
+
+  protected void setupRotations(net.minecraft.client.player.AbstractClientPlayer, com.mojang.blaze3d.vertex.PoseStack, float, float, float);
+    descriptor: (Lnet/minecraft/client/player/AbstractClientPlayer;Lcom/mojang/blaze3d/vertex/PoseStack;FFF)V
+
+  protected void scale(net.minecraft.world.entity.LivingEntity, com.mojang.blaze3d.vertex.PoseStack, float);
+    descriptor: (Lnet/minecraft/world/entity/LivingEntity;Lcom/mojang/blaze3d/vertex/PoseStack;F)V
+
+  protected void setupRotations(net.minecraft.world.entity.LivingEntity, com.mojang.blaze3d.vertex.PoseStack, float, float, float);
+    descriptor: (Lnet/minecraft/world/entity/LivingEntity;Lcom/mojang/blaze3d/vertex/PoseStack;FFF)V
+
+  public void render(net.minecraft.world.entity.LivingEntity, float, float, com.mojang.blaze3d.vertex.PoseStack, net.minecraft.client.renderer.MultiBufferSource, int);
+    descriptor: (Lnet/minecraft/world/entity/LivingEntity;FFLcom/mojang/blaze3d/vertex/PoseStack;Lnet/minecraft/client/renderer/MultiBufferSource;I)V
+
+  public net.minecraft.resources.ResourceLocation getTextureLocation(net.minecraft.world.entity.Entity);
+    descriptor: (Lnet/minecraft/world/entity/Entity;)Lnet/minecraft/resources/ResourceLocation;
+
+  protected void renderNameTag(net.minecraft.world.entity.Entity, net.minecraft.network.chat.Component, com.mojang.blaze3d.vertex.PoseStack, net.minecraft.client.renderer.MultiBufferSource, int);
+    descriptor: (Lnet/minecraft/world/entity/Entity;Lnet/minecraft/network/chat/Component;Lcom/mojang/blaze3d/vertex/PoseStack;Lnet/minecraft/client/renderer/MultiBufferSource;I)V
+
+  public void render(net.minecraft.world.entity.Entity, float, float, com.mojang.blaze3d.vertex.PoseStack, net.minecraft.client.renderer.MultiBufferSource, int);
+    descriptor: (Lnet/minecraft/world/entity/Entity;FFLcom/mojang/blaze3d/vertex/PoseStack;Lnet/minecraft/client/renderer/MultiBufferSource;I)V
+
+  public net.minecraft.world.phys.Vec3 getRenderOffset(net.minecraft.world.entity.Entity, float);
+    descriptor: (Lnet/minecraft/world/entity/Entity;F)Lnet/minecraft/world/phys/Vec3;
+}

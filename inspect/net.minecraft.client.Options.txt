@@ -1,0 +1,952 @@
+Compiled from "Options.java"
+public class net.minecraft.client.Options {
+  static final org.slf4j.Logger LOGGER;
+    descriptor: Lorg/slf4j/Logger;
+  static final com.google.gson.Gson GSON;
+    descriptor: Lcom/google/gson/Gson;
+  private static final com.google.gson.reflect.TypeToken<java.util.List<java.lang.String>> LIST_OF_STRINGS_TYPE;
+    descriptor: Lcom/google/gson/reflect/TypeToken;
+  public static final int RENDER_DISTANCE_TINY;
+    descriptor: I
+  public static final int RENDER_DISTANCE_SHORT;
+    descriptor: I
+  public static final int RENDER_DISTANCE_NORMAL;
+    descriptor: I
+  public static final int RENDER_DISTANCE_FAR;
+    descriptor: I
+  public static final int RENDER_DISTANCE_REALLY_FAR;
+    descriptor: I
+  public static final int RENDER_DISTANCE_EXTREME;
+    descriptor: I
+  private static final com.google.common.base.Splitter OPTION_SPLITTER;
+    descriptor: Lcom/google/common/base/Splitter;
+  private static final float DEFAULT_VOLUME;
+    descriptor: F
+  public static final java.lang.String DEFAULT_SOUND_DEVICE;
+    descriptor: Ljava/lang/String;
+  private static final net.minecraft.network.chat.Component ACCESSIBILITY_TOOLTIP_DARK_MOJANG_BACKGROUND;
+    descriptor: Lnet/minecraft/network/chat/Component;
+  private final net.minecraft.client.OptionInstance<java.lang.Boolean> darkMojangStudiosBackground;
+    descriptor: Lnet/minecraft/client/OptionInstance;
+  private static final net.minecraft.network.chat.Component ACCESSIBILITY_TOOLTIP_HIDE_LIGHTNING_FLASHES;
+    descriptor: Lnet/minecraft/network/chat/Component;
+  private final net.minecraft.client.OptionInstance<java.lang.Boolean> hideLightningFlash;
+    descriptor: Lnet/minecraft/client/OptionInstance;
+  private static final net.minecraft.network.chat.Component ACCESSIBILITY_TOOLTIP_HIDE_SPLASH_TEXTS;
+    descriptor: Lnet/minecraft/network/chat/Component;
+  private final net.minecraft.client.OptionInstance<java.lang.Boolean> hideSplashTexts;
+    descriptor: Lnet/minecraft/client/OptionInstance;
+  private final net.minecraft.client.OptionInstance<java.lang.Double> sensitivity;
+    descriptor: Lnet/minecraft/client/OptionInstance;
+  private final net.minecraft.client.OptionInstance<java.lang.Integer> renderDistance;
+    descriptor: Lnet/minecraft/client/OptionInstance;
+  private final net.minecraft.client.OptionInstance<java.lang.Integer> simulationDistance;
+    descriptor: Lnet/minecraft/client/OptionInstance;
+  private int serverRenderDistance;
+    descriptor: I
+  private final net.minecraft.client.OptionInstance<java.lang.Double> entityDistanceScaling;
+    descriptor: Lnet/minecraft/client/OptionInstance;
+  public static final int UNLIMITED_FRAMERATE_CUTOFF;
+    descriptor: I
+  private final net.minecraft.client.OptionInstance<java.lang.Integer> framerateLimit;
+    descriptor: Lnet/minecraft/client/OptionInstance;
+  private final net.minecraft.client.OptionInstance<net.minecraft.client.CloudStatus> cloudStatus;
+    descriptor: Lnet/minecraft/client/OptionInstance;
+  private static final net.minecraft.network.chat.Component GRAPHICS_TOOLTIP_FAST;
+    descriptor: Lnet/minecraft/network/chat/Component;
+  private static final net.minecraft.network.chat.Component GRAPHICS_TOOLTIP_FABULOUS;
+    descriptor: Lnet/minecraft/network/chat/Component;
+  private static final net.minecraft.network.chat.Component GRAPHICS_TOOLTIP_FANCY;
+    descriptor: Lnet/minecraft/network/chat/Component;
+  private final net.minecraft.client.OptionInstance<net.minecraft.client.GraphicsStatus> graphicsMode;
+    descriptor: Lnet/minecraft/client/OptionInstance;
+  private final net.minecraft.client.OptionInstance<java.lang.Boolean> ambientOcclusion;
+    descriptor: Lnet/minecraft/client/OptionInstance;
+  private static final net.minecraft.network.chat.Component PRIORITIZE_CHUNK_TOOLTIP_NONE;
+    descriptor: Lnet/minecraft/network/chat/Component;
+  private static final net.minecraft.network.chat.Component PRIORITIZE_CHUNK_TOOLTIP_PLAYER_AFFECTED;
+    descriptor: Lnet/minecraft/network/chat/Component;
+  private static final net.minecraft.network.chat.Component PRIORITIZE_CHUNK_TOOLTIP_NEARBY;
+    descriptor: Lnet/minecraft/network/chat/Component;
+  private final net.minecraft.client.OptionInstance<net.minecraft.client.PrioritizeChunkUpdates> prioritizeChunkUpdates;
+    descriptor: Lnet/minecraft/client/OptionInstance;
+  public java.util.List<java.lang.String> resourcePacks;
+    descriptor: Ljava/util/List;
+  public java.util.List<java.lang.String> incompatibleResourcePacks;
+    descriptor: Ljava/util/List;
+  private final net.minecraft.client.OptionInstance<net.minecraft.world.entity.player.ChatVisiblity> chatVisibility;
+    descriptor: Lnet/minecraft/client/OptionInstance;
+  private final net.minecraft.client.OptionInstance<java.lang.Double> chatOpacity;
+    descriptor: Lnet/minecraft/client/OptionInstance;
+  private final net.minecraft.client.OptionInstance<java.lang.Double> chatLineSpacing;
+    descriptor: Lnet/minecraft/client/OptionInstance;
+  private final net.minecraft.client.OptionInstance<java.lang.Double> textBackgroundOpacity;
+    descriptor: Lnet/minecraft/client/OptionInstance;
+  private final net.minecraft.client.OptionInstance<java.lang.Double> panoramaSpeed;
+    descriptor: Lnet/minecraft/client/OptionInstance;
+  private static final net.minecraft.network.chat.Component ACCESSIBILITY_TOOLTIP_CONTRAST_MODE;
+    descriptor: Lnet/minecraft/network/chat/Component;
+  private final net.minecraft.client.OptionInstance<java.lang.Boolean> highContrast;
+    descriptor: Lnet/minecraft/client/OptionInstance;
+  private final net.minecraft.client.OptionInstance<java.lang.Boolean> narratorHotkey;
+    descriptor: Lnet/minecraft/client/OptionInstance;
+  public java.lang.String fullscreenVideoModeString;
+    descriptor: Ljava/lang/String;
+  public boolean hideServerAddress;
+    descriptor: Z
+  public boolean advancedItemTooltips;
+    descriptor: Z
+  public boolean pauseOnLostFocus;
+    descriptor: Z
+  private final java.util.Set<net.minecraft.world.entity.player.PlayerModelPart> modelParts;
+    descriptor: Ljava/util/Set;
+  private final net.minecraft.client.OptionInstance<net.minecraft.world.entity.HumanoidArm> mainHand;
+    descriptor: Lnet/minecraft/client/OptionInstance;
+  public int overrideWidth;
+    descriptor: I
+  public int overrideHeight;
+    descriptor: I
+  private final net.minecraft.client.OptionInstance<java.lang.Double> chatScale;
+    descriptor: Lnet/minecraft/client/OptionInstance;
+  private final net.minecraft.client.OptionInstance<java.lang.Double> chatWidth;
+    descriptor: Lnet/minecraft/client/OptionInstance;
+  private final net.minecraft.client.OptionInstance<java.lang.Double> chatHeightUnfocused;
+    descriptor: Lnet/minecraft/client/OptionInstance;
+  private final net.minecraft.client.OptionInstance<java.lang.Double> chatHeightFocused;
+    descriptor: Lnet/minecraft/client/OptionInstance;
+  private final net.minecraft.client.OptionInstance<java.lang.Double> chatDelay;
+    descriptor: Lnet/minecraft/client/OptionInstance;
+  private static final net.minecraft.network.chat.Component ACCESSIBILITY_TOOLTIP_NOTIFICATION_DISPLAY_TIME;
+    descriptor: Lnet/minecraft/network/chat/Component;
+  private final net.minecraft.client.OptionInstance<java.lang.Double> notificationDisplayTime;
+    descriptor: Lnet/minecraft/client/OptionInstance;
+  private final net.minecraft.client.OptionInstance<java.lang.Integer> mipmapLevels;
+    descriptor: Lnet/minecraft/client/OptionInstance;
+  public boolean useNativeTransport;
+    descriptor: Z
+  private final net.minecraft.client.OptionInstance<net.minecraft.client.AttackIndicatorStatus> attackIndicator;
+    descriptor: Lnet/minecraft/client/OptionInstance;
+  public net.minecraft.client.tutorial.TutorialSteps tutorialStep;
+    descriptor: Lnet/minecraft/client/tutorial/TutorialSteps;
+  public boolean joinedFirstServer;
+    descriptor: Z
+  public boolean hideBundleTutorial;
+    descriptor: Z
+  private final net.minecraft.client.OptionInstance<java.lang.Integer> biomeBlendRadius;
+    descriptor: Lnet/minecraft/client/OptionInstance;
+  private final net.minecraft.client.OptionInstance<java.lang.Double> mouseWheelSensitivity;
+    descriptor: Lnet/minecraft/client/OptionInstance;
+  private final net.minecraft.client.OptionInstance<java.lang.Boolean> rawMouseInput;
+    descriptor: Lnet/minecraft/client/OptionInstance;
+  public int glDebugVerbosity;
+    descriptor: I
+  private final net.minecraft.client.OptionInstance<java.lang.Boolean> autoJump;
+    descriptor: Lnet/minecraft/client/OptionInstance;
+  private final net.minecraft.client.OptionInstance<java.lang.Boolean> operatorItemsTab;
+    descriptor: Lnet/minecraft/client/OptionInstance;
+  private final net.minecraft.client.OptionInstance<java.lang.Boolean> autoSuggestions;
+    descriptor: Lnet/minecraft/client/OptionInstance;
+  private final net.minecraft.client.OptionInstance<java.lang.Boolean> chatColors;
+    descriptor: Lnet/minecraft/client/OptionInstance;
+  private final net.minecraft.client.OptionInstance<java.lang.Boolean> chatLinks;
+    descriptor: Lnet/minecraft/client/OptionInstance;
+  private final net.minecraft.client.OptionInstance<java.lang.Boolean> chatLinksPrompt;
+    descriptor: Lnet/minecraft/client/OptionInstance;
+  private final net.minecraft.client.OptionInstance<java.lang.Boolean> enableVsync;
+    descriptor: Lnet/minecraft/client/OptionInstance;
+  private final net.minecraft.client.OptionInstance<java.lang.Boolean> entityShadows;
+    descriptor: Lnet/minecraft/client/OptionInstance;
+  private final net.minecraft.client.OptionInstance<java.lang.Boolean> forceUnicodeFont;
+    descriptor: Lnet/minecraft/client/OptionInstance;
+  private final net.minecraft.client.OptionInstance<java.lang.Boolean> invertYMouse;
+    descriptor: Lnet/minecraft/client/OptionInstance;
+  private final net.minecraft.client.OptionInstance<java.lang.Boolean> discreteMouseScroll;
+    descriptor: Lnet/minecraft/client/OptionInstance;
+  private final net.minecraft.client.OptionInstance<java.lang.Boolean> realmsNotifications;
+    descriptor: Lnet/minecraft/client/OptionInstance;
+  private static final net.minecraft.network.chat.Component ALLOW_SERVER_LISTING_TOOLTIP;
+    descriptor: Lnet/minecraft/network/chat/Component;
+  private final net.minecraft.client.OptionInstance<java.lang.Boolean> allowServerListing;
+    descriptor: Lnet/minecraft/client/OptionInstance;
+  private final net.minecraft.client.OptionInstance<java.lang.Boolean> reducedDebugInfo;
+    descriptor: Lnet/minecraft/client/OptionInstance;
+  private final java.util.Map<net.minecraft.sounds.SoundSource, net.minecraft.client.OptionInstance<java.lang.Double>> soundSourceVolumes;
+    descriptor: Ljava/util/Map;
+  private final net.minecraft.client.OptionInstance<java.lang.Boolean> showSubtitles;
+    descriptor: Lnet/minecraft/client/OptionInstance;
+  private static final net.minecraft.network.chat.Component DIRECTIONAL_AUDIO_TOOLTIP_ON;
+    descriptor: Lnet/minecraft/network/chat/Component;
+  private static final net.minecraft.network.chat.Component DIRECTIONAL_AUDIO_TOOLTIP_OFF;
+    descriptor: Lnet/minecraft/network/chat/Component;
+  private final net.minecraft.client.OptionInstance<java.lang.Boolean> directionalAudio;
+    descriptor: Lnet/minecraft/client/OptionInstance;
+  private final net.minecraft.client.OptionInstance<java.lang.Boolean> backgroundForChatOnly;
+    descriptor: Lnet/minecraft/client/OptionInstance;
+  private final net.minecraft.client.OptionInstance<java.lang.Boolean> touchscreen;
+    descriptor: Lnet/minecraft/client/OptionInstance;
+  private final net.minecraft.client.OptionInstance<java.lang.Boolean> fullscreen;
+    descriptor: Lnet/minecraft/client/OptionInstance;
+  private final net.minecraft.client.OptionInstance<java.lang.Boolean> bobView;
+    descriptor: Lnet/minecraft/client/OptionInstance;
+  private static final net.minecraft.network.chat.Component MOVEMENT_TOGGLE;
+    descriptor: Lnet/minecraft/network/chat/Component;
+  private static final net.minecraft.network.chat.Component MOVEMENT_HOLD;
+    descriptor: Lnet/minecraft/network/chat/Component;
+  private final net.minecraft.client.OptionInstance<java.lang.Boolean> toggleCrouch;
+    descriptor: Lnet/minecraft/client/OptionInstance;
+  private final net.minecraft.client.OptionInstance<java.lang.Boolean> toggleSprint;
+    descriptor: Lnet/minecraft/client/OptionInstance;
+  public boolean skipMultiplayerWarning;
+    descriptor: Z
+  public boolean skipRealms32bitWarning;
+    descriptor: Z
+  private static final net.minecraft.network.chat.Component CHAT_TOOLTIP_HIDE_MATCHED_NAMES;
+    descriptor: Lnet/minecraft/network/chat/Component;
+  private final net.minecraft.client.OptionInstance<java.lang.Boolean> hideMatchedNames;
+    descriptor: Lnet/minecraft/client/OptionInstance;
+  private final net.minecraft.client.OptionInstance<java.lang.Boolean> showAutosaveIndicator;
+    descriptor: Lnet/minecraft/client/OptionInstance;
+  private static final net.minecraft.network.chat.Component CHAT_TOOLTIP_ONLY_SHOW_SECURE;
+    descriptor: Lnet/minecraft/network/chat/Component;
+  private final net.minecraft.client.OptionInstance<java.lang.Boolean> onlyShowSecureChat;
+    descriptor: Lnet/minecraft/client/OptionInstance;
+  public final net.minecraft.client.KeyMapping keyUp;
+    descriptor: Lnet/minecraft/client/KeyMapping;
+  public final net.minecraft.client.KeyMapping keyLeft;
+    descriptor: Lnet/minecraft/client/KeyMapping;
+  public final net.minecraft.client.KeyMapping keyDown;
+    descriptor: Lnet/minecraft/client/KeyMapping;
+  public final net.minecraft.client.KeyMapping keyRight;
+    descriptor: Lnet/minecraft/client/KeyMapping;
+  public final net.minecraft.client.KeyMapping keyJump;
+    descriptor: Lnet/minecraft/client/KeyMapping;
+  public final net.minecraft.client.KeyMapping keyShift;
+    descriptor: Lnet/minecraft/client/KeyMapping;
+  public final net.minecraft.client.KeyMapping keySprint;
+    descriptor: Lnet/minecraft/client/KeyMapping;
+  public final net.minecraft.client.KeyMapping keyInventory;
+    descriptor: Lnet/minecraft/client/KeyMapping;
+  public final net.minecraft.client.KeyMapping keySwapOffhand;
+    descriptor: Lnet/minecraft/client/KeyMapping;
+  public final net.minecraft.client.KeyMapping keyDrop;
+    descriptor: Lnet/minecraft/client/KeyMapping;
+  public final net.minecraft.client.KeyMapping keyUse;
+    descriptor: Lnet/minecraft/client/KeyMapping;
+  public final net.minecraft.client.KeyMapping keyAttack;
+    descriptor: Lnet/minecraft/client/KeyMapping;
+  public final net.minecraft.client.KeyMapping keyPickItem;
+    descriptor: Lnet/minecraft/client/KeyMapping;
+  public final net.minecraft.client.KeyMapping keyChat;
+    descriptor: Lnet/minecraft/client/KeyMapping;
+  public final net.minecraft.client.KeyMapping keyPlayerList;
+    descriptor: Lnet/minecraft/client/KeyMapping;
+  public final net.minecraft.client.KeyMapping keyCommand;
+    descriptor: Lnet/minecraft/client/KeyMapping;
+  public final net.minecraft.client.KeyMapping keySocialInteractions;
+    descriptor: Lnet/minecraft/client/KeyMapping;
+  public final net.minecraft.client.KeyMapping keyScreenshot;
+    descriptor: Lnet/minecraft/client/KeyMapping;
+  public final net.minecraft.client.KeyMapping keyTogglePerspective;
+    descriptor: Lnet/minecraft/client/KeyMapping;
+  public final net.minecraft.client.KeyMapping keySmoothCamera;
+    descriptor: Lnet/minecraft/client/KeyMapping;
+  public final net.minecraft.client.KeyMapping keyFullscreen;
+    descriptor: Lnet/minecraft/client/KeyMapping;
+  public final net.minecraft.client.KeyMapping keySpectatorOutlines;
+    descriptor: Lnet/minecraft/client/KeyMapping;
+  public final net.minecraft.client.KeyMapping keyAdvancements;
+    descriptor: Lnet/minecraft/client/KeyMapping;
+  public final net.minecraft.client.KeyMapping[] keyHotbarSlots;
+    descriptor: [Lnet/minecraft/client/KeyMapping;
+  public final net.minecraft.client.KeyMapping keySaveHotbarActivator;
+    descriptor: Lnet/minecraft/client/KeyMapping;
+  public final net.minecraft.client.KeyMapping keyLoadHotbarActivator;
+    descriptor: Lnet/minecraft/client/KeyMapping;
+  public final net.minecraft.client.KeyMapping[] keyMappings;
+    descriptor: [Lnet/minecraft/client/KeyMapping;
+  protected net.minecraft.client.Minecraft minecraft;
+    descriptor: Lnet/minecraft/client/Minecraft;
+  private final java.io.File optionsFile;
+    descriptor: Ljava/io/File;
+  public boolean hideGui;
+    descriptor: Z
+  private net.minecraft.client.CameraType cameraType;
+    descriptor: Lnet/minecraft/client/CameraType;
+  public java.lang.String lastMpIp;
+    descriptor: Ljava/lang/String;
+  public boolean smoothCamera;
+    descriptor: Z
+  private final net.minecraft.client.OptionInstance<java.lang.Integer> fov;
+    descriptor: Lnet/minecraft/client/OptionInstance;
+  private static final net.minecraft.network.chat.Component TELEMETRY_TOOLTIP;
+    descriptor: Lnet/minecraft/network/chat/Component;
+  private final net.minecraft.client.OptionInstance<java.lang.Boolean> telemetryOptInExtra;
+    descriptor: Lnet/minecraft/client/OptionInstance;
+  private static final net.minecraft.network.chat.Component ACCESSIBILITY_TOOLTIP_SCREEN_EFFECT;
+    descriptor: Lnet/minecraft/network/chat/Component;
+  private final net.minecraft.client.OptionInstance<java.lang.Double> screenEffectScale;
+    descriptor: Lnet/minecraft/client/OptionInstance;
+  private static final net.minecraft.network.chat.Component ACCESSIBILITY_TOOLTIP_FOV_EFFECT;
+    descriptor: Lnet/minecraft/network/chat/Component;
+  private final net.minecraft.client.OptionInstance<java.lang.Double> fovEffectScale;
+    descriptor: Lnet/minecraft/client/OptionInstance;
+  private static final net.minecraft.network.chat.Component ACCESSIBILITY_TOOLTIP_DARKNESS_EFFECT;
+    descriptor: Lnet/minecraft/network/chat/Component;
+  private final net.minecraft.client.OptionInstance<java.lang.Double> darknessEffectScale;
+    descriptor: Lnet/minecraft/client/OptionInstance;
+  private static final net.minecraft.network.chat.Component ACCESSIBILITY_TOOLTIP_GLINT_SPEED;
+    descriptor: Lnet/minecraft/network/chat/Component;
+  private final net.minecraft.client.OptionInstance<java.lang.Double> glintSpeed;
+    descriptor: Lnet/minecraft/client/OptionInstance;
+  private static final net.minecraft.network.chat.Component ACCESSIBILITY_TOOLTIP_GLINT_STRENGTH;
+    descriptor: Lnet/minecraft/network/chat/Component;
+  private final net.minecraft.client.OptionInstance<java.lang.Double> glintStrength;
+    descriptor: Lnet/minecraft/client/OptionInstance;
+  private static final net.minecraft.network.chat.Component ACCESSIBILITY_TOOLTIP_DAMAGE_TILT_STRENGTH;
+    descriptor: Lnet/minecraft/network/chat/Component;
+  private final net.minecraft.client.OptionInstance<java.lang.Double> damageTiltStrength;
+    descriptor: Lnet/minecraft/client/OptionInstance;
+  private final net.minecraft.client.OptionInstance<java.lang.Double> gamma;
+    descriptor: Lnet/minecraft/client/OptionInstance;
+  public static final int AUTO_GUI_SCALE;
+    descriptor: I
+  private static final int MAX_GUI_SCALE_INCLUSIVE;
+    descriptor: I
+  private final net.minecraft.client.OptionInstance<java.lang.Integer> guiScale;
+    descriptor: Lnet/minecraft/client/OptionInstance;
+  private final net.minecraft.client.OptionInstance<net.minecraft.client.ParticleStatus> particles;
+    descriptor: Lnet/minecraft/client/OptionInstance;
+  private final net.minecraft.client.OptionInstance<net.minecraft.client.NarratorStatus> narrator;
+    descriptor: Lnet/minecraft/client/OptionInstance;
+  public java.lang.String languageCode;
+    descriptor: Ljava/lang/String;
+  private final net.minecraft.client.OptionInstance<java.lang.String> soundDevice;
+    descriptor: Lnet/minecraft/client/OptionInstance;
+  public boolean onboardAccessibility;
+    descriptor: Z
+  public boolean syncWrites;
+    descriptor: Z
+  public net.minecraft.client.OptionInstance<java.lang.Boolean> darkMojangStudiosBackground();
+    descriptor: ()Lnet/minecraft/client/OptionInstance;
+
+  public net.minecraft.client.OptionInstance<java.lang.Boolean> hideLightningFlash();
+    descriptor: ()Lnet/minecraft/client/OptionInstance;
+
+  public net.minecraft.client.OptionInstance<java.lang.Boolean> hideSplashTexts();
+    descriptor: ()Lnet/minecraft/client/OptionInstance;
+
+  public net.minecraft.client.OptionInstance<java.lang.Double> sensitivity();
+    descriptor: ()Lnet/minecraft/client/OptionInstance;
+
+  public net.minecraft.client.OptionInstance<java.lang.Integer> renderDistance();
+    descriptor: ()Lnet/minecraft/client/OptionInstance;
+
+  public net.minecraft.client.OptionInstance<java.lang.Integer> simulationDistance();
+    descriptor: ()Lnet/minecraft/client/OptionInstance;
+
+  public net.minecraft.client.OptionInstance<java.lang.Double> entityDistanceScaling();
+    descriptor: ()Lnet/minecraft/client/OptionInstance;
+
+  public net.minecraft.client.OptionInstance<java.lang.Integer> framerateLimit();
+    descriptor: ()Lnet/minecraft/client/OptionInstance;
+
+  public net.minecraft.client.OptionInstance<net.minecraft.client.CloudStatus> cloudStatus();
+    descriptor: ()Lnet/minecraft/client/OptionInstance;
+
+  public net.minecraft.client.OptionInstance<net.minecraft.client.GraphicsStatus> graphicsMode();
+    descriptor: ()Lnet/minecraft/client/OptionInstance;
+
+  public net.minecraft.client.OptionInstance<java.lang.Boolean> ambientOcclusion();
+    descriptor: ()Lnet/minecraft/client/OptionInstance;
+
+  public net.minecraft.client.OptionInstance<net.minecraft.client.PrioritizeChunkUpdates> prioritizeChunkUpdates();
+    descriptor: ()Lnet/minecraft/client/OptionInstance;
+
+  public void updateResourcePacks(net.minecraft.server.packs.repository.PackRepository);
+    descriptor: (Lnet/minecraft/server/packs/repository/PackRepository;)V
+
+  public net.minecraft.client.OptionInstance<net.minecraft.world.entity.player.ChatVisiblity> chatVisibility();
+    descriptor: ()Lnet/minecraft/client/OptionInstance;
+
+  public net.minecraft.client.OptionInstance<java.lang.Double> chatOpacity();
+    descriptor: ()Lnet/minecraft/client/OptionInstance;
+
+  public net.minecraft.client.OptionInstance<java.lang.Double> chatLineSpacing();
+    descriptor: ()Lnet/minecraft/client/OptionInstance;
+
+  public net.minecraft.client.OptionInstance<java.lang.Double> textBackgroundOpacity();
+    descriptor: ()Lnet/minecraft/client/OptionInstance;
+
+  public net.minecraft.client.OptionInstance<java.lang.Double> panoramaSpeed();
+    descriptor: ()Lnet/minecraft/client/OptionInstance;
+
+  public net.minecraft.client.OptionInstance<java.lang.Boolean> highContrast();
+    descriptor: ()Lnet/minecraft/client/OptionInstance;
+
+  public net.minecraft.client.OptionInstance<java.lang.Boolean> narratorHotkey();
+    descriptor: ()Lnet/minecraft/client/OptionInstance;
+
+  public net.minecraft.client.OptionInstance<net.minecraft.world.entity.HumanoidArm> mainHand();
+    descriptor: ()Lnet/minecraft/client/OptionInstance;
+
+  public net.minecraft.client.OptionInstance<java.lang.Double> chatScale();
+    descriptor: ()Lnet/minecraft/client/OptionInstance;
+
+  public net.minecraft.client.OptionInstance<java.lang.Double> chatWidth();
+    descriptor: ()Lnet/minecraft/client/OptionInstance;
+
+  public net.minecraft.client.OptionInstance<java.lang.Double> chatHeightUnfocused();
+    descriptor: ()Lnet/minecraft/client/OptionInstance;
+
+  public net.minecraft.client.OptionInstance<java.lang.Double> chatHeightFocused();
+    descriptor: ()Lnet/minecraft/client/OptionInstance;
+
+  public net.minecraft.client.OptionInstance<java.lang.Double> chatDelay();
+    descriptor: ()Lnet/minecraft/client/OptionInstance;
+
+  public net.minecraft.client.OptionInstance<java.lang.Double> notificationDisplayTime();
+    descriptor: ()Lnet/minecraft/client/OptionInstance;
+
+  public net.minecraft.client.OptionInstance<java.lang.Integer> mipmapLevels();
+    descriptor: ()Lnet/minecraft/client/OptionInstance;
+
+  public net.minecraft.client.OptionInstance<net.minecraft.client.AttackIndicatorStatus> attackIndicator();
+    descriptor: ()Lnet/minecraft/client/OptionInstance;
+
+  public net.minecraft.client.OptionInstance<java.lang.Integer> biomeBlendRadius();
+    descriptor: ()Lnet/minecraft/client/OptionInstance;
+
+  private static double logMouse(int);
+    descriptor: (I)D
+
+  private static int unlogMouse(double);
+    descriptor: (D)I
+
+  public net.minecraft.client.OptionInstance<java.lang.Double> mouseWheelSensitivity();
+    descriptor: ()Lnet/minecraft/client/OptionInstance;
+
+  public net.minecraft.client.OptionInstance<java.lang.Boolean> rawMouseInput();
+    descriptor: ()Lnet/minecraft/client/OptionInstance;
+
+  public net.minecraft.client.OptionInstance<java.lang.Boolean> autoJump();
+    descriptor: ()Lnet/minecraft/client/OptionInstance;
+
+  public net.minecraft.client.OptionInstance<java.lang.Boolean> operatorItemsTab();
+    descriptor: ()Lnet/minecraft/client/OptionInstance;
+
+  public net.minecraft.client.OptionInstance<java.lang.Boolean> autoSuggestions();
+    descriptor: ()Lnet/minecraft/client/OptionInstance;
+
+  public net.minecraft.client.OptionInstance<java.lang.Boolean> chatColors();
+    descriptor: ()Lnet/minecraft/client/OptionInstance;
+
+  public net.minecraft.client.OptionInstance<java.lang.Boolean> chatLinks();
+    descriptor: ()Lnet/minecraft/client/OptionInstance;
+
+  public net.minecraft.client.OptionInstance<java.lang.Boolean> chatLinksPrompt();
+    descriptor: ()Lnet/minecraft/client/OptionInstance;
+
+  public net.minecraft.client.OptionInstance<java.lang.Boolean> enableVsync();
+    descriptor: ()Lnet/minecraft/client/OptionInstance;
+
+  public net.minecraft.client.OptionInstance<java.lang.Boolean> entityShadows();
+    descriptor: ()Lnet/minecraft/client/OptionInstance;
+
+  public net.minecraft.client.OptionInstance<java.lang.Boolean> forceUnicodeFont();
+    descriptor: ()Lnet/minecraft/client/OptionInstance;
+
+  public net.minecraft.client.OptionInstance<java.lang.Boolean> invertYMouse();
+    descriptor: ()Lnet/minecraft/client/OptionInstance;
+
+  public net.minecraft.client.OptionInstance<java.lang.Boolean> discreteMouseScroll();
+    descriptor: ()Lnet/minecraft/client/OptionInstance;
+
+  public net.minecraft.client.OptionInstance<java.lang.Boolean> realmsNotifications();
+    descriptor: ()Lnet/minecraft/client/OptionInstance;
+
+  public net.minecraft.client.OptionInstance<java.lang.Boolean> allowServerListing();
+    descriptor: ()Lnet/minecraft/client/OptionInstance;
+
+  public net.minecraft.client.OptionInstance<java.lang.Boolean> reducedDebugInfo();
+    descriptor: ()Lnet/minecraft/client/OptionInstance;
+
+  public final float getSoundSourceVolume(net.minecraft.sounds.SoundSource);
+    descriptor: (Lnet/minecraft/sounds/SoundSource;)F
+
+  public final net.minecraft.client.OptionInstance<java.lang.Double> getSoundSourceOptionInstance(net.minecraft.sounds.SoundSource);
+    descriptor: (Lnet/minecraft/sounds/SoundSource;)Lnet/minecraft/client/OptionInstance;
+
+  private net.minecraft.client.OptionInstance<java.lang.Double> createSoundSliderOptionInstance(java.lang.String, net.minecraft.sounds.SoundSource);
+    descriptor: (Ljava/lang/String;Lnet/minecraft/sounds/SoundSource;)Lnet/minecraft/client/OptionInstance;
+
+  public net.minecraft.client.OptionInstance<java.lang.Boolean> showSubtitles();
+    descriptor: ()Lnet/minecraft/client/OptionInstance;
+
+  public net.minecraft.client.OptionInstance<java.lang.Boolean> directionalAudio();
+    descriptor: ()Lnet/minecraft/client/OptionInstance;
+
+  public net.minecraft.client.OptionInstance<java.lang.Boolean> backgroundForChatOnly();
+    descriptor: ()Lnet/minecraft/client/OptionInstance;
+
+  public net.minecraft.client.OptionInstance<java.lang.Boolean> touchscreen();
+    descriptor: ()Lnet/minecraft/client/OptionInstance;
+
+  public net.minecraft.client.OptionInstance<java.lang.Boolean> fullscreen();
+    descriptor: ()Lnet/minecraft/client/OptionInstance;
+
+  public net.minecraft.client.OptionInstance<java.lang.Boolean> bobView();
+    descriptor: ()Lnet/minecraft/client/OptionInstance;
+
+  public net.minecraft.client.OptionInstance<java.lang.Boolean> toggleCrouch();
+    descriptor: ()Lnet/minecraft/client/OptionInstance;
+
+  public net.minecraft.client.OptionInstance<java.lang.Boolean> toggleSprint();
+    descriptor: ()Lnet/minecraft/client/OptionInstance;
+
+  public net.minecraft.client.OptionInstance<java.lang.Boolean> hideMatchedNames();
+    descriptor: ()Lnet/minecraft/client/OptionInstance;
+
+  public net.minecraft.client.OptionInstance<java.lang.Boolean> showAutosaveIndicator();
+    descriptor: ()Lnet/minecraft/client/OptionInstance;
+
+  public net.minecraft.client.OptionInstance<java.lang.Boolean> onlyShowSecureChat();
+    descriptor: ()Lnet/minecraft/client/OptionInstance;
+
+  public net.minecraft.client.OptionInstance<java.lang.Integer> fov();
+    descriptor: ()Lnet/minecraft/client/OptionInstance;
+
+  public net.minecraft.client.OptionInstance<java.lang.Boolean> telemetryOptInExtra();
+    descriptor: ()Lnet/minecraft/client/OptionInstance;
+
+  public net.minecraft.client.OptionInstance<java.lang.Double> screenEffectScale();
+    descriptor: ()Lnet/minecraft/client/OptionInstance;
+
+  public net.minecraft.client.OptionInstance<java.lang.Double> fovEffectScale();
+    descriptor: ()Lnet/minecraft/client/OptionInstance;
+
+  public net.minecraft.client.OptionInstance<java.lang.Double> darknessEffectScale();
+    descriptor: ()Lnet/minecraft/client/OptionInstance;
+
+  public net.minecraft.client.OptionInstance<java.lang.Double> glintSpeed();
+    descriptor: ()Lnet/minecraft/client/OptionInstance;
+
+  public net.minecraft.client.OptionInstance<java.lang.Double> glintStrength();
+    descriptor: ()Lnet/minecraft/client/OptionInstance;
+
+  public net.minecraft.client.OptionInstance<java.lang.Double> damageTiltStrength();
+    descriptor: ()Lnet/minecraft/client/OptionInstance;
+
+  public net.minecraft.client.OptionInstance<java.lang.Double> gamma();
+    descriptor: ()Lnet/minecraft/client/OptionInstance;
+
+  public net.minecraft.client.OptionInstance<java.lang.Integer> guiScale();
+    descriptor: ()Lnet/minecraft/client/OptionInstance;
+
+  public net.minecraft.client.OptionInstance<net.minecraft.client.ParticleStatus> particles();
+    descriptor: ()Lnet/minecraft/client/OptionInstance;
+
+  public net.minecraft.client.OptionInstance<net.minecraft.client.NarratorStatus> narrator();
+    descriptor: ()Lnet/minecraft/client/OptionInstance;
+
+  public net.minecraft.client.OptionInstance<java.lang.String> soundDevice();
+    descriptor: ()Lnet/minecraft/client/OptionInstance;
+
+  public net.minecraft.client.Options(net.minecraft.client.Minecraft, java.io.File);
+    descriptor: (Lnet/minecraft/client/Minecraft;Ljava/io/File;)V
+
+  public float getBackgroundOpacity(float);
+    descriptor: (F)F
+
+  public int getBackgroundColor(float);
+    descriptor: (F)I
+
+  public int getBackgroundColor(int);
+    descriptor: (I)I
+
+  public void setKey(net.minecraft.client.KeyMapping, com.mojang.blaze3d.platform.InputConstants$Key);
+    descriptor: (Lnet/minecraft/client/KeyMapping;Lcom/mojang/blaze3d/platform/InputConstants$Key;)V
+
+  private void processOptions(net.minecraft.client.Options$FieldAccess);
+    descriptor: (Lnet/minecraft/client/Options$FieldAccess;)V
+
+  public void load();
+    descriptor: ()V
+
+  static boolean isTrue(java.lang.String);
+    descriptor: (Ljava/lang/String;)Z
+
+  static boolean isFalse(java.lang.String);
+    descriptor: (Ljava/lang/String;)Z
+
+  private net.minecraft.nbt.CompoundTag dataFix(net.minecraft.nbt.CompoundTag);
+    descriptor: (Lnet/minecraft/nbt/CompoundTag;)Lnet/minecraft/nbt/CompoundTag;
+
+  public void save();
+    descriptor: ()V
+
+  public net.minecraft.server.level.ClientInformation buildPlayerInformation();
+    descriptor: ()Lnet/minecraft/server/level/ClientInformation;
+
+  public void broadcastOptions();
+    descriptor: ()V
+
+  private void setModelPart(net.minecraft.world.entity.player.PlayerModelPart, boolean);
+    descriptor: (Lnet/minecraft/world/entity/player/PlayerModelPart;Z)V
+
+  public boolean isModelPartEnabled(net.minecraft.world.entity.player.PlayerModelPart);
+    descriptor: (Lnet/minecraft/world/entity/player/PlayerModelPart;)Z
+
+  public void toggleModelPart(net.minecraft.world.entity.player.PlayerModelPart, boolean);
+    descriptor: (Lnet/minecraft/world/entity/player/PlayerModelPart;Z)V
+
+  public net.minecraft.client.CloudStatus getCloudsType();
+    descriptor: ()Lnet/minecraft/client/CloudStatus;
+
+  public boolean useNativeTransport();
+    descriptor: ()Z
+
+  public void loadSelectedResourcePacks(net.minecraft.server.packs.repository.PackRepository);
+    descriptor: (Lnet/minecraft/server/packs/repository/PackRepository;)V
+
+  public net.minecraft.client.CameraType getCameraType();
+    descriptor: ()Lnet/minecraft/client/CameraType;
+
+  public void setCameraType(net.minecraft.client.CameraType);
+    descriptor: (Lnet/minecraft/client/CameraType;)V
+
+  private static java.util.List<java.lang.String> readListOfStrings(java.lang.String);
+    descriptor: (Ljava/lang/String;)Ljava/util/List;
+
+  public java.io.File getFile();
+    descriptor: ()Ljava/io/File;
+
+  public java.lang.String dumpOptionsForReport();
+    descriptor: ()Ljava/lang/String;
+
+  public void setServerRenderDistance(int);
+    descriptor: (I)V
+
+  public int getEffectiveRenderDistance();
+    descriptor: ()I
+
+  private static net.minecraft.network.chat.Component pixelValueLabel(net.minecraft.network.chat.Component, int);
+    descriptor: (Lnet/minecraft/network/chat/Component;I)Lnet/minecraft/network/chat/Component;
+
+  private static net.minecraft.network.chat.Component percentValueLabel(net.minecraft.network.chat.Component, double);
+    descriptor: (Lnet/minecraft/network/chat/Component;D)Lnet/minecraft/network/chat/Component;
+
+  public static net.minecraft.network.chat.Component genericValueLabel(net.minecraft.network.chat.Component, net.minecraft.network.chat.Component);
+    descriptor: (Lnet/minecraft/network/chat/Component;Lnet/minecraft/network/chat/Component;)Lnet/minecraft/network/chat/Component;
+
+  public static net.minecraft.network.chat.Component genericValueLabel(net.minecraft.network.chat.Component, int);
+    descriptor: (Lnet/minecraft/network/chat/Component;I)Lnet/minecraft/network/chat/Component;
+
+  private static java.lang.String method_37293(com.mojang.datafixers.util.Pair);
+    descriptor: (Lcom/mojang/datafixers/util/Pair;)Ljava/lang/String;
+
+  private static void method_24230(net.minecraft.nbt.CompoundTag, java.lang.String);
+    descriptor: (Lnet/minecraft/nbt/CompoundTag;Ljava/lang/String;)V
+
+  private static void method_42468(java.lang.Integer);
+    descriptor: (Ljava/lang/Integer;)V
+
+  private static net.minecraft.network.chat.Component method_42493(net.minecraft.network.chat.Component, java.lang.Integer);
+    descriptor: (Lnet/minecraft/network/chat/Component;Ljava/lang/Integer;)Lnet/minecraft/network/chat/Component;
+
+  private static void method_42502(java.lang.Integer);
+    descriptor: (Ljava/lang/Integer;)V
+
+  private static net.minecraft.network.chat.Component method_42508(net.minecraft.network.chat.Component, java.lang.Integer);
+    descriptor: (Lnet/minecraft/network/chat/Component;Ljava/lang/Integer;)Lnet/minecraft/network/chat/Component;
+
+  private static void method_42509(java.lang.String);
+    descriptor: (Ljava/lang/String;)V
+
+  private static java.util.Optional method_42516(java.lang.String);
+    descriptor: (Ljava/lang/String;)Ljava/util/Optional;
+
+  private static java.util.List method_42478();
+    descriptor: ()Ljava/util/List;
+
+  private static net.minecraft.network.chat.Component method_42523(net.minecraft.network.chat.Component, java.lang.String);
+    descriptor: (Lnet/minecraft/network/chat/Component;Ljava/lang/String;)Lnet/minecraft/network/chat/Component;
+
+  private void method_42463(net.minecraft.client.NarratorStatus);
+    descriptor: (Lnet/minecraft/client/NarratorStatus;)V
+
+  private net.minecraft.network.chat.Component method_42489(net.minecraft.network.chat.Component, net.minecraft.client.NarratorStatus);
+    descriptor: (Lnet/minecraft/network/chat/Component;Lnet/minecraft/client/NarratorStatus;)Lnet/minecraft/network/chat/Component;
+
+  private static void method_42465(net.minecraft.client.ParticleStatus);
+    descriptor: (Lnet/minecraft/client/ParticleStatus;)V
+
+  private static void method_42515(java.lang.Integer);
+    descriptor: (Ljava/lang/Integer;)V
+
+  private static int method_42479();
+    descriptor: ()I
+
+  private static net.minecraft.network.chat.Component method_42522(net.minecraft.network.chat.Component, java.lang.Integer);
+    descriptor: (Lnet/minecraft/network/chat/Component;Ljava/lang/Integer;)Lnet/minecraft/network/chat/Component;
+
+  private static void method_42467(java.lang.Double);
+    descriptor: (Ljava/lang/Double;)V
+
+  private static net.minecraft.network.chat.Component method_42492(net.minecraft.network.chat.Component, java.lang.Double);
+    descriptor: (Lnet/minecraft/network/chat/Component;Ljava/lang/Double;)Lnet/minecraft/network/chat/Component;
+
+  private static void method_48975(java.lang.Double);
+    descriptor: (Ljava/lang/Double;)V
+
+  private static net.minecraft.network.chat.Component method_48976(net.minecraft.network.chat.Component, java.lang.Double);
+    descriptor: (Lnet/minecraft/network/chat/Component;Ljava/lang/Double;)Lnet/minecraft/network/chat/Component;
+
+  private static net.minecraft.network.chat.Component method_48583(net.minecraft.network.chat.Component, java.lang.Double);
+    descriptor: (Lnet/minecraft/network/chat/Component;Ljava/lang/Double;)Lnet/minecraft/network/chat/Component;
+
+  private static void method_48582(java.lang.Double);
+    descriptor: (Ljava/lang/Double;)V
+
+  private static net.minecraft.network.chat.Component method_48584(net.minecraft.network.chat.Component, java.lang.Double);
+    descriptor: (Lnet/minecraft/network/chat/Component;Ljava/lang/Double;)Lnet/minecraft/network/chat/Component;
+
+  private static void method_42501(java.lang.Double);
+    descriptor: (Ljava/lang/Double;)V
+
+  private static net.minecraft.network.chat.Component method_42726(net.minecraft.network.chat.Component, java.lang.Double);
+    descriptor: (Lnet/minecraft/network/chat/Component;Ljava/lang/Double;)Lnet/minecraft/network/chat/Component;
+
+  private static void method_42514(java.lang.Double);
+    descriptor: (Ljava/lang/Double;)V
+
+  private static net.minecraft.network.chat.Component method_42727(net.minecraft.network.chat.Component, java.lang.Double);
+    descriptor: (Lnet/minecraft/network/chat/Component;Ljava/lang/Double;)Lnet/minecraft/network/chat/Component;
+
+  private static void method_42526(java.lang.Double);
+    descriptor: (Ljava/lang/Double;)V
+
+  private static net.minecraft.network.chat.Component method_42728(net.minecraft.network.chat.Component, java.lang.Double);
+    descriptor: (Lnet/minecraft/network/chat/Component;Ljava/lang/Double;)Lnet/minecraft/network/chat/Component;
+
+  private static void method_47607(java.lang.Boolean);
+    descriptor: (Ljava/lang/Boolean;)V
+
+  private static net.minecraft.network.chat.Component method_47608(net.minecraft.network.chat.Component, java.lang.Boolean);
+    descriptor: (Lnet/minecraft/network/chat/Component;Ljava/lang/Boolean;)Lnet/minecraft/network/chat/Component;
+
+  private static void method_41779(java.lang.Integer);
+    descriptor: (Ljava/lang/Integer;)V
+
+  private static java.lang.Double method_42532(java.lang.Integer);
+    descriptor: (Ljava/lang/Integer;)Ljava/lang/Double;
+
+  private static java.lang.Integer method_42536(java.lang.Double);
+    descriptor: (Ljava/lang/Double;)Ljava/lang/Integer;
+
+  private static net.minecraft.network.chat.Component method_41789(net.minecraft.network.chat.Component, java.lang.Integer);
+    descriptor: (Lnet/minecraft/network/chat/Component;Ljava/lang/Integer;)Lnet/minecraft/network/chat/Component;
+
+  private static void method_42466(java.lang.Boolean);
+    descriptor: (Ljava/lang/Boolean;)V
+
+  private static net.minecraft.network.chat.Component method_42491(net.minecraft.network.chat.Component, java.lang.Boolean);
+    descriptor: (Lnet/minecraft/network/chat/Component;Ljava/lang/Boolean;)Lnet/minecraft/network/chat/Component;
+
+  private static void method_42520(java.lang.Boolean);
+    descriptor: (Ljava/lang/Boolean;)V
+
+  private static net.minecraft.network.chat.Component method_42506(net.minecraft.network.chat.Component, java.lang.Boolean);
+    descriptor: (Lnet/minecraft/network/chat/Component;Ljava/lang/Boolean;)Lnet/minecraft/network/chat/Component;
+
+  private void method_42513(java.lang.Boolean);
+    descriptor: (Ljava/lang/Boolean;)V
+
+  private static void method_42500(java.lang.Boolean);
+    descriptor: (Ljava/lang/Boolean;)V
+
+  private static net.minecraft.network.chat.Component method_42525(net.minecraft.network.chat.Component, java.lang.Boolean);
+    descriptor: (Lnet/minecraft/network/chat/Component;Ljava/lang/Boolean;)Lnet/minecraft/network/chat/Component;
+
+  private static void method_42530(java.lang.Boolean);
+    descriptor: (Ljava/lang/Boolean;)V
+
+  private static net.minecraft.client.gui.components.Tooltip method_47398(java.lang.Boolean);
+    descriptor: (Ljava/lang/Boolean;)Lnet/minecraft/client/gui/components/Tooltip;
+
+  private static void method_45575(net.minecraft.sounds.SoundSource, java.lang.Double);
+    descriptor: (Lnet/minecraft/sounds/SoundSource;Ljava/lang/Double;)V
+
+  private static net.minecraft.network.chat.Component method_45579(net.minecraft.network.chat.Component, java.lang.Double);
+    descriptor: (Lnet/minecraft/network/chat/Component;Ljava/lang/Double;)Lnet/minecraft/network/chat/Component;
+
+  private void method_45577(java.util.EnumMap);
+    descriptor: (Ljava/util/EnumMap;)V
+
+  private void method_42535(java.lang.Boolean);
+    descriptor: (Ljava/lang/Boolean;)V
+
+  private static void method_42537(java.lang.Boolean);
+    descriptor: (Ljava/lang/Boolean;)V
+
+  private static void method_42538(java.lang.Boolean);
+    descriptor: (Ljava/lang/Boolean;)V
+
+  private static void method_41777(java.lang.Boolean);
+    descriptor: (Ljava/lang/Boolean;)V
+
+  private static void method_41778(java.lang.Double);
+    descriptor: (Ljava/lang/Double;)V
+
+  private static net.minecraft.network.chat.Component method_41788(net.minecraft.network.chat.Component, java.lang.Double);
+    descriptor: (Lnet/minecraft/network/chat/Component;Ljava/lang/Double;)Lnet/minecraft/network/chat/Component;
+
+  private static void method_41797(java.lang.Integer);
+    descriptor: (Ljava/lang/Integer;)V
+
+  private static net.minecraft.network.chat.Component method_41800(net.minecraft.network.chat.Component, java.lang.Integer);
+    descriptor: (Lnet/minecraft/network/chat/Component;Ljava/lang/Integer;)Lnet/minecraft/network/chat/Component;
+
+  private static void method_42458(net.minecraft.client.AttackIndicatorStatus);
+    descriptor: (Lnet/minecraft/client/AttackIndicatorStatus;)V
+
+  private static void method_42541(java.lang.Integer);
+    descriptor: (Ljava/lang/Integer;)V
+
+  private static net.minecraft.network.chat.Component method_42545(net.minecraft.network.chat.Component, java.lang.Integer);
+    descriptor: (Lnet/minecraft/network/chat/Component;Ljava/lang/Integer;)Lnet/minecraft/network/chat/Component;
+
+  private static void method_48188(java.lang.Double);
+    descriptor: (Ljava/lang/Double;)V
+
+  private static int method_48190(java.lang.Double);
+    descriptor: (Ljava/lang/Double;)I
+
+  private static java.lang.Double method_48187(int);
+    descriptor: (I)Ljava/lang/Double;
+
+  private static net.minecraft.network.chat.Component method_48189(net.minecraft.network.chat.Component, java.lang.Double);
+    descriptor: (Lnet/minecraft/network/chat/Component;Ljava/lang/Double;)Lnet/minecraft/network/chat/Component;
+
+  private static void method_42540(java.lang.Double);
+    descriptor: (Ljava/lang/Double;)V
+
+  private static int method_42544(java.lang.Double);
+    descriptor: (Ljava/lang/Double;)I
+
+  private static java.lang.Double method_42504(int);
+    descriptor: (I)Ljava/lang/Double;
+
+  private static net.minecraft.network.chat.Component method_42548(net.minecraft.network.chat.Component, java.lang.Double);
+    descriptor: (Lnet/minecraft/network/chat/Component;Ljava/lang/Double;)Lnet/minecraft/network/chat/Component;
+
+  private static void method_41796(java.lang.Double);
+    descriptor: (Ljava/lang/Double;)V
+
+  private static net.minecraft.network.chat.Component method_41799(net.minecraft.network.chat.Component, java.lang.Double);
+    descriptor: (Lnet/minecraft/network/chat/Component;Ljava/lang/Double;)Lnet/minecraft/network/chat/Component;
+
+  private static void method_41802(java.lang.Double);
+    descriptor: (Ljava/lang/Double;)V
+
+  private static net.minecraft.network.chat.Component method_41804(net.minecraft.network.chat.Component, java.lang.Double);
+    descriptor: (Lnet/minecraft/network/chat/Component;Ljava/lang/Double;)Lnet/minecraft/network/chat/Component;
+
+  private static void method_42558(java.lang.Double);
+    descriptor: (Ljava/lang/Double;)V
+
+  private static net.minecraft.network.chat.Component method_42560(net.minecraft.network.chat.Component, java.lang.Double);
+    descriptor: (Lnet/minecraft/network/chat/Component;Ljava/lang/Double;)Lnet/minecraft/network/chat/Component;
+
+  private static void method_42562(java.lang.Double);
+    descriptor: (Ljava/lang/Double;)V
+
+  private static net.minecraft.network.chat.Component method_42564(net.minecraft.network.chat.Component, java.lang.Double);
+    descriptor: (Lnet/minecraft/network/chat/Component;Ljava/lang/Double;)Lnet/minecraft/network/chat/Component;
+
+  private void method_42455(net.minecraft.world.entity.HumanoidArm);
+    descriptor: (Lnet/minecraft/world/entity/HumanoidArm;)V
+
+  private void method_49599(java.lang.Boolean);
+    descriptor: (Ljava/lang/Boolean;)V
+
+  private static void method_45580(java.lang.Double);
+    descriptor: (Ljava/lang/Double;)V
+
+  private static void method_42566(java.lang.Double);
+    descriptor: (Ljava/lang/Double;)V
+
+  private static void method_42568(java.lang.Double);
+    descriptor: (Ljava/lang/Double;)V
+
+  private static void method_42424(java.lang.Double);
+    descriptor: (Ljava/lang/Double;)V
+
+  private static net.minecraft.network.chat.Component method_42432(net.minecraft.network.chat.Component, java.lang.Double);
+    descriptor: (Lnet/minecraft/network/chat/Component;Ljava/lang/Double;)Lnet/minecraft/network/chat/Component;
+
+  private static void method_42456(net.minecraft.world.entity.player.ChatVisiblity);
+    descriptor: (Lnet/minecraft/world/entity/player/ChatVisiblity;)V
+
+  private static void method_41776(net.minecraft.client.PrioritizeChunkUpdates);
+    descriptor: (Lnet/minecraft/client/PrioritizeChunkUpdates;)V
+
+  private static net.minecraft.client.gui.components.Tooltip method_47396(net.minecraft.client.PrioritizeChunkUpdates);
+    descriptor: (Lnet/minecraft/client/PrioritizeChunkUpdates;)Lnet/minecraft/client/gui/components/Tooltip;
+
+  private static void method_47999(java.lang.Boolean);
+    descriptor: (Ljava/lang/Boolean;)V
+
+  private static void method_42460(net.minecraft.client.GraphicsStatus);
+    descriptor: (Lnet/minecraft/client/GraphicsStatus;)V
+
+  private static void method_42464(net.minecraft.client.OptionInstance, net.minecraft.client.GraphicsStatus);
+    descriptor: (Lnet/minecraft/client/OptionInstance;Lnet/minecraft/client/GraphicsStatus;)V
+
+  private static boolean method_42480();
+    descriptor: ()Z
+
+  private static boolean method_42486(net.minecraft.client.GraphicsStatus);
+    descriptor: (Lnet/minecraft/client/GraphicsStatus;)Z
+
+  private static net.minecraft.network.chat.Component method_42497(net.minecraft.network.chat.Component, net.minecraft.client.GraphicsStatus);
+    descriptor: (Lnet/minecraft/network/chat/Component;Lnet/minecraft/client/GraphicsStatus;)Lnet/minecraft/network/chat/Component;
+
+  private static net.minecraft.client.gui.components.Tooltip method_47397(net.minecraft.client.GraphicsStatus);
+    descriptor: (Lnet/minecraft/client/GraphicsStatus;)Lnet/minecraft/client/gui/components/Tooltip;
+
+  private static void method_42459(net.minecraft.client.CloudStatus);
+    descriptor: (Lnet/minecraft/client/CloudStatus;)V
+
+  private static net.minecraft.client.CloudStatus method_52704(java.lang.Boolean);
+    descriptor: (Ljava/lang/Boolean;)Lnet/minecraft/client/CloudStatus;
+
+  private static void method_42555(java.lang.Integer);
+    descriptor: (Ljava/lang/Integer;)V
+
+  private static int method_42557(java.lang.Integer);
+    descriptor: (Ljava/lang/Integer;)I
+
+  private static java.lang.Integer method_42511(int);
+    descriptor: (I)Ljava/lang/Integer;
+
+  private static net.minecraft.network.chat.Component method_42559(net.minecraft.network.chat.Component, java.lang.Integer);
+    descriptor: (Lnet/minecraft/network/chat/Component;Ljava/lang/Integer;)Lnet/minecraft/network/chat/Component;
+
+  private static void method_42428(java.lang.Double);
+    descriptor: (Ljava/lang/Double;)V
+
+  private static int method_42430(java.lang.Double);
+    descriptor: (Ljava/lang/Double;)I
+
+  private static java.lang.Double method_42518(int);
+    descriptor: (I)Ljava/lang/Double;
+
+  private static void method_42434(java.lang.Double);
+    descriptor: (Ljava/lang/Double;)V
+
+  private static net.minecraft.network.chat.Component method_42436(net.minecraft.network.chat.Component, java.lang.Double);
+    descriptor: (Lnet/minecraft/network/chat/Component;Ljava/lang/Double;)Lnet/minecraft/network/chat/Component;
+
+  static {};
+    descriptor: ()V
+}

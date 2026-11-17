@@ -1,0 +1,127 @@
+Compiled from "MouseHandler.java"
+public class net.minecraft.client.MouseHandler {
+  private final net.minecraft.client.Minecraft minecraft;
+    descriptor: Lnet/minecraft/client/Minecraft;
+  private boolean isLeftPressed;
+    descriptor: Z
+  private boolean isMiddlePressed;
+    descriptor: Z
+  private boolean isRightPressed;
+    descriptor: Z
+  private double xpos;
+    descriptor: D
+  private double ypos;
+    descriptor: D
+  private int fakeRightMouse;
+    descriptor: I
+  private int activeButton;
+    descriptor: I
+  private boolean ignoreFirstMove;
+    descriptor: Z
+  private int clickDepth;
+    descriptor: I
+  private double mousePressedTime;
+    descriptor: D
+  private final net.minecraft.util.SmoothDouble smoothTurnX;
+    descriptor: Lnet/minecraft/util/SmoothDouble;
+  private final net.minecraft.util.SmoothDouble smoothTurnY;
+    descriptor: Lnet/minecraft/util/SmoothDouble;
+  private double accumulatedDX;
+    descriptor: D
+  private double accumulatedDY;
+    descriptor: D
+  private double accumulatedScrollX;
+    descriptor: D
+  private double accumulatedScrollY;
+    descriptor: D
+  private double lastMouseEventTime;
+    descriptor: D
+  private boolean mouseGrabbed;
+    descriptor: Z
+  public net.minecraft.client.MouseHandler(net.minecraft.client.Minecraft);
+    descriptor: (Lnet/minecraft/client/Minecraft;)V
+
+  private void onPress(long, int, int, int);
+    descriptor: (JIII)V
+
+  private void onScroll(long, double, double);
+    descriptor: (JDD)V
+
+  private void onDrop(long, java.util.List<java.nio.file.Path>);
+    descriptor: (JLjava/util/List;)V
+
+  public void setup(long);
+    descriptor: (J)V
+
+  private void onMove(long, double, double);
+    descriptor: (JDD)V
+
+  public void turnPlayer();
+    descriptor: ()V
+
+  public boolean isLeftPressed();
+    descriptor: ()Z
+
+  public boolean isMiddlePressed();
+    descriptor: ()Z
+
+  public boolean isRightPressed();
+    descriptor: ()Z
+
+  public double xpos();
+    descriptor: ()D
+
+  public double ypos();
+    descriptor: ()D
+
+  public void setIgnoreFirstMove();
+    descriptor: ()V
+
+  public boolean isMouseGrabbed();
+    descriptor: ()Z
+
+  public void grabMouse();
+    descriptor: ()V
+
+  public void releaseMouse();
+    descriptor: ()V
+
+  public void cursorEntered();
+    descriptor: ()V
+
+  private void method_1602(net.minecraft.client.gui.screens.Screen, double, double, double, double);
+    descriptor: (Lnet/minecraft/client/gui/screens/Screen;DDDD)V
+
+  private static void method_16013(net.minecraft.client.gui.screens.Screen, double, double);
+    descriptor: (Lnet/minecraft/client/gui/screens/Screen;DD)V
+
+  private void method_29615(long, int, long);
+    descriptor: (JIJ)V
+
+  private void method_29617(long, java.nio.file.Path[]);
+    descriptor: (J[Ljava/nio/file/Path;)V
+
+  private void method_22685(long, double, double);
+    descriptor: (JDD)V
+
+  private void method_22687(long, double, double);
+    descriptor: (JDD)V
+
+  private void method_22684(long, int, int, int);
+    descriptor: (JIII)V
+
+  private void method_22686(long, int, int, int);
+    descriptor: (JIII)V
+
+  private void method_22688(long, double, double);
+    descriptor: (JDD)V
+
+  private void method_22689(long, double, double);
+    descriptor: (JDD)V
+
+  private static void method_1605(boolean[], net.minecraft.client.gui.screens.Screen, double, double, int);
+    descriptor: ([ZLnet/minecraft/client/gui/screens/Screen;DDI)V
+
+  private static void method_1611(boolean[], net.minecraft.client.gui.screens.Screen, double, double, int);
+    descriptor: ([ZLnet/minecraft/client/gui/screens/Screen;DDI)V
+}

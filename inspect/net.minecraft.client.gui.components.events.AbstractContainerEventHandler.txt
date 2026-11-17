@@ -1,0 +1,21 @@
+Compiled from "AbstractContainerEventHandler.java"
+public abstract class net.minecraft.client.gui.components.events.AbstractContainerEventHandler implements net.minecraft.client.gui.components.events.ContainerEventHandler {
+  private net.minecraft.client.gui.components.events.GuiEventListener focused;
+    descriptor: Lnet/minecraft/client/gui/components/events/GuiEventListener;
+  private boolean isDragging;
+    descriptor: Z
+  public net.minecraft.client.gui.components.events.AbstractContainerEventHandler();
+    descriptor: ()V
+
+  public final boolean isDragging();
+    descriptor: ()Z
+
+  public final void setDragging(boolean);
+    descriptor: (Z)V
+
+  public net.minecraft.client.gui.components.events.GuiEventListener getFocused();
+    descriptor: ()Lnet/minecraft/client/gui/components/events/GuiEventListener;
+
+  public void setFocused(net.minecraft.client.gui.components.events.GuiEventListener);
+    descriptor: (Lnet/minecraft/client/gui/components/events/GuiEventListener;)V
+}
