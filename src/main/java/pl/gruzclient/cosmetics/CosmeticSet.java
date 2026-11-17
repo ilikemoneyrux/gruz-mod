@@ -15,7 +15,7 @@ public record CosmeticSet(String cape, String head, String wings, String back, S
     public static final CosmeticSet NONE = new CosmeticSet("none", "none", "none", "none", "none", "none", "none", 0xB45CFF);
 
     /** Wbudowane peleryny + własne z panelu admina (CustomCapes, lista od launchera) */
-    public static final String[] CAPES = withCustom("none", "gruz", "nebula", "sakura", "inferno", "ocean", "flow", "crystals", "galaxy", "aurora", "ember", "pumpkin", "winter");
+    public static final String[] CAPES = withCustom("none", "gruz", "nebula", "sakura", "inferno", "ocean", "flow", "crystals", "galaxy", "aurora", "ember", "pumpkin", "winter", "void");
 
     private static String[] withCustom(String... base) {
         java.util.List<String> all = new java.util.ArrayList<>(java.util.List.of(base));
@@ -24,12 +24,12 @@ public record CosmeticSet(String cape, String head, String wings, String back, S
     }
     /** Peleryny HD z obrazka (assets/gruzclient/textures/cape/*.png); reszta jest animowana */
     public static final Set<String> HD_CAPES = Set.of("gruz", "nebula", "sakura", "inferno", "ocean", "pumpkin", "winter");
-    public static final String[] HEADS = {"none", "halo", "crown", "tophat", "witch", "santa"};
-    public static final String[] WINGS = {"none", "angel", "demon", "crystal", "bat"};
+    public static final String[] HEADS = {"none", "halo", "crown", "tophat", "witch", "santa", "viking", "headphones"};
+    public static final String[] WINGS = {"none", "angel", "demon", "crystal", "bat", "phoenix"};
     public static final String[] BACKS = {"none", "backpack", "jetpack"};
     public static final String[] TRAILS = {"none", "shards", "sparks", "stars", "witch", "souls", "snow"};
     public static final String[] PETS = {"none", "crystal", "pumpkin"};
-    public static final String[] NAMES = {"none", "rainbow", "neon", "gold", "fire", "frost"};
+    public static final String[] NAMES = {"none", "rainbow", "neon", "gold", "fire", "frost", "void"};
 
     /** Jedyna darmowa kosmetyka */
     public static final String FREE = "cape:gruz";

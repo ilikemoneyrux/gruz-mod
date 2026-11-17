@@ -72,7 +72,7 @@ public final class WingMesh {
     }
 
     private static int fc0, fc1, fc2;
-    private static boolean crystal;
+    private static boolean crystal, phoenix;
 
     private static float[] at(float[] p, float[] d, float[] n, float L, float w, float k, float s) {
         return new float[]{p[0] + d[0] * L * k + n[0] * w * s, p[1] + d[1] * L * k + n[1] * w * s};
@@ -82,7 +82,7 @@ public final class WingMesh {
     private static void feather(float[] p, float ang, float L, float w, float z, float shade) {
         float[] d = {(float) Math.sin(ang), (float) Math.cos(ang)}, n = {(float) Math.cos(ang), (float) -Math.sin(ang)};
         int a = mix(fc0, 0x000000, shade), b = mix(fc1, 0x000000, shade), c = mix(fc2, 0x000000, shade * 0.6f);
-        float sharp = crystal ? 0.12f : 0.3f; // kryształ ma ostre końce
+        float sharp = crystal || phoenix ? 0.12f : 0.3f; // kryształ i feniks mają ostre końce
         quad(at(p, d, n, L, w, 0f, -0.3f), at(p, d, n, L, w, 0f, 0.3f), at(p, d, n, L, w, 0.6f, 0.5f), at(p, d, n, L, w, 0.6f, -0.5f), z, a, a, b, b);
         quad(at(p, d, n, L, w, 0.6f, -0.5f), at(p, d, n, L, w, 0.6f, 0.5f), at(p, d, n, L, w, 0.9f, sharp), at(p, d, n, L, w, 0.9f, -sharp), z + L * 0.02f, b, b, c, c);
         tri(at(p, d, n, L, w, 0.9f, -sharp), at(p, d, n, L, w, 0.9f, sharp), at(p, d, n, L, w, 1f, 0f), z + L * 0.035f, c, c, c);
@@ -91,7 +91,7 @@ public final class WingMesh {
         quad(at(p, d, n, L, w, 0.05f, -0.05f), at(p, d, n, L, w, 0.05f, 0.05f), at(p, d, n, L, w, 0.88f, 0.03f), at(p, d, n, L, w, 0.88f, -0.03f), z + L * 0.02f + 0.03f, a2, a2, b2, b2);
     }
 
-    /** Liczy siatkę jednego (prawego) skrzydła do POS/COL/N. Zwraca true, gdy skrzydło świeci (kryształ). */
+    /** Liczy siatkę jednego (prawego) skrzydła do POS/COL/N. Zwraca true, gdy skrzydło świeci (kryształ, feniks). */
     public static boolean build(String style, int color, float fold) {
         N = 0;
         boolean membrane = "demon".equals(style) || "bat".equals(style);
@@ -103,9 +103,10 @@ public final class WingMesh {
         if (!membrane) {
             // ---------------- skrzydło z piór (anioł, kryształ) ----------------
             crystal = "crystal".equals(style);
-            fc0 = crystal ? mix(color, 0x000000, 0.5f) : 0x9D97BD;   // nasada pióra (cień)
-            fc1 = crystal ? color : 0xE9E6F4;                         // środek
-            fc2 = crystal ? mix(color, 0xFFFFFF, 0.7f) : 0xFFFFFF;    // koniec
+            phoenix = "phoenix".equals(style); // feniks: pióra jak płomień, od czerwieni do żółci
+            fc0 = crystal ? mix(color, 0x000000, 0.5f) : phoenix ? 0xB0200C : 0x9D97BD;   // nasada pióra (cień)
+            fc1 = crystal ? color : phoenix ? 0xFF7A1A : 0xE9E6F4;                         // środek
+            fc2 = crystal ? mix(color, 0xFFFFFF, 0.7f) : phoenix ? 0xFFE27A : 0xFFFFFF;    // koniec
             float[] S = {0, 0}, E = {5.5f, -3.6f}, W = {11, -4.2f}, T = {14.5f, -2.2f};
             float[][] arm = {S, E, W, T};
             // lotki pierwszego rzędu: wachlarz od nadgarstka do końca dłoni
@@ -132,8 +133,8 @@ public final class WingMesh {
             }
             // przednia krawędź (ramię skrzydła)
             strip(new float[][]{{-0.6f, 0.6f}, S, E, W, T, {15.4f, -1.2f}}, 2.2f, 0.7f, 0.9f,
-                    crystal ? mix(color, 0xFFFFFF, 0.35f) : 0xF6F4FB, crystal ? color : 0xD9D5EA);
-            return crystal;
+                    crystal ? mix(color, 0xFFFFFF, 0.35f) : phoenix ? 0xFFF1A0 : 0xF6F4FB, crystal ? color : phoenix ? 0xFF9A2A : 0xD9D5EA);
+            return crystal || phoenix;
         }
 
         // ---------------- skrzydło z błony (demon, nietoperz) ----------------

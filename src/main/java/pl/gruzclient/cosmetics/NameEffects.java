@@ -4,9 +4,10 @@ import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.MutableComponent;
 import net.minecraft.network.chat.Style;
 import net.minecraft.network.chat.TextColor;
+import net.minecraft.util.StringDecomposer;
 import pl.gruzclient.render.GruzDraw;
 
-/** Animowane nicki (kosmetyka "name"): tęcza, neon, złoto, ogień, lód. Widzą je inni gracze Gruz. */
+/** Animowane nicki (kosmetyka "name"): tęcza, neon, złoto, ogień, lód, pustka. Widzą je inni gracze Gruz. */
 public final class NameEffects {
     private NameEffects() {}
 
@@ -16,29 +17,32 @@ public final class NameEffects {
      */
     public static Component apply(Component original, CosmeticSet set, String nick) {
         if (set == null || !set.hasName()) return original;
-        String full = original.getString();
+        // znak po znaku z gotowym stylem; stare kody § (nicki z wielu serwerów) rozwijamy tutaj,
+        // bo po rozbiciu na pojedyncze znaki „§” i cyfra koloru pokazałyby się jako zwykły tekst
+        java.util.List<Style> styles = new java.util.ArrayList<>();
+        StringBuilder sb = new StringBuilder();
+        original.visit((style, segment) -> {
+            StringDecomposer.iterateFormatted(segment, style, (i, st, cp) -> {
+                sb.appendCodePoint(cp);
+                styles.add(st);
+                return true;
+            });
+            return java.util.Optional.empty();
+        }, Style.EMPTY);
+        String full = sb.toString();
         if (full.isEmpty()) return original;
         int start = nick == null ? -1 : full.indexOf(nick);
         int from = start >= 0 ? start : 0, to = start >= 0 ? start + nick.length() : full.length();
         float t = (System.currentTimeMillis() % 100_000L) / 1000f;
         MutableComponent out = Component.empty();
-        int[] pos = {0};
-        original.visit((style, segment) -> {
-            for (int i = 0; i < segment.length(); ) {
-                int cp = segment.codePointAt(i);
-                int g = pos[0];
-                String ch = new String(Character.toChars(cp));
-                if (g >= from && g < to) {
-                    out.append(Component.literal(ch).setStyle(style.withColor(TextColor.fromRgb(color(set.name(), set.color(), g - from, to - from, t)))));
-                } else {
-                    out.append(Component.literal(ch).setStyle(style));
-                }
-                int n = Character.charCount(cp);
-                i += n;
-                pos[0] += n;
-            }
-            return java.util.Optional.empty();
-        }, Style.EMPTY);
+        for (int g = 0, k = 0; g < full.length(); k++) {
+            int cp = full.codePointAt(g);
+            String ch = new String(Character.toChars(cp));
+            Style style = styles.get(k);
+            if (g >= from && g < to) style = style.withColor(TextColor.fromRgb(color(set.name(), set.color(), g - from, to - from, t)));
+            out.append(Component.literal(ch).setStyle(style));
+            g += Character.charCount(cp);
+        }
         return out;
     }
 
@@ -52,6 +56,8 @@ public final class NameEffects {
                 yield f < 0.5f ? GruzDraw.mix(0xC81E0A, 0xFF7A1A, f * 2f) : GruzDraw.mix(0xFF7A1A, 0xFFE27A, (f - 0.5f) * 2f);
             }
             case "frost" -> GruzDraw.mix(0x5CC8FF, 0xFFFFFF, band(i, n, t * 0.8f) * 0.8f + wave(t * 3f + i) * 0.2f);
+            // pustka: ciemny fiolet z pulsującą poświatą i jasnym pasem
+            case "void" -> GruzDraw.mix(GruzDraw.mix(0x2A0E4A, 0x9A4CF0, wave(t * 1.8f - i * 0.5f)), 0xF0DDFF, band(i, n, t) * 0.7f);
             default -> 0xFFFFFF;
         };
     }

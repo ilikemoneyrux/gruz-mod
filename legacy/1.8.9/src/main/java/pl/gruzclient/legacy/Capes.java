@@ -25,7 +25,7 @@ public final class Capes {
     private Capes() {}
 
     private static final Set<String> HD = new HashSet<String>(Arrays.asList("gruz", "nebula", "sakura", "inferno", "ocean", "pumpkin", "winter"));
-    private static final Set<String> ANIM = new HashSet<String>(Arrays.asList("flow", "crystals", "galaxy", "aurora", "ember"));
+    private static final Set<String> ANIM = new HashSet<String>(Arrays.asList("flow", "crystals", "galaxy", "aurora", "ember", "void"));
     private static final int SCALE = 4, W = 64 * SCALE, H = 32 * SCALE;
     private static final Map<String, Identifier> IDS = new HashMap<String, Identifier>();
     private static final Map<String, NativeImageBackedTexture> LIVE = new HashMap<String, NativeImageBackedTexture>();
@@ -167,6 +167,14 @@ public final class Capes {
                     float k = Math.max(0f, wave) * (1f - v / 22f);
                     rgb = mix(0x03060C, a, Math.min(1f, k * 1.15f + 0.08f));
                     if (hash(x * 5 + 11, y * 3 + 7) > 0.95f) rgb = mix(rgb, 0xFFFFFF, 0.55f);
+                } else if (style.equals("void")) {
+                    // pustka: czarna peleryna z falującą szczeliną w kolorze motywu i migoczącymi drobinkami
+                    float rift = Math.abs(u - 5f - (float) Math.sin(v * 0.55f + t * 0.8f) * 1.1f);
+                    float glow = Math.max(0f, 1f - rift / 2.6f);
+                    rgb = mix(0x030106, dark, glow * glow + v / 16f * 0.1f);
+                    if (rift < 0.45f) rgb = mix(color, 0xFFFFFF, (0.45f - rift) / 0.45f * ((float) Math.sin(t * 3f + v * 0.5f) * 0.25f + 0.55f));
+                    float d = hash(x * 3 + 17, y * 11 + 5);
+                    if (d > 0.94f && rift > 1f) rgb = mix(rgb, hot, ((float) Math.sin(t * 2.5f + d * 50f) * 0.5f + 0.5f) * 0.8f);
                 } else { // ember
                     float heat = (float) (Math.sin(u * 1.1f + t * 2.0f) * 0.25f + Math.sin(v * 0.8f - t * 3.1f + u * 0.4f) * 0.25f + 0.5f);
                     heat *= v / 16f * 0.9f + 0.1f;

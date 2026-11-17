@@ -558,6 +558,11 @@ public final class Lang {
         put("name.gold", "Złoto", "Gold");
         put("name.fire", "Ogień", "Fire");
         put("name.frost", "Lód", "Frost");
+        put("cape.void", "Pustka", "Void");
+        put("head.viking", "Hełm wikinga", "Viking helmet");
+        put("head.headphones", "Słuchawki", "Headphones");
+        put("wings.phoenix", "Skrzydła feniksa", "Phoenix wings");
+        put("name.void", "Pustka", "Void");
         put("setting.wings", "Skrzydła", "Wings");
         put("setting.back", "Plecy", "Back");
         put("setting.nameEffect", "Efekt nicku", "Name effect");

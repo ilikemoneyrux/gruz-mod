@@ -184,8 +184,48 @@ public final class FeatureTest {
             case 605 -> mc.setScreen(new pl.gruzclient.screen.GruzModsScreen(null, Modules.BLOCK_OVERLAY));
             case 625 -> shot("07-preview-overlay");
             case 630 -> mc.setScreen(new pl.gruzclient.screen.GruzModsScreen(null, Modules.HIT_COLOR));
-            case 650 -> shot("08-preview-hitcolor");
-            case 660 -> { log("DONE"); mc.stop(); }
+            case 648 -> shot("08-preview-hitcolor");
+            // kolorowy nick na liście graczy (Tab) i kosmetyki z bliska (GRUZ_FT_COS = zestaw jak w -Dgruz.cosmetics)
+            case 645 -> {
+                // w świecie jednoosobowym Tab pokazuje się tylko z celem na liście (jak „życie” na serwerach)
+                var srv = mc.getSingleplayerServer();
+                if (srv != null) srv.execute(() -> {
+                    for (String c : new String[]{"scoreboard objectives add gtest dummy", "scoreboard objectives setdisplay list gtest", "scoreboard players set " + p.getScoreboardName() + " gtest 20"})
+                        srv.getCommands().performPrefixedCommand(srv.createCommandSourceStack(), c);
+                });
+            }
+            case 650 -> { mc.setScreen(null); mc.options.keyPlayerList.setDown(true); }
+            case 652 -> shot("09a-tab-plain");
+            case 655 -> {
+                // nazwa ze starymi kodami § – tak wysyła ją wiele serwerów (rangi w Tab)
+                Modules.COSMETICS.preview("name", "rainbow");
+                var info = mc.getConnection().getPlayerInfo(p.getUUID());
+                if (info != null) info.setTabListDisplayName(net.minecraft.network.chat.Component.literal("§7[§eVIP§7] §a" + p.getScoreboardName()));
+            }
+            case 675 -> shot("09-tab-name");
+            case 680 -> {
+                mc.options.keyPlayerList.setDown(false);
+                Modules.COSMETICS.preview(null, null);
+                String cos = System.getenv("GRUZ_FT_COS");
+                if (cos != null) { System.setProperty("gruz.cosmetics", cos); System.setProperty("gruz.unlocked", "all"); Modules.COSMETICS.applyLauncherChoice(); }
+                // czysta scena: bez modułów (hitboxy, HUD), bez zbroi, w dzień
+                for (Module m : Modules.ALL) if (m != Modules.COSMETICS && m.isEnabled()) m.setEnabled(false);
+                var srv = mc.getSingleplayerServer();
+                if (srv != null) srv.execute(() -> {
+                    for (String c : new String[]{"time set noon", "item replace entity " + p.getScoreboardName() + " armor.head with air", "item replace entity " + p.getScoreboardName() + " armor.chest with air",
+                            "item replace entity " + p.getScoreboardName() + " armor.legs with air", "item replace entity " + p.getScoreboardName() + " armor.feet with air"})
+                        srv.getCommands().performPrefixedCommand(srv.createCommandSourceStack(), c);
+                });
+                mc.options.hideGui = true;
+                p.setXRot(10f); p.setYRot(180f);
+                mc.options.setCameraType(net.minecraft.client.CameraType.THIRD_PERSON_BACK);
+            }
+            case 710 -> shot("10-cos-back");
+            case 715 -> mc.options.setCameraType(net.minecraft.client.CameraType.THIRD_PERSON_FRONT);
+            case 745 -> shot("11-cos-front");
+            case 750 -> { p.setYRot(270f); }
+            case 775 -> shot("12-cos-side");
+            case 785 -> { log("DONE"); mc.stop(); }
             default -> { }
         }
         if (t > 300 && t < 320) p.turn(8.0, 0.0); // „ruch myszy” w prawo

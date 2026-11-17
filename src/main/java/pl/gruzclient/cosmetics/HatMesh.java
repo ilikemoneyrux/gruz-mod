@@ -4,6 +4,7 @@ package pl.gruzclient.cosmetics;
  * Kształt nakryć głowy (od 0.5.12): okrągłe bryły zamiast klocków. Same trójkąty z kolorem w każdym wierzchołku.
  * TEN SAM algorytm jest w launcherze i na stronie (gruzhats.js) – zmieniając coś tutaj, zmień też tam.
  * Jednostka = piksel modelu (1/16 bloku), środek = oś głowy, y w dół (czubek głowy to y = -8), z do tyłu.
+ * Hełm wikinga i słuchawki od 0.5.24.
  * Także plecy i pety (backpack, jetpack, flame, petcrystal, petpumpkin): plecy w układzie tułowia
  * (y = 0 szyja … 12 pas, plecy to z = 2), pety wokół własnego środka.
  * Jedno wspólne pole robocze: rysowanie idzie w jednym wątku.
@@ -84,6 +85,9 @@ public final class HatMesh {
         lathe(rings, 8);
     }
 
+    /** Punkt na pałąku słuchawek: kąt 0..PI od prawego ucha przez czubek głowy, promień, z */
+    private static float[] arc(float a, float r, float z) { return new float[]{pwr(Math.cos(a)) * r, -3.9f - pwr(Math.sin(a)) * r, z}; }
+
     private static float[] polar(float a, float y, float rr) { return new float[]{(float) Math.cos(a) * rr, y, (float) Math.sin(a) * rr}; }
 
     /** Punkt na przodzie dyni (kula R = 3, H = 2.5), tuż nad powierzchnią */
@@ -161,6 +165,49 @@ public final class HatMesh {
                         {4.25f, -9.6f, red}, {3.7f, -11.2f, redHi, 0.2f, 0.2f}, {3.0f, -12.8f, red, 0.7f, 0.7f}, {2.2f, -14.0f, redHi, 1.6f, 1.4f},
                         {1.4f, -14.6f, red, 2.8f, 2.1f}, {0.8f, -14.5f, red, 4.0f, 2.7f}, {0.3f, -13.9f, red, 4.9f, 3.1f}}, SEG);
                 ball(5.3f, -13.2f, 3.3f, 1.25f, white);
+                return false;
+            }
+            case "viking" -> {
+                int steel = 0x8C8F99, hi = 0xC4C7D0, bronze = 0xB8823A, bronzeHi = 0xE2AD2B, bronzeDark = 0x7A5424;
+                // stalowa kopuła na zaokrąglonym kwadracie (przylega do głowy) z obręczą z brązu
+                PW = 0.4f;
+                lathe(new float[][]{{4.5f, -5.2f, bronzeDark}, {4.8f, -5.4f, bronze}, {4.8f, -6.4f, bronzeHi}, {4.65f, -6.6f, steel}, {4.6f, -7.9f, hi},
+                        {4.15f, -9.0f, steel}, {3.1f, -9.9f, hi}, {1.7f, -10.45f, steel}, {0, -10.65f, steel}}, SEG);
+                PW = 1f;
+                // nosal z klejnotem w kolorze motywu
+                quad(new float[]{-0.55f, -6.4f, -4.95f}, new float[]{0.55f, -6.4f, -4.95f}, new float[]{0.45f, -3.6f, -4.95f}, new float[]{-0.45f, -3.6f, -4.95f}, steel);
+                tri(new float[]{-0.4f, -5.9f, -5.0f}, new float[]{0, -6.4f, -5.0f}, new float[]{0.4f, -5.9f, -5.0f}, color, hot, color);
+                tri(new float[]{-0.4f, -5.9f, -5.0f}, new float[]{0.4f, -5.9f, -5.0f}, new float[]{0, -5.4f, -5.0f}, color, color, mix(color, 0x000000, 0.35f));
+                // rogi: od boków kopuły na zewnątrz i w górę
+                for (int s = -1; s <= 1; s += 2)
+                    lathe(new float[][]{{1.05f, -7.0f, 0xB9A77C, s * 4.3f, 0}, {0.9f, -8.4f, 0xD9CCA6, s * 5.7f, 0}, {0.7f, -9.9f, 0xEDE3C8, s * 6.6f, 0},
+                            {0.45f, -11.4f, 0xF5EEDA, s * 6.9f, 0}, {0, -12.6f, 0xFFF8E8, s * 6.6f, 0}}, 8);
+                return false;
+            }
+            case "headphones" -> {
+                int black = 0x1B1B22, sheen = 0x3A3A46, pad = 0x2A2A33;
+                // pałąk: łuk nad głową (PW < 1 = przylega do kwadratowej głowy), środek łuku na wysokości uszu
+                PW = 0.5f;
+                int n = 14;
+                for (int i = 0; i < n; i++) {
+                    float a0 = (float) (i / (double) n * Math.PI), a1 = (float) ((i + 1) / (double) n * Math.PI);
+                    quad(arc(a0, 5.45f, -0.8f), arc(a1, 5.45f, -0.8f), arc(a1, 5.45f, 0.8f), arc(a0, 5.45f, 0.8f), lit(sheen, (a0 + a1) / 2f + 1.6f));
+                    quad(arc(a0, 5.0f, -0.8f), arc(a1, 5.0f, -0.8f), arc(a1, 5.0f, 0.8f), arc(a0, 5.0f, 0.8f), black);
+                    for (float z : new float[]{-0.8f, 0.8f}) quad(arc(a0, 5.0f, z), arc(a1, 5.0f, z), arc(a1, 5.45f, z), arc(a0, 5.45f, z), black);
+                }
+                // nauszniki: spłaszczone w x, szerokie w z, ze świecącym pierścieniem w kolorze motywu na zewnątrz
+                SZ = 2.3f;
+                for (int s = -1; s <= 1; s += 2) {
+                    lathe(at(new float[][]{{0, -6.2f, black}, {0.75f, -6.1f, black}, {1.0f, -5.5f, pad}, {1.05f, -3.9f, pad}, {1.0f, -2.3f, pad},
+                            {0.75f, -1.7f, black}, {0, -1.6f, black}}, s * 4.95f, 0), 12);
+                    for (int k = 0; k < 8; k++) {
+                        double b0 = k / 8.0 * Math.PI * 2, b1 = (k + 1) / 8.0 * Math.PI * 2;
+                        float[] c = {s * 6.04f, -3.9f, 0};
+                        float[] e0 = {s * 6.04f, -3.9f + (float) Math.sin(b0) * 1.5f, (float) Math.cos(b0) * 1.5f};
+                        float[] e1 = {s * 6.04f, -3.9f + (float) Math.sin(b1) * 1.5f, (float) Math.cos(b1) * 1.5f};
+                        tri(c, e0, e1, mix(color, 0x000000, 0.45f), color, color);
+                    }
+                }
                 return false;
             }
             case "backpack" -> {

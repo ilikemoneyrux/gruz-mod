@@ -125,6 +125,15 @@ public final class CapeTextures {
                         float spark = hash(x * 13, (int) (y + t * 6f) * 7);
                         if (spark > 0.93f) rgb = GruzDraw.mix(rgb, 0xFFE08A, 0.85f);
                     }
+                    case "void" -> {
+                        // pustka: czarna peleryna z falującą szczeliną w kolorze motywu i migoczącymi drobinkami
+                        float rift = Math.abs(u - 5f - (float) Math.sin(v * 0.55f + t * 0.8f) * 1.1f);
+                        float glow = Math.max(0f, 1f - rift / 2.6f);
+                        rgb = GruzDraw.mix(0x030106, dark, glow * glow + v / 16f * 0.1f);
+                        if (rift < 0.45f) rgb = GruzDraw.mix(color, 0xFFFFFF, (0.45f - rift) / 0.45f * ((float) Math.sin(t * 3f + v * 0.5f) * 0.25f + 0.55f));
+                        float d = hash(x * 3 + 17, y * 11 + 5);
+                        if (d > 0.94f && rift > 1f) rgb = GruzDraw.mix(rgb, hot, ((float) Math.sin(t * 2.5f + d * 50f) * 0.5f + 0.5f) * 0.8f);
+                    }
                     default -> { // "gruz": gradient, neonowa ramka i kryształ na środku
                         rgb = GruzDraw.mix(0x07050C, deep, v / 16f);
                         boolean edge = u < 0.6f || (u > 9.4f && u < 10.6f) || v < 0.6f || (v > 15.4f && v < 16.6f);
